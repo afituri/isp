@@ -27,12 +27,15 @@
       "name":"طرابلس"
     }];
     $scope.login = function(){
-      $http.post('/user/login',{ 
-        $scope.loginForm
-      }).success(function (result){
-        console.log(result);
-      }).error(function (data, status){
-        console.log(data);
+      $http.post('/user/login',{
+        'username': $scope.loginForm.email,
+        'password': $scope.loginForm.password
+      }).then(function(response) {
+        //First function handles success
+        console.log(response.data);
+      }, function(response) {
+        //Second function handles error
+        console.log("Something went wrong");
       });
     }
     $scope.register = function(){

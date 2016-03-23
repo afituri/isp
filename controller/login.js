@@ -68,6 +68,7 @@ function findById(id, fn) {
 }
 
 function findByUserName(username, fn) {
+
   User.findOne({email : username}, function(err, user){
     if (user) {
       return fn(null, user);
