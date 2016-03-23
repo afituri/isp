@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router();
 var login = require('../controller/login')(router);
 var user = require("../controller/user");
+var reseller = require("../controller/reseller");
 
 
 
-// user.register({email:"abdoo@gmail.com",password :'102030'},function(result){
+// reseller.register({email:"abd@gmail.com",password :'102030'},function(result){
 
 
 // console.log(result);

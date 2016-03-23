@@ -2,6 +2,7 @@ var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   easyPbkdf2 = require("easy-pbkdf2")();
 var User = require("../models/user");
+var Reseller = require("../models/reseller");
 
 //read the passport api docs if you wanna know what this does
 passport.use(new LocalStrategy(
@@ -62,7 +63,13 @@ function findById(id, fn) {
     if (user) {
       fn(null, user);
     } else {
-      fn(new Error('User ' + id + ' does not exist'));
+      Reseller.findOne({_id : id}, function(err, user){
+        if (user) {
+          fn(null, user);
+        } else {
+          fn(new Error('User ' + id + ' does not exist'));
+        }
+      });
     }
   });
 }
@@ -73,7 +80,13 @@ function findByUserName(username, fn) {
     if (user) {
       return fn(null, user);
     } else {
-      return fn(null, null);
+      Reseller.findOne({email : username}, function(err, user){
+        if (user) {
+          return fn(null, user);
+        } else {
+          return fn(null, null);
+        }
+      });
     }
   });
 }
