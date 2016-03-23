@@ -1,0 +1,34 @@
+{
+  "name": "ispls",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Aladdin Sonni <alaaden3000@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/afituri/isp",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.2",
+    "angular-animate": "^1.5.2",
+    "angular-ui-router": "^0.2.18",
+    "angular-strap": "^2.3.7",
+    "font-awesome": "^4.5.0",
+    "angular-auto-validate": "^1.19.3",
+    "angular-motion": "^0.4.3",
+    "angular-toastr": "^1.7.0",
+    "ladda": "^1.0.0",
+    "angular-ladda": "^0.3.4",
+    "bootstrap-rtl": "^3.4.0"
+  }
+}
