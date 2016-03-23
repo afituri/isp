@@ -30,10 +30,12 @@
       $http.post('/user/login',{
         'username': $scope.loginForm.email,
         'password': $scope.loginForm.password
-      }).success(function (result){
-        console.log(result);
-      }).error(function (data, status){
-        console.log(data);
+      }).then(function(response) {
+        //First function handles success
+        console.log(response.data);
+      }, function(response) {
+        //Second function handles error
+        console.log("Something went wrong");
       });
     }
     $scope.register = function(){
