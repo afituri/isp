@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="omla">
+  <header>
+    <title>عملة</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/paper.min.css">
+    <link rel="stylesheet" href="/angular-motion/dist/angular-motion.min.css">
+    <link rel="stylesheet" href="/bootstrap-rtl/dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/navbar-rtl.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </header>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">عملــة</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li ui-sref-active="active"><a ui-sref="dollar"><i class="fa fa-usd fa-fw"></i>دولار</a></li>
+                  <li ui-sref-active="active"><a ui-sref="euro"><i class="fa fa-eur fa-fw"></i>يورو</a></li>
+                  <li ui-sref-active="active"><a ui-sref="pound"><i class="fa fa-gbp fa-fw"></i>استرليني</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search" _lpchecked="1">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="&#xf002; بحث...">
+                  </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                  <!-- <li class="dropdown">
+                    <a href="#" data-animation="am-flip-x" bs-dropdown class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                      <i class="fa fa-user fa-fw"></i>
+                      اسم المستخدم
+                      <i class="fa fa-caret-down fa-fw"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#"><i class="fa fa-cog fa-fw"></i>&nbsp;الملف الشخصي</a></li>
+                      <li><a href="#"><i class="fa fa-sign-out fa-fw"></i>&nbsp;خروج</a></li>
+                    </ul>
+                  </li> -->
+                  <li ui-sref-active="active"><a ui-sref="auth"><i class="fa fa-sign-in fa-fw"></i>&nbsp;تسجيل الدخول</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div ui-view></div>
+        </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <footer class="footer">
+        <p>جميع الحقوق © 2016 | صمم وطور من قبل</p>
+      </footer>
+    </div>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-animate/angular-animate.min.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
