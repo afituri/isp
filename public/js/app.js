@@ -27,8 +27,8 @@
       "name":"طرابلس"
     }];
     $scope.login = function(){
-      $http.post('/user/login',{ 
-        $scope.loginForm
+      $http.post('/user/login',{
+        'loginForm': $scope.loginForm
       }).success(function (result){
         console.log(result);
       }).error(function (data, status){
