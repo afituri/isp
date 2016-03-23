@@ -1,0 +1,63 @@
+.widget-box{
+  background-color: #fff;
+  border-radius: 4px;
+  position: relative;
+}
+.widget-container{
+  padding: 15px;
+}
+.widget-title h2 {
+  font-size: 1.5em;
+  text-decoration: none;
+  color: #434a54;
+  padding: 15px 15px 0;
+}
+a i.glyphicon, button i.glyphicon, .widget-title i.glyphicon, .title.icon-space i{
+  margin-right: 5px;
+}
+.list_items > li {
+  padding: 0 16px 12px 0;
+}
+button i.btn-icon,button.btn-icon i{
+  margin-right: 0;
+}
+.highlight{
+  background: #eee;
+  padding: 10px;
+  margin-bottom: 10px;  
+}
+.cell-sm{
+   width: 150px;
+}
+.cell-sm{
+   width: 200px;
+}
+.cell-sm{
+   width: 300px;
+}
+.custom-badges{
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+  text-align: center;
+}
+.bagde-blue, .table-blue th{
+  background: #55c1e7;
+}
+.bagde-green, .table-green th{
+  background: #a1d36e;
+}
+.bagde-red, .table-red th{
+  background: #fa6f57;
+}
+table.order-table{border-collapse: separate; }
+table.order-table th{color: #fff; }
+table.order-table td { border: 1px solid #dddddd; }
+table.order-table tr:first-child th:first-child { border-top-right-radius: 10px; }
+table.order-table tr:first-child th:last-child { border-top-left-radius: 10px; }
+.dataTables_filter input {
+  border-radius:3px;
+  background: none;
+  border:1px solid #DDD;
+}

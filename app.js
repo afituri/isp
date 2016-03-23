@@ -15,16 +15,15 @@ var users = require('./routes/users');
 
 var app = express();
 
-var mongoose = require('mongoose');
-var config = require('./config'); // get our config file
-
-var options = {
-  db: { native_parser: true },
-  server: { poolSize: 5 },
-  user: config.user,
-  pass: config.password
-}
-mongoose.connect(config.url, options);
+// var mongoose = require('mongoose');
+// var config = require('./config'); // get our config file
+// var options = {
+//   db: { native_parser: true },
+//   server: { poolSize: 5 },
+//   user: config.user,
+//   pass: config.password
+// }
+// mongoose.connect(config.url, options);
 
 // view engine setup
 app.engine('html', require('ejs').renderFile);
