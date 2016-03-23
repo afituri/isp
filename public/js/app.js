@@ -28,7 +28,8 @@
     }];
     $scope.login = function(){
       $http.post('/user/login',{
-        'loginForm': $scope.loginForm
+        'username': $scope.loginForm.email,
+        'password': $scope.loginForm.password
       }).success(function (result){
         console.log(result);
       }).error(function (data, status){
