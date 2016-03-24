@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
-
 // set up a mongoose model
 
-var User = new Schema({
+var Customer = new Schema({
   name: {type: String, index: true, default: "Unknown user"},
   password: {type: String, required: true},
   salt: String,
@@ -14,6 +13,6 @@ var User = new Schema({
   status: Boolean  
 });
 
-User.plugin(timestamps);
-User.index({ name: 'text'});
-module.exports = mongoose.model('User', User);
+Customer.plugin(timestamps);
+Customer.index({ name: 'text'});
+module.exports = mongoose.model('Customer', Customer);
