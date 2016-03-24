@@ -16,6 +16,5 @@
     $locationProvider.html5Mode(false).hashPrefix('!');
   }]);
   app.controller('HomeCtl',['$scope','$http',function($scope,$http){
-    
   }]);
 }());
