@@ -12,7 +12,11 @@ var user = require("../controller/user");
 // });
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('login', { title: 'شاشة الدخول' });
+});
+
+router.get('/home', function(req, res) {
+  res.render('index', { title: 'الرئسية' });
 });
 
 module.exports = router;

@@ -3,43 +3,19 @@
   var app = angular.module('isp',[
     'mgcrea.ngStrap',
     'ngAnimate',
+    'ui.router',
     'jcs-autoValidate'
     ]);
-  app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
-    defaultErrorMessageResolver.setI18nFileRootPath('/lang');
-    defaultErrorMessageResolver.setCulture('ar-ly');
-    defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
-      errorMessages['emailType'] = "الرجاء إدخال البريد الالكتروني";
-      errorMessages['password'] = "الرجاء إدخال كلمة المرور";
-      errorMessages['confirmPassword'] = "الرجاء إعادة ادخال كلمة المرور";
-      errorMessages['storeName'] = "الرجاء إدخال اسم المحل";
-      errorMessages['ownerName'] = "الرجاء إدخال اسم صاحب المحل";
-      errorMessages['country'] = "الرجاء إختيار المدينة";
-      errorMessages['location'] = "الرجاء إدخال المنطقة";
-      errorMessages['phone'] = "الرجاء إدخال رقم الهاتف";
+  app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider){
+    $stateProvider.state('home',{
+      url: '/',
+      templateUrl: 'pages/home.html',
+      controller: 'HomeCtl'
     });
+    $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(false).hashPrefix('!');
   }]);
-  app.controller('AuthCtl',['$scope','$http',function($scope,$http){
-    $scope.loginForm = {};
-    $scope.registerForm = {};
-    $scope.countries = [{
-      "id":1,
-      "name":"طرابلس"
-    }];
-    $scope.login = function(){
-      $http.post('/user/login',{
-        'username': $scope.loginForm.email,
-        'password': $scope.loginForm.password
-      }).then(function(response) {
-        //First function handles success
-        console.log(response.data);
-      }, function(response) {
-        //Second function handles error
-        console.log("Something went wrong");
-      });
-    }
-    $scope.register = function(){
-      console.log("It's registered!");
-    }
+  app.controller('HomeCtl',['$scope','$http',function($scope,$http){
+    
   }]);
 }());
