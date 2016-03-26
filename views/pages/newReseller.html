@@ -1,0 +1,86 @@
+<div class="widget-box">
+  <h5><i class="fa fa-user-plus"></i>&nbsp;إضافة موزع جديد</h5>
+  <hr>
+  <form novalidate ng-submit="newResller()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">اسم المخول</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.repName" ng-required-err-type="repName" placeholder="اسم المخول" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">اسم الشىركة</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.companyName" ng-required-err-type="companyName" placeholder="اسم الشىركة" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <lable class="control-label">المدينة</lable>
+          <select class="form-control input-sm" ng-model="newResllerForm.city" ng-required-err-type="city" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+            <option value="1">طرابلس</option>
+            <option value="2">بنغازي</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">المنطقة</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.area" ng-required-err-type="area" placeholder="المنطقة" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">خط الطول</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.langtitude" ng-required-err-type="langtitude" placeholder="خط الطول" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">خط العرض</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.longtitude" ng-required-err-type="longtitude" placeholder="خط العرض" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">رقم الهاتف</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.phone" ng-required-err-type="phone" placeholder="رقم الهاتف" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">البريد الالكتروني</label>
+          <input class="form-control input-sm" type="email" ng-model="newResllerForm.email" ng-required-err-type="emailType" placeholder="البريد الالكتروني" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">كلمة المرور</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.password" ng-required-err-type="password" placeholder="كلمة المرور" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">تأكيد كلمة المرور</label>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.confirmPassword" ng-required-err-type="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-5">
+        <button type="submit" class="btn btn-success btn-sm btn-block"><i class="fa fa-user-plus"></i>&nbsp;تسجيل</button>
+      </div>
+    </div>
+  </form>
+</div>

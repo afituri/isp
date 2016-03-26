@@ -4,6 +4,7 @@ var login = require('../controller/login')(router);
 var user = require("../controller/user");
 var reseller = require("../controller/reseller");
 var userHelpers = require("../controller/userHelpers");
+var data = require("../data/resellers.json");
 
 
 
@@ -19,6 +20,10 @@ router.get('/', function(req, res) {
 
 router.get('/home',userHelpers.isLogin ,function(req, res) {
   res.render('index', { title: 'الرئسية' });
+});
+
+router.get('/data', function(req, res) {
+  res.send(data);
 });
 
 module.exports = router;

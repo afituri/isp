@@ -1,8 +1,6 @@
 (function(){
   'use strict';
-  var app = angular.module('isp',[
-    'jcs-autoValidate'
-    ]);
+  var app = angular.module('isp',['jcs-autoValidate']);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
     defaultErrorMessageResolver.setI18nFileRootPath('/lang');
     defaultErrorMessageResolver.setCulture('ar-ly');

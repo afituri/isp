@@ -10,17 +10,6 @@ html{
   position: relative;
   min-height: 100%;
 }
-::-webkit-input-placeholder { font-family: 'FontAwesome'; }
-::-moz-placeholder { font-family: 'FontAwesome'; } /* firefox 19+ */
-:-ms-input-placeholder { font-family: 'FontAwesome'; } /* ie */
-input:-moz-placeholder { font-family: 'FontAwesome'; }
-.country-select{
-  padding-right: 15px !important;
-}
-.country-icon{
-  position: absolute;
-  margin-top: -20px;
-}
 body {
   font-family: 'droidkufi', sans-serif;
   /*padding: 20px;*/
@@ -48,6 +37,7 @@ input[type=number]:focus,
   border-radius: 4px;
   position: relative;
   padding: 30px;
+  padding-top: 10px;
 }
 .footer{
   bottom: 0;
@@ -70,3 +60,62 @@ select, select.form-control {
   min-height: 51px;
   border-radius: 0;
 }
+#row{
+  padding-top: 70px;
+}
+/*Right panel menu style start*/
+.icon { margin-left:10px; }
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-right: 15px }
+.panel-body .table {margin-bottom: 0px; }
+.collapse.am-collapse {
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+  overflow: hidden;
+  &.in-remove {
+    animation-name: collapse;
+    display: block;
+  }
+  &.in-add {
+    animation-name: expand;
+  }
+}
+/*Right panel menu style end*/
+.panel-table{
+  padding:0;
+}
+.panel-table .panel-body .table-bordered{
+  border-style: none;
+  margin:0;
+}
+.panel-table .panel-body .table-bordered > thead > tr > th:last-of-type {
+  text-align:center;
+  width: 100px;
+}
+.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
+  border-right: 0px;
+}
+.panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
+  border-left: 0px;
+  width: 25%;
+}
+.panel-table .panel-body .table-bordered > tbody > tr:last-of-type > td{
+  border-bottom: 0px;
+}
+.panel-table .panel-body .table-bordered > thead > tr:last-of-type > th{
+  border-top: 0px;
+}
+.panel-table .panel-footer .pagination{
+  margin:0; 
+}
+.panel-table .panel-footer .col{
+ line-height: 34px;
+ height: 34px;
+}
+.active{
+  font-weight: 700;
+}
+

@@ -29,6 +29,7 @@
     "angular-toastr": "^1.7.0",
     "ladda": "^1.0.0",
     "angular-ladda": "^0.3.4",
-    "bootstrap-rtl": "^3.4.0"
+    "bootstrap-rtl": "^3.4.0",
+    "angular-sanitize": "^1.5.3"
   }
 }

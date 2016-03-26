@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="isp">
   <header>
-    <title>عملة</title>
+    <title><%=title %></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -32,7 +32,8 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left" role="search" _lpchecked="1">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="&#xf002; بحث...">
+                    <i class="fa fa-search fa-fw"></i>
+                    <input type="text" class="form-control" placeholder="بحث...">
                   </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
@@ -54,11 +55,40 @@
           </nav>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row" id="row">
+        <div class="col-md-3" ng-controller="MenuCtl">
+          <div class="panel-group" ng-model="activePanel" role="tablist" aria-multiselectable="true" bs-collapse>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab">
+                <h4 class="panel-title">
+                  <a bs-collapse-toggle style="cursor:pointer">
+                    المزعين
+                  </a>
+                </h4>
+              </div>
+              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+                <div class="panel-body">
+                  <table class="table">
+                    <tr>
+                      <td ui-sref-active="active">
+                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="resellers" style="text-decoration:none;">عرض الموزعين</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td ui-sref-active="active">
+                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newReseller" style="text-decoration:none;">إضافة موزع جديد</a>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
           <div ui-view></div>
         </div>
-        </div>
+      </div>
       </div>
       <br>
       <br>
@@ -71,6 +101,7 @@
     <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-animate/angular-animate.min.js"></script>
+    <script src="/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/angular-strap/dist/angular-strap.min.js"></script>
     <script src="/angular-strap/dist/angular-strap.tpl.min.js"></script>
