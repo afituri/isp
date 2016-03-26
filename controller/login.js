@@ -45,6 +45,7 @@ module.exports = function (router) {
       
       req.logIn(user, function(err) {
         if (err) { return next(err); }
+        console.log(user);
         return res.send({login: true });
       });
     })(req, res, next);

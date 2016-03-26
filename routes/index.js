@@ -3,6 +3,7 @@ var router = express.Router();
 var login = require('../controller/login')(router);
 var user = require("../controller/user");
 var reseller = require("../controller/reseller");
+var userHelpers = require("../controller/userHelpers");
 
 
 
@@ -16,7 +17,7 @@ router.get('/', function(req, res) {
   res.render('login', { title: 'شاشة الدخول' });
 });
 
-router.get('/home', function(req, res) {
+router.get('/home',userHelpers.isLogin ,function(req, res) {
   res.render('index', { title: 'الرئسية' });
 });
 
