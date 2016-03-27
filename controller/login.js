@@ -1,7 +1,8 @@
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   easyPbkdf2 = require("easy-pbkdf2")();
-var User = require("../models/user");
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 var Reseller = require("../models/reseller");
 
 //read the passport api docs if you wanna know what this does

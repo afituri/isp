@@ -16,4 +16,4 @@ var User = new Schema({
 
 User.plugin(timestamps);
 User.index({ name: 'text'});
-module.exports = mongoose.model('User', User);
+exports.User = mongoose.model('User', User);

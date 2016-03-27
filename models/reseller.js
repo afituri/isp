@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 // set up a mongoose model
 
 var Reseller = new Schema({
-  repName: {type: String, index: true},
-  companyName: String,
+  repName: {type: String},
+  companyName: {type:String, index: true},
   city: Number,
   address: String,
   langtitude: String,
@@ -14,12 +14,11 @@ var Reseller = new Schema({
   email: {type: String, unique : true, required : true},
   password: {type: String, required: true},
   salt: String,
-  status: Boolean,
+  status: { type: Number, min: 1, max: 10, default:1 },
   phone: String,
   policy: {type:Number, default:1}
-
 });
 
 Reseller.plugin(timestamps); 
 Reseller.index({ companyName: 'text'});
-module.exports = mongoose.model('Reseller', Reseller);
+exports.Reseller = mongoose.model('Reseller', Reseller);

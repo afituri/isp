@@ -3,6 +3,15 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
 
+var config = require('../config'); // get our config file
+var options = {
+  db: { native_parser: true },
+  server: { poolSize: 5 },
+  user: config.user,
+  pass: config.password
+}
+mongoose.connect(config.url, options);
+console.log('got called');
 var model = {}
 
 fs.readdirSync(__dirname)
