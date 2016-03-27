@@ -5,12 +5,21 @@ var Schema = mongoose.Schema;
 // set up a mongoose model
 
 var Reseller = new Schema({
+  repName: {type: String, index: true},
+  companyName: String,
+  city: Number,
+  address: String,
+  langtitude: String,
+  longtitude: String,
+  email: {type: String, unique : true, required : true},
   password: {type: String, required: true},
   salt: String,
-  email: {type: String, unique : true, required : true},
-  status: Boolean  
+  status: Boolean,
+  phone: String,
+  policy: {type:Number, default:1}
+
 });
 
-Reseller.plugin(timestamps);
-Reseller.index({ name: 'text'});
+Reseller.plugin(timestamps); 
+Reseller.index({ companyName: 'text'});
 module.exports = mongoose.model('Reseller', Reseller);
