@@ -33,7 +33,7 @@ module.exports = {
             console.log(err);
           } else {
             transporter.sendMail({
-              from: 'HNEC <voter_approve@hnec.ly',
+              from: '',
               to: obj.locals.email,
               subject: obj.subject,
               html: html,
