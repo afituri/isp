@@ -1,4 +1,4 @@
-var Reseller = require("../models/reseller"),
+var model = require("../models"),
     generatePassword = require('password-generator'),
     easyPbkdf2 = require("easy-pbkdf2")(),
     reseller = null;
@@ -6,15 +6,13 @@ var Reseller = require("../models/reseller"),
 
 module.exports = {
   /* here we add a new user to the system */
-  register: function (body, cb) {
+  add: function (body, cb) {
+    var obj = body;
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
     easyPbkdf2.secureHash( body.password, salt, function( err, passwordHash, originalSalt ) {
-      var obj={
-        email : body.email,
-        password : passwordHash,
-        salt : originalSalt,
-      };
-      reseller = new Reseller(obj);
+      obj.password = passwordHash;
+      obj.salt = originalSalt;
+      reseller = new model.Reseller(obj);
       reseller.save(function(err,result){
         if (!err) {
           delete result.password;
@@ -27,4 +25,7 @@ module.exports = {
       });
     });
   },
+  edit: function(id,body,cb) {
+
+  }
 };

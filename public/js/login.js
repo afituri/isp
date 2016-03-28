@@ -18,6 +18,7 @@
       }).then(function(response) {
         //First function handles success
         console.log(response.data);
+        window.location.replace('/home');
       }, function(response) {
         //Second function handles error
         console.log("Something went wrong");
