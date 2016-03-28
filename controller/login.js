@@ -2,8 +2,7 @@ var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   easyPbkdf2 = require("easy-pbkdf2")();
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var Reseller = require("../models/reseller");
+var model = require("../models");
 
 //read the passport api docs if you wanna know what this does
 passport.use(new LocalStrategy(
@@ -61,7 +60,7 @@ module.exports = function (router) {
 }
 
 function findById(id, fn) {
-  User.findOne({_id : id}, function(err, user){
+  model.User.findOne({_id : id}, function(err, user){
     if (user) {
       fn(null, user);
     } else {

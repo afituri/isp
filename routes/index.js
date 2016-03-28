@@ -20,19 +20,19 @@ router.get('/home',userHelpers.isLogin ,function(req, res) {
   res.render('index', { title: 'الرئسية' });
 });
 
-router.get('/getResellers', function(req, res) {
+router.get('/getResellers',userHelpers.isLogin , function(req, res) {
   res.send(getResellers);
 });
 
-router.post('/getResellerByID', function(req, res) {
+router.post('/getResellerByID',userHelpers.isLogin , function(req, res) {
   res.send(getResellerByID);
 });
 
-router.get('/getServices', function(req, res) {
+router.get('/getServices',userHelpers.isLogin , function(req, res) {
   res.send(getServices);
 });
 
-router.post('/getServiceByID', function(req, res) {
+router.post('/getServiceByID',userHelpers.isLogin , function(req, res) {
   res.send(getServiceByID);
 });
 
