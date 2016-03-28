@@ -12,19 +12,10 @@ var RedisStore = require('connect-redis')(session);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var reseller = require('./routes/reseller');
 var pages = require('./routes/pages');
 
 var app = express();
-
-// var mongoose = require('mongoose');
-// var config = require('./config'); // get our config file
-// var options = {
-//   db: { native_parser: true },
-//   server: { poolSize: 5 },
-//   user: config.user,
-//   pass: config.password
-// }
-// mongoose.connect(config.url, options);
 
 // view engine setup
 app.engine('html', require('ejs').renderFile);
@@ -50,6 +41,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/reseller', reseller);
 app.use('/pages', pages);
 
 /// catch 404 and forward to error handler
