@@ -15,32 +15,56 @@
       controller: 'HomeCtl'
     }).state('resellers',{
       url: '/resellers',
-      templateUrl: 'pages/resellers.html',
+      templateUrl: 'pages/resellers/resellers.html',
       controller: 'ResellersCtl'
-    }).state('NewResellerCtl',{
+    }).state('newReseller',{
       url: '/resellers/new',
-      templateUrl: 'pages/newReseller.html',
-      controller: 'newResellerCtl'
+      templateUrl: 'pages/resellers/newReseller.html',
+      controller: 'NewResellerCtl'
     }).state('editReseller',{
       url: '/resellers/edit/:id',
-      templateUrl: 'pages/editReseller.html',
+      templateUrl: 'pages/resellers/editReseller.html',
       controller: 'EditResellerCtl'
     }).state('showReseller',{
       url: '/resellers/show/:id',
-      templateUrl: 'pages/showReseller.html',
+      templateUrl: 'pages/resellers/showReseller.html',
       controller: 'ShowResellerCtl'
+    }).state('serviceProviders',{
+      url: '/serviceProviders',
+      templateUrl: 'pages/serviceProviders/serviceProviders.html',
+      controller: 'ServiceProvidersCtl'
+    }).state('newServiceProvider',{
+      url: '/serviceProviders/new',
+      templateUrl: 'pages/serviceProviders/newServiceProvider.html',
+      controller: 'NewServiceProviderCtl'
+    }).state('editServiceProvider',{
+      url: '/serviceProviders/edit/:id',
+      templateUrl: 'pages/serviceProviders/editServiceProvider.html',
+      controller: 'EditServiceProviderCtl'
     }).state('services',{
       url: '/services',
-      templateUrl: 'pages/services.html',
+      templateUrl: 'pages/services/services.html',
       controller: 'ServicesCtl'
     }).state('newService',{
       url: '/services/new',
-      templateUrl: 'pages/newServices.html',
-      controller: 'NewServicesCtl'
+      templateUrl: 'pages/services/newService.html',
+      controller: 'NewServiceCtl'
     }).state('editService',{
       url: '/services/edit/:id',
-      templateUrl: 'pages/editServices.html',
-      controller: 'EditServicesCtl'
+      templateUrl: 'pages/services/editService.html',
+      controller: 'EditServiceCtl'
+    }).state('suppliers',{
+      url: '/suppliers',
+      templateUrl: 'pages/suppliers/suppliers.html',
+      controller: 'SuppliersCtl'
+    }).state('newSupplier',{
+      url: '/suppliers/new',
+      templateUrl: 'pages/suppliers/newSupplier.html',
+      controller: 'NewSupplierCtl'
+    }).state('editSupplier',{
+      url: '/suppliers/edit/:id',
+      templateUrl: 'pages/suppliers/editSupplier.html',
+      controller: 'EditSupplierCtl'
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');

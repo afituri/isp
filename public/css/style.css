@@ -135,5 +135,6 @@ select, select.form-control {
   }
 }
 .well-sm{
+  background-color: #fff;
   border-radius: 4px;
 }
