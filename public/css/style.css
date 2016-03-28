@@ -118,4 +118,22 @@ select, select.form-control {
 .active{
   font-weight: 700;
 }
-
+.modal-backdrop.am-fade {
+  opacity: .5;
+  transition: opacity .15s linear;
+  &.ng-enter {
+    opacity: 0;
+    &.ng-enter-active {
+      opacity: .5;
+    }
+  }
+  &.ng-leave {
+    opacity: .5;
+    &.ng-leave-active {
+      opacity: 0;
+    }
+  }
+}
+.well-sm{
+  border-radius: 4px;
+}
