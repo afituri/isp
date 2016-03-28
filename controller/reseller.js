@@ -20,12 +20,20 @@ module.exports = {
           cb(result);
         } else {
           //TODO: return page with errors
-          cb(true);
+          cb(false);
         }
       });
     });
   },
   edit: function(id,body,cb) {
-
+    var obj = body;
+    model.Reseller.findOneAndUpdate({_id:id}, obj, function(err,result) {
+      if (!err) {
+        cb(true)
+      } else {
+        console.log(err);
+        cb(false);
+      }
+    });
   }
 };
