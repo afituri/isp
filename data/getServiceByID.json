@@ -1,8 +1,6 @@
 {
   "id":"1",
-  "name":"اسم الخدمة 1",
-  "email":"email1@gmail.com",
-  "phone":"0922220222",
-  "logo":"",
-  "website":"www.site1.com"
+  "name":"خدمة 1",
+  "servicesProvider":"1",
+  "discriptoin":"لا يوجد"
 }
