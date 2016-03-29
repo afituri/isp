@@ -13,35 +13,20 @@ router.get('/', function(req, res) {
 
 /* Add new policy   */
 router.post('/add', function(req, res) {
-  console.log(req.body);
-  var body ={
-    name: req.body.name,
-    type:req.body.name,
-    discriptoin:req.body.name,
-    initialPrice:req.body.name,
-    item:null,
-    packages:null
-  }
-  if(type=='item'){
-    body['item']={
-      made:req.body.name,
-      brand:req.body.name
-    }
-  }else if(type=='package'){
-    body['packages']={
-      renewPrice:req.body.name,
-      GBPrice:req.body.name
-    }
-  }
-  Policy.addPolicy(function(result){
+  Policy.addPolicy(req.body,function(result){
     res.send(result);
   });
 });
 
 /* Edit policy  by id  */
 router.put('/edit/:id', function(req, res) {
-  console.log(req.body)
-  console.log(req.params.id);
+  // console.log(req.body)
+  // console.log(req.params.id);
+  
+  Policy.updatePolicy(req.params.id,req.body,function(result){
+    res.send(result);
+  });
+
 });
 
 /* Delete policy  by id  */
@@ -51,7 +36,9 @@ router.delete('/delete/:id', function(req, res) {
 
 /* GET policy  by ID  */
 router.get('/:id', function(req, res) {
-  res.send(data.policy);
+  Policy.getPolicyId(req.params.id,function(result){
+    res.send(result);  
+  });
 });
 
 /* GET product Policies for policy by ID  */

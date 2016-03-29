@@ -9,12 +9,12 @@ var Policy = new Schema({
    initialPrice: { type: Number, required: true},
    item: {
       // supplier:{type: String, required: true},
-      made:{type: Number, required: true},
-      brand:{type: String, required: true}
+      made:{type: Number},
+      brand:{type: String}
    },
    packages: {
-      renewPrice: { type: Number, required: true},
-      GBPrice: { type: Number, required: true},
+      renewPrice: { type: Number},
+      GBPrice: { type: Number},
    },
    status: Boolean
 });
