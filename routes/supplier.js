@@ -1,31 +1,31 @@
 var express = require('express');
 var router = express.Router();
-var data = require('../data/reseller');
+var data = require('../data/supplier');
 
-/* GET all resellers */
+/* GET all suppliers */
 router.get('/', function(req, res) {
-  res.send(data.resellers);
+  res.send(data.suppliers);
 });
 
-/* Add new reseller  */
+/* Add new supplier  */
 router.post('/add', function(req, res) {
   console.log(req.body);
 });
 
-/* Edit reseller by id  */
+/* Edit supplier by id  */
 router.put('/edit/:id', function(req, res) {
   console.log(req.body)
   console.log(req.params.id);
 });
 
-/* Delete reseller by id  */
+/* Delete supplier by id  */
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
 });
 
-/* GET reseller by ID  */
+/* GET supplier by ID  */
 router.get('/:id', function(req, res) {
-  res.send(data.reseller);
+  res.send(data.supplier);
 });
 
 

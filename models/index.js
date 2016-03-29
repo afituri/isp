@@ -11,9 +11,7 @@ var options = {
   pass: config.password
 }
 mongoose.connect(config.url, options);
-console.log('got called');
-var model = {}
-
+var model = {};
 fs.readdirSync(__dirname)
   .filter(function(file) {
       return (file.indexOf('.') !== 0) && (file !== 'index.js')
