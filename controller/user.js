@@ -1,10 +1,31 @@
-var User = require("../models/user"),
-    generatePassword = require('password-generator'),
+var generatePassword = require('password-generator'),
     easyPbkdf2 = require("easy-pbkdf2")(),
     user = null;
+var model = require("../models");
 
 
 module.exports = {
+  getUser :function(username,cb){
+    console.log('user');
+    model.User.findOne({email : username}, function(err, user){
+      console.log(user);
+      if(!err){
+        cb(user);
+      }else{
+        cb(null);
+      }
+    });
+  },
+
+  getUserId :function(id,cb){
+    model.User.findOne({_id : id}, function(err, user){
+      if(!err){
+        cb(user);
+      }else{
+        cb(null);
+      }
+    });
+  },
   /* here we add a new user to the system */
   register: function (body, cb) {
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
@@ -14,7 +35,7 @@ module.exports = {
         password : passwordHash,
         salt : originalSalt,
       };
-      user = new User(obj);
+      user = new model.User(obj);
       user.save(function(err,result){
         if (!err) {
           delete result.password;
@@ -30,23 +51,21 @@ module.exports = {
 
 
   hasNid: function (nid, cb) {
-    User.findOne({nid : nid, verified:3}, function(err, user){
+    model.User.findOne({nid : nid, verified:3}, function(err, user){
       if (!err) {
         if(user){
-          cb(true);
+          cb(user);
         } else {
           cb(false);
         }
       } else {
-        //TODO: return page with errors
-        console.log(err)
         cb(null);
       }
     });
   },
   /* get  */
   verify: function (id, cb) {
-    User.findOne({_id : id}, function(err, user){
+    model.User.findOne({_id : id}, function(err, user){
       if(!err && user != null){
         cb(user);
       } else {
@@ -55,20 +74,10 @@ module.exports = {
     });
   },
   
-  /* hasEmail  */
-  hasEmail: function (email, cb) {
-    User.findOne({email : email},'_id', function(err, id){
-      if(!err && id != null){
-        cb(id);
-      } else {
-        console.log(err);
-        cb(null);
-      }
-    });
-  },
+
   /* user verifies*/
   enteredData: function (id,body, cb) {
-    User.findOne({_id : id}, function(err, user){
+    model.User.findOne({_id : id}, function(err, user){
       if(!err && user != null){
         user.name = body.name;
         user.nid= body.nid;
@@ -98,7 +107,7 @@ module.exports = {
         password : passwordHash,
         salt : originalSalt,
       };
-      User.findOne({_id : id}, function(err, user){
+      model.User.findOne({_id : id}, function(err, user){
         if(!err && user != null){
           user.password = passwordHash;
           user.salt = originalSalt;

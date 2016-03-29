@@ -5,6 +5,26 @@ var model = require("../models"),
 
 
 module.exports = {
+
+  getReseller :function(username,cb){
+    model.Reseller.findOne({email : username}, function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        cb(null);
+      }
+    });
+  },
+
+  getResellerId :function(id,cb){
+    model.Reseller.findOne({_id : id}, function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        cb(null);
+      }
+    });
+  },
   /* here we add a new user to the system */
   add: function (body, cb) {
     var obj = body;
@@ -35,5 +55,5 @@ module.exports = {
         cb(false);
       }
     });
-  }
+  },
 };
