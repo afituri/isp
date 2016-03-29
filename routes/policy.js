@@ -1,36 +1,36 @@
 var express = require('express');
 var router = express.Router();
-var data = require('../data/sProvider');
+var data = require('../data/policy');
 
-/* GET all Service Providers */
+/* GET all policy */
 router.get('/', function(req, res) {
-  res.send(data.sProviders);
+  res.send(data.policies);
 });
 
-/* Add new Service Provider  */
+/* Add new policy   */
 router.post('/add', function(req, res) {
   console.log(req.body);
 });
 
-/* Edit Service Provider by id  */
+/* Edit policy  by id  */
 router.put('/edit/:id', function(req, res) {
   console.log(req.body)
   console.log(req.params.id);
 });
 
-/* Delete Service Provider by id  */
+/* Delete policy  by id  */
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
 });
 
-/* GET Service Provider by ID  */
+/* GET policy  by ID  */
 router.get('/:id', function(req, res) {
-  res.send(data.sProvider);
+  res.send(data.policy);
 });
 
-/* GET All Services belongs to a Service Provider by ID  */
-router.get('/:id/services', function(req, res) {
-  res.send(data.services);
+/* GET product Policies for policy by ID  */
+router.get('/:id/productPolicies', function(req, res) {
+  res.send(data.productPolicies);
 });
 
 

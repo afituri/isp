@@ -17,6 +17,7 @@ var sProvider = require('./routes/sProvider');
 var service = require('./routes/service');
 var supplier = require('./routes/supplier');
 var customer = require('./routes/customer');
+var policy = require('./routes/policy');
 var pages = require('./routes/pages');
 
 var app = express();
@@ -50,6 +51,7 @@ app.use('/sProvider', sProvider);
 app.use('/service', service);
 app.use('/supplier', supplier);
 app.use('/customer', customer);
+app.use('/policy', policy);
 app.use('/pages', pages);
 
 /// catch 404 and forward to error handler
