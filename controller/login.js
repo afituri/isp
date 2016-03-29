@@ -3,6 +3,8 @@ var passport = require('passport'),
   easyPbkdf2 = require("easy-pbkdf2")();
 var mongoose = require('mongoose');
 var model = require("../models");
+var UserC = require("../controller/user");
+var ResellerC = require("../controller/reseller");
 
 //read the passport api docs if you wanna know what this does
 passport.use(new LocalStrategy(
@@ -60,11 +62,11 @@ module.exports = function (router) {
 }
 
 function findById(id, fn) {
-  model.User.findOne({_id : id}, function(err, user){
+  UserC.getUserId(id,function(user){
     if (user) {
       fn(null, user);
     } else {
-      Reseller.findOne({_id : id}, function(err, user){
+      ResellerC.getResellerId(id,function(user){
         if (user) {
           fn(null, user);
         } else {
@@ -73,23 +75,25 @@ function findById(id, fn) {
       });
     }
   });
+
 }
 
 function findByUserName(username, fn) {
-
-  User.findOne({email : username}, function(err, user){
+  console.log("im her");
+  UserC.getUser(username,function(user){
     if (user) {
-      return fn(null, user);
+      fn(null, user);
     } else {
-      Reseller.findOne({email : username}, function(err, user){
+      ResellerC.getReseller(username,function(user){
         if (user) {
-          return fn(null, user);
+          fn(null, user);
         } else {
-          return fn(null, null);
+          fn(new Error('User ' + id + ' does not exist'));
         }
       });
     }
   });
+
 }
 
 function authenticate(user, userEnteredPassword, callback) {

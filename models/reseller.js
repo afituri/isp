@@ -18,9 +18,8 @@ var Reseller = new Schema({
   phone: String,
   policy: {type:Number, default:1}
 });
-Reseller.post('remove', function(doc) {
-  console.log('%s has been removed', doc._id);
-});
+
 Reseller.plugin(timestamps); 
-Reseller.index({ companyName: 'text'});
+Reseller.index({ repName: 'text'});
 exports.Reseller = mongoose.model('Reseller', Reseller);
+

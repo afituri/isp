@@ -11,13 +11,15 @@ var redis = require("redis"),
 var RedisStore = require('connect-redis')(session);
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var reseller = require('./routes/reseller');
 var sProvider = require('./routes/sProvider');
 var service = require('./routes/service');
 var supplier = require('./routes/supplier');
 var customer = require('./routes/customer');
+var warehouse = require('./routes/warehouse');
 var policy = require('./routes/policy');
+
 var pages = require('./routes/pages');
 
 var app = express();
@@ -45,12 +47,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/reseller', reseller);
 app.use('/sProvider', sProvider);
 app.use('/service', service);
 app.use('/supplier', supplier);
 app.use('/customer', customer);
+app.use('/warehouse', warehouse);
 app.use('/policy', policy);
 app.use('/pages', pages);
 
