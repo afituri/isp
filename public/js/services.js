@@ -10,14 +10,14 @@
     var self = {
       'resellersObj': [],
       'getResellers': function(){
-        $http.get('/getResellers').then(function(response) {
+        $http.get('/reseller').then(function(response) {
           self.resellersObj = response.data;
         }, function(response) {
           console.log("Something went wrong");
         });
       },
       'getResellersByID': function(id){
-        return $http.post('/getResellerByID');
+        return $http.get('/reseller/:id');
       }
     };
     self.getResellers();
@@ -27,14 +27,17 @@
     var self = {
       'serviceProvidersObj': [],
       'getServiceProviders': function(){
-        $http.get('/getServiceProviders').then(function(response) {
+        $http.get('/sProvider').then(function(response) {
           self.serviceProvidersObj = response.data;
         }, function(response) {
           console.log("Something went wrong");
         });
       },
       'getServiceProviderByID': function(id){
-        return $http.post('/getServiceProviderByID');
+        return $http.get('/sProvider/:id');
+      },
+      'getServiceProvidersServicesByID': function(id){
+        return $http.get('/sProvider/:id/services');
       }
     };
     self.getServiceProviders();
@@ -44,14 +47,14 @@
     var self = {
       'servicesObj': [],
       'getServices': function(){
-        $http.get('/getServices').then(function(response) {
+        $http.get('/service').then(function(response) {
           self.servicesObj = response.data;
         }, function(response) {
           console.log("Something went wrong");
         });
       },
       'getServiceByID': function(id){
-        return $http.put('/getServiceByID');
+        return $http.get('/service/:id');
       }
     };
     self.getServices();
@@ -61,14 +64,14 @@
     var self = {
       'suppliersObj': [],
       'getSuppliers': function(){
-        $http.get('/getSuppliers').then(function(response) {
+        $http.get('/supplier').then(function(response) {
           self.suppliersObj = response.data;
         }, function(response) {
           console.log("Something went wrong");
         });
       },
       'getSupplierByID': function(id){
-        return $http.put('/getSupplierByID');
+        return $http.get('/supplier/:id');
       }
     };
     self.getSuppliers();

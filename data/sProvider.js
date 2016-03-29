@@ -2,7 +2,7 @@ module.exports = {
   "sProviders" : [
     {
       "id":"1",
-      "name":"اسم الخدمة 1",
+      "name":"اسم الشركة 1",
       "email":"email1@gmail.com",
       "phone":"0922220222",
       "logo":"",
@@ -10,7 +10,7 @@ module.exports = {
     },
     {
       "id":"2",
-      "name":"اسم الخدمة 2",
+      "name":"اسم الشركة 2",
       "email":"email2@gmail.com",
       "phone":"0922220222",
       "logo":"",
@@ -19,7 +19,7 @@ module.exports = {
   ],
   "sProvider" : {
     "id":"1",
-    "name":"اسم الخدمة 1",
+    "name":"اسم الشركة 1",
     "email":"email1@gmail.com",
     "phone":"0922220222",
     "logo":"",
