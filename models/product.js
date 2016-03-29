@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var Product = new Schema({
    name: { type: String, required: true},
-   type: { type: String, enum: ['product1', 'product2', 'product3'], required: true},
+   type: { type: String, enum: ['Service', 'Item', 'Package'], required: true},
    discriptoin: { type: String, required: true},
    initialPrice: { type: Number, required: true},
    item: {
@@ -29,4 +29,4 @@ var Product = new Schema({
 
 Product.plugin(timestamps);
 Product.index({ name: 'text'});
-module.exports = mongoose.model('Product', Product);
+exports.Product = mongoose.model('Product', Product);

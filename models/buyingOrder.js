@@ -15,4 +15,4 @@ var BuyingOrder = new Schema({
 });
 
 BuyingOrder.plugin(timestamps);
-module.exports = mongoose.model('BuyingOrder', BuyingOrder);
+exports.BuyingOrder = mongoose.model('BuyingOrder', BuyingOrder);

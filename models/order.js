@@ -29,4 +29,4 @@ var order = new Schema({
 order.plugin(textSearch);
 order.plugin(timestamps);
 order.index({ customer: 'text'});
-module.exports = mongoose.model('order', order);
+exports.order = mongoose.model('order', order);

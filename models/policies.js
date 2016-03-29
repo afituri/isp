@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
-var Policie = new Schema({
+var Policy = new Schema({
    name: { type: String, required: true},
    type: { type: String, enum: ['Policie1', 'Policie2', 'Policie3'], required: true},
    discriptoin: { type: String, required: true},
@@ -19,9 +19,9 @@ var Policie = new Schema({
    status: Boolean
 });
 
-Policie.plugin(timestamps);
-Policie.index({ name: 'text'});
-module.exports = mongoose.model('Policie', Policie);
+Policy.plugin(timestamps);
+Policy.index({ name: 'text'});
+exports.Policy = mongoose.model('Policy', Policy);
 
 
 // policie{

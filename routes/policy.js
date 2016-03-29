@@ -1,10 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var data = require('../data/policy');
+var Policy = require("../controller/policies");
+
 
 /* GET all policy */
 router.get('/', function(req, res) {
-  res.send(data.policies);
+  Policy.getPolicies(function(policies){
+    console.log(policies);
+    res.send(policies);
+  });
 });
 
 /* Add new policy   */

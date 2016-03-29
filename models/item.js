@@ -15,4 +15,4 @@ var Item = new Schema({
 
 Item.plugin(timestamps);
 // Reseller.index({ repName: 'text'});
-module.exports = mongoose.model('Item', Item);
+exports.Item = mongoose.model('Item', Item);

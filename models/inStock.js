@@ -19,4 +19,4 @@ var Stock = new Schema({
 
 Stock.plugin(timestamps);
 Stock.index({ stock: 'text'});
-module.exports = mongoose.model('Stock', Stock);
+exports.Stock = mongoose.model('Stock', Stock);

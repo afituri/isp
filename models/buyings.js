@@ -17,4 +17,4 @@ var Buyings = new Schema({
 
 Buyings.plugin(timestamps);
 // BuyingOrder.index({ repName: 'text'});
-module.exports = mongoose.model('Buyings', Buyings);
+exports.Buyings = mongoose.model('Buyings', Buyings);
