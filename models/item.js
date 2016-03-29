@@ -5,13 +5,11 @@ var Schema = mongoose.Schema;
 // set up a mongoose model
 
 var Reseller = new Schema({
-  name:{type: String, required: true},
-  email:{type: String, required: true},
-  phone:{type: String, required: true},
-  repName:{type: String, required: true},
-  repPhone:{type: String, required: true},
-  notes:{type: String, required: true},
-
+  product:{type: String, required: true},
+  supplier:{type: String, required: true},
+  made:{type: Number, required: true},
+  brand:{type: String, required: true},
+  
   status: Boolean
 });
 

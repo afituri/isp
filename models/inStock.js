@@ -4,17 +4,16 @@ var Schema = mongoose.Schema;
 // set up a mongoose model
 
 var Stock = new Schema({
-  name: {
+  stock: {
     type: String,
     index: true,
     default: "Unknown Stock"
     required: true
   },
-  city: {type: Number, required: [true, 'Why no city?']},
-  area: {type: String, required: true},
-  langtitude: {type: String, required: true},
-  longtitude: {type: String, required: true},
-  phone: {type: String, required: true},
+  item: {type: Number, required: [true, 'Why no city?']},
+  quantity: {type: String, required: true},
+  buyingOrder: {type: String, required: true},
+  
   status: Boolean
 });
 
