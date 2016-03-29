@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var Product = new Schema({
    name: { type: String, required: true},
-   type: { type: String, enum: ['Service', 'Item', 'Package'], required: true},
+   type: { type: String, enum: ['service', 'item', 'package'], required: true},
    discriptoin: { type: String, required: true},
    initialPrice: { type: Number, required: true},
    item: {
@@ -14,7 +14,7 @@ var Product = new Schema({
    },
    packages: {
       type: { type: Number, required: true},
-      service: { type: Number, required: true},
+      service: {type: Schema.Types.ObjectId , ref: 'Service'},
       dSpeed: { type: Number, required: true},
       uSpeed: { type: Number, required: true},
       monthlyQuota: { type: Number, required: true},
