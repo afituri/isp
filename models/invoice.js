@@ -17,5 +17,5 @@ var invoice = new Schema({
 
 invoice.plugin(textSearch);
 invoice.plugin(timestamps);
-invoice.index({ name: 'text'});
+invoice.index({ customer: 'text'});
 module.exports = mongoose.model('invoice', invoice);

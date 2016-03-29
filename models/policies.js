@@ -13,36 +13,28 @@ var Policie = new Schema({
       brand:{type: String, required: true}
    },
    packages: {
-      type: { type: Number, required: true},
-      service: { type: Number, required: true},
-      dSpeed: { type: Number, required: true},
-      uSpeed: { type: Number, required: true},
-      monthlyQuota: { type: Number, required: true},
       renewPrice: { type: Number, required: true},
       GBPrice: { type: Number, required: true},
-      cost: { type: Number, required: true},
-      costCurrency: { type: Number, required: true},
-      exchangeRate: { type: Number, required: true}
    },
    status: Boolean
 });
 
 Policie.plugin(timestamps);
-Policie.index({ repName: 'text'});
+Policie.index({ name: 'text'});
 module.exports = mongoose.model('Policie', Policie);
 
 
-policie{
-   name:"",
-   discription:"",
+// policie{
+//    name:"",
+//    discription:"",
 
-   productPolicie:[{
-      product:"",
-      policiePrice:32,
-      packages:{
-         renewPrice:43,
-         GBPrice:34
-         }
-      }
-   ]
-}
+//    productPolicie:[{
+//       product:"",
+//       policiePrice:32,
+//       packages:{
+//          renewPrice:43,
+//          GBPrice:34
+//          }
+//       }
+//    ]
+// }

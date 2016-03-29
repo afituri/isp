@@ -7,7 +7,7 @@ var Stock = new Schema({
   stock: {
     type: String,
     index: true,
-    default: "Unknown Stock"
+    default: "Unknown Stock",
     required: true
   },
   item: {type: Number, required: [true, 'Why no city?']},
@@ -18,5 +18,5 @@ var Stock = new Schema({
 });
 
 Stock.plugin(timestamps);
-Stock.index({ name: 'text'});
+Stock.index({ stock: 'text'});
 module.exports = mongoose.model('Stock', Stock);

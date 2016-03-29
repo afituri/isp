@@ -21,5 +21,5 @@ var Package = new Schema({
 });
 
 Package.plugin(timestamps);
-Package.index({ repName: 'text'});
+// Package.index({ repName: 'text'});
 module.exports = mongoose.model('Package', Package);

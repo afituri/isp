@@ -12,14 +12,14 @@ var order = new Schema({
   piad: {type: Number, required: [true, 'Why no piad?']},
   left: {type: Number, required: [true, 'Why no left?']},
 
-  invoice
-  product
-  quantity
-  discount
-  price
-  macAddress
-  startDate
-  endDate
+  // invoice
+  // product
+  // quantity
+  // discount
+  // price
+  // macAddress
+  // startDate
+  // endDate
   siteld: {type: String, required: true},
 
 
@@ -28,5 +28,5 @@ var order = new Schema({
 
 order.plugin(textSearch);
 order.plugin(timestamps);
-order.index({ name: 'text'});
+order.index({ customer: 'text'});
 module.exports = mongoose.model('order', order);

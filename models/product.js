@@ -28,5 +28,5 @@ var Product = new Schema({
 });
 
 Product.plugin(timestamps);
-Product.index({ repName: 'text'});
+Product.index({ name: 'text'});
 module.exports = mongoose.model('Product', Product);

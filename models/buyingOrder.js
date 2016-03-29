@@ -15,5 +15,4 @@ var BuyingOrder = new Schema({
 });
 
 BuyingOrder.plugin(timestamps);
-BuyingOrder.index({ repName: 'text'});
 module.exports = mongoose.model('BuyingOrder', BuyingOrder);

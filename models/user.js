@@ -9,7 +9,7 @@ var User = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
   salt: String,
   email: {type: String, unique : true, required : true},
   

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // set up a mongoose model
 
-var Reseller = new Schema({
+var Item = new Schema({
   product:{type: String, required: true},
   supplier:{type: String, required: true},
   made:{type: Number, required: true},
@@ -13,6 +13,6 @@ var Reseller = new Schema({
   status: Boolean
 });
 
-Reseller.plugin(timestamps);
-Reseller.index({ repName: 'text'});
-module.exports = mongoose.model('Reseller', Reseller);
+Item.plugin(timestamps);
+// Reseller.index({ repName: 'text'});
+module.exports = mongoose.model('Item', Item);

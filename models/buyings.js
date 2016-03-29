@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // set up a mongoose model
 
-var BuyingOrder = new Schema({
+var Buyings = new Schema({
   item: {type: Number, required: [true, 'Why no item?']},
   buyingOrder: {type: Number, required: [true, 'Why no buyingOrder?']},
   quantity: {type: String, required: true},
@@ -15,6 +15,6 @@ var BuyingOrder = new Schema({
   status: Boolean
 });
 
-BuyingOrder.plugin(timestamps);
-BuyingOrder.index({ repName: 'text'});
-module.exports = mongoose.model('BuyingOrder', BuyingOrder);
+Buyings.plugin(timestamps);
+// BuyingOrder.index({ repName: 'text'});
+module.exports = mongoose.model('Buyings', Buyings);
