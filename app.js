@@ -11,7 +11,7 @@ var redis = require("redis"),
 var RedisStore = require('connect-redis')(session);
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var reseller = require('./routes/reseller');
 var sProvider = require('./routes/sProvider');
 var service = require('./routes/service');
@@ -47,7 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/reseller', reseller);
 app.use('/sProvider', sProvider);
 app.use('/service', service);
