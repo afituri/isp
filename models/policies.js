@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var Policy = new Schema({
    name: { type: String, required: true},
-   type: { type: String, enum: ['Service', 'Item', 'Package'], required: true},
+   type: { type: String, enum: ['service', 'item', 'package'], required: true},
    discriptoin: { type: String, required: true},
    initialPrice: { type: Number, required: true},
    item: {

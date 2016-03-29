@@ -22,18 +22,16 @@ router.post('/add', function(req, res) {
     item:null,
     packages:null
   }
-  if(type=='Item'){
+  if(type=='item'){
     body['item']={
-      made
-      brand
+      made:req.body.name,
+      brand:req.body.name
     }
-  }
-    item
-    
-    
-    packages
-    renewPrice
-    GBPrice
+  }else if(type=='package'){
+    body['packages']={
+      renewPrice:req.body.name,
+      GBPrice:req.body.name
+    }
   }
   Policy.addPolicy(function(result){
     res.send(result);
