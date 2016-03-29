@@ -55,6 +55,23 @@
       console.log("Something went wrong");
     });
   }]);
+  app.controller('DetailServiceProviderCtl',['$scope','$stateParams','MenuFac','ServiceProvidersServ',function($scope,$stateParams,MenuFac,ServiceProvidersServ){
+    MenuFac.active = 1;
+    $scope.activePanel = MenuFac;
+    $scope.services = {};
+    $scope.detailServiceProvidersForm = {};
+    ServiceProvidersServ.getServiceProviderByID($stateParams.id).then(function(response) {
+      $scope.detailServiceProviderForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    ServiceProvidersServ.getServiceProvidersServicesByID($stateParams.id).then(function(response) {
+      $scope.services = response.data;
+      console.log(response.data);
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  }]);
   // Service Providers Controllers End
   // Service Controllers Start
   app.controller('ServicesCtl',['$scope','MenuFac','ServicesServ',function($scope,MenuFac,ServicesServ){

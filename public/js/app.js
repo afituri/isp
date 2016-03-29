@@ -41,6 +41,10 @@
       url: '/serviceProviders/edit/:id',
       templateUrl: 'pages/serviceProviders/editServiceProvider.html',
       controller: 'EditServiceProviderCtl'
+    }).state('detailServiceProvider',{
+      url: '/serviceProviders/:id/services',
+      templateUrl: 'pages/serviceProviders/detailServiceProvider.html',
+      controller: 'DetailServiceProviderCtl'
     }).state('services',{
       url: '/services',
       templateUrl: 'pages/services/services.html',
