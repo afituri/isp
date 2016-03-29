@@ -69,6 +69,30 @@
       url: '/suppliers/edit/:id',
       templateUrl: 'pages/suppliers/editSupplier.html',
       controller: 'EditSupplierCtl'
+    }).state('warehouses',{
+      url: '/warehouses',
+      templateUrl: 'pages/warehouses/warehouses.html',
+      controller: 'WarehousesCtl'
+    }).state('newWarehouse',{
+      url: '/warehouses/new',
+      templateUrl: 'pages/warehouses/newWarehouse.html',
+      controller: 'NewWarehouseCtl'
+    }).state('editWarehouse',{
+      url: '/warehouses/edit/:id',
+      templateUrl: 'pages/warehouses/editWarehouse.html',
+      controller: 'EditWarehouseCtl'
+    }).state('customers',{
+      url: '/customers',
+      templateUrl: 'pages/customers/customers.html',
+      controller: 'CustomersCtl'
+    }).state('newCustomer',{
+      url: '/customers/new',
+      templateUrl: 'pages/customers/newCustomer.html',
+      controller: 'NewCustomerCtl'
+    }).state('editCustomer',{
+      url: '/customers/edit/:id',
+      templateUrl: 'pages/customers/editCustomer.html',
+      controller: 'EditCustomerCtl'
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');

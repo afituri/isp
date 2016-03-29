@@ -77,4 +77,38 @@
     self.getSuppliers();
     return self;
   }]);
+  app.service('WarehousesServ',['$http',function($http){
+    var self = {
+      'warehousesObj': [],
+      'getWarehouses': function(){
+        $http.get('/warehouse').then(function(response) {
+          self.warehousesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      },
+      'getWarehouseByID': function(id){
+        return $http.get('/warehouse/:id');
+      }
+    };
+    self.getWarehouses();
+    return self;
+  }]);
+  app.service('CustomersServ',['$http',function($http){
+    var self = {
+      'customersObj': [],
+      'getCustomers': function(){
+        $http.get('/customer').then(function(response) {
+          self.customersObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      },
+      'getCustomerByID': function(id){
+        return $http.get('/customer/:id');
+      }
+    };
+    self.getCustomers();
+    return self;
+  }]);
 }());

@@ -117,4 +117,46 @@
     });
   }]);
   // Suppliers Controllers End
+  // Warehouses Controllers Start
+  app.controller('WarehousesCtl',['$scope','MenuFac','WarehousesServ',function($scope,MenuFac,WarehousesServ){
+    MenuFac.active = 4;
+    $scope.activePanel = MenuFac;
+    $scope.warehouses = WarehousesServ;
+  }]);
+  app.controller('NewWarehouseCtl',['$scope','MenuFac',function($scope,MenuFac){
+    MenuFac.active = 4;
+    $scope.activePanel = MenuFac;
+  }]);
+  app.controller('EditWarehouseCtl',['$scope','$stateParams','MenuFac','WarehousesServ',function($scope,$stateParams,MenuFac,WarehousesServ){
+    MenuFac.active = 4;
+    $scope.activePanel = MenuFac;
+    $scope.editWarehouseForm = {};
+    WarehousesServ.getWarehouseByID($stateParams.id).then(function(response) {
+      $scope.editWarehouseForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  }]);
+  // Warehouses Controllers End
+  // Customers Controllers End
+  app.controller('CustomersCtl',['$scope','MenuFac','CustomersServ',function($scope,MenuFac,CustomersServ){
+    MenuFac.active = 5;
+    $scope.activePanel = MenuFac;
+    $scope.customers = CustomersServ;
+  }]);
+  app.controller('NewCustomerCtl',['$scope','MenuFac','CustomersServ',function($scope,MenuFac,CustomersServ){
+    MenuFac.active = 5;
+    $scope.activePanel = MenuFac;
+  }]);
+  app.controller('EditCustomerCtl',['$scope','$stateParams','MenuFac','CustomersServ',function($scope,$stateParams,MenuFac,CustomersServ){
+    MenuFac.active = 5;
+    $scope.activePanel = MenuFac;
+    $scope.editCustomerForm = {};
+    WarehousesServ.getCustomerByID($stateParams.id).then(function(response) {
+      $scope.editCustomerForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  }]);
+  // Customers Controllers End
 }())

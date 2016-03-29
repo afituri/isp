@@ -3,7 +3,7 @@ module.exports = {
     {
       "id": "1",
       "name": "سالم محمد التاجوري",
-      "companyName": null,
+      "repName": null,
       "city": "1",
       "address": "الشارع الغربي",
       "email": "email1@gmail.com",
@@ -15,8 +15,8 @@ module.exports = {
     },
     {
       "id": "2",
-      "name": "سالم",
-      "companyName": "الدقة",
+      "name": "الشركة رقم 1",
+      "repName": "الدقة",
       "city": "2",
       "address": "",
       "email": "email2@gmail.com",
@@ -29,7 +29,7 @@ module.exports = {
     {
       "id": "3",
       "name": "سالم",
-      "companyName": null,
+      "repName": null,
       "city": "3",
       "address": "",
       "email": "email3@gmail.com",
@@ -43,7 +43,7 @@ module.exports = {
   "customer" : {
     "id": "1",
     "name": "سالم محمد التاجوري",
-    "companyName": null,
+    "repName": null,
     "city": "1",
     "address": "الشارع الغربي",
     "email": "email1@gmail.com",
