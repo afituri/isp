@@ -7,7 +7,6 @@ var Policy = require("../controller/policies");
 /* GET all policy */
 router.get('/', function(req, res) {
   Policy.getPolicies(function(policies){
-    console.log(policies);
     res.send(policies);
   });
 });
@@ -15,6 +14,30 @@ router.get('/', function(req, res) {
 /* Add new policy   */
 router.post('/add', function(req, res) {
   console.log(req.body);
+  var body ={
+    name: req.body.name,
+    type:req.body.name,
+    discriptoin:req.body.name,
+    initialPrice:req.body.name,
+    item:null,
+    packages:null
+  }
+  if(type=='Item'){
+    body['item']={
+      made
+      brand
+    }
+  }
+    item
+    
+    
+    packages
+    renewPrice
+    GBPrice
+  }
+  Policy.addPolicy(function(result){
+    res.send(result);
+  });
 });
 
 /* Edit policy  by id  */
