@@ -1,0 +1,52 @@
+<div class="widget-box">
+  <h5><i class="fa fa-plus"></i>&nbsp;إضافة مزود خدمة جديد</h5>
+  <hr>
+  <form novalidate ng-submit="newServiceProvider()">
+    <div class="row">
+      <div class="col-md-3" align="center">
+        <img ng-src="{{newServiceProviderForm.logo | defaultLogo:'../img/internetProvider.png'}}" class="img-rounded img-responsive" alt="" style="width:75%;">
+        <br>
+        <button type="file" class="btn btn-default btn-sm" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB">
+          <i class="fa fa-upload"></i>&nbsp;تحمل الشعار
+        </button>
+      </div>
+      <div class="col-md-9">
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">اسم الخدمة</label>
+              <input class="form-control input-sm" type="text" ng-model="newServiceProviderForm.name" ng-required-err-type="name" placeholder="اسم الخدمة" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">رقم الهاتف</label>
+              <input class="form-control input-sm" type="text" ng-model="newServiceProviderForm.phone" ng-required-err-type="phone" placeholder="رقم الهاتف" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">البريد الالكتروني</label>
+              <input class="form-control input-sm" type="email" ng-model="newServiceProviderForm.email" ng-required-err-type="emilType" placeholder="البريد الالكتروني" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">موقع مزود الخدمة</label>
+              <input class="form-control input-sm" type="text" ng-model="newServiceProviderForm.website" ng-required-err-type="website" placeholder="موقع مزود الخدمة" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-5">
+        <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
+      </div>
+    </div>
+  </form>
+</div>

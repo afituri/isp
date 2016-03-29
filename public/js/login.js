@@ -1,8 +1,6 @@
 (function(){
   'use strict';
-  var app = angular.module('isp',[
-    'jcs-autoValidate'
-    ]);
+  var app = angular.module('isp',['jcs-autoValidate']);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
     defaultErrorMessageResolver.setI18nFileRootPath('/lang');
     defaultErrorMessageResolver.setCulture('ar-ly');
@@ -20,6 +18,7 @@
       }).then(function(response) {
         //First function handles success
         console.log(response.data);
+        window.location.replace('/home');
       }, function(response) {
         //Second function handles error
         console.log("Something went wrong");

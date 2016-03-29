@@ -1,0 +1,58 @@
+<div class="panel panel-default panel-table">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col col-xs-6">
+        <h3 class="panel-title" style="padding-top: 5px;">عرض الموزعين</h3>
+      </div>
+      <div class="col col-xs-6 text-left">
+        <a ui-sref="newReseller" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة موزع جديد</a>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped table-bordered table-list table-responsive">
+      <thead>
+        <tr>
+          <th>اسم المخول</th>
+          <th>اسم الشركة</th>
+          <th>البريد الالكتروني</th>
+          <th class="text-center"><em class="fa fa-cog"></em></th>
+        </tr> 
+      </thead>
+      <tbody ng-repeat="reseller in resellers.resellersObj">
+        <tr>
+          <td>{{reseller.repName}}</td>
+          <td>{{reseller.companyName}}</td>
+          <td>{{reseller.email}}</td>
+          <td class="text-center">
+            <button type="button" class="btn btn-info btn-sm" data-placement="top" data-trigger="focus" title="مزيد من المعلومات" data-content="المدينة:- {{reseller.city}}<br/>المنطقة:- {{reseller.address}}<br/>خط الطول:- {{reseller.langtitude}}<br/>خط العرض:- {{reseller.longtitude}}<br/>رقم الهاتف:- {{reseller.phone}}" bs-popover>
+              <em class="fa fa-info fa-fw"></em>
+            </button>
+            <a class="btn btn-primary btn-sm" ui-sref="showReseller({id:reseller.id})" data-trigger="hover" data-title="عرض" bs-tooltip><em class="fa fa-eye fa-fw"></em></a>
+            <a class="btn btn-warning btn-sm" ui-sref="editReseller({id:reseller.id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
+            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col col-xs-4">صفحة 1 من 5
+      </div>
+      <div class="col col-xs-8">
+        <ul class="pagination hidden-xs pull-left">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+        </ul>
+        <ul class="pagination visible-xs pull-left">
+            <li><a href="#">«</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
