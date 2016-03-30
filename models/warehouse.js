@@ -8,16 +8,6 @@ var Warehouse = new Schema({
    area: {type: String, required: true},
    phone: {type: String, required: true},
    email: {type: String, required: true},
-
-   warehouse: {
-      type: String,
-      index: true,
-      default: "Unknown Warehouse",
-      required: true
-   },
-   item: {type: Number, required: [true, 'Why no item?']},
-   quantity: {type: String, required: true},
-   buyingOrder: {type: String, required: true},
   
    status: Boolean
 });
