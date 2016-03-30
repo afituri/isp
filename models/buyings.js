@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 // set up a mongoose model
 
 var Buyings = new Schema({
-  item: {type: Number, required: [true, 'Why no item?']},
+  // product
+  // item: {type: Number, required: [true, 'Why no item?']},
   buyingOrder: {type: Number, required: [true, 'Why no buyingOrder?']},
   quantity: {type: String, required: true},
   price: {type: Number, required: [true, 'Why no price?']},

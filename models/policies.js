@@ -22,19 +22,3 @@ var Policy = new Schema({
 Policy.plugin(timestamps);
 Policy.index({ name: 'text'});
 exports.Policy = mongoose.model('Policy', Policy);
-
-
-// policie{
-//    name:"",
-//    discription:"",
-
-//    productPolicie:[{
-//       product:"",
-//       policiePrice:32,
-//       packages:{
-//          renewPrice:43,
-//          GBPrice:34
-//          }
-//       }
-//    ]
-// }

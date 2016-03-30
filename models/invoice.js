@@ -2,20 +2,19 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var textSearch = require('mongoose-text-search');
 var Schema = mongoose.Schema;
-// set up a mongoose model
 
-var invoice = new Schema({
-  customer: {type: String, index: true, default: "Unknown invoice"},
-  createDate: Date,
-  type: {type: Number, required: [true, 'Why no type?']},
-  notes: {type: String, required: true},
-  piad: {type: Number, required: [true, 'Why no piad?']},
-  left: {type: Number, required: [true, 'Why no left?']},
+var Invoice = new Schema({
+   customer: {type : mongoose.Schema.ObjectId, ref : 'Customer'},
+   createDate: Date,
+   type: {type: Number, required: [true, 'Why no type?']},
+   notes: {type: String, required: true},
+   piad: {type: Number, required: [true, 'Why no piad?']},
+   left: {type: Number, required: [true, 'Why no left?']},
 
-  status: Boolean  
+   status: Boolean
 });
 
-invoice.plugin(textSearch);
-invoice.plugin(timestamps);
-invoice.index({ customer: 'text'});
-exports.invoice = mongoose.model('invoice', invoice);
+Invoice.plugin(textSearch);
+Invoice.plugin(timestamps);
+Invoice.index({ customer: 'text'});
+exports.Invoice = mongoose.model('Invoice', Invoice);

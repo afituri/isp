@@ -9,20 +9,20 @@ var Product = new Schema({
    initialPrice: { type: Number, required: true},
    item: {
       // supplier:{type: String, required: true},
-      made:{type: Number, required: true},
-      brand:{type: String, required: true}
+      made:{type: Number},
+      brand:{type: String}
    },
    packages: {
-      type: { type: Number, required: true},
-      service: {type: Schema.Types.ObjectId , ref: 'Service'},
-      dSpeed: { type: Number, required: true},
-      uSpeed: { type: Number, required: true},
-      monthlyQuota: { type: Number, required: true},
-      renewPrice: { type: Number, required: true},
-      GBPrice: { type: Number, required: true},
+      type: { type: Number},
+      service: {type: Schema.Types.ObjectId , ref: 'Services'},
+      dSpeed: { type: Number},
+      uSpeed: { type: Number},
+      monthlyQuota: { type: Number},
+      renewPrice: { type: Number},
+      GBPrice: { type: Number},
       cost: Number,
-      costCurrency: { type: Number, required: true},
-      exchangeRate: { type: Number, required: true}
+      costCurrency: { type: Number},
+      exchangeRate: { type: Number}
    },
    status: Boolean
 });
