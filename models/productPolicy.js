@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
-var Policy = new Schema({
-   name: { type: String, required: true},
+var ProductPolicy = new Schema({
+   product: {type: Schema.Types.ObjectId , ref: 'Product'},
+   policy: {type: Schema.Types.ObjectId , ref: 'Policy'},
    type: { type: String, enum: ['service', 'item', 'package'], required: true},
-   discriptoin: { type: String, required: true},
    initialPrice: { type: Number, required: true},
    item: {
       // supplier:{type: String, required: true},
@@ -19,22 +19,6 @@ var Policy = new Schema({
    status: Boolean
 });
 
-Policy.plugin(timestamps);
-Policy.index({ name: 'text'});
-exports.Policy = mongoose.model('Policy', Policy);
-
-
-// policie{
-//    name:"",
-//    discription:"",
-
-//    productPolicie:[{
-//       product:"",
-//       policiePrice:32,
-//       packages:{
-//          renewPrice:43,
-//          GBPrice:34
-//          }
-//       }
-//    ]
-// }
+ProductPolicy.plugin(timestamps);
+ProductPolicy.index({ name: 'text'});
+exports.ProductPolicy = mongoose.model('ProductPolicy', ProductPolicy);

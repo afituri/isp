@@ -15,7 +15,15 @@ module.exports = {
       }
     });
   },
-
+  getAllReseller :function(cb){
+    model.Reseller.find({}, function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        cb(null);
+      }
+    });
+  },
   getResellerId :function(id,cb){
     model.Reseller.findOne({_id : id}, function(err, result){
       if(!err){
@@ -26,7 +34,7 @@ module.exports = {
     });
   },
   /* here we add a new user to the system */
-  add: function (body, cb) {
+  addReseller: function (body, cb) {
     var obj = body;
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
     easyPbkdf2.secureHash( body.password, salt, function( err, passwordHash, originalSalt ) {
@@ -45,7 +53,7 @@ module.exports = {
       });
     });
   },
-  edit: function(id,body,cb) {
+  updateReseller: function(id,body,cb) {
     var obj = body;
     model.Reseller.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {

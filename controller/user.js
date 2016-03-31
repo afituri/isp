@@ -5,10 +5,17 @@ var model = require("../models");
 
 
 module.exports = {
+  getAllUser :function(cb){
+    model.User.find({}, function(err, users){
+      if(!err){
+        cb(users);
+      }else{
+        cb(null);
+      }
+    });
+  },
   getUser :function(username,cb){
-    console.log('user');
     model.User.findOne({email : username}, function(err, user){
-      console.log(user);
       if(!err){
         cb(user);
       }else{
@@ -63,37 +70,21 @@ module.exports = {
       }
     });
   },
-  /* get  */
-  verify: function (id, cb) {
-    model.User.findOne({_id : id}, function(err, user){
-      if(!err && user != null){
-        cb(user);
-      } else {
-        cb(null);
-      }
-    });
-  },
-  
 
-  /* user verifies*/
-  enteredData: function (id,body, cb) {
-    model.User.findOne({_id : id}, function(err, user){
-      if(!err && user != null){
-        user.name = body.name;
-        user.nid= body.nid;
-        user.save(function(err,result){
-          if (!err) {
-            delete result.password;
-            delete result.salt;
-            cb(result);
-          } else {
-            //return page with errors
-            console.log(err)
-            cb(null);
-          }
-        });
+
+  updateUser : function(id,body,cb){
+    var obj ={
+      name : body.name,
+      email : body.email,
+      phone : body.phone,
+      nid : body.nid
+  }
+    model.User.findOneAndUpdate({_id:id}, obj, function(err,result) {
+      if (!err) {
+        cb(true)
       } else {
-        cb(null);
+        console.log(err);
+        cb(false);
       }
     });
   },
