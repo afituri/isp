@@ -122,6 +122,7 @@
       errorMessages['customerName'] = "الرجاء إدخال اسم العميل";
       errorMessages['customerRepName'] = "الرجاء إدخال اسم المندوب";
       errorMessages['notes'] = "الرجاء إدخال الملاحضة";
+      errorMessages['type'] = "الرجاء اختيار نوع العميل";
     });
   }]);
   app.filter('defaultLogo', function(){

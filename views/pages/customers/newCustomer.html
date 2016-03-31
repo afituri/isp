@@ -1,23 +1,31 @@
-<div class="widget-box animated fadeIn">
+<div class="widget-box">
+  <h5><i class="fa fa-plus"></i>&nbsp;إضافة عميل جديد</h5>
+  <hr>
   <form novalidate ng-submit="newCustomer()">
     <div class="row">
-      <div class="col-md-6">
-        <h5><i class="fa fa-plus"></i>&nbsp;إضافة عميل جديد</h5>
-      </div>
-      <div class="col-md-6 text-left" style="padding-top:10px;">
-        <span style="color:red;">نوع العميل</span>
-        <toggle-switch ng-model="newCustomerForm.type" class="switch-info switch-small" on-label="شركة" off-label="شخصي">></toggle-switch>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div ng-class="{'col-md-3': newCustomerForm.type == true ,'col-md-4': newCustomerForm.type == false}">
+      <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
         <div class="form-group">
-          <label class="control-label">اسم العميل</label>
-          <input class="form-control input-sm" type="text" ng-model="newCustomerForm.name" ng-required-err-type="customerName" placeholder="اسم العميل" required>
+          <label class="control-label">نوع العميل</label>
+          <select class="form-control input-sm" ng-model="newCustomerForm.type" ng-required-err-type="type" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+            <option value="1">شخصي</option>
+            <option value="2">شركة</option>
+          </select>
         </div>
       </div>
-      <div ng-class="{'col-md-3': newCustomerForm.type == true ,'col-md-4': newCustomerForm.type == false}">
+      <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
+        <div class="form-group">
+          <label class="control-label">اسم العميل</label>
+          <input class="form-control input-sm" type="text" ng-model="newCustomerForm.name" ng-required-err-type="name" placeholder="اسم العميل" required>
+        </div>
+      </div>
+      <div class="col-md-3" ng-if="newCustomerForm.type == 2">
+        <div class="form-group">
+          <label class="control-label">اسم المندوب</label>
+          <input class="form-control input-sm" type="text" ng-model="newCustomerForm.repName" ng-required-err-type="repName" placeholder="اسم المندوب" required>
+        </div>
+      </div>
+      <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
         <div class="form-group">
           <label class="control-label">المدينة</label>
           <select class="form-control input-sm" ng-model="newCustomerForm.city" ng-required-err-type="city" required>
@@ -27,20 +35,14 @@
           </select>
         </div>
       </div>
-      <div ng-class="{'col-md-3': newCustomerForm.type == true ,'col-md-4': newCustomerForm.type == false}">
+    </div>
+    <div class="row">
+      <div class="col-md-3">
         <div class="form-group">
           <label class="control-label">العنوان</label>
           <input class="form-control input-sm" type="text" ng-model="newCustomerForm.address" ng-required-err-type="address" placeholder="العنوان" required>
         </div>
       </div>
-      <div class="col-md-3" ng-if="newCustomerForm.type == true">
-        <div class="form-group">
-          <label class="control-label">اسم المندوب</label>
-          <input class="form-control input-sm" type="text" ng-model="newCustomerForm.repName" ng-required-err-type="customerRepName" placeholder="اسم المندوب" required>
-        </div>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-md-3">
         <div class="form-group">
           <label class="control-label">البريد الالكتروني</label>
@@ -53,7 +55,7 @@
           <input class="form-control input-sm" type="text" ng-model="newCustomerForm.phone" ng-required-err-type="phone" placeholder="رقم الهاتف" required>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group">
           <label class="control-label">ملاحظات</label>
           <textarea class="form-control input-sm" rows="6" ng-model="newCustomerForm.notes" ng-required-err-type="notes" placeholder="ملاحظات" required></textarea>

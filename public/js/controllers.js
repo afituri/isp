@@ -147,13 +147,20 @@
   app.controller('NewCustomerCtl',['$scope','MenuFac','CustomersServ',function($scope,MenuFac,CustomersServ){
     MenuFac.active = 5;
     $scope.activePanel = MenuFac;
-    $scope.newCustomerForm = {"type":false};
+    $scope.newCustomerForm = {};
+    $scope.newCustomer = function(){
+      CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
+        console.log(response.data);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('EditCustomerCtl',['$scope','$stateParams','MenuFac','CustomersServ',function($scope,$stateParams,MenuFac,CustomersServ){
     MenuFac.active = 5;
     $scope.activePanel = MenuFac;
     $scope.editCustomerForm = {};
-    WarehousesServ.getCustomerByID($stateParams.id).then(function(response) {
+    CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
       $scope.editCustomerForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
