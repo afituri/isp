@@ -3,20 +3,15 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 var Supplier = new Schema({
-  repName: {type: String},
-  companyName: {type:String, index: true},
-  city: Number,
-  address: String,
-  langtitude: String,
-  longtitude: String,
-  email: {type: String, unique : true, required : true},
-  password: {type: String, required: true},
-  salt: String,
-  status: { type: Number, min: 1, max: 10, default:1 },
-  phone: String,
-  // policy: {type:Number, default:1}
+
+  name:{type: String, required : true},
+  email : {type: String, required : true},
+  phone : {type: String, required : true},
+  repName:{type: String, required : true},
+  repPhone: {type: String, required : true},
+  notes:: {type: String, required : true}
 });
 
 Supplier.plugin(timestamps); 
-Supplier.index({ repName: 'text'});
+Supplier.index({ name: 'text'});
 exports.Supplier = mongoose.model('Supplier', Supplier);
