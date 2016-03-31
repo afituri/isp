@@ -9,7 +9,7 @@ var Supplier = new Schema({
   phone : {type: String, required : true},
   repName:{type: String, required : true},
   repPhone: {type: String, required : true},
-  notes:: {type: String, required : true}
+  notes: {type: String, required : true}
 });
 
 Supplier.plugin(timestamps); 

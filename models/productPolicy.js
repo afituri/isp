@@ -21,4 +21,4 @@ var ProductPolicy = new Schema({
 
 ProductPolicy.plugin(timestamps);
 ProductPolicy.index({ name: 'text'});
-exports.ProductPolicy = mongoose.model('ProductPolicy', Policy);
+exports.ProductPolicy = mongoose.model('ProductPolicy', ProductPolicy);
