@@ -8,10 +8,10 @@ var User = new Schema({
    salt: String,
    email: {type: String, unique : true, required : true},
    
-   userRules{[
+   userRules:[{
       entity: { type: String, enum: ['service', 'item', 'package'], required: true},
       level: { type: Number, required: [true, 'Why no level?']},
-   ]},
+   }],
 
    phone: {
       type: String,

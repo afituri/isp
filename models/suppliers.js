@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
-var Reseller = new Schema({
+var Supplier = new Schema({
   repName: {type: String},
   companyName: {type:String, index: true},
   city: Number,
@@ -17,6 +17,6 @@ var Reseller = new Schema({
   // policy: {type:Number, default:1}
 });
 
-Reseller.plugin(timestamps); 
-Reseller.index({ repName: 'text'});
-exports.Reseller = mongoose.model('Reseller', Reseller);
+Supplier.plugin(timestamps); 
+Supplier.index({ repName: 'text'});
+exports.Supplier = mongoose.model('Supplier', Supplier);

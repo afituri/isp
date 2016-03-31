@@ -4,18 +4,25 @@ var data = require('../data/customer');
 
 /* GET all customer */
 router.get('/', function(req, res) {
-  res.send(data.customers);
+  Customer.getCustomer(function(customers){
+    res.send(customers);
+  });
 });
 
 /* Add new customer   */
 router.post('/add', function(req, res) {
-  console.log(req.body);
+  Customer.addCustomer(function(customer){
+    res.send(customer);
+  });
 });
 
 /* Edit customer  by id  */
 router.put('/edit/:id', function(req, res) {
-  console.log(req.body)
-  console.log(req.params.id);
+  // console.log(req.body)
+  // console.log(req.params.id);
+  Customer.updateCustomer(req.params.id,req.body,function(customer){
+    res.send(customer);
+  });
 });
 
 /* Delete customer  by id  */
@@ -25,7 +32,10 @@ router.delete('/delete/:id', function(req, res) {
 
 /* GET customer  by ID  */
 router.get('/:id', function(req, res) {
-  res.send(data.customer);
+  // res.send(data.customer);
+  Customer.getCustomerId(req.params.id,function(customer){
+    res.send(customer);
+  });
 });
 
 
