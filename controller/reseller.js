@@ -15,7 +15,15 @@ module.exports = {
       }
     });
   },
-
+  getAllReseller :function(cb){
+    model.Reseller.find({}, function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        cb(null);
+      }
+    });
+  },
   getResellerId :function(id,cb){
     model.Reseller.findOne({_id : id}, function(err, result){
       if(!err){
