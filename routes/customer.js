@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 
 /* Add new customer   */
 router.post('/add', function(req, res) {
-  Customer.addCustomer(function(customer){
+  Customer.addCustomer(req.body,function(customer){
     res.send(customer);
   });
 });
