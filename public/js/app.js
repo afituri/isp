@@ -6,7 +6,8 @@
     'ngSanitize',
     'ui.router',
     'jcs-autoValidate',
-    'ngFileUpload'
+    'ngFileUpload',
+    'toggle-switch'
   ]);
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider){
     $stateProvider.state('home',{
@@ -118,6 +119,9 @@
       errorMessages['phone'] = "الرجاء إدخال رقم الهاتف";
       errorMessages['password'] = "الرجاء إدخال كلمة المرور";
       errorMessages['confirmPassword'] = "الرجاء إعادة إدخال كلمة المرور";
+      errorMessages['customerName'] = "الرجاء إدخال اسم العميل";
+      errorMessages['customerRepName'] = "الرجاء إدخال اسم المندوب";
+      errorMessages['notes'] = "الرجاء إدخال الملاحضة";
     });
   }]);
   app.filter('defaultLogo', function(){

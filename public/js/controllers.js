@@ -147,6 +147,7 @@
   app.controller('NewCustomerCtl',['$scope','MenuFac','CustomersServ',function($scope,MenuFac,CustomersServ){
     MenuFac.active = 5;
     $scope.activePanel = MenuFac;
+    $scope.newCustomerForm = {"type":false};
   }]);
   app.controller('EditCustomerCtl',['$scope','$stateParams','MenuFac','CustomersServ',function($scope,$stateParams,MenuFac,CustomersServ){
     MenuFac.active = 5;

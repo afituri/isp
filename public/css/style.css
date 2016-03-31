@@ -138,3 +138,6 @@ select, select.form-control {
   background-color: #fff;
   border-radius: 4px;
 }
+.switch-info{
+  direction:ltr;
+}
