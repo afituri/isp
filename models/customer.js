@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var Customer = new Schema({
    name: {type: String, required: true},
-   repName: {type: String, required: true},
+   repName: {type: String},
    city: {type: Number, required: [true, 'Why no type?']},
    address: {type: String, required: true},
    email: {type: String, required: true},

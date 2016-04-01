@@ -106,6 +106,9 @@
       },
       'getCustomerByID': function(id){
         return $http.get('/customer/:id');
+      },
+      'addCustomer': function(customer){
+        return $http.post('/customer/add',customer);
       }
     };
     self.getCustomers();

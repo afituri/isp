@@ -25,6 +25,7 @@ module.exports = {
   },
   
   addCustomer : function(body,cb){
+
     var obj ={
       name : body.name,
       repName : body.repName,
@@ -39,8 +40,8 @@ module.exports = {
     customer.save(function(err,result){
       if (!err) {
         cb(true);
-
       } else {
+        console.log(err);
         //TODO: return page with errors
         cb(false);
       }
