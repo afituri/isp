@@ -14,6 +14,7 @@ router.get('/', function(req, res) {
 /* Add new reseller  */
 router.post('/add', function(req, res) {
   // console.log(req.body);
+  console.log("im hear");
   resellerMgr.addReseller(req.body,function(reseller){
     res.send(reseller);
   });
