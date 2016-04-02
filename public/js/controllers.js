@@ -10,11 +10,15 @@
     MenuFac.active = 0;
     $scope.resellers = ResllersServ;
   }]);
-  app.controller('NewResellerCtl',['$scope','MenuFac',function($scope,MenuFac){
+  app.controller('NewResellerCtl',['$scope','MenuFac','ResllersServ', function($scope,MenuFac,ResllersServ){
     MenuFac.active = 0;
     $scope.newResllerForm = {};
     $scope.newResller = function(){
-      console.log($scope.newResllerForm);
+      ResllersServ.addResller($scope.newResllerForm).then(function(response) {
+        console.log(response.data);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
     }
   }]);
   app.controller('EditResellerCtl',['$scope','$stateParams','ResllersServ','MenuFac',function($scope,$stateParams,ResllersServ,MenuFac){
@@ -41,9 +45,17 @@
     $scope.activePanel = MenuFac;
     $scope.serviceProviders = ServiceProvidersServ;
   }]);
-  app.controller('NewServiceProviderCtl',['$scope','MenuFac',function($scope,MenuFac){
+  app.controller('NewServiceProviderCtl',['$scope','MenuFac','ServiceProvidersServ',function($scope,MenuFac,ServiceProvidersServ){
     MenuFac.active = 1;
     $scope.activePanel = MenuFac;
+    $scope.newServiceProviderForm = {};
+    $scope.newServiceProvider = function(){
+      ServiceProvidersServ.addServiceProvider($scope.newServiceProviderForm).then(function(response) {
+        console.log(response.data);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('EditServiceProviderCtl',['$scope','$stateParams','MenuFac','ServiceProvidersServ',function($scope,$stateParams,MenuFac,ServiceProvidersServ){
     MenuFac.active = 1;
@@ -79,10 +91,18 @@
     $scope.activePanel = MenuFac;
     $scope.services = ServicesServ;
   }]);
-  app.controller('NewServiceCtl',['$scope','MenuFac','ServiceProvidersServ',function($scope,MenuFac,ServiceProvidersServ){
+  app.controller('NewServiceCtl',['$scope','MenuFac','ServiceProvidersServ','ServicesServ',function($scope,MenuFac,ServiceProvidersServ,ServicesServ){
     MenuFac.active = 2;
     $scope.activePanel = MenuFac;
     $scope.serviceProviders = ServiceProvidersServ;
+    $scope.newServiceForm = {};
+    $scope.newService = function(){
+      ServicesServ.addService($scope.newServiceForm).then(function(response) {
+        console.log(response.data);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('EditServiceCtl',['$scope','$stateParams','MenuFac','ServicesServ','ServiceProvidersServ',function($scope,$stateParams,MenuFac,ServicesServ,ServiceProvidersServ){
     MenuFac.active = 2;
@@ -102,9 +122,17 @@
     $scope.activePanel = MenuFac;
     $scope.suppliers = SuppliersServ;
   }]);
-  app.controller('NewSupplierCtl',['$scope','MenuFac',function($scope,MenuFac){
+  app.controller('NewSupplierCtl',['$scope','MenuFac','SuppliersServ',function($scope,MenuFac,SuppliersServ){
     MenuFac.active = 3;
     $scope.activePanel = MenuFac;
+    $scope.newSupplierForm = {};
+    $scope.newSupplier = function(){
+      SuppliersServ.addSupplier($scope.newSupplierForm).then(function(response) {
+        console.log(response.data);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('EditSupplierCtl',['$scope','$stateParams','MenuFac','SuppliersServ',function($scope,$stateParams,MenuFac,SuppliersServ){
     MenuFac.active = 3;

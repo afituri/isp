@@ -18,6 +18,9 @@
       },
       'getResellersByID': function(id){
         return $http.get('/reseller/:id');
+      },
+      'addResller': function(Resller){
+        return $http.post('/reseller/add',Resller);
       }
     };
     self.getResellers();
@@ -38,6 +41,9 @@
       },
       'getServiceProvidersServicesByID': function(id){
         return $http.get('/sProvider/:id/services');
+      },
+      'addServiceProvider': function(ServiceProvider){
+        return $http.post('/sProvider/add',ServiceProvider);
       }
     };
     self.getServiceProviders();
@@ -55,6 +61,9 @@
       },
       'getServiceByID': function(id){
         return $http.get('/service/:id');
+      },
+      'addService': function(Service){
+        return $http.post('/service/add',Service);
       }
     };
     self.getServices();
@@ -72,6 +81,9 @@
       },
       'getSupplierByID': function(id){
         return $http.get('/supplier/:id');
+      },
+      'addSupplier': function(Supplier){
+        return $http.post('/supplier/add',Supplier);
       }
     };
     self.getSuppliers();

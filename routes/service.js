@@ -12,7 +12,6 @@ router.get('/', function(req, res) {
 
 /* Add new Service   */
 router.post('/add', function(req, res) {
-  // console.log(req.body);
   servicesMgr.addServices(req.body,function(services){
     res.send(services);
   });

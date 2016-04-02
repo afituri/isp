@@ -8,7 +8,7 @@ var ServiceProvider = new Schema({
   name: {type: String, required : true},
   email: {type: String, required : true},
   phone: {type: String, required : true},
-  logo: {type: String, required : true},
+  logo: {type: String},
   websit: {type: String, required : true},
   
   status: Boolean

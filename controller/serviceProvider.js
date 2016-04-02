@@ -27,8 +27,11 @@ module.exports = {
   addSProvider : function(body,cb){
     var obj ={
       name : body.name,
-      servicesProvider : body.servicesProvider,
-      discriptoin : body.discriptoin
+      email : body.email,
+      phone : body.phone,
+      logo : body.logo,
+      websit : body.website,
+      
      }
     serviceProvider = new model.ServiceProvider(obj);
     serviceProvider.save(function(err,result){
@@ -44,8 +47,11 @@ module.exports = {
   updateSProvider : function(id,body,cb){
     var obj ={
       name : body.name,
-      servicesProvider : body.servicesProvider,
-      discriptoin : body.discriptoin
+      email : body.email,
+      phone : body.phone,
+      logo : body.logo,
+      websit : body.websit,
+      
      }
     model.ServiceProvider.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
