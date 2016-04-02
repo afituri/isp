@@ -89,6 +89,9 @@
       },
       'getWarehouseByID': function(id){
         return $http.get('/warehouse/:id');
+      },
+      'addWarehouse': function(warehouse){
+        return $http.post('/warehouse/add',warehouse);
       }
     };
     self.getWarehouses();

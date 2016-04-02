@@ -123,9 +123,17 @@
     $scope.activePanel = MenuFac;
     $scope.warehouses = WarehousesServ;
   }]);
-  app.controller('NewWarehouseCtl',['$scope','MenuFac',function($scope,MenuFac){
+  app.controller('NewWarehouseCtl',['$scope','MenuFac','WarehousesServ',function($scope,MenuFac,WarehousesServ){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
+    $scope.newWarehouseForm = {};
+    $scope.newWarehouse = function(){
+      WarehousesServ.addWarehouse($scope.newWarehouseForm).then(function(response) {
+        console.log(response.data);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('EditWarehouseCtl',['$scope','$stateParams','MenuFac','WarehousesServ',function($scope,$stateParams,MenuFac,WarehousesServ){
     MenuFac.active = 4;
