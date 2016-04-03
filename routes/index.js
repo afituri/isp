@@ -12,6 +12,7 @@ var city = require('../data/lycities');
 router.get('/', function(req, res) {
   res.render('login', { title: 'شاشة الدخول' });
 });
+
 router.get('/cities',userHelpers.isLogin , function(req, res) {
   res.send(city);
 });
