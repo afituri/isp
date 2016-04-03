@@ -8,7 +8,7 @@ var Product = new Schema({
    discriptoin: { type: String, required: true},
    initialPrice: { type: Number, required: true},
    item: {
-      // supplier:{type: String, required: true},
+      supplier: {type: Schema.Types.ObjectId , ref: 'Supplier'},
       made:{type: Number},
       brand:{type: String}
    },
@@ -24,7 +24,7 @@ var Product = new Schema({
       costCurrency: { type: Number},
       exchangeRate: { type: Number}
    },
-   status: Boolean
+   status: {type: Number, default:1}
 });
 
 Product.plugin(timestamps);

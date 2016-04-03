@@ -11,7 +11,7 @@ var Invoice = new Schema({
    piad: {type: Number, required: [true, 'Why no piad?']},
    left: {type: Number, required: [true, 'Why no left?']},
 
-   status: Boolean
+   status: {type: Number, default:1}
 });
 
 Invoice.plugin(textSearch);

@@ -16,7 +16,7 @@ var ProductPolicy = new Schema({
       renewPrice: { type: Number},
       GBPrice: { type: Number},
    },
-   status: Boolean
+   status: {type: Number, default:1}
 });
 
 ProductPolicy.plugin(timestamps);
