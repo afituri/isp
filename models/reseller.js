@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var Reseller = new Schema({
    repName: {type: String},
    companyName: {type:String, index: true},
-   city: Number,
+   city: String,
    address: String,
    langtitude: String,
    longtitude: String,
