@@ -22,8 +22,7 @@
           <lable class="control-label">المدينة</lable>
           <select class="form-control input-sm" ng-model="newResllerForm.city" ng-required-err-type="city" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option value="1">طرابلس</option>
-            <option value="2">بنغازي</option>
+            <option ng-repeat="city in cities.citiesObj" value="{{city.nameAr}}">{{city.nameAr}}</option>
           </select>
         </div>
       </div>
