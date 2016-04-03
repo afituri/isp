@@ -9,7 +9,7 @@ var ServiceProvider = new Schema({
   email: {type: String, required : true},
   phone: {type: String, required : true},
   logo: {type: String},
-  websit: {type: String, required : true},
+  website: {type: String, required : true},
   
   status: Boolean
 });
