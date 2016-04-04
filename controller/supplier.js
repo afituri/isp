@@ -7,12 +7,15 @@ var model = require("../models"),
 module.exports = {
 
   getSupplier :function(limit,page,cb){
+    page = parseInt(page);
     page-=1;
+    limit = parseInt(limit);
     model.Supplier.count({},function(err,count){
       model.Supplier.find({}).limit(limit).skip(page*limit).exec(function(err, result){
         if(!err){
           cb({result:result,count:count});
         }else{
+          console.log(err);
           cb(null);
         }
       });
