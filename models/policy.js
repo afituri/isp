@@ -6,7 +6,7 @@ var Policy = new Schema({
    name: { type: String, required: true},
    discriptoin: { type: String, required: true},
    
-   status: Boolean
+   status: {type: Number, default:1}
 });
 
 Policy.plugin(timestamps);

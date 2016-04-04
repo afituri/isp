@@ -7,9 +7,9 @@
     'ui.router',
     'jcs-autoValidate',
     'ngFileUpload',
-    'toggle-switch'
+    'toastr'
   ]);
-  app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider){
+  app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig){
     $stateProvider.state('home',{
       url: '/',
       templateUrl: 'pages/home.html',
@@ -103,6 +103,11 @@
     });
     angular.extend($modalProvider.defaults, {
       animation: 'am-flip-x'
+    });
+    angular.extend(toastrConfig, {
+      positionClass: 'toast-top-left',
+      progressBar: true,
+      tapToDismiss: true
     });
   }]);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){

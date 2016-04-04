@@ -38,7 +38,9 @@ router.delete('/delete/:id', function(req, res) {
 /* GET Service Provider by ID  */
 router.get('/:id', function(req, res) {
   // res.send(data.sProvider);
+  console.log("Got here");
   serviceProviderMgr.getSProviderId(req.params.id,function(SProvider){
+    console.log(SProvider);
     res.send(SProvider);
   });
 });

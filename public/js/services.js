@@ -17,10 +17,13 @@
         });
       },
       'getResellersByID': function(id){
-        return $http.get('/reseller/:id');
+        return $http.get('/reseller/'+id);
       },
-      'addResller': function(Resller){
-        return $http.post('/reseller/add',Resller);
+      'addResller': function(resllerObj){
+        return $http.post('/reseller/add',resllerObj);
+      },
+      'editResller': function(id,resllerObj){
+        return $http.put('/reseller/edit/'+id,resllerObj);
       }
     };
     self.getResellers();
@@ -37,13 +40,16 @@
         });
       },
       'getServiceProviderByID': function(id){
-        return $http.get('/sProvider/:id');
+        return $http.get('/sProvider/'+id);
       },
       'getServiceProvidersServicesByID': function(id){
-        return $http.get('/sProvider/:id/services');
+        return $http.get('/sProvider/'+id+'/services');
       },
-      'addServiceProvider': function(ServiceProvider){
-        return $http.post('/sProvider/add',ServiceProvider);
+      'addServiceProvider': function(serviceProviderObj){
+        return $http.post('/sProvider/add',serviceProviderObj);
+      },
+      'editServiceProvider': function(id,serviceProviderObj){
+        return $http.put('/sProvider/edit/'+id,serviceProviderObj);
       }
     };
     self.getServiceProviders();
@@ -62,8 +68,11 @@
       'getServiceByID': function(id){
         return $http.get('/service/:id');
       },
-      'addService': function(Service){
-        return $http.post('/service/add',Service);
+      'addService': function(serviceObj){
+        return $http.post('/service/add',serviceObj);
+      },
+      'editService': function(id,serviceObj){
+        return $http.put('/service/edit/'+id,serviceObj);
       }
     };
     self.getServices();
@@ -82,8 +91,11 @@
       'getSupplierByID': function(id){
         return $http.get('/supplier/:id');
       },
-      'addSupplier': function(Supplier){
-        return $http.post('/supplier/add',Supplier);
+      'addSupplier': function(supplierObj){
+        return $http.post('/supplier/add',supplierObj);
+      },
+      'editSupplier': function(id,supplierObj){
+        return $http.put('/supplier/edit/'+id,supplierObj);
       }
     };
     self.getSuppliers();
@@ -100,10 +112,13 @@
         });
       },
       'getWarehouseByID': function(id){
-        return $http.get('/warehouse/:id');
+        return $http.get('/warehouse/'+id);
       },
-      'addWarehouse': function(warehouse){
-        return $http.post('/warehouse/add',warehouse);
+      'addWarehouse': function(warehouseObj){
+        return $http.post('/warehouse/add',warehouseObj);
+      },
+      'editWarehouse': function(id,warehouseObj){
+        return $http.put('/warehouse/edit'+id,warehouseObj);
       }
     };
     self.getWarehouses();
@@ -120,13 +135,30 @@
         });
       },
       'getCustomerByID': function(id){
-        return $http.get('/customer/:id');
+        return $http.get('/customer/'+id);
       },
-      'addCustomer': function(customer){
-        return $http.post('/customer/add',customer);
+      'addCustomer': function(customerObj){
+        return $http.post('/customer/add',customerObj);
+      },
+      'editCustomer': function(id,customerObj){
+        return $http.put('/customer/edit/'+id,customerObj);
       }
     };
     self.getCustomers();
+    return self;
+  }]);
+  app.service('CitiesServ',['$http',function($http){
+    var self = {
+      'citiesObj': [],
+      'getCities': function(){
+        $http.get('/cities').then(function(response) {
+          self.citiesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      }
+    };
+    self.getCities();
     return self;
   }]);
 }());

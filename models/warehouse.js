@@ -8,10 +8,10 @@ var Warehouse = new Schema({
    area: {type: String, required: true},
    phone: {type: String, required: true},
    email: {type: String, required: true},
-  
-   status: Boolean
+   
+   status: {type: Number, default:1}
 });
 
 Warehouse.plugin(timestamps);
-Warehouse.index({ Warehouse: 'text'});
+Warehouse.index({ name: 'text'});
 exports.Warehouse = mongoose.model('Warehouse', Warehouse);

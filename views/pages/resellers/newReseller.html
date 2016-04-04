@@ -1,4 +1,4 @@
-<div class="widget-box">
+<div class="widget-box animated fadeIn">
   <h5><i class="fa fa-user-plus"></i>&nbsp;إضافة موزع جديد</h5>
   <hr>
   <form novalidate ng-submit="newResller()">
@@ -22,15 +22,14 @@
           <lable class="control-label">المدينة</lable>
           <select class="form-control input-sm" ng-model="newResllerForm.city" ng-required-err-type="city" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option value="1">طرابلس</option>
-            <option value="2">بنغازي</option>
+            <option ng-repeat="city in cities.citiesObj" value="{{city.nameAr}}">{{city.nameAr}}</option>
           </select>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label class="control-label">المنطقة</label>
-          <input class="form-control input-sm" type="text" ng-model="newResllerForm.area" ng-required-err-type="area" placeholder="المنطقة" required>
+          <input class="form-control input-sm" type="text" ng-model="newResllerForm.address" ng-required-err-type="address" placeholder="المنطقة" required>
         </div>
       </div>
     </div>

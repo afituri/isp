@@ -12,14 +12,14 @@ var order = new Schema({
    piad: {type: Number, required: [true, 'Why no piad?']},
    left: {type: Number, required: [true, 'Why no left?']},
    quantity: {type: Number, required: [true, 'Why no piad?']},
-   // discount
+   discount: {type: Number, required: [true, 'Why no piad?']},
    price: {type: Number, required: [true, 'Why no piad?']},
-   // macAddress
+   macAddress: {type: String},
    startDate: Date,
    endDate: Date,
    siteId: {type: String, required: true},
 
-   status: Boolean
+   status: {type: Number, default:1}
 });
 
 order.plugin(textSearch);

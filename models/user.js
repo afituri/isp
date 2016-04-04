@@ -26,7 +26,7 @@ var User = new Schema({
    },
    nid: {type: String, index: true},
   
-   status: Boolean  
+   status: {type: Number, default:1}
 });
 
 User.plugin(timestamps);

@@ -30,7 +30,7 @@ module.exports = {
       email : body.email,
       phone : body.phone,
       logo : body.logo,
-      websit : body.website,
+      website : body.website,
       
      }
     serviceProvider = new model.ServiceProvider(obj);
@@ -39,6 +39,7 @@ module.exports = {
         cb(true);
 
       } else {
+        console.log(err);
         //TODO: return page with errors
         cb(false);
       }
