@@ -4,13 +4,16 @@ var model = require("../models");
 var customer = null;
 
 module.exports = {
-  getCustomer :function(cb){
-    model.Customer.find({},function(err, customers){
-      if(!err){
-        cb(customers);
-      }else{
-        cb(null);
-      }
+  getCustomer :function(limit,page,cb){
+    page-=1;
+    model.Customer.count({},function(err,count){
+      model.Customer.find({}).limit(limit).skip(page*limit).exec(function(err, customers){
+        if(!err){
+          cb({customers:customers,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
 

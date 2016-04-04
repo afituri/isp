@@ -5,7 +5,8 @@ var customerMgr = require("../controller/customer");
 
 /* GET all customer */
 router.get('/', function(req, res) {
-  customerMgr.getCustomer(function(customers){
+  customerMgr.getCustomer(3,1,function(customers){
+    console.log(customers);
     res.send(customers);
   });
 });
