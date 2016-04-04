@@ -9,12 +9,16 @@
   app.service('ResllersServ',['$http',function($http){
     var self = {
       'resellersObj': [],
-      'getResellers': function(){
-        $http.get('/reseller').then(function(response) {
-          self.resellersObj = response.data;
-        }, function(response) {
-          console.log("Something went wrong");
-        });
+      // 'getResellers': function(){
+      //   $http.get('/reseller').then(function(response) {
+      //     self.resellersObj = response.data.result;
+      //     console.log(response.data);
+      //   }, function(response) {
+      //     console.log("Something went wrong");
+      //   });
+      // },
+      'getResellers': function(pageSize,currentPage){
+        return $http.get('/reseller/10/1');
       },
       'getResellersByID': function(id){
         return $http.get('/reseller/'+id);

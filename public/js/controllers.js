@@ -8,8 +8,19 @@
   }]);
   app.controller('ResellersCtl',['$scope','ResllersServ','MenuFac',function($scope,ResllersServ,MenuFac){
     MenuFac.active = 0;
-    ResllersServ.getResellers();
-    $scope.resellers = ResllersServ;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ResllersServ.getResellers($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.resellers = response.data.result;
+        console.log($scope.resellers);
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
   }]);
   app.controller('NewResellerCtl',['$scope','$state','MenuFac','ResllersServ','CitiesServ','toastr', function($scope,$state,MenuFac,ResllersServ,CitiesServ,toastr){
     MenuFac.active = 0;

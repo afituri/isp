@@ -7,7 +7,8 @@
     'ui.router',
     'jcs-autoValidate',
     'ngFileUpload',
-    'toastr'
+    'toastr',
+    'ui.bootstrap'
   ]);
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig){
     $stateProvider.state('home',{
