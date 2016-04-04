@@ -18,7 +18,7 @@
       //   });
       // },
       'getResellers': function(pageSize,currentPage){
-        return $http.get('/reseller/10/1');
+        return $http.get('/reseller/'+pageSize+'/'+currentPage);
       },
       'getResellersByID': function(id){
         return $http.get('/reseller/'+id);
