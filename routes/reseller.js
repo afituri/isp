@@ -4,9 +4,9 @@ var data = require('../data/reseller');
 var resellerMgr = require("../controller/reseller");
 
 /* GET all resellers */
-router.get('/', function(req, res) {
+router.get('/:limit/:page', function(req, res) {
   // res.send(data.resellers);
-  resellerMgr.getAllReseller(3,1,function(reseller){
+  resellerMgr.getAllReseller(req.params.limit,req.params.page,function(reseller){
     res.send(reseller);
   });
 });
