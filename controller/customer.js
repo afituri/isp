@@ -9,7 +9,7 @@ module.exports = {
     model.Customer.count({},function(err,count){
       model.Customer.find({}).limit(limit).skip(page*limit).exec(function(err, customers){
         if(!err){
-          cb({customers:customers,count:count});
+          cb({result:customers,count:count});
         }else{
           cb(null);
         }

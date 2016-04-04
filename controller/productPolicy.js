@@ -9,7 +9,7 @@ module.exports = {
     model.ProductPolicy.count({},function(err,count){
       model.ProductPolicy.find({}).limit(limit).skip(page*limit).exec(function(err, pPolicies){
         if(!err){
-          cb({pPolicies:pPolicies,count:count});
+          cb({result:pPolicies,count:count});
         }else{
           cb(null);
         }

@@ -10,7 +10,7 @@ module.exports = {
     model.User.count({},function(err,count){
       model.User.find({}).limit(limit).skip(page*limit).exec(function(err, users){
         if(!err){
-          cb({users:users,count:count});
+          cb({result:users,count:count});
         }else{
           cb(null);
         }

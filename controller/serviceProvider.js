@@ -9,7 +9,7 @@ module.exports = {
     model.ServiceProvider.count({},function(err,count){
       model.ServiceProvider.find({}).limit(limit).skip(page*limit).exec(function(err, provider){
         if(!err){
-          cb({provider:provider,count:count});
+          cb({result:provider,count:count});
         }else{
           cb(null);
         }
