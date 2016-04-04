@@ -38,14 +38,10 @@
   </div>
   <div class="panel-footer">
     <div class="row">
-      <div class="col col-xs-4">صفحة 1 من 5
+      <div class="col col-xs-4">صفحة {{currentPage}} من {{total}}
       </div>
       <div class="col col-xs-8">
         <uib-pagination class="pull-left btn-sm" first-text="الاول" last-text="الاخير" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" previous-text="السابق" next-text="التالي" ng-click="init()"></uib-pagination>
-        <ul class="pagination visible-xs pull-left">
-            <li><a href="#">«</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
       </div>
     </div>
   </div>
