@@ -6,13 +6,16 @@ var model = require("../models"),
 
 module.exports = {
 
-  getWarehouses :function(cb){
-    model.Warehouse.find({}, function(err, result){
-      if(!err){
-        cb(result);
-      }else{
-        cb(null);
-      }
+  getWarehouses :function(limit,page,cb){
+    page-=1;
+    model.Warehouse.count({},function(err,count){
+      model.Warehouse.find({}).limit(limit).skip(page*limit).exec(function(err, result){
+        if(!err){
+          cb({result:result,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
 

@@ -6,7 +6,7 @@ var resellerMgr = require("../controller/reseller");
 /* GET all resellers */
 router.get('/', function(req, res) {
   // res.send(data.resellers);
-  resellerMgr.getAllReseller(function(reseller){
+  resellerMgr.getAllReseller(3,1,function(reseller){
     res.send(reseller);
   });
 });

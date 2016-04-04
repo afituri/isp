@@ -7,7 +7,7 @@ var servicesMgr = require("../controller/service");
 /* GET all Service Providers */
 router.get('/', function(req, res) {
   // res.send(data.sProviders);
-  serviceProviderMgr.getSProvider(function(SProvider){
+  serviceProviderMgr.getSProvider(3,1,function(SProvider){
     res.send(SProvider);
   });
 });

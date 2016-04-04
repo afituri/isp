@@ -4,13 +4,16 @@ var model = require("../models");
 var serviceProvider = null;
 
 module.exports = {
-  getSProvider :function(cb){
-    model.ServiceProvider.find({},function(err, provider){
-      if(!err){
-        cb(provider);
-      }else{
-        cb(null);
-      }
+  getSProvider :function(limit,page,cb){
+    page-=1;
+    model.ServiceProvider.count({},function(err,count){
+      model.ServiceProvider.find({}).limit(limit).skip(page*limit).exec(function(err, provider){
+        if(!err){
+          cb({provider:provider,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
 

@@ -5,7 +5,7 @@ var wareMgr = require("../controller/warehouse");
 /* GET all warehouses */
 router.get('/', function(req, res) {
   // res.send(data.warehouses);
-  wareMgr.getWarehouses(function(warehouse){
+  wareMgr.getWarehouses(3,1,function(warehouse){
     res.send(warehouse);
   });
 });

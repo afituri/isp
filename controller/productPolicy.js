@@ -4,13 +4,16 @@ var model = require("../models");
 var productP = null;
 
 module.exports = {
-  getProductP :function(cb){
-    model.ProductPolicy.find({},function(err, pPolicies){
-      if(!err){
-        cb(pPolicies);
-      }else{
-        cb(null);
-      }
+  getProductP :function(limit,page,cb){
+    page-=1;
+    model.ProductPolicy.count({},function(err,count){
+      model.ProductPolicy.find({}).limit(limit).skip(page*limit).exec(function(err, pPolicies){
+        if(!err){
+          cb({pPolicies:pPolicies,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
   getProduct :function(id,cb){

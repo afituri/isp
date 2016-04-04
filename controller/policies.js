@@ -4,13 +4,16 @@ var model = require("../models");
 var Policy = null;
 
 module.exports = {
-  getPolicies :function(cb){
-    model.Policy.find({},function(err, policies){
-      if(!err){
-        cb(policies);
-      }else{
-        cb(null);
-      }
+  getPolicies :function(limit,page,cb){
+    page-=1;
+    model.Policy.count({},function(err,count){
+      model.Policy.find({}).limit(limit).skip(page*limit).exec(function(err,policies){
+        if(!err){
+          cb({policies:policies,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
 

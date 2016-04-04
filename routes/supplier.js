@@ -6,7 +6,7 @@ var supplierMgr = require("../controller/supplier");
 /* GET all suppliers */
 router.get('/', function(req, res) {
   // res.send(data.suppliers);
-  supplierMgr.getSupplier(function(supplier){
+  supplierMgr.getSupplier(3,1,function(supplier){
     res.send(supplier);
   });
 });

@@ -5,7 +5,7 @@ var servicesMgr = require("../controller/service");
 /* GET all Service */
 router.get('/', function(req, res) {
   // res.send(data.services);
-  servicesMgr.getServices(function(services){
+  servicesMgr.getServices(3,1,function(services){
     res.send(services);
   });
 });

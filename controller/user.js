@@ -5,13 +5,16 @@ var model = require("../models");
 
 
 module.exports = {
-  getAllUser :function(cb){
-    model.User.find({}, function(err, users){
-      if(!err){
-        cb(users);
-      }else{
-        cb(null);
-      }
+  getAllUser :function(limit,page,cb){
+    page-=1;
+    model.User.count({},function(err,count){
+      model.User.find({}).limit(limit).skip(page*limit).exec(function(err, users){
+        if(!err){
+          cb({users:users,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
   getUser :function(username,cb){

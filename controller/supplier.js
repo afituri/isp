@@ -6,13 +6,16 @@ var model = require("../models"),
 
 module.exports = {
 
-  getSupplier :function(cb){
-    model.Supplier.find({}, function(err, result){
-      if(!err){
-        cb(result);
-      }else{
-        cb(null);
-      }
+  getSupplier :function(limit,page,cb){
+    page-=1;
+    model.Supplier.count({},function(err,count){
+      model.Supplier.find({}).limit(limit).skip(page*limit).exec(function(err, result){
+        if(!err){
+          cb({result:result,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
 

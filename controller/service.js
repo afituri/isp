@@ -4,13 +4,16 @@ var model = require("../models");
 var services = null;
 
 module.exports = {
-  getServices :function(cb){
-    model.Services.find({},function(err, services){
-      if(!err){
-        cb(services);
-      }else{
-        cb(null);
-      }
+  getServices :function(limit,page,cb){
+    page-=1;
+    model.Services.count({},function(err,count){
+      model.Services.find({}).limit(limit).skip(page*limit).exec(function(err, services){
+        if(!err){
+          cb({services:services,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
 

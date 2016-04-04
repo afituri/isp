@@ -5,7 +5,7 @@ var userMgr = require("../controller/user");
 
 /* GET all users */
 router.get('/', function(req, res) {
-  userMgr.getCustomer(function(users){
+  userMgr.getCustomer(3,1,function(users){
     res.send(users);
   });
 });

@@ -15,13 +15,16 @@ module.exports = {
       }
     });
   },
-  getAllReseller :function(cb){
-    model.Reseller.find({}, function(err, result){
-      if(!err){
-        cb(result);
-      }else{
-        cb(null);
-      }
+  getAllReseller :function(limit,page,cb){
+    page-=1;
+    model.Reseller.count({},function(err,count){
+      model.Reseller.find({}).limit(limit).skip(page*limit).exec(function(err, result){
+        if(!err){
+          cb({result:result,count:count});
+        }else{
+          cb(null);
+        }
+      });
     });
   },
   getResellerId :function(id,cb){
