@@ -8,7 +8,7 @@
   });
   app.service('ResllersServ',['$http',function($http){
     var self = {
-      'resellersObj': [],
+      // 'resellersObj': [],
       // 'getResellers': function(){
       //   $http.get('/reseller').then(function(response) {
       //     self.resellersObj = response.data.result;
@@ -30,7 +30,6 @@
         return $http.put('/reseller/edit/'+id,resllerObj);
       }
     };
-    self.getResellers();
     return self;
   }]);
   app.service('ServiceProvidersServ',['$http',function($http){

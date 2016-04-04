@@ -14,8 +14,8 @@
     $scope.init = function () {
       ResllersServ.getResellers($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.resellers = response.data.result;
-        console.log($scope.resellers);
         $scope.total = response.data.count;
+        console.log(response);
       }, function(response) {
         console.log("Something went wrong");
       });
