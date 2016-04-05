@@ -5,12 +5,15 @@ var Policy = null;
 
 module.exports = {
   getPolicies :function(limit,page,cb){
+    page = parseInt(page);
     page-=1;
+    limit = parseInt(limit);
     model.Policy.count({},function(err,count){
       model.Policy.find({}).limit(limit).skip(page*limit).exec(function(err,policies){
         if(!err){
           cb({result:policies,count:count});
         }else{
+          console.log(err);
           cb(null);
         }
       });

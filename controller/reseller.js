@@ -16,12 +16,15 @@ module.exports = {
     });
   },
   getAllReseller :function(limit,page,cb){
+    page = parseInt(page);
     page-=1;
+    limit = parseInt(limit);
     model.Reseller.count({},function(err,count){
       model.Reseller.find({}).limit(limit).skip(page*limit).exec(function(err, result){
         if(!err){
           cb({result:result,count:count});
         }else{
+          console.log(err);
           cb(null);
         }
       });

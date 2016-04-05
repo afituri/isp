@@ -6,10 +6,7 @@ var resellerMgr = require("../controller/reseller");
 /* GET all resellers */
 router.get('/:limit/:page', function(req, res) {
   // res.send(data.resellers);
-  console.log(req.params.limit);
-  console.log(req.params.page);
   resellerMgr.getAllReseller(req.params.limit,req.params.page,function(reseller){
-    console.log(reseller);
     res.send(reseller);
   });
 });

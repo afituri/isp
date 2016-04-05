@@ -5,12 +5,15 @@ var productP = null;
 
 module.exports = {
   getProductP :function(limit,page,cb){
+    page = parseInt(page);
     page-=1;
+    limit = parseInt(limit);
     model.ProductPolicy.count({},function(err,count){
       model.ProductPolicy.find({}).limit(limit).skip(page*limit).exec(function(err, pPolicies){
         if(!err){
           cb({result:pPolicies,count:count});
         }else{
+          console.log(err);
           cb(null);
         }
       });

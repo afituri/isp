@@ -5,12 +5,15 @@ var customer = null;
 
 module.exports = {
   getCustomer :function(limit,page,cb){
+    page = parseInt(page);
     page-=1;
+    limit = parseInt(limit);
     model.Customer.count({},function(err,count){
       model.Customer.find({}).limit(limit).skip(page*limit).exec(function(err, customers){
         if(!err){
           cb({result:customers,count:count});
         }else{
+          console.log(err);
           cb(null);
         }
       });

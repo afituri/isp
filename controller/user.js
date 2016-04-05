@@ -6,12 +6,15 @@ var model = require("../models");
 
 module.exports = {
   getAllUser :function(limit,page,cb){
+    page = parseInt(page);
     page-=1;
+    limit = parseInt(limit);
     model.User.count({},function(err,count){
       model.User.find({}).limit(limit).skip(page*limit).exec(function(err, users){
         if(!err){
           cb({result:users,count:count});
         }else{
+          console.log(err);
           cb(null);
         }
       });
