@@ -60,7 +60,34 @@ module.exports = {
       }
     });
   },
+
+  deletePolicy : function(id,cb){
+    model.Customer.find({policy:id}, function(err,resultCustomer) {
+      if(resultCustomer.length > 0){
+        cb(1)
+      } else{
+        model.ProductPolicy.find({policy:id}, function(err,resultProductPolicy) {
+          if(resultProductPolicy.length > 0){
+            cb(1)
+          } else{
+            model.Reseller.find({policy:id}, function(err,resultReseller) {
+              if(resultReseller.length > 0){
+                cb(1)
+              } else{
+                model.Supplier.remove({_id:id}, function(err,result) {
+                  if (!err) {
+                    cb(2)
+                  } else {
+                    console.log(err);
+                    cb(3);
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+
 };
-
-
-
