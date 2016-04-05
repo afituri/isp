@@ -70,7 +70,42 @@ module.exports = {
       }
     });
   },
+
+  updateCustomer : function(id,body,cb){
+    var obj ={
+      name : body.name,
+      repName : body.repName,
+      city : body.city,
+      address : body.address,
+      email : body.email,
+      phone : body.phone,
+      type : body.type,
+      notes : body.notes
+  }
+    model.Customer.findOneAndUpdate({_id:id}, obj, function(err,result) {
+      if (!err) {
+        cb(true)
+      } else {
+        console.log(err);
+        cb(false);
+      }
+    });
+  },
+  deleteCustomer : function(id,cb){
+    model.Invoice.find({customer:id}, function(err,resul) {
+      if(resul.length > 0){
+        cb(1)
+      } else{
+        model.Customer.remove({_id:id}, function(err,result) {
+          if (!err) {
+            cb(2)
+          } else {
+            console.log(err);
+            cb(3);
+          }
+        });
+      }
+    });
+  },
+
 };
-
-
-

@@ -14,7 +14,7 @@ var Reseller = new Schema({
    salt: String,
    status: { type: Number, min: 1, max: 10, default:1 },
    phone: String,
-   policy: [{type: mongoose.Schema.Types.ObjectId, ref: 'Policy'}],
+   policy: {type: mongoose.Schema.Types.ObjectId, ref: 'Policy'},
 
    status: {type: Number, default:1}
 });

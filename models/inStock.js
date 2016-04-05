@@ -3,8 +3,8 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 var inStock = new Schema({
-   warehouse: [{type: mongoose.Schema.Types.ObjectId, ref: 'Warehouse'}],
-   buyingOrder: [{type: mongoose.Schema.Types.ObjectId, ref: 'BuyingOrder'}],
+   warehouse: {type: mongoose.Schema.Types.ObjectId, ref: 'Warehouse'},
+   buyingOrder: {type: mongoose.Schema.Types.ObjectId, ref: 'BuyingOrder'},
    product: {type : mongoose.Schema.ObjectId, ref : 'Product'},
    description: {type: String},
    macAddress: {type: String},

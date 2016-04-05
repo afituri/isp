@@ -53,4 +53,28 @@ module.exports = {
       }
     });
   },
+
+  deleteSupplier : function(id,cb){
+    model.Product.find({supplier:id}, function(err,resultProduct) {
+      if(resultProduct.length > 0){
+        cb(1)
+      } else{
+        model.BuyingOrder.find({supplier:id}, function(err,resultBuyingOrder) {
+          if(resultBuyingOrder.length > 0){
+            cb(1)
+          } else{
+            model.Supplier.remove({_id:id}, function(err,result) {
+              if (!err) {
+                cb(2)
+              } else {
+                console.log(err);
+                cb(3);
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+
 };
