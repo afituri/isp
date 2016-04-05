@@ -5,12 +5,15 @@ var services = null;
 
 module.exports = {
   getServices :function(limit,page,cb){
+    page = parseInt(page);
     page-=1;
+    limit = parseInt(limit);
     model.Services.count({},function(err,count){
       model.Services.find({}).limit(limit).skip(page*limit).exec(function(err, services){
         if(!err){
           cb({result:services,count:count});
         }else{
+          console.log(err);
           cb(null);
         }
       });
