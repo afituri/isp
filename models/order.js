@@ -3,7 +3,7 @@ var timestamps = require('mongoose-timestamp');
 var textSearch = require('mongoose-text-search');
 var Schema = mongoose.Schema;
 
-var order = new Schema({
+var Order = new Schema({
    invoice: {type : mongoose.Schema.ObjectId, ref : 'Invoice'},
    product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
    createDate: Date,
@@ -22,7 +22,7 @@ var order = new Schema({
    status: {type: Number, default:1}
 });
 
-order.plugin(textSearch);
-order.plugin(timestamps);
-order.index({ customer: 'text'});
-exports.order = mongoose.model('order', order);
+Order.plugin(textSearch);
+Order.plugin(timestamps);
+Order.index({ customer: 'text'});
+exports.Order = mongoose.model('Order', Order);
