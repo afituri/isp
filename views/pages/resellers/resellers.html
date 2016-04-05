@@ -38,10 +38,9 @@
   </div>
   <div class="panel-footer">
     <div class="row">
-      <div class="col col-xs-4">صفحة {{currentPage}} من {{total}}
-      </div>
-      <div class="col col-xs-8">
-        <uib-pagination class="pull-left btn-sm" first-text="الاول" last-text="الاخير" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" previous-text="السابق" next-text="التالي" ng-click="init()"></uib-pagination>
+      <div class="col-xs-12 col-md-12 text-center">
+        <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
+        <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
       </div>
     </div>
   </div>
