@@ -4,6 +4,7 @@ var model = require("../models");
 var Policy = null;
 
 module.exports = {
+  
   getPolicies :function(limit,page,cb){
     page = parseInt(page);
     page-=1;

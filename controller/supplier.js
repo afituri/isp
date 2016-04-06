@@ -58,7 +58,7 @@ module.exports = {
   },
 
   deleteSupplier : function(id,cb){
-    model.Product.find({supplier:id}, function(err,resultProduct) {
+    model.Product.find({'item.supplier':id}, function(err,resultProduct) {
       if(resultProduct.length > 0){
         cb(1)
       } else{

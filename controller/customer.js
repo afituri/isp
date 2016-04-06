@@ -1,9 +1,10 @@
 var generatePassword = require('password-generator'),
-    easyPbkdf2 = require("easy-pbkdf2")();
+  easyPbkdf2 = require("easy-pbkdf2")();
 var model = require("../models");
 var customer = null;
 
 module.exports = {
+
   getCustomer :function(limit,page,cb){
     page = parseInt(page);
     page-=1;
@@ -94,6 +95,7 @@ module.exports = {
       }
     });
   },
+  
   deleteCustomer : function(id,cb){
     model.Invoice.find({customer:id}, function(err,resul) {
       if(resul.length > 0){
