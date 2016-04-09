@@ -4,9 +4,9 @@ var data = require('../data/supplier');
 var supplierMgr = require("../controller/supplier");
 
 /* GET all suppliers */
-router.get('/', function(req, res) {
+router.get('/:limit/:page', function(req, res) {
   // res.send(data.suppliers);
-  supplierMgr.getSupplier(3,1,function(supplier){
+  supplierMgr.getSupplier(req.params.limit,req.params.page,function(supplier){
     res.send(supplier);
   });
 });

@@ -6,8 +6,8 @@ var productPMgr = require("../controller/productPolicy");
 
 
 /* GET all policy */
-router.get('/', function(req, res) {
-  policyMgr.getPolicies(3,1,function(policies){
+router.get('/:limit/:page', function(req, res) {
+  policyMgr.getPolicies(req.params.limit,req.params.page,function(policies){
     res.send(policies);
   });
 });

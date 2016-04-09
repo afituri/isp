@@ -4,7 +4,7 @@ var data = require('../data/user');
 var userMgr = require("../controller/user");
 
 /* GET all users */
-router.get('/', function(req, res) {
+router.get('/:limit/:page', function(req, res) {
   userMgr.getCustomer(3,1,function(users){
     res.send(users);
   });

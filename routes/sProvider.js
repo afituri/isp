@@ -5,9 +5,9 @@ var serviceProviderMgr = require("../controller/serviceProvider");
 var servicesMgr = require("../controller/service");
 
 /* GET all Service Providers */
-router.get('/', function(req, res) {
+router.get('/:limit/:page', function(req, res) {
   // res.send(data.sProviders);
-  serviceProviderMgr.getSProvider(3,1,function(SProvider){
+  serviceProviderMgr.getSProvider(req.params.limit,req.params.page,function(SProvider){
     res.send(SProvider);
   });
 });

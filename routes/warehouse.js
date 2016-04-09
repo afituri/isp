@@ -3,9 +3,9 @@ var router = express.Router();
 var data = require('../data/warehouse');
 var wareMgr = require("../controller/warehouse");
 /* GET all warehouses */
-router.get('/', function(req, res) {
+router.get('/:limit/:page', function(req, res) {
   // res.send(data.warehouses);
-  wareMgr.getWarehouses(3,1,function(warehouse){
+  wareMgr.getWarehouses(req.params.limit,req.params.page,function(warehouse){
     res.send(warehouse);
   });
 });
