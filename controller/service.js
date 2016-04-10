@@ -9,7 +9,9 @@ module.exports = {
     page-=1;
     limit = parseInt(limit);
     model.Services.count({},function(err,count){
-      model.Services.find({}).limit(limit).skip(page*limit).exec(function(err, services){
+      model.Services.find({}).limit(limit).skip(page*limit)
+      .populate('servicesProvider', 'name')
+      .exec(function(err, services){
         if(!err){
           cb({result:services,count:count});
         }else{
