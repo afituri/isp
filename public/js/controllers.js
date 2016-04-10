@@ -69,15 +69,75 @@
       console.log("Something went wrong");
     });
   }]);
+    // Service Controllers Start
+  app.controller('ServicesCtl',['$scope','MenuFac','ServicesServ',function($scope,MenuFac,ServicesServ){
+    MenuFac.active = 1;
+    $scope.activePanel = MenuFac;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ServicesServ.getServices($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.services = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+  }]);
+  app.controller('NewServiceCtl',['$scope','$state','MenuFac','ServiceProvidersServ','ServicesServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,ServicesServ,toastr){
+    MenuFac.active = 1;
+    $scope.activePanel = MenuFac;
+    $scope.serviceProviders = ServiceProvidersServ;
+    $scope.newServiceForm = {};
+    $scope.newService = function(){
+      ServicesServ.addService($scope.newServiceForm).then(function(response) {
+        if(response.data){
+          $state.go('services');
+          toastr.success('تمت إضافة خدمة جديدة بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  app.controller('EditServiceCtl',['$scope','$state','$stateParams','MenuFac','ServicesServ','ServiceProvidersServ','toastr',function($scope,$state,$stateParams,MenuFac,ServicesServ,ServiceProvidersServ,toastr){
+    MenuFac.active = 1;
+    $scope.activePanel = MenuFac;
+    $scope.editServiceForm = {};
+    $scope.serviceProviders = ServiceProvidersServ;
+    ServicesServ.getServiceByID($stateParams.id).then(function(response) {
+      $scope.editServiceForm = response.data;
+      console.log(response.data);
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.editService = function(){
+      ServicesServ.editService($stateParams.id,$scope.editServiceForm).then(function(response) {
+        if(response.data){
+          $state.go('services');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+  }]);
+  // Service Controllers End
   // Service Providers Controllers Start
   app.controller('ServiceProvidersCtl',['$scope','MenuFac','ServiceProvidersServ',function($scope,MenuFac,ServiceProvidersServ){
-    MenuFac.active = 1;
+    MenuFac.active = 2;
     $scope.activePanel = MenuFac;
     ServiceProvidersServ.getServiceProviders();
     $scope.serviceProviders = ServiceProvidersServ;
   }]);
   app.controller('NewServiceProviderCtl',['$scope','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,toastr){
-    MenuFac.active = 1;
+    MenuFac.active = 2;
     $scope.activePanel = MenuFac;
     $scope.newServiceProviderForm = {};
     $scope.newServiceProvider = function(){
@@ -94,7 +154,7 @@
     };
   }]);
   app.controller('EditServiceProviderCtl',['$scope','$stateParams','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$stateParams,$state,MenuFac,ServiceProvidersServ,toastr){
-    MenuFac.active = 1;
+    MenuFac.active = 2;
     $scope.activePanel = MenuFac;
     $scope.editServiceProviderForm = {};
     ServiceProvidersServ.getServiceProviderByID($stateParams.id).then(function(response) {
@@ -116,7 +176,7 @@
     }
   }]);
   app.controller('DetailServiceProviderCtl',['$scope','$stateParams','MenuFac','ServiceProvidersServ',function($scope,$stateParams,MenuFac,ServiceProvidersServ){
-    MenuFac.active = 1;
+    MenuFac.active = 2;
     $scope.activePanel = MenuFac;
     $scope.services = {};
     $scope.detailServiceProvidersForm = {};
@@ -132,65 +192,6 @@
     });
   }]);
   // Service Providers Controllers End
-  // Service Controllers Start
-  app.controller('ServicesCtl',['$scope','MenuFac','ServicesServ',function($scope,MenuFac,ServicesServ){
-    MenuFac.active = 2;
-    $scope.activePanel = MenuFac;
-    $scope.pageSize = 10;
-    $scope.currentPage = 1;
-    $scope.total = 0;
-    $scope.init = function () {
-      ServicesServ.getServices($scope.pageSize,$scope.currentPage).then(function(response) {
-        $scope.services = response.data.result;
-        $scope.total = response.data.count;
-      }, function(response) {
-        console.log("Something went wrong");
-      });
-    }
-    $scope.init();
-  }]);
-  app.controller('NewServiceCtl',['$scope','$state','MenuFac','ServiceProvidersServ','ServicesServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,ServicesServ,toastr){
-    MenuFac.active = 2;
-    $scope.activePanel = MenuFac;
-    $scope.serviceProviders = ServiceProvidersServ;
-    $scope.newServiceForm = {};
-    $scope.newService = function(){
-      ServicesServ.addService($scope.newServiceForm).then(function(response) {
-        if(response.data){
-          $state.go('services');
-          toastr.success('تمت إضافة خدمة جديدة بنجاح');
-        } else {
-          console.log(response.data);
-        }
-      }, function(response) {
-        console.log("Something went wrong");
-      });
-    };
-  }]);
-  app.controller('EditServiceCtl',['$scope','$state','$stateParams','MenuFac','ServicesServ','ServiceProvidersServ','toastr',function($scope,$state,$stateParams,MenuFac,ServicesServ,ServiceProvidersServ,toastr){
-    MenuFac.active = 2;
-    $scope.activePanel = MenuFac;
-    $scope.editServiceForm = {};
-    $scope.serviceProviders = ServiceProvidersServ;
-    ServicesServ.getServiceByID($stateParams.id).then(function(response) {
-      $scope.editServiceForm = response.data;
-    }, function(response) {
-      console.log("Something went wrong");
-    });
-    $scope.editService = function(){
-      ServicesServ.editService($stateParams.id,$scope.editServiceForm).then(function(response) {
-        if(response.data){
-          $state.go('services');
-          toastr.info('تم التعديل بنجاح');
-        } else {
-          console.log(response.data);
-        }
-      }, function(response) {
-        console.log("Something went wrong");
-      });
-    }
-  }]);
-  // Service Controllers End
   // Suppliers Controllers Start
   app.controller('SuppliersCtl',['$scope','MenuFac','SuppliersServ',function($scope,MenuFac,SuppliersServ){
     MenuFac.active = 3;

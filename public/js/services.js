@@ -64,7 +64,7 @@
         return $http.get('/service/'+pageSize+'/'+currentPage);
       },
       'getServiceByID': function(id){
-        return $http.get('/service/:id');
+        return $http.get('/service/'+id);
       },
       'addService': function(serviceObj){
         return $http.post('/service/add',serviceObj);

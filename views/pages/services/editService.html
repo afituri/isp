@@ -14,7 +14,7 @@
           <label class="control-label">مزود الخدمة</label>
           <select class="form-control input-sm" ng-model="editServiceForm.servicesProvider" ng-required-err-type="servicesProvider" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option ng-repeat="serviceProvider in serviceProviders.serviceProvidersObj" value="{{serviceProvider.id}}">{{serviceProvider.name}}</option>
+            <option ng-repeat="serviceProvider in serviceProviders.serviceProvidersObj" value="{{serviceProvider._id}}">{{serviceProvider.name}}</option>
           </select>
         </div>
       </div>
