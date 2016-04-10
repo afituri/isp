@@ -18,7 +18,7 @@ router.get('/cities',userHelpers.isLogin , function(req, res) {
 });
 
 router.get('/home',userHelpers.isLogin ,function(req, res) {
-  res.render('index', { title: 'الرئسية' });
+  res.render('index', { title: 'الرئيسية' });
 });
 
 module.exports = router;
