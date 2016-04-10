@@ -60,16 +60,11 @@
   }]);
   app.service('ServicesServ',['$http',function($http){
     var self = {
-      'servicesObj': [],
-      'getServices': function(){
-        $http.get('/service').then(function(response) {
-          self.servicesObj = response.data;
-        }, function(response) {
-          console.log("Something went wrong");
-        });
+      'getServices': function(pageSize,currentPage){
+        return $http.get('/service/'+pageSize+'/'+currentPage);
       },
       'getServiceByID': function(id){
-        return $http.get('/service/:id');
+        return $http.get('/service/'+id);
       },
       'addService': function(serviceObj){
         return $http.post('/service/add',serviceObj);
@@ -78,18 +73,12 @@
         return $http.put('/service/edit/'+id,serviceObj);
       }
     };
-    self.getServices();
     return self;
   }]);
   app.service('SuppliersServ',['$http',function($http){
     var self = {
-      'suppliersObj': [],
-      'getSuppliers': function(){
-        $http.get('/supplier').then(function(response) {
-          self.suppliersObj = response.data;
-        }, function(response) {
-          console.log("Something went wrong");
-        });
+      'getSuppliers': function(pageSize,currentPage){
+        return $http.get('/supplier/'+pageSize+'/'+currentPage);
       },
       'getSupplierByID': function(id){
         return $http.get('/supplier/:id');
@@ -101,18 +90,12 @@
         return $http.put('/supplier/edit/'+id,supplierObj);
       }
     };
-    self.getSuppliers();
     return self;
   }]);
   app.service('WarehousesServ',['$http',function($http){
     var self = {
-      'warehousesObj': [],
-      'getWarehouses': function(){
-        $http.get('/warehouse').then(function(response) {
-          self.warehousesObj = response.data;
-        }, function(response) {
-          console.log("Something went wrong");
-        });
+      'getWarehouses': function(pageSize,currentPage){
+        return $http.get('/warehouse/'+pageSize+'/'+currentPage);
       },
       'getWarehouseByID': function(id){
         return $http.get('/warehouse/'+id);
@@ -124,18 +107,12 @@
         return $http.put('/warehouse/edit'+id,warehouseObj);
       }
     };
-    self.getWarehouses();
     return self;
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'customersObj': [],
-      'getCustomers': function(){
-        $http.get('/customer').then(function(response) {
-          self.customersObj = response.data;
-        }, function(response) {
-          console.log("Something went wrong");
-        });
+      'getCustomers': function(pageSize,currentPage){
+        return $http.get('/customer/'+pageSize+'/'+currentPage);
       },
       'getCustomerByID': function(id){
         return $http.get('/customer/'+id);
@@ -147,7 +124,6 @@
         return $http.put('/customer/edit/'+id,customerObj);
       }
     };
-    self.getCustomers();
     return self;
   }]);
   app.service('CitiesServ',['$http',function($http){

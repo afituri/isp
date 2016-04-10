@@ -10,7 +10,14 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-bordered table-list table-responsive">
+    <div ng-if="services.length == 0">
+      <div class="alert alert-info" style="margin:20px;">
+        <p class="text-center">
+          عفوا لاتوجد بيانات
+        </p>
+      </div>
+    </div>
+    <table ng-if="services.length" class="table table-striped table-bordered table-list table-responsive">
       <thead>
         <tr>
           <th>اسم الخدمة</th>
@@ -18,10 +25,10 @@
           <th class="text-center"><em class="fa fa-cog"></em></th>
         </tr> 
       </thead>
-      <tbody ng-repeat="service in services.servicesObj">
+      <tbody ng-repeat="service in services">
         <tr>
           <td>{{service.name}}</td>
-          <td>{{service.servicesProvider}}</td>
+          <td>{{service.servicesProvider.name}}</td>
           <td class="text-center">
             <a class="btn btn-warning btn-sm" ui-sref="editService({id:service._id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
             <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
@@ -30,22 +37,11 @@
       </tbody>
     </table>
   </div>
-  <div class="panel-footer">
+  <div class="panel-footer" ng-if="services.length">
     <div class="row">
-      <div class="col col-xs-4">صفحة 1 من 5
-      </div>
-      <div class="col col-xs-8">
-        <ul class="pagination hidden-xs pull-left">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-        </ul>
-        <ul class="pagination visible-xs pull-left">
-            <li><a href="#">«</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
+      <div class="col-xs-12 col-md-12 text-center">
+        <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
+        <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
       </div>
     </div>
   </div>

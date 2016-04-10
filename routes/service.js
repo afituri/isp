@@ -3,9 +3,9 @@ var router = express.Router();
 var data = require('../data/service');
 var servicesMgr = require("../controller/service");
 /* GET all Service */
-router.get('/', function(req, res) {
+router.get('/:limit/:page', function(req, res) {
   // res.send(data.services);
-  servicesMgr.getServices(3,1,function(services){
+  servicesMgr.getServices(req.params.limit,req.params.page,function(services){
     res.send(services);
   });
 });

@@ -4,8 +4,8 @@ var data = require('../data/customer');
 var customerMgr = require("../controller/customer");
 
 /* GET all customer */
-router.get('/', function(req, res) {
-  customerMgr.getCustomer(3,1,function(customers){
+router.get('/:limit/:page', function(req, res) {
+  customerMgr.getCustomer(req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
