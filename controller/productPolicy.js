@@ -96,7 +96,22 @@ module.exports = {
       }
     });
   },
+
+  deleteProductPolicy : function(id,cb){
+    model.Invoice.find({customer:id}, function(err,resul) {
+      if(resul.length > 0){
+        cb(1)
+      } else{
+        model.ProductPolicy.remove({_id:id}, function(err,result) {
+          if (!err) {
+            cb(2)
+          } else {
+            console.log(err);
+            cb(3);
+          }
+        });
+      }
+    });
+  },
+
 };
-
-
-

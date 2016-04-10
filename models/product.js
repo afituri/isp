@@ -8,13 +8,13 @@ var Product = new Schema({
    discriptoin: { type: String, required: true},
    initialPrice: { type: Number, required: true},
    item: {
-      supplier: {type: Schema.Types.ObjectId , ref: 'Supplier'},
-      made:{type: Number},
-      brand:{type: String}
+      supplier: { type: Schema.Types.ObjectId , ref: 'Supplier'},
+      made: { type: Number},
+      brand: { type: String}
    },
    packages: {
       type: { type: Number},
-      service: {type: Schema.Types.ObjectId , ref: 'Services'},
+      service: { type: Schema.Types.ObjectId , ref: 'Services'},
       dSpeed: { type: Number},
       uSpeed: { type: Number},
       monthlyQuota: { type: Number},
@@ -24,7 +24,7 @@ var Product = new Schema({
       costCurrency: { type: Number},
       exchangeRate: { type: Number}
    },
-   status: {type: Number, default:1}
+   status: { type: Number, default:1}
 });
 
 Product.plugin(timestamps);

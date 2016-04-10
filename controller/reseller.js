@@ -70,4 +70,22 @@ module.exports = {
       }
     });
   },
+
+  deleteReseller : function(id,cb){
+    model.Customer.find({reseller:id}, function(err,resul) {
+      if(resul.length > 0){
+        cb(1)
+      } else{
+        model.Reseller.remove({_id:id}, function(err,result) {
+          if (!err) {
+            cb(2)
+          } else {
+            console.log(err);
+            cb(3);
+          }
+        });
+      }
+    });
+  },
+
 };

@@ -4,14 +4,14 @@ var textSearch = require('mongoose-text-search');
 var Schema = mongoose.Schema;
 
 var Invoice = new Schema({
-   customer: {type : mongoose.Schema.ObjectId, ref : 'Customer'},
+   customer: { type: mongoose.Schema.ObjectId, ref : 'Customer'},
    createDate: Date,
-   type: {type: Number, required: [true, 'Why no type?']},
-   notes: {type: String, required: true},
-   piad: {type: Number, required: [true, 'Why no piad?']},
-   left: {type: Number, required: [true, 'Why no left?']},
+   type: { type: Number, required: [true, 'Why no type?']},
+   notes: { type: String, required: true},
+   piad: { type: Number, required: [true, 'Why no piad?']},
+   left: { type: Number, required: [true, 'Why no left?']},
 
-   status: {type: Number, default:1}
+   status: { type: Number, default:1}
 });
 
 Invoice.plugin(textSearch);

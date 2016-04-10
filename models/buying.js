@@ -3,14 +3,14 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 var Buyings = new Schema({
-   product: {type : mongoose.Schema.ObjectId, ref : 'Product'},
-   buyingOrder: {type: Number, required: [true, 'Why no buyingOrder?']},
-   quantity: {type: String, required: true},
-   price: {type: Number, required: [true, 'Why no price?']},
-   currency: {type: Number, required: [true, 'Why no currency?']},
-   exchangeRate: {type: Number, required: [true, 'Why no exchangeRate?']},
+   product: { type : mongoose.Schema.ObjectId, ref : 'Product'},
+   buyingOrder: { type: Number, required: [true, 'Why no buyingOrder?']},
+   quantity: { type: String, required: true},
+   price: { type: Number, required: [true, 'Why no price?']},
+   currency: { type: Number, required: [true, 'Why no currency?']},
+   exchangeRate: { type: Number, required: [true, 'Why no exchangeRate?']},
 
-   status: {type: Number, default:1}
+   status: { type: Number, default:1}
 });
 
 Buyings.plugin(timestamps);

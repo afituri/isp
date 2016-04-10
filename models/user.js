@@ -3,10 +3,10 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 var User = new Schema({
-   name: {type: String, index: true, default: "Unknown user"},
-   password: {type: String, required: true},
+   name: { type: String, index: true, default: "Unknown user"},
+   password: { type: String, required: true},
    salt: String,
-   email: {type: String, unique : true, required : true},
+   email: { type: String, unique : true, required : true},
    
    userRules:[{
       entity: { type: String, enum: ['service', 'item', 'package'], required: true},
