@@ -28,7 +28,7 @@
       <tbody ng-repeat="service in services">
         <tr>
           <td>{{service.name}}</td>
-          <td>{{service.servicesProvider}}</td>
+          <td>{{service.servicesProvider.name}}</td>
           <td class="text-center">
             <a class="btn btn-warning btn-sm" ui-sref="editService({id:service._id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
             <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
