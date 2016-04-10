@@ -1,4 +1,15 @@
 <div class="row animated fadeIn">
+  <div class="col-md-12">
+    <div class="well well-sm" ng-if="serviceProviders.serviceProvidersObj.length == 0">
+      <div class="alert alert-info" style="margin:10px;">
+        <p class="text-center">
+          عفوا لاتوجد بيانات
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row animated fadeIn" ng-if="serviceProviders.serviceProvidersObj.length">
   <div class="col-md-6" ng-repeat="serviceProvider in serviceProviders.serviceProvidersObj">
     <div class="well well-sm">
       <div class="row">

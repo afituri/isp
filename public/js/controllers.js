@@ -15,7 +15,6 @@
       ResllersServ.getResellers($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.resellers = response.data.result;
         $scope.total = response.data.count;
-        console.log(response);
       }, function(response) {
         console.log("Something went wrong");
       });
@@ -137,7 +136,18 @@
   app.controller('ServicesCtl',['$scope','MenuFac','ServicesServ',function($scope,MenuFac,ServicesServ){
     MenuFac.active = 2;
     $scope.activePanel = MenuFac;
-    $scope.services = ServicesServ;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ServicesServ.getServices($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.services = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
   }]);
   app.controller('NewServiceCtl',['$scope','$state','MenuFac','ServiceProvidersServ','ServicesServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,ServicesServ,toastr){
     MenuFac.active = 2;
@@ -185,8 +195,18 @@
   app.controller('SuppliersCtl',['$scope','MenuFac','SuppliersServ',function($scope,MenuFac,SuppliersServ){
     MenuFac.active = 3;
     $scope.activePanel = MenuFac;
-    SuppliersServ.getSuppliers();
-    $scope.suppliers = SuppliersServ;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      SuppliersServ.getSuppliers($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.suppliers = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
   }]);
   app.controller('NewSupplierCtl',['$scope','$state','MenuFac','SuppliersServ','toastr',function($scope,$state,MenuFac,SuppliersServ,toastr){
     MenuFac.active = 3;
@@ -232,8 +252,18 @@
   app.controller('WarehousesCtl',['$scope','MenuFac','WarehousesServ',function($scope,MenuFac,WarehousesServ){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
-    WarehousesServ.getWarehouses();
-    $scope.warehouses = WarehousesServ;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      WarehousesServ.getWarehouses($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.warehouses = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
   }]);
   app.controller('NewWarehouseCtl',['$scope','$state','MenuFac','WarehousesServ','toastr',function($scope,$state,MenuFac,WarehousesServ,toastr){
     MenuFac.active = 4;
@@ -279,8 +309,18 @@
   app.controller('CustomersCtl',['$scope','MenuFac','CustomersServ',function($scope,MenuFac,CustomersServ){
     MenuFac.active = 5;
     $scope.activePanel = MenuFac;
-    CustomersServ.getCustomers();
-    $scope.customers = CustomersServ;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.customers = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
   }]);
   app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','CitiesServ','toastr',function($scope,$state,MenuFac,CustomersServ,CitiesServ,toastr){
     MenuFac.active = 5;
