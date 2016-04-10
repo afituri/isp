@@ -129,6 +129,9 @@
       errorMessages['customerRepName'] = "الرجاء إدخال اسم المندوب";
       errorMessages['notes'] = "الرجاء إدخال الملاحضة";
       errorMessages['type'] = "الرجاء اختيار نوع العميل";
+      errorMessages['servicesProvider'] = "الرجاء اختيار مزود الخدمة";
+      errorMessages['nameService'] = "الرجاء إدخال اسم الخدمة";
+      errorMessages['discriptoinService'] = "الرجاء إدخال معلومات عن الخدمة";
     });
   }]);
   app.filter('defaultLogo', function(){
