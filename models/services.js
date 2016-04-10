@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var Services = new Schema({
    name: {type: String, required : true},
    servicesProvider: {type: Schema.Types.ObjectId , ref: 'ServiceProvider'},
-   discriptoin: {type: String, required : true},
+   description: {type: String, required : true},
    
    status: {type: Number, default:1}
 });
