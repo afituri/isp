@@ -81,7 +81,7 @@
         return $http.get('/supplier/'+pageSize+'/'+currentPage);
       },
       'getSupplierByID': function(id){
-        return $http.get('/supplier/:id');
+        return $http.get('/supplier/'+id);
       },
       'addSupplier': function(supplierObj){
         return $http.post('/supplier/add',supplierObj);

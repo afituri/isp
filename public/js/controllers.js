@@ -111,7 +111,6 @@
     $scope.serviceProviders = ServiceProvidersServ;
     ServicesServ.getServiceByID($stateParams.id).then(function(response) {
       $scope.editServiceForm = response.data;
-      console.log(response.data);
     }, function(response) {
       console.log("Something went wrong");
     });
@@ -266,9 +265,10 @@
     }
     $scope.init();
   }]);
-  app.controller('NewWarehouseCtl',['$scope','$state','MenuFac','WarehousesServ','toastr',function($scope,$state,MenuFac,WarehousesServ,toastr){
+  app.controller('NewWarehouseCtl',['$scope','$state','MenuFac','WarehousesServ','CitiesServ','toastr',function($scope,$state,MenuFac,WarehousesServ,CitiesServ,toastr){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
+    $scope.cities = CitiesServ;
     $scope.newWarehouseForm = {};
     $scope.newWarehouse = function(){
       WarehousesServ.addWarehouse($scope.newWarehouseForm).then(function(response) {
