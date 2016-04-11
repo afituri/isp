@@ -33,11 +33,14 @@ router.put('/edit/:id', function(req, res) {
 /* Delete policy  by id  */
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
+  policyMgr.getPolicyId(req.params.id,function(result){
+    res.send(result);  
+  });
 });
 
 /* GET policy  by ID  */
 router.get('/:id', function(req, res) {
-  policyMgr.getPolicyId(req.params.id,function(result){
+  policyMgr.deletePolicy(req.params.id,function(result){
     res.send(result);  
   });
 });

@@ -29,6 +29,9 @@ router.put('/edit/:id', function(req, res) {
 /* Delete customer  by id  */
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
+  customerMgr.deleteCustomer(req.params.id,function(customer){
+    res.send(customer);
+  });
 });
 
 /* GET customer  by ID  */

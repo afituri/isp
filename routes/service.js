@@ -29,6 +29,9 @@ router.put('/edit/:id', function(req, res) {
 /* Delete Service  by id  */
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
+  servicesMgr.deleteServices(req.params.id,function(services){
+    res.send(services);
+  });
 });
 
 /* GET Service  by ID  */

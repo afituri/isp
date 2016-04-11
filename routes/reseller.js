@@ -31,6 +31,9 @@ router.put('/edit/:id', function(req, res) {
 /* Delete reseller by id  */
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
+  resellerMgr.deleteReseller(req.params.id,function(reseller){
+    res.send(reseller);
+  });
 });
 
 /* GET reseller by ID  */
