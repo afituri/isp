@@ -6,51 +6,43 @@
   app.controller('MenuCtl',['$scope','MenuFac',function($scope,MenuFac){
     $scope.activePanel = MenuFac;
   }]);
-  app.controller('ResellersCtl',['$scope','ResllersServ','MenuFac',function($scope,ResllersServ,MenuFac){
+  // Service Providers Controllers Start
+  app.controller('ServiceProvidersCtl',['$scope','MenuFac','ServiceProvidersServ',function($scope,MenuFac,ServiceProvidersServ){
     MenuFac.active = 0;
-    $scope.pageSize = 10;
-    $scope.currentPage = 1;
-    $scope.total = 0;
-    $scope.init = function () {
-      ResllersServ.getResellers($scope.pageSize,$scope.currentPage).then(function(response) {
-        $scope.resellers = response.data.result;
-        $scope.total = response.data.count;
-      }, function(response) {
-        console.log("Something went wrong");
-      });
-    }
-    $scope.init();
+    $scope.activePanel = MenuFac;
+    ServiceProvidersServ.getServiceProviders();
+    $scope.serviceProviders = ServiceProvidersServ;
   }]);
-  app.controller('NewResellerCtl',['$scope','$state','MenuFac','ResllersServ','CitiesServ','toastr', function($scope,$state,MenuFac,ResllersServ,CitiesServ,toastr){
+  app.controller('NewServiceProviderCtl',['$scope','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,toastr){
     MenuFac.active = 0;
-    $scope.newResllerForm = {};
-    $scope.cities = CitiesServ;
-    $scope.newResller = function(){
-      ResllersServ.addResller($scope.newResllerForm).then(function(response) {
+    $scope.activePanel = MenuFac;
+    $scope.newServiceProviderForm = {};
+    $scope.newServiceProvider = function(){
+      ServiceProvidersServ.addServiceProvider($scope.newServiceProviderForm).then(function(response) {
         if(response.data){
-          $state.go('resellers');
-          toastr.success('تمت إضافة موزع جديد بنجاح');
+          $state.go('serviceProviders');
+          toastr.success('تمت إضافة مزود خدمة جديد بنجاح');
         } else {
           console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");
       });
-    }
+    };
   }]);
-  app.controller('EditResellerCtl',['$scope','$state','$stateParams','ResllersServ','MenuFac','CitiesServ','toastr',function($scope,$state,$stateParams,ResllersServ,MenuFac,CitiesServ,toastr){
+  app.controller('EditServiceProviderCtl',['$scope','$stateParams','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$stateParams,$state,MenuFac,ServiceProvidersServ,toastr){
     MenuFac.active = 0;
-    $scope.editResllerForm = {};
-    $scope.cities = CitiesServ;
-    ResllersServ.getResellersByID($stateParams.id).then(function(response) {
-      $scope.editResllerForm = response.data;
+    $scope.activePanel = MenuFac;
+    $scope.editServiceProviderForm = {};
+    ServiceProvidersServ.getServiceProviderByID($stateParams.id).then(function(response) {
+      $scope.editServiceProviderForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
     });
-    $scope.editResller = function(){
-      ResllersServ.editResller($stateParams.id,$scope.editResllerForm).then(function(response) {
+    $scope.editServiceProvider = function(){
+      ServiceProvidersServ.editServiceProvider($stateParams.id,$scope.editServiceProviderForm).then(function(response) {
         if(response.data){
-          $state.go('resellers');
+          $state.go('serviceProviders');
           toastr.info('تم التعديل بنجاح');
         } else {
           console.log(response.data);
@@ -60,15 +52,23 @@
       });
     }
   }]);
-  app.controller('ShowResellerCtl',['$scope','$stateParams','ResllersServ','MenuFac',function($scope,$stateParams,ResllersServ,MenuFac){
+  app.controller('DetailServiceProviderCtl',['$scope','$stateParams','MenuFac','ServiceProvidersServ',function($scope,$stateParams,MenuFac,ServiceProvidersServ){
     MenuFac.active = 0;
-    $scope.showResllerForm = {};
-    ResllersServ.getResellersByID($stateParams.id).then(function(response) {
-      $scope.showResllerForm = response.data;
+    $scope.activePanel = MenuFac;
+    $scope.services = {};
+    $scope.detailServiceProvidersForm = {};
+    ServiceProvidersServ.getServiceProviderByID($stateParams.id).then(function(response) {
+      $scope.detailServiceProviderForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    ServiceProvidersServ.getServiceProvidersServicesByID($stateParams.id).then(function(response) {
+      $scope.services = response.data;
     }, function(response) {
       console.log("Something went wrong");
     });
   }]);
+  // Service Providers Controllers End
     // Service Controllers Start
   app.controller('ServicesCtl',['$scope','MenuFac','ServicesServ',function($scope,MenuFac,ServicesServ){
     MenuFac.active = 1;
@@ -128,43 +128,52 @@
     }
   }]);
   // Service Controllers End
-  // Service Providers Controllers Start
-  app.controller('ServiceProvidersCtl',['$scope','MenuFac','ServiceProvidersServ',function($scope,MenuFac,ServiceProvidersServ){
+  // Service Resellers Controllers Start
+  app.controller('ResellersCtl',['$scope','ResllersServ','MenuFac',function($scope,ResllersServ,MenuFac){
     MenuFac.active = 2;
-    $scope.activePanel = MenuFac;
-    ServiceProvidersServ.getServiceProviders();
-    $scope.serviceProviders = ServiceProvidersServ;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ResllersServ.getResellers($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.resellers = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
   }]);
-  app.controller('NewServiceProviderCtl',['$scope','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,toastr){
+  app.controller('NewResellerCtl',['$scope','$state','MenuFac','ResllersServ','CitiesServ','toastr', function($scope,$state,MenuFac,ResllersServ,CitiesServ,toastr){
     MenuFac.active = 2;
-    $scope.activePanel = MenuFac;
-    $scope.newServiceProviderForm = {};
-    $scope.newServiceProvider = function(){
-      ServiceProvidersServ.addServiceProvider($scope.newServiceProviderForm).then(function(response) {
+    $scope.newResllerForm = {};
+    $scope.cities = CitiesServ;
+    $scope.newResller = function(){
+      ResllersServ.addResller($scope.newResllerForm).then(function(response) {
         if(response.data){
-          $state.go('serviceProviders');
-          toastr.success('تمت إضافة مزود خدمة جديد بنجاح');
+          $state.go('resellers');
+          toastr.success('تمت إضافة موزع جديد بنجاح');
         } else {
           console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");
       });
-    };
+    }
   }]);
-  app.controller('EditServiceProviderCtl',['$scope','$stateParams','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$stateParams,$state,MenuFac,ServiceProvidersServ,toastr){
+  app.controller('EditResellerCtl',['$scope','$state','$stateParams','ResllersServ','MenuFac','CitiesServ','toastr',function($scope,$state,$stateParams,ResllersServ,MenuFac,CitiesServ,toastr){
     MenuFac.active = 2;
-    $scope.activePanel = MenuFac;
-    $scope.editServiceProviderForm = {};
-    ServiceProvidersServ.getServiceProviderByID($stateParams.id).then(function(response) {
-      $scope.editServiceProviderForm = response.data;
+    $scope.editResllerForm = {};
+    $scope.cities = CitiesServ;
+    ResllersServ.getResellersByID($stateParams.id).then(function(response) {
+      $scope.editResllerForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
     });
-    $scope.editServiceProvider = function(){
-      ServiceProvidersServ.editServiceProvider($stateParams.id,$scope.editServiceProviderForm).then(function(response) {
+    $scope.editResller = function(){
+      ResllersServ.editResller($stateParams.id,$scope.editResllerForm).then(function(response) {
         if(response.data){
-          $state.go('serviceProviders');
+          $state.go('resellers');
           toastr.info('تم التعديل بنجاح');
         } else {
           console.log(response.data);
@@ -174,23 +183,16 @@
       });
     }
   }]);
-  app.controller('DetailServiceProviderCtl',['$scope','$stateParams','MenuFac','ServiceProvidersServ',function($scope,$stateParams,MenuFac,ServiceProvidersServ){
+  app.controller('ShowResellerCtl',['$scope','$stateParams','ResllersServ','MenuFac',function($scope,$stateParams,ResllersServ,MenuFac){
     MenuFac.active = 2;
-    $scope.activePanel = MenuFac;
-    $scope.services = {};
-    $scope.detailServiceProvidersForm = {};
-    ServiceProvidersServ.getServiceProviderByID($stateParams.id).then(function(response) {
-      $scope.detailServiceProviderForm = response.data;
-    }, function(response) {
-      console.log("Something went wrong");
-    });
-    ServiceProvidersServ.getServiceProvidersServicesByID($stateParams.id).then(function(response) {
-      $scope.services = response.data;
+    $scope.showResllerForm = {};
+    ResllersServ.getResellersByID($stateParams.id).then(function(response) {
+      $scope.showResllerForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
     });
   }]);
-  // Service Providers Controllers End
+  // Service Resellers Controllers End
   // Suppliers Controllers Start
   app.controller('SuppliersCtl',['$scope','MenuFac','SuppliersServ',function($scope,MenuFac,SuppliersServ){
     MenuFac.active = 3;
