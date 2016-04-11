@@ -44,7 +44,7 @@ module.exports = {
     var obj ={
       name : body.name,
       servicesProvider : body.servicesProvider,
-      discriptoin : body.discriptoin
+      description : body.discriptoin
      }
     services = new model.Services(obj);
     services.save(function(err,result){
@@ -52,6 +52,7 @@ module.exports = {
         cb(true);
 
       } else {
+        console.log(err);
         //TODO: return page with errors
         cb(false);
       }
@@ -61,7 +62,7 @@ module.exports = {
     var obj ={
       name : body.name,
       servicesProvider : body.servicesProvider,
-      discriptoin : body.discriptoin
+      description : body.description
      }
     model.Services.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {

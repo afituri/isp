@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var Warehouse = new Schema({
    name: { type: String, required: true},
-   city: { type: Number, required: [true, 'Why no city?']},
+   city: { type: String, required: [true, 'Why no city?']},
    area: { type: String, required: true},
    phone: { type: String, required: true},
    email: { type: String, required: true},

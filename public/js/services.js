@@ -104,7 +104,7 @@
         return $http.post('/warehouse/add',warehouseObj);
       },
       'editWarehouse': function(id,warehouseObj){
-        return $http.put('/warehouse/edit'+id,warehouseObj);
+        return $http.put('/warehouse/edit/'+id,warehouseObj);
       }
     };
     return self;
