@@ -4,7 +4,7 @@
     &nbsp;تعديل عميل ({{editCustomerForm.name}}) , نوع العميل <span ng-if="editCustomerForm.type==1">(شخصي)</span><span ng-if="editCustomerForm.type==2">(شركة)</span>
   </h5>
   <hr>
-  <form novalidate ng-submit="newCustomer()">
+  <form novalidate ng-submit="editCustomer()">
     <div class="row">
       <div ng-class="{'col-md-4': editCustomerForm.type==1,'col-md-3': editCustomerForm.type==2}">
         <div class="form-group">

@@ -283,17 +283,18 @@
       });
     };
   }]);
-  app.controller('EditWarehouseCtl',['$scope','$state','$stateParams','MenuFac','WarehousesServ','toastr',function($scope,$state,$stateParams,MenuFac,WarehousesServ,toastr){
+  app.controller('EditWarehouseCtl',['$scope','$state','$stateParams','MenuFac','WarehousesServ','CitiesServ','toastr',function($scope,$state,$stateParams,MenuFac,WarehousesServ,CitiesServ,toastr){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
     $scope.editWarehouseForm = {};
+    $scope.cities = CitiesServ;
     WarehousesServ.getWarehouseByID($stateParams.id).then(function(response) {
       $scope.editWarehouseForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
     });
     $scope.editWarehouse = function(){
-      WarehousesServ.editWarehouse($stateParams.id,$scope.editSupplierForm).then(function(response) {
+      WarehousesServ.editWarehouse($stateParams.id,$scope.editWarehouseForm).then(function(response) {
         if(response.data){
           $state.go('warehouses');
           toastr.info('تم التعديل بنجاح');

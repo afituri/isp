@@ -14,8 +14,7 @@
           <label class="control-label">المدينة</label>
           <select class="form-control input-sm" ng-model="editWarehouseForm.city" ng-required-err-type="city" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option value="1">طرابلس</option>
-            <option value="2">بنغازي</option>
+            <option ng-repeat="city in cities.citiesObj" value="{{city.nameAr}}">{{city.nameAr}}</option>
           </select>
         </div>
       </div>
@@ -43,7 +42,7 @@
     <hr>
     <div class="row">
       <div class="col-md-2 col-md-offset-5">
-        <button type="submit" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil"></i>&nbsp;إضافة</button>
+        <button type="submit" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil"></i>&nbsp;تعديل</button>
       </div>
     </div>
   </form>
