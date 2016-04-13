@@ -19,7 +19,7 @@ var supplier = require('./routes/supplier');
 var customer = require('./routes/customer');
 var warehouse = require('./routes/warehouse');
 var policy = require('./routes/policy');
-
+var product = require('./routes/product');
 var pages = require('./routes/pages');
 
 var app = express();
@@ -56,6 +56,7 @@ app.use('/customer', customer);
 app.use('/warehouse', warehouse);
 app.use('/policy', policy);
 app.use('/pages', pages);
+app.use('/product', product);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
