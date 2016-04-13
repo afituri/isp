@@ -5,6 +5,18 @@ var product = null;
 
 module.exports = {
 
+  getProduct :function(cb){
+    model.Product.find({}).populate('packages.service')
+    .exec(function(err, services){
+      if(!err){
+        cb(services);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
   deletePolicy : function(id,cb){
     model.Buyings.find({product:id}, function(err,resultBuyings) {
       if(resultBuyings.length > 0){
