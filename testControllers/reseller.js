@@ -29,7 +29,7 @@
   model.Product.find({}).populate('packages.service')
     .exec(function(err, services){
       if(!err){
-        console.log(services);
+        console.log(services[0].packages.service);
       }else{
         console.log(err);
         console.log(null);
