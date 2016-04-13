@@ -6,17 +6,22 @@
       'active': -1
     }
   });
+  app.service('CitiesServ',['$http',function($http){
+    var self = {
+      'citiesObj': [],
+      'getCities': function(){
+        $http.get('/cities').then(function(response) {
+          self.citiesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      }
+    };
+    self.getCities();
+    return self;
+  }]);
   app.service('ResllersServ',['$http',function($http){
     var self = {
-      // 'resellersObj': [],
-      // 'getResellers': function(){
-      //   $http.get('/reseller').then(function(response) {
-      //     self.resellersObj = response.data.result;
-      //     console.log(response.data);
-      //   }, function(response) {
-      //     console.log("Something went wrong");
-      //   });
-      // },
       'getResellers': function(pageSize,currentPage){
         return $http.get('/reseller/'+pageSize+'/'+currentPage);
       },
@@ -126,18 +131,21 @@
     };
     return self;
   }]);
-  app.service('CitiesServ',['$http',function($http){
+  app.service('ProductsServ',['$http',function($http){
     var self = {
-      'citiesObj': [],
-      'getCities': function(){
-        $http.get('/cities').then(function(response) {
-          self.citiesObj = response.data;
-        }, function(response) {
-          console.log("Something went wrong");
-        });
+      'getProducts': function(pageSize,currentPage){
+        return $http.get('/product/'+pageSize+'/'+currentPage);
+      },
+      'getProductByID': function(id){
+        return $http.get('/product/'+id);
+      },
+      'addProduct': function(productObj){
+        return $http.post('/product/add',productObj);
+      },
+      'editProduct': function(id,productObj){
+        return $http.put('/product/edit/'+id,productObj);
       }
     };
-    self.getCities();
     return self;
   }]);
 }());

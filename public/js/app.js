@@ -95,6 +95,18 @@
       url: '/customers/edit/:id',
       templateUrl: 'pages/customers/editCustomer.html',
       controller: 'EditCustomerCtl'
+    }).state('products',{
+      url: '/products',
+      templateUrl: 'pages/products/products.html',
+      controller: 'ProductsCtl'
+    }).state('newProduct',{
+      url: '/products/new',
+      templateUrl: 'pages/products/newProduct.html',
+      controller: 'NewProductCtl'
+    }).state('editProduct',{
+      url: '/products/edit/:id',
+      templateUrl: 'pages/products/editProduct.html',
+      controller: 'EditProductCtl'
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');

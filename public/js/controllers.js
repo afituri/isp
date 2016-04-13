@@ -368,4 +368,63 @@
     }
   }]);
   // Customers Controllers End
+  // Products Controllers End
+  app.controller('ProductsCtl',['$scope','MenuFac','ProductsServ',function($scope,MenuFac,ProductsServ){
+    MenuFac.active = 6;
+    $scope.activePanel = MenuFac;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ProductsServ.getProducts($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.products = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+  }]);
+  app.controller('NewProductCtl',['$scope','$state','MenuFac','ProductsServ','CitiesServ','toastr',function($scope,$state,MenuFac,ProductsServ,CitiesServ,toastr){
+    MenuFac.active = 6;
+    $scope.activePanel = MenuFac;
+    $scope.newProductForm = {};
+    $scope.cities = CitiesServ;
+    $scope.newProduct = function(){
+      ProductsServ.addProduct($scope.newProductForm).then(function(response) {
+        if(response.data){
+          $state.go('products');
+          toastr.success('تمت إضافة منتج جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  app.controller('EditProductCtl',['$scope','$state','$stateParams','MenuFac','ProductsServ','CitiesServ','toastr',function($scope,$state,$stateParams,MenuFac,ProductsServ,CitiesServ,toastr){
+    MenuFac.active = 6;
+    $scope.activePanel = MenuFac;
+    $scope.editProductForm = {};
+    $scope.cities = CitiesServ;
+    ProductsServ.getProductByID($stateParams.id).then(function(response) {
+      $scope.editProductForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.editProduct = function(){
+      ProductsServ.editProduct($stateParams.id,$scope.editProductForm).then(function(response) {
+        if(response.data){
+          $state.go('products');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+  }]);
+  // Products Controllers End
 }())
