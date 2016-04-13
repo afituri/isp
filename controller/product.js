@@ -4,15 +4,35 @@ var model = require("../models");
 var product = null;
 
 module.exports = {
+  
+  getProduct :function(limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Product.count({},function(err,count){
+      model.Product.find({}).limit(limit).skip(page*limit)
+      .populate('Service')
+      .exec(function(err, products){
+        if(!err){
+          cb({result:products,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
 
-  getProduct :function(cb){
-    model.Product.find({}).populate('packages.service')
-    .exec(function(err, services){
-      if(!err){
-        cb(services);
-      }else{
+  addProduct : function(body,cb){
+    var obj = body;
+    product = new model.Product(obj);
+    product.save(function(err,result){
+      if (!err) {
+        cb(true);
+      } else {
+        //TODO: return page with errors
         console.log(err);
-        cb(null);
+        cb(false);
       }
     });
   },
