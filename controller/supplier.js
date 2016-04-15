@@ -22,7 +22,7 @@ module.exports = {
     });
   },
 
-  getAllSupplier :function(limit,page,cb){
+  getAllSupplier :function(cb){
     model.Supplier.find({},function(err, result){
       if(!err){
         cb(result);
