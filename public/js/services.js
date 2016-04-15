@@ -6,18 +6,38 @@
       'active': -1
     }
   });
-  app.service('CitiesServ',['$http',function($http){
+  app.service('HelperServ',['$http',function($http){
     var self = {
       'citiesObj': [],
+      'suppliersObj': [],
+      'servicesObj': [],
       'getCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
         }, function(response) {
           console.log("Something went wrong");
         });
+      },
+      'getAllSuppliers': function(){
+        return $http.get('/supplier/all').then(function(response) {
+          self.suppliersObj = response.data;
+          console.log(response.data);
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      },
+      'getAllServices': function(){
+        return $http.get('/service/all').then(function(response) {
+          self.servicesObj = response.data;
+          console.log(response.data);
+        }, function(response) {
+          console.log("Something went wrong");
+        });
       }
     };
     self.getCities();
+    self.getAllSuppliers();
+    self.getAllServices();
     return self;
   }]);
   app.service('ResllersServ',['$http',function($http){

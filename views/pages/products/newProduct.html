@@ -31,6 +31,7 @@
           <lable class="control-label">المورد</lable>
           <select class="form-control input-sm" ng-model="newProductForm.supplier" ng-required-err-type="productSupplier" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
+            <option ng-repeat="supplier in objects.suppliersObj" value="{{supplier._id}}">{{supplier.name}}</option>
           </select>
         </div>
       </div>
@@ -41,7 +42,7 @@
           <label class="control-label">بلد الصنع</label>
           <select class="form-control input-sm" ng-model="newProductForm.made" ng-required-err-type="productMade" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option ng-repeat="city in cities.citiesObj" value="{{city.id}}">{{city.nameAr}}</option>
+            <option ng-repeat="city in objects.citiesObj" value="{{city.id}}">{{city.nameAr}}</option>
           </select>
         </div>
       </div>
@@ -61,6 +62,7 @@
         <lable class="control-label">الخدمة</lable>
         <select class="form-control input-sm" ng-model="newProductForm.service" ng-required-err-type="productService" required>
           <option value="" disabled selected>الرجاء الاختيار</option>
+          <option ng-repeat="service in objects.servicesObj" value="{{service._id}}">{{service.name}}</option>
         </select>
       </div>
     </div>

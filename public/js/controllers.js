@@ -144,10 +144,10 @@
     }
     $scope.init();
   }]);
-  app.controller('NewResellerCtl',['$scope','$state','MenuFac','ResllersServ','CitiesServ','toastr', function($scope,$state,MenuFac,ResllersServ,CitiesServ,toastr){
+  app.controller('NewResellerCtl',['$scope','$state','MenuFac','ResllersServ','HelperServ','toastr', function($scope,$state,MenuFac,ResllersServ,HelperServ,toastr){
     MenuFac.active = 2;
     $scope.newResllerForm = {};
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     $scope.newResller = function(){
       ResllersServ.addResller($scope.newResllerForm).then(function(response) {
         if(response.data){
@@ -161,10 +161,10 @@
       });
     }
   }]);
-  app.controller('EditResellerCtl',['$scope','$state','$stateParams','ResllersServ','MenuFac','CitiesServ','toastr',function($scope,$state,$stateParams,ResllersServ,MenuFac,CitiesServ,toastr){
+  app.controller('EditResellerCtl',['$scope','$state','$stateParams','ResllersServ','MenuFac','HelperServ','toastr',function($scope,$state,$stateParams,ResllersServ,MenuFac,HelperServ,toastr){
     MenuFac.active = 2;
     $scope.editResllerForm = {};
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     ResllersServ.getResellersByID($stateParams.id).then(function(response) {
       $scope.editResllerForm = response.data;
     }, function(response) {
@@ -267,10 +267,10 @@
     }
     $scope.init();
   }]);
-  app.controller('NewWarehouseCtl',['$scope','$state','MenuFac','WarehousesServ','CitiesServ','toastr',function($scope,$state,MenuFac,WarehousesServ,CitiesServ,toastr){
+  app.controller('NewWarehouseCtl',['$scope','$state','MenuFac','WarehousesServ','HelperServ','toastr',function($scope,$state,MenuFac,WarehousesServ,HelperServ,toastr){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     $scope.newWarehouseForm = {};
     $scope.newWarehouse = function(){
       WarehousesServ.addWarehouse($scope.newWarehouseForm).then(function(response) {
@@ -285,11 +285,11 @@
       });
     };
   }]);
-  app.controller('EditWarehouseCtl',['$scope','$state','$stateParams','MenuFac','WarehousesServ','CitiesServ','toastr',function($scope,$state,$stateParams,MenuFac,WarehousesServ,CitiesServ,toastr){
+  app.controller('EditWarehouseCtl',['$scope','$state','$stateParams','MenuFac','WarehousesServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,WarehousesServ,HelperServ,toastr){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
     $scope.editWarehouseForm = {};
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     WarehousesServ.getWarehouseByID($stateParams.id).then(function(response) {
       $scope.editWarehouseForm = response.data;
     }, function(response) {
@@ -326,11 +326,11 @@
     }
     $scope.init();
   }]);
-  app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','CitiesServ','toastr',function($scope,$state,MenuFac,CustomersServ,CitiesServ,toastr){
+  app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,MenuFac,CustomersServ,HelperServ,toastr){
     MenuFac.active = 5;
     $scope.activePanel = MenuFac;
     $scope.newCustomerForm = {};
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     $scope.newCustomer = function(){
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
@@ -344,11 +344,11 @@
       });
     };
   }]);
-  app.controller('EditCustomerCtl',['$scope','$state','$stateParams','MenuFac','CustomersServ','CitiesServ','toastr',function($scope,$state,$stateParams,MenuFac,CustomersServ,CitiesServ,toastr){
+  app.controller('EditCustomerCtl',['$scope','$state','$stateParams','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,CustomersServ,HelperServ,toastr){
     MenuFac.active = 5;
     $scope.activePanel = MenuFac;
     $scope.editCustomerForm = {};
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
       $scope.editCustomerForm = response.data;
     }, function(response) {
@@ -385,11 +385,11 @@
     }
     $scope.init();
   }]);
-  app.controller('NewProductCtl',['$scope','$state','MenuFac','ProductsServ','CitiesServ','toastr',function($scope,$state,MenuFac,ProductsServ,CitiesServ,toastr){
+  app.controller('NewProductCtl',['$scope','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.newProductForm = {};
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     $scope.newProduct = function(){
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
@@ -403,11 +403,11 @@
       });
     };
   }]);
-  app.controller('EditProductCtl',['$scope','$state','$stateParams','MenuFac','ProductsServ','CitiesServ','toastr',function($scope,$state,$stateParams,MenuFac,ProductsServ,CitiesServ,toastr){
+  app.controller('EditProductCtl',['$scope','$state','$stateParams','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.editProductForm = {};
-    $scope.cities = CitiesServ;
+    $scope.objects = HelperServ;
     ProductsServ.getProductByID($stateParams.id).then(function(response) {
       $scope.editProductForm = response.data;
     }, function(response) {

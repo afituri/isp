@@ -22,7 +22,7 @@
           <lable class="control-label">المدينة</lable>
           <select class="form-control input-sm" ng-model="editResllerForm.city" ng-required-err-type="city" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option ng-repeat="city in cities.citiesObj" value="{{city.nameAr}}">{{city.nameAr}}</option>
+            <option ng-repeat="city in objects.citiesObj" value="{{city.nameAr}}">{{city.nameAr}}</option>
           </select>
         </div>
       </div>
