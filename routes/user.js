@@ -5,7 +5,12 @@ var userMgr = require("../controller/user");
 
 /* GET all users */
 router.get('/:limit/:page', function(req, res) {
-  userMgr.getCustomer(3,1,function(users){
+  userMgr.getCustomer(req.params.limit,req.params.page,function(users){
+    res.send(users);
+  });
+});
+router.get('/all', function(req, res) {
+  userMgr.getAllCustomer(function(users){
     res.send(users);
   });
 });

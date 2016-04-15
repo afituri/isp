@@ -20,6 +20,16 @@ module.exports = {
       });
     });
   },
+  getUsers :function(cb){
+    model.User.find({},function(err, users){
+      if(!err){
+        cb({result:users,count:count});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getUser :function(username,cb){
     model.User.findOne({email : username}, function(err, user){
       if(!err){

@@ -82,7 +82,7 @@ function findByUserName(username, fn) {
     if (user) {
       fn(null, user);
     } else {
-      ResellerC.getReseller(username,function(user){
+      ResellerC.getResellerByuser(username,function(user){
         if (user) {
           fn(null, user);
         } else {

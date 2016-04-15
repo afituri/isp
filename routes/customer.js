@@ -9,7 +9,11 @@ router.get('/:limit/:page', function(req, res) {
     res.send(customers);
   });
 });
-
+router.get('/all', function(req, res) {
+  customerMgr.getAllCustomer(function(customers){
+    res.send(customers);
+  });
+});
 /* Add new customer   */
 router.post('/add', function(req, res) {
   customerMgr.addCustomer(req.body,function(customer){

@@ -23,6 +23,17 @@ module.exports = {
     });
   },
 
+  getAllProduct :function(cb){
+    model.Product.find({}).populate('Service')
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+  },
   addProduct : function(body,cb){
     var obj = body;
     product = new model.Product(obj);

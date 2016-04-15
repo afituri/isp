@@ -21,6 +21,17 @@ module.exports = {
     });
   },
 
+  getAllPolicies :function(cb){
+    model.Policy.find({},function(err,policies){
+      if(!err){
+        cb(policies);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
   getPolicyId :function(id,cb){
     model.Policy.findOne({_id : id}, function(err, policy){
       if(!err){

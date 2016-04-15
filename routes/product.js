@@ -9,7 +9,12 @@ router.get('/:limit/:page', function(req, res) {
     res.send(product);
   });
 });
-
+router.get('/all', function(req, res) {
+  productMgr.getAllProduct(function(product){
+    console.log(product);
+    res.send(product);
+  });
+});
 /* Add new customer   */
 router.post('/add', function(req, res) {
   productMgr.addProduct(req.body,function(product){

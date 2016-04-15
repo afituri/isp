@@ -12,6 +12,11 @@ router.get('/:limit/:page', function(req, res) {
   });
 });
 
+router.get('/all', function(req, res) {
+  policyMgr.getAllPolicies(function(policies){
+    res.send(policies);
+  });
+});
 /* Add new policy   */
 router.post('/add', function(req, res) {
   policyMgr.addPolicy(req.body,function(result){

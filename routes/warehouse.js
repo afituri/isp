@@ -9,7 +9,12 @@ router.get('/:limit/:page', function(req, res) {
     res.send(warehouse);
   });
 });
-
+router.get('/all', function(req, res) {
+  // res.send(data.warehouses);
+  wareMgr.getAllWarehouses(function(warehouse){
+    res.send(warehouse);
+  });
+});
 /* Add new warehouse  */
 router.post('/add', function(req, res) {
   // console.log(req.body);

@@ -22,6 +22,16 @@ module.exports = {
     });
   },
 
+  getAllWarehouses :function(cb){
+    model.Warehouse.find({},function(err, result){
+      if(!err){
+        cb({result:result,count:count});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getWarehouseId :function(id,cb){
     model.Warehouse.findOne({_id : id}, function(err, result){
       if(!err){

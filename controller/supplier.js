@@ -22,6 +22,16 @@ module.exports = {
     });
   },
 
+  getAllSupplier :function(limit,page,cb){
+    model.Supplier.find({},function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getSupplierId :function(id,cb){
     model.Supplier.findOne({_id : id}, function(err, result){
       if(!err){

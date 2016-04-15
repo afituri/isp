@@ -9,7 +9,12 @@ router.get('/:limit/:page', function(req, res) {
     res.send(services);
   });
 });
-
+router.get('/all', function(req, res) {
+  // res.send(data.services);
+  servicesMgr.getAllServices(function(services){
+    res.send(services);
+  });
+});
 /* Add new Service   */
 router.post('/add', function(req, res) {
   servicesMgr.addServices(req.body,function(services){

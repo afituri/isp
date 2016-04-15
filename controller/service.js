@@ -21,7 +21,17 @@ module.exports = {
       });
     });
   },
-
+  getAllServices :function(cb){
+    model.Services.find({}).populate('servicesProvider', 'name')
+    .exec(function(err, services){
+      if(!err){
+        cb(services);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getServicesId :function(id,cb){
     model.Services.findOne({_id : id}, function(err, services){
       if(!err){

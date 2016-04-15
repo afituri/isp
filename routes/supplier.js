@@ -10,7 +10,12 @@ router.get('/:limit/:page', function(req, res) {
     res.send(supplier);
   });
 });
-
+router.get('/all', function(req, res) {
+  // res.send(data.suppliers);
+  supplierMgr.getAllSupplier(function(supplier){
+    res.send(supplier);
+  });
+});
 /* Add new supplier  */
 router.post('/add', function(req, res) {
   // console.log(req.body);

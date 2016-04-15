@@ -21,6 +21,17 @@ module.exports = {
     });
   },
 
+  getAllCustomer :function(limit,page,cb){
+    model.Customer.find({},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
   getCustomerId :function(id,cb){
     model.Customer.findOne({_id : id}, function(err, custom){
       if(!err){

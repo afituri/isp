@@ -19,7 +19,18 @@ module.exports = {
       });
     });
   },
-  getProduct :function(id,cb){
+
+  getAllProductP :function(cb){
+    model.ProductPolicy.find({},function(err, pPolicies){
+      if(!err){
+        cb(pPolicies);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+  getProductP :function(id,cb){
     model.ProductPolicy.find({policy:id},function(err, pPolicies){
       if(!err){
         cb(pPolicies);

@@ -6,7 +6,7 @@ var model = require("../models"),
 
 module.exports = {
 
-  getReseller :function(username,cb){
+  getResellerByuser :function(username,cb){
     model.Reseller.findOne({email : username}, function(err, result){
       if(!err){
         cb(result);
@@ -15,7 +15,17 @@ module.exports = {
       }
     });
   },
-  getAllReseller :function(limit,page,cb){
+  getAllReseller :function(cb){
+    model.Reseller.find({},function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+  getReseller :function(limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
