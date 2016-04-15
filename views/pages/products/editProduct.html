@@ -1,1 +1,134 @@
-<h1>Edit Product</h1>
+<div class="widget-box animated fadeIn">
+  <h5><i class="fa fa-pencil"></i>&nbsp;تعديل منتج ({{editProductForm.name}})</h5>
+  <hr>
+  <form novalidate ng-submit="editProduct()">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">اسم المنتج</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.name" ng-required-err-type="productName" placeholder="اسم المنتج" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <lable class="control-label">نوع المنتج</lable>
+          <select class="form-control input-sm" ng-model="editProductForm.type" ng-required-err-type="productType" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+            <option value="service">Service</option>
+            <option value="item">Item</option>
+            <option value="package">Package</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">سعر البيع</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.initialPrice" ng-required-err-type="productInitialPrice" placeholder="سعر البيع" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <lable class="control-label">المورد</lable>
+          <select class="form-control input-sm" ng-model="editProductForm.supplier" ng-required-err-type="productSupplier" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">بلد الصنع</label>
+          <select class="form-control input-sm" ng-model="editProductForm.made" ng-required-err-type="productMade" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+            <option ng-repeat="city in cities.citiesObj" value="{{city.id}}">{{city.nameAr}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">اسم العلامة التجارية</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.brand" ng-required-err-type="productBrand" placeholder="اسم العلامة التجارية" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <lable class="control-label">نوع الباقة</lable>
+        <select class="form-control input-sm" ng-model="editProductForm.type" ng-required-err-type="productType" required>
+          <option value="" disabled selected>الرجاء الاختيار</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <lable class="control-label">الخدمة</lable>
+        <select class="form-control input-sm" ng-model="editProductForm.service" ng-required-err-type="productService" required>
+          <option value="" disabled selected>الرجاء الاختيار</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">سرعة التحميل</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.dSpeed" ng-required-err-type="productDSpeed" placeholder="سرعة التحميل" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">سرعة الرفع</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.uSpeed" ng-required-err-type="productUSpeed" placeholder="سرعة الرفع" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">الحصة الشهرية</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.monthlyQuota" ng-required-err-type="productMonthlyQuota" placeholder="الحصة الشهرية" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">سعر التجديد</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.renewPrice" ng-required-err-type="productRenewPrice" placeholder="سعر التجديد" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">سعر الجيجا</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.GBPrice" ng-required-err-type="productGBPrice" placeholder="سعر الجيجا" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">التكلفة من المزود</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.cost" ng-required-err-type="productCost" placeholder="التكلفة من المزود" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">العملة</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.costCurrency" ng-required-err-type="productCostCurrency" placeholder="العملة" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">سعر الصرف</label>
+          <input class="form-control input-sm" type="text" ng-model="editProductForm.exchangeRate" ng-required-err-type="productExchangeRate" placeholder="سعر الصرف" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">معلومات عن المنتج</label>
+          <textarea class="form-control input-sm" rows="5" ng-model="editProductForm.discriptoin" ng-required-err-type="productDiscriptoin" placeholder="معلومات عن المنتج" required></textarea>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-5">
+        <button type="submit" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil"></i>&nbsp;تعديل</button>
+      </div>
+    </div>
+  </form>
+</div>
