@@ -22,14 +22,17 @@
       <div class="col-md-12">
         <div class="form-group">
           <label class="control-label">معلومات عن الخدمة</label>
-          <textarea class="form-control input-sm" cols="30" rows="10" ng-model="newServiceForm.discriptoin" ng-required-err-type="discriptoinService" placeholder="معلومات عن الخدمة" required></textarea>
+          <textarea class="form-control input-sm" cols="30" rows="10" ng-model="newServiceForm.description" ng-required-err-type="discriptoinService" placeholder="معلومات عن الخدمة" required></textarea>
         </div>
       </div>
     </div>
     <hr>
     <div class="row">
-      <div class="col-md-2 col-md-offset-5">
+      <div class="col-md-2 col-md-offset-4">
         <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-success btn-sm btn-block" ui-sref="services"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
       </div>
     </div>
   </form>

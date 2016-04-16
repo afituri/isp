@@ -11,11 +11,11 @@
       'citiesObj': [],
       'suppliersObj': [],
       'servicesObj': [],
-      'getCities': function(){
+      'getAllCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
         }, function(response) {
-          console.log("Something went wrong");
+          console.log("Something went wrong in getAllCities");
         });
       },
       'getAllSuppliers': function(){
@@ -23,7 +23,7 @@
           self.suppliersObj = response.data;
           console.log(response.data);
         }, function(response) {
-          console.log("Something went wrong");
+          console.log("Something went wrong in getAllSuppliers");
         });
       },
       'getAllServices': function(){
@@ -31,11 +31,11 @@
           self.servicesObj = response.data;
           console.log(response.data);
         }, function(response) {
-          console.log("Something went wrong");
+          console.log("Something went wrong in getAllServices");
         });
       }
     };
-    self.getCities();
+    self.getAllCities();
     self.getAllSuppliers();
     self.getAllServices();
     return self;

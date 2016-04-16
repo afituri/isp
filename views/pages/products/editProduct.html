@@ -29,9 +29,8 @@
       <div class="col-md-3">
         <div class="form-group">
           <lable class="control-label">المورد</lable>
-          <select class="form-control input-sm" ng-model="editProductForm.supplier" ng-required-err-type="productSupplier" required>
+          <select class="form-control input-sm" ng-model="editProductForm.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj" ng-required-err-type="productSupplier" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option ng-repeat="supplier in objects.suppliersObj" value="{{supplier._id}}">{{supplier.name}}</option>
           </select>
         </div>
       </div>
@@ -128,8 +127,11 @@
     </div>
     <hr>
     <div class="row">
-      <div class="col-md-2 col-md-offset-5">
+      <div class="col-md-2 col-md-offset-4">
         <button type="submit" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil"></i>&nbsp;تعديل</button>
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
       </div>
     </div>
   </form>

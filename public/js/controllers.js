@@ -389,6 +389,8 @@
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.newProductForm = {};
+    HelperServ.getAllServices();
+    HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
     $scope.newProduct = function(){
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
@@ -407,6 +409,8 @@
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.editProductForm = {};
+    HelperServ.getAllServices();
+    HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
     ProductsServ.getProductByID($stateParams.id).then(function(response) {
       $scope.editProductForm = response.data;
