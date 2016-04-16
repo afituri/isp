@@ -12,9 +12,8 @@
       <div class="col-md-6">
         <div class="form-group">
           <label class="control-label">مزود الخدمة</label>
-          <select class="form-control input-sm" ng-model="editServiceForm.servicesProvider" ng-required-err-type="servicesProvider" required>
+          <select class="form-control input-sm" ng-model="editServiceForm.servicesProvider" ng-options="serviceProvider._id as serviceProvider.name for serviceProvider in serviceProviders.serviceProvidersObj" ng-required-err-type="servicesProvider" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option ng-repeat="serviceProvider in serviceProviders.serviceProvidersObj" value="{{serviceProvider._id}}">{{serviceProvider.name}}</option>
           </select>
         </div>
       </div>

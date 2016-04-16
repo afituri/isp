@@ -29,9 +29,8 @@
       <div class="col-md-3">
         <div class="form-group">
           <lable class="control-label">المورد</lable>
-          <select class="form-control input-sm" ng-model="newProductForm.supplier" ng-required-err-type="productSupplier" required>
+          <select class="form-control input-sm" ng-model="newProductForm.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj" ng-required-err-type="productSupplier" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option ng-repeat="supplier in objects.suppliersObj" value="{{supplier._id}}">{{supplier.name}}</option>
           </select>
         </div>
       </div>
@@ -40,9 +39,8 @@
       <div class="col-md-3">
         <div class="form-group">
           <label class="control-label">بلد الصنع</label>
-          <select class="form-control input-sm" ng-model="newProductForm.made" ng-required-err-type="productMade" required>
+          <select class="form-control input-sm" ng-model="newProductForm.made" ng-options="city.id as city.nameAr for city in objects.citiesObj" ng-required-err-type="productMade" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
-            <option ng-repeat="city in objects.citiesObj" value="{{city.id}}">{{city.nameAr}}</option>
           </select>
         </div>
       </div>
@@ -60,9 +58,8 @@
       </div>
       <div class="col-md-3">
         <lable class="control-label">الخدمة</lable>
-        <select class="form-control input-sm" ng-model="newProductForm.service" ng-required-err-type="productService" required>
+        <select class="form-control input-sm" ng-model="newProductForm.service" ng-options="service._id as service.name for service in objects.servicesObj" ng-required-err-type="productService" required>
           <option value="" disabled selected>الرجاء الاختيار</option>
-          <option ng-repeat="service in objects.servicesObj" value="{{service._id}}">{{service.name}}</option>
         </select>
       </div>
     </div>
