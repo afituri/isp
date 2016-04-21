@@ -392,7 +392,35 @@
     HelperServ.getAllServices();
     HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
-    $scope.newProduct = function(){
+    $scope.activeTab = "tap1";
+    $scope.newServiceProduct = function(){
+      $scope.newProductForm.type = "service";
+      ProductsServ.addProduct($scope.newProductForm).then(function(response) {
+        if(response.data){
+          $state.go('products');
+          toastr.success('تمت إضافة منتج جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.newItemProduct = function(){
+      $scope.newProductForm.type = "item";
+      ProductsServ.addProduct($scope.newProductForm).then(function(response) {
+        if(response.data){
+          $state.go('products');
+          toastr.success('تمت إضافة منتج جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.newPackageProduct = function(){
+      $scope.newProductForm.type = "package";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
           $state.go('products');

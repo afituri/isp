@@ -21,7 +21,6 @@
       'getAllSuppliers': function(){
         return $http.get('/supplier/all').then(function(response) {
           self.suppliersObj = response.data;
-          console.log(response.data);
         }, function(response) {
           console.log("Something went wrong in getAllSuppliers");
         });
@@ -29,7 +28,6 @@
       'getAllServices': function(){
         return $http.get('/service/all').then(function(response) {
           self.servicesObj = response.data;
-          console.log(response.data);
         }, function(response) {
           console.log("Something went wrong in getAllServices");
         });

@@ -144,3 +144,15 @@ select, select.form-control {
 .panel-footer{
   padding: 10px 0 0 0;
 }
+.tab-pane.am-fade {
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+  opacity: 1;
+}
+.nav.nav-tabs{
+  cursor:pointer;
+}
+.tab-content{
+  padding-top: 10px;
+}
