@@ -48,7 +48,7 @@
       templateUrl: 'pages/serviceProviders/detailServiceProvider.html',
       controller: 'DetailServiceProviderCtl'
     }).state('services',{
-      url: '/services',
+      url: '/service',
       templateUrl: 'pages/services/services.html',
       controller: 'ServicesCtl'
     }).state('newService',{

@@ -3,6 +3,12 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 var Product = new Schema({
+   // service 
+   // add service only
+   //package 
+   // add packege only 
+   //service 
+   // name , type , description ,initialprice
    name: { type: String, required: true},
    type: { type: String, enum: ['service', 'item', 'package'], required: true},
    discriptoin: { type: String, required: true},

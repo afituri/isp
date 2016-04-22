@@ -34,8 +34,30 @@ module.exports = {
         }
       });
   },
+  
   addProduct : function(body,cb){
+    console.log("new");
+    console.log(body);
     var obj = body;
+    product = new model.Product(obj);
+    product.save(function(err,result){
+      if (!err) {
+        cb(true);
+      } else {
+        //TODO: return page with errors
+        console.log(err);
+        cb(false);
+      }
+    });
+  },
+/* for Service just insert those fields (name,discriptoin,initialPrice)*/
+  newServiceProduct : function(body,cb){
+    
+    var name = body.name;
+    var discriptoin=body.discriptoin;
+    var initialPrice=body.initialPrice;
+    var obj = {name:name,discriptoin:discriptoin,initialPrice:initialPrice}
+    console.log(obj);
     product = new model.Product(obj);
     product.save(function(err,result){
       if (!err) {
