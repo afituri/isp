@@ -22,8 +22,7 @@ module.exports = {
     });
   },
   getAllServices :function(cb){
-    model.Services.find({}).populate('servicesProvider', 'name')
-    .exec(function(err, services){
+    model.Services.find({},function(err, services){
       if(!err){
         cb(services);
       }else{

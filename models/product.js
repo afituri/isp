@@ -11,7 +11,7 @@ var Product = new Schema({
    // name , type , description ,initialprice
    name: { type: String, required: true},
    type: { type: String, enum: ['service', 'item', 'package'], required: true},
-   discriptoin: { type: String, required: true},
+   discriptoin: { type: String},
    initialPrice: { type: Number, required: true},
    item: {
       supplier: { type: Schema.Types.ObjectId , ref: 'Supplier'},
