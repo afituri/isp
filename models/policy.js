@@ -4,8 +4,7 @@ var Schema = mongoose.Schema;
 
 var Policy = new Schema({
    name: { type: String, required: true},
-   discriptoin: { type: String, required: true},
-   
+   description: { type: String, required: true},
    status: { type: Number, default:1}
 });
 

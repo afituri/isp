@@ -10,7 +10,7 @@
     var self = {
       'citiesObj': [],
       'suppliersObj': [],
-      'servicesObj': [],
+      'serviceProvidersObj': [],
       'getAllCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
@@ -25,17 +25,20 @@
           console.log("Something went wrong in getAllSuppliers");
         });
       },
-      'getAllServices': function(){
-        return $http.get('/service/all').then(function(response) {
-          self.servicesObj = response.data;
+      'getServiceProvidersServicesByID': function(id){
+        return $http.get('/sProvider/'+id+'/services');
+      },
+      'getAllServiceProviders': function(){
+        return $http.get('/sProvider/').then(function(response) {
+          self.serviceProvidersObj = response.data;
         }, function(response) {
-          console.log("Something went wrong in getAllServices");
+          console.log("Something went wrong in getAllServiceProviders");
         });
       }
     };
     self.getAllCities();
     self.getAllSuppliers();
-    self.getAllServices();
+    self.getAllServiceProviders();
     return self;
   }]);
   app.service('ResllersServ',['$http',function($http){
@@ -162,6 +165,23 @@
       },
       'editProduct': function(id,productObj){
         return $http.put('/product/edit/'+id,productObj);
+      }
+    };
+    return self;
+  }]);
+  app.service('PoliciesServ',['$http',function($http){
+    var self = {
+      'getPolicies': function(pageSize,currentPage){
+        return $http.get('/policy/'+pageSize+'/'+currentPage);
+      },
+      'getPolicyByID': function(id){
+        return $http.get('/policy/'+id);
+      },
+      'addPolicy': function(policyObj){
+        return $http.post('/policy/add',policyObj);
+      },
+      'editPolicy': function(id,policyObj){
+        return $http.put('/policy/edit/'+id,policyObj);
       }
     };
     return self;

@@ -107,6 +107,18 @@
       url: '/products/edit/:id',
       templateUrl: 'pages/products/editProduct.html',
       controller: 'EditProductCtl'
+    }).state('policies',{
+      url: '/policies',
+      templateUrl: 'pages/policies/policies.html',
+      controller: 'PoliciesCtl'
+    }).state('newPolicy',{
+      url: '/policies/new',
+      templateUrl: 'pages/policies/newPolicy.html',
+      controller: 'NewPolicyCtl'
+    }).state('editPolicy',{
+      url: '/policies/edit/:id',
+      templateUrl: 'pages/policies/editPolicy.html',
+      controller: 'EditPolicyCtl'
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');

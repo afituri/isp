@@ -118,18 +118,15 @@
           <div class="col-md-3">
             <div class="form-group">
               <label class="control-label">نوع الباقة</label>
-              <select class="form-control input-sm" ng-model="newProductForm.packages.type" required>
+              <select class="form-control input-sm" ng-model="newProductForm.packages.type" ng-options="serviceProvider._id as serviceProvider.name for serviceProvider in objects.serviceProvidersObj"  ng-change="getServiceByID(newProductForm.packages.type)" required>
                 <option value="" disabled selected>الرجاء الاختيار</option>
-                 <option value="1" >الباقة 1</option>
-                  <option value="2" >الباقة 2</option>
-                  <option value="3" >الباقة 3</option>
               </select>
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label class="control-label">الخدمة</label>
-              <select class="form-control input-sm" ng-model="newProductForm.packages.service" ng-options="service._id as service.name for service in objects.servicesObj" required>
+              <select class="form-control input-sm" ng-model="newProductForm.packages.service" ng-options="service._id as service.name for service in serviceProviderOfservices" required>
                 <option value="" disabled selected>الرجاء الاختيار</option>
               </select>
             </div>
