@@ -26,7 +26,7 @@ router.post('/add', function(req, res) {
 
 /* Edit policy  by id  */
 router.put('/edit/:id', function(req, res) {
-  // console.log(req.body)
+  console.log(req.body)
   // console.log(req.params.id);
   
   policyMgr.updatePolicy(req.params.id,req.body,function(result){
