@@ -22,6 +22,93 @@ module.exports = {
       });
     });
   },
+  getProductItem :function(limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Product.count({type:"item"},function(err,count){
+      model.Product.find({type:"item"}).limit(limit).skip(page*limit)
+      .populate('supplier')
+      .exec(function(err, products){
+        if(!err){
+          cb({result:products,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+
+  getAllItem :function(cb){
+    model.Product.find({type:"item"}).populate('supplier')
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+  },
+  getProductService :function(limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Product.count({type:"service"},function(err,count){
+      model.Product.find({type:"service"}).limit(limit).skip(page*limit)
+      .exec(function(err, products){
+        if(!err){
+          cb({result:products,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+
+  getAllService :function(cb){
+    model.Product.find({type:"service"})
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+  },
+
+  getProductPackage :function(limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Product.count({type:"package"},function(err,count){
+      model.Product.find({type:"package"}).limit(limit).skip(page*limit)
+      .populate('service')
+      .exec(function(err, products){
+        if(!err){
+          cb({result:products,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+
+  getAllPackage :function(cb){
+    model.Product.find({type:"package"}).populate('service')
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+  },
 
   getAllProduct :function(cb){
     model.Product.find({}).populate('Service')
@@ -36,8 +123,6 @@ module.exports = {
   },
   
   addProduct : function(body,cb){
-    console.log("new");
-    console.log(body);
     var obj = body;
     product = new model.Product(obj);
     product.save(function(err,result){
@@ -57,7 +142,6 @@ module.exports = {
     var discriptoin=body.discriptoin;
     var initialPrice=body.initialPrice;
     var obj = {name:name,discriptoin:discriptoin,initialPrice:initialPrice}
-    console.log(obj);
     product = new model.Product(obj);
     product.save(function(err,result){
       if (!err) {
