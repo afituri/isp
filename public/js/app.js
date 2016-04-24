@@ -48,7 +48,7 @@
       templateUrl: 'pages/serviceProviders/detailServiceProvider.html',
       controller: 'DetailServiceProviderCtl'
     }).state('services',{
-      url: '/services',
+      url: '/service',
       templateUrl: 'pages/services/services.html',
       controller: 'ServicesCtl'
     }).state('newService',{
@@ -107,6 +107,18 @@
       url: '/products/edit/:id',
       templateUrl: 'pages/products/editProduct.html',
       controller: 'EditProductCtl'
+    }).state('policies',{
+      url: '/policies',
+      templateUrl: 'pages/policies/policies.html',
+      controller: 'PoliciesCtl'
+    }).state('newPolicy',{
+      url: '/policies/new',
+      templateUrl: 'pages/policies/newPolicy.html',
+      controller: 'NewPolicyCtl'
+    }).state('editPolicy',{
+      url: '/policies/edit/:id',
+      templateUrl: 'pages/policies/editPolicy.html',
+      controller: 'EditPolicyCtl'
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');

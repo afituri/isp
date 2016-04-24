@@ -45,7 +45,7 @@ module.exports = {
   addPolicy : function(body,cb){
     var obj ={
     name: body.name,
-    discriptoin:body.discriptoin
+    description:body.description
     }
     Policy = new model.Policy(obj);
     Policy.save(function(err,result){
@@ -61,7 +61,7 @@ module.exports = {
   updatePolicy : function(id,body,cb){
     var obj ={
     name: body.name,
-    discriptoin:body.discriptoin
+    description:body.description
     }
     model.Policy.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {

@@ -1,136 +1,207 @@
 <div class="widget-box animated fadeIn">
   <h5><i class="fa fa-plus"></i>&nbsp;إضافة منتج جديد</h5>
-  <hr>
-  <form novalidate ng-submit="newProduct()">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">اسم المنتج</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.name" ng-required-err-type="productName" placeholder="اسم المنتج" required>
+  <hr style="margin-bottom:0;">
+  <div bs-active-pane="activeTab" bs-tabs>
+    <div data-title="خدمة - service" name="tap1" bs-pane>
+      <form novalidate ng-submit="newServiceProduct()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">اسم الخدمة</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم الخدمة" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">سعر الخدمة</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر الخدمة" required>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <lable class="control-label">نوع المنتج</lable>
-          <select class="form-control input-sm" ng-model="newProductForm.type" ng-required-err-type="productType" required>
-            <option value="" disabled selected>الرجاء الاختيار</option>
-            <option value="service">Service</option>
-            <option value="item">Item</option>
-            <option value="package">Package</option>
-          </select>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">معلومات عن الخدمة</label>
+              <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.discriptoin" placeholder="معلومات عن الخدمة" required></textarea>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">سعر البيع</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" ng-required-err-type="productInitialPrice" placeholder="سعر البيع" required>
+        <hr>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-4">
+            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <lable class="control-label">المورد</lable>
-          <select class="form-control input-sm" ng-model="newProductForm.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj" ng-required-err-type="productSupplier" required>
-            <option value="" disabled selected>الرجاء الاختيار</option>
-          </select>
-        </div>
-      </div>
+      </form>
     </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">بلد الصنع</label>
-          <select class="form-control input-sm" ng-model="newProductForm.made" ng-options="city.id as city.nameAr for city in objects.citiesObj" ng-required-err-type="productMade" required>
-            <option value="" disabled selected>الرجاء الاختيار</option>
-          </select>
+    <div data-title="بند - item" name="tap2" bs-pane>
+
+
+      <form novalidate ng-submit="newItemProduct()">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">اسم البند</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم البند" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">سعر البند</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر البند" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">المورد</label>
+              <select class="form-control input-sm" ng-model="newProductForm.item.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj" required>
+                <option value="" disabled selected>الرجاء الاختيار</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">بلد الصنع</label>
+              <select class="form-control input-sm" ng-model="newProductForm.item.made" ng-options="city.id as city.nameAr for city in objects.citiesObj" required>
+                <option value="" disabled selected>الرجاء الاختيار</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">اسم العلامة التجارية</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.brand" ng-required-err-type="productBrand" placeholder="اسم العلامة التجارية" required>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">اسم العلامة التجارية</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.item.brand" placeholder="اسم العلامة التجارية" required>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="control-label">معلومات عن البند</label>
+              <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.discriptoin" placeholder="معلومات عن البند" required></textarea>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <lable class="control-label">نوع الباقة</lable>
-        <select class="form-control input-sm" ng-model="newProductForm.type" ng-required-err-type="productType" required>
-          <option value="" disabled selected>الرجاء الاختيار</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <lable class="control-label">الخدمة</lable>
-        <select class="form-control input-sm" ng-model="newProductForm.service" ng-options="service._id as service.name for service in objects.servicesObj" ng-required-err-type="productService" required>
-          <option value="" disabled selected>الرجاء الاختيار</option>
-        </select>
-      </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-4">
+            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+          </div>
+        </div>
+      </form>
+
+
+
+
     </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">سرعة التحميل</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.dSpeed" ng-required-err-type="productDSpeed" placeholder="سرعة التحميل" required>
+    <div data-title="حزمة - package" name="tap3" bs-pane>
+      <form novalidate ng-submit="newPackageProduct()">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">اسم الحزمة</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم الحزمة" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">سعر الحزمة</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر الحزمة" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">نوع الباقة</label>
+              <select class="form-control input-sm" ng-model="newProductForm.packages.type" ng-options="serviceProvider._id as serviceProvider.name for serviceProvider in objects.serviceProvidersObj"  ng-change="getServiceByID(newProductForm.packages.type)" required>
+                <option value="" disabled selected>الرجاء الاختيار</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">الخدمة</label>
+              <select class="form-control input-sm" ng-model="newProductForm.packages.service" ng-options="service._id as service.name for service in serviceProviderOfservices" required>
+                <option value="" disabled selected>الرجاء الاختيار</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">سرعة الرفع</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.uSpeed" ng-required-err-type="productUSpeed" placeholder="سرعة الرفع" required>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">سرعة التحميل</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.dSpeed" placeholder="سرعة التحميل" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">سرعة الرفع</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.uSpeed" placeholder="سرعة الرفع" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">الحصة الشهرية</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.monthlyQuota" placeholder="الحصة الشهرية" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">سعر التجديد</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.renewPrice" placeholder="سعر التجديد" required>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">الحصة الشهرية</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.monthlyQuota" ng-required-err-type="productMonthlyQuota" placeholder="الحصة الشهرية" required>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">سعر الجيجا</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.GBPrice" placeholder="سعر الجيجا" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">التكلفة من المزود</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.cost" placeholder="التكلفة من المزود" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">العملة</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.costCurrency" placeholder="العملة" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">سعر الصرف</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.exchangeRate" placeholder="سعر الصرف" required>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">سعر التجديد</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.renewPrice" ng-required-err-type="productRenewPrice" placeholder="سعر التجديد" required>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">معلومات عن الحزمة</label>
+              <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.packages.discriptoin" placeholder="معلومات عن الحزمة" required></textarea>
+            </div>
+          </div>
         </div>
-      </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-4">
+            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">سعر الجيجا</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.GBPrice" ng-required-err-type="productGBPrice" placeholder="سعر الجيجا" required>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">التكلفة من المزود</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.cost" ng-required-err-type="productCost" placeholder="التكلفة من المزود" required>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">العملة</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.costCurrency" ng-required-err-type="productCostCurrency" placeholder="العملة" required>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label class="control-label">سعر الصرف</label>
-          <input class="form-control input-sm" type="text" ng-model="newProductForm.exchangeRate" ng-required-err-type="productExchangeRate" placeholder="سعر الصرف" required>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label">معلومات عن المنتج</label>
-          <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.discriptoin" ng-required-err-type="productDiscriptoin" placeholder="معلومات عن المنتج" required></textarea>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-2 col-md-offset-4">
-        <button type="submit" class="btn btn-success btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
-      </div>
-      <div class="col-md-2">
-        <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>

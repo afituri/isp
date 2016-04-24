@@ -389,10 +389,44 @@
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.newProductForm = {};
-    HelperServ.getAllServices();
     HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
-    $scope.newProduct = function(){
+    $scope.activeTab = "tap1";
+    $scope.getServiceByID = function(id){
+      HelperServ.getServiceProvidersServicesByID(id).then(function(response){
+        $scope.serviceProviderOfservices = response.data;
+      },function(response){
+        console.log("Something went wrong");
+      })
+    };
+    $scope.newServiceProduct = function(){
+      $scope.newProductForm.type = "service";
+      ProductsServ.addProduct($scope.newProductForm).then(function(response) {
+        if(response.data){
+          $state.go('products');
+          toastr.success('تمت إضافة منتج جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.newItemProduct = function(){
+      $scope.newProductForm.type = "item";
+      ProductsServ.addProduct($scope.newProductForm).then(function(response) {
+        if(response.data){
+          $state.go('products');
+          toastr.success('تمت إضافة منتج جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.newPackageProduct = function(){
+      $scope.newProductForm.type = "package";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
           $state.go('products');
@@ -431,4 +465,61 @@
     }
   }]);
   // Products Controllers End
+  // Policies Controllers Start
+  app.controller('PoliciesCtl',['$scope','MenuFac','PoliciesServ',function($scope,MenuFac,PoliciesServ){
+    MenuFac.active = 7;
+    $scope.activePanel = MenuFac;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      PoliciesServ.getPolicies($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.policies = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+  }]);
+  app.controller('NewPolicyCtl',['$scope','$state','MenuFac','PoliciesServ','toastr',function($scope,$state,MenuFac,PoliciesServ,toastr){
+    MenuFac.active = 7;
+    $scope.activePanel = MenuFac;
+    $scope.newPolicyForm = {};
+    $scope.newPolicy = function(){
+      PoliciesServ.addPolicy($scope.newPolicyForm).then(function(response) {
+        if(response.data){
+          $state.go('policies');
+          toastr.success('تمت إضافة سياسة جديدة بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  app.controller('EditPolicyCtl',['$scope','$state','$stateParams','MenuFac','PoliciesServ','toastr',function($scope,$state,$stateParams,MenuFac,PoliciesServ,toastr){
+    MenuFac.active = 7;
+    $scope.activePanel = MenuFac;
+    $scope.editPolicyForm = {};
+    PoliciesServ.getPolicyByID($stateParams.id).then(function(response) {
+      $scope.editPolicyForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.editPolicy = function(){
+      PoliciesServ.editPolicy($stateParams.id,$scope.editPolicyForm).then(function(response) {
+        if(response.data){
+          $state.go('policies');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+  }]);
+  // Policies Controllers End
 }())
