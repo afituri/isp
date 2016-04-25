@@ -54,6 +54,9 @@
       },
       'editResller': function(id,resllerObj){
         return $http.put('/reseller/edit/'+id,resllerObj);
+      },
+      'deleteResller': function(id){
+        return $http.delete('/reseller/delete/'+id);
       }
     };
     return self;
@@ -79,6 +82,9 @@
       },
       'editServiceProvider': function(id,serviceProviderObj){
         return $http.put('/sProvider/edit/'+id,serviceProviderObj);
+      },
+      'deleteServiceProvider': function(id){
+        return $http.delete('/sProvider/delete/'+id);
       }
     };
     self.getServiceProviders();
@@ -97,6 +103,9 @@
       },
       'editService': function(id,serviceObj){
         return $http.put('/service/edit/'+id,serviceObj);
+      },
+      'deleteService': function(id){
+        return $http.delete('/service/delete/'+id);
       }
     };
     return self;
@@ -114,6 +123,9 @@
       },
       'editSupplier': function(id,supplierObj){
         return $http.put('/supplier/edit/'+id,supplierObj);
+      },
+      'deleteSupplier': function(id){
+        return $http.delete('/supplier/delete/'+id);
       }
     };
     return self;
@@ -131,6 +143,9 @@
       },
       'editWarehouse': function(id,warehouseObj){
         return $http.put('/warehouse/edit/'+id,warehouseObj);
+      },
+      'deleteWarehouse': function(id){
+        return $http.delete('/warehouse/delete/'+id);
       }
     };
     return self;
@@ -148,6 +163,9 @@
       },
       'editCustomer': function(id,customerObj){
         return $http.put('/customer/edit/'+id,customerObj);
+      },
+      'deleteCustomer': function(id){
+        return $http.delete('/customer/delete/'+id);
       }
     };
     return self;
@@ -165,6 +183,9 @@
       },
       'editProduct': function(id,productObj){
         return $http.put('/product/edit/'+id,productObj);
+      },
+      'deleteProduct': function(id){
+        return $http.delete('/product/delete/'+id);
       }
     };
     return self;
@@ -182,6 +203,9 @@
       },
       'editPolicy': function(id,policyObj){
         return $http.put('/policy/edit/'+id,policyObj);
+      },
+      'deletePolicy': function(id){
+        return $http.delete('/policy/delete/'+id);
       }
     };
     return self;

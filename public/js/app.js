@@ -126,13 +126,14 @@
       animation: 'am-flip-x',
       html: true
     });
-    angular.extend($modalProvider.defaults, {
-      animation: 'am-flip-x'
-    });
     angular.extend(toastrConfig, {
       positionClass: 'toast-top-left',
       progressBar: true,
       tapToDismiss: true
+    });
+    angular.extend($modalProvider.defaults, {
+      animation: 'am-fade-and-scale',
+      placement: 'center'
     });
   }]);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){

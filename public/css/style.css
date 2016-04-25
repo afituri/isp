@@ -10,6 +10,9 @@ html{
   position: relative;
   min-height: 100%;
 }
+.navbar-default {
+  background-color: #f8f8f8;
+}
 body {
   font-family: 'droidkufi', sans-serif;
   /*padding: 20px;*/

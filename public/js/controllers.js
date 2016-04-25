@@ -1,17 +1,46 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('HomeCtl',['$scope',function($scope){
+  app.controller('HomeCtl',['$scope','MenuFac',function($scope,MenuFac){
+    MenuFac.active = -1;
+    $scope.activePanel = MenuFac;
   }]);
   app.controller('MenuCtl',['$scope','MenuFac',function($scope,MenuFac){
     $scope.activePanel = MenuFac;
   }]);
   // Service Providers Controllers Start
-  app.controller('ServiceProvidersCtl',['$scope','MenuFac','ServiceProvidersServ',function($scope,MenuFac,ServiceProvidersServ){
+  app.controller('ServiceProvidersCtl',['$scope','$modal','MenuFac','ServiceProvidersServ','toastr',function($scope,$modal,MenuFac,ServiceProvidersServ,toastr){
     MenuFac.active = 0;
     $scope.activePanel = MenuFac;
     ServiceProvidersServ.getServiceProviders();
     $scope.serviceProviders = ServiceProvidersServ;
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "مزود الخدمة هذا";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ServiceProvidersServ.deleteServiceProvider(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewServiceProviderCtl',['$scope','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,toastr){
     MenuFac.active = 0;
@@ -70,7 +99,7 @@
   }]);
   // Service Providers Controllers End
     // Service Controllers Start
-  app.controller('ServicesCtl',['$scope','MenuFac','ServicesServ',function($scope,MenuFac,ServicesServ){
+  app.controller('ServicesCtl',['$scope','$modal','MenuFac','ServicesServ','toastr',function($scope,$modal,MenuFac,ServicesServ,toastr){
     MenuFac.active = 1;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -85,6 +114,33 @@
       });
     }
     $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذه الخدمة";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ServicesServ.deleteService(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewServiceCtl',['$scope','$state','MenuFac','ServiceProvidersServ','ServicesServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,ServicesServ,toastr){
     MenuFac.active = 1;
@@ -129,7 +185,7 @@
   }]);
   // Service Controllers End
   // Service Resellers Controllers Start
-  app.controller('ResellersCtl',['$scope','ResllersServ','MenuFac',function($scope,ResllersServ,MenuFac){
+  app.controller('ResellersCtl',['$scope','$modal','ResllersServ','MenuFac','toastr',function($scope,$modal,ResllersServ,MenuFac,toastr){
     MenuFac.active = 2;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -143,6 +199,33 @@
       });
     }
     $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا الموزع";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ResllersServ.deleteResller(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewResellerCtl',['$scope','$state','MenuFac','ResllersServ','HelperServ','toastr', function($scope,$state,MenuFac,ResllersServ,HelperServ,toastr){
     MenuFac.active = 2;
@@ -194,7 +277,7 @@
   }]);
   // Service Resellers Controllers End
   // Suppliers Controllers Start
-  app.controller('SuppliersCtl',['$scope','MenuFac','SuppliersServ',function($scope,MenuFac,SuppliersServ){
+  app.controller('SuppliersCtl',['$scope','$modal','MenuFac','SuppliersServ','toastr',function($scope,$modal,MenuFac,SuppliersServ,toastr){
     MenuFac.active = 3;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -209,6 +292,33 @@
       });
     }
     $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا المورد";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      SuppliersServ.deleteSupplier(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewSupplierCtl',['$scope','$state','MenuFac','SuppliersServ','toastr',function($scope,$state,MenuFac,SuppliersServ,toastr){
     MenuFac.active = 3;
@@ -251,7 +361,7 @@
   }]);
   // Suppliers Controllers End
   // Warehouses Controllers Start
-  app.controller('WarehousesCtl',['$scope','MenuFac','WarehousesServ',function($scope,MenuFac,WarehousesServ){
+  app.controller('WarehousesCtl',['$scope','$modal','MenuFac','WarehousesServ','toastr',function($scope,$modal,MenuFac,WarehousesServ,toastr){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -266,6 +376,33 @@
       });
     }
     $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا المخزن";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      WarehousesServ.deleteWarehouse(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewWarehouseCtl',['$scope','$state','MenuFac','WarehousesServ','HelperServ','toastr',function($scope,$state,MenuFac,WarehousesServ,HelperServ,toastr){
     MenuFac.active = 4;
@@ -310,7 +447,7 @@
   }]);
   // Warehouses Controllers End
   // Customers Controllers End
-  app.controller('CustomersCtl',['$scope','MenuFac','CustomersServ',function($scope,MenuFac,CustomersServ){
+  app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
     MenuFac.active = 5;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -325,6 +462,33 @@
       });
     }
     $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا الزبون";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      CustomersServ.deleteCustomer(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,MenuFac,CustomersServ,HelperServ,toastr){
     MenuFac.active = 5;
@@ -369,7 +533,7 @@
   }]);
   // Customers Controllers End
   // Products Controllers End
-  app.controller('ProductsCtl',['$scope','MenuFac','ProductsServ',function($scope,MenuFac,ProductsServ){
+  app.controller('ProductsCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -384,6 +548,33 @@
       });
     }
     $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا المنتج";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ProductsServ.deleteProduct(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewProductCtl',['$scope','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
@@ -466,7 +657,7 @@
   }]);
   // Products Controllers End
   // Policies Controllers Start
-  app.controller('PoliciesCtl',['$scope','MenuFac','PoliciesServ',function($scope,MenuFac,PoliciesServ){
+  app.controller('PoliciesCtl',['$scope','$modal','MenuFac','PoliciesServ','toastr',function($scope,$modal,MenuFac,PoliciesServ,toastr){
     MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -479,8 +670,35 @@
       }, function(response) {
         console.log("Something went wrong");
       });
-    }
+    };
     $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذه السياسة";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      PoliciesServ.deletePolicy(id).then(function(response) {
+        if(response.data == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data == 2){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        } else if (response.data == 3){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('NewPolicyCtl',['$scope','$state','MenuFac','PoliciesServ','toastr',function($scope,$state,MenuFac,PoliciesServ,toastr){
     MenuFac.active = 7;
