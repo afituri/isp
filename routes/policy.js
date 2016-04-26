@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/policy');
 var policyMgr = require("../controller/policies");
-var productPMgr = require("../controller/productPolicy");
+var productPMgr = require("../controller/policies");
 
 
 /* GET all policy */
@@ -37,6 +37,7 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete policy  by id  */
 router.delete('/delete/:id', function(req, res) {
+  console.log(req.params.id);
   policyMgr.deletePolicy(req.params.id,function(result){
     res.send(result);  
   });
