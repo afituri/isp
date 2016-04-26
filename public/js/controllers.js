@@ -30,10 +30,11 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
@@ -130,10 +131,11 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
@@ -215,10 +217,11 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
@@ -308,10 +311,11 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
@@ -392,10 +396,11 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
@@ -478,10 +483,11 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
@@ -564,10 +570,11 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
@@ -688,14 +695,15 @@
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data == 2){
           $scope.deleteModel.hide();
-          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+          toastr.success('تم الحذف بنجاح');
+          $scope.init();
         } else if (response.data == 3){
           $scope.deleteModel.hide();
-          toastr.success('تم الحذف بنجاح');
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        toastr.error('Something went wrong');
         console.log("Something went wrong");
       });
     };
