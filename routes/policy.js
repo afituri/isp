@@ -37,9 +37,8 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete policy  by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
   policyMgr.deletePolicy(req.params.id,function(result){
-    res.send(result);  
+    res.send({result:result});  
   });
 });
 
