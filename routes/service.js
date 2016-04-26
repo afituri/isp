@@ -17,6 +17,7 @@ router.get('/all', function(req, res) {
 });
 /* Add new Service   */
 router.post('/add', function(req, res) {
+  console.log(req.body);
   servicesMgr.addServices(req.body,function(services){
     res.send(services);
   });
@@ -35,6 +36,7 @@ router.put('/edit/:id', function(req, res) {
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
   servicesMgr.deleteServices(req.params.id,function(services){
+    console.log(services);
     res.send(services);
   });
 });

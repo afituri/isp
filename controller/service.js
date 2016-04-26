@@ -53,7 +53,7 @@ module.exports = {
     var obj ={
       name : body.name,
       servicesProvider : body.servicesProvider,
-      description : body.discriptoin
+      description : body.description
      }
     services = new model.Services(obj);
     services.save(function(err,result){
