@@ -35,9 +35,8 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete supplier by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
   supplierMgr.deleteSupplier(req.params.id,function(supplier){
-    res.send(supplier);
+    res.send({result:supplier});
   });
 });
 

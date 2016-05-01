@@ -34,9 +34,8 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete warehouse by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
   wareMgr.deleteWarehouse(req.params.id,function(warehouse){
-    res.send(warehouse);
+    res.send({result:warehouse});
   });
 });
 

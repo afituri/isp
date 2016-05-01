@@ -34,7 +34,7 @@ router.put('/edit/:id', function(req, res) {
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
   customerMgr.deleteCustomer(req.params.id,function(customer){
-    res.send(customer);
+    res.send({result:customer});
   });
 });
 
