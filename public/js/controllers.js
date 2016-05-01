@@ -25,20 +25,19 @@
     };
     $scope.confirmDelete = function(id){
       ServiceProvidersServ.deleteServiceProvider(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           $scope.init();
           toastr.success('تم الحذف بنجاح');
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         console.log("Something went wrong");
       });
     };
@@ -126,20 +125,19 @@
     };
     $scope.confirmDelete = function(id){
       ServicesServ.deleteService(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           $scope.init();
           toastr.success('تم الحذف بنجاح');
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         console.log("Something went wrong");
       });
     };
@@ -212,20 +210,19 @@
     };
     $scope.confirmDelete = function(id){
       ResllersServ.deleteResller(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           $scope.init();
           toastr.success('تم الحذف بنجاح');
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         console.log("Something went wrong");
       });
     };
@@ -306,20 +303,19 @@
     };
     $scope.confirmDelete = function(id){
       SuppliersServ.deleteSupplier(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           $scope.init();
           toastr.success('تم الحذف بنجاح');
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         console.log("Something went wrong");
       });
     };
@@ -391,20 +387,19 @@
     };
     $scope.confirmDelete = function(id){
       WarehousesServ.deleteWarehouse(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           $scope.init();
           toastr.success('تم الحذف بنجاح');
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         console.log("Something went wrong");
       });
     };
@@ -478,20 +473,19 @@
     };
     $scope.confirmDelete = function(id){
       CustomersServ.deleteCustomer(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           $scope.init();
           toastr.success('تم الحذف بنجاح');
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         console.log("Something went wrong");
       });
     };
@@ -565,20 +559,19 @@
     };
     $scope.confirmDelete = function(id){
       ProductsServ.deleteProduct(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           $scope.init();
           toastr.success('تم الحذف بنجاح');
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         console.log("Something went wrong");
       });
     };
@@ -690,20 +683,19 @@
     };
     $scope.confirmDelete = function(id){
       PoliciesServ.deletePolicy(id).then(function(response) {
-        if(response.data == 1){
+        if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-        } else if (response.data == 2){
+        } else if (response.data.result == 2){
           $scope.deleteModel.hide();
           toastr.success('تم الحذف بنجاح');
           $scope.init();
-        } else if (response.data == 3){
+        } else if (response.data.result == 3){
           $scope.deleteModel.hide();
           toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
         }
       }, function(response) {
         $scope.deleteModel.hide();
-        toastr.error('Something went wrong');
         console.log("Something went wrong");
       });
     };

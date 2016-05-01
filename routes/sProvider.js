@@ -27,9 +27,8 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete Service Provider by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
   serviceProviderMgr.deleteServiceProvider(req.params.id,function(SProvider){
-    res.send(SProvider);
+    res.send({result:SProvider});
   });
 });
 
