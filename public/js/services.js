@@ -11,6 +11,10 @@
       'citiesObj': [],
       'suppliersObj': [],
       'serviceProvidersObj': [],
+      'itemsObj': [],
+      'servicesObj': [],
+      'packagesObj': [],
+      'policiesObj': [],
       'getAllCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
@@ -33,6 +37,34 @@
           self.serviceProvidersObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllServiceProviders");
+        });
+      },
+      'getAllItems': function(){
+        return $http.get('/product/allItem').then(function(response) {
+          self.itemsObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllServices': function(){
+        return $http.get('/product/allService').then(function(response) {
+          self.servicesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllPackages': function(){
+        return $http.get('/product/allPackage').then(function(response) {
+          self.packagesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllPolicies': function(){
+        return $http.get('/policy/all').then(function(response) {
+          self.policiesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
         });
       }
     };
@@ -172,8 +204,14 @@
   }]);
   app.service('ProductsServ',['$http',function($http){
     var self = {
-      'getProducts': function(pageSize,currentPage){
-        return $http.get('/product/'+pageSize+'/'+currentPage);
+      'getProductServices': function(pageSize,currentPage){
+        return $http.get('/product/service/'+pageSize+'/'+currentPage);
+      },
+      'getProductItems': function(pageSize,currentPage){
+        return $http.get('/product/item/'+pageSize+'/'+currentPage);
+      },
+      'getProductPackages': function(pageSize,currentPage){
+        return $http.get('/product/package/'+pageSize+'/'+currentPage);
       },
       'getProductByID': function(id){
         return $http.get('/product/'+id);
@@ -206,6 +244,26 @@
       },
       'deletePolicy': function(id){
         return $http.delete('/policy/delete/'+id);
+      }
+    };
+    return self;
+  }]);
+  app.service('ProductPoliciesServ',['$http',function($http){
+    var self = {
+      'getProductPolicies': function(pageSize,currentPage){
+        return $http.get('/productPolicy/'+pageSize+'/'+currentPage);
+      },
+      'getProductPolicyByID': function(id){
+        return $http.get('/productPolicy/'+id);
+      },
+      'addProductPolicy': function(productPolicyObj){
+        return $http.post('/productPolicy/add',productPolicyObj);
+      },
+      'editProductPolicy': function(id,productPolicyObj){
+        return $http.put('/productPolicy/edit/'+id,productPolicyObj);
+      },
+      'deleteProductPolicy': function(id){
+        return $http.delete('/productPolicy/delete/'+id);
       }
     };
     return self;
