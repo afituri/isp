@@ -680,7 +680,7 @@
       $scope.newProductForm.type = "service";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('products');
+          $state.go('productServices');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
@@ -693,7 +693,7 @@
       $scope.newProductForm.type = "item";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('products');
+          $state.go('productItems');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
@@ -706,7 +706,7 @@
       $scope.newProductForm.type = "package";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('products');
+          $state.go('productPackages');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
