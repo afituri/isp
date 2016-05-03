@@ -50,24 +50,25 @@ module.exports = {
   },
   
   addProductP : function(body,cb){
-    var obj ={
-    product: body.product,
-    type:body.type,
-    initialPrice:body.initialPrice,
-    item:null,
-    packages:null
-  }
-  if(body.type=='item'){
-    obj['item']={
-      made:body.made,
-      brand:body.brand
-    }
-  }else if(body.type=='package'){
-    obj['packages']={
-      renewPrice:body.renewPrice,
-      GBPrice:body.GBPrice
-    }
-  }
+  //   var obj ={
+  //   product: body.product,
+  //   type:body.type,
+  //   initialPrice:body.initialPrice,
+  //   item:null,
+  //   packages:null
+  // }
+  // if(body.type=='item'){
+  //   obj['item']={
+  //     made:body.made,
+  //     brand:body.brand
+  //   }
+  // }else if(body.type=='package'){
+  //   obj['packages']={
+  //     renewPrice:body.renewPrice,
+  //     GBPrice:body.GBPrice
+  //   }
+  // }
+    var obj=body;
     productP = new model.ProductPolicy(obj);
     productP.save(function(err,result){
       if (!err) {
@@ -80,24 +81,25 @@ module.exports = {
     });
   },
   updateProductP : function(id,body,cb){
-    var obj ={
-    product: body.product,
-    type:body.type,
-    initialPrice:body.initialPrice,
-    item:null,
-    packages:null
-  }
-  if(body.type=='item'){
-    obj['item']={
-      made:body.made,
-      brand:body.brand
-    }
-  }else if(body.type=='package'){
-    obj['packages']={
-      renewPrice:body.renewPrice,
-      GBPrice:body.GBPrice
-    }
-  }
+  //   var obj ={
+  //   product: body.product,
+  //   type:body.type,
+  //   initialPrice:body.initialPrice,
+  //   item:null,
+  //   packages:null
+  // }
+  // if(body.type=='item'){
+  //   obj['item']={
+  //     made:body.made,
+  //     brand:body.brand
+  //   }
+  // }else if(body.type=='package'){
+  //   obj['packages']={
+  //     renewPrice:body.renewPrice,
+  //     GBPrice:body.GBPrice
+  //   }
+  // }
+    var obj=body;
     model.ProductPolicy.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)

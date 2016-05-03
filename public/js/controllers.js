@@ -533,14 +533,57 @@
   }]);
   // Customers Controllers End
   // Products Controllers End
-  app.controller('ProductsCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
+  app.controller('ProductServicesCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
     $scope.init = function () {
-      ProductsServ.getProducts($scope.pageSize,$scope.currentPage).then(function(response) {
+      ProductsServ.getProductServices($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.productServices = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا المنتج (خدمة)";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ProductsServ.deleteProduct(id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  app.controller('ProductItemsCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
+    MenuFac.active = 6;
+    $scope.activePanel = MenuFac;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ProductsServ.getProductItems($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.products = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -550,7 +593,50 @@
     $scope.init();
     $scope.showDeleteModel = function(id){
       $scope.id = id;
-      $scope.deleteName = "هذا المنتج";
+      $scope.deleteName = "هذا المنتج (المعدة)";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ProductsServ.deleteProduct(id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  app.controller('ProductPackagesCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
+    MenuFac.active = 6;
+    $scope.activePanel = MenuFac;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ProductsServ.getProductPackages($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.products = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا المنتج (حزمة)";
       $scope.deleteModel = $modal({
         scope: $scope,
         templateUrl: 'pages/model.delete.tpl.html',
@@ -594,7 +680,7 @@
       $scope.newProductForm.type = "service";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('products');
+          $state.go('productServices');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
@@ -607,7 +693,7 @@
       $scope.newProductForm.type = "item";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('products');
+          $state.go('productItems');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
@@ -620,7 +706,7 @@
       $scope.newProductForm.type = "package";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('products');
+          $state.go('productPackages');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
@@ -740,4 +826,25 @@
     }
   }]);
   // Policies Controllers End
+  // Product Ploicies Controllers Start
+  app.controller('ProductPoliciesCtl',['$scope','MenuFac','ProductPoliciesServ',function($scope,MenuFac,ProductPoliciesServ){
+    MenuFac.active = 8;
+    $scope.activePanel = MenuFac;
+  }]);
+  app.controller('NewProductPolicyCtl',['$scope','MenuFac','ProductPoliciesServ','HelperServ',function($scope,MenuFac,ProductPoliciesServ,HelperServ){
+    MenuFac.active = 8;
+    $scope.activePanel = MenuFac;
+    $scope.activeTab = "tap1";
+    HelperServ.getAllItems();
+    HelperServ.getAllServices();
+    HelperServ.getAllPackages();
+    HelperServ.getAllPolicies();
+    $scope.objects = HelperServ;
+    $scope.newProductPolicyForm = {};
+  }]);
+  app.controller('EditProductPolicyCtl',['$scope','MenuFac','ProductPoliciesServ',function($scope,MenuFac,ProductPoliciesServ){
+    MenuFac.active = 8;
+    $scope.activePanel = MenuFac;
+  }]);
+  // Product Policies Controllers End
 }())

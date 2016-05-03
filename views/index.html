@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/paper.min.css">
     <link rel="stylesheet" href="/angular-motion/dist/angular-motion.min.css">
     <link rel="stylesheet" href="/bootstrap-rtl/dist/css/bootstrap-rtl.min.css">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
@@ -207,11 +206,11 @@
                         <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="customers" style="text-decoration:none;">عرض الزبائن</a>
                       </td>
                     </tr>
-                    <tr>
+<!--                     <tr>
                       <td ui-sref-active="active">
                         <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newCustomer" style="text-decoration:none;">إضافة زبون جديد</a>
                       </td>
-                    </tr>
+                    </tr> -->
                   </table>
                 </div>
               </div>
@@ -221,7 +220,7 @@
                 <h4 class="panel-title">
                   <a bs-collapse-toggle style="cursor:pointer">
                     <i class="fa fa-caret-down"></i>
-                    المنتجات
+                    المنتجات (خدمات, معدات, حزم)
                   </a>
                 </h4>
               </div>
@@ -230,7 +229,17 @@
                   <table class="table">
                     <tr>
                       <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="products" style="text-decoration:none;">عرض المنتجات</a>
+                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productServices" style="text-decoration:none;">عرض الخدمات</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td ui-sref-active="active">
+                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productItems" style="text-decoration:none;">عرض المعدات</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td ui-sref-active="active">
+                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productPackages" style="text-decoration:none;">عرض الحزم</a>
                       </td>
                     </tr>
                     <tr>
@@ -262,6 +271,32 @@
                     <tr>
                       <td ui-sref-active="active">
                         <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newPolicy" style="text-decoration:none;">إضافة سياسة جديدة</a>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab">
+                <h4 class="panel-title">
+                  <a bs-collapse-toggle style="cursor:pointer">
+                    <i class="fa fa-caret-down"></i>
+                    سياسات المنتج
+                  </a>
+                </h4>
+              </div>
+              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+                <div class="panel-body">
+                  <table class="table">
+                    <tr>
+                      <td ui-sref-active="active">
+                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productPolicies" style="text-decoration:none;">عرض سياسات المنتج</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td ui-sref-active="active">
+                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newProductPolicy" style="text-decoration:none;">إضافة سياسة منتج جديد</a>
                       </td>
                     </tr>
                   </table>

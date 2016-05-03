@@ -32,26 +32,24 @@
             <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
           </div>
           <div class="col-md-2">
-            <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            <a class="btn btn-success btn-sm btn-block" ui-sref="productServices"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
           </div>
         </div>
       </form>
     </div>
-    <div data-title="بند - item" name="tap2" bs-pane>
-
-
+    <div data-title="معدة - item" name="tap2" bs-pane>
       <form novalidate ng-submit="newItemProduct()">
         <div class="row">
           <div class="col-md-3">
             <div class="form-group">
-              <label class="control-label">اسم البند</label>
-              <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم البند" required>
+              <label class="control-label">اسم المعدة</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم المعدة" required>
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
-              <label class="control-label">سعر البند</label>
-              <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر البند" required>
+              <label class="control-label">سعر المعدة</label>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر المعدة" required>
             </div>
           </div>
           <div class="col-md-3">
@@ -80,8 +78,8 @@
           </div>
           <div class="col-md-8">
             <div class="form-group">
-              <label class="control-label">معلومات عن البند</label>
-              <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.discriptoin" placeholder="معلومات عن البند" required></textarea>
+              <label class="control-label">معلومات عن المعدة</label>
+              <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.discriptoin" placeholder="معلومات عن المعدة" required></textarea>
             </div>
           </div>
         </div>
@@ -91,14 +89,10 @@
             <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
           </div>
           <div class="col-md-2">
-            <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            <a class="btn btn-success btn-sm btn-block" ui-sref="productServices"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
           </div>
         </div>
       </form>
-
-
-
-
     </div>
     <div data-title="حزمة - package" name="tap3" bs-pane>
       <form novalidate ng-submit="newPackageProduct()">
@@ -162,7 +156,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label class="control-label">سعر الجيجا</label>
-              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.GBPrice" placeholder="سعر الجيجا" required>
+              <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.GBPrice" placeholder="سعر الجيجا">
             </div>
           </div>
           <div class="col-md-3">
@@ -198,7 +192,7 @@
             <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
           </div>
           <div class="col-md-2">
-            <a class="btn btn-success btn-sm btn-block" ui-sref="products"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            <a class="btn btn-success btn-sm btn-block" ui-sref="productServices"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
           </div>
         </div>
       </form>
