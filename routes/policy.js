@@ -3,6 +3,7 @@ var router = express.Router();
 var data = require('../data/policy');
 var policyMgr = require("../controller/policies");
 var productPMgr = require("../controller/policies");
+var productPolicyMgr = require("../controller/productPolicy");
 
 
 /* GET all policy */
@@ -57,5 +58,11 @@ router.get('/:id/productPolicies', function(req, res) {
   });
 });
 
+// product policy
 
+router.post('productPolicy/add', function(req, res) {
+  productPolicyMgr.addProductP(req.body,function(result){
+    res.send(result);
+  });
+});
 module.exports = router;
