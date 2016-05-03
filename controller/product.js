@@ -137,7 +137,6 @@ module.exports = {
   },
 /* for Service just insert those fields (name,discriptoin,initialPrice)*/
   newServiceProduct : function(body,cb){
-    
     var name = body.name;
     var discriptoin=body.discriptoin;
     var initialPrice=body.initialPrice;

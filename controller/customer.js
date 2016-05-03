@@ -43,7 +43,6 @@ module.exports = {
   },
   
   addCustomer : function(body,cb){
-
     var obj ={
       name : body.name,
       repName : body.repName,
