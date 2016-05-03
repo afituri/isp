@@ -21,7 +21,7 @@ var warehouse = require('./routes/warehouse');
 var policy = require('./routes/policy');
 var product = require('./routes/product');
 var pages = require('./routes/pages');
-var inStock = require('./routes/Instock');
+var inStock = require('./routes/inStock');
 var app = express();
 
 // view engine setup
