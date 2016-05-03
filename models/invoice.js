@@ -10,7 +10,7 @@ var Invoice = new Schema({
    notes: { type: String, required: true},
    piad: { type: Number, required: [true, 'Why no piad?']},
    left: { type: Number, required: [true, 'Why no left?']},
-
+   discount: { type: Number, required: [true, 'Why no piad?']},
    status: { type: Number, default:1}
 });
 

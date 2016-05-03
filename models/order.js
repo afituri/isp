@@ -12,7 +12,6 @@ var Order = new Schema({
    piad: { type: Number, required: [true, 'Why no piad?']},
    left: { type: Number, required: [true, 'Why no left?']},
    quantity: { type: Number, required: [true, 'Why no piad?']},
-   discount: { type: Number, required: [true, 'Why no piad?']},
    price: { type: Number, required: [true, 'Why no piad?']},
    macAddress: { type: String},
    startDate: Date,
