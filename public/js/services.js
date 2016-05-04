@@ -268,4 +268,24 @@
     };
     return self;
   }]);
+  app.service('InvoicesServ',['$http',function($http){
+    var self = {
+      'getInvoces': function(pageSize,currentPage){
+        return $http.get('/invoice/'+pageSize+'/'+currentPage);
+      },
+      'getInvoiceByID': function(id){
+        return $http.get('/invoice/'+id);
+      },
+      'addInvoice': function(invoiceObj){
+        return $http.post('/invoice/add',invoiceObj);
+      },
+      'editInvoice': function(id,invoiceObj){
+        return $http.put('/invoice/edit/'+id,invoiceObj);
+      },
+      'deleteInvoice': function(id){
+        return $http.delete('/invoice/delete/'+id);
+      }
+    };
+    return self;
+  }]);
 }());

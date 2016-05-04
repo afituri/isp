@@ -1,0 +1,126 @@
+<div class="widget-box animated fadeIn">
+  <h5><i class="fa fa-plus"></i>&nbsp;إضافة فاتورة جديدة</h5>
+  <hr>
+  <form novalidate ng-submit="newInvoice()">
+    <div class="row">
+      <div class="col-md-4" ng-class="{'col-md-3': newInvoiceForm.type==2}">
+        <div class="form-group">
+          <label class="control-label">نوع العميل</label>
+          <select class="form-control input-sm" ng-model="newInvoiceForm.type" ng-required-err-type="type" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+            <option value="1">شخصي</option>
+            <option value="2">شركة</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4" ng-class="{'col-md-3': newInvoiceForm.type==2}">
+        <div class="form-group">
+          <label class="control-label">اسم العميل</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.name" ng-required-err-type="name" placeholder="اسم العميل" required>
+        </div>
+      </div>
+      <div class="col-md-3" ng-if="newInvoiceForm.type == 2">
+        <div class="form-group">
+          <label class="control-label">اسم المندوب</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.repName" ng-required-err-type="repName" placeholder="اسم المندوب" required>
+        </div>
+      </div>
+      <div class="col-md-4" ng-class="{'col-md-3': newInvoiceForm.type==2}">
+        <div class="form-group">
+          <label class="control-label">المدينة</label>
+          <select class="form-control input-sm" ng-model="newInvoiceForm.city" ng-options="city.id as city.nameAr for city in objects.citiesObj" ng-required-err-type="city" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">العنوان</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.address" ng-required-err-type="address" placeholder="العنوان" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">البريد الالكتروني</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.email" ng-required-err-type="emailType" placeholder="البريد الالكتروني" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">رقم الهاتف</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.phone" ng-required-err-type="phone" placeholder="رقم الهاتف" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">ملاحظات</label>
+          <textarea class="form-control input-sm" rows="6" ng-model="newInvoiceForm.notes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">اسم الخدمة</label>
+          <select class="form-control input-sm" ng-model="newInvoiceForm.product" ng-options="service._id as service.name for service in objects.servicesObj" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">اسم المعدة</label>
+          <select class="form-control input-sm" ng-model="newProductPolicyForm.product" ng-options="item._id as item.name for item in objects.itemsObj" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">اسم الحزمة</label>
+          <select class="form-control input-sm" ng-model="newProductPolicyForm.product" ng-options="package._id as package.name for package in objects.packagesObj" required>
+            <option value="" disabled selected>الرجاء الاختيار</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">تاريخ البداية</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.startDate" placeholder="تاريخ البداية" required bs-datepicker>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">تاريخ النهاية</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.endDate" placeholder="تاريخ النهاية" required bs-datepicker>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">التخفيض</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.discount" placeholder="التخفيض">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">الاجمالي</label>
+          <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.total" placeholder="الاجمالي" required>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-4">
+        <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-print"></i>&nbsp;طباعة الفاتورة</button>
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-success btn-sm btn-block"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+      </div>
+    </div>
+  </form>
+</div>

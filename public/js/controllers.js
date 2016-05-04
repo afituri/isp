@@ -835,11 +835,11 @@
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
     $scope.activeTab = "tap1";
-    HelperServ.getAllItems();
-    HelperServ.getAllServices();
-    HelperServ.getAllPackages();
-    HelperServ.getAllPolicies();
     $scope.objects = HelperServ;
+    $scope.objects.getAllItems();
+    $scope.objects.getAllServices();
+    $scope.objects.getAllPackages();
+    $scope.objects.getAllPolicies();
     $scope.newProductPolicyForm = {};
   }]);
   app.controller('EditProductPolicyCtl',['$scope','MenuFac','ProductPoliciesServ',function($scope,MenuFac,ProductPoliciesServ){
@@ -847,4 +847,36 @@
     $scope.activePanel = MenuFac;
   }]);
   // Product Policies Controllers End
+  // Invoces Controllers Start
+  app.controller('InvoicesCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
+    MenuFac.active = 9;
+    $scope.activePanel = MenuFac;
+  }]);
+  app.controller('NewInvoiceCtl',['$scope','MenuFac','InvoicesServ','HelperServ','toastr',function($scope,MenuFac,InvoicesServ,HelperServ,toastr){
+    MenuFac.active = 9;
+    $scope.activePanel = MenuFac;
+    $scope.objects = HelperServ;
+    $scope.objects.getAllItems();
+    $scope.objects.getAllServices();
+    $scope.objects.getAllPackages();
+    $scope.newInvoiceForm = {};
+    $scope.newInvoice = function(){
+      InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
+        if(response.data){
+          $state.go('invoices');
+          toastr.success('تمت إضافة فاتورة جديدة بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      },function(response){
+        console.log("Something went wrong in newInvoice function");
+      });
+    }
+  }]);
+  app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
+    MenuFac.active = 9;
+    $scope.activePanel = MenuFac;
+    $scope.editInvoiceForm = {};
+  }]);
+  // Invoces Controllers End
 }())

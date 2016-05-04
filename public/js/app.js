@@ -10,7 +10,7 @@
     'toastr',
     'ui.bootstrap'
   ]);
-  app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig){
+  app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider){
     $stateProvider.state('home',{
       url: '/',
       templateUrl: 'pages/home.html',
@@ -149,6 +149,19 @@
       url: '/productPolicies/edit/:id',
       templateUrl: 'pages/productPolicies/editProductPolicy.html',
       controller: 'EditProductPolicyCtl'
+    })
+    .state('invoices',{
+      url: '/invoices',
+      templateUrl: 'pages/invoices/invoices.html',
+      controller: 'InvoicesCtl'
+    }).state('newInvoice',{
+      url: '/invoices/new',
+      templateUrl: 'pages/invoices/newInvoice.html',
+      controller: 'NewInvoiceCtl'
+    }).state('editInvoice',{
+      url: '/invoices/edit/:id',
+      templateUrl: 'pages/invoices/editInvoice.html',
+      controller: 'EditInvoiceCtl'
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');
@@ -164,6 +177,10 @@
     angular.extend($modalProvider.defaults, {
       animation: 'am-fade-and-scale',
       placement: 'center'
+    });
+    angular.extend($datepickerProvider.defaults, {
+      dateFormat: 'd/M/yyyy',
+      autoclose: true
     });
   }]);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
