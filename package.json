@@ -26,6 +26,7 @@
     "passport-local": "^1.0.0",
     "password-generator": "^2.0.2",
     "redis": "^2.5.3",
-    "static-favicon": "~1.0.0"
+    "static-favicon": "~1.0.0",
+    "postinstall" : "./node_modules/bower/bin/bower install",
   }
 }
