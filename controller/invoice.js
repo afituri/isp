@@ -54,7 +54,20 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
-    var obj = body;
+    console.log(body);
+    customerObj = {
+      name: body.name ,
+      repName: body.repName,
+      city: body.city,
+      address: body.address,
+      email: body.email,
+      phone: body.phone,
+      type: body.type
+      /*reseller: body.,
+      notes: body.notes*/
+     /* policy: */
+    }
+   /* var obj = body;
     invoice = new model.Invoice(obj);
     invoice.save(function(err,result){
       if (!err) {
@@ -64,7 +77,7 @@ module.exports = {
         console.log(err);
         cb(false);
       }
-    });
+    });*/
   },
 
   updateInvoice : function(id,body,cb){
