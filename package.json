@@ -6,15 +6,6 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "^3.0.0",
-    "bower": "^1.3.2",
-    "angular": "latest",
-    "angular-bootstrap": "0.10.0",
-    "angular-cookies": "latest",
-    "angular-ui-router": "#master",
-    "auth0.js": "latest",
-    "auth0-angular": "latest",
-    "bootstrap": "3.0.3",
     "body-parser": "~1.0.0",
     "connect-redis": "^3.0.2",
     "cookie-parser": "~1.0.1",
@@ -35,7 +26,6 @@
     "passport-local": "^1.0.0",
     "password-generator": "^2.0.2",
     "redis": "^2.5.3",
-    "static-favicon": "~1.0.0",
-    "postinstall" : "./node_modules/bower/bin/bower install"
+    "static-favicon": "~1.0.0"
   }
 }
