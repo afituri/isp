@@ -852,7 +852,7 @@
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
-  app.controller('NewInvoiceCtl',['$scope','MenuFac','InvoicesServ','HelperServ','toastr',function($scope,MenuFac,InvoicesServ,HelperServ,toastr){
+  app.controller('NewInvoiceCtl',['$scope','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr',function($scope,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr){
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.objects = HelperServ;
@@ -860,6 +860,21 @@
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
     $scope.newInvoiceForm = {};
+    $scope.previousSubscription = '1';
+    $scope.pageSize = 5;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.customers = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    if($scope.previousSubscription == '2'){
+      $scope.init();
+    }
     $scope.newInvoice = function(){
       InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
         if(response.data){
