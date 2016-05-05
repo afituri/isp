@@ -1,4 +1,4 @@
-config/
+
 # Logs
 logs
 *.log
@@ -27,7 +27,6 @@ build/Release
 # Dependency directory
 node_modules
 bower_components
-config.js
 
 # Optional npm cache directory
 .npm
