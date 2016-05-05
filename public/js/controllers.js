@@ -852,7 +852,20 @@
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
-  app.controller('NewInvoiceCtl',['$scope','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr',function($scope,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr){
+  app.controller('NewInvoiceCtl',['$scope','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http',function($scope,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http){
+   
+    $scope.myFunc = function() {
+      $scope.search=angular.element('#Text1').val();
+      var name=angular.element('#Text1').val();
+      
+      $http({ method: 'POST', url: '/customer/in/'+name}).
+        success(function(data, status, headers, config) {
+          $scope.search=data;
+        }).error(function(data, status, headers, config) {
+          console.log('Oops and error', data);
+        });
+    };
+
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.objects = HelperServ;

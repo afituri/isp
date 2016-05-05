@@ -21,10 +21,15 @@ router.post('/add', function(req, res) {
   });
 });
 
+router.post('/in/:name', function(req, res) {
+  customerMgr.getCustomerName(req.params.name,function(customer){
+    console.log(customer);
+    res.send(customer);
+  });
+});
+
 /* Edit customer  by id  */
 router.put('/edit/:id', function(req, res) {
-  // console.log(req.body)
-  // console.log(req.params.id);
   customerMgr.updateCustomer(req.params.id,req.body,function(customer){
     res.send(customer);
   });
@@ -45,6 +50,10 @@ router.get('/:id', function(req, res) {
     res.send(customer);
   });
 });
+
+
+
+
 
 
 module.exports = router;

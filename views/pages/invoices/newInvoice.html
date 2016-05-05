@@ -85,18 +85,44 @@
                   عرض جميع المشتركين
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control input-sm" placeholder="بحث">
+                  <input id="Text1" type="text" name="search" class="form-control input-sm" placeholder="بحث" ng-change="myFunc()" ng-model="myValue"> 
                 </div>
               </div>
             </div>
             <div class="table-responsive">
-              <div ng-show="customers == null">
+              <div ng-hide="true">
                 <div class="alert alert-info" style="margin-bottom:0;">
-                  <p class="text-center">
+                  <p class="text-center" >
                     عفوا لاتوجد بيانات
                   </p>
                 </div>
               </div>
+
+              <div ng-show="true">
+                <div class="alert alert-info" style="margin-bottom:0;">
+                <table class="table table-striped table-bordered table-list" > 
+                  <thead>
+                    <tr>
+                        <th><em class="fa fa-cog"></em></th>
+                        <th class="hidden-xs">ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="i in search">
+                      <td align="center">
+                       <input type="checkbox" >
+                      </td>
+                      <td class="hidden-xs">1</td>
+                      <td>{{i.name}}</td>
+                      <td>{{i.email}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+
               <table class="table table-hover table-bordered table-condensed" ng-hide="customers == null">
                 <thead>
                   <tr>

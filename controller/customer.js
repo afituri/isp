@@ -42,6 +42,15 @@ module.exports = {
     });
   },
   
+  getCustomerName :function(name,cb){
+    model.Customer.find({name :{ $regex:name, $options: 'i' }}).limit(30).exec(function(err, custom){
+      if(!err){
+        cb(custom);
+      }else{
+        cb(null);
+      }
+    });
+  },
   addCustomer : function(body,cb){
     var obj ={
       name : body.name,
