@@ -852,7 +852,7 @@
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
-  app.controller('NewInvoiceCtl',['$scope','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http',function($scope,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http){
+  app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http){
    
     $scope.myFunc = function() {
       $scope.search=angular.element('#Text1').val();
@@ -889,7 +889,27 @@
       $scope.init();
     }
     $scope.newInvoice = function(){
-      InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
+      var exist =angular.element('#exist').val();
+      //not subscribe before == 1
+      if(exist==1){
+       // $scope.newInvoiceForm.cutomerType=exist;
+        InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
+          if(response){
+            window.location.href='/customer/report';
+          }
+        });
+      } else {
+        // subscribe before == 2
+        if(exist==2){
+          // customer type 1 personal 2 company 
+          InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
+
+
+          });
+        }
+      }
+
+      /*InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
         if(response.data){
           $state.go('invoices');
           toastr.success('تمت إضافة فاتورة جديدة بنجاح');
@@ -898,7 +918,7 @@
         }
       },function(response){
         console.log("Something went wrong in newInvoice function");
-      });
+      });*/
     }
   }]);
   app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){

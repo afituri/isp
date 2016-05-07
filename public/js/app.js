@@ -37,7 +37,14 @@
       url: '/serviceProviders',
       templateUrl: 'pages/serviceProviders/serviceProviders.html',
       controller: 'ServiceProvidersCtl'
-    }).state('newServiceProvider',{
+    })
+    .state('invoice',{
+      url: '/customer/report',
+      templateUrl: 'pages/invoices/invoice.html',
+      controller: 'NewInvoiceCtl'
+    })
+
+    .state('newServiceProvider',{
       url: '/serviceProviders/new',
       templateUrl: 'pages/serviceProviders/newServiceProvider.html',
       controller: 'NewServiceProviderCtl'

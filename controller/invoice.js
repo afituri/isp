@@ -55,18 +55,36 @@ module.exports = {
 
   addInvoice : function(body,cb){
     console.log(body);
-    customerObj = {
-      name: body.name ,
-      repName: body.repName,
-      city: body.city,
-      address: body.address,
-      email: body.email,
-      phone: body.phone,
-      type: body.type
-      /*reseller: body.,
-      notes: body.notes*/
-     /* policy: */
-    }
+    // reseller: not exist in front end 
+    customer = new model.Customer(body);
+    customer.save(function(err,customerResult){
+      if (!err) {
+        console.log(customerResult._id);
+        cb(true)
+        // invoice not correct front end 
+        /*invoice=new model.Invoice();
+        invoice.save(function(err,invoiceResult){
+          if (!err) {
+            console.log(invoiceResult)
+            cb(true);
+          } else {
+        //TODO: return page with errors
+            console.log(err);
+            cb(false);
+          }
+        });*/
+
+
+        //cb(true);
+      
+
+      } else {
+        //TODO: return page with errors
+        console.log(err);
+        cb(false);
+      }
+    });
+
    /* var obj = body;
     invoice = new model.Invoice(obj);
     invoice.save(function(err,result){

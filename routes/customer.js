@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var data = require('../data/customer');
+var jsr = require('jsreport');
+var fs = require("fs");
+var path = require("path");
 var customerMgr = require("../controller/customer");
 
 /* GET all customer */
@@ -25,6 +28,21 @@ router.post('/in/:name', function(req, res) {
   customerMgr.getCustomerName(req.params.name,function(customer){
     console.log(customer);
     res.send(customer);
+  });
+});
+
+router.get('/report', function(req, res) {
+   jsr.render({
+    template: {
+      content: fs.readFileSync(path.join(__dirname, "../views/pages/invoices/invoice.html"), "utf8"),
+      recipe: "phantom-pdf"
+    },
+    data: {
+      name:"Mr.alla don't forget to design this page !!!"
+    }
+  })
+  .then(function (response) {
+    response.result.pipe(res);
   });
 });
 

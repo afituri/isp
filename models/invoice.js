@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var Invoice = new Schema({
    customer: { type: mongoose.Schema.ObjectId, ref : 'Customer'},
-   createDate: Date,
+   createDate: { type: Date, default: Date.now },
    type: { type: Number, required: [true, 'Why no type?']},
    notes: { type: String, required: true},
    piad: { type: Number, required: [true, 'Why no piad?']},
