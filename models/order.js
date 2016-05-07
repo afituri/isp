@@ -7,12 +7,13 @@ var Order = new Schema({
    invoice: { type : mongoose.Schema.ObjectId, ref : 'Invoice'},
    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
    createDate: Date,
-   type: { type: Number, required: [true, 'Why no type?']},
+   /*type: { type: Number, required: [true, 'Why no type?']},
    notes: { type: String, required: true},
    piad: { type: Number, required: [true, 'Why no piad?']},
-   left: { type: Number, required: [true, 'Why no left?']},
-   quantity: { type: Number, required: [true, 'Why no piad?']},
+   left: { type: Number, required: [true, 'Why no left?']},*/
+   /*quantity: { type: Number, required: [true, 'Why no piad?']},*/
    price: { type: Number, required: [true, 'Why no piad?']},
+   // in stock 
    macAddress: { type: String},
    startDate: Date,
    endDate: Date,
