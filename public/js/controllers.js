@@ -860,7 +860,7 @@
       
       $http({ method: 'POST', url: '/customer/in/'+name}).
         success(function(data, status, headers, config) {
-          $scope.search=data;
+          $scope.customers=data;
         }).error(function(data, status, headers, config) {
           console.log('Oops and error', data);
         });
@@ -889,36 +889,24 @@
       $scope.init();
     }
     $scope.newInvoice = function(){
-      var exist =angular.element('#exist').val();
-      //not subscribe before == 1
-      if(exist==1){
-       // $scope.newInvoiceForm.cutomerType=exist;
+      if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
-          if(response){
+          if(response.data){
             window.location.href='/customer/report';
           }
+        },function(response){
+          console.log("Something went wrong");
         });
-      } else {
-        // subscribe before == 2
-        if(exist==2){
-          // customer type 1 personal 2 company 
+      } else if($scope.previousSubscription==2){
           InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
 
-
+          },function(response){
+            console.log("Something went wrong");
           });
         }
-      }
-
-      /*InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
-        if(response.data){
-          $state.go('invoices');
-          toastr.success('تمت إضافة فاتورة جديدة بنجاح');
-        } else {
-          console.log(response.data);
-        }
-      },function(response){
-        console.log("Something went wrong in newInvoice function");
-      });*/
+    }
+    $scope.print = function(){
+      window.location.href='/report/printInvoice';
     }
   }]);
   app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){

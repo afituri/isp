@@ -23,6 +23,7 @@ var product = require('./routes/product');
 var pages = require('./routes/pages');
 var invoice = require('./routes/invoice');
 var inStock = require('./routes/inStock');
+var report = require('./routes/report');
 var app = express();
 
 // view engine setup
@@ -60,6 +61,7 @@ app.use('/pages', pages);
 app.use('/product', product);
 app.use('/invoice', invoice);
 app.use('/instock', inStock);
+app.use('/report', report);
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

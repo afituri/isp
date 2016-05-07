@@ -7,7 +7,7 @@
       <div class="col-md-6">
         <div class="form-group pull-left" style="margin-bottom:0;">
           <label class="control-label">هل الزبون مشترك جديد ؟</label>
-          <select id="exist" class="form-control input-sm" ng-model="previousSubscription" required>
+          <select class="form-control input-sm" ng-model="previousSubscription" required>
             <option value="1">نعم</option>
             <option value="2">لا</option>
           </select>
@@ -97,33 +97,7 @@
                   </p>
                 </div>
               </div>
-
-              <div ng-show="true">
-                <div class="alert alert-info" style="margin-bottom:0;">
-                <table class="table table-striped table-bordered table-list" > 
-                  <thead>
-                    <tr>
-                        <th><em class="fa fa-cog"></em></th>
-                        <th class="hidden-xs">ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr> 
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="i in search">
-                      <td align="center">
-                       <input type="checkbox" >
-                      </td>
-                      <td class="hidden-xs">1</td>
-                      <td>{{i.name}}</td>
-                      <td>{{i.email}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                </div>
-              </div>
-
-              <table class="table table-hover table-bordered table-condensed" ng-hide="customers == null">
+              <table class="table table-hover table-bordered table-condensed">
                 <thead>
                   <tr>
                     <th>اسم المشترك</th>
@@ -205,6 +179,12 @@
         <div class="form-group">
           <label class="control-label">الاجمالي</label>
           <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.total" placeholder="الاجمالي" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label">ملاحظات</label>
+          <textarea class="form-control input-sm" rows="6" ng-model="newInvoiceForm.invoceNotes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
         </div>
       </div>
     </div>
