@@ -857,7 +857,8 @@
     $scope.myFunc = function() {
       $scope.search=angular.element('#Text1').val();
       var name=angular.element('#Text1').val();
-      
+      console.log(name);
+      if(!name){ name=null;};
       $http({ method: 'POST', url: '/customer/in/'+name}).
         success(function(data, status, headers, config) {
           $scope.customers=data;
@@ -889,10 +890,12 @@
       $scope.init();
     }
     $scope.newInvoice = function(){
+     
       if($scope.previousSubscription==1){
-        InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
-          if(response.data){
-            window.location.href='/customer/report';
+        InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
+          if(!err){
+            //console.log(response);
+            window.location.href='/report/printInvoice';
           }
         },function(response){
           console.log("Something went wrong");

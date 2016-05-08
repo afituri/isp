@@ -25,6 +25,7 @@ router.post('/add', function(req, res) {
 });
 
 router.post('/in/:name', function(req, res) {
+  console.log(req.params.name);
   customerMgr.getCustomerName(req.params.name,function(customer){
     console.log(customer);
     res.send(customer);
