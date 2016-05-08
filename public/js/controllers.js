@@ -919,6 +919,7 @@
     $scope.total = 0;
     $scope.init = function () {
       CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
+        console.log(response.data.result);
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
