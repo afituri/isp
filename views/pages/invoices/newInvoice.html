@@ -112,7 +112,7 @@
                     <td>{{customer.email}}</td>
                     <td>{{customer.phone}}</td>
                     <td class="text-center">
-                      <input type="radio" ng-model="newInvoiceForm.customerId" value="customer._id">
+                      <input type="radio" name="cutomerRadio" value="customer._id">
                     </td>
                   </tr>
                 </tbody>
@@ -142,7 +142,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label class="control-label">اسم المعدة</label>
-          <select class="form-control input-sm" ng-model="newProductPolicyForm.product" ng-options="item._id as item.name for item in objects.itemsObj" required>
+          <select class="form-control input-sm" ng-model="newInvoiceForm.productItem" ng-options="item._id as item.name for item in objects.itemsObj" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
           </select>
         </div>
@@ -150,7 +150,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label class="control-label">اسم الحزمة</label>
-          <select class="form-control input-sm" ng-model="newProductPolicyForm.product" ng-options="package._id as package.name for package in objects.packagesObj" required>
+          <select class="form-control input-sm" ng-model="newInvoiceForm.productPackage" ng-options="package._id as package.name for package in objects.packagesObj" required>
             <option value="" disabled selected>الرجاء الاختيار</option>
           </select>
         </div>

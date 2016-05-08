@@ -37,6 +37,7 @@ module.exports = {
 
 
   deleteInvoice : function(id,cb){
+
     model.Order.find({invoice:id}, function(err,resultOrder) {
       if(resultOrder.length > 0){
         cb(1)
@@ -54,48 +55,70 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
-    console.log(body);
-    // reseller: not exist in front end 
-    customer = new model.Customer(body);
-    customer.save(function(err,customerResult){
-      if (!err) {
-        console.log(customerResult._id);
-        cb(true)
-        // invoice not correct front end 
-        /*invoice=new model.Invoice();
-        invoice.save(function(err,invoiceResult){
+    model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
+      },function(err,product){
+        customer = new model.Customer(body);
+        customer.save(function(err,customerResult){
           if (!err) {
-            console.log(invoiceResult)
-            cb(true);
+            invoice={
+              customer:customerResult._id,
+              type:1,
+              notes:body.invoceNotes,
+              piad:body.total,
+              discount:body.discount
+            };
+            invoice=new model.Invoice(invoice);
+            invoice.save(function(err,invoiceResult){
+              if (!err) {
+                order1={
+                  invoice:invoiceResult._id,
+                  product:body.product,
+                  price : product[0].initialPrice,
+                  startDate:body.startDate,
+                  endDate:body.endDate
+                };
+                order2={
+                  invoice:invoiceResult._id,
+                  product:body.productItem,
+                  price : product[1].initialPrice,
+                  startDate:body.startDate,
+                  endDate:body.endDate
+                };
+                order3={
+                  invoice:invoiceResult._id,
+                  product:body.productPackage,
+                  price : product[2].initialPrice,
+                  startDate:body.startDate,
+                  endDate:body.endDate
+                };
+                var arrayOrder=[order1,order2,order3];
+                var counter=0;
+                var arrayOrd=[];
+                for(var i=0;i<3;i++){
+                  order=new model.Order(arrayOrder[i]);
+                  order.save(function(err,orderResult){
+                    arrayOrd.push(orderResult);
+                    arrayOfResult=[customerResult,invoiceResult,arrayOrd];
+                    if(!err){
+                      counter++;
+                      if(counter==3){
+                        cb(arrayOfResult,false);
+                      }
+                    } else {
+                      console.log()
+                      cb(null,err)
+                    }
+                  });
+                }
+              } else {
+                cb(null,err);
+              }
+            });
           } else {
-        //TODO: return page with errors
-            console.log(err);
-            cb(false);
+            cb(null,err);
           }
-        });*/
-
-
-        //cb(true);
-      
-
-      } else {
-        //TODO: return page with errors
-        console.log(err);
-        cb(false);
-      }
-    });
-
-   /* var obj = body;
-    invoice = new model.Invoice(obj);
-    invoice.save(function(err,result){
-      if (!err) {
-        cb(true);
-      } else {
-        //TODO: return page with errors
-        console.log(err);
-        cb(false);
-      }
-    });*/
+        });
+      });
   },
 
   updateInvoice : function(id,body,cb){
