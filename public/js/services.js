@@ -257,7 +257,7 @@
         return $http.get('/productPolicy/'+id);
       },
       'addProductPolicy': function(productPolicyObj){
-        return $http.post('/productPolicy/add',productPolicyObj);
+        return $http.post('/policy/productPolicy/add',productPolicyObj);
       },
       'editProductPolicy': function(id,productPolicyObj){
         return $http.put('/productPolicy/edit/'+id,productPolicyObj);

@@ -60,7 +60,7 @@ router.get('/:id/productPolicies', function(req, res) {
 
 // product policy
 
-router.post('productPolicy/add', function(req, res) {
+router.post('/productPolicy/add', function(req, res) {
   productPolicyMgr.addProductP(req.body,function(result){
     res.send(result);
   });
