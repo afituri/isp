@@ -37,7 +37,7 @@
       </tbody>
     </table>
   </div>
-  <div class="panel-footer" ng-if="policies.length">
+  <div class="panel-footer" ng-show="policies.length">
     <div class="row">
       <div class="col-xs-12 col-md-12 text-center">
         <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
