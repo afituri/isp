@@ -222,6 +222,15 @@
       'editProduct': function(id,productObj){
         return $http.put('/product/edit/'+id,productObj);
       },
+      'getProductServiceByID':function(id,serviceObj){
+        return $http.put('/product/productService/'+id,serviceObj);
+      },
+      'editProductService':function(id,productObj){
+        return $http.put('/product/productService/edit/'+id,productObj);
+      },
+      'deleteProductService': function(id){
+        return $http.delete('/product/productService/delete/'+id);
+      },
       'deleteProduct': function(id){
         return $http.delete('/product/delete/'+id);
       }

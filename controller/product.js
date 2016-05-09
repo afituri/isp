@@ -51,6 +51,7 @@ module.exports = {
         }
       });
   },
+
   getProductService :function(limit,page,cb){
     page = parseInt(page);
     page-=1;
@@ -75,6 +76,17 @@ module.exports = {
           cb(products);
         }else{
           console.log(err);
+          cb(null);
+        }
+      });
+  },
+
+     
+   getServiceById :function(id,cb){
+    model.Product.findOne({_id:id}, function(err, products){
+        if(!err){
+          cb(products);
+        }else{
           cb(null);
         }
       });
@@ -187,5 +199,39 @@ module.exports = {
       }
     });
   },
+
+    updateService : function(id,body,cb){
+      console.log(body);
+    var obj ={
+      name : body.name,
+      discriptoin:body.discriptoin,
+      initialPrice:body.initialPrice
+
+    }
+    model.Product.findOneAndUpdate({_id:id}, obj, function(err,result) {
+      if (!err) {
+        cb(true)
+      } else {
+        console.log(err);
+        cb(false);
+      }
+    });
+  },
+
+  deleteProductService:function(id,cb){
+    model.Product.remove({_id:id},function(err,result) {
+      if (!err) {
+        cb(2)
+      } else {
+        console.log(err);
+        cb(3);
+      }
+  });
+}
+
+
+
+
+
 
 };

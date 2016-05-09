@@ -126,7 +126,15 @@
       url: '/products/new',
       templateUrl: 'pages/products/newProduct.html',
       controller: 'NewProductCtl'
-    }).state('editProduct',{
+    })
+    //00000
+    .state('editProductService',{
+      url: '/product/productService/edit/:id',
+      templateUrl: 'pages/products/editService.html',
+      controller: 'ProductServicesCtl'
+    })
+
+    .state('editProduct',{
       url: '/products/edit/:id',
       templateUrl: 'pages/products/editProduct.html',
       controller: 'EditProductCtl'

@@ -531,14 +531,31 @@
       });
     }
   }]);
-  // Customers Controllers End
-  // Products Controllers End
-  app.controller('ProductServicesCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
+
+  app.controller('ProductServicesCtl',['$scope','$state','$stateParams','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,$stateParams,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+    $scope.editProductServiceForm = {};
+    ProductsServ.getProductServiceByID($stateParams.id).then(function(response) {
+      $scope.editProductServiceForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.editProductService = function(){
+      ProductsServ.editProductService($stateParams.id,$scope.editProductServiceForm).then(function(response) {
+        if(response.data){
+          $state.go('productServices');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
     $scope.init = function () {
       ProductsServ.getProductServices($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.productServices = response.data.result;
@@ -549,8 +566,9 @@
     }
     $scope.init();
     $scope.showDeleteModel = function(id){
+      //alert(id);
       $scope.id = id;
-      $scope.deleteName = "هذا المنتج (خدمة)";
+      $scope.deleteName = "منتج الخدمة";
       $scope.deleteModel = $modal({
         scope: $scope,
         templateUrl: 'pages/model.delete.tpl.html',
@@ -558,7 +576,7 @@
       });
     };
     $scope.confirmDelete = function(id){
-      ProductsServ.deleteProduct(id).then(function(response) {
+      ProductsServ.deleteProductService(id).then(function(response) {
         if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
