@@ -594,6 +594,8 @@
       });
     };
   }]);
+
+
   app.controller('ProductItemsCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -602,7 +604,7 @@
     $scope.total = 0;
     $scope.init = function () {
       ProductsServ.getProductItems($scope.pageSize,$scope.currentPage).then(function(response) {
-        $scope.products = response.data.result;
+        $scope.productItems = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
@@ -637,6 +639,8 @@
       });
     };
   }]);
+
+
   app.controller('ProductPackagesCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -680,6 +684,7 @@
       });
     };
   }]);
+  
   app.controller('NewProductCtl',['$scope','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -734,6 +739,7 @@
       });
     };
   }]);
+
   app.controller('EditProductCtl',['$scope','$state','$stateParams','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -952,7 +958,6 @@
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            //console.log(response);
             window.location.href='/report/printInvoice';
           }
         },function(response){
