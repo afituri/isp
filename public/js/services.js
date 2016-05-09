@@ -187,6 +187,9 @@
       'getCustomers': function(pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage);
       },
+      'getAllCustomers': function(){
+        return $http.get('/customer/all');
+      },
       'getCustomerByID': function(id){
         return $http.get('/customer/'+id);
       },

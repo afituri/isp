@@ -8,7 +8,8 @@
     'jcs-autoValidate',
     'ngFileUpload',
     'toastr',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'nya.bootstrap.select'
   ]);
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider){
     $stateProvider.state('home',{

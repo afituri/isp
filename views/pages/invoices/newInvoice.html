@@ -78,7 +78,7 @@
     <div ng-if="previousSubscription == 2">
       <div class="row">
         <div class="col-md-12">
-          <div class="panel panel-default" style="margin-bottom:0;">
+          <!-- <div class="panel panel-default" style="margin-bottom:0;">
             <div class="panel-heading" style="padding:5px;">
               <div class="row">
                 <div class="col-md-3" style="padding-top:5px;">
@@ -125,7 +125,15 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
+          <ol class="nya-bs-select form-control input-sm" ng-model="model" data-live-search="true">
+            <li nya-bs-option="customer in customers">
+              <a>
+                {{customer.name}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
         </div>
       </div>
     </div>

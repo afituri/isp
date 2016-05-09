@@ -932,23 +932,15 @@
     $scope.objects.getAllPackages();
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
-    $scope.pageSize = 5;
-    $scope.currentPage = 1;
-    $scope.total = 0;
     $scope.init = function () {
-      CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
-        console.log(response.data.result);
-        $scope.customers = response.data.result;
-        $scope.total = response.data.count;
+      CustomersServ.getAllCustomers().then(function(response) {
+        $scope.customers = response.data;
       }, function(response) {
         console.log("Something went wrong");
       });
     }
-    if($scope.previousSubscription == '2'){
-      $scope.init();
-    }
+    $scope.init();
     $scope.newInvoice = function(){
-     
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
@@ -965,9 +957,6 @@
             console.log("Something went wrong");
           });
         }
-    }
-    $scope.print = function(){
-      window.location.href='/report/printInvoice';
     }
   }]);
   app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
