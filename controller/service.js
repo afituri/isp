@@ -53,7 +53,7 @@ module.exports = {
     var obj ={
       name : body.name,
       servicesProvider : body.servicesProvider,
-      description : body.discriptoin
+      description : body.description
      }
     services = new model.Services(obj);
     services.save(function(err,result){
@@ -86,7 +86,7 @@ module.exports = {
   deleteServices : function(id,cb){
     model.Services.remove({_id:id}, function(err,result) {
       if (!err) {
-        cb(2)
+        cb(2);
       } else {
         console.log(err);
         cb(3);

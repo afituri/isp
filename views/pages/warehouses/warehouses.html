@@ -35,13 +35,13 @@
           <td>{{warehouse.phone}}</td>
           <td class="text-center">
             <a class="btn btn-warning btn-sm" ui-sref="editWarehouse({id:warehouse._id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
-            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
+            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" ng-click="showDeleteModel(warehouse._id)" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="panel-footer" ng-if="warehouses.length">
+  <div class="panel-footer" ng-show="warehouses.length">
     <div class="row">
       <div class="col-xs-12 col-md-12 text-center">
         <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>

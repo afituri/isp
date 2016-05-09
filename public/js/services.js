@@ -10,7 +10,11 @@
     var self = {
       'citiesObj': [],
       'suppliersObj': [],
+      'serviceProvidersObj': [],
+      'itemsObj': [],
       'servicesObj': [],
+      'packagesObj': [],
+      'policiesObj': [],
       'getAllCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
@@ -25,17 +29,48 @@
           console.log("Something went wrong in getAllSuppliers");
         });
       },
+      'getServiceProvidersServicesByID': function(id){
+        return $http.get('/sProvider/'+id+'/services');
+      },
+      'getAllServiceProviders': function(){
+        return $http.get('/sProvider/').then(function(response) {
+          self.serviceProvidersObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllServiceProviders");
+        });
+      },
+      'getAllItems': function(){
+        return $http.get('/product/allItem').then(function(response) {
+          self.itemsObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
       'getAllServices': function(){
-        return $http.get('/service/all').then(function(response) {
+        return $http.get('/product/allService').then(function(response) {
           self.servicesObj = response.data;
         }, function(response) {
-          console.log("Something went wrong in getAllServices");
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllPackages': function(){
+        return $http.get('/product/allPackage').then(function(response) {
+          self.packagesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllPolicies': function(){
+        return $http.get('/policy/all').then(function(response) {
+          self.policiesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
         });
       }
     };
     self.getAllCities();
     self.getAllSuppliers();
-    self.getAllServices();
+    self.getAllServiceProviders();
     return self;
   }]);
   app.service('ResllersServ',['$http',function($http){
@@ -51,6 +86,9 @@
       },
       'editResller': function(id,resllerObj){
         return $http.put('/reseller/edit/'+id,resllerObj);
+      },
+      'deleteResller': function(id){
+        return $http.delete('/reseller/delete/'+id);
       }
     };
     return self;
@@ -76,6 +114,9 @@
       },
       'editServiceProvider': function(id,serviceProviderObj){
         return $http.put('/sProvider/edit/'+id,serviceProviderObj);
+      },
+      'deleteServiceProvider': function(id){
+        return $http.delete('/sProvider/delete/'+id);
       }
     };
     self.getServiceProviders();
@@ -94,6 +135,9 @@
       },
       'editService': function(id,serviceObj){
         return $http.put('/service/edit/'+id,serviceObj);
+      },
+      'deleteService': function(id){
+        return $http.delete('/service/delete/'+id);
       }
     };
     return self;
@@ -111,6 +155,9 @@
       },
       'editSupplier': function(id,supplierObj){
         return $http.put('/supplier/edit/'+id,supplierObj);
+      },
+      'deleteSupplier': function(id){
+        return $http.delete('/supplier/delete/'+id);
       }
     };
     return self;
@@ -128,6 +175,9 @@
       },
       'editWarehouse': function(id,warehouseObj){
         return $http.put('/warehouse/edit/'+id,warehouseObj);
+      },
+      'deleteWarehouse': function(id){
+        return $http.delete('/warehouse/delete/'+id);
       }
     };
     return self;
@@ -145,14 +195,23 @@
       },
       'editCustomer': function(id,customerObj){
         return $http.put('/customer/edit/'+id,customerObj);
+      },
+      'deleteCustomer': function(id){
+        return $http.delete('/customer/delete/'+id);
       }
     };
     return self;
   }]);
   app.service('ProductsServ',['$http',function($http){
     var self = {
-      'getProducts': function(pageSize,currentPage){
-        return $http.get('/product/'+pageSize+'/'+currentPage);
+      'getProductServices': function(pageSize,currentPage){
+        return $http.get('/product/service/'+pageSize+'/'+currentPage);
+      },
+      'getProductItems': function(pageSize,currentPage){
+        return $http.get('/product/item/'+pageSize+'/'+currentPage);
+      },
+      'getProductPackages': function(pageSize,currentPage){
+        return $http.get('/product/package/'+pageSize+'/'+currentPage);
       },
       'getProductByID': function(id){
         return $http.get('/product/'+id);
@@ -162,6 +221,69 @@
       },
       'editProduct': function(id,productObj){
         return $http.put('/product/edit/'+id,productObj);
+      },
+      'deleteProduct': function(id){
+        return $http.delete('/product/delete/'+id);
+      }
+    };
+    return self;
+  }]);
+  app.service('PoliciesServ',['$http',function($http){
+    var self = {
+      'getPolicies': function(pageSize,currentPage){
+        return $http.get('/policy/'+pageSize+'/'+currentPage);
+      },
+      'getPolicyByID': function(id){
+        return $http.get('/policy/'+id);
+      },
+      'addPolicy': function(policyObj){
+        return $http.post('/policy/add',policyObj);
+      },
+      'editPolicy': function(id,policyObj){
+        return $http.put('/policy/edit/'+id,policyObj);
+      },
+      'deletePolicy': function(id){
+        return $http.delete('/policy/delete/'+id);
+      }
+    };
+    return self;
+  }]);
+  app.service('ProductPoliciesServ',['$http',function($http){
+    var self = {
+      'getProductPolicies': function(pageSize,currentPage){
+        return $http.get('/productPolicy/'+pageSize+'/'+currentPage);
+      },
+      'getProductPolicyByID': function(id){
+        return $http.get('/productPolicy/'+id);
+      },
+      'addProductPolicy': function(productPolicyObj){
+        return $http.post('/policy/productPolicy/add',productPolicyObj);
+      },
+      'editProductPolicy': function(id,productPolicyObj){
+        return $http.put('/productPolicy/edit/'+id,productPolicyObj);
+      },
+      'deleteProductPolicy': function(id){
+        return $http.delete('/productPolicy/delete/'+id);
+      }
+    };
+    return self;
+  }]);
+  app.service('InvoicesServ',['$http',function($http){
+    var self = {
+      'getInvoces': function(pageSize,currentPage){
+        return $http.get('/invoice/'+pageSize+'/'+currentPage);
+      },
+      'getInvoiceByID': function(id){
+        return $http.get('/invoice/'+id);
+      },
+      'addInvoice': function(invoiceObj){
+        return $http.post('/invoice/add',invoiceObj);
+      },
+      'editInvoice': function(id,invoiceObj){
+        return $http.put('/invoice/edit/'+id,invoiceObj);
+      },
+      'deleteInvoice': function(id){
+        return $http.delete('/invoice/delete/'+id);
       }
     };
     return self;

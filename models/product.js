@@ -19,7 +19,8 @@ var Product = new Schema({
       brand: { type: String}
    },
    packages: {
-      type: { type: Number},
+      type:{ type: Schema.Types.ObjectId , ref: 'ServiceProvider'},
+      // type: { type: Number},
       service: { type: Schema.Types.ObjectId , ref: 'Services'},
       dSpeed: { type: Number},
       uSpeed: { type: Number},

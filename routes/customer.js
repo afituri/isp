@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/customer');
 var customerMgr = require("../controller/customer");
+// var jsr = require('jsreport');
+// var fs = require("fs");
+// var path = require("path");
 
 /* GET all customer */
 router.get('/:limit/:page', function(req, res) {
@@ -21,10 +24,31 @@ router.post('/add', function(req, res) {
   });
 });
 
+router.post('/in/:name', function(req, res) {
+  console.log(req.params.name);
+  customerMgr.getCustomerName(req.params.name,function(customer){
+    console.log(customer);
+    res.send(customer);
+  });
+});
+
+// router.get('/report', function(req, res) {
+//    jsr.render({
+//     template: {
+//       content: fs.readFileSync(path.join(__dirname, "../views/pages/invoices/invoice.html"), "utf8"),
+//       recipe: "phantom-pdf"
+//     },
+//     data: {
+//       name:"Mr.alla don't forget to design this page !!!"
+//     }
+//   })
+//   .then(function (response) {
+//     response.result.pipe(res);
+//   });
+// });
+
 /* Edit customer  by id  */
 router.put('/edit/:id', function(req, res) {
-  // console.log(req.body)
-  // console.log(req.params.id);
   customerMgr.updateCustomer(req.params.id,req.body,function(customer){
     res.send(customer);
   });
@@ -34,7 +58,7 @@ router.put('/edit/:id', function(req, res) {
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
   customerMgr.deleteCustomer(req.params.id,function(customer){
-    res.send(customer);
+    res.send({result:customer});
   });
 });
 
@@ -45,6 +69,10 @@ router.get('/:id', function(req, res) {
     res.send(customer);
   });
 });
+
+
+
+
 
 
 module.exports = router;

@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/policy');
 var policyMgr = require("../controller/policies");
-var productPMgr = require("../controller/productPolicy");
+var productPMgr = require("../controller/policies");
+var productPolicyMgr = require("../controller/productPolicy");
 
 
 /* GET all policy */
@@ -37,15 +38,14 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete policy  by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
-  policyMgr.getPolicyId(req.params.id,function(result){
-    res.send(result);  
+  policyMgr.deletePolicy(req.params.id,function(result){
+    res.send({result:result});  
   });
 });
 
 /* GET policy  by ID  */
 router.get('/:id', function(req, res) {
-  policyMgr.deletePolicy(req.params.id,function(result){
+  policyMgr.getPolicyId(req.params.id,function(result){
     res.send(result);  
   });
 });
@@ -58,5 +58,12 @@ router.get('/:id/productPolicies', function(req, res) {
   });
 });
 
+// product policy
+
+router.post('/productPolicy/add', function(req, res) {
+  productPolicyMgr.addProductP(req.body,function(result){
+    res.send(result);
+  });
+});
 
 module.exports = router;

@@ -14,7 +14,6 @@ var Customer = new Schema({
    reseller: { type: Schema.Types.ObjectId , ref: 'Reseller'},
    notes: { type: String, required: true},
    policy: { type: Schema.Types.ObjectId , ref: 'Policy'},
-   
    status: { type: Number, default:1}
 });
 

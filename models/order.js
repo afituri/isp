@@ -6,18 +6,17 @@ var Schema = mongoose.Schema;
 var Order = new Schema({
    invoice: { type : mongoose.Schema.ObjectId, ref : 'Invoice'},
    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
-   createDate: Date,
-   type: { type: Number, required: [true, 'Why no type?']},
+   /*type: { type: Number, required: [true, 'Why no type?']},
    notes: { type: String, required: true},
    piad: { type: Number, required: [true, 'Why no piad?']},
-   left: { type: Number, required: [true, 'Why no left?']},
-   quantity: { type: Number, required: [true, 'Why no piad?']},
-   discount: { type: Number, required: [true, 'Why no piad?']},
-   price: { type: Number, required: [true, 'Why no piad?']},
-   macAddress: { type: String},
-   startDate: Date,
-   endDate: Date,
-   siteId: { type: String, required: true},
+   left: { type: Number, required: [true, 'Why no left?']},*/
+   /*quantity: { type: Number, required: [true, 'Why no piad?']},*/
+   price: { type: Number, required: [true, 'price required']},
+   // complete later 
+   macAddress: {type: String},
+   startDate: { type:Date, required: [true, 'start date required']},
+   endDate:{ type: Date, required: [true, 'end date required']},
+   siteId: { type: String},
 
    status: { type: Number, default:1}
 });

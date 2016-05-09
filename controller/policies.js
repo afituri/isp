@@ -2,7 +2,10 @@ var generatePassword = require('password-generator'),
   easyPbkdf2 = require("easy-pbkdf2")();
 var model = require("../models");
 var Policy = null;
-
+var Customer=null;
+var ProductPolicy=null;
+var Reseller=null;
+var Supplier=null;
 module.exports = {
   
   getPolicies :function(limit,page,cb){
@@ -45,7 +48,7 @@ module.exports = {
   addPolicy : function(body,cb){
     var obj ={
     name: body.name,
-    discriptoin:body.discriptoin
+    description:body.description
     }
     Policy = new model.Policy(obj);
     Policy.save(function(err,result){
@@ -61,7 +64,7 @@ module.exports = {
   updatePolicy : function(id,body,cb){
     var obj ={
     name: body.name,
-    discriptoin:body.discriptoin
+    description:body.description
     }
     model.Policy.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
@@ -74,6 +77,7 @@ module.exports = {
   },
 
   deletePolicy : function(id,cb){
+    console.log("id in "+id);
     model.Customer.find({policy:id}, function(err,resultCustomer) {
       if(resultCustomer.length > 0){
         cb(1)
@@ -86,7 +90,7 @@ module.exports = {
               if(resultReseller.length > 0){
                 cb(1)
               } else{
-                model.Supplier.remove({_id:id}, function(err,result) {
+                model.Policy.remove({_id:id}, function(err,result) {
                   if (!err) {
                     cb(2)
                   } else {

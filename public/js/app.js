@@ -10,12 +10,13 @@
     'toastr',
     'ui.bootstrap'
   ]);
-  app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig){
+  app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider){
     $stateProvider.state('home',{
       url: '/',
       templateUrl: 'pages/home.html',
       controller: 'HomeCtl'
-    }).state('resellers',{
+    })
+    .state('resellers',{
       url: '/resellers',
       templateUrl: 'pages/resellers/resellers.html',
       controller: 'ResellersCtl'
@@ -31,11 +32,19 @@
       url: '/resellers/show/:id',
       templateUrl: 'pages/resellers/showReseller.html',
       controller: 'ShowResellerCtl'
-    }).state('serviceProviders',{
+    })
+    .state('serviceProviders',{
       url: '/serviceProviders',
       templateUrl: 'pages/serviceProviders/serviceProviders.html',
       controller: 'ServiceProvidersCtl'
-    }).state('newServiceProvider',{
+    })
+    .state('invoice',{
+      url: '/customer/report',
+      templateUrl: 'pages/invoices/invoice.html',
+      controller: 'NewInvoiceCtl'
+    })
+
+    .state('newServiceProvider',{
       url: '/serviceProviders/new',
       templateUrl: 'pages/serviceProviders/newServiceProvider.html',
       controller: 'NewServiceProviderCtl'
@@ -47,7 +56,8 @@
       url: '/serviceProviders/:id/services',
       templateUrl: 'pages/serviceProviders/detailServiceProvider.html',
       controller: 'DetailServiceProviderCtl'
-    }).state('services',{
+    })
+    .state('services',{
       url: '/service',
       templateUrl: 'pages/services/services.html',
       controller: 'ServicesCtl'
@@ -59,7 +69,8 @@
       url: '/services/edit/:id',
       templateUrl: 'pages/services/editService.html',
       controller: 'EditServiceCtl'
-    }).state('suppliers',{
+    })
+    .state('suppliers',{
       url: '/suppliers',
       templateUrl: 'pages/suppliers/suppliers.html',
       controller: 'SuppliersCtl'
@@ -71,7 +82,8 @@
       url: '/suppliers/edit/:id',
       templateUrl: 'pages/suppliers/editSupplier.html',
       controller: 'EditSupplierCtl'
-    }).state('warehouses',{
+    })
+    .state('warehouses',{
       url: '/warehouses',
       templateUrl: 'pages/warehouses/warehouses.html',
       controller: 'WarehousesCtl'
@@ -83,23 +95,34 @@
       url: '/warehouses/edit/:id',
       templateUrl: 'pages/warehouses/editWarehouse.html',
       controller: 'EditWarehouseCtl'
-    }).state('customers',{
+    })
+    .state('customers',{
       url: '/customers',
       templateUrl: 'pages/customers/customers.html',
       controller: 'CustomersCtl'
-    }).state('newCustomer',{
-      url: '/customers/new',
-      templateUrl: 'pages/customers/newCustomer.html',
-      controller: 'NewCustomerCtl'
+    // }).state('newCustomer',{
+      // url: '/customers/new',
+      // templateUrl: 'pages/customers/newCustomer.html',
+      // controller: 'NewCustomerCtl'
     }).state('editCustomer',{
       url: '/customers/edit/:id',
       templateUrl: 'pages/customers/editCustomer.html',
       controller: 'EditCustomerCtl'
-    }).state('products',{
-      url: '/products',
-      templateUrl: 'pages/products/products.html',
-      controller: 'ProductsCtl'
-    }).state('newProduct',{
+    })
+    .state('productServices',{
+      url: '/products/services',
+      templateUrl: 'pages/products/productServices.html',
+      controller: 'ProductServicesCtl'
+    }).state('productItems',{
+      url: '/products/items',
+      templateUrl: 'pages/products/productItems.html',
+      controller: 'ProductItemsCtl'
+    }).state('productPackages',{
+      url: '/products/packages',
+      templateUrl: 'pages/products/productPackages.html',
+      controller: 'ProductPackagesCtl'
+    })
+    .state('newProduct',{
       url: '/products/new',
       templateUrl: 'pages/products/newProduct.html',
       controller: 'NewProductCtl'
@@ -107,6 +130,45 @@
       url: '/products/edit/:id',
       templateUrl: 'pages/products/editProduct.html',
       controller: 'EditProductCtl'
+    })
+    .state('policies',{
+      url: '/policies',
+      templateUrl: 'pages/policies/policies.html',
+      controller: 'PoliciesCtl'
+    }).state('newPolicy',{
+      url: '/policies/new',
+      templateUrl: 'pages/policies/newPolicy.html',
+      controller: 'NewPolicyCtl'
+    }).state('editPolicy',{
+      url: '/policies/edit/:id',
+      templateUrl: 'pages/policies/editPolicy.html',
+      controller: 'EditPolicyCtl'
+    })
+    .state('productPolicies',{
+      url: '/productPolicies',
+      templateUrl: 'pages/productPolicies/productPolicies.html',
+      controller: 'ProductPoliciesCtl'
+    }).state('newProductPolicy',{
+      url: '/productPolicies/new',
+      templateUrl: 'pages/productPolicies/newProductPolicy.html',
+      controller: 'NewProductPolicyCtl'
+    }).state('editProductPolicy',{
+      url: '/productPolicies/edit/:id',
+      templateUrl: 'pages/productPolicies/editProductPolicy.html',
+      controller: 'EditProductPolicyCtl'
+    })
+    .state('invoices',{
+      url: '/invoices',
+      templateUrl: 'pages/invoices/invoices.html',
+      controller: 'InvoicesCtl'
+    }).state('newInvoice',{
+      url: '/invoices/new',
+      templateUrl: 'pages/invoices/newInvoice.html',
+      controller: 'NewInvoiceCtl'
+    }).state('editInvoice',{
+      url: '/invoices/edit/:id',
+      templateUrl: 'pages/invoices/editInvoice.html',
+      controller: 'EditInvoiceCtl'
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');
@@ -114,13 +176,18 @@
       animation: 'am-flip-x',
       html: true
     });
-    angular.extend($modalProvider.defaults, {
-      animation: 'am-flip-x'
-    });
     angular.extend(toastrConfig, {
       positionClass: 'toast-top-left',
       progressBar: true,
       tapToDismiss: true
+    });
+    angular.extend($modalProvider.defaults, {
+      animation: 'am-fade-and-scale',
+      placement: 'center'
+    });
+    angular.extend($datepickerProvider.defaults, {
+      dateFormat: 'd/M/yyyy',
+      autoclose: true
     });
   }]);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
