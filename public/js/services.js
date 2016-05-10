@@ -6,6 +6,12 @@
       'active': -1
     }
   });
+  app.service('ReportServ',['$http',function($http){
+    var self = {
+      'invoiceObj': []
+    };
+    return self;
+  }]);
   app.service('HelperServ',['$http',function($http){
     var self = {
       'citiesObj': [],
