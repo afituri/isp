@@ -28,7 +28,7 @@ module.exports = {
     limit = parseInt(limit);
     model.Product.count({type:"item"},function(err,count){
       model.Product.find({type:"item"}).limit(limit).skip(page*limit)
-      .populate('supplier')
+      .populate('item.supplier')
       .exec(function(err, products){
         if(!err){
           cb({result:products,count:count});
@@ -91,6 +91,23 @@ module.exports = {
         }
       });
   },
+
+  getItemById: function(id,cb){
+      model.Product.find({_id:id})
+      .populate('item.supplier')
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+
+  },
+
+
+
 
   getProductPackage :function(limit,page,cb){
     page = parseInt(page);
@@ -201,7 +218,6 @@ module.exports = {
   },
 
     updateService : function(id,body,cb){
-      console.log(body);
     var obj ={
       name : body.name,
       discriptoin:body.discriptoin,
@@ -213,6 +229,29 @@ module.exports = {
         cb(true)
       } else {
         console.log(err);
+        cb(false);
+      }
+    });
+  },
+
+  updateItem: function(id,body,cb){
+    console.log("body");
+    console.log(body);
+    var obj ={
+      name : body.name,
+      discriptoin:body.discriptoin,
+      initialPrice:body.initialPrice,
+      item : {
+         made:body.city,
+         brand:body.item.brand,
+         supplier: body.item.supplier
+        }
+      }
+    model.Product.update({_id:id}, obj, function(err,result) {
+      console.log(err);
+      if (!err) {
+        cb(true)
+      } else {
         cb(false);
       }
     });

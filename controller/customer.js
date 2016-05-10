@@ -22,7 +22,7 @@ module.exports = {
     });
   },
 
-  getAllCustomer :function(limit,page,cb){
+  getAllCustomer :function(cb){
     model.Customer.find({},function(err, customers){
       if(!err){
         cb(customers);

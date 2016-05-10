@@ -428,6 +428,7 @@
     $scope.editWarehouseForm = {};
     $scope.objects = HelperServ;
     WarehousesServ.getWarehouseByID($stateParams.id).then(function(response) {
+console.log(response.data);
       $scope.editWarehouseForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
@@ -540,7 +541,8 @@
     $scope.total = 0;
     $scope.editProductServiceForm = {};
     ProductsServ.getProductServiceByID($stateParams.id).then(function(response) {
-      $scope.editProductServiceForm = response.data;
+      console.log(response.data);
+      $scope.editProductServiceForm = response.data[0];
     }, function(response) {
       console.log("Something went wrong");
     });
@@ -594,21 +596,52 @@
       });
     };
   }]);
-  app.controller('ProductItemsCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
+
+
+  app.controller('ProductItemsCtl',['$scope','$state','$stateParams','HelperServ','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,$stateParams,HelperServ,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+     HelperServ.getAllSuppliers();
+    $scope.objects = HelperServ;
+    HelperServ.getAllCities();
+    $scope.cityObject = HelperServ;
+
     $scope.init = function () {
       ProductsServ.getProductItems($scope.pageSize,$scope.currentPage).then(function(response) {
-        $scope.products = response.data.result;
+        $scope.productItems = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
     }
     $scope.init();
+    $scope.editProductItemForm = {};
+    ProductsServ.getProductServiceByID($stateParams.id,$scope.editProductItemForm).then(function(response) {
+
+      $scope.editProductItemForm = response.data[0];
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+
+    $scope.editProductItems = function(){
+      var objCity=angular.element('#country').val();
+      console.log(objCity.slice(7,objCity.length));
+      $scope.editProductItemForm.city=objCity.slice(7,objCity.length);
+      ProductsServ.editProductItem($stateParams.id,$scope.editProductItemForm).then(function(response) {
+        if(response.data){
+          $state.go('productItems');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+
     $scope.showDeleteModel = function(id){
       $scope.id = id;
       $scope.deleteName = "هذا المنتج (المعدة)";
@@ -619,7 +652,7 @@
       });
     };
     $scope.confirmDelete = function(id){
-      ProductsServ.deleteProduct(id).then(function(response) {
+      ProductsServ.deleteProductService(id).then(function(response) {
         if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
@@ -637,6 +670,8 @@
       });
     };
   }]);
+
+
   app.controller('ProductPackagesCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -680,6 +715,7 @@
       });
     };
   }]);
+  
   app.controller('NewProductCtl',['$scope','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -734,6 +770,7 @@
       });
     };
   }]);
+
   app.controller('EditProductCtl',['$scope','$state','$stateParams','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -944,7 +981,6 @@
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            //console.log(response);
             window.location.href='/report/printInvoice';
           }
         },function(response){
