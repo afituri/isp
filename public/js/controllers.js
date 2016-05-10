@@ -596,12 +596,17 @@
   }]);
 
 
-  app.controller('ProductItemsCtl',['$scope','$modal','MenuFac','ProductsServ','toastr',function($scope,$modal,MenuFac,ProductsServ,toastr){
+  app.controller('ProductItemsCtl',['$scope','$state','$stateParams','HelperServ','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,$stateParams,HelperServ,$modal,MenuFac,ProductsServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+     HelperServ.getAllSuppliers();
+    $scope.objects = HelperServ;
+    HelperServ.getAllCities();
+    $scope.cityObject = HelperServ;
+
     $scope.init = function () {
       ProductsServ.getProductItems($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.productItems = response.data.result;
@@ -611,6 +616,26 @@
       });
     }
     $scope.init();
+    $scope.editProductItemForm = {};
+    ProductsServ.getProductServiceByID($stateParams.id,$scope.editProductItemForm).then(function(response) {
+      $scope.editProductItemForm = response.data[0];
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+
+    $scope.editProductItems = function(){
+      ProductsServ.editProductItem($stateParams.id,$scope.editProductItemForm).then(function(response) {
+        if(response.data){
+          $state.go('productItems');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+
     $scope.showDeleteModel = function(id){
       $scope.id = id;
       $scope.deleteName = "هذا المنتج (المعدة)";
@@ -621,7 +646,7 @@
       });
     };
     $scope.confirmDelete = function(id){
-      ProductsServ.deleteProduct(id).then(function(response) {
+      ProductsServ.deleteProductService(id).then(function(response) {
         if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');

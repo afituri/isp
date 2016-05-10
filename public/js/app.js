@@ -114,11 +114,16 @@
       url: '/products/services',
       templateUrl: 'pages/products/productServices.html',
       controller: 'ProductServicesCtl'
-    }).state('productItems',{
+    })
+    
+    .state('productItems',{
       url: '/products/items',
       templateUrl: 'pages/products/productItems.html',
       controller: 'ProductItemsCtl'
-    }).state('productPackages',{
+    })
+    
+
+    .state('productPackages',{
       url: '/products/packages',
       templateUrl: 'pages/products/productPackages.html',
       controller: 'ProductPackagesCtl'
@@ -128,11 +133,15 @@
       templateUrl: 'pages/products/newProduct.html',
       controller: 'NewProductCtl'
     })
-    //00000
     .state('editProductService',{
       url: '/product/productService/edit/:id',
       templateUrl: 'pages/products/editService.html',
       controller: 'ProductServicesCtl'
+    })
+    .state('editProductItems',{
+      url: '/product/productItems/edit/:id',
+      templateUrl: 'pages/products/editProductItem.html',
+      controller: 'ProductItemsCtl',
     })
 
     .state('editProduct',{

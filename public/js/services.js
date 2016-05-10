@@ -205,8 +205,9 @@
     };
     return self;
   }]);
-  app.service('ProductsServ',['$http',function($http){
-    var self = {
+
+ /* app.service('ProductsItem',['$http',function($http){
+     var self = {
       'getProductServices': function(pageSize,currentPage){
         return $http.get('/product/service/'+pageSize+'/'+currentPage);
       },
@@ -239,7 +240,49 @@
       }
     };
     return self;
+   }]);*/
+
+
+  app.service('ProductsServ',['$http',function($http){
+    var self = {
+      'getProductServices': function(pageSize,currentPage){
+        return $http.get('/product/service/'+pageSize+'/'+currentPage);
+      },
+      'getProductItems': function(pageSize,currentPage){
+        return $http.get('/product/item/'+pageSize+'/'+currentPage);
+      },
+      'getProductPackages': function(pageSize,currentPage){
+        return $http.get('/product/package/'+pageSize+'/'+currentPage);
+      },
+      'getProductByID': function(id){
+        return $http.get('/product/'+id);
+      },
+      'addProduct': function(productObj){
+        return $http.post('/product/add',productObj);
+      },
+      'editProduct': function(id,productObj){
+        return $http.put('/product/edit/'+id,productObj);
+      },
+      'getProductServiceByID':function(id,serviceObj){
+        return $http.put('/product/productService/'+id,serviceObj);
+      },
+      'editProductService':function(id,productObj){
+        return $http.put('/product/productService/edit/'+id,productObj);
+      },
+      'editProductItem':function(id,productObj){
+        return $http.put('/product/productItems/edit/'+id,productObj);
+      },
+      'deleteProductService': function(id){
+        return $http.delete('/product/productService/delete/'+id);
+      },
+      'deleteProduct': function(id){
+        return $http.delete('/product/delete/'+id);
+      }
+    };
+    return self;
   }]);
+
+  
   app.service('PoliciesServ',['$http',function($http){
     var self = {
       'getPolicies': function(pageSize,currentPage){

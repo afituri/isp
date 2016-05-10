@@ -21,6 +21,7 @@
           <th>سعر المعدة</th>
           <th>المورد</th>
           <th>بلد الصنع</th>
+          <th class="text-center"><em class="fa fa-cog"></em></th>
 <!--           <th class="numeric">Price</th>
           <th class="numeric">Change</th>
           <th class="numeric">Change %</th>
@@ -34,7 +35,17 @@
         <tr>
           <td>{{item.name}}</td>
           <td>{{item.initialPrice}}</td>
-          <td>{{item.}}</td>
+          <td>{{item.item.supplier.name}}</td>
+          <td>{{cityObject.citiesObj[item.item.made-1].nameAr}}</td>
+          <td class="text-center">
+             <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="اسم العلامة التجارية :- {{item.item.brand}}<br/>معلومات عن الخدمة:- {{item.discriptoin}}" bs-popover>
+              <em class="fa fa-info fa-fw"></em>
+            </button>
+            <a class="btn btn-warning btn-sm" ui-sref="editProductItems({id:item._id})" data-trigger="hover" data-title="تعديل" bs-tooltip ><em class="fa fa-pencil fa-fw" ></em></a>
+            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" ng-click="showDeleteModel(item._id)" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
+          </td>
+
+        <!--   cityObject -->
 <!--           <td class="numeric">$1.38</td>
           <td class="numeric">-0.01</td>
           <td class="numeric">-0.36%</td>

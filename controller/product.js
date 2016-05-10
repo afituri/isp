@@ -28,7 +28,7 @@ module.exports = {
     limit = parseInt(limit);
     model.Product.count({type:"item"},function(err,count){
       model.Product.find({type:"item"}).limit(limit).skip(page*limit)
-      .populate('supplier')
+      .populate('item.supplier')
       .exec(function(err, products){
         if(!err){
           cb({result:products,count:count});
@@ -91,6 +91,23 @@ module.exports = {
         }
       });
   },
+
+  getItemById: function(id,cb){
+      model.Product.find({_id:id})
+      .populate('item.supplier')
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+
+  },
+
+
+
 
   getProductPackage :function(limit,page,cb){
     page = parseInt(page);
@@ -201,7 +218,6 @@ module.exports = {
   },
 
     updateService : function(id,body,cb){
-      console.log(body);
     var obj ={
       name : body.name,
       discriptoin:body.discriptoin,
@@ -212,6 +228,47 @@ module.exports = {
       if (!err) {
         cb(true)
       } else {
+        console.log(err);
+        cb(false);
+      }
+    });
+  },
+
+  updateItem: function(id,body,cb){
+    console.log("body");
+    console.log(body);
+    var obj ={
+      name : body.name,
+      discriptoin:body.discriptoin,
+      initialPrice:body.initialPrice,
+      item:null
+     /* item : {
+        brand:body.item.brand,
+        made:body.item.made,
+        supplier: body.item.supplier._id
+        }*/
+      }
+
+      if(body.type=='item'){
+        obj['item']={
+         made:body.item.made,
+         brand:body.item.brand,
+         supplier: body.item.supplier
+      }
+    }
+
+
+
+
+    
+    console.log("obj");
+    console.log(obj);
+    model.Product.update({_id:id}, obj, function(err,result) {
+      console.log(err);
+      if (!err) {
+        cb(true)
+      } else {
+        console.log("err");
         console.log(err);
         cb(false);
       }

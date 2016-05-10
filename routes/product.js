@@ -55,13 +55,20 @@ router.post('/add', function(req, res) {
 
 
 router.put('/productService/:id', function(req, res) {
-  productMgr.getServiceById(req.params.id,function(productService){
+  productMgr.getItemById(req.params.id,function(productService){
+    console.log(productService);
     res.send(productService);
   });
 });
 
 router.put('/productService/edit/:id', function(req, res) {
   productMgr.updateService(req.params.id,req.body,function(productService){
+    res.send(productService);
+  });
+});
+//productItems
+router.put('/productItems/edit/:id', function(req, res) {
+  productMgr.updateItem(req.params.id,req.body,function(productService){
     res.send(productService);
   });
 });
