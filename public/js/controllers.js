@@ -428,6 +428,7 @@
     $scope.editWarehouseForm = {};
     $scope.objects = HelperServ;
     WarehousesServ.getWarehouseByID($stateParams.id).then(function(response) {
+console.log(response.data);
       $scope.editWarehouseForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
@@ -540,7 +541,8 @@
     $scope.total = 0;
     $scope.editProductServiceForm = {};
     ProductsServ.getProductServiceByID($stateParams.id).then(function(response) {
-      $scope.editProductServiceForm = response.data;
+      console.log(response.data);
+      $scope.editProductServiceForm = response.data[0];
     }, function(response) {
       console.log("Something went wrong");
     });
@@ -618,12 +620,16 @@
     $scope.init();
     $scope.editProductItemForm = {};
     ProductsServ.getProductServiceByID($stateParams.id,$scope.editProductItemForm).then(function(response) {
+
       $scope.editProductItemForm = response.data[0];
     }, function(response) {
       console.log("Something went wrong");
     });
 
     $scope.editProductItems = function(){
+      var objCity=angular.element('#country').val();
+      console.log(objCity.slice(7,objCity.length));
+      $scope.editProductItemForm.city=objCity.slice(7,objCity.length);
       ProductsServ.editProductItem($stateParams.id,$scope.editProductItemForm).then(function(response) {
         if(response.data){
           $state.go('productItems');

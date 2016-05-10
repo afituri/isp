@@ -241,35 +241,17 @@ module.exports = {
       name : body.name,
       discriptoin:body.discriptoin,
       initialPrice:body.initialPrice,
-      item:null
-     /* item : {
-        brand:body.item.brand,
-        made:body.item.made,
-        supplier: body.item.supplier._id
-        }*/
-      }
-
-      if(body.type=='item'){
-        obj['item']={
-         made:body.item.made,
+      item : {
+         made:body.city,
          brand:body.item.brand,
          supplier: body.item.supplier
+        }
       }
-    }
-
-
-
-
-    
-    console.log("obj");
-    console.log(obj);
     model.Product.update({_id:id}, obj, function(err,result) {
       console.log(err);
       if (!err) {
         cb(true)
       } else {
-        console.log("err");
-        console.log(err);
         cb(false);
       }
     });

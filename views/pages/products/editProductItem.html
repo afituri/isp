@@ -1,5 +1,5 @@
 <div class="widget-box animated fadeIn">
-  <h5><i class="fa fa-plus"></i>&nbsp;إضافة عميل جديد</h5>
+  <h5><i class="fa fa-plus"></i>&nbsp; تعديل منتج المعدة </h5>
   <hr>
    <div data-title="معدة - item" name="tap2" bs-pane>
       <form novalidate ng-submit="editProductItems()">
@@ -13,13 +13,13 @@
           <div class="col-md-3">
             <div class="form-group">
               <label class="control-label">سعر المعدة</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductItemForm.initialPrice" placeholder="سعر المعدة" required>
+              <input class="form-control input-sm" type="text" ng-model="editProductItemForm.initialPrice" placeholder="سعر المعدة" required >
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label class="control-label">المورد</label>
-              <select class="form-control input-sm" ng-model="editProductItemForm.item.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj" required>
+              <select class="form-control input-sm" ng-model="editProductItemForm.item.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj track by supplier._id" required>
                 <option value="" disabled selected>الرجاء الاختيار</option>
               </select>
             </div>
@@ -27,9 +27,10 @@
           <div class="col-md-3">
             <div class="form-group">
               <label class="control-label">بلد الصنع</label>
-              <select class="form-control input-sm" ng-model="editProductItemForm.item.made" ng-options="city.id as city.nameAr for city in objects.citiesObj" required>
-                <option value="" disabled selected>الرجاء الاختيار</option>
+              <select id="country" class="form-control input-sm" ng-model="cityObject.citiesObj[editProductItemForm.item.made -1].id" ng-options="made.id as made.nameAr for made in objects.citiesObj"  required >
+                <option value="" disabled >الرجاء الاختيار</option>
               </select>
+            
             </div>
           </div>
         </div>
