@@ -5,15 +5,17 @@ var services = null;
 
 module.exports = {
   getServices :function(limit,page,cb){
+    console.log(limit+" "+page);
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.Services.count({},function(err,count){
-      model.Services.find({}).limit(limit).skip(page*limit)
-      .populate('servicesProvider', 'name')
-      .exec(function(err, services){
+    model.Service.count({},function(err,count){
+      model.Service.find({}).limit(limit).skip(page*limit)
+      .populate('Serviceprovider')
+      .exec(function(err, service){
         if(!err){
-          cb({result:services,count:count});
+           console.log(service);
+          cb({result:service,count:count});
         }else{
           console.log(err);
           cb(null);
@@ -51,13 +53,14 @@ module.exports = {
   },
   addServices : function(body,cb){
     var obj ={
-      name : body.name,
+      name : body.name.toString(),
       servicesProvider : body.servicesProvider,
-      description : body.description
+      description : body.description.toString()
      }
-    services = new model.Services(obj);
+    services = new model.Service(obj);
     services.save(function(err,result){
       if (!err) {
+        console.log(err);
         cb(true);
 
       } else {
@@ -67,6 +70,7 @@ module.exports = {
       }
     });
   },
+
   updateServices : function(id,body,cb){
     var obj ={
       name : body.name,

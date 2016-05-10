@@ -115,8 +115,9 @@ module.exports = {
     limit = parseInt(limit);
     model.Product.count({type:"package"},function(err,count){
       model.Product.find({type:"package"}).limit(limit).skip(page*limit)
-      .populate('service')
+      .populate('packages.type')
       .exec(function(err, products){
+        console.log(products);
         if(!err){
           cb({result:products,count:count});
         }else{

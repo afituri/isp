@@ -568,7 +568,6 @@ console.log(response.data);
     }
     $scope.init();
     $scope.showDeleteModel = function(id){
-      //alert(id);
       $scope.id = id;
       $scope.deleteName = "منتج الخدمة";
       $scope.deleteModel = $modal({
