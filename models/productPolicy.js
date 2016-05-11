@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
-var ProductPolicy = new Schema({
+var Productpolicy = new Schema({
    product: { type: Schema.Types.ObjectId , ref: 'Product'},
    policy: { type: Schema.Types.ObjectId , ref: 'Policy'},
    type: { type: String, enum: ['service', 'item', 'package'], required: true},
@@ -19,6 +19,6 @@ var ProductPolicy = new Schema({
    status: { type: Number, default:1}
 });
 
-ProductPolicy.plugin(timestamps);
-ProductPolicy.index({ name: 'text'});
-exports.ProductPolicy = mongoose.model('ProductPolicy', ProductPolicy);
+Productpolicy.plugin(timestamps);
+Productpolicy.index({ name: 'text'});
+exports.Productpolicy = mongoose.model('Productpolicy', Productpolicy);

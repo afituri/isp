@@ -318,11 +318,11 @@
   }]);
   app.service('ProductPoliciesServ',['$http',function($http){
     var self = {
-      'getProductPolicies': function(pageSize,currentPage){
-        return $http.get('/productPolicy/'+pageSize+'/'+currentPage);
+      'getProductPolicies': function(pageSize,currentPage,type){
+        return $http.post('/policy/productPolicy/'+pageSize+'/'+currentPage,type);
       },
       'getProductPolicyByID': function(id){
-        return $http.get('/productPolicy/'+id);
+        return $http.get('/policy/productPolicyService/'+id);
       },
       'addProductPolicy': function(productPolicyObj){
         return $http.post('/policy/productPolicy/add',productPolicyObj);
@@ -331,7 +331,7 @@
         return $http.put('/productPolicy/edit/'+id,productPolicyObj);
       },
       'deleteProductPolicy': function(id){
-        return $http.delete('/productPolicy/delete/'+id);
+        return $http.delete('/policy/productPolicy/delete/'+id);
       }
     };
     return self;

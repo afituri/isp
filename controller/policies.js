@@ -3,7 +3,7 @@ var generatePassword = require('password-generator'),
 var model = require("../models");
 var Policy = null;
 var Customer=null;
-var ProductPolicy=null;
+var Productpolicy=null;
 var Reseller=null;
 var Supplier=null;
 module.exports = {
@@ -82,7 +82,7 @@ module.exports = {
       if(resultCustomer.length > 0){
         cb(1)
       } else{
-        model.ProductPolicy.find({policy:id}, function(err,resultProductPolicy) {
+        model.Productpolicy.find({policy:id}, function(err,resultProductPolicy) {
           if(resultProductPolicy.length > 0){
             cb(1)
           } else{

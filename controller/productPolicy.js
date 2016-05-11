@@ -4,12 +4,16 @@ var model = require("../models");
 var productP = null;
 
 module.exports = {
-  getProductP :function(limit,page,cb){
+  getProductP :function(type,limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.ProductPolicy.count({},function(err,count){
-      model.ProductPolicy.find({}).limit(limit).skip(page*limit).exec(function(err, pPolicies){
+    model.Productpolicy.count({type:type},function(err,count){
+      model.Productpolicy.find({type:type}).limit(limit).skip(page*limit)
+      .populate('policy')
+      .populate('product')
+      .exec(function(err, pPolicies){
+        console.log(pPolicies);
         if(!err){
           cb({result:pPolicies,count:count});
         }else{
@@ -21,7 +25,7 @@ module.exports = {
   },
 
   getAllProductP :function(cb){
-    model.ProductPolicy.find({},function(err, pPolicies){
+    model.Productpolicy.find({},function(err, pPolicies){
       if(!err){
         cb(pPolicies);
       }else{
@@ -30,7 +34,7 @@ module.exports = {
       }
     });
   },
-  getProductP :function(id,cb){
+/*  getProductP :function(id,cb){
     model.ProductPolicy.find({policy:id},function(err, pPolicies){
       if(!err){
         cb(pPolicies);
@@ -38,9 +42,9 @@ module.exports = {
         cb(null);
       }
     });
-  },
+  },*/
   getProductPId :function(id,cb){
-    model.ProductPolicy.findOne({_id : id}, function(err, pPolicies){
+    model.Productpolicy.findOne({_id : id}, function(err, pPolicies){
       if(!err){
         cb(pPolicies);
       }else{
@@ -69,7 +73,7 @@ module.exports = {
   //   }
   // }
     var obj=body;
-    productP = new model.ProductPolicy(obj);
+    productP = new model.Productpolicy(obj);
     productP.save(function(err,result){
       if (!err) {
         cb(true);
@@ -100,7 +104,7 @@ module.exports = {
   //   }
   // }
     var obj=body;
-    model.ProductPolicy.findOneAndUpdate({_id:id}, obj, function(err,result) {
+    model.Productpolicy.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
       } else {
@@ -115,7 +119,7 @@ module.exports = {
       if(resul.length > 0){
         cb(1)
       } else{
-        model.ProductPolicy.remove({_id:id}, function(err,result) {
+        model.Productpolicy.remove({_id:id}, function(err,result) {
           if (!err) {
             cb(2)
           } else {
@@ -125,6 +129,23 @@ module.exports = {
         });
       }
     });
+  },
+
+  deleteProductPolicyService : function(id,cb){
+/*    model.Invoice.find({customer:id}, function(err,resul) {
+      if(resul.length > 0){
+        cb(1)
+      } else{*/
+        model.Productpolicy.remove({_id:id}, function(err,result) {
+          if (!err) {
+            cb(2)
+          } else {
+            console.log(err);
+            cb(3);
+          }
+        });
+     // }
+   // });
   },
 
 };

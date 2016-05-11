@@ -932,7 +932,85 @@ console.log(response.data);
   app.controller('ProductPoliciesCtl',['$scope','MenuFac','ProductPoliciesServ',function($scope,MenuFac,ProductPoliciesServ){
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
+  
   }]);
+
+  app.controller('ProductPoliciesServiceCtl',['$scope','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+    MenuFac.active = 8;
+    $scope.activePanel = MenuFac;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.editPolicyServiceForm = {};
+   
+    ProductPoliciesServ.getProductPolicyByID($stateParams.id).then(function(response) {
+      console.log("her");
+      console.log(response.data);
+      $scope.editPolicyForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+ /*   $scope.editPolicy = function(){
+      PoliciesServ.editPolicy($stateParams.id,$scope.editPolicyForm).then(function(response) {
+        if(response.data){
+          $state.go('policies');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+*/
+
+
+
+
+
+
+
+    $scope.init = function () {
+      ProductPoliciesServ.getProductPolicies($scope.pageSize,$scope.currentPage,{type:"service"}).then(function(response) {
+        $scope.policies = response.data.result;
+        console.log($scope.policies);
+        $scope.total = response.data.count;
+        console.log($scope.total);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.init();
+
+     $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذه سياسات منتج (الخدمة)";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ProductPoliciesServ.deleteProductPolicy(id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.init();
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+  
+  }]);
+
   app.controller('NewProductPolicyCtl',['$scope','$state','MenuFac','ProductPoliciesServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductPoliciesServ,HelperServ,toastr){
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
@@ -947,7 +1025,7 @@ console.log(response.data);
       $scope.newProductPolicyForm.type = "service";
       ProductPoliciesServ.addProductPolicy($scope.newProductPolicyForm).then(function(response){
         if(response.data){
-          $state.go('productPolicies');
+          $state.go('productPoliciesService');
           toastr.success('تمت إضافة سياسة جديدة بنجاح');
         } else {
           console.log(response.data);

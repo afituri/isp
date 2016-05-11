@@ -172,7 +172,32 @@
       url: '/productPolicies',
       templateUrl: 'pages/productPolicies/productPolicies.html',
       controller: 'ProductPoliciesCtl'
-    }).state('newProductPolicy',{
+    })
+    //productPoliciesService
+    .state('productPoliciesService',{
+      url: '/productPoliciesService',
+      templateUrl: 'pages/productPolicies/productPoliciesService.html',
+      controller: 'ProductPoliciesServiceCtl'
+    })
+    //productPoliciesItem
+    .state('productPoliciesItem',{
+      url: '/productPoliciesItem',
+      templateUrl: 'pages/productPolicies/productPoliciesItem.html',
+      controller: 'ProductPoliciesCtl'
+    })
+    //editProductPoliciesService
+    .state('editProductPoliciesService',{
+      url: '/editProductPoliciesService/:id',
+      templateUrl: 'pages/productPolicies/editProductPoliciesService.html',
+      controller: 'ProductPoliciesServiceCtl'
+    })
+    .state('productPoliciesPackage',{
+      url: '/productPoliciesPackage',
+      templateUrl: 'pages/productPolicies/productPoliciesPackage.html',
+      controller: 'ProductPoliciesCtl'
+    })
+
+    .state('newProductPolicy',{
       url: '/productPolicies/new',
       templateUrl: 'pages/productPolicies/newProductPolicy.html',
       controller: 'NewProductPolicyCtl'
