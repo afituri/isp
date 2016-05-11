@@ -18,10 +18,10 @@ module.exports = {
         recipe: "phantom-pdf",
         content: fs.readFileSync(path.join(__dirname, "../views/reports/"+HTMLprint), "utf8")
       }
-    }).then(function (response) {
-       //you can for example pipe it to express.js response
-       response.stream.pipe(res);
+    }).then(function(resp) {
+      resp.stream.pipe(res);
+    }).catch(function(e) {
+      res.end(e.message);
     });
   }
-  
 };

@@ -6,12 +6,11 @@
       'active': -1
     }
   });
-  app.service('ReportServ',['$http',function($http){
-    var self = {
+  app.factory('ReportServ',function(){
+    return {
       'invoiceObj': []
-    };
-    return self;
-  }]);
+    }
+  });
   app.service('HelperServ',['$http',function($http){
     var self = {
       'citiesObj': [],
