@@ -115,7 +115,8 @@ module.exports = {
     limit = parseInt(limit);
     model.Product.count({type:"package"},function(err,count){
       model.Product.find({type:"package"}).limit(limit).skip(page*limit)
-      .populate('service')
+      .populate('packages.type')
+      .populate('packages.service')
       .exec(function(err, products){
         if(!err){
           cb({result:products,count:count});
@@ -246,6 +247,34 @@ module.exports = {
          brand:body.item.brand,
          supplier: body.item.supplier
         }
+      }
+    model.Product.update({_id:id}, obj, function(err,result) {
+      console.log(err);
+      if (!err) {
+        cb(true)
+      } else {
+        cb(false);
+      }
+    });
+  },
+
+  updatePackage: function(id,body,cb){
+    var obj ={
+      name : body.name,
+      discriptoin:body.discriptoin,
+      initialPrice:body.initialPrice,
+      packages: {
+      type:body.packages.type,
+      service: body.packages.service,
+      dSpeed: body.packages.dSpeed,
+      uSpeed: body.packages.uSpeed,
+      monthlyQuota: body.packages.monthlyQuota,
+      renewPrice: body.packages.renewPrice,
+      GBPrice: body.packages.GBPrice,
+      cost: body.packages.cost,
+      costCurrency: body.packages.costCurrency,
+      exchangeRate: body.packages.exchangeRate
+       }
       }
     model.Product.update({_id:id}, obj, function(err,result) {
       console.log(err);

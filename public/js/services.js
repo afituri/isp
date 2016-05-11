@@ -127,10 +127,14 @@
     self.getServiceProviders();
     return self;
   }]);
+//0000 
   app.service('ServicesServ',['$http',function($http){
     var self = {
       'getServices': function(pageSize,currentPage){
         return $http.get('/service/'+pageSize+'/'+currentPage);
+      },
+      'getAllServices': function(pageSize,currentPage){
+        return $http.get('/service/all');
       },
       'getServiceByID': function(id){
         return $http.get('/service/'+id);
@@ -276,6 +280,9 @@
       },
       'editProductItem':function(id,productObj){
         return $http.put('/product/productItems/edit/'+id,productObj);
+      },
+      'editProductPackage':function(id,productObj){
+        return $http.put('/product/productPackages/edit/'+id,productObj);
       },
       'deleteProductService': function(id){
         return $http.delete('/product/productService/delete/'+id);

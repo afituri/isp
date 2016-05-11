@@ -30,7 +30,7 @@
       <tbody ng-repeat="warehouse in warehouses">
         <tr>
           <td>{{warehouse.name}}</td>
-          <td>{{warehouse.city}}, {{warehouse.area}}</td>
+          <td>{{cityObject.citiesObj[warehouse.city-1].nameAr}} , {{warehouse.area}}</td>
           <td>{{warehouse.email}}</td>
           <td>{{warehouse.phone}}</td>
           <td class="text-center">

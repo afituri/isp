@@ -101,10 +101,10 @@
       url: '/customers',
       templateUrl: 'pages/customers/customers.html',
       controller: 'CustomersCtl'
-    // }).state('newCustomer',{
-      // url: '/customers/new',
-      // templateUrl: 'pages/customers/newCustomer.html',
-      // controller: 'NewCustomerCtl'
+      }).state('newCustomer',{
+      url: '/customers/new',
+      templateUrl: 'pages/customers/newCustomer.html',
+      controller: 'NewCustomerCtl'
     }).state('editCustomer',{
       url: '/customers/edit/:id',
       templateUrl: 'pages/customers/editCustomer.html',
@@ -128,6 +128,7 @@
       templateUrl: 'pages/products/productPackages.html',
       controller: 'ProductPackagesCtl'
     })
+    
     .state('newProduct',{
       url: '/products/new',
       templateUrl: 'pages/products/newProduct.html',
@@ -137,6 +138,11 @@
       url: '/product/productService/edit/:id',
       templateUrl: 'pages/products/editService.html',
       controller: 'ProductServicesCtl'
+    })
+    .state('editProductPackages',{
+      url: '/products/ProductPackages/edit/:id',
+      templateUrl: 'pages/products/editProductPackages.html',
+      controller: 'ProductPackagesCtl'
     })
     .state('editProductItems',{
       url: '/product/productItems/edit/:id',

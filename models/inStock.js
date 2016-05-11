@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
-var InStock = new Schema({
+var Instock = new Schema({
    warehouse: { type: mongoose.Schema.Types.ObjectId, ref: 'Warehouse'},
    product: { type: mongoose.Schema.ObjectId, ref : 'Product'},
    description: { type: String},
@@ -11,6 +11,6 @@ var InStock = new Schema({
    status: { type: Number, default:1}
 });
 
-InStock.plugin(timestamps);
-InStock.index({ InStock: 'text'});
-exports.InStock = mongoose.model('InStock', InStock);
+Instock.plugin(timestamps);
+Instock.index({ Instock: 'text'});
+exports.Instock = mongoose.model('Instock', Instock);
