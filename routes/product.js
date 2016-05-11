@@ -56,7 +56,7 @@ router.post('/add', function(req, res) {
 
 router.put('/productService/:id', function(req, res) {
   productMgr.getItemById(req.params.id,function(productService){
-    console.log(productService);
+    
     res.send(productService);
   });
 });
@@ -69,6 +69,12 @@ router.put('/productService/edit/:id', function(req, res) {
 //productItems
 router.put('/productItems/edit/:id', function(req, res) {
   productMgr.updateItem(req.params.id,req.body,function(productService){
+    res.send(productService);
+  });
+});
+
+router.put('/productPackages/edit/:id', function(req, res) {
+  productMgr.updatePackage(req.params.id,req.body,function(productService){
     res.send(productService);
   });
 });

@@ -128,6 +128,7 @@
       templateUrl: 'pages/products/productPackages.html',
       controller: 'ProductPackagesCtl'
     })
+    
     .state('newProduct',{
       url: '/products/new',
       templateUrl: 'pages/products/newProduct.html',
@@ -137,6 +138,11 @@
       url: '/product/productService/edit/:id',
       templateUrl: 'pages/products/editService.html',
       controller: 'ProductServicesCtl'
+    })
+    .state('editProductPackages',{
+      url: '/products/ProductPackages/edit/:id',
+      templateUrl: 'pages/products/editProductPackages.html',
+      controller: 'ProductPackagesCtl'
     })
     .state('editProductItems',{
       url: '/product/productItems/edit/:id',

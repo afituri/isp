@@ -282,6 +282,9 @@
       'editProductItem':function(id,productObj){
         return $http.put('/product/productItems/edit/'+id,productObj);
       },
+      'editProductPackage':function(id,productObj){
+        return $http.put('/product/productPackages/edit/'+id,productObj);
+      },
       'deleteProductService': function(id){
         return $http.delete('/product/productService/delete/'+id);
       },
