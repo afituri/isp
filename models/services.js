@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var Services = new Schema({
    name: { type: String, required : true},
-   servicesProvider: { type: Schema.Types.ObjectId , ref: 'ServiceProvider'},
+   serviceprovider: { type: Schema.Types.ObjectId , ref: 'Serviceprovider'},
    description: { type: String, required : true},
    
    status: { type: Number, default:1}
@@ -12,5 +12,5 @@ var Services = new Schema({
 
 Services.plugin(timestamps); 
 Services.index({ name: 'text'});
-exports.Services = mongoose.model('Services', Services);
+exports.Service = mongoose.model('Service', Services);
 

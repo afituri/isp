@@ -128,10 +128,14 @@
     self.getServiceProviders();
     return self;
   }]);
+//0000 
   app.service('ServicesServ',['$http',function($http){
     var self = {
       'getServices': function(pageSize,currentPage){
         return $http.get('/service/'+pageSize+'/'+currentPage);
+      },
+      'getAllServices': function(pageSize,currentPage){
+        return $http.get('/service/all');
       },
       'getServiceByID': function(id){
         return $http.get('/service/'+id);

@@ -101,10 +101,10 @@
       url: '/customers',
       templateUrl: 'pages/customers/customers.html',
       controller: 'CustomersCtl'
-    // }).state('newCustomer',{
-      // url: '/customers/new',
-      // templateUrl: 'pages/customers/newCustomer.html',
-      // controller: 'NewCustomerCtl'
+      }).state('newCustomer',{
+      url: '/customers/new',
+      templateUrl: 'pages/customers/newCustomer.html',
+      controller: 'NewCustomerCtl'
     }).state('editCustomer',{
       url: '/customers/edit/:id',
       templateUrl: 'pages/customers/editCustomer.html',

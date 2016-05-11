@@ -69,10 +69,7 @@ module.exports = {
   },
 
   deleteWarehouse : function(id,cb){
-    console.log(id);
-    model.inStock.find({}, function(err,resul) {
-      console.log(resul);
-      console.log(err);
+    model.Instock.find({}, function(err,resul) {
       if(resul.length > 0){
         cb(1)
       } else{
