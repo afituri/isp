@@ -1028,7 +1028,8 @@ console.log(response.data);
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            window.location.href='/report/printInvoice';
+            console.log(response.data);
+            // window.location.href='/report/printInvoice';
           }
         },function(response){
           console.log("Something went wrong");
@@ -1041,9 +1042,6 @@ console.log(response.data);
           });
         }
     }
-    $scope.print = ReportServ;
-    $scope.print.invoiceObj = [{'id':'1','name':'aladdin'},{'id':'2','name':'Abdo'}];
-    console.log($scope.print.invoiceObj);
   }]);
   app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
     MenuFac.active = 9;

@@ -19,6 +19,7 @@ body {
   padding-top: 10px;
   background-color: #F5F5F5;
   background-image: url('../img/background.jpg');
+  background-size:cover;
 }
 /*textarea:focus,
 textarea.form-control:focus,
