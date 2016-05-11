@@ -7,28 +7,27 @@
     <style>
       @font-face {
         font-family: 'Droid Arabic Kufi';
-        src : url("http://localhost:3000/fonts/DroidKufi-Regular.ttf") format("truetype");
+        src : url("//localhost:3000/fonts/DroidKufi-Regular.ttf") format("truetype");
       }
       body {
         font-family: 'Droid Arabic Kufi', sans-serif;
         font-size: 12px;
       }
     </style>
-    <meta charset="utf-8"/>
+    <script src="http://localhost:3000/js/angular-1.4.10.min.js"></script>
+    <script src="http://localhost:3000/js/invoiceApp.js"></script>
+    <script src="http://localhost:3000/js/services.js"></script>
+    <script src="http://localhost:3000/js/invoiceCtl.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container" ng-controller="PrintInvoiceCtl">
       <div class="row">
         <div class="col-xs-12">
-          <div class="text-center">
-            <h2> بسم الله الرحمن الرحيم </h2>
+          <div class="text-center" ng-repeat="inv in invoice.invoiceObj">
+            ID: {{ inv.id }}, Name: {{ inv.name }}
           </div>
         </div>
       </div>
     </div>
-    <link rel="stylesheet" href="http://localhost:3000/angular/angular.min.js">
-    <link rel="stylesheet" href="http://localhost:3000/js/invoiceApp.js">
-    <link rel="stylesheet" href="http://localhost:3000/js/services.js">
-    <link rel="stylesheet" href="http://localhost:3000/js/invoiceCtl.js">
   </body>
 </html>

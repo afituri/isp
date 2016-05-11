@@ -946,7 +946,7 @@ console.log(response.data);
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
-  app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http){
+  app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){
    
     $scope.myFunc = function() {
       $scope.search=angular.element('#Text1').val();
@@ -994,6 +994,9 @@ console.log(response.data);
           });
         }
     }
+    $scope.print = ReportServ;
+    $scope.print.invoiceObj = [{'id':'1','name':'aladdin'},{'id':'2','name':'Abdo'}];
+    console.log($scope.print.invoiceObj);
   }]);
   app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
     MenuFac.active = 9;
