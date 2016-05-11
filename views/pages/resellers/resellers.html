@@ -25,7 +25,8 @@
           <td>{{reseller.companyName}}</td>
           <td>{{reseller.email}}</td>
           <td class="text-center">
-            <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدينة:- {{reseller.city}}<br/>المنطقة:- {{reseller.address}}<br/>خط الطول:- {{reseller.langtitude}}<br/>خط العرض:- {{reseller.longtitude}}<br/>رقم الهاتف:- {{reseller.phone}}" bs-popover>
+            
+            <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدينة:- {{cityObject.citiesObj[reseller.city-1].nameAr}}<br/>المنطقة:- {{reseller.address}}<br/>خط الطول:- {{reseller.langtitude}}<br/>خط العرض:- {{reseller.longtitude}}<br/>رقم الهاتف:- {{reseller.phone}}" bs-popover>
               <em class="fa fa-info fa-fw"></em>
             </button>
             <a class="btn btn-primary btn-sm" ui-sref="showReseller({id:reseller._id})" data-trigger="hover" data-title="عرض" bs-tooltip><em class="fa fa-eye fa-fw"></em></a>

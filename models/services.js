@@ -4,11 +4,12 @@ var Schema = mongoose.Schema;
 
 var Service = new Schema({
    name: { type: String, required : true},
-   servicesProvider: { type: Schema.Types.ObjectId , ref: 'ServiceProvider'},
+   serviceprovider: { type: Schema.Types.ObjectId , ref: 'Serviceprovider'},
    description: { type: String, required : true},
    
    status: { type: Number, default:1}
 });
+
 
 Service.plugin(timestamps); 
 Service.index({ name: 'text'});

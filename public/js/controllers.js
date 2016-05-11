@@ -167,6 +167,7 @@
     $scope.serviceProviders = ServiceProvidersServ;
     ServicesServ.getServiceByID($stateParams.id).then(function(response) {
       $scope.editServiceForm = response.data;
+      console.log($scope.editServiceForm);
     }, function(response) {
       console.log("Something went wrong");
     });
@@ -185,11 +186,14 @@
   }]);
   // Service Controllers End
   // Service Resellers Controllers Start
-  app.controller('ResellersCtl',['$scope','$modal','ResllersServ','MenuFac','toastr',function($scope,$modal,ResllersServ,MenuFac,toastr){
+  app.controller('ResellersCtl',['$scope','HelperServ','$modal','ResllersServ','MenuFac','toastr',function($scope,HelperServ,$modal,ResllersServ,MenuFac,toastr){
     MenuFac.active = 2;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+    HelperServ.getAllCities();
+    $scope.cityObject = HelperServ;
+    // 55555
     $scope.init = function () {
       ResllersServ.getResellers($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.resellers = response.data.result;
@@ -346,6 +350,7 @@
     }, function(response) {
       console.log("Something went wrong");
     });
+    //44444
     $scope.editService = function(){
       SuppliersServ.editSupplier($stateParams.id,$scope.editSupplierForm).then(function(response) {
         if(response.data){
@@ -361,12 +366,14 @@
   }]);
   // Suppliers Controllers End
   // Warehouses Controllers Start
-  app.controller('WarehousesCtl',['$scope','$modal','MenuFac','WarehousesServ','toastr',function($scope,$modal,MenuFac,WarehousesServ,toastr){
+  app.controller('WarehousesCtl',['$scope','$modal','HelperServ','MenuFac','WarehousesServ','toastr',function($scope,$modal,HelperServ,MenuFac,WarehousesServ,toastr){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+    HelperServ.getAllCities();
+    $scope.cityObject = HelperServ;
     $scope.init = function () {
       WarehousesServ.getWarehouses($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.warehouses = response.data.result;
@@ -715,13 +722,20 @@ console.log(response.data);
     };
   }]);
   
-  app.controller('NewProductCtl',['$scope','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductsServ,HelperServ,toastr){
+  app.controller('NewProductCtl',['$scope','ServicesServ','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,ServicesServ,$state,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 6;
+    
     $scope.activePanel = MenuFac;
     $scope.newProductForm = {};
     HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
+    console.log($scope.objects);
     $scope.activeTab = "tap1";
+    ServicesServ.getAllServices().then(function(response){
+        $scope.ObjService=response.data;
+    },function(response){
+        console.log("Something went wrong");
+      });
     $scope.getServiceByID = function(id){
       HelperServ.getServiceProvidersServicesByID(id).then(function(response){
         $scope.serviceProviderOfservices = response.data;

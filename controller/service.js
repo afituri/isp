@@ -5,17 +5,16 @@ var services = null;
 
 module.exports = {
   getServices :function(limit,page,cb){
-    console.log(limit+" "+page);
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
     model.Service.count({},function(err,count){
       model.Service.find({}).limit(limit).skip(page*limit)
-      .populate('Serviceprovider')
-      .exec(function(err, service){
+      .populate('serviceprovider')
+      .exec(function(err, services){
         if(!err){
-           console.log(service);
-          cb({result:service,count:count});
+          console.log(services);
+          cb({result:services,count:count});
         }else{
           console.log(err);
           cb(null);
@@ -24,7 +23,7 @@ module.exports = {
     });
   },
   getAllServices :function(cb){
-    model.Services.find({},function(err, services){
+    model.Service.find({},function(err, services){
       if(!err){
         cb(services);
       }else{
@@ -34,7 +33,7 @@ module.exports = {
     });
   },
   getServicesId :function(id,cb){
-    model.Services.findOne({_id : id}, function(err, services){
+    model.Service.findOne({_id : id}, function(err, services){
       if(!err){
         cb(services);
       }else{
@@ -43,7 +42,7 @@ module.exports = {
     });
   },
   getServicesIdProv :function(id,cb){
-    model.Services.find({servicesProvider : id}, function(err, services){
+    model.Service.find({servicesProvider : id}, function(err, services){
       if(!err){
         cb(services);
       }else{
@@ -53,14 +52,14 @@ module.exports = {
   },
   addServices : function(body,cb){
     var obj ={
-      name : body.name.toString(),
-      servicesProvider : body.servicesProvider,
-      description : body.description.toString()
+      name : body.name,
+      serviceprovider : body.Serviceprovider,
+      description : body.description
      }
-    services = new model.Service(obj);
-    services.save(function(err,result){
+    service = new model.Service(obj);
+    service.save(function(err,result){
+      console.log(err);
       if (!err) {
-        console.log(err);
         cb(true);
 
       } else {
@@ -70,14 +69,14 @@ module.exports = {
       }
     });
   },
-
   updateServices : function(id,body,cb){
     var obj ={
       name : body.name,
-      servicesProvider : body.servicesProvider,
+      serviceprovider : body.serviceprovider,
       description : body.description
      }
-    model.Services.findOneAndUpdate({_id:id}, obj, function(err,result) {
+   /* console.log(obj);*/
+    model.Service.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
       } else {
@@ -88,7 +87,7 @@ module.exports = {
   },
 
   deleteServices : function(id,cb){
-    model.Services.remove({_id:id}, function(err,result) {
+    model.Service.remove({_id:id}, function(err,result) {
       if (!err) {
         cb(2);
       } else {
