@@ -464,39 +464,97 @@
     .state('productPolicies',{
       url: '/productPolicies',
       templateUrl: 'pages/productPolicies/productPolicies.html',
-<<<<<<< HEAD
-      controller: 'ProductPoliciesCtl'
+      controller: 'ProductPoliciesCtl',
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productPoliciesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
     //productPoliciesService
     .state('productPoliciesService',{
       url: '/productPoliciesService',
       templateUrl: 'pages/productPolicies/productPoliciesService.html',
-      controller: 'ProductPoliciesServiceCtl'
+      controller: 'ProductPoliciesServiceCtl',
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productPoliciesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
     //productPoliciesItem
     .state('productPoliciesItem',{
       url: '/productPoliciesItem',
       templateUrl: 'pages/productPolicies/productPoliciesItem.html',
-      controller: 'ProductPoliciesItemCtl'
+      controller: 'ProductPoliciesItemCtl',
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productPoliciesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
     //editProductPoliciesService
     .state('editProductPoliciesService',{
       url: '/editProductPoliciesService/:id',
       templateUrl: 'pages/productPolicies/editProductPoliciesService.html',
-      controller: 'ProductPoliciesServiceCtl'
+      controller: 'ProductPoliciesServiceCtl',
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productPoliciesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
     .state('editProductPoliciesItem',{
       url: '/editProductPoliciesItem/:id',
       templateUrl: 'pages/productPolicies/editProductPoliciesItem.html',
-      controller: 'ProductPoliciesItemCtl'
+      controller: 'ProductPoliciesItemCtl',
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productPoliciesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
     .state('productPoliciesPackage',{
       url: '/productPoliciesPackage',
       templateUrl: 'pages/productPolicies/productPoliciesPackage.html',
-      controller: 'ProductPoliciesCtl'
+      controller: 'ProductPoliciesCtl',
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productPoliciesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
-
-.state('newProductPolicy',{
+    .state('newProductPolicy',{
       url: '/productPolicies/new',
       templateUrl: 'pages/productPolicies/newProductPolicy.html',
       controller: 'NewProductPolicyCtl',

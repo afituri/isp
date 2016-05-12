@@ -39,7 +39,7 @@
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
             console.log(response.data);
-            // window.location.href='/report/printInvoice';
+            window.location.href='/report/printInvoice';
           }
         },function(response){
           console.log("Something went wrong");
