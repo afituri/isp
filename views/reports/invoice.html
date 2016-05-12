@@ -1,30 +1,231 @@
-<html ng-app="isp">
+<html>
   <head>
     <meta charset="utf-8">
     <title>القاتورة النعائية</title>
     <link rel="stylesheet" type="text/css" href="http://localhost:3000/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="http://localhost:3000/bootstrap-rtl/dist/css/bootstrap-rtl.min.css">
     <style>
-      @font-face {
-        font-family: 'Droid Arabic Kufi';
+      @font-face{
+        font-family: 'Droid Arabic Kufi Regular';
         src : url("//localhost:3000/fonts/DroidKufi-Regular.ttf") format("truetype");
       }
-      body {
-        font-family: 'Droid Arabic Kufi', sans-serif;
+      @font-face{
+        font-family: 'Droid Arabic Kufi bold';
+        src : url("//localhost:3000/fonts/DroidKufi-bold.ttf") format("truetype");
+      }
+      body{
+        font-family: 'Droid Arabic Kufi Regular', sans-serif;
         font-size: 12px;
       }
+      h6{
+        margin-top: 6px;
+        margin-bottom: 0px;
+      }
+      hr{
+        border-top:4px solid #000000;
+        margin-top:5px;
+        margin-bottom:5px;
+      }
+      .logo{
+        padding-top: 20px;
+        padding-right: 25px;
+      }
+      .label-default {
+        background-color: #E4E4E4 !important;
+      }
+      .table-bordered>thead>tr>th{
+        background-color: #E4E4E4 !important;
+      }
+      .table-bordered,.table-bordered>thead>tr>th,.table-bordered>tbody>tr>td{
+        font-size: 12px;
+        border: 1px solid #000 !important;
+      }
     </style>
-    <script src="http://localhost:3000/js/angular-1.4.10.min.js"></script>
-    <script src="http://localhost:3000/js/invoiceApp.js"></script>
-    <script src="http://localhost:3000/js/services.js"></script>
-    <script src="http://localhost:3000/js/invoiceCtl.js"></script>
   </head>
   <body>
-    <div class="container" ng-controller="PrintInvoiceCtl">
+    <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <div class="text-center" ng-repeat="inv in invoice.invoiceObj">
-            ID: {{ inv.id }}, Name: {{ inv.name }}
+          <div class="row">
+            <div class="col-xs-8 text-right">
+              <img class="logo" src="//localhost:3000/img/logo.png" alt="logo">
+            </div>
+            <div class="col-xs-4 text-center">
+              <h6>طرابلس - ليبيا</h6>
+              <h6>Tel: 00218217175732</h6>
+              <h6>Tel: 00218916476781</h6>
+              <h6>Tel: 00218916470282</h6>
+              <h6>Email: sales@huloll.ly</h6>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-7">
+              <div class="text-left">
+                <h5>فاتورة رقم 4</h5>
+              </div>
+            </div>
+            <div class="col-xs-5">
+              <div class="text-left">
+                <small>تاريخ الطباعة: 2013-09-23 الساعة: 2:46:25</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-9">
+              <br><br>
+              <div class="row">
+                <div class="col-xs-4">
+                  <h5>الاسم (Name)</h5>
+                </div>
+                <div class="col-xs-8 text-center" style="background-color: #E4E4E4 !important;">
+                  <h5>شركة البستان - السراج</h5>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-xs-4">
+                  <h5>الاشتراك (Site ID)</h5>
+                </div>
+                <div class="col-xs-8 text-center" style="background-color: #E4E4E4 !important;">
+                  <h5>BWKA01031</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-3 text-left">
+              <h5><span class="label label-default">مدة الاشتراك Duration</span></h5>
+              <h5 style="padding-top:7px;" class="btn-blok">
+                <span class="label label-default" style="padding-left:15px;padding-right:15px;">51</span>
+                <span class="label label-default" style="padding-left:23px;padding-right:23px;">شهور</span>
+              </h5>
+              <h5 style="padding-top:7px;" class="btn-blok">
+                <span class="label label-default" style="padding-left:15px;padding-right:15px;">من</span>
+                <span class="label label-default" style="padding-left:3px;padding-right:3px;">2012-03-12</span>
+              </h5>
+              <h5 style="padding-top:7px;" class="btn-blok">
+                <span class="label label-default" style="padding-left:14px;padding-right:14px;">الى</span>
+                <span class="label label-default" style="padding-left:3px;padding-right:3px;">2016-06-12</span>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <table class="table table-bordered table-condensed">
+                <thead> 
+                  <tr>
+                    <th class="text-center" width="60%">
+                      الوصف
+                      <br>
+                      Description</th> 
+                    <th class="text-center" width="15%">
+                      سعر الوحدة
+                      <br>
+                      Price
+                    </th> 
+                    <th class="text-center" width="15%">
+                      الاجمالي
+                      <br>
+                      Total
+                    </th> 
+                  </tr> 
+                </thead> 
+                <tbody> 
+                  <tr> 
+                    <td class="text-left">
+                      <h5>Hardware</h5>
+                      Full vsat kit (ViaSat Surfbeam 2 modem,) kjbne
+                    </td> 
+                    <td class="text-center">
+                      <br>
+                      2500
+                    </td>
+                    <td class="text-center">
+                      <br>
+                      2500
+                    </td> 
+                  </tr>
+                  <tr> 
+                    <td class="text-left">
+                      <h5>Subscription</h5>
+                      Tooway Pro 30 1Mbps/2Mbps Up/Down 30GB
+                    </td> 
+                    <td class="text-center">
+                      <br>
+                      800
+                    </td>
+                    <td class="text-center">
+                      <br>
+                      40800
+                    </td> 
+                  </tr>
+                  <tr> 
+                    <td class="text-left">
+                      <h5>Router</h5>
+                      Description of Router
+                    </td> 
+                    <td class="text-center">
+                      <br>
+                      0
+                    </td>
+                    <td class="text-center">
+                      <br>
+                      0
+                    </td> 
+                  </tr>
+                  <tr> 
+                    <td class="text-center">
+                      <h5>اعمال التركيب والنقل المصاحبة</h5>
+                    </td> 
+                    <td class="text-center">
+                      <h6>0</h6>
+                    </td>
+                    <td class="text-center">
+                      <h6>0</h6>
+                    </td> 
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-7">
+              <h6 style="background-color: #E4E4E4 !important;padding:6px;">اجمالى المبلغ: فقط ثلاثة واربعون الف وثلاثمائة دينار ليبي</h6>
+            </div>
+            <div class="col-xs-5">
+              <table class="pull-left">
+                <tbody>
+                  <tr>
+                    <td class="text-center" style="padding-left:10px;"><h5>اجمالى الفاتورة </h5></td>
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">43300</span></h5></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center" style="padding-left:10px;"><h5>صافي الفاتورة </h5></td>
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">43300</span></h5></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- <div class="row">
+                <div class="col-xs-6">
+                  <h5>اجمالى الفاتورة</h5>
+                </div>
+                <div class="col-xs-6" style="padding-right:0;margin-top:-5px;">
+                  <h5><span class="label label-default" style="display:block;padding:7px;">43300</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-xs-offset-6" style="padding-right:0;margin-top:-5px;">
+                  <h5><span class="label label-default" style="display:block;padding:7px;">0</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6">
+                  <h5>صافي الفاتورة</h5>
+                </div>
+                <div class="col-xs-6" style="padding-right:0;margin-top:-5px;">
+                  <h5><span class="label label-default" style="display:block;padding:7px;">43300</span></h5>
+                </div>
+              </div> -->
+            </div>
           </div>
         </div>
       </div>

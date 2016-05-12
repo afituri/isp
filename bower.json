@@ -37,6 +37,7 @@
     "animate.css": "^3.5.1",
     "bootstrap-additions": "^0.3.1",
     "angular-i18n": "^1.5.5",
-    "nya-bootstrap-select": "^2.1.6"
+    "nya-bootstrap-select": "^2.1.6",
+    "oclazyload": "^1.0.9"
   }
 }
