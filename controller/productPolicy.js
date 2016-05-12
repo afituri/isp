@@ -13,7 +13,6 @@ module.exports = {
       .populate('policy')
       .populate('product')
       .exec(function(err, pPolicies){
-        console.log(pPolicies);
         if(!err){
           cb({result:pPolicies,count:count});
         }else{
@@ -21,6 +20,17 @@ module.exports = {
           cb(null);
         }
       });
+    });
+  },
+
+  getAllProductP :function(cb){
+    model.Productpolicy.find({},function(err, pPolicies){
+      if(!err){
+        cb(pPolicies);
+      }else{
+        console.log(err);
+        cb(null);
+      }
     });
   },
 
@@ -104,6 +114,8 @@ module.exports = {
   //   }
   // }
     var obj=body;
+    console.log("objjj");
+    console.log(obj);
     model.Productpolicy.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)

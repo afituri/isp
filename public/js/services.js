@@ -321,13 +321,13 @@
         return $http.post('/policy/productPolicy/'+pageSize+'/'+currentPage,type);
       },
       'getProductPolicyByID': function(id){
-        return $http.get('/policy/productPolicyService/'+id);
+        return $http.post('/policy/productPolicyService/'+id);
       },
       'addProductPolicy': function(productPolicyObj){
         return $http.post('/policy/productPolicy/add',productPolicyObj);
       },
       'editProductPolicy': function(id,productPolicyObj){
-        return $http.put('/productPolicy/edit/'+id,productPolicyObj);
+        return $http.put('/policy/productPolicy/edit/'+id,productPolicyObj);
       },
       'deleteProductPolicy': function(id){
         return $http.delete('/policy/productPolicy/delete/'+id);

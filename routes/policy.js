@@ -14,9 +14,8 @@ router.get('/:limit/:page', function(req, res) {
 });
 //productPolicy
 router.post('/productPolicy/:limit/:page', function(req, res) {
-  console.log(req.body);
+ 
   productPolicyMgr.getProductP(req.body.type,req.params.limit,req.params.page,function(policies){
-    console.log(policies);
     res.send(policies);
   });
 });
@@ -39,6 +38,15 @@ router.put('/edit/:id', function(req, res) {
   // console.log(req.params.id);
   
   policyMgr.updatePolicy(req.params.id,req.body,function(result){
+    res.send(result);
+  });
+
+});
+
+//productPolicy
+
+router.put('/productPolicy/edit/:id', function(req, res) {
+  productPolicyMgr.updateProductP(req.params.id,req.body,function(result){
     res.send(result);
   });
 
@@ -83,8 +91,13 @@ router.post('/productPolicy/add', function(req, res) {
 //productPolicyService
 router.post('/productPolicyService/:id', function(req, res) {
   productPolicyMgr.getProductPId(req.params.id,function(result){
+    console.log("i am here");
+    console.log(result);
     res.send(result);
   });
 });
+
+
+
 
 module.exports = router;

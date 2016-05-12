@@ -935,25 +935,28 @@ console.log(response.data);
   
   }]);
 
-  app.controller('ProductPoliciesServiceCtl',['$scope','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+  app.controller('ProductPoliciesServiceCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
     $scope.editPolicyServiceForm = {};
-   
+    $scope.objects = HelperServ;
+    $scope.objects.getAllItems();
+    $scope.objects.getAllServices();
+    $scope.objects.getAllPackages();
+    $scope.objects.getAllPolicies();
     ProductPoliciesServ.getProductPolicyByID($stateParams.id).then(function(response) {
-      console.log("her");
       console.log(response.data);
-      $scope.editPolicyForm = response.data;
+      $scope.editPolicyServiceForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
     });
- /*   $scope.editPolicy = function(){
-      PoliciesServ.editPolicy($stateParams.id,$scope.editPolicyForm).then(function(response) {
+    $scope.editProductPolicy = function(){
+      ProductPoliciesServ.editProductPolicy($stateParams.id,$scope.editPolicyServiceForm).then(function(response) {
         if(response.data){
-          $state.go('policies');
+          $state.go('productPoliciesService');
           toastr.info('تم التعديل بنجاح');
         } else {
           console.log(response.data);
@@ -961,7 +964,8 @@ console.log(response.data);
       }, function(response) {
         console.log("Something went wrong");
       });
-*/
+    }
+
 
 
 
@@ -1011,6 +1015,52 @@ console.log(response.data);
   
   }]);
 
+   app.controller('ProductPoliciesItemCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+       $scope.init = function () {
+      ProductPoliciesServ.getProductPolicies($scope.pageSize,$scope.currentPage,{type:"item"}).then(function(response) {
+        $scope.policies = response.data.result;
+        console.log($scope.policies);
+        $scope.total = response.data.count;
+        console.log($scope.total);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.init();
+
+     $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذه سياسات منتج (المعدة)";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ProductPoliciesServ.deleteProductPolicy(id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.init();
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+   
+   }]);
+
+
+  
+
   app.controller('NewProductPolicyCtl',['$scope','$state','MenuFac','ProductPoliciesServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductPoliciesServ,HelperServ,toastr){
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
@@ -1038,7 +1088,7 @@ console.log(response.data);
       $scope.newProductPolicyForm.type = "item";
       ProductPoliciesServ.addProductPolicy($scope.newProductPolicyForm).then(function(response){
         if(response.data){
-          $state.go('productPolicies');
+          $state.go('productPoliciesItem');
           toastr.success('تمت إضافة سياسة جديدة بنجاح');
         } else {
           console.log(response.data);

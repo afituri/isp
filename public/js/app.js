@@ -183,13 +183,18 @@
     .state('productPoliciesItem',{
       url: '/productPoliciesItem',
       templateUrl: 'pages/productPolicies/productPoliciesItem.html',
-      controller: 'ProductPoliciesCtl'
+      controller: 'ProductPoliciesItemCtl'
     })
     //editProductPoliciesService
     .state('editProductPoliciesService',{
       url: '/editProductPoliciesService/:id',
       templateUrl: 'pages/productPolicies/editProductPoliciesService.html',
       controller: 'ProductPoliciesServiceCtl'
+    })
+    .state('editProductPoliciesItem',{
+      url: '/editProductPoliciesItem/:id',
+      templateUrl: 'pages/productPolicies/editProductPoliciesItem.html',
+      controller: 'ProductPoliciesItemCtl'
     })
     .state('productPoliciesPackage',{
       url: '/productPoliciesPackage',

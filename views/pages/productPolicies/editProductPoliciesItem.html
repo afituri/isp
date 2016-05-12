@@ -1,12 +1,12 @@
 <div class="widget-box animated fadeIn">
   <h5><i class="fa fa-plus"></i>&nbsp; تعديل سياسات منتج (الخدمة)</h5>
   <hr>
-   <form novalidate ng-submit="editProductPolicy()">
+   <form novalidate ng-submit="newItemProductPolicy()">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-             <label class="control-label">اسم الخدمة</label>
-              <select class="form-control input-sm" ng-model="editPolicyServiceForm.product" ng-options="service._id as service.name for service in objects.servicesObj" required>
+              <label class="control-label">اسم المعدة</label>
+              <select class="form-control input-sm" ng-model="newProductPolicyForm.product" ng-options="item._id as item.name for item in objects.itemsObj" required>
                 <option value="" disabled selected>الرجاء الاختيار</option>
               </select>
             </div>
@@ -14,7 +14,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label class="control-label">اسم السياسة</label>
-              <select class="form-control input-sm" ng-model="editPolicyServiceForm.policy" ng-options="policy._id as policy.name for policy in objects.policiesObj" required>
+              <select class="form-control input-sm" ng-model="newProductPolicyForm.policy" ng-options="policy._id as policy.name for policy in objects.policiesObj" required>
                 <option value="" disabled selected>الرجاء الاختيار</option>
               </select>
             </div>
@@ -22,17 +22,17 @@
           <div class="col-md-4">
             <div class="form-group">
               <label class="control-label">سعر السياسة</label>
-              <input class="form-control input-sm" type="text" ng-model="editPolicyServiceForm.initialPrice" placeholder="سعر السياسة" required>
+              <input class="form-control input-sm" type="text" ng-model="newProductPolicyForm.initialPrice" placeholder="سعر السياسة" required>
             </div>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-md-2 col-md-offset-4">
-            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; تعديل</button>
+            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
           </div>
           <div class="col-md-2">
-            <a class="btn btn-success btn-sm btn-block" ui-sref="productPoliciesService"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            <a class="btn btn-success btn-sm btn-block" ui-sref="productPolicies"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
           </div>
         </div>
       </form>
