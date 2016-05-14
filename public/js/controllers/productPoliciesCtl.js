@@ -45,7 +45,7 @@
       $scope.newProductPolicyForm.type = "package";
       ProductPoliciesServ.addProductPolicy($scope.newProductPolicyForm).then(function(response){
         if(response.data){
-          $state.go('productPolicies');
+          $state.go('productPoliciesPackage');
           toastr.success('تمت إضافة سياسة جديدة بنجاح');
         } else {
           console.log(response.data);
@@ -219,6 +219,68 @@
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
     $scope.objects.getAllPolicies();
+    $scope.init = function () {
+      ProductPoliciesServ.getProductPolicies($scope.pageSize,$scope.currentPage,{type:"package"}).then(function(response) {
+        $scope.policies = response.data.result;
+        console.log($scope.policies);
+        $scope.total = response.data.count;
+        console.log($scope.total);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.init();
+    $scope.showDeleteModel = function(id){
+        $scope.id = id;
+        $scope.deleteName = "هذه سياسات منتج (الحزمة)";
+        $scope.deleteModel = $modal({
+          scope: $scope,
+          templateUrl: 'pages/model.delete.tpl.html',
+          show: true
+        });
+    };
+    $scope.confirmDelete = function(id){
+      ProductPoliciesServ.deleteProductPolicy(id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.init();
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+
+    $scope.editPolicyPackageForm ={};
+    ProductPoliciesServ.getProductPolicyByID($stateParams.id).then(function(response) {
+      console.log(response.data);
+      $scope.editPolicyPackageForm = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+      //edit function 
+    $scope.editProductPolicy = function(){
+      ProductPoliciesServ.editProductPolicy($stateParams.id,$scope.editPolicyPackageForm).then(function(response) {
+        if(response.data){
+          $state.go('productPoliciesPackage');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+
+
+
 
     /*$scope.editPolicyItemForm ={};
     ProductPoliciesServ.getProductPolicyByID($stateParams.id).then(function(response) {
