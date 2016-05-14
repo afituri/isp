@@ -16,7 +16,17 @@
     $stateProvider.state('home',{
       url: '/',
       templateUrl: 'pages/home.html',
-      controller: 'HomeCtl'
+      controller: 'HomeCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/homeCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
     .state('resellers',{
       url: '/resellers',
@@ -601,10 +611,6 @@
       return input;
     };
   });
-  app.controller('HomeCtl',['$scope','MenuFac',function($scope,MenuFac){
-    MenuFac.active = -1;
-    $scope.activePanel = MenuFac;
-  }]);
   app.controller('MenuCtl',['$scope','MenuFac',function($scope,MenuFac){
     $scope.activePanel = MenuFac;
   }]);
