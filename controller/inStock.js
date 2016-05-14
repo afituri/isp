@@ -1,15 +1,15 @@
 var generatePassword = require('password-generator'),
   easyPbkdf2 = require("easy-pbkdf2")();
 var model = require("../models");
-var instock = null;
+var inStock = null;
 
 module.exports = {
   getInStock :function(limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.InStock.count({},function(err,count){
-      model.InStock.find({}).limit(limit).skip(page*limit).exec(function(err, result){
+    model.Instock.count({},function(err,count){
+      model.Instock.find({}).limit(limit).skip(page*limit).exec(function(err, result){
         if(!err){
           cb({result:result,count:count});
         }else{
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   getAllInStock :function(cb){
-    model.InStock.find({},function(err, result){
+    model.Instock.find({},function(err, result){
       if(!err){
         cb(result);
       }else{
@@ -31,7 +31,7 @@ module.exports = {
     });
   },
   getInStockId :function(id,cb){
-    model.InStock.findOne({_id : id}, function(err, result){
+    model.Instock.findOne({_id : id}, function(err, result){
       if(!err){
         cb(result);
       }else{
@@ -39,10 +39,20 @@ module.exports = {
       }
     });
   },
+  updateInStockInvoice : function(id,cb){
+    model.Instock.findOneAndUpdate({status:1},{invoice:id,status:2} , function(err,result) {
+      if (!err) {
+        cb(true)
+      } else {
+        console.log(err);
+        cb(false);
+      }
+    });
+  },
   addInStock: function (body, cb) {
     var obj = body;
-    instock = new model.InStock(obj);
-    instock.save(function(err,result){
+    inStock = new model.Instock(obj);
+    inStock.save(function(err,result){
       if (!err) {
         cb(true);
 
@@ -55,7 +65,7 @@ module.exports = {
   },
   updateInStock: function(id,body,cb) {
     var obj = body;
-    model.InStock.findOneAndUpdate({_id:id}, obj, function(err,result) {
+    model.Instock.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
       } else {
@@ -65,7 +75,7 @@ module.exports = {
     });
   },
   deleteInStock : function(id,cb){
-    model.InStock.remove({_id:id}, function(err,result) {
+    model.Instock.remove({_id:id}, function(err,result) {
       if (!err) {
         cb(2)
       } else {
