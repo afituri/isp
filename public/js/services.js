@@ -20,6 +20,14 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
+      'stockObj': [],
+      'getAllStock': function(){
+        $http.get('/warehouse/all').then(function(response) {
+          self.stockObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllCities");
+        });
+      },
       'getAllCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
@@ -317,20 +325,20 @@
   }]);
   app.service('ProductPoliciesServ',['$http',function($http){
     var self = {
-      'getProductPolicies': function(pageSize,currentPage){
-        return $http.get('/productPolicy/'+pageSize+'/'+currentPage);
+      'getProductPolicies': function(pageSize,currentPage,type){
+        return $http.post('/policy/productPolicy/'+pageSize+'/'+currentPage,type);
       },
       'getProductPolicyByID': function(id){
-        return $http.get('/productPolicy/'+id);
+        return $http.post('/policy/productPolicyService/'+id);
       },
       'addProductPolicy': function(productPolicyObj){
         return $http.post('/policy/productPolicy/add',productPolicyObj);
       },
       'editProductPolicy': function(id,productPolicyObj){
-        return $http.put('/productPolicy/edit/'+id,productPolicyObj);
+        return $http.put('/policy/productPolicy/edit/'+id,productPolicyObj);
       },
       'deleteProductPolicy': function(id){
-        return $http.delete('/productPolicy/delete/'+id);
+        return $http.delete('/policy/productPolicy/delete/'+id);
       }
     };
     return self;
@@ -345,6 +353,9 @@
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
+      },
+      'report': function(invoiceObj){
+        return $http.post('/report/printInvoice',invoiceObj);
       },
       'editInvoice': function(id,invoiceObj){
         return $http.put('/invoice/edit/'+id,invoiceObj);

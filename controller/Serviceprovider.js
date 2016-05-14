@@ -71,11 +71,11 @@ module.exports = {
   },
 
   deleteServiceProvider : function(id,cb){
-    model.Services.find({Serviceprovider:id}, function(err,resultServices) {
+    model.Service.find({Serviceprovider:id}, function(err,resultServices) {
       if(resultServices.length > 0){
         cb(1)
       } else{
-        model.ServiceProvider.remove({_id:id}, function(err,result) {
+        model.Serviceprovider.remove({_id:id}, function(err,result) {
           if (!err) {
             cb(2)
           } else {
