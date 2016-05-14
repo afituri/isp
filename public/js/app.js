@@ -542,7 +542,7 @@
     .state('productPoliciesPackage',{
       url: '/productPoliciesPackage',
       templateUrl: 'pages/productPolicies/productPoliciesPackage.html',
-      controller: 'ProductPoliciesCtl',
+      controller: 'ProductPoliciesPackageCtl',
      resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
