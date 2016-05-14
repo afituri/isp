@@ -1,6 +1,7 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
+  //dddddddddddddddddddddd
   app.controller('InvoicesCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
@@ -38,8 +39,16 @@
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            console.log(response.data);
-            window.location.href='/report/printInvoice';
+            console.log('response.data');
+            console.log("hhhhhhhhhhhhhhhh");
+            // window.location.href='/report/printInvoice';
+            InvoicesServ.report(response.data).then(function(response,err){
+              if(!err){
+
+              }
+            },function(response){
+              console.log("Something went wrong");
+            });
           }
         },function(response){
           console.log("Something went wrong");

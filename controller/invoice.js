@@ -1,6 +1,7 @@
 var generatePassword = require('password-generator'),
   easyPbkdf2 = require("easy-pbkdf2")();
 var model = require("../models");
+var instockMgr = require("./inStock");
 var invoice = null;
 
 module.exports = {
@@ -70,6 +71,7 @@ module.exports = {
             invoice=new model.Invoice(invoice);
             invoice.save(function(err,invoiceResult){
               if (!err) {
+                instockMgr.updateInStockInvoice(invoiceResult._id,function(result){});
                 order1={
                   invoice:invoiceResult._id,
                   product:body.product,

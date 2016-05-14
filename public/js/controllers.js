@@ -1156,6 +1156,7 @@ console.log(response.data);
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
+            console.log("dsds");
             window.location.href='/report/printInvoice';
           }
         },function(response){
