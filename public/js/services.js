@@ -346,6 +346,9 @@
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
       },
+      'report': function(invoiceObj){
+        return $http.post('/report/printInvoice',invoiceObj);
+      },
       'editInvoice': function(id,invoiceObj){
         return $http.put('/invoice/edit/'+id,invoiceObj);
       },
