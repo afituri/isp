@@ -9,7 +9,10 @@ module.exports = {
     page-=1;
     limit = parseInt(limit);
     model.Instock.count({},function(err,count){
-      model.Instock.find({}).limit(limit).skip(page*limit).exec(function(err, result){
+      model.Instock.find({}).limit(limit).skip(page*limit)
+      .populate('product')
+      .populate('warehouse')
+      .exec(function(err, result){
         if(!err){
           cb({result:result,count:count});
         }else{

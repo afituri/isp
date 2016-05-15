@@ -2,7 +2,7 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('ProductServicesCtl',['$scope','$state','$stateParams','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,$stateParams,$modal,MenuFac,ProductsServ,toastr){
-    MenuFac.active = 6;
+    MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -64,7 +64,7 @@
     };
   }]);
   app.controller('ProductItemsCtl',['$scope','$state','$stateParams','HelperServ','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,$stateParams,HelperServ,$modal,MenuFac,ProductsServ,toastr){
-    MenuFac.active = 6;
+    MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -136,7 +136,7 @@
     };
   }]);
   app.controller('ProductPackagesCtl',['$scope','$state','ServicesServ','HelperServ','$stateParams','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,ServicesServ,HelperServ,$stateParams,$modal,MenuFac,ProductsServ,toastr){
-    MenuFac.active = 6;
+    MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -214,7 +214,7 @@
     };
   }]);
   app.controller('NewProductCtl',['$scope','ServicesServ','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,ServicesServ,$state,MenuFac,ProductsServ,HelperServ,toastr){
-    MenuFac.active = 6;
+    MenuFac.active = 7;
     
     $scope.activePanel = MenuFac;
     $scope.newProductForm = {};
@@ -275,7 +275,7 @@
     };
   }]);
   app.controller('EditProductCtl',['$scope','$state','$stateParams','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,ProductsServ,HelperServ,toastr){
-    MenuFac.active = 6;
+    MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.editProductForm = {};
     HelperServ.getAllServices();

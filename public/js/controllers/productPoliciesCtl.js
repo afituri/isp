@@ -2,11 +2,11 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('ProductPoliciesCtl',['$scope','MenuFac','ProductPoliciesServ',function($scope,MenuFac,ProductPoliciesServ){
-    MenuFac.active = 8;
+    MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
   app.controller('NewProductPolicyCtl',['$scope','$state','MenuFac','ProductPoliciesServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductPoliciesServ,HelperServ,toastr){
-    MenuFac.active = 8;
+    MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.activeTab = "tap1";
     $scope.objects = HelperServ;
@@ -56,12 +56,12 @@
     };
   }]);
   app.controller('EditProductPolicyCtl',['$scope','MenuFac','ProductPoliciesServ',function($scope,MenuFac,ProductPoliciesServ){
-    MenuFac.active = 8;
+    MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
 
   app.controller('ProductPoliciesServiceCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
-    MenuFac.active = 8;
+    MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -134,7 +134,7 @@
 
   app.controller('ProductPoliciesItemCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
     // edit form data 
-    MenuFac.active = 8;
+    MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -209,7 +209,7 @@
 
   app.controller('ProductPoliciesPackageCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
     // edit form data 
-    MenuFac.active = 8;
+    MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;

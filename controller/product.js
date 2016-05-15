@@ -40,6 +40,18 @@ module.exports = {
     });
   },
 
+  getAllProductByType:function(type,cb){
+    model.Product.find({type:type}).populate('supplier')
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+  },
+
   getAllItem :function(cb){
     model.Product.find({type:"item"}).populate('supplier')
       .exec(function(err, products){

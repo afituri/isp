@@ -13,6 +13,8 @@ router.get('/all', function(req, res) {
     res.send(product);
   });
 });
+
+
 // get item
 router.get('/item/:limit/:page', function(req, res) {
   productMgr.getProductItem(req.params.limit,req.params.page,function(product){
@@ -51,6 +53,15 @@ router.post('/add', function(req, res) {
   productMgr.addProduct(req.body,function(product){
     res.send(product);
   });
+});
+
+router.get('/bytype/:id', function(req, res) {
+  //console.log(req.params.id);
+   console.log("ff");
+   res.send(true);
+ /* productMgr.getAllProductByType(req.body.type,function(product){
+    res.send(product);
+  });*/
 });
 
 
