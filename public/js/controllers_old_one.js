@@ -1,13 +1,13 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('HomeCtl',['$scope','MenuFac',function($scope,MenuFac){
-    MenuFac.active = -1;
-    $scope.activePanel = MenuFac;
-  }]);
-  app.controller('MenuCtl',['$scope','MenuFac',function($scope,MenuFac){
-    $scope.activePanel = MenuFac;
-  }]);
+  // app.controller('HomeCtl',['$scope','MenuFac',function($scope,MenuFac){
+  //   MenuFac.active = -1;
+  //   $scope.activePanel = MenuFac;
+  // }]);
+  // app.controller('MenuCtl',['$scope','MenuFac',function($scope,MenuFac){
+  //   $scope.activePanel = MenuFac;
+  // }]);
   // Service Providers Controllers Start
   // app.controller('ServiceProvidersCtl',['$scope','$modal','MenuFac','ServiceProvidersServ','toastr',function($scope,$modal,MenuFac,ServiceProvidersServ,toastr){
   //   MenuFac.active = 0;
