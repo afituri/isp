@@ -22,6 +22,18 @@ module.exports = {
       });
     });
   },
+  getInStockId :function(id,cb){
+    model.Instock.findOne({_id : id})
+    .populate('product')
+    .populate('warehouse')
+    .exec(function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        cb(null);
+      }
+    });
+  },
 
   getAllInStock :function(cb){
     model.Instock.find({},function(err, result){
@@ -33,15 +45,7 @@ module.exports = {
       }
     });
   },
-  getInStockId :function(id,cb){
-    model.Instock.findOne({_id : id}, function(err, result){
-      if(!err){
-        cb(result);
-      }else{
-        cb(null);
-      }
-    });
-  },
+  
   updateInStockInvoice : function(id,cb){
     model.Instock.findOneAndUpdate({status:1},{invoice:id,status:2} , function(err,result) {
       if (!err) {

@@ -191,6 +191,12 @@
       },
       'deleteStocks': function(id){
         return $http.delete('/inStock/delete/'+id);
+      },
+      'getInStockById': function(id){
+        return $http.get('/inStock/'+id);
+      },
+      'editInStock': function(id,obj){
+        return $http.put('/inStock/edit/'+id,obj);
       }
     };
 
@@ -282,6 +288,9 @@
     var self = {
       'getProductServices': function(pageSize,currentPage){
         return $http.get('/product/service/'+pageSize+'/'+currentPage);
+      },
+      'getProductAll': function(pageSize,currentPage){
+        return $http.get('/product/all');
       },
       'getAllService': function(){
         return $http.get('/product/allService');

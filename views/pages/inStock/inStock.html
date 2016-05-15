@@ -56,14 +56,14 @@
               <em class="fa fa-info fa-fw"></em>
             </button>
 
-            <a class="btn btn-warning btn-sm" ui-sref="editCustomer({id:customer._id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
+            <a class="btn btn-warning btn-sm" ui-sref="editInStock({id:inStocks._id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
             <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" ng-click="showDeleteModel(inStocks._id)" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="panel-footer" ng-show="customers.length">
+  <div class="panel-footer" ng-show="getInStocks.length">
     <div class="row">
       <div class="col-xs-12 col-md-12 text-center">
         <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
@@ -71,4 +71,5 @@
       </div>
     </div>
   </div>
+
 </div>
