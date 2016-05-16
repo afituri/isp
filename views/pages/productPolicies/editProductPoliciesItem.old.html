@@ -1,0 +1,41 @@
+<div class="widget-box animated fadeIn">
+  <h5><i class="fa fa-plus"></i>&nbsp; تعديل سياسات منتج (الخدمة)</h5>
+  <hr>
+   <form novalidate ng-submit="editProductPolicy()">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">اسم المعدة</label>
+              <select class="form-control input-sm" ng-model="editPolicyItemForm.product" ng-options="item._id as item.name for item in objects.itemsObj" required>
+                <option value="" disabled selected>الرجاء الاختيار</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">اسم السياسة</label>
+              <select class="form-control input-sm" ng-model="editPolicyItemForm.policy" ng-options="policy._id as policy.name for policy in objects.policiesObj" required>
+                <option value="" disabled selected>الرجاء الاختيار</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">سعر السياسة</label>
+              <input class="form-control input-sm" type="text" ng-model="editPolicyItemForm.initialPrice" placeholder="سعر السياسة" required>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-4">
+            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; تعديل </button>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-success btn-sm btn-block" ui-sref="productPoliciesItem"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+          </div>
+        </div>
+      </form>
+ 
+
+</div>
