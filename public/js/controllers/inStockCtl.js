@@ -1,8 +1,6 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  
-
   app.controller('inStockCtl',['$scope','$modal','$stateParams','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr',function($scope,$modal,$stateParams,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr){
     MenuFac.active =5;
     $scope.activePanel = MenuFac;
@@ -18,17 +16,16 @@
       }, function(response) {
         console.log("Something went wrong");
       });
-
-     ProductsServ.getProductAll().then(function(response) {
-            if(response.data){
-              $scope.Allproduct=response.data;
-            } else {
-              console.log(response.data);
-            }
-            }, function(response) {
-            console.log("Something went wrong");
-        });
-     $scope.editInStock = function(){
+    ProductsServ.getProductAll().then(function(response) {
+      if(response.data){
+        $scope.Allproduct=response.data;
+      } else {
+        console.log(response.data);
+      }
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.editInStock = function(){
       InStockServ.editInStock($stateParams.id,$scope.editInStockForm).then(function(response) {
         if(response.data){
           $state.go('inStock');
@@ -49,7 +46,6 @@
         console.log("Something went wrong");
       });
     }
-
     $scope.init();
     $scope.showPass=false;
     $scope.hidePass=true;
@@ -62,17 +58,15 @@
         $scope.hidePass=true;
       }
     }
-
     $scope.showDeleteModel = function(id){
       $scope.id = id;
-      $scope.deleteName = "هذه المخزون";
+      $scope.deleteName = "هذا المخزون";
       $scope.deleteModel = $modal({
         scope: $scope,
         templateUrl: 'pages/model.delete.tpl.html',
         show: true
       });
     };
-
     $scope.confirmDelete = function(id){
       InStockServ.deleteStocks(id).then(function(response) {
         if(response.data.result == 1){
@@ -94,59 +88,55 @@
 }]);
 
 app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr',function($scope,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr){
-    MenuFac.active = 5;
-    $scope.activePanel = MenuFac;
-    $scope.objects=HelperServ;
-    $scope.objects.getAllStock();
-    $scope.newInStockForm={};
-    $scope.productType=function(){
-        if($scope.newInStockForm.type==1){
-          ProductsServ.getAllService().then(function(response) {
+  MenuFac.active = 5;
+  $scope.activePanel = MenuFac;
+  $scope.objects=HelperServ;
+  $scope.objects.getAllStock();
+  $scope.newInStockForm={};
+  $scope.productType=function(){
+    if($scope.newInStockForm.type==1){
+      ProductsServ.getAllService().then(function(response) {
+      if(response.data){
+        $scope.Allproduct=response.data;
+      } else {
+        console.log(response.data);
+      }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    } else if($scope.newInStockForm.type==2){
+        ProductsServ.getAllItem().then(function(response) {
           if(response.data){
             $scope.Allproduct=response.data;
           } else {
             console.log(response.data);
           }
-          }, function(response) {
+        }, function(response) {
             console.log("Something went wrong");
-          });
-        } else if($scope.newInStockForm.type==2){
-            ProductsServ.getAllItem().then(function(response) {
-              if(response.data){
-                $scope.Allproduct=response.data;
-              } else {
-                console.log(response.data);
-              }
-            }, function(response) {
-                console.log("Something went wrong");
-            });
-        } else if($scope.newInStockForm.type==3){
-            ProductsServ.getAllPackage().then(function(response) {
-            if(response.data){
-              $scope.Allproduct=response.data;
-            } else {
-              console.log(response.data);
-            }
-            }, function(response) {
-              console.log("Something went wrong");
-            });
-
-        }
-      }
-
-    $scope.newInStock = function(){
-      InStockServ.addInStock($scope.newInStockForm).then(function(response) {
+        });
+    } else if($scope.newInStockForm.type==3){
+        ProductsServ.getAllPackage().then(function(response) {
         if(response.data){
-          $state.go('inStock');
-          toastr.success('تمت إضافة المخزون بنجاح');
+          $scope.Allproduct=response.data;
         } else {
           console.log(response.data);
         }
-      }, function(response) {
-        console.log("Something went wrong");
-      });
-    };
-
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+    }
+  }
+  $scope.newInStock = function(){
+    InStockServ.addInStock($scope.newInStockForm).then(function(response) {
+      if(response.data){
+        $state.go('inStock');
+        toastr.success('تمت إضافة المخزون بنجاح');
+      } else {
+        console.log(response.data);
+      }
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  };
   }]);
-
 }());

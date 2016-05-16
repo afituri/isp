@@ -2,6 +2,7 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('HomeCtl',['$scope','MenuFac',function($scope,MenuFac){
+    //alert("hii");
     MenuFac.active = -1;
     $scope.activePanel = MenuFac;
   }]);
