@@ -39,16 +39,14 @@
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            console.log('response.data');
-            console.log("hhhhhhhhhhhhhhhh");
-            // window.location.href='/report/printInvoice';
-            InvoicesServ.report(response.data).then(function(response,err){
-              if(!err){
+            window.location.href='/report/printInvoice/'+response.data[0]._id;
+            // InvoicesServ.report(response.data).then(function(response,err){
+            //   if(!err){
 
-              }
-            },function(response){
-              console.log("Something went wrong");
-            });
+            //   }
+            // },function(response){
+            //   console.log("Something went wrong");
+            // });
           }
         },function(response){
           console.log("Something went wrong");

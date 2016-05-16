@@ -1,10 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var userHelpers = require('../controller/userHelpers');
+var invoiceMgr = require("../controller/invoice");
 
-router.post('/printInvoice', function(req, res) {
-  // userHelpers.printReport("invoice.html",res);
-  console.log(req.body);
+
+router.get('/printInvoice/:id', function(req, res) {
+  console.log(req.params.id);
+  invoiceMgr.getInvoicedata(req.params.id,function(result){
+    console.log(result);
+    userHelpers.printReport("invoice.html",res);
+  });
+  
 });
 
 module.exports = router;
