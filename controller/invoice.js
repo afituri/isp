@@ -135,7 +135,35 @@ module.exports = {
         cb(false);
       }
     });
-  }
+  },
+
+  getInvoicedata :function(id,cb){
+    model.Instock.findOne({invoice : id}, function(err, result){
+      if(!err){
+        // cb(result);
+        model.Order.find({invoice : id}).populate('product')
+        .exec(function(err, order){
+          if(!err){
+            // cb(result);
+            model.Invoice.findOne({_id:id}).populate('Customer').exec(function(err, invoices){
+              if(!err){
+                cb({instock:result,order:order,invoices:invoices});
+              }else{
+                console.log(err);
+                cb(null);
+              }
+            });
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
 
 
 
