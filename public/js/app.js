@@ -16,7 +16,17 @@
     $stateProvider.state('home',{
       url: '/',
       templateUrl: 'pages/home.html',
-      controller: 'HomeCtl'
+      controller: 'HomeCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/homeCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     })
     .state('resellers',{
       url: '/resellers',
@@ -508,6 +518,25 @@
         }] 
       }
     })
+
+    // editProductPoliciesPackage.html
+    .state('editProductPoliciesPackage',{
+      url: '/editProductPoliciesPackage/:id',
+      templateUrl: 'pages/productPolicies/editProductPoliciesPackage.html',
+      controller: 'ProductPoliciesPackageCtl',
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productPoliciesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+
     //editProductPoliciesService
     .state('editProductPoliciesService',{
       url: '/editProductPoliciesService/:id',
@@ -542,7 +571,7 @@
     .state('productPoliciesPackage',{
       url: '/productPoliciesPackage',
       templateUrl: 'pages/productPolicies/productPoliciesPackage.html',
-      controller: 'ProductPoliciesCtl',
+      controller: 'ProductPoliciesPackageCtl',
      resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -568,7 +597,53 @@
           }]);
         }] 
       }
-    }).state('editProductPolicy',{
+    })
+    .state('newInStock',{
+      url: '/instock/new',
+      templateUrl: 'pages/inStock/newInStock.html',
+      controller: 'NewInStockCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/inStockCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('inStock',{
+      url: '/instock',
+      templateUrl: 'pages/inStock/inStock.html',
+      controller: 'inStockCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/inStockCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('editInStock',{
+      url: '/inStock/edit/:id',
+      templateUrl: 'pages/inStock/editInStock.html',
+      controller: 'inStockCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/inStockCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('editProductPolicy',{
       url: '/productPolicies/edit/:id',
       templateUrl: 'pages/productPolicies/editProductPolicy.html',
       controller: 'EditProductPolicyCtl',
@@ -680,10 +755,6 @@
       return input;
     };
   });
-  app.controller('HomeCtl',['$scope','MenuFac',function($scope,MenuFac){
-    MenuFac.active = -1;
-    $scope.activePanel = MenuFac;
-  }]);
   app.controller('MenuCtl',['$scope','MenuFac',function($scope,MenuFac){
     $scope.activePanel = MenuFac;
   }]);

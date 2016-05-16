@@ -2,7 +2,7 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('PoliciesCtl',['$scope','$modal','MenuFac','PoliciesServ','toastr',function($scope,$modal,MenuFac,PoliciesServ,toastr){
-    MenuFac.active = 7;
+    MenuFac.active = 8;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -45,7 +45,7 @@
     };
   }]);
   app.controller('NewPolicyCtl',['$scope','$state','MenuFac','PoliciesServ','toastr',function($scope,$state,MenuFac,PoliciesServ,toastr){
-    MenuFac.active = 7;
+    MenuFac.active = 8;
     $scope.activePanel = MenuFac;
     $scope.newPolicyForm = {};
     $scope.newPolicy = function(){
@@ -62,7 +62,7 @@
     };
   }]);
   app.controller('EditPolicyCtl',['$scope','$state','$stateParams','MenuFac','PoliciesServ','toastr',function($scope,$state,$stateParams,MenuFac,PoliciesServ,toastr){
-    MenuFac.active = 7;
+    MenuFac.active = 8;
     $scope.activePanel = MenuFac;
     $scope.editPolicyForm = {};
     PoliciesServ.getPolicyByID($stateParams.id).then(function(response) {

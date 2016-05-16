@@ -2,7 +2,7 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
-    MenuFac.active = 5;
+    MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -45,7 +45,7 @@
     };
   }]);
   app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,MenuFac,CustomersServ,HelperServ,toastr){
-    MenuFac.active = 5;
+    MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
@@ -63,7 +63,7 @@
     };
   }]);
   app.controller('EditCustomerCtl',['$scope','$state','$stateParams','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,CustomersServ,HelperServ,toastr){
-    MenuFac.active = 5;
+    MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.editCustomerForm = {};
     $scope.objects = HelperServ;

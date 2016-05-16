@@ -25,7 +25,7 @@ module.exports = {
   getAllWarehouses :function(cb){
     model.Warehouse.find({},function(err, result){
       if(!err){
-        cb({result:result,count:count});
+        cb({result:result});
       }else{
         console.log(err);
         cb(null);

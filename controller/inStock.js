@@ -9,7 +9,10 @@ module.exports = {
     page-=1;
     limit = parseInt(limit);
     model.Instock.count({},function(err,count){
-      model.Instock.find({}).limit(limit).skip(page*limit).exec(function(err, result){
+      model.Instock.find({}).limit(limit).skip(page*limit)
+      .populate('product')
+      .populate('warehouse')
+      .exec(function(err, result){
         if(!err){
           cb({result:result,count:count});
         }else{
@@ -17,6 +20,18 @@ module.exports = {
           cb(null);
         }
       });
+    });
+  },
+  getInStockId :function(id,cb){
+    model.Instock.findOne({_id : id})
+    .populate('product')
+    .populate('warehouse')
+    .exec(function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        cb(null);
+      }
     });
   },
 
@@ -30,15 +45,7 @@ module.exports = {
       }
     });
   },
-  getInStockId :function(id,cb){
-    model.Instock.findOne({_id : id}, function(err, result){
-      if(!err){
-        cb(result);
-      }else{
-        cb(null);
-      }
-    });
-  },
+  
   updateInStockInvoice : function(id,cb){
     model.Instock.findOneAndUpdate({status:1},{invoice:id,status:2} , function(err,result) {
       if (!err) {

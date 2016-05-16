@@ -6,54 +6,42 @@
   font-family: 'droidkufi';
   src : url("../fonts/DroidKufi-Regular.ttf") format("truetype");
 }
-html{
+/*html{
   position: relative;
   min-height: 100%;
-}
+}*/
 .navbar-default {
   background-color: #f8f8f8;
 }
 body {
   font-family: 'droidkufi', sans-serif;
   /*padding: 20px;*/
-  padding-top: 10px;
-  background-color: #F5F5F5;
-  background-image: url('../img/background.jpg');
-  background-size:cover;
+  /*padding-top: 10px;*/
+  /*background-color: #F5F5F5;*/
+  /*background-image: url('../img/background.jpg');*/
+  /*background-size:cover;*/
 }
-/*textarea:focus,
-textarea.form-control:focus,
-input.form-control:focus,
-input[type=text]:focus,
-input[type=password]:focus,
-input[type=email]:focus,
-input[type=number]:focus,
-[type=text].form-control:focus,
-[type=password].form-control:focus,
-[type=email].form-control:focus,
-[type=tel].form-control:focus,
-[contenteditable].form-control:focus {
-  -webkit-box-shadow: inset 0 -2px 0 #666666;
-  box-shadow: inset 0 -2px 0 #666666;
-}*/
+.site_title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 17px;
+  width: 100%;
+  color: #ECF0F1 !important;
+  margin-left: 0 !important;
+  line-height: 23px;
+  display: block;
+  margin: 0;
+  padding-right: 10px;
+  padding-top: 10px;
+  height: 100%;
+}
 .widget-box{
   background-color: #fff;
   border-radius: 4px;
   position: relative;
   padding: 30px;
   padding-top: 10px;
-}
-.footer{
-  bottom: 0;
-  position: absolute;
-  width: 100%;
-}
-.footer p,.footer a{
-  color: #A79B9B;
-  text-align: center;
-}
-.footer a:hover{
-  text-decoration: underline;
 }
 select, select.form-control {
   background-position: left center;
@@ -164,3 +152,7 @@ select, select.form-control {
   margin-top: 5px;
   margin-bottom: 0px;
 }
+/*.btn-default{
+  background: rgba(52, 73, 94, 0.94);
+  color: #ECF0F1;
+}*/

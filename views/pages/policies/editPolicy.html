@@ -1,31 +1,39 @@
-<div class="widget-box animated fadeIn">
-  <h5><i class="fa fa-pencil"></i>&nbsp;تعديل سياسة ({{editPolicyForm.name}})</h5>
-  <hr>
-  <form novalidate ng-submit="editPolicy()">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label class="control-label">اسم السياسة</label>
-          <input class="form-control input-sm" type="text" ng-model="editPolicyForm.name" placeholder="اسم السياسة" required>
-        </div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>تعديل سياسة <span>({{editPolicyForm.name}})</span></h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form novalidate ng-submit="editPolicy()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">اسم السياسة</label>
+                <input class="form-control input-sm" type="text" ng-model="editPolicyForm.name" placeholder="اسم السياسة" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">معلومات عن السياسة</label>
+                <textarea class="form-control input-sm" cols="30" rows="10" ng-model="editPolicyForm.description" placeholder="معلومات عن السياسة" required></textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-4">
+              <button type="submit" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil"></i>&nbsp;تعديل</button>
+            </div>
+            <div class="col-md-2">
+              <a class="btn btn-success btn-sm btn-block" ui-sref="policies"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label class="control-label">معلومات عن السياسة</label>
-          <textarea class="form-control input-sm" cols="30" rows="10" ng-model="editPolicyForm.description" placeholder="معلومات عن السياسة" required></textarea>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-2 col-md-offset-4">
-        <button type="submit" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil"></i>&nbsp;تعديل</button>
-      </div>
-      <div class="col-md-2">
-        <a class="btn btn-success btn-sm btn-block" ui-sref="policies"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>

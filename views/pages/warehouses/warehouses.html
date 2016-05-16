@@ -1,51 +1,58 @@
-<div class="panel panel-default panel-table animated fadeIn">
-  <div class="panel-heading">
-    <div class="row">
-      <div class="col col-xs-6">
-        <h3 class="panel-title" style="padding-top: 5px;">عرض المخازن</h3>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <div class="row">
+          <div class="col col-xs-6">
+            <h2>عرض المخازن</h2>
+          </div>
+          <div class="col col-xs-6 text-left">
+            <a ui-sref="newWarehouse" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مخزن جديد</a>
+          </div>
+        </div>
+        <div class="clearfix"></div>
       </div>
-      <div class="col col-xs-6 text-left">
-        <a ui-sref="newWarehouse" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مخزن جديد</a>
-      </div>
-    </div>
-  </div>
-  <div class="table-responsive">
-    <div ng-if="warehouses.length == 0">
-      <div class="alert alert-info" style="margin:20px;">
-        <p class="text-center">
-          عفوا لاتوجد بيانات
-        </p>
-      </div>
-    </div>
-    <table ng-if="warehouses.length" class="table table-striped table-bordered table-condensed table-hover">
-      <thead>
-        <tr>
-          <th>اسم المخزن</th>
-          <th>المدينة, المنطقة</th>
-          <th>البريد الالكتروني</th>
-          <th>رقم الهاتف</th>
-          <th class="text-center"><em class="fa fa-cog"></em></th>
-        </tr> 
-      </thead>
-      <tbody ng-repeat="warehouse in warehouses">
-        <tr>
-          <td>{{warehouse.name}}</td>
-          <td>{{cityObject.citiesObj[warehouse.city-1].nameAr}} , {{warehouse.area}}</td>
-          <td>{{warehouse.email}}</td>
-          <td>{{warehouse.phone}}</td>
-          <td class="text-center">
-            <a class="btn btn-warning btn-sm" ui-sref="editWarehouse({id:warehouse._id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
-            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" ng-click="showDeleteModel(warehouse._id)" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="panel-footer" ng-show="warehouses.length">
-    <div class="row">
-      <div class="col-xs-12 col-md-12 text-center">
-        <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
-        <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
+      <div class="x_content">
+        <div class="table-responsive">
+          <div ng-show="warehouses.length == 0">
+            <div class="alert alert-info" style="margin:20px;">
+              <p class="text-center">
+                عفوا لاتوجد بيانات
+              </p>
+            </div>
+          </div>
+          <table ng-show="warehouses.length" class="table table-striped table-condensed jambo_table">
+            <thead>
+              <tr>
+                <th>اسم المخزن</th>
+                <th>المدينة</th>
+                <th>المنطقة</th>
+                <th>البريد الالكتروني</th>
+                <th>رقم الهاتف</th>
+                <th><i class="fa fa-cog"></i></th>
+              </tr> 
+            </thead>
+            <tbody ng-repeat="warehouse in warehouses">
+              <tr>
+                <td>{{warehouse.name}}</td>
+                <td>{{cityObject.citiesObj[warehouse.city-1].nameAr}}</td>
+                <td>{{warehouse.area}}</td>
+                <td>{{warehouse.email}}</td>
+                <td>{{warehouse.phone}}</td>
+                <td class="text-center">
+                  <a class="btn btn-success btn-sm" ui-sref="editWarehouse({id:warehouse._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(warehouse._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row" ng-show="warehouses.length">
+          <div class="col-xs-12 col-md-12 text-center">
+            <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
+            <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
+          </div>
+        </div>
       </div>
     </div>
   </div>

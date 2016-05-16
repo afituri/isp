@@ -13,6 +13,7 @@
   });
   app.service('HelperServ',['$http',function($http){
     var self = {
+      'stockObj': [],
       'citiesObj': [],
       'suppliersObj': [],
       'serviceProvidersObj': [],
@@ -20,6 +21,14 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
+      
+      'getAllStock': function(){
+        $http.get('/warehouse/all').then(function(response) {
+          self.stockObj = response.data.result;
+        }, function(response) {
+          console.log("Something went wrong in getAllCities");
+        });
+      },
       'getAllCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
@@ -73,6 +82,7 @@
         });
       }
     };
+    self.getAllStock();
     self.getAllCities();
     self.getAllSuppliers();
     self.getAllServiceProviders();
@@ -171,6 +181,28 @@
     };
     return self;
   }]);
+  app.service('InStockServ',['$http',function($http){
+    var self = {
+      'addInStock': function(obj){
+        return $http.post('/inStock/add',obj);
+      },
+      'getInStocks': function(pageSize,currentPage){
+        return $http.get('/inStock/'+pageSize+'/'+currentPage);
+      },
+      'deleteStocks': function(id){
+        return $http.delete('/inStock/delete/'+id);
+      },
+      'getInStockById': function(id){
+        return $http.get('/inStock/'+id);
+      },
+      'editInStock': function(id,obj){
+        return $http.put('/inStock/edit/'+id,obj);
+      }
+    };
+
+    return self;
+
+  }]);
   app.service('WarehousesServ',['$http',function($http){
     var self = {
       'getWarehouses': function(pageSize,currentPage){
@@ -256,6 +288,18 @@
     var self = {
       'getProductServices': function(pageSize,currentPage){
         return $http.get('/product/service/'+pageSize+'/'+currentPage);
+      },
+      'getProductAll': function(pageSize,currentPage){
+        return $http.get('/product/all');
+      },
+      'getAllService': function(){
+        return $http.get('/product/allService');
+      },
+      'getAllItem': function(type){
+        return $http.get('/product/allItem');
+      },
+      'getAllPackage': function(type){
+        return $http.get('/product/allPackage');
       },
       'getProductItems': function(pageSize,currentPage){
         return $http.get('/product/item/'+pageSize+'/'+currentPage);

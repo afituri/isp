@@ -1,57 +1,63 @@
-<div class="widget-box animated fadeIn">
-  <h5><i class="fa fa-plus"></i>&nbsp;إضافة مورد جديد</h5>
-  <hr>
-  <form novalidate ng-submit="newSupplier()">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label">اسم الشركة</label>
-          <input class="form-control input-sm" type="text" ng-model="newSupplierForm.name" ng-required-err-type="name" placeholder="اسم الشركة" required>
-        </div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>إضافة مورد جديد</h2>
+        <div class="clearfix"></div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label">اسم المخول</label>
-          <input class="form-control input-sm" type="text" ng-model="newSupplierForm.repName" ng-required-err-type="reqName" placeholder="اسم المخول" required>
-        </div>
+      <div class="x_content">
+        <form novalidate ng-submit="newSupplier()">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">اسم الشركة</label>
+                <input class="form-control input-sm" type="text" ng-model="newSupplierForm.name" ng-required-err-type="name" placeholder="اسم الشركة" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">اسم المخول</label>
+                <input class="form-control input-sm" type="text" ng-model="newSupplierForm.repName" ng-required-err-type="reqName" placeholder="اسم المخول" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">البريد الالكتروني</label>
+                <input class="form-control input-sm" type="email" ng-model="newSupplierForm.email" ng-required-err-type="emailType" placeholder="البريد الالكتروني" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">رقم هاتف الشركة</label>
+                <input class="form-control input-sm" type="text" ng-model="newSupplierForm.phone" ng-required-err-type="phone" placeholder="رقم هاتف الشركة" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">رقم هاتف المخول</label>
+                <input class="form-control input-sm" type="text" ng-model="newSupplierForm.repPhone" ng-required-err-type="repPhone" placeholder="رقم هاتف المخول" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">ملاحظات</label>
+                <input class="form-control input-sm" type="text" ng-model="newSupplierForm.notes" ng-required-err-type="notes" placeholder="ملاحظات" required>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-4">
+              <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
+            </div>
+            <div class="col-md-2">
+              <a class="btn btn-success btn-sm btn-block" ui-sref="suppliers"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label">البريد الالكتروني</label>
-          <input class="form-control input-sm" type="email" ng-model="newSupplierForm.email" ng-required-err-type="emailType" placeholder="البريد الالكتروني" required>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label">رقم هاتف الشركة</label>
-          <input class="form-control input-sm" type="text" ng-model="newSupplierForm.phone" ng-required-err-type="phone" placeholder="رقم هاتف الشركة" required>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label">رقم هاتف المخول</label>
-          <input class="form-control input-sm" type="text" ng-model="newSupplierForm.repPhone" ng-required-err-type="repPhone" placeholder="رقم هاتف المخول" required>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label">ملاحظات</label>
-          <input class="form-control input-sm" type="text" ng-model="newSupplierForm.notes" ng-required-err-type="notes" placeholder="ملاحظات" required>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-2 col-md-offset-4">
-        <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
-      </div>
-      <div class="col-md-2">
-        <a class="btn btn-success btn-sm btn-block" ui-sref="suppliers"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>

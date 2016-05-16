@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>تعديل المخزون</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form  novalidate ng-submit="editInStock()">
+          <div class="row">
+            <div class="col-md-4" ng-class="">
+              <div class="form-group">
+                <label class="control-label">المخزن</label>
+                <select class="form-control input-sm" ng-model="editInStockForm.warehouse._id" ng-options="stock._id as stock.name for stock in objects.stockObj" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4" ng-class="">
+              <div class="form-group">
+                <label class="control-label">المنتج </label>
+                <select class="form-control input-sm" ng-model="editInStockForm.product._id"ng-options="stock._id as stock.name for stock in Allproduct"  ng-required-err-type="required" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" >
+              <div class="form-group">
+                <label class="control-label">ماك ادرس</label>
+                <input class="form-control input-sm" type="text" ng-model="editInStockForm.macAddress" ng-required-err-type="required" placeholder="اسم العميل" required>
+              </div>
+            </div>
+            <div class="col-md-4" >
+              <div class="form-group">
+                <label class="control-label">اسم المستخدم</label>
+                <input class="form-control input-sm" type="text" ng-model="editInStockForm.username" ng-required-err-type="required" placeholder="اسم العميل" required>
+              </div>
+            </div>
+            <div class="col-md-4" >
+              <div class="form-group">
+                <label class="control-label">الباسورد</label>
+                <input class="form-control input-sm" type="password" ng-model="editInStockForm.password" ng-required-err-type="required" placeholder="اسم العميل"  required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">الوصف</label>
+                <textarea class="form-control input-sm" rows="6" cols="12" ng-model="editInStockForm.description" ng-required-err-type="notes" placeholder="ملاحظات" ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-4">
+              <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;تعديل</button>
+            </div>
+            <div class="col-md-2">
+              <a class="btn btn-success btn-sm btn-block" ui-sref="inStock"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            </div>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="panel panel-default panel-table animated fadeIn">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col col-xs-6">
+        <h3 class="panel-title" style="padding-top: 5px;">عرض الموزعين</h3>
+      </div>
+      <div class="col col-xs-6 text-left">
+        <a ui-sref="newReseller" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة موزع جديد</a>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>اسم المخول</th>
+          <th>اسم الشركة</th>
+          <th>البريد الالكتروني</th>
+          <th class="text-center"><em class="fa fa-cog"></em></th>
+        </tr> 
+      </thead>
+      <tbody ng-repeat="reseller in resellers">
+        <tr>
+          <td>{{reseller.repName}}</td>
+          <td>{{reseller.companyName}}</td>
+          <td>{{reseller.email}}</td>
+          <td class="text-center">
+            
+            <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدينة:- {{cityObject.citiesObj[reseller.city-1].nameAr}}<br/>المنطقة:- {{reseller.address}}<br/>خط الطول:- {{reseller.langtitude}}<br/>خط العرض:- {{reseller.longtitude}}<br/>رقم الهاتف:- {{reseller.phone}}" bs-popover>
+              <em class="fa fa-info fa-fw"></em>
+            </button>
+            <a class="btn btn-primary btn-sm" ui-sref="showReseller({id:reseller._id})" data-trigger="hover" data-title="عرض" bs-tooltip><em class="fa fa-eye fa-fw"></em></a>
+            <a class="btn btn-warning btn-sm" ui-sref="editReseller({id:reseller._id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a>
+            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" ng-click="showDeleteModel(reseller._id)" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 text-center">
+        <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
+        <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
+      </div>
+    </div>
+  </div>
+</div>

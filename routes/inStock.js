@@ -22,21 +22,23 @@ router.post('/add', function(req, res) {
 
 /* Edit in stock by id  */
 router.put('/edit/:id', function(req, res) {
-  supplierMgr.updateInStock(req.params.id,req.body,function(InStock){
+  instockMgr.updateInStock(req.params.id,req.body,function(InStock){
+    console.log("body");
+    console.log(req.body);
     res.send(InStock);
   });
 });
 
 /* Delete in stock by id  */
 router.delete('/delete/:id', function(req, res) {
-  supplierMgr.deleteInStock(req.params.id,function(InStock){
+  instockMgr.deleteInStock(req.params.id,function(InStock){
     res.send({result:InStock});
   });
 });
 
 /* GET in stock by ID  */
 router.get('/:id', function(req, res) {
-  supplierMgr.getInStockId(req.params.id,function(InStock){
+  instockMgr.getInStockId(req.params.id,function(InStock){
     res.send(InStock);
   });
 });

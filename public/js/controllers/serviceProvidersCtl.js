@@ -17,12 +17,15 @@
     };
     $scope.confirmDelete = function(id){
       ServiceProvidersServ.deleteServiceProvider(id).then(function(response) {
+        //alert(response.data.result);
         if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
         } else if (response.data.result == 2){
           $scope.deleteModel.hide();
-          $scope.init();
+          ServiceProvidersServ.getServiceProviders();
+          $scope.serviceProviders = ServiceProvidersServ;
+         // $scope.init();
           toastr.success('تم الحذف بنجاح');
         } else if (response.data.result == 3){
           $scope.deleteModel.hide();

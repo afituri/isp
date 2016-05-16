@@ -13,6 +13,8 @@ module.exports = {
       .populate('policy')
       .populate('product')
       .exec(function(err, pPolicies){
+        console.log("programming here ");
+        console.log(pPolicies);
         if(!err){
           cb({result:pPolicies,count:count});
         }else{
