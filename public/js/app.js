@@ -286,7 +286,40 @@
           }]);
         }] 
       }
-    }).state('newCustomer',{
+    })
+    .state('showInvoice',{
+      url: '/showInvoice/:id',
+      templateUrl: 'pages/invoices/showInvoice.html',
+      controller: 'InvoicesCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('invoiceCustomer',{
+      url: '/invoiceCustomers',
+      templateUrl: 'pages/invoices/customers.html',
+      controller: 'CustomersCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/customersCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+
+    .state('newCustomer',{
       url: '/customers/new',
       templateUrl: 'pages/customers/newCustomer.html',
       controller: 'NewCustomerCtl',

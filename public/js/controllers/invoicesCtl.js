@@ -2,9 +2,19 @@
   'use strict';
   var app = angular.module('isp');
   //dddddddddddddddddddddd
-  app.controller('InvoicesCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
+  app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
+    //alert($stateParams.id);
+    InvoicesServ.getInvoiceByID($stateParams.id).then(function(response) {
+      $scope.allInvoice=response.data;
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+
+
+  
+
   }]);
   app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){   
     $scope.myFunc = function() {

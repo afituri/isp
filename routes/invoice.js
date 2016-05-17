@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var invoiceMgr = require("../controller/invoice");
-var invoicePMgr = require("../controller/invoice");
 
 
 
@@ -12,8 +11,18 @@ router.get('/:limit/:page', function(req, res) {
 	});
  });
 
+router.get('/:id', function(req, res) {
+
+  invoiceMgr.getInvoicesById(req.params.id,function(invoices){
+    console.log("invoices");
+    console.log(invoices);
+    res.send(invoices);
+  });
+});
+
 router.get('/all', function(req, res) {
   invoiceMgr.getAllInvoices(function(policies){
+    console.log(policies);
     res.send(policies);
   });
 });

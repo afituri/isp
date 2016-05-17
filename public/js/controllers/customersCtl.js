@@ -7,6 +7,8 @@
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+    
+
     $scope.init = function () {
       CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;

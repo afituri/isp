@@ -23,8 +23,19 @@ module.exports = {
     });
   },
 
-   getAllInvoices :function(limit,page,cb){
+   getAllInvoices :function(cb){
     model.Invoice.find({},function(err, invoices){
+      if(!err){
+        cb(invoices);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getInvoicesById :function(id,cb){
+    model.Invoice.find({customer:id},function(err, invoices){
       if(!err){
         cb(invoices);
       }else{

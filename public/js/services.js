@@ -385,6 +385,8 @@
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
       'getInvoiceByID': function(id){
+        console.log("id");
+        console.log(id);
         return $http.get('/invoice/'+id);
       },
       'addInvoice': function(invoiceObj){
