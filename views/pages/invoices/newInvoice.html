@@ -99,7 +99,6 @@
             </div>
           </div>
           <hr>
-          {{customId}}
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
@@ -168,14 +167,14 @@
             </div>
             <div class="col-md-2" ng-show="itemInfo">
               <div class="form-group">
-                <label class="control-label">الحقل الاول</label>
-                <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.filed1" disabled>
+                <label class="control-label">اسم المستخدم</label>
+                <input class="form-control input-sm" type="text" ng-model="itemInfo.username" disabled>
               </div>
             </div>
             <div class="col-md-2" ng-show="itemInfo">
               <div class="form-group">
-                <label class="control-label">الحقل التاني</label>
-                <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.filed2" disabled>
+                <label class="control-label">كلمة المرور</label>
+                <input class="form-control input-sm" type="text" ng-model="itemInfo.password" disabled>
               </div>
             </div>
           </div>

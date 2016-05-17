@@ -31,7 +31,6 @@
     $scope.myFunc = function() {
       $scope.search=angular.element('#Text1').val();
       var name=angular.element('#Text1').val();
-      console.log(name);
       if(!name){ name=null;};
       $http({ method: 'POST', url: '/customer/in/'+name}).
         success(function(data, status, headers, config) {
@@ -59,6 +58,7 @@
     $scope.newInvoice = function(){
       if($scope.previousSubscription==1){
         $scope.newInvoiceForm.previousSubscription=1;
+        $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
@@ -76,6 +76,7 @@
       } else if($scope.previousSubscription==2){
           $scope.newInvoiceForm.previousSubscription=2;
           $scope.newInvoiceForm.customId=$scope.customId;
+          $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
           InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
           },function(response){
@@ -85,8 +86,10 @@
     };
     $scope.getItemInfo = function(){
       InvoicesServ.getItemInfoByID($scope.newInvoiceForm.productItem).then(function(response){
-        $scope.itemInfo = response.data
-        console.log($scope.itemInfo);
+        $scope.itemInfo={};
+        $scope.itemInfo.username = response.data.username;
+        $scope.itemInfo.password = response.data.password;
+        $scope.itemInfo.inst=response.data._id;
       },function(response) {
         console.log("Something went wrong");
       });

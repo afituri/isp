@@ -3,6 +3,11 @@ var router = express.Router();
 var instockMgr = require("../controller/inStock");
 
 /* GET all in stock */
+router.get('/search/:id', function(req, res) {
+  instockMgr.searchInStockInvoice(req.params.id,function(InStock){
+    res.send(InStock);
+  });
+});
 router.get('/:limit/:page', function(req, res) {
   instockMgr.getInStock(req.params.limit,req.params.page,function(InStock){
     res.send(InStock);
@@ -40,11 +45,7 @@ router.get('/:id', function(req, res) {
     res.send(InStock);
   });
 });
-router.get('search/:id', function(req, res) {
-  instockMgr.searchInStockInvoice(req.params.id,function(InStock){
-    res.send(InStock);
-  });
-});
+
 
 
 module.exports = router;

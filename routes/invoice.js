@@ -14,8 +14,7 @@ router.get('/:limit/:page', function(req, res) {
 router.get('/:id', function(req, res) {
 
   invoiceMgr.getInvoicesById(req.params.id,function(invoices){
-    console.log("invoices");
-    console.log(invoices);
+
     res.send(invoices);
   });
 });

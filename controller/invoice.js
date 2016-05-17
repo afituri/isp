@@ -83,7 +83,7 @@ module.exports = {
               invoice=new model.Invoice(invoice);
               invoice.save(function(err,invoiceResult){
                 if (!err) {
-                  instockMgr.updateInStockInvoice(invoiceResult._id,function(result){});
+                  instockMgr.updateInStockInvoice(invoiceResult._id,body.itemInfo,function(result){});
                   order1={
                     invoice:invoiceResult._id,
                     product:body.product,
@@ -143,7 +143,7 @@ module.exports = {
           invoice=new model.Invoice(invoice);
           invoice.save(function(err,invoiceResult){
             if (!err) {
-              instockMgr.updateInStockInvoice(invoiceResult._id,function(result){});
+              instockMgr.updateInStockInvoice(invoiceResult._id,body.itemInfo,function(result){});
               order1={
                 invoice:invoiceResult._id,
                 product:body.product,

@@ -46,8 +46,8 @@ module.exports = {
     });
   },
   
-  updateInStockInvoice : function(id,cb){
-    model.Instock.findOneAndUpdate({status:1},{invoice:id,status:2} , function(err,result) {
+  updateInStockInvoice : function(id,itemInfo,cb){
+    model.Instock.findOneAndUpdate({$and:[{status:1},{_id:itemInfo}]},{invoice:id,status:2} , function(err,result) {
       if (!err) {
         cb(true)
       } else {
@@ -57,12 +57,12 @@ module.exports = {
     });
   },
   searchInStockInvoice :function(id,cb){
-    model.Instock.findOne({status:1,product:id}, function(err,result) {
+    model.Instock.findOne({$and: [ {status:1},{product:id}]}, function(err,result) {
       if (!err) {
         cb(result)
       } else {
         console.log(err);
-        cb(null);
+        cb(false);
       }
     });
   },
