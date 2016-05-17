@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var data = require('../data/sProvider');
-var serviceProviderMgr = require("../controller/serviceProvider");
+var serviceProviderMgr = require("../controller/Serviceprovider");
 var servicesMgr = require("../controller/service");
 
 /* GET all Service Providers */

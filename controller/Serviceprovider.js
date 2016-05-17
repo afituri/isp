@@ -8,8 +8,8 @@ module.exports = {
     // page = parseInt(page);
     // page-=1;
     // limit = parseInt(limit);
-    model.ServiceProvider.count({},function(err,count){
-      model.ServiceProvider.find({}).exec(function(err, provider){
+    model.Serviceprovider.count({},function(err,count){
+      model.Serviceprovider.find({}).exec(function(err, provider){
         if(!err){
           cb({result:provider,count:count});
         }else{
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   getSProviderId :function(id,cb){
-    model.ServiceProvider.findOne({_id : id}, function(err, provider){
+    model.Serviceprovider.findOne({_id : id}, function(err, provider){
       if(!err){
         cb(provider);
       }else{
@@ -39,7 +39,7 @@ module.exports = {
       website : body.website,
       
      }
-    serviceProvider = new model.ServiceProvider(obj);
+    serviceProvider = new model.Serviceprovider(obj);
     serviceProvider.save(function(err,result){
       if (!err) {
         cb(true);
@@ -60,7 +60,7 @@ module.exports = {
       websit : body.websit,
       
      }
-    model.ServiceProvider.findOneAndUpdate({_id:id}, obj, function(err,result) {
+    model.Serviceprovider.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
       } else {
@@ -71,11 +71,11 @@ module.exports = {
   },
 
   deleteServiceProvider : function(id,cb){
-    model.Services.find({servicesProvider:id}, function(err,resultServices) {
+    model.Service.find({Serviceprovider:id}, function(err,resultServices) {
       if(resultServices.length > 0){
         cb(1)
       } else{
-        model.ServiceProvider.remove({_id:id}, function(err,result) {
+        model.Serviceprovider.remove({_id:id}, function(err,result) {
           if (!err) {
             cb(2)
           } else {

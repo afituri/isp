@@ -6,8 +6,14 @@
       'active': -1
     }
   });
+  app.factory('ReportServ',function(){
+    return {
+      'invoiceObj': []
+    }
+  });
   app.service('HelperServ',['$http',function($http){
     var self = {
+      'stockObj': [],
       'citiesObj': [],
       'suppliersObj': [],
       'serviceProvidersObj': [],
@@ -15,6 +21,14 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
+      
+      'getAllStock': function(){
+        $http.get('/warehouse/all').then(function(response) {
+          self.stockObj = response.data.result;
+        }, function(response) {
+          console.log("Something went wrong in getAllCities");
+        });
+      },
       'getAllCities': function(){
         $http.get('/cities').then(function(response) {
           self.citiesObj = response.data;
@@ -68,6 +82,7 @@
         });
       }
     };
+    self.getAllStock();
     self.getAllCities();
     self.getAllSuppliers();
     self.getAllServiceProviders();
@@ -122,10 +137,14 @@
     self.getServiceProviders();
     return self;
   }]);
+//0000 
   app.service('ServicesServ',['$http',function($http){
     var self = {
       'getServices': function(pageSize,currentPage){
         return $http.get('/service/'+pageSize+'/'+currentPage);
+      },
+      'getAllServices': function(pageSize,currentPage){
+        return $http.get('/service/all');
       },
       'getServiceByID': function(id){
         return $http.get('/service/'+id);
@@ -162,6 +181,28 @@
     };
     return self;
   }]);
+  app.service('InStockServ',['$http',function($http){
+    var self = {
+      'addInStock': function(obj){
+        return $http.post('/inStock/add',obj);
+      },
+      'getInStocks': function(pageSize,currentPage){
+        return $http.get('/inStock/'+pageSize+'/'+currentPage);
+      },
+      'deleteStocks': function(id){
+        return $http.delete('/inStock/delete/'+id);
+      },
+      'getInStockById': function(id){
+        return $http.get('/inStock/'+id);
+      },
+      'editInStock': function(id,obj){
+        return $http.put('/inStock/edit/'+id,obj);
+      }
+    };
+
+    return self;
+
+  }]);
   app.service('WarehousesServ',['$http',function($http){
     var self = {
       'getWarehouses': function(pageSize,currentPage){
@@ -187,6 +228,9 @@
       'getCustomers': function(pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage);
       },
+      'getAllCustomers': function(){
+        return $http.get('/customer/all');
+      },
       'getCustomerByID': function(id){
         return $http.get('/customer/'+id);
       },
@@ -202,8 +246,9 @@
     };
     return self;
   }]);
-  app.service('ProductsServ',['$http',function($http){
-    var self = {
+
+ /* app.service('ProductsItem',['$http',function($http){
+     var self = {
       'getProductServices': function(pageSize,currentPage){
         return $http.get('/product/service/'+pageSize+'/'+currentPage);
       },
@@ -222,12 +267,78 @@
       'editProduct': function(id,productObj){
         return $http.put('/product/edit/'+id,productObj);
       },
+      'getProductServiceByID':function(id,serviceObj){
+        return $http.put('/product/productService/'+id,serviceObj);
+      },
+      'editProductService':function(id,productObj){
+        return $http.put('/product/productService/edit/'+id,productObj);
+      },
+      'deleteProductService': function(id){
+        return $http.delete('/product/productService/delete/'+id);
+      },
+      'deleteProduct': function(id){
+        return $http.delete('/product/delete/'+id);
+      }
+    };
+    return self;
+   }]);*/
+
+
+  app.service('ProductsServ',['$http',function($http){
+    var self = {
+      'getProductServices': function(pageSize,currentPage){
+        return $http.get('/product/service/'+pageSize+'/'+currentPage);
+      },
+      'getProductAll': function(pageSize,currentPage){
+        return $http.get('/product/all');
+      },
+      'getAllService': function(){
+        return $http.get('/product/allService');
+      },
+      'getAllItem': function(type){
+        return $http.get('/product/allItem');
+      },
+      'getAllPackage': function(type){
+        return $http.get('/product/allPackage');
+      },
+      'getProductItems': function(pageSize,currentPage){
+        return $http.get('/product/item/'+pageSize+'/'+currentPage);
+      },
+      'getProductPackages': function(pageSize,currentPage){
+        return $http.get('/product/package/'+pageSize+'/'+currentPage);
+      },
+      'getProductByID': function(id){
+        return $http.get('/product/'+id);
+      },
+      'addProduct': function(productObj){
+        return $http.post('/product/add',productObj);
+      },
+      'editProduct': function(id,productObj){
+        return $http.put('/product/edit/'+id,productObj);
+      },
+      'getProductServiceByID':function(id,serviceObj){
+        return $http.put('/product/productService/'+id,serviceObj);
+      },
+      'editProductService':function(id,productObj){
+        return $http.put('/product/productService/edit/'+id,productObj);
+      },
+      'editProductItem':function(id,productObj){
+        return $http.put('/product/productItems/edit/'+id,productObj);
+      },
+      'editProductPackage':function(id,productObj){
+        return $http.put('/product/productPackages/edit/'+id,productObj);
+      },
+      'deleteProductService': function(id){
+        return $http.delete('/product/productService/delete/'+id);
+      },
       'deleteProduct': function(id){
         return $http.delete('/product/delete/'+id);
       }
     };
     return self;
   }]);
+
+  
   app.service('PoliciesServ',['$http',function($http){
     var self = {
       'getPolicies': function(pageSize,currentPage){
@@ -250,20 +361,20 @@
   }]);
   app.service('ProductPoliciesServ',['$http',function($http){
     var self = {
-      'getProductPolicies': function(pageSize,currentPage){
-        return $http.get('/productPolicy/'+pageSize+'/'+currentPage);
+      'getProductPolicies': function(pageSize,currentPage,type){
+        return $http.post('/policy/productPolicy/'+pageSize+'/'+currentPage,type);
       },
       'getProductPolicyByID': function(id){
-        return $http.get('/productPolicy/'+id);
+        return $http.post('/policy/productPolicyService/'+id);
       },
       'addProductPolicy': function(productPolicyObj){
         return $http.post('/policy/productPolicy/add',productPolicyObj);
       },
       'editProductPolicy': function(id,productPolicyObj){
-        return $http.put('/productPolicy/edit/'+id,productPolicyObj);
+        return $http.put('/policy/productPolicy/edit/'+id,productPolicyObj);
       },
       'deleteProductPolicy': function(id){
-        return $http.delete('/productPolicy/delete/'+id);
+        return $http.delete('/policy/productPolicy/delete/'+id);
       }
     };
     return self;
@@ -274,16 +385,24 @@
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
       'getInvoiceByID': function(id){
+        console.log("id");
+        console.log(id);
         return $http.get('/invoice/'+id);
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
+      },
+      'report': function(invoiceObj){
+        return $http.post('/report/printInvoice',invoiceObj);
       },
       'editInvoice': function(id,invoiceObj){
         return $http.put('/invoice/edit/'+id,invoiceObj);
       },
       'deleteInvoice': function(id){
         return $http.delete('/invoice/delete/'+id);
+      },
+      'getItemInfoByID': function(id){
+        return $http.get('/inStock/search/'+id);
       }
     };
     return self;

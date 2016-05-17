@@ -1,6 +1,7 @@
 var generatePassword = require('password-generator'),
   easyPbkdf2 = require("easy-pbkdf2")();
 var model = require("../models");
+var instockMgr = require("./inStock");
 var invoice = null;
 
 module.exports = {
@@ -22,8 +23,19 @@ module.exports = {
     });
   },
 
-   getAllInvoices :function(limit,page,cb){
+   getAllInvoices :function(cb){
     model.Invoice.find({},function(err, invoices){
+      if(!err){
+        cb(invoices);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getInvoicesById :function(id,cb){
+    model.Invoice.find({customer:id},function(err, invoices){
       if(!err){
         cb(invoices);
       }else{
@@ -57,74 +69,133 @@ module.exports = {
   addInvoice : function(body,cb){
     model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
       },function(err,product){
-        customer = new model.Customer(body);
-        customer.save(function(err,customerResult){
-          if (!err) {
-            invoice={
-              customer:customerResult._id,
-              type:1,
-              notes:body.invoceNotes,
-              piad:body.total,
-              discount:body.discount
-            };
-            invoice=new model.Invoice(invoice);
-            invoice.save(function(err,invoiceResult){
-              if (!err) {
-                order1={
-                  invoice:invoiceResult._id,
-                  product:body.product,
-                  price : product[0].initialPrice,
-                  startDate:body.startDate,
-                  endDate:body.endDate
-                };
-                order2={
-                  invoice:invoiceResult._id,
-                  product:body.productItem,
-                  price : product[1].initialPrice,
-                  startDate:body.startDate,
-                  endDate:body.endDate
-                };
-                order3={
-                  invoice:invoiceResult._id,
-                  product:body.productPackage,
-                  price : product[2].initialPrice,
-                  startDate:body.startDate,
-                  endDate:body.endDate
-                };
-                var arrayOrder=[order1,order2,order3];
-                var counter=0;
-                var arrayOrd=[];
-                for(var i=0;i<3;i++){
-                  order=new model.Order(arrayOrder[i]);
-                  order.save(function(err,orderResult){
-                    arrayOrd.push(orderResult);
-                    arrayOfResult=[customerResult,invoiceResult,arrayOrd];
-                    if(!err){
-                      counter++;
-                      if(counter==3){
-                        cb(arrayOfResult,false);
+        if(body.previousSubscription==1){
+          customer = new model.Customer(body);
+          customer.save(function(err,customerResult){
+            if (!err) {
+              invoice={
+                customer:customerResult._id,
+                type:1,
+                notes:body.invoceNotes,
+                piad:body.total,
+                discount:body.discount
+              };
+              invoice=new model.Invoice(invoice);
+              invoice.save(function(err,invoiceResult){
+                if (!err) {
+                  instockMgr.updateInStockInvoice(invoiceResult._id,body.itemInfo,function(result){});
+                  order1={
+                    invoice:invoiceResult._id,
+                    product:body.product,
+                    price : product[0].initialPrice,
+                    startDate:body.startDate,
+                    endDate:body.endDate
+                  };
+                  order2={
+                    invoice:invoiceResult._id,
+                    product:body.productItem,
+                    price : product[1].initialPrice,
+                    startDate:body.startDate,
+                    endDate:body.endDate
+                  };
+                  order3={
+                    invoice:invoiceResult._id,
+                    product:body.productPackage,
+                    price : product[2].initialPrice,
+                    startDate:body.startDate,
+                    endDate:body.endDate
+                  };
+                  var arrayOrder=[order1,order2,order3];
+                  var counter=0;
+                  var arrayOrd=[];
+                  for(var i=0;i<3;i++){
+                    order=new model.Order(arrayOrder[i]);
+                    order.save(function(err,orderResult){
+                      arrayOrd.push(orderResult);
+                      arrayOfResult=[customerResult,invoiceResult,arrayOrd];
+                      if(!err){
+                        counter++;
+                        if(counter==3){
+                          cb(arrayOfResult,false);
+                        }
+                      } else {
+                        console.log()
+                        cb(null,err)
                       }
-                    } else {
-                      console.log()
-                      cb(null,err)
-                    }
-                  });
+                    });
+                  }
+                } else {
+                  cb(null,err);
                 }
-              } else {
-                cb(null,err);
+              });
+            } else {
+              cb(null,err);
+            }
+          });
+        }else{
+          invoice={
+            customer:body.customId,
+            type:1,
+            notes:body.invoceNotes,
+            piad:body.total,
+            discount:body.discount
+          };
+          invoice=new model.Invoice(invoice);
+          invoice.save(function(err,invoiceResult){
+            if (!err) {
+              instockMgr.updateInStockInvoice(invoiceResult._id,body.itemInfo,function(result){});
+              order1={
+                invoice:invoiceResult._id,
+                product:body.product,
+                price : product[0].initialPrice,
+                startDate:body.startDate,
+                endDate:body.endDate
+              };
+              order2={
+                invoice:invoiceResult._id,
+                product:body.productItem,
+                price : product[1].initialPrice,
+                startDate:body.startDate,
+                endDate:body.endDate
+              };
+              order3={
+                invoice:invoiceResult._id,
+                product:body.productPackage,
+                price : product[2].initialPrice,
+                startDate:body.startDate,
+                endDate:body.endDate
+              };
+              var arrayOrder=[order1,order2,order3];
+              var counter=0;
+              var arrayOrd=[];
+              for(var i=0;i<3;i++){
+                order=new model.Order(arrayOrder[i]);
+                order.save(function(err,orderResult){
+                  arrayOrd.push(orderResult);
+                  arrayOfResult=[null,invoiceResult,arrayOrd];
+                  if(!err){
+                    counter++;
+                    if(counter==3){
+                      cb(arrayOfResult,false);
+                    }
+                  } else {
+                    cb(null,err)
+                  }
+                });
               }
-            });
-          } else {
-            cb(null,err);
-          }
-        });
+            } else {
+              cb(null,err);
+            }
+          });
+        }
+
+
+
       });
   },
 
   updateInvoice : function(id,body,cb){
-    var obj ={
-     
-    }
+    var obj = body;
     model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
@@ -133,7 +204,40 @@ module.exports = {
         cb(false);
       }
     });
-  }
+  },
+
+  getInvoicedata :function(id,cb){
+    model.Instock.findOne({invoice : id}, function(err, result){
+      if(!err){
+        // cb(result);
+        model.Order.find({invoice : id}).populate('product')
+        .exec(function(err, order){
+          if(!err){
+            // cb(result);
+
+
+
+            model.Invoice.findOne({_id:id}).populate('customer').exec(function(err, invoices){
+              if(!err){
+                cb({instock:result,order:order,invoices:invoices});
+              }else{
+                console.log(err);
+                cb(null);
+              }
+            });
+
+
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
 
 
 

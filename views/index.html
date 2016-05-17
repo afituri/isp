@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="isp">
   <header>
-    <title><%=title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>شركة الحلول المتقنة لتقينة المعلومات والإتصالات</title>
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap-additions/dist/bootstrap-additions.min.css">
     <link rel="stylesheet" href="/angular-motion/dist/angular-motion.min.css">
@@ -13,334 +13,208 @@
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/animate.css/animate.min.css">
     <link rel="stylesheet" href="/angular-toastr/dist/angular-toastr.min.css">
-    <link rel="stylesheet" href="/css/navbar-rtl.css">
+    <link rel="stylesheet" href="/nya-bootstrap-select/dist/css/nya-bs-select.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="/css/style.css">
   </header>
-  <body>
-    <div class="container animated fadeIn">
-      <div class="row">
-        <div class="col-md-12">
-          <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" ui-sref="home">اسم الشركة</a>
-              </div>
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left" role="search" _lpchecked="1">
-                  <div class="form-group">
-                    <i class="fa fa-search fa-fw"></i>
-                    <input type="text" class="form-control" placeholder="بحث...">
-                  </div>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown">
-                    <a data-animation="am-flip-x" bs-dropdown class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      <i class="fa fa-user fa-fw"></i>
-                      اسم المستخدم
-                      <i class="fa fa-caret-down fa-fw"></i>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#"><i class="fa fa-cog fa-fw"></i>&nbsp;الملف الشخصي</a></li>
-                      <li><a href="#"><i class="fa fa-sign-out fa-fw"></i>&nbsp;خروج</a></li>
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border:0;">
+              <a href="/" class="site_title">
+                <span>شركة الحلول المتقنة لتقينة </span>
+                <br>
+                <span>المعلومات والإتصالات</span>
+              </a>
+            </div>
+            <div class="clearfix"></div>
+            <br/>
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  <li><a ui-sref="home"><i class="fa fa-home"></i> الرئيسية</a>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i> مزودي الخدمة <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="serviceProviders">عرض مزودي الخدمة</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newServiceProvider">إضافة مزود خدمة جديد</a>
+                      </li>
                     </ul>
                   </li>
-                  <!-- <li ui-sref-active="active"><a ui-sref="auth"><i class="fa fa-sign-in fa-fw"></i>&nbsp;تسجيل الدخول</a></li> -->
+                  <li><a><i class="fa fa-bars"></i> الخدمات <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="services">عرض الخدمات</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newService">إضافة خدمة جديدة</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i> الموزعين <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="resellers">عرض الموزعين</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newReseller">إضافة موزع جديد</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i> الموردين <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="suppliers">عرض الموردين</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newSupplier">إضافة مورد جديد</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>المخازن <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="warehouses">عرض المخازن</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newWarehouse">إضافة مخزن جديد</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>المخزون (البضاعة المخزنة) <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="inStock">عرض المخازن</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newInStock">إضافة مخزن جديد</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>الزبائن <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="customers">عرض الزبائن</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newCustomer">إضافة زبون</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i><span style="font-size:14px;">المنتجات <small style="font-size:9px;">(خدمات, معدات, حزم)</small> <span class="fa fa-chevron-down"></span></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="productServices">عرض الخدمات</a>
+                      </li>
+                      <li>
+                        <a ui-sref="productItems">عرض المعدات</a>
+                      </li>
+                      <li>
+                        <a ui-sref="productPackages">عرض الحزم</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newProduct">إضافة منتج جديد</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>السياسات <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="policies">عرض السياسات</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newPolicy">إضافة سياسة جديدة</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>سياسات المنتج <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="productPoliciesService">عرض سياسات منتج (الخدمة)</a>
+                      </li>
+                      <li>
+                        <a ui-sref="productPoliciesItem">عرض سياسات منتج (المعدة)</a>
+                      </li>
+                      <li>
+                        <a ui-sref="productPoliciesPackage">عرض سياسات منتج (الحزمة)</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newProductPolicy">إضافة سياسة منتج جديد</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>الفواتير <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="invoiceCustomer">عرض الفواتير</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newInvoice">إضافة فاتورة جديدة</a>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
             </div>
-          </nav>
-        </div>
-      </div>
-      <div class="row" id="row">
-        <div class="col-md-3" ng-controller="MenuCtl">
-          <div class="panel-group" ng-model="activePanel.active" role="tablist" aria-multiselectable="true" bs-collapse>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    مزودي الخدمة
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="serviceProviders" style="text-decoration:none;">عرض مزودي الخدمة</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newServiceProvider" style="text-decoration:none;">إضافة مزود خدمة جديد</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    الخدمات
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="services" style="text-decoration:none;">عرض الخدمات</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newService" style="text-decoration:none;">إضافة خدمة جديدة</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    الموزعين
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="resellers" style="text-decoration:none;">عرض الموزعين</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newReseller" style="text-decoration:none;">إضافة موزع جديد</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    الموردين
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="suppliers" style="text-decoration:none;">عرض الموردين</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newSupplier" style="text-decoration:none;">إضافة مورد جديد</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    المخازن
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="warehouses" style="text-decoration:none;">عرض المخازن</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newWarehouse" style="text-decoration:none;">إضافة مخزن جديد</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    الزبائن
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="customers" style="text-decoration:none;">عرض الزبائن</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    المنتجات (خدمات, معدات, حزم)
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productServices" style="text-decoration:none;">عرض الخدمات</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productItems" style="text-decoration:none;">عرض المعدات</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productPackages" style="text-decoration:none;">عرض الحزم</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newProduct" style="text-decoration:none;">إضافة منتج جديد</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    السياسات
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="policies" style="text-decoration:none;">عرض السياسات</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newPolicy" style="text-decoration:none;">إضافة سياسة جديدة</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    سياسات المنتج
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a ui-sref="productPolicies" style="text-decoration:none;">عرض سياسات المنتج</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newProductPolicy" style="text-decoration:none;">إضافة سياسة منتج جديد</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a bs-collapse-toggle style="cursor:pointer">
-                    <i class="fa fa-caret-down"></i>
-                    الفواتير
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <table class="table">
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-eye fa-fw icon text-primary"></i><a style="text-decoration:none;">عرض الفواتير</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td ui-sref-active="active">
-                        <i class="fa fa-plus fa-fw icon text-success"></i><a ui-sref="newInvoice" style="text-decoration:none;">إضافة فاتورة جديدة</a>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <!-- /sidebar menu -->
+            <!-- /menu footer buttons -->
+            <!-- <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div> -->
+            <!-- /menu footer buttons -->
           </div>
         </div>
-        <div class="col-md-9">
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav class="" role="navigation">
+              <ul class="nav navbar-nav navbar-left">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="img/img.jpg" alt="">&nbsp;اسم المستخدم
+                    <span class=" fa fa-angle-down fa-fw"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> خروج</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <div class="right_col" role="main">
           <div ui-view></div>
         </div>
+        <!-- /page content -->
+        <!-- footer content -->
+        <footer class="footer">
+          <div class="pull-left">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
-      </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <!-- <footer class="footer">
-        <p>جميع الحقوق © 2016 | صمم وطور من قبل</p>
-      </footer> -->
     </div>
     <script src="/jquery/dist/jquery.min.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -355,10 +229,14 @@
     <script src="/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="/angular-toastr/dist/angular-toastr.min.js"></script>
     <script src="/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
-    <script src="/angular-i18n/angular-locale_ar-ly.js"></script>
+    <script src="/nya-bootstrap-select/dist/js/nya-bs-select.min.js"></script>
+    <script src="/oclazyload/dist/ocLazyLoad.min.js"></script>
     <script src="/js/ui-bootstrap/ui-bootstrap-tpls-1.2.5.min.js"></script>
+    <script src="/nprogress/nprogress.js"></script>
+    <script src="/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="/js/custom.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/services.js"></script>
-    <script src="/js/controllers.js"></script>
+    <script id="ng_load_controler_before"></script>
   </body>
 </html>

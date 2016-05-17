@@ -11,17 +11,17 @@ module.exports = {
     // res.redirect('/');
     return next();
   },
-  printReport : function(HTMLprint,res){
+  printReport : function(HTMLprint,result,res){
     jsreport.render({
       template: { 
         engine: "jsrender",
         recipe: "phantom-pdf",
-        content: fs.readFileSync(path.join(__dirname, "../views/reports/"+HTMLprint), "utf8")
-      }
-    }).then(function (response) {
-       //you can for example pipe it to express.js response
-       response.stream.pipe(res);
+        content: fs.readFileSync(path.join(__dirname, "../views/reports/"+HTMLprint), "utf8"),
+      },data:{result:result}
+    }).then(function(resp) {
+      resp.stream.pipe(res);
+    }).catch(function(e) {
+      res.end(e.message);
     });
   }
-  
 };

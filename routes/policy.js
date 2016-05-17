@@ -12,6 +12,13 @@ router.get('/:limit/:page', function(req, res) {
     res.send(policies);
   });
 });
+//productPolicy
+router.post('/productPolicy/:limit/:page', function(req, res) {
+ 
+  productPolicyMgr.getProductP(req.body.type,req.params.limit,req.params.page,function(policies){
+    res.send(policies);
+  });
+});
 
 router.get('/all', function(req, res) {
   policyMgr.getAllPolicies(function(policies){
@@ -36,9 +43,24 @@ router.put('/edit/:id', function(req, res) {
 
 });
 
+//productPolicy
+
+router.put('/productPolicy/edit/:id', function(req, res) {
+  productPolicyMgr.updateProductP(req.params.id,req.body,function(result){
+    res.send(result);
+  });
+
+});
+
 /* Delete policy  by id  */
 router.delete('/delete/:id', function(req, res) {
   policyMgr.deletePolicy(req.params.id,function(result){
+    res.send({result:result});  
+  });
+});
+
+router.delete('/productPolicy/delete/:id', function(req, res) {
+  productPolicyMgr.deleteProductPolicyService(req.params.id,function(result){
     res.send({result:result});  
   });
 });
@@ -65,5 +87,16 @@ router.post('/productPolicy/add', function(req, res) {
     res.send(result);
   });
 });
+
+//productPolicyService
+router.post('/productPolicyService/:id', function(req, res) {
+  productPolicyMgr.getProductPId(req.params.id,function(result){
+
+    res.send(result);
+  });
+});
+
+
+
 
 module.exports = router;

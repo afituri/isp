@@ -13,6 +13,8 @@ router.get('/all', function(req, res) {
     res.send(product);
   });
 });
+
+
 // get item
 router.get('/item/:limit/:page', function(req, res) {
   productMgr.getProductItem(req.params.limit,req.params.page,function(product){
@@ -53,30 +55,45 @@ router.post('/add', function(req, res) {
   });
 });
 
-/* Edit customer  by id  */
-// router.put('/edit/:id', function(req, res) {
-//   // console.log(req.body)
-//   // console.log(req.params.id);
-//   customerMgr.updateCustomer(req.params.id,req.body,function(customer){
-//     res.send(customer);
-//   });
-// });
+router.get('/bytype/:id', function(req, res) {
+  //console.log(req.params.id);
+   res.send(true);
+ /* productMgr.getAllProductByType(req.body.type,function(product){
+    res.send(product);
+  });*/
+});
 
-// /* Delete customer  by id  */
-// router.delete('/delete/:id', function(req, res) {
-//   console.log(req.params.id);
-//   customerMgr.deleteCustomer(req.params.id,function(customer){
-//     res.send(customer);
-//   });
-// });
 
-// /* GET customer  by ID  */
-// router.get('/:id', function(req, res) {
-//   // res.send(data.customer);
-//   customerMgr.getCustomerId(req.params.id,function(customer){
-//     res.send(customer);
-//   });
-// });
+router.put('/productService/:id', function(req, res) {
+  productMgr.getItemById(req.params.id,function(productService){
+    
+    res.send(productService);
+  });
+});
+
+router.put('/productService/edit/:id', function(req, res) {
+  productMgr.updateService(req.params.id,req.body,function(productService){
+    res.send(productService);
+  });
+});
+//productItems
+router.put('/productItems/edit/:id', function(req, res) {
+  productMgr.updateItem(req.params.id,req.body,function(productService){
+    res.send(productService);
+  });
+});
+
+router.put('/productPackages/edit/:id', function(req, res) {
+  productMgr.updatePackage(req.params.id,req.body,function(productService){
+    res.send(productService);
+  });
+});
+
+router.delete('/productService/delete/:id', function(req, res) {
+  productMgr.deleteProductService(req.params.id,function(productService){
+     res.send({result:productService});
+   });
+});
 
 
 module.exports = router;

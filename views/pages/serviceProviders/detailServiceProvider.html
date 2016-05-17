@@ -1,86 +1,84 @@
-<div class="widget-box animated fadeIn" style="padding:0px;border-radius:4px 4px 0px 0px">
-  <div class="row" align="center">
-    <div class="col-md-2" style="padding-top:10px;">
-      <img ng-src="{{detailServiceProviderForm.logo | defaultLogo:'../img/internetProvider.png'}}" class="img-rounded img-responsive" width="75%" alt="">
-    </div>
-    <div class="col-md-10">
-      <div class="row" style="padding-top:40px;padding-right:0px;">
-        <div class="col-xs-6 col-md-3">
-          <dl>
-            <dt>اسم الشركة</dt>
-            <dd>{{detailServiceProviderForm.name}}</dd>
-          </dl>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <div class="row">
+          <div class="col-xs-6">
+            <h3 class="panel-title" style="padding-top: 5px;">عرض خدمات الشركة</h3>
+          </div>
+          <div class="col-xs-6 text-left">
+            <a ui-sref="newService" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i><i class="hidden-xs">&nbsp;إضافة خدمة جديدة</i></a>
+          </div>
         </div>
-        <div class="col-xs-6 col-md-3">
-          <dl>
-            <dt>البريد الالكتروني</dt>
-            <dd>{{detailServiceProviderForm.email}}</dd>
-          </dl>
+        <div class="row" align="center">
+          <div class="col-md-2" style="padding-top:10px;">
+            <img ng-src="{{detailServiceProviderForm.logo | defaultLogo:'../img/internetProvider.png'}}" class="img-rounded img-responsive" width="75%" alt="">
+          </div>
+          <div class="col-md-10">
+            <div class="row" style="padding-top:40px;padding-right:0px;">
+              <div class="col-xs-6 col-md-3">
+                <dl>
+                  <dt>اسم الشركة</dt>
+                  <dd>{{detailServiceProviderForm.name}}</dd>
+                </dl>
+              </div>
+              <div class="col-xs-6 col-md-3">
+                <dl>
+                  <dt>البريد الالكتروني</dt>
+                  <dd>{{detailServiceProviderForm.email}}</dd>
+                </dl>
+              </div>
+              <div class="col-xs-6 col-md-3">
+                <dl>
+                  <dt>رقم هاتف الشركة</dt>
+                  <dd>{{detailServiceProviderForm.phone}}</dd>
+                </dl>
+              </div>
+              <div class="col-xs-6 col-md-3">
+                <dl>
+                  <dt>الموقع الالكتروني</dt>
+                  <dd>{{detailServiceProviderForm.website}}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-xs-6 col-md-3">
-          <dl>
-            <dt>رقم هاتف الشركة</dt>
-            <dd>{{detailServiceProviderForm.phone}}</dd>
-          </dl>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="table-responsive">
+          <div ng-show="serviceProviders.serviceProvidersObj.length == 0">
+            <div class="alert alert-info">
+              <p class="text-center">
+                عفوا لاتوجد بيانات
+              </p>
+            </div>
+          </div>
+          <table ng-show="services.length" class="table table-striped table-condensed jambo_table">
+            <thead>
+              <tr>
+                <th class="column-title" style="display: table-cell;">اسم الخدمة</th>
+                <th class="column-title" style="display: table-cell;">مزود الخدمة</th>
+                <th class="column-title text-center" style="display: table-cell;"><i class="fa fa-cog"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="service in services">
+                <td>{{service.name}}</td>
+                <td>{{service.servicesProvider}}</td>
+                <td>
+                  <a class="btn btn-success btn-xs"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="col-xs-6 col-md-3">
-          <dl>
-            <dt>الموقع الالكتروني</dt>
-            <dd>{{detailServiceProviderForm.website}}</dd>
-          </dl>
+        <div class="row" ng-show="services.length">
+          <div class="col-xs-12 col-md-12 text-center">
+            <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
+            <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="panel panel-default panel-table">
-  <div class="panel-heading">
-    <div class="row">
-      <div class="col-xs-6">
-        <h3 class="panel-title" style="padding-top: 5px;">عرض خدمات الشركة</h3>
-      </div>
-      <div class="col-xs-6 text-left">
-        <a ui-sref="newService" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i><span class="hidden-xs">&nbsp;إضافة خدمة جديدة</span></a>
-      </div>
-    </div>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered table-condensed table-hover">
-      <thead>
-        <tr>
-          <th>اسم الخدمة</th>
-          <th>مزود الخدمة</th>
-          <th class="text-center"><em class="fa fa-cog"></em></th>
-        </tr> 
-      </thead>
-      <tbody ng-repeat="service in services">
-        <tr>
-          <td>{{service.name}}</td>
-          <td>{{service.servicesProvider}}</td>
-          <td class="text-center">
-            <!-- <a class="btn btn-warning btn-sm" ui-sref="editService({id:service.id})" data-trigger="hover" data-title="تعديل" bs-tooltip><em class="fa fa-pencil fa-fw"></em></a> -->
-            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="panel-footer">
-    <div class="row">
-      <div class="col-xs-4 hidden-xs">صفحة 1 من 5
-      </div>
-      <div class="col-xs-8">
-        <ul class="pagination hidden-xs pull-left">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-        </ul>
-        <ul class="pagination visible-xs pull-left">
-            <li><a href="#">«</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
       </div>
     </div>
   </div>

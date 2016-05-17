@@ -8,9 +8,9 @@ module.exports = {
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.Services.count({},function(err,count){
-      model.Services.find({}).limit(limit).skip(page*limit)
-      .populate('servicesProvider', 'name')
+    model.Service.count({},function(err,count){
+      model.Service.find({}).limit(limit).skip(page*limit)
+      .populate('serviceprovider')
       .exec(function(err, services){
         if(!err){
           cb({result:services,count:count});
@@ -22,7 +22,7 @@ module.exports = {
     });
   },
   getAllServices :function(cb){
-    model.Services.find({},function(err, services){
+    model.Service.find({},function(err, services){
       if(!err){
         cb(services);
       }else{
@@ -32,7 +32,7 @@ module.exports = {
     });
   },
   getServicesId :function(id,cb){
-    model.Services.findOne({_id : id}, function(err, services){
+    model.Service.findOne({_id : id}, function(err, services){
       if(!err){
         cb(services);
       }else{
@@ -41,7 +41,7 @@ module.exports = {
     });
   },
   getServicesIdProv :function(id,cb){
-    model.Services.find({servicesProvider : id}, function(err, services){
+    model.Service.find({servicesProvider : id}, function(err, services){
       if(!err){
         cb(services);
       }else{
@@ -52,11 +52,12 @@ module.exports = {
   addServices : function(body,cb){
     var obj ={
       name : body.name,
-      servicesProvider : body.servicesProvider,
+      serviceprovider : body.Serviceprovider,
       description : body.description
      }
-    services = new model.Services(obj);
-    services.save(function(err,result){
+    service = new model.Service(obj);
+    service.save(function(err,result){
+      console.log(err);
       if (!err) {
         cb(true);
 
@@ -70,10 +71,11 @@ module.exports = {
   updateServices : function(id,body,cb){
     var obj ={
       name : body.name,
-      servicesProvider : body.servicesProvider,
+      serviceprovider : body.serviceprovider,
       description : body.description
      }
-    model.Services.findOneAndUpdate({_id:id}, obj, function(err,result) {
+   /* console.log(obj);*/
+    model.Service.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
       } else {
@@ -84,7 +86,7 @@ module.exports = {
   },
 
   deleteServices : function(id,cb){
-    model.Services.remove({_id:id}, function(err,result) {
+    model.Service.remove({_id:id}, function(err,result) {
       if (!err) {
         cb(2);
       } else {

@@ -6,36 +6,13 @@
   font-family: 'droidkufi';
   src : url("../fonts/DroidKufi-Regular.ttf") format("truetype");
 }
-html{
-  position: relative;
-  min-height: 100%;
-}
-::-webkit-input-placeholder { font-family: 'FontAwesome'; }
-::-moz-placeholder { font-family: 'FontAwesome'; } /* firefox 19+ */
-:-ms-input-placeholder { font-family: 'FontAwesome'; } /* ie */
-input:-moz-placeholder { font-family: 'FontAwesome'; }
 body {
   font-family: 'droidkufi', sans-serif;
-  /*padding: 20px;*/
-  padding-top: 10px;
-  background-color: #F5F5F5;
-  background-image: url('../img/background.jpg');
 }
-.widget-box{
-  background-color: #fff;
-  border-radius: 4px;
-  position: relative;
-  padding: 30px;
+.h1{
+  font-family: 'droidkufi', sans-serif;
 }
-.footer{
-  bottom: 0;
-  position: absolute;
-  width: 90%;
-}
-.footer p,.footer a{
-  color: #A79B9B;
-  text-align: center;
-}
-.footer a:hover{
-  text-decoration: underline;
+.login_content h1{
+  font-family: 'droidkufi', sans-serif;
+  font-size: 20px;
 }

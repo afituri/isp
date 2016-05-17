@@ -12,8 +12,6 @@ var Order = new Schema({
    left: { type: Number, required: [true, 'Why no left?']},*/
    /*quantity: { type: Number, required: [true, 'Why no piad?']},*/
    price: { type: Number, required: [true, 'price required']},
-   // complete later 
-   macAddress: {type: String},
    startDate: { type:Date, required: [true, 'start date required']},
    endDate:{ type: Date, required: [true, 'end date required']},
    siteId: { type: String},
