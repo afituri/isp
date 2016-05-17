@@ -37,9 +37,9 @@
     $scope.init();
     $scope.newInvoice = function(){
       if($scope.previousSubscription==1){
+        $scope.newInvoiceForm.previousSubscription=1;
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            console.log(response.data);
             window.location.href='/report/printInvoice/'+response.data[1]._id;
             // InvoicesServ.report(response.data).then(function(response,err){
             //   if(!err){
@@ -53,6 +53,7 @@
           console.log("Something went wrong");
         });
       } else if($scope.previousSubscription==2){
+          $scope.newInvoiceForm.previousSubscription=2;
           InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
 
           },function(response){

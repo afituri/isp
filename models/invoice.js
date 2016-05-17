@@ -11,6 +11,7 @@ var Invoice = new Schema({
    piad: { type: Number, required: [true, 'Why no piad?']},
    /*left: { type: Number},*/
    discount: { type: Number, required: [true, 'Why no piad?']},
+   idinv:{ type: Number},
    status: { type: Number, default:1}
 });
 

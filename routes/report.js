@@ -17,6 +17,7 @@ router.get('/printInvoice/:id', function(req, res) {
     result['nowdate']=nowdate;
     result['startDate']=startDate;
     result['endDate']=endDate;
+    console.log(result);
     userHelpers.printReport("invoice.html",result,res);
   });
   
