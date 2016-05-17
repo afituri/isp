@@ -15,19 +15,12 @@
     $scope.showInvoice = function(id){
       window.location.href='/report/printInvoice/'+id;
     }
-
-
-  
-
   }]);
-  app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){   
-    
-   
-    $scope.go =function(id){
+
+  app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+    $scope.go =function(id,name){
       $scope.customId=id;
     }
-    
-
     $scope.myFunc = function() {
       $scope.search=angular.element('#Text1').val();
       var name=angular.element('#Text1').val();
