@@ -400,6 +400,9 @@
       },
       'deleteInvoice': function(id){
         return $http.delete('/invoice/delete/'+id);
+      },
+      'getItemInfoByID': function(id){
+        return $http.get('/inStock/search/'+id);
       }
     };
     return self;

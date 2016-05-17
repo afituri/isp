@@ -111,7 +111,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">اسم المعدة</label>
-                <select class="form-control input-sm" ng-model="newInvoiceForm.productItem" ng-options="item._id as item.name for item in objects.itemsObj" required>
+                <select class="form-control input-sm" ng-model="newInvoiceForm.productItem" ng-change="getItemInfo()" ng-options="item._id as item.name for item in objects.itemsObj" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
                 </select>
               </div>
@@ -154,6 +154,27 @@
               <div class="form-group">
                 <label class="control-label">ملاحظات</label>
                 <textarea class="form-control input-sm" rows="6" ng-model="newInvoiceForm.invoceNotes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" ng-show="itemInfo.length == 0">
+              <div class="alert alert-info">
+                <p class="text-center">
+                  عفوا لاتوجد هذه المعدة
+                </p>
+              </div>
+            </div>
+            <div class="col-md-2" ng-show="itemInfo">
+              <div class="form-group">
+                <label class="control-label">اسم المستخدم</label>
+                <input class="form-control input-sm" type="text" ng-model="itemInfo.username" disabled>
+              </div>
+            </div>
+            <div class="col-md-2" ng-show="itemInfo">
+              <div class="form-group">
+                <label class="control-label">كلمة المرور</label>
+                <input class="form-control input-sm" type="text" ng-model="itemInfo.password" disabled>
               </div>
             </div>
           </div>
