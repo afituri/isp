@@ -56,6 +56,16 @@ module.exports = {
       }
     });
   },
+  searchInStockInvoice :function(id,cb){
+    model.Instock.findOne({status:1,product:id}, function(err,result) {
+      if (!err) {
+        cb(result)
+      } else {
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   addInStock: function (body, cb) {
     var obj = body;
     inStock = new model.Instock(obj);

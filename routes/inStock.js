@@ -40,6 +40,11 @@ router.get('/:id', function(req, res) {
     res.send(InStock);
   });
 });
+router.get('search/:id', function(req, res) {
+  instockMgr.searchInStockInvoice(req.params.id,function(InStock){
+    res.send(InStock);
+  });
+});
 
 
 module.exports = router;
