@@ -8,7 +8,7 @@ router.get('/printInvoice/:id', function(req, res) {
   console.log(req.params.id);
   invoiceMgr.getInvoicedata(req.params.id,function(result){
     console.log(result);
-    userHelpers.printReport("invoice.html",res);
+    userHelpers.printReport("invoice.html",result,res);
   });
   
 });
