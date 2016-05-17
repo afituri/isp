@@ -67,10 +67,12 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
+    console.log(body);
     model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
       },function(err,product){
         customer = new model.Customer(body);
         customer.save(function(err,customerResult){
+          console.log(customerResult);
           if (!err) {
             invoice={
               customer:customerResult._id,
@@ -83,6 +85,7 @@ module.exports = {
             invoice.save(function(err,invoiceResult){
               if (!err) {
                 instockMgr.updateInStockInvoice(invoiceResult._id,function(result){});
+                console.log(invoiceResult);
                 order1={
                   invoice:invoiceResult._id,
                   product:body.product,
@@ -157,7 +160,7 @@ module.exports = {
 
 
 
-            model.Invoice.findOne({_id:id}).populate('Customer').exec(function(err, invoices){
+            model.Invoice.findOne({_id:id}).populate('customer').exec(function(err, invoices){
               if(!err){
                 cb({instock:result,order:order,invoices:invoices});
               }else{
