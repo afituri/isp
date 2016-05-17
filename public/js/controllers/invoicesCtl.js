@@ -82,7 +82,15 @@
             console.log("Something went wrong");
           });
         }
-    }
+    };
+    $scope.getItemInfo = function(){
+      InvoicesServ.getItemInfoByID($scope.newInvoiceForm.productItem).then(function(response){
+        $scope.itemInfo = response.data
+        console.log($scope.itemInfo);
+      },function(response) {
+        console.log("Something went wrong");
+      });
+    };
   }]);
   app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
     MenuFac.active = 10;
