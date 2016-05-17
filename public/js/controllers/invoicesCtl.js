@@ -39,7 +39,8 @@
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            window.location.href='/report/printInvoice/'+response.data[0]._id;
+            console.log(response.data);
+            window.location.href='/report/printInvoice/'+response.data[1]._id;
             // InvoicesServ.report(response.data).then(function(response,err){
             //   if(!err){
 

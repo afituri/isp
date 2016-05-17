@@ -57,7 +57,6 @@ router.post('/add', function(req, res) {
 
 router.get('/bytype/:id', function(req, res) {
   //console.log(req.params.id);
-   console.log("ff");
    res.send(true);
  /* productMgr.getAllProductByType(req.body.type,function(product){
     res.send(product);

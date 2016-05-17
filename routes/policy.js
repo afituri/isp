@@ -91,8 +91,7 @@ router.post('/productPolicy/add', function(req, res) {
 //productPolicyService
 router.post('/productPolicyService/:id', function(req, res) {
   productPolicyMgr.getProductPId(req.params.id,function(result){
-    console.log("i am here");
-    console.log(result);
+
     res.send(result);
   });
 });

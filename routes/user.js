@@ -35,7 +35,6 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete user by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
   
 });
 

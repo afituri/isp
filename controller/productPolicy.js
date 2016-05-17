@@ -13,8 +13,6 @@ module.exports = {
       .populate('policy')
       .populate('product')
       .exec(function(err, pPolicies){
-        console.log("programming here ");
-        console.log(pPolicies);
         if(!err){
           cb({result:pPolicies,count:count});
         }else{
@@ -116,8 +114,7 @@ module.exports = {
   //   }
   // }
     var obj=body;
-    console.log("objjj");
-    console.log(obj);
+
     model.Productpolicy.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
