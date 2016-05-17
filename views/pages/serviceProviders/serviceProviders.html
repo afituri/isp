@@ -7,8 +7,8 @@
       </div>
       <div class="x_content">
         <div class="row animated fadeIn">
-          <div class="col-md-12">
-            <div class="well well-sm" ng-show="serviceProviders.serviceProvidersObj.length == 0">
+          <div class="col-md-12" ng-show="serviceProviders.serviceProvidersObj.length == 0">
+            <div class="well well-sm" >
               <div class="alert alert-info">
                 <p class="text-center">
                   عفوا لاتوجد بيانات
@@ -24,7 +24,7 @@
                 <div class="col-md-4">
                   <img ng-src="{{serviceProvider.logo | defaultLogo:'../img/internetProvider.png'}}" class="img-rounded img-responsive" alt="" style="padding-top:20px;">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md">
                   <h4>
                     {{serviceProvider.name}}
                   </h4>
@@ -42,7 +42,8 @@
                     <i class="fa fa-globe fa-fw"></i>
                     {{serviceProvider.website}}
                   </p>
-                  <a class="btn btn-info btn-sm" ui-sref="detailServiceProvider({id:serviceProvider._id})">
+                  <br>
+                  &nbsp;&nbsp;<a class="btn btn-info btn-sm" ui-sref="detailServiceProvider({id:serviceProvider._id})">
                     <i class="fa fa-eye"></i>&nbsp;عرض
                   </a>
                   <a class="btn btn-warning btn-sm" ui-sref="editServiceProvider({id:serviceProvider._id})">
