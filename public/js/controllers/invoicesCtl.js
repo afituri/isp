@@ -24,7 +24,6 @@
     
    
     $scope.go =function(id){
-      alert(id);
       $scope.customId=id;
     }
     
@@ -76,8 +75,9 @@
         });
       } else if($scope.previousSubscription==2){
           $scope.newInvoiceForm.previousSubscription=2;
+          $scope.newInvoiceForm.customId=$scope.customId;
           InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
-
+            window.location.href='/report/printInvoice/'+response.data[1]._id;
           },function(response){
             console.log("Something went wrong");
           });
