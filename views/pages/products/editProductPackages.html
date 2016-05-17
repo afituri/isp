@@ -1,108 +1,113 @@
-<div class="widget-box animated fadeIn">
-  <h5><i class="fa fa-plus"></i>&nbsp; تعديل منتج الحزمة</h5>
-  <hr>
-
-   <form novalidate ng-submit="editProductPackages()">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">اسم الحزمة</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.name" placeholder="اسم الحزمة" required>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>تعديل منتج المعدة</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form novalidate ng-submit="editProductPackages()">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">اسم الحزمة</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.name" placeholder="اسم الحزمة" required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">سعر الحزمة</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.initialPrice" placeholder="سعر الحزمة" required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">نوع الباقة</label>
+                <select class="form-control input-sm" ng-model="editProductPackageForm.packages.type" ng-options="serviceProvider._id as serviceProvider.name for serviceProvider in objects.serviceProvidersObj"  ng-change="getServiceByID(editProductPackageForm.packages.type)" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">الخدمة</label>
+                <select class="form-control input-sm" ng-model="editProductPackageForm.packages.service" ng-options="service._id as service.name for service in ObjService" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">سعر الحزمة</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.initialPrice" placeholder="سعر الحزمة" required>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">سرعة التحميل</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.dSpeed" placeholder="سرعة التحميل" required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">سرعة الرفع</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.uSpeed" placeholder="سرعة الرفع" required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">الحصة الشهرية</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.monthlyQuota" placeholder="الحصة الشهرية" required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">سعر التجديد</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.renewPrice" placeholder="سعر التجديد" required>
+              </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">نوع الباقة</label>
-              <select class="form-control input-sm" ng-model="editProductPackageForm.packages.type" ng-options="serviceProvider._id as serviceProvider.name for serviceProvider in objects.serviceProvidersObj"  ng-change="getServiceByID(editProductPackageForm.packages.type)" required>
-                <option value="" disabled selected>الرجاء الاختيار</option>
-              </select>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">سعر الجيجا</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.GBPrice" placeholder="سعر الجيجا">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">التكلفة من المزود</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.cost" placeholder="التكلفة من المزود" required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">العملة</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.costCurrency" placeholder="العملة" required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">سعر الصرف</label>
+                <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.exchangeRate" placeholder="سعر الصرف" required>
+              </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">الخدمة</label>
-              <select class="form-control input-sm" ng-model="editProductPackageForm.packages.service" ng-options="service._id as service.name for service in ObjService" required>
-                <option value="" disabled selected>الرجاء الاختيار</option>
-              </select>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">معلومات عن الحزمة</label>
+                <textarea class="form-control input-sm" rows="5" ng-model="editProductPackageForm.discriptoin" placeholder="معلومات عن الحزمة" required></textarea>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">سرعة التحميل</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.dSpeed" placeholder="سرعة التحميل" required>
+          <hr>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-4">
+              <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; تعديل</button>
+            </div>
+            <div class="col-md-2">
+              <a class="btn btn-success btn-sm btn-block" ui-sref="productPackages"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">سرعة الرفع</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.uSpeed" placeholder="سرعة الرفع" required>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">الحصة الشهرية</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.monthlyQuota" placeholder="الحصة الشهرية" required>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">سعر التجديد</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.renewPrice" placeholder="سعر التجديد" required>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">سعر الجيجا</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.GBPrice" placeholder="سعر الجيجا">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">التكلفة من المزود</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.cost" placeholder="التكلفة من المزود" required>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">العملة</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.costCurrency" placeholder="العملة" required>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="control-label">سعر الصرف</label>
-              <input class="form-control input-sm" type="text" ng-model="editProductPackageForm.packages.exchangeRate" placeholder="سعر الصرف" required>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label class="control-label">معلومات عن الحزمة</label>
-              <textarea class="form-control input-sm" rows="5" ng-model="editProductPackageForm.discriptoin" placeholder="معلومات عن الحزمة" required></textarea>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-md-2 col-md-offset-4">
-            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; تعديل</button>
-          </div>
-          <div class="col-md-2">
-            <a class="btn btn-success btn-sm btn-block" ui-sref="productPackages"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
-          </div>
-        </div>
-      </form>
- 
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
