@@ -13,7 +13,6 @@ module.exports = {
       .populate('serviceprovider')
       .exec(function(err, services){
         if(!err){
-          console.log(services);
           cb({result:services,count:count});
         }else{
           console.log(err);

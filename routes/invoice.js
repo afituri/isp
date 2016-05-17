@@ -21,9 +21,8 @@ router.get('/:id', function(req, res) {
 });
 
 router.get('/all', function(req, res) {
-  invoiceMgr.getAllInvoices(function(policies){
-    console.log(policies);
-    res.send(policies);
+  invoiceMgr.getAllInvoices(function(result){
+    res.send(result);
   });
 });
 /* Add new invoice   */

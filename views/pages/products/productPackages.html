@@ -1,60 +1,67 @@
-<div class="panel panel-default panel-table animated fadeIn">
-  <div class="panel-heading">
-    <div class="row">
-      <div class="col-md-3">
-        <h3 class="panel-title" style="padding-top: 5px;">عرض المنتجات (حزم)</h3>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <div class="row">
+          <div class="col-md-3">
+            <h2>عرض المنتجات (حزم)</h2>
+          </div>
+          <div class="col-md-9 text-left">
+            <a ui-sref="productServices" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض الخدمات</a> 
+            <a ui-sref="productItems" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض المعدات</a>
+            <a ui-sref="newProduct" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة منتج جديد</a>
+          </div>
+        </div>
+        <div class="clearfix"></div>
       </div>
-      <div class="col-md-6">
-        <a ui-sref="productServices" class="btn btn-sm btn-success"><i class="fa fa-list fa-fw"></i>&nbsp;عرض الخدمات</a> 
-        <a ui-sref="productItems" class="btn btn-sm btn-info"><i class="fa fa-list fa-fw"></i>&nbsp;عرض المعدات</a>
-      </div>
-      <div class="col-md-3 text-left">
-        <a ui-sref="newProduct" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة منتج جديد</a>
-      </div>
-    </div>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered table-condensed table-hover">
-      <thead>
-        <tr>
-          <th>اسم الحزمة</th>
-          <th>سعر الحزمة</th>
-          <th class="numeric">نوع الباقة</th>
-          <th class="numeric">الخدمة</th>
-          <th class="numeric">سرعة التحميل</th>
-          <th> سرعة الرفع </th>
-          <th class="text-center"><em class="fa fa-cog"></em></th>
-
-        </tr>
-      </thead>
-      <tbody ng-repeat="packages in products">
-        <tr>
-          <td>{{packages.name}}</td>
-          <td>{{packages.initialPrice}}</td>
-          <td>{{packages.packages.type.name}}</td>
-          <td>{{packages.packages.service.name}}</td>
-          <td>{{packages.packages.dSpeed}}</td>
-          <td>{{packages.packages.uSpeed}}</td>
-
-               <td class="text-center">
-             <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="الحصة الشهرية :- {{packages.packages.monthlyQuota}}<br/>سعر التجديد:- {{packages.packages.renewPrice}}  <br/> سعر الجيجا :- {{packages.packages.GBPrice}} <br/> التكلفة من المزود :- {{packages.packages.cost}} <br/> العملة :- {{packages.packages.costCurrency}} </br>
-             سعر الصرف :- {{packages.packages.exchangeRate}} <br/> معلومات عن الحزمة :- {{packages.discriptoin}}" bs-popover>
-              <em class="fa fa-info fa-fw"></em>
-            </button>
-            <a class="btn btn-warning btn-sm" ui-sref="editProductPackages({id:packages._id})" data-trigger="hover" data-title="تعديل" bs-tooltip ><em class="fa fa-pencil fa-fw" ></em></a>
-            <a class="btn btn-danger btn-sm" data-trigger="hover" data-title="حذف" ng-click="showDeleteModel(packages._id)" bs-tooltip><em class="fa fa-trash fa-fw"></em></a>
-          </td>
-
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="panel-footer" ng-show="products.length">
-    <div class="row">
-      <div class="col-xs-12 col-md-12 text-center">
-        <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
-        <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
+      <div class="x_content">
+        <div class="table-responsive">
+          <div ng-show="products.length == 0">
+            <div class="alert alert-info">
+              <p class="text-center">
+                عفوا لاتوجد بيانات
+              </p>
+            </div>
+          </div>
+          <table ng-show="products.length" class="table table-striped table-condensed jambo_table">
+            <thead>
+              <tr>
+                <th>اسم الحزمة</th>
+                <th>سعر الحزمة</th>
+                <th>نوع الباقة</th>
+                <th>الخدمة</th>
+                <th>سرعة التحميل</th>
+                <th> سرعة الرفع </th>
+                <th><i class="fa fa-cog"></i></th>
+              </tr>
+            </thead>
+            <tbody ng-repeat="packages in products">
+              <tr>
+                <td>{{packages.name}}</td>
+                <td>{{packages.initialPrice}}</td>
+                <td>{{packages.packages.type.name}}</td>
+                <td>{{packages.packages.service.name}}</td>
+                <td>{{packages.packages.dSpeed}}</td>
+                <td>{{packages.packages.uSpeed}}</td>
+                <td class="text-center">
+                   <button type="button" class="btn btn-success btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="الحصة الشهرية :- {{packages.packages.monthlyQuota}}<br/>سعر التجديد:- {{packages.packages.renewPrice}}  <br/> سعر الجيجا :- {{packages.packages.GBPrice}} <br/> التكلفة من المزود :- {{packages.packages.cost}} <br/> العملة :- {{packages.packages.costCurrency}} </br>
+                    سعر الصرف :- {{packages.packages.exchangeRate}} <br/> معلومات عن الحزمة :- {{packages.discriptoin}}" bs-popover>
+                    <i class="fa fa-info fa-fw"></i>
+                    مزيد من المعلومات
+                  </button>
+                  <a class="btn btn-success btn-sm" ui-sref="editProductPackages({id:packages._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(packages._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row" ng-show="products.length">
+          <div class="col-xs-12 col-md-12 text-center">
+            <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
+            <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
+          </div>
+        </div>
       </div>
     </div>
   </div>

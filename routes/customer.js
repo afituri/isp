@@ -25,9 +25,7 @@ router.post('/add', function(req, res) {
 });
 
 router.post('/in/:name', function(req, res) {
-  console.log(req.params.name);
   customerMgr.getCustomerName(req.params.name,function(customer){
-    console.log(customer);
     res.send(customer);
   });
 });
@@ -56,7 +54,6 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete customer  by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
   customerMgr.deleteCustomer(req.params.id,function(customer){
     res.send({result:customer});
   });

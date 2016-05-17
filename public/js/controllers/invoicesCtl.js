@@ -12,11 +12,23 @@
         console.log("Something went wrong");
     });
 
+    $scope.showInvoice = function(id){
+      window.location.href='/report/printInvoice/'+id;
+    }
+
 
   
 
   }]);
   app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){   
+    
+   
+    $scope.go =function(id){
+      alert(id);
+      $scope.customId=id;
+    }
+    
+
     $scope.myFunc = function() {
       $scope.search=angular.element('#Text1').val();
       var name=angular.element('#Text1').val();
@@ -49,7 +61,8 @@
       if($scope.previousSubscription==1){
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            window.location.href='/report/printInvoice/'+response.data[0]._id;
+            console.log(response.data);
+            window.location.href='/report/printInvoice/'+response.data[1]._id;
             // InvoicesServ.report(response.data).then(function(response,err){
             //   if(!err){
 

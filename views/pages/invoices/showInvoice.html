@@ -4,13 +4,13 @@
       <div class="x_title">
         <div class="row">
           <div class="col-xs-2">
-            <h2 class="pull-right">عرض الزبائن</h2>
+            <h2 class="pull-right">عرض الفاتورة</h2>
           </div>
           <div class="col-xs-7">
             <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="بحث...">
           </div>
           <div class="col-xs-3 text-left">
-            <a class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
+            <a class="btn btn-sm btn-primary" ui-sref="newInvoice"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -29,28 +29,22 @@
               <tr>
                 <th>تاريخ الإنشاء  </th>
                 <th>وقت الإنشاء </th>
-                <th>البريد الالكتروني </th>
-                <th>اسم المندوب </th>
-                <th>رقم الهاتف </th>
-                <th>الموزع </th>
-                <th>السياسة </th>
+                <th>المدفوع </th>
+                <th>التخفيض </th>
+                <th>الملاحظات</th>
                 <th><i class="fa fa-cog"></i></th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="invoice in allInvoice">
-                <td ng-bind="invoice.createdAt | date:'MM/dd/yyyy'"></td>
+                <td ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
               
-                <td ng-bind="invoice.createdAt | date:'MM/dd/yyyy'">></td>
+                <td ng-bind="invoice.createdAt | date:'HH:mm:ss'"></td>
+                <td>{{invoice.piad}}</td>
+                <td>{{invoice.discount}}</td>
+                <td>{{invoice.notes}}</td>
                 <td>
-                  <span ng-if="customer.type == 1">لا يوجد</span>
-                  <span ng-if="customer.type == 2">{{customer.repName}}</span>
-                </td>
-                <td>{{customer.phone}}</td>
-                <td>{{customer.reseller}}</td>
-                <td>{{customer.policy}}</td>
-                <td>
-                  <!-- <a class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a> -->
+                  <a class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                 </td>
               </tr>
             </tbody>

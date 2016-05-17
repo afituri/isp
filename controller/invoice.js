@@ -135,9 +135,7 @@ module.exports = {
   },
 
   updateInvoice : function(id,body,cb){
-    var obj ={
-     
-    }
+    var obj = body;
     model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
@@ -156,6 +154,9 @@ module.exports = {
         .exec(function(err, order){
           if(!err){
             // cb(result);
+
+
+
             model.Invoice.findOne({_id:id}).populate('Customer').exec(function(err, invoices){
               if(!err){
                 cb({instock:result,order:order,invoices:invoices});
@@ -164,6 +165,8 @@ module.exports = {
                 cb(null);
               }
             });
+
+
           }else{
             console.log(err);
             cb(null);
