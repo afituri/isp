@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
+var autoIncrement = require('mongoose-auto-increment');
+
 
 var config = require('../config'); // get our config file
 var options = {
@@ -10,7 +12,8 @@ var options = {
   user: config.user,
   pass: config.password
 }
-mongoose.connect(config.url, options);
+var connection=mongoose.connect(config.url, options);
+autoIncrement.initialize(connection);
 var model = {};
 fs.readdirSync(__dirname)
   .filter(function(file) {
