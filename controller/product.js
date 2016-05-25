@@ -165,6 +165,7 @@ module.exports = {
   },
   
   addProduct : function(body,cb){
+    
     var obj = body;
     product = new model.Product(obj);
     product.save(function(err,result){

@@ -29,8 +29,9 @@
                 <th>اسم المعدة</th>
                 <th>سعر المعدة</th>
                 <th>المورد</th>
-                <th>بلد الصنع</th>
+               <!--  <th>بلد الصنع</th> -->
                 <th>اسم العلامة التجارية</th>
+                <th>الوصف</th>
                 <th class="text-center"><i class="fa fa-cog"></i></th>
               </tr>
             </thead>
@@ -39,8 +40,9 @@
                 <td>{{item.name}}</td>
                 <td>{{item.initialPrice}}</td>
                 <td>{{item.item.supplier.name}}</td>
-                <td>{{cityObject.citiesObj[item.item.made-1].nameAr}}</td>
+                <!-- <td>{{cityObject.citiesObj[item.item.made-1].nameAr}}</td> -->
                 <td>{{item.item.brand}}</td>
+                <td>{{item.discriptoin}}</td>
                 <td>
                   <a class="btn btn-success btn-sm" ui-sref="editProductItems({id:item._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
                   <a class="btn btn-success btn-sm" ng-click="showDeleteModel(item._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>

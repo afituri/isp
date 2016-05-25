@@ -693,7 +693,7 @@
     })
     .state('invoices',{
       url: '/invoices',
-      templateUrl: 'pages/invoices/invoices.html',
+      templateUrl: 'pages/invoices/invoice.html',
       controller: 'InvoicesCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
