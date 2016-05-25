@@ -44,10 +44,7 @@ module.exports = {
   },
   /* here we add a new user to the system */
   addWarehouse: function (body, cb) {
-    // model.Warehouse.nextCount(function(err, count) {
 
-    //   console.log(err);
-    // });
     var obj = body;
     warehouse = new model.Warehouse(obj);
     warehouse.save(function(err,result){

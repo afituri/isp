@@ -10,6 +10,7 @@ var Invoice = new Schema({
    type: { type: Number, required: [true, 'Why no type?']},
    notes: { type: String, required: true},
    piad: { type: Number, required: [true, 'Why no piad?']},
+   reseller: { type: Schema.Types.ObjectId , ref: 'Reseller'},
    /*left: { type: Number},*/
    discount: { type: Number, required: [true, 'Why no piad?']},
    idinv:{ type: Number},
