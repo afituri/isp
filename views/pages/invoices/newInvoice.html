@@ -32,6 +32,7 @@
                   </select>
                 </div>
               </div>
+              
               <div class="col-md-4" ng-class="{'col-md-3': newInvoiceForm.type==2}">
                 <div class="form-group">
                   <label class="control-label">اسم العميل</label>
@@ -54,6 +55,7 @@
               </div>
             </div>
             <div class="row">
+
               <div class="col-md-3">
                 <div class="form-group">
                   <label class="control-label">العنوان</label>
@@ -100,6 +102,16 @@
           </div>
           <hr>
           <div class="row">
+          <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">نوع الفاتورة</label>
+                <select class="form-control input-sm" ng-model="newInvoiceForm.typein" ng-required-err-type="type" required>
+                    <option value="" disabled selected>الرجاء الاختيار</option>
+                    <option value="Invoice">فاتورة</option>
+                    <option value="Initial">مبدئية</option>
+                  </select>
+              </div>
+            </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">اسم الخدمة</label>

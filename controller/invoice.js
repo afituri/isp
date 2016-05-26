@@ -78,7 +78,8 @@ module.exports = {
                 type:1,
                 notes:body.invoceNotes,
                 piad:body.total,
-                discount:body.discount
+                discount:body.discount,
+                typein:body.typein
               };
               invoice=new model.Invoice(invoice);
               invoice.save(function(err,invoiceResult){
