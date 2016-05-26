@@ -7,6 +7,7 @@ var Instock = new Schema({
    product: { type: mongoose.Schema.ObjectId, ref : 'Product',required:true},
    invoice: { type : mongoose.Schema.ObjectId, ref : 'Invoice',default:null},
    description: { type: String},
+   quantity: { type: Number},
    macAddress: { type: String, required:true},
    username: { type: String, required:true},
    password: { type: String ,required:true},
