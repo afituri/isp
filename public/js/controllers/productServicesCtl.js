@@ -92,9 +92,9 @@
     });
 
     $scope.editProductItems = function(){
-      var objCity=angular.element('#country').val();
-      console.log(objCity.slice(7,objCity.length));
-      $scope.editProductItemForm.city=objCity.slice(7,objCity.length);
+/*      var objCity=angular.element('#country').val();
+      console.log(objCity.slice(7,objCity.length));*/
+      /*$scope.editProductItemForm.city=objCity.slice(7,objCity.length);*/
       ProductsServ.editProductItem($stateParams.id,$scope.editProductItemForm).then(function(response) {
         if(response.data){
           $state.go('productItems');

@@ -15,7 +15,7 @@ var Product = new Schema({
    initialPrice: { type: Number, required: true},
    item: {
       supplier: { type: Schema.Types.ObjectId , ref: 'Supplier'},
-      made: { type: Number},
+      /*made: { type: Number},*/
       brand: { type: String}
    },
    packages: {

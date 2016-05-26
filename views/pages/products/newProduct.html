@@ -46,19 +46,19 @@
           <div data-title="معدة - item" name="tap2" bs-pane>
             <form novalidate ng-submit="newItemProduct()">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">اسم المعدة</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم المعدة" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">سعر المعدة</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر المعدة" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">المورد</label>
                     <select class="form-control input-sm" ng-model="newProductForm.item.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj" required>
@@ -66,14 +66,14 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-3">
+               <!--  <div class="col-md-3">
                   <div class="form-group">
                     <label class="control-label">بلد الصنع</label>
                     <select class="form-control input-sm" ng-model="newProductForm.item.made" ng-options="city.id as city.nameAr for city in objects.citiesObj" required>
                       <option value="" disabled selected>الرجاء الاختيار</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="row">
                 <div class="col-md-4">
