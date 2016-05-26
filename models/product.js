@@ -10,7 +10,7 @@ var Product = new Schema({
    //service 
    // name , type , description ,initialprice
    name: { type: String, required: true},
-   type: { type: String, enum: ['service', 'item', 'package'], required: true},
+   type: { type: String, enum: ['service', 'item', 'package','etc'], required: true},
    discriptoin: { type: String},
    initialPrice: { type: Number, required: true},
    item: {
