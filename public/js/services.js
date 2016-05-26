@@ -21,6 +21,7 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
+      'etcObj': [],
       
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
@@ -294,6 +295,9 @@
       },
       'getAllService': function(){
         return $http.get('/product/allService');
+      },
+      'getAllEtc': function(){
+        return $http.get('/product/allEtc');
       },
       'getAllItem': function(type){
         return $http.get('/product/allItem');

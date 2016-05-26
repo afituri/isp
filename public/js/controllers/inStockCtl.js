@@ -124,6 +124,16 @@ app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','
         }, function(response) {
           console.log("Something went wrong");
         });
+    } else if($scope.newInStockForm.type==4){
+        ProductsServ.getAllEtc().then(function(response) {
+        if(response.data){
+          $scope.Allproduct=response.data;
+        } else {
+          console.log(response.data);
+        }
+        }, function(response) {
+          console.log("Something went wrong");
+        });
     }
   }
   $scope.newInStock = function(){

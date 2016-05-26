@@ -48,6 +48,11 @@ router.get('/allPackage', function(req, res) {
     res.send(product);
   });
 });
+router.get('/allEtc', function(req, res) {
+  productMgr.getAllEtc(function(product){
+    res.send(product);
+  });
+});
 /* Add new customer   */
 router.post('/add', function(req, res) {
   productMgr.addProduct(req.body,function(product){
