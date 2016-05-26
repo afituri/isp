@@ -52,7 +52,6 @@ module.exports = {
         cb(true);
 
       } else {
-        //TODO: return page with errors
         console.log(err);
         cb(false);
       }
