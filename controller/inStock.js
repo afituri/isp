@@ -68,6 +68,7 @@ module.exports = {
   },
   addInStock: function (body, cb) {
     var obj = body;
+    console.log(body);
     inStock = new model.Instock(obj);
     inStock.save(function(err,result){
       if (!err) {
