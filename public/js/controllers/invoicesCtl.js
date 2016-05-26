@@ -87,6 +87,34 @@
         console.log("Something went wrong");
       });
     };
+    $scope.getProductInfo = function(id){
+      if(id == 'خدمة'){
+        $scope.productsObj = $scope.objects.servicesObj;
+      } else if(id == 'معدة'){
+        $scope.productsObj = $scope.objects.itemsObj;
+      } else if (id == 'حزمة'){
+        $scope.productsObj = $scope.objects.packagesObj;
+      }
+    };
+    $scope.selectedProducts = [];
+    $scope.productTypeRequired = false;
+    $scope.productNameRequired = false;
+    $scope.selectProduct = function(){
+      if(!$scope.productType){
+        $scope.productTypeRequired = true;
+      }
+      if(!$scope.productName){
+        $scope.productNameRequired = true;
+      }
+      if($scope.productType && $scope.productName){
+        $scope.selectedProducts.push({'type':$scope.productType,'name':$scope.productName});
+        $scope.productType = '';
+        $scope.productName = '';
+      }
+    };
+    $scope.removeSelect = function(index){
+      $scope.selectedProducts.splice(index, 1);
+    };
   }]);
   app.controller('EditInvoiceCtl',['$scope','MenuFac','InvoicesServ',function($scope,MenuFac,InvoicesServ){
     MenuFac.active = 10;
