@@ -38,6 +38,7 @@
     $scope.objects.getAllItems();
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
+    $scope.objects.getAllResellers();
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
     $scope.init = function () {

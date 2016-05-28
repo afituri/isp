@@ -4,7 +4,7 @@
       <div class="x_panel">
         <div class="x_title">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-4" style="padding-top:15px;">
               <h2>إضافة فاتورة جديدة</h2>
             </div>
             <div class="col-md-3">
@@ -19,10 +19,19 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label class="control-label">نوع الفاتورة</label>
-                <select class="form-control input-sm" ng-model="newInvoiceForm.typein" ng-required-err-type="type" required>
+                <select class="form-control input-sm" ng-model="newInvoiceForm.typein" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
                   <option value="Invoice">فاتورة</option>
                   <option value="Initial">مبدئية</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">اسم الموزع</label>
+                <select class="form-control input-sm" ng-model="newInvoiceForm.reseller" ng-options="reseller._id as reseller.companyName for reseller in objects.resellersObj" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="motherCompany">الشركة الام</option>
                 </select>
               </div>
             </div>
