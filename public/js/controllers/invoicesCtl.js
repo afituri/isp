@@ -97,6 +97,9 @@
         $scope.productsObj = $scope.objects.packagesObj;
       }
     };
+    $scope.test = function(){
+      console.log($scope.productName.name);
+    }
     $scope.selectedProducts = [];
     $scope.productTypeRequired = false;
     $scope.productNameRequired = false;
@@ -108,7 +111,7 @@
         $scope.productNameRequired = true;
       }
       if($scope.productType && $scope.productName){
-        $scope.selectedProducts.push({'type':$scope.productType,'name':$scope.productName});
+        $scope.selectedProducts.push({'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
         $scope.productType = '';
         $scope.productName = '';
       }

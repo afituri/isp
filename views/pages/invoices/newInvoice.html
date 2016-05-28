@@ -147,7 +147,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">اختيار المنتج</label>
-                <select class="form-control input-sm" ng-model="productName" ng-options="product.name as product.name for product in productsObj">
+                <select class="form-control input-sm" ng-model="productName" ng-change="test()" ng-options="product.name for product in productsObj track by product._id">
                   <option value="" disabled selected>الرجاء الاختيار</option>
                 </select>
                 <span style="color:red;" ng-show="productNameRequired">هذا الحقل مطلوب</span>
