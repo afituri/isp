@@ -42,7 +42,24 @@
           }]);
         }] 
       }
-    }).state('newReseller',{
+    })
+    .state('dollar',{
+      url: '/dollar',
+      templateUrl: 'pages/dollar/dollar.html',
+      controller: 'DollarsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/dollarCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+      
+    })
+    .state('newReseller',{
       url: '/resellers/new',
       templateUrl: 'pages/resellers/newReseller.html',
       controller: 'NewResellerCtl',

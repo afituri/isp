@@ -247,6 +247,19 @@
         console.log("Something went wrong");
       });
     };
+    $scope.newEtcProduct = function(){
+      $scope.newProductForm.type = "etc";
+      ProductsServ.addProduct($scope.newProductForm).then(function(response) {
+        if(response.data){
+          $state.go('productServices');
+          toastr.success('تمت إضافة منتج جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
     $scope.newItemProduct = function(){
       $scope.newProductForm.type = "item";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {

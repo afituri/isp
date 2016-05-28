@@ -50,6 +50,18 @@ module.exports = {
       }
     });
   },
+
+  deleteDollar: function(id,cb){
+    console.log(id);
+    model.Dollar.remove({_id:id}, function(err,result) {
+      if (!err) {
+        cb(2)
+      } else {
+        console.log(err);
+        cb(3);
+      }
+    });
+  },
   
   addDollar : function(body,cb){
     var obj =body;
@@ -60,6 +72,7 @@ module.exports = {
 
       } else {
         //TODO: return page with errors
+        console.log(err);
         cb(false);
       }
     });

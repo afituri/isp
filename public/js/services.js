@@ -21,6 +21,7 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
+      'etcObj': [],
       
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
@@ -88,6 +89,22 @@
     self.getAllServiceProviders();
     return self;
   }]);
+
+  app.service('DollarServ',['$http',function($http){
+    var self = {
+      'addDollar': function(dollar){
+        return $http.post('/dollar/add',dollar);
+      },
+      'getDollar': function(pageSize,currentPage){
+        return $http.get('/dollar/'+pageSize+'/'+currentPage)
+      },
+      'deleteDollar': function(id){
+        return $http.delete('/dollar/delete/'+id);
+      }
+    };
+    return self;
+   }]);
+
   app.service('ResllersServ',['$http',function($http){
     var self = {
       'getResellers': function(pageSize,currentPage){
@@ -294,6 +311,9 @@
       },
       'getAllService': function(){
         return $http.get('/product/allService');
+      },
+      'getAllEtc': function(){
+        return $http.get('/product/allEtc');
       },
       'getAllItem': function(type){
         return $http.get('/product/allItem');
