@@ -8,7 +8,7 @@
       <div class="x_content">
         <form  novalidate ng-submit="newInStock()">
           <div class="row">
-            <div class="col-md-4" ng-class="">
+            <div class="col-md-4" ng-class="{'col-md-3': newInStockForm.type==4}">
               <div class="form-group">
                 <label class="control-label">المخزن</label>
                 <select class="form-control input-sm" ng-model="newInStockForm.warehouse" ng-options="stock._id as stock.name for stock in objects.stockObj" required>
@@ -16,7 +16,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-4" ng-class="">
+            <div class="col-md-4" ng-class="{'col-md-3': newInStockForm.type==4}">
               <div class="form-group">
                 <label class="control-label">نوع المنتج </label>
                 <select class="form-control input-sm" ng-model="newInStockForm.type" ng-required-err-type="required" ng-change="productType()"required>
@@ -29,7 +29,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-4" ng-class="">
+            <div class="col-md-4" ng-class="{'col-md-3': newInStockForm.type==4}">
               <div class="form-group">
                 <label class="control-label">المنتج </label>
                 <select class="form-control input-sm" ng-model="newInStockForm.product"ng-options="stock._id as stock.name for stock in Allproduct"  ng-required-err-type="required" required>
@@ -37,8 +37,14 @@
                 </select>
               </div>
             </div>
+            <div class="col-md-3" ng-if="newInStockForm.type==4">
+              <div class="form-group">
+                <label class="control-label">الكمية</label>
+                <input class="form-control input-sm" type="text" ng-model="newInStockForm.quantity" ng-required-err-type="required" placeholder="الكمية" required>
+              </div>
+            </div>
           </div>
-          <div class="row">
+          <div class="row" ng-if="newInStockForm.type != 4">
             <div class="col-md-4" >
               <div class="form-group">
                 <label class="control-label">ماك ادرس/سيريال نامبر</label>
@@ -59,7 +65,12 @@
             </div>
           </div>
           <div class="row">
-             <div class="col-md-12">
+            <div class="col-md-3" style="padding-top:65px;">
+              <span class="file-input btn btn-block btn-info btn-file">استعراض ملف CSV
+                <ng-csv-import result="csv.result" encoding="csv.encoding" encoding-visible="csv.encodingVisible"></ng-csv-import>
+              </span>
+            </div>
+            <div class="col-md-9">
               <div class="form-group">
                 <label class="control-label">الوصف</label>
                 <textarea class="form-control input-sm" rows="6" cols="12" ng-model="newInStockForm.description" ng-required-err-type="notes" placeholder="ملاحظات" ></textarea>

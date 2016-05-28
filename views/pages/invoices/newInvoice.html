@@ -4,7 +4,7 @@
       <div class="x_panel">
         <div class="x_title">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-4" style="padding-top:15px;">
               <h2>إضافة فاتورة جديدة</h2>
             </div>
             <div class="col-md-3">
@@ -19,10 +19,20 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label class="control-label">نوع الفاتورة</label>
-                <select class="form-control input-sm" ng-model="newInvoiceForm.typein" ng-required-err-type="type" required>
+                <select class="form-control input-sm" ng-model="newInvoiceForm.typein" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
                   <option value="Invoice">فاتورة</option>
                   <option value="Initial">مبدئية</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">اسم الموزع</label>
+                <select class="form-control input-sm" ng-model="newInvoiceForm.reseller" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="1">الشركة الام</option>
+                  <option ng-repeat="reseller in objects.resellersObj" value="{{reseller._id}}">{{reseller.companyName}}</option>
                 </select>
               </div>
             </div>
@@ -130,6 +140,7 @@
                   <option value="خدمة">خدمة - service</option>
                   <option value="معدة">معدة - item</option>
                   <option value="حزمة">حزمة - package</option>
+                  <option value="معدات">معدات اخرى - other item</option>
                 </select>
                 <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
               </div>
@@ -137,7 +148,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">اختيار المنتج</label>
-                <select class="form-control input-sm" ng-model="productName" ng-options="product.name as product.name for product in productsObj">
+                <select class="form-control input-sm" ng-model="productName" ng-change="test()" ng-options="product.name for product in productsObj track by product._id">
                   <option value="" disabled selected>الرجاء الاختيار</option>
                 </select>
                 <span style="color:red;" ng-show="productNameRequired">هذا الحقل مطلوب</span>

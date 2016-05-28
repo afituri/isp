@@ -20,6 +20,7 @@ router.get('/all', function(req, res) {
 });
 /* Add new in stock  */
 router.post('/add', function(req, res) {
+  console.log(req.body);
   instockMgr.addInStock(req.body,function(InStock){
     res.send(InStock);
   });

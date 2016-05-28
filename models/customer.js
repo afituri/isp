@@ -11,7 +11,7 @@ var Customer = new Schema({
    email: { type: String, required: true},
    phone: { type: String, required: true},
    type: { type: Number, required: [true, 'Why no type?']},
-   reseller: { type: Schema.Types.ObjectId , ref: 'Reseller'},
+   reseller: { type: Schema.Types.ObjectId , ref: 'Reseller',default:null},
    notes: { type: String, required: true},
    policy: { type: Schema.Types.ObjectId , ref: 'Policy'},
    status: { type: Number, default:1}

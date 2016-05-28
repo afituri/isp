@@ -10,7 +10,8 @@
     'toastr',
     'ui.bootstrap',
     'nya.bootstrap.select',
-    'oc.lazyLoad'
+    'oc.lazyLoad',
+    'ngCsvImport'
   ]);
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider','$ocLazyLoadProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider,$ocLazyLoadProvider){
     $stateProvider.state('home',{
