@@ -85,45 +85,46 @@ module.exports = {
               invoice.save(function(err,invoiceResult){
                 if (!err) {
                   instockMgr.updateInStockInvoice(invoiceResult._id,body.itemInfo,function(result){});
-                  order1={
+                  // order1={
+                  //   invoice:invoiceResult._id,
+                  //   product:body.product,
+                  //   price : product[0].initialPrice,
+                  //   startDate:body.startDate,
+                  //   endDate:body.endDate
+                  // };
+                  // order2={
+                  //   invoice:invoiceResult._id,
+                  //   product:body.productItem,
+                  //   price : product[1].initialPrice,
+                  //   startDate:body.startDate,
+                  //   endDate:body.endDate
+                  // };
+                  Order={
                     invoice:invoiceResult._id,
-                    product:body.product,
-                    price : product[0].initialPrice,
+                    // product:body.productPackage,
+                    // price : product[2].initialPrice,
                     startDate:body.startDate,
                     endDate:body.endDate
                   };
-                  order2={
-                    invoice:invoiceResult._id,
-                    product:body.productItem,
-                    price : product[1].initialPrice,
-                    startDate:body.startDate,
-                    endDate:body.endDate
-                  };
-                  order3={
-                    invoice:invoiceResult._id,
-                    product:body.productPackage,
-                    price : product[2].initialPrice,
-                    startDate:body.startDate,
-                    endDate:body.endDate
-                  };
-                  var arrayOrder=[order1,order2,order3];
-                  var counter=0;
-                  var arrayOrd=[];
-                  for(var i=0;i<3;i++){
-                    order=new model.Order(arrayOrder[i]);
-                    order.save(function(err,orderResult){
-                      arrayOrd.push(orderResult);
-                      arrayOfResult=[customerResult,invoiceResult,arrayOrd];
-                      if(!err){
-                        counter++;
-                        if(counter==3){
-                          cb(arrayOfResult,false);
-                        }
-                      } else {
-                        console.log()
-                        cb(null,err)
-                      }
-                    });
+                  // var arrayOrder=[order1,order2,order3];
+                  // var counter=0;
+                  // var arrayOrd=[];
+                  for( i in body.selectedProducts ){
+                    console.log(i);
+                    // order=new model.Order(arrayOrder[i]);
+                    // order.save(function(err,orderResult){
+                    //   arrayOrd.push(orderResult);
+                    //   arrayOfResult=[customerResult,invoiceResult,arrayOrd];
+                    //   if(!err){
+                    //     counter++;
+                    //     if(counter==3){
+                    //       cb(arrayOfResult,false);
+                    //     }
+                    //   } else {
+                    //     console.log()
+                    //     cb(null,err)
+                    //   }
+                    // });
                   }
                 } else {
                   cb(null,err);

@@ -75,6 +75,13 @@
           console.log("Something went wrong in getAllPackages");
         });
       },
+      'getAllEtcs': function(){
+        return $http.get('/product/allEtc').then(function(response) {
+          self.etcObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
+        });
+      },
       'getAllPolicies': function(){
         return $http.get('/policy/all').then(function(response) {
           self.policiesObj = response.data;

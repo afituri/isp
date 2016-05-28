@@ -36,6 +36,7 @@
     $scope.activePanel = MenuFac;
     $scope.objects = HelperServ;
     $scope.objects.getAllItems();
+    $scope.objects.getAllEtcs();
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
     $scope.objects.getAllResellers();
@@ -50,9 +51,11 @@
     }
     $scope.init();
     $scope.newInvoice = function(){
+      console.log($scope.selectedProducts);
       if($scope.previousSubscription==1){
         $scope.newInvoiceForm.previousSubscription=1;
-        $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
+        // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
+        $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
@@ -95,6 +98,8 @@
         $scope.productsObj = $scope.objects.itemsObj;
       } else if (id == 'حزمة'){
         $scope.productsObj = $scope.objects.packagesObj;
+      } else if (id == 'معدات'){
+        $scope.productsObj = $scope.objects.etcObj;
       }
     };
     $scope.selectedProducts = [];
