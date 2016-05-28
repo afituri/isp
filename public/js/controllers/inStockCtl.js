@@ -93,6 +93,10 @@ app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','
   $scope.objects=HelperServ;
   $scope.objects.getAllStock();
   $scope.newInStockForm={};
+  $scope.csv = {
+    result: null,
+    encoding: 'UTF-8',
+  };
   $scope.productType=function(){
     if($scope.newInStockForm.type==1){
       ProductsServ.getAllService().then(function(response) {
