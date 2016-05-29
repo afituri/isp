@@ -14,7 +14,7 @@ var Invoice = new Schema({
    /*left: { type: Number},*/
    discount: { type: Number, required: [true, 'Why no piad?']},
    idinv:{ type: Number},
-   typein: { type: String, enum: ['Initial', 'Invoice'], required: true},
+   typein: { type: Number, default:1},
    status: { type: Number, default:1}
 });
 Invoice.plugin(autoIncrement.plugin, {

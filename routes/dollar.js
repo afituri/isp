@@ -18,7 +18,7 @@ router.get('/all', function(req, res) {
 //lastDollar
 
 router.get('/lastDollar', function(req, res) {
-  dollarMgr.(function(dollar){
+  dollarMgr.getLastDollar(function(dollar){
     res.send(dollar);
   });
 });

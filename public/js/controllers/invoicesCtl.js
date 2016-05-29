@@ -17,7 +17,7 @@
     }
   }]);
 
-  app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+  app.controller('NewInvoiceCtl',['$scope','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
     $scope.go =function(id,name){
       $scope.customId=id;
     }
@@ -115,10 +115,19 @@
         $scope.productNameRequired = true;
       }
       if($scope.productType && $scope.productName){
-        $scope.selectedProducts.push({'price':$scope.productName.initialPrice,'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-        $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + $scope.productName.initialPrice;
+
+        DollarServ.getLastDollar().then(function(response) {
+          console.log(response.data[0].price);
+          $scope.dollarToday=response.data[0].price;
+        
+        $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+        $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
         $scope.productType = '';
         $scope.productName = '';
+
+        }, function(response) {
+          console.log("Something went wrong");
+        });
       }
     };
     $scope.removeSelect = function(index){

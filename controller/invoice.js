@@ -3,7 +3,7 @@ var generatePassword = require('password-generator'),
 var model = require("../models");
 var instockMgr = require("./inStock");
 var invoice = null;
-
+var dollarMgr = require("./dollar");
 module.exports = {
 
 
@@ -78,7 +78,7 @@ module.exports = {
             if (!err) {
               invoice={
                 customer:customerResult._id,
-                type:1,
+                type:body.type,
                 notes:body.invoceNotes,
                 piad:body.total,
                 reseller:body.reseller,
@@ -88,62 +88,36 @@ module.exports = {
               invoice=new model.Invoice(invoice);
               invoice.save(function(err,invoiceResult){
                 if (!err) {
-                  // instockMgr.updateInStockInvoice(invoiceResult._id,body.itemInfo,function(result){});
-                  // order1={
-                  //   invoice:invoiceResult._id,
-                  //   product:body.product,
-                  //   price : product[0].initialPrice,
-                  //   startDate:body.startDate,
-                  //   endDate:body.endDate
-                  // };
-                  // order2={
-                  //   invoice:invoiceResult._id,
-                  //   product:body.productItem,
-                  //   price : product[1].initialPrice,
-                  //   startDate:body.startDate,
-                  //   endDate:body.endDate
-                  // };
-                  Order={
-                    invoice:invoiceResult._id,
-                    // product:body.productPackage,
-                    // price : product[2].initialPrice,
-                    startDate:body.startDate,
-                    endDate:body.endDate
-                  };
-                  // var arrayOrder=[order1,order2,order3];
-                  // var counter=0;
+                  
                   var arrayOrd=[];
                   for( i in body.selectedProducts ){
+
                     model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
-                      Order.product=body.selectedProducts[i].id;
-                      Order.price=pro.initialPrice;
-                      order=new model.Order(Order);
-                      order.save(function(err,orderResult){
-                        arrayOrd.push(orderResult);
-                        arrayOfResult=[customerResult,invoiceResult,arrayOrd];
-                        if(!err){
-                          if(i==body.selectedProducts.length-1){
-                            cb(arrayOfResult,false);
+                      dollarMgr.getLastDollar(function(dollar){
+                        Order={
+                          invoice:invoiceResult._id,
+                          product:pro._id,
+                          price:pro.initialPrice*dollar[0].price,
+                          startDate:body.startDate,
+                          endDate:body.endDate
+                        };
+
+                        order=new model.Order(Order);
+                        order.save(function(err,orderResult){
+                          arrayOrd.push(orderResult);
+                          arrayOfResult=[customerResult,invoiceResult,arrayOrd];
+                          if(!err){
+                            if(i==body.selectedProducts.length-1){
+                              cb(arrayOfResult,false);
+                            }
+                          } else {
+                            cb(null,err)
                           }
-                        } else {
-                          cb(null,err)
-                        }
+                        });
                       });
-                    });
-                    // order=new model.Order(arrayOrder[i]);
-                    // order.save(function(err,orderResult){
-                    //   arrayOrd.push(orderResult);
-                    //   arrayOfResult=[customerResult,invoiceResult,arrayOrd];
-                    //   if(!err){
-                    //     counter++;
-                    //     if(counter==3){
-                    //       cb(arrayOfResult,false);
-                    //     }
-                    //   } else {
-                    //     console.log()
-                    //     cb(null,err)
-                    //   }
-                    // });
+                      });
+                      
+   
                   }
                 } else {
                   console.log(err);

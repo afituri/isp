@@ -21,8 +21,8 @@
                 <label class="control-label">نوع الفاتورة</label>
                 <select class="form-control input-sm" ng-model="newInvoiceForm.typein" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
-                  <option value="Invoice">فاتورة</option>
-                  <option value="Initial">مبدئية</option>
+                  <option value="1">فاتورة</option>
+                  <option value="2">مبدئية</option>
                 </select>
               </div>
             </div>
@@ -192,6 +192,36 @@
               </table>
             </div>
           </div>
+
+          <!-- 00000 -->
+         
+              <div class="col-md-2">
+                <label class="control-label">المخــازن</label>
+                <select class="form-control input-sm" ng-model="stock">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  
+                >
+                </select>
+                <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
+              </div>
+
+              <div class="col-md-2">
+                <label class="control-label">المخزون</label>
+                <select class="form-control input-sm" ng-model="productType" ng-change="getProductInfo(productType)">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="خدمة">خدمة - service</option>
+                  <option value="معدة">معدة - item</option>
+                  <option value="حزمة">حزمة - package</option>
+                  <option value="معدات">معدات اخرى - other item</option>
+                </select>
+                <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
+              </div>
+           
+            <br>
+
+
+
+
           <hr>
           <div class="row">
             <div class="col-md-3">
