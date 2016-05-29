@@ -26,17 +26,16 @@
           }]);
         }] 
       }
-    }) 
-    .state('customers_pending',{
-      url: '/customers_pending',
-      templateUrl: 'pages/customers/customers_pending.html',
-      controller: 'CustomersCtl',
+    }) .state('customersPending',{
+      url: '/customersPending',
+      templateUrl: 'pages/reseller/all/customersPending.html',
+      controller: 'CustomersPendingCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
             insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
             files: [
-              '/js/controllers/customersCtl.js',
+              '/js/resellerControllers.js',
             ] 
           }]);
         }] 
