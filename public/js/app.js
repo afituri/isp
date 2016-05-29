@@ -335,8 +335,21 @@
         }] 
       }
     })
-
-
+    .state('renewInvoice',{
+      url: '/invoiceCustomers/renew/:id',
+      templateUrl: 'pages/invoices/renewInvoice.html',
+      controller: 'RenewInvoiceCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
     .state('newCustomer',{
       url: '/customers/new',
       templateUrl: 'pages/customers/newCustomer.html',

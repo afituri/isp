@@ -128,4 +128,24 @@
     $scope.activePanel = MenuFac;
     $scope.editInvoiceForm = {};
   }]);
+  app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+    $scope.renewInviceForm = {};
+    $scope.objects = HelperServ;
+    $scope.objects.getAllPackages();
+    CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
+      $scope.customer = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.renewInvice = function(){
+      InvoicesServ.renewInvice($scope.renewInviceForm).then(function(response){
+        if(response.data){
+          toastr.success('تم التجديد بنجاح');
+          $state.go('invoiceCustomer')
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
 }());
