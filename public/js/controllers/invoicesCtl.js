@@ -149,6 +149,7 @@
       console.log("Something went wrong");
     });
     $scope.renewInvice = function(){
+      $scope.renewInviceForm.idCu=$stateParams.id;
       InvoicesServ.renewInvice($scope.renewInviceForm).then(function(response){
         if(response.data){
           toastr.success('تم التجديد بنجاح');
