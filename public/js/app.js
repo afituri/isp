@@ -305,6 +305,7 @@
         }] 
       }
     })
+   
     .state('showInvoice',{
       url: '/showInvoice/:id',
       templateUrl: 'pages/invoices/showInvoice.html',

@@ -155,7 +155,7 @@
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label class="control-label">نوع الباقة</label>
+                    <label class="control-label">مزودي الخدمة</label>
                     <select class="form-control input-sm" ng-model="newProductForm.packages.type" ng-options="serviceProvider._id as serviceProvider.name for serviceProvider in objects.serviceProvidersObj"  ng-change="getServiceByID(newProductForm.packages.type)" required>
                       <option value="" disabled selected>الرجاء الاختيار</option>
                     </select>

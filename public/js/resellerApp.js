@@ -26,6 +26,21 @@
           }]);
         }] 
       }
+    }) 
+    .state('customers_pending',{
+      url: '/customers_pending',
+      templateUrl: 'pages/customers/customers_pending.html',
+      controller: 'CustomersCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/customersCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');
