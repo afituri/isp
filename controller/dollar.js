@@ -7,7 +7,7 @@ module.exports = {
   getLastDollar: function(cb){
     model.Dollar.find({}).sort({_id:-1}).limit(1).exec(function(err,dollar){
       if(!err){
-        cb({result:dollar,count:count});
+        cb(dollar);
       }else{
         console.log(err);
         cb(null);
