@@ -112,6 +112,9 @@
       'getDollar': function(pageSize,currentPage){
         return $http.get('/dollar/'+pageSize+'/'+currentPage)
       },
+      'getLastDollar': function(){
+        return $http.get('/dollar/lastDollar')
+      },
       'deleteDollar': function(id){
         return $http.delete('/dollar/delete/'+id);
       }
@@ -256,8 +259,9 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'getCustomers': function(pageSize,currentPage){
-        return $http.get('/customer/'+pageSize+'/'+currentPage);
+      'getCustomers': function(status,pageSize,currentPage){
+        console.log(status);
+        return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getAllCustomers': function(){
         return $http.get('/customer/all');

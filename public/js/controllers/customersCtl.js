@@ -10,7 +10,7 @@
     
 
     $scope.init = function () {
-      CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
+      CustomersServ.getCustomers(1,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -52,6 +52,7 @@
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
     $scope.newCustomer = function(){
+      $scope.newCustomerForm.status=1;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
           $state.go('customers');

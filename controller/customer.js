@@ -5,12 +5,12 @@ var customer = null;
 
 module.exports = {
 
-  getCustomer :function(limit,page,cb){
+  getCustomer :function(status,limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.Customer.count({},function(err,count){
-      model.Customer.find({}).limit(limit).skip(page*limit).exec(function(err, customers){
+    model.Customer.count({status:status},function(err,count){
+      model.Customer.find({status:status}).limit(limit).skip(page*limit).exec(function(err, customers){
         if(!err){
           //console.log(customers);
           cb({result:customers,count:count});
@@ -61,7 +61,8 @@ module.exports = {
       email : body.email,
       phone : body.phone,
       type : body.type,
-      notes : body.notes
+      notes : body.notes,
+      status : body.status
   }
     customer = new model.Customer(obj);
     customer.save(function(err,result){

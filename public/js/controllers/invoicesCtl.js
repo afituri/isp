@@ -106,6 +106,7 @@
     $scope.selectedProducts = [];
     $scope.productTypeRequired = false;
     $scope.productNameRequired = false;
+    $scope.newInvoiceForm.total = 0;
     $scope.selectProduct = function(){
       if(!$scope.productType){
         $scope.productTypeRequired = true;
@@ -114,7 +115,8 @@
         $scope.productNameRequired = true;
       }
       if($scope.productType && $scope.productName){
-        $scope.selectedProducts.push({'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+        $scope.selectedProducts.push({'price':$scope.productName.initialPrice,'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+        $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + $scope.productName.initialPrice;
         $scope.productType = '';
         $scope.productName = '';
       }

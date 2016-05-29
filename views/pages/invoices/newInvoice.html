@@ -173,6 +173,7 @@
                   <tr>
                     <th>نوع المنتج</th>
                     <th>اسم المنتج</th>
+                    <th>السعر</th>
                     <th>إلغاء</th>
                   </tr>
                 </thead>
@@ -182,6 +183,7 @@
                       {{selectedProduct.type}}
                     </td> 
                     <td>{{selectedProduct.name}}</td> 
+                     <td>{{selectedProduct.price}}</td> 
                     <td>
                       <button type="button" class="btn btn-danger btn-xs" ng-click="removeSelect($index)"><i class="fa fa-trash"></i></button>
                     </td> 

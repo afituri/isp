@@ -7,8 +7,8 @@ var customerMgr = require("../controller/customer");
 // var path = require("path");
 
 /* GET all customer */
-router.get('/:limit/:page', function(req, res) {
-  customerMgr.getCustomer(req.params.limit,req.params.page,function(customers){
+router.get('/:limit/:page/:status', function(req, res) {
+  customerMgr.getCustomer(req.params.status,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
