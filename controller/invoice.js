@@ -236,7 +236,46 @@ module.exports = {
     });
   },
 
+renewInvice :function(body,cb){
+  var invoice={
+    customer:body.idCu,
+    type:1,
+    notes:body.invoceNotes,
+    piad:body.total,
+    reseller:null,
+    discount:body.discount,
+    typein:3
+  };
+  invoice=new model.Invoice(invoice);
+  invoice.save(function(err,invoiceResult){
+    if (!err) {
+      model.Product.findOne({_id:body.package},function(err,pro){
+        dollarMgr.getLastDollar(function(dollar){
+          Order={
+            invoice:invoiceResult._id,
+            product:pro._id,
+            price:pro.initialPrice*dollar[0].price,
+            startDate:body.startDate,
+            endDate:body.endDate
+          };
+          order=new model.Order(Order);
+          order.save(function(err,orderResult){
+            if (!err) {
+              cb(invoiceResult);
+            }else{
+              console.log(err);
+              cb(null);
+            }
+          });
+        });
+      });
 
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
 
 
 

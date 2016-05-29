@@ -439,7 +439,7 @@
         return $http.get('/inStock/search/'+id);
       },
       'renewInvice': function(renewInviceObj){
-        return $http.get('',renewInviceObj);
+        return $http.post('/invoice/renewInvice',renewInviceObj);
       }
     };
     return self;
