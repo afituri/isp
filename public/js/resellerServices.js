@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  var app = angular.module('isp');
+  var app = angular.module('reseller');
   app.service('HelperServ',['$http',function($http){
     var self = {
       'stockObj': [],
@@ -91,6 +91,29 @@
     self.getAllCities();
     self.getAllSuppliers();
     self.getAllServiceProviders();
+    return self;
+  }]);
+  app.service('CustomersServ',['$http',function($http){
+    var self = {
+      'getCustomers': function(pageSize,currentPage){
+        return $http.get('/customer/'+pageSize+'/'+currentPage);
+      },
+      'getAllCustomers': function(){
+        return $http.get('/customer/all');
+      },
+      'getCustomerByID': function(id){
+        return $http.get('/customer/'+id);
+      },
+      'addCustomer': function(customerObj){
+        return $http.post('/customer/add',customerObj);
+      },
+      'editCustomer': function(id,customerObj){
+        return $http.put('/customer/edit/'+id,customerObj);
+      },
+      'deleteCustomer': function(id){
+        return $http.delete('/customer/delete/'+id);
+      }
+    };
     return self;
   }]);
 }());

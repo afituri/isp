@@ -1,14 +1,11 @@
 (function(){
   'use strict';
-  var app = angular.module('isp');
-  app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
-    MenuFac.active = 6;
-    $scope.activePanel = MenuFac;
+  var app = angular.module('reseller');
+  app.controller('CustomersPendingCtl',['$scope','$modal','CustomersServ','toastr',function($scope,$modal,CustomersServ,toastr){
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
     
-
     $scope.init = function () {
       CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
@@ -46,9 +43,7 @@
       });
     };
   }]);
-  app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,MenuFac,CustomersServ,HelperServ,toastr){
-    MenuFac.active = 6;
-    $scope.activePanel = MenuFac;
+  app.controller('NewCustomerCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
     $scope.newCustomer = function(){
@@ -64,9 +59,7 @@
       });
     };
   }]);
-  app.controller('EditCustomerCtl',['$scope','$state','$stateParams','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,MenuFac,CustomersServ,HelperServ,toastr){
-    MenuFac.active = 6;
-    $scope.activePanel = MenuFac;
+  app.controller('EditCustomerCtl',['$scope','$state','$stateParams','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,CustomersServ,HelperServ,toastr){
     $scope.editCustomerForm = {};
     $scope.objects = HelperServ;
     CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
