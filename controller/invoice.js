@@ -103,20 +103,21 @@ module.exports = {
                   //   startDate:body.startDate,
                   //   endDate:body.endDate
                   // };
-                  Order={
-                    invoice:invoiceResult._id,
-                    // product:body.productPackage,
-                    // price : product[2].initialPrice,
-                    startDate:body.startDate,
-                    endDate:body.endDate
-                  };
+                  
                   // var arrayOrder=[order1,order2,order3];
                   // var counter=0;
                   var arrayOrd=[];
                   for( i in body.selectedProducts ){
+
                     model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
-                      Order.product=body.selectedProducts[i].id;
-                      Order.price=pro.initialPrice;
+                      Order={
+                        invoice:invoiceResult._id,
+                        product:pro._id,
+                        price:pro.initialPrice,
+                        startDate:body.startDate,
+                        endDate:body.endDate
+                      };
+
                       order=new model.Order(Order);
                       order.save(function(err,orderResult){
                         arrayOrd.push(orderResult);

@@ -130,48 +130,22 @@
                   </tr> 
                 </thead> 
                 <tbody> 
+                  {{for result.order}}
                   <tr> 
                     <td class="text-center">
-                      <h5><!-- Hardware --> {{:result.order[0].product.name}}</h5>
-                       {{:result.order[0].product.discriptoin}}
+                      <h5><!-- Hardware --> {{:product.name}}</h5>
+                       {{:product.discriptoin}}
                     </td> 
                     <td class="text-center">
                       <br>
-                      {{:result.order[0].product.initialPrice}}
+                      {{:product.initialPrice}}
                     </td>
                  <!--    <td class="text-center">
                       <br>
                       2500
                     </td> --> 
                   </tr>
-                  <tr> 
-                    <td class="text-center">
-                      <h5><!-- Hardware --> {{:result.order[1].product.name}}</h5>
-                       {{:result.order[1].product.discriptoin}}
-                    </td> 
-                    <td class="text-center">
-                      <br>
-                      {{:result.order[1].product.initialPrice}}
-                    </td>
-                 <!--    <td class="text-center">
-                      <br>
-                      2500
-                    </td> --> 
-                  </tr>
-                  <tr> 
-                    <td class="text-center">
-                      <h5><!-- Hardware --> {{:result.order[2].product.name}}</h5>
-                       {{:result.order[2].product.discriptoin}}
-                    </td> 
-                    <td class="text-center">
-                      <br>
-                      {{:result.order[2].product.initialPrice}}
-                    </td>
-                 <!--    <td class="text-center">
-                      <br>
-                      2500
-                    </td> --> 
-                  </tr>
+                 {{/for}}
                   <!-- <tr> 
                     <td class="text-left">
                       <h5>Subscription</h5>

@@ -17,11 +17,14 @@ module.exports = {
         engine: "jsrender",
         recipe: "phantom-pdf",
         content: fs.readFileSync(path.join(__dirname, "../views/reports/"+HTMLprint), "utf8"),
+        
       },data:{result:result}
     }).then(function(resp) {
       resp.stream.pipe(res);
     }).catch(function(e) {
       res.end(e.message);
     });
-  }
+  },
+
+  
 };
