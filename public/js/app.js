@@ -105,7 +105,7 @@
     })
     .state('newUser',{
       url: '/newUser',
-      templateUrl: 'pages/users/newUser.html',
+      templateUrl: '/users/newUser.html',
       controller: 'NewUserCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {

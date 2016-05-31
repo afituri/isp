@@ -260,7 +260,6 @@
   app.service('CustomersServ',['$http',function($http){
     var self = {
       'getCustomers': function(status,pageSize,currentPage){
-        console.log(status);
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getAllCustomers': function(){
