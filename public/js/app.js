@@ -754,7 +754,7 @@
         }] 
       }
     })
-      .state('newUser',{
+    .state('newUser',{
       url: '/newUser',
       templateUrl: 'pages/users/newUser.html',
       controller: 'NewUserCtl',
