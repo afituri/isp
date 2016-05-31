@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>دفعة الفاتورة للعميل <span><strong>{{customer.name}}</strong></h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form novalidate ng-submit="paidInvoice()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">الدقعة</label>
+                <input class="form-control input-sm" type="text" ng-model="paidInvoiceForm.paid" placeholder="الدفعة">
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-4">
+              <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;اضافة</button>
+            </div>
+            <div class="col-md-2">
+              <a class="btn btn-success btn-sm btn-block" ui-sref="invoiceCustomer"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

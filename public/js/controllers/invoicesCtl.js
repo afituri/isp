@@ -149,4 +149,22 @@
       });
     };
   }]);
+  app.controller('PaidInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+    $scope.paidInvoiceForm = {};
+    CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
+      $scope.customer = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.paidInvoice = function(){
+      InvoicesServ.paidInovice($scope.paidInvoiceForm).then(function(response){
+        if(response.data){
+          toastr.success('تم الدفع بنجاح');
+          $state.go('invoiceCustomer')
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
 }());
