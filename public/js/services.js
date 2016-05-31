@@ -444,6 +444,9 @@
       },
       'renewInvice': function(renewInviceObj){
         return $http.post('/invoice/renewInvice',renewInviceObj);
+      },
+      'paidInvoice': function(paidInviceObj){
+        return $http.post('/invoice/paidInvoice',paidInviceObj);
       }
     };
     return self;
