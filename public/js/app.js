@@ -829,11 +829,12 @@
       errorMessages['repName'] = "الرجاء إدخال اسم المخول";
       errorMessages['companyName'] = "الرجاء إدخال اسم الشىركة";
       errorMessages['city'] = "الرجاء إختيار المدينة";
-      errorMessages['address'] = "الرجاء إدخال المنطقة";
+      errorMessages['area'] = "الرجاء إدخال المنطقة";
       errorMessages['langtitude'] = "الرجاء إدخال خط الطول";
       errorMessages['longtitude'] = "الرجاء إدخال خط العرض";
       errorMessages['emailType'] = "الرجاء إدخال البريد الالكتروني";
       errorMessages['phone'] = "الرجاء إدخال رقم الهاتف";
+      errorMessages['repPhone'] = "الرجاء إدخال رقم هاتف المخول";
       errorMessages['password'] = "الرجاء إدخال كلمة المرور";
       errorMessages['confirmPassword'] = "الرجاء إعادة إدخال كلمة المرور";
       errorMessages['customerName'] = "الرجاء إدخال اسم العميل";
@@ -843,6 +844,8 @@
       errorMessages['servicesProvider'] = "الرجاء اختيار مزود الخدمة";
       errorMessages['nameService'] = "الرجاء إدخال اسم الخدمة";
       errorMessages['discriptoinService'] = "الرجاء إدخال معلومات عن الخدمة";
+      errorMessages['warehouseName'] = "الرجاء إدخال اسم المخزن";
+      errorMessages['customerName'] = 'الرجاء ادخال اسم العميل';
     });
   }]);
   app.filter('defaultLogo', function(){
