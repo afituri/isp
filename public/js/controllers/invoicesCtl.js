@@ -169,7 +169,7 @@
     });
     $scope.paidInvoice = function(){
       $scope.paidInvoiceForm.idCu=$stateParams.id;
-      InvoicesServ.paidInovice($scope.paidInvoiceForm).then(function(response){
+      InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
         if(response.data){
           toastr.success('تم الدفع بنجاح');
           $state.go('invoiceCustomer')

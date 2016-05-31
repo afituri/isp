@@ -281,10 +281,10 @@ addPaid :function(body,cb){
   var invoice={
     customer:body.idCu,
     type:1,
-    notes:null,
-    piad:body.total,
+    notes:'null',
+    piad:body.paid,
     reseller:null,
-    discount:null,
+    discount:0,
     typein:4
   };
   invoice=new model.Invoice(invoice);
