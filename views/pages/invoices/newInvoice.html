@@ -192,20 +192,18 @@
               </table>
             </div>
           </div>
-
-          <!-- 00000 -->
-         
-              <div class="col-md-2">
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
                 <label class="control-label">المخــازن</label>
                 <select class="form-control input-sm" ng-model="stock">
                   <option value="" disabled selected>الرجاء الاختيار</option>
-                  
-                >
                 </select>
-                <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
               </div>
-
-              <div class="col-md-2">
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
                 <label class="control-label">المخزون</label>
                 <select class="form-control input-sm" ng-model="productType" ng-change="getProductInfo(productType)">
                   <option value="" disabled selected>الرجاء الاختيار</option>
@@ -214,16 +212,8 @@
                   <option value="حزمة">حزمة - package</option>
                   <option value="معدات">معدات اخرى - other item</option>
                 </select>
-                <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
               </div>
-           
-            <br>
-
-
-
-
-          <hr>
-          <div class="row">
+            </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">تاريخ البداية</label>
