@@ -277,6 +277,28 @@ renewInvice :function(body,cb){
   });
 },
 
+addPaid :function(body,cb){
+  var invoice={
+    customer:body.idCu,
+    type:1,
+    notes:'null',
+    piad:body.paid,
+    reseller:null,
+    discount:0,
+    typein:4
+  };
+  invoice=new model.Invoice(invoice);
+  invoice.save(function(err,invoiceResult){
+    if (!err) {
+      cb(invoiceResult);
+      
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
+
 
 
 

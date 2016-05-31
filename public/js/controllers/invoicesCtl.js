@@ -168,7 +168,8 @@
       console.log("Something went wrong");
     });
     $scope.paidInvoice = function(){
-      InvoicesServ.paidInovice($scope.paidInvoiceForm).then(function(response){
+      $scope.paidInvoiceForm.idCu=$stateParams.id;
+      InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
         if(response.data){
           toastr.success('تم الدفع بنجاح');
           $state.go('invoiceCustomer')

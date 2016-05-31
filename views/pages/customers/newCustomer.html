@@ -21,7 +21,7 @@
             <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
               <div class="form-group">
                 <label class="control-label">اسم العميل</label>
-                <input class="form-control input-sm" type="text" ng-model="newCustomerForm.name" ng-required-err-type="name" placeholder="اسم العميل" required>
+                <input class="form-control input-sm" type="text" ng-model="newCustomerForm.name" ng-required-err-type="customerName" placeholder="اسم العميل" required>
               </div>
             </div>
             <div class="col-md-3" ng-if="newCustomerForm.type == 2">
@@ -43,7 +43,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">العنوان</label>
-                <input class="form-control input-sm" type="text" ng-model="newCustomerForm.address" ng-required-err-type="address" placeholder="العنوان" required>
+                <input class="form-control input-sm" type="text" ng-model="newCustomerForm.address" ng-required-err-type="area" placeholder="العنوان" required>
               </div>
             </div>
             <div class="col-md-3">

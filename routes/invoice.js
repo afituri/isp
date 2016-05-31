@@ -33,8 +33,13 @@ router.post('/add', function(req, res) {
 });
 
 router.post('/renewInvice', function(req, res) {
-  console.log(req.body);
   invoiceMgr.renewInvice(req.body,function(result){
+    res.send(result);
+  });
+});
+
+router.post('/paidInvoice', function(req, res) {
+  invoiceMgr.addPaid(req.body,function(result){
     res.send(result);
   });
 });
