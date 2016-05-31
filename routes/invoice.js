@@ -39,6 +39,13 @@ router.post('/renewInvice', function(req, res) {
   });
 });
 
+router.post('/paidInvoice', function(req, res) {
+  console.log(req.body);
+  invoiceMgr.addPaid(req.body,function(result){
+    res.send(result);
+  });
+});
+
 /* Edit invoice  by id  */
 router.put('/edit/:id', function(req, res) {
   invoiceMgr.updateInvoice(req.params.id,req.body,function(result){
