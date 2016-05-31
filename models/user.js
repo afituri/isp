@@ -7,12 +7,10 @@ var User = new Schema({
    password: { type: String, required: true},
    salt: String,
    email: { type: String, unique : true, required : true},
-   
    userRules:[{
       entity: { type: String, enum: ['service', 'item', 'package'], required: true},
       level: { type: Number, required: [true, 'Why no level?']},
    }],
-
    phone: {
       type: String,
       default:"NULL",
