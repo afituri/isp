@@ -103,21 +103,7 @@
         }] 
       }
     })
-    .state('newUser',{
-      url: '/newUser',
-      templateUrl: '/users/newUser.html',
-      controller: 'NewUserCtl',
-      resolve: {
-        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-          return $ocLazyLoad.load([{
-            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
-            files: [
-              '/js/controllers/usersCtl.js',
-            ] 
-          }]);
-        }] 
-      }
-    })
+  
     .state('serviceProviders',{
       url: '/serviceProviders',
       templateUrl: 'pages/serviceProviders/serviceProviders.html',
@@ -767,7 +753,24 @@
           }]);
         }] 
       }
-    }).state('newInvoice',{
+    })
+      .state('newUser',{
+      url: '/newUser',
+      templateUrl: 'pages/users/newUser.html',
+      controller: 'NewUserCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/usersCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+    .state('newInvoice',{
       url: '/invoices/new',
       templateUrl: 'pages/invoices/newInvoice.html',
       controller: 'NewInvoiceCtl',
