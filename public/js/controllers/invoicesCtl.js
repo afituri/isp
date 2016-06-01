@@ -17,7 +17,26 @@
     }
   }]);
 
-  app.controller('NewInvoiceCtl',['$scope','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+  app.controller('NewInvoiceCtl',['$scope','InStockServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+    
+
+    $scope.showId = function(id){
+      alert(id);
+    }
+
+    $scope.stock={};
+    $scope.stockId=0;
+    $scope.getStockId=function(id){
+      $scope.stockId=$scope.stock._id;
+      InStockServ.getByWP($scope.stock._id,$scope.ItemId).then(function(response) {
+        
+        $scope.getData = response.data;
+        console.log($scope.getData);
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+
+    };
     $scope.go =function(id,name){
       $scope.customId=id;
     }
@@ -40,6 +59,7 @@
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
     $scope.objects.getAllResellers();
+    $scope.objects.getAllStock();
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
     $scope.init = function () {
@@ -50,6 +70,7 @@
       });
     }
     $scope.init();
+
     $scope.newInvoice = function(){
       console.log($scope.selectedProducts);
       if($scope.previousSubscription==1){
@@ -100,6 +121,7 @@
         $scope.productsObj = $scope.objects.packagesObj;
       } else if (id == 'معدات'){
         $scope.productsObj = $scope.objects.etcObj;
+
       }
     };
 
@@ -107,6 +129,7 @@
     $scope.productTypeRequired = false;
     $scope.productNameRequired = false;
     $scope.newInvoiceForm.total = 0;
+    $scope.countItem=0;
     $scope.selectProduct = function(){
       if(!$scope.productType){
         $scope.productTypeRequired = true;
@@ -117,13 +140,35 @@
       if($scope.productType && $scope.productName){
 
         DollarServ.getLastDollar().then(function(response) {
-          console.log(response.data[0].price);
-          $scope.dollarToday=response.data[0].price;
-        
-        $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-        $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
-        $scope.productType = '';
-        $scope.productName = '';
+          //console.log(response.data[0].price);
+          
+          if($scope.productType=="معدة"){
+            if($scope.countItem==0){
+              $scope.countItem=1;
+              $scope.ItemId=$scope.productName._id;
+               InStockServ.getByWP($scope.stock._id,$scope.ItemId).then(function(response) {
+                $scope.getData = response.data;
+              }, function(response) {
+                console.log("Something went wrong");
+              });
+              $scope.dollarToday=response.data[0].price;
+              $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+              $scope.productType = '';
+              $scope.productName = '';
+             } else {
+            //000000
+            toastr["error"]("عفوا لا يمكن اختيار اكثر من معدة");
+          } 
+          } else {
+            $scope.dollarToday=response.data[0].price;
+            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+            $scope.productType = '';
+            $scope.productName = '';
+          }
+         
+         
 
         }, function(response) {
           console.log("Something went wrong");

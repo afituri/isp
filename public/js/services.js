@@ -220,6 +220,9 @@
       'addInStock': function(obj){
         return $http.post('/inStock/add',obj);
       },
+      'getByWP': function(idStock,idItem){
+        return $http.get('/inStock/getByWP/'+idStock+'/'+idItem);
+      },
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
       },

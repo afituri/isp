@@ -197,20 +197,16 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">المخــازن</label>
-                <select class="form-control input-sm" ng-model="stock">
-                  <option value="" disabled selected>الرجاء الاختيار</option>
+                <select class="form-control input-sm" ng-model="stock"  ng-change="getStockId(stock._id)" ng-options="stock as stock.name for stock in objects.stockObj">
+                  <option value="" selected>الرجاء الاختيار</option>
                 </select>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
-                <label class="control-label">المخزون</label>
-                <select class="form-control input-sm" ng-model="productType" ng-change="getProductInfo(productType)">
+                <label class="control-label">ماك ادرس</label>
+                <select class="form-control input-sm" ng-model="inStockdata" ng-change="showId(stock._id)"  ng-options="inStock as inStock.macAddress for inStock in getData">
                   <option value="" disabled selected>الرجاء الاختيار</option>
-                  <option value="خدمة">خدمة - service</option>
-                  <option value="معدة">معدة - item</option>
-                  <option value="حزمة">حزمة - package</option>
-                  <option value="معدات">معدات اخرى - other item</option>
                 </select>
               </div>
             </div>
