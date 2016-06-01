@@ -10,7 +10,11 @@ module.exports = {
     page-=1;
     limit = parseInt(limit);
     model.Customer.count({status:status},function(err,count){
-      model.Customer.find({status:status}).limit(limit).skip(page*limit).exec(function(err, customers){
+      model.Customer.find({status:status}).limit(limit).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
+        console.log(customers);
         if(!err){
           //console.log(customers);
           cb({result:customers,count:count});
@@ -62,7 +66,9 @@ module.exports = {
       phone : body.phone,
       type : body.type,
       notes : body.notes,
-      status : body.status
+      status : body.status,
+      user: body.user,
+      reseller : body.reseller
   }
     customer = new model.Customer(obj);
     customer.save(function(err,result){
