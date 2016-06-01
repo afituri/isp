@@ -49,7 +49,9 @@ router.get('/allPackage', function(req, res) {
   });
 });
 router.get('/allEtc', function(req, res) {
+  console.log("sdfsdf");
   productMgr.getAllEtc(function(product){
+    console.log(product);
     res.send(product);
   });
 });
