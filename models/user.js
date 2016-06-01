@@ -11,7 +11,7 @@ var User = new Schema({
       entity: { type: String, enum: ['service', 'item', 'package'], required: true},
       level: { type: Number, required: [true, 'Why no level?']},
    }],
-  /* phone: {
+   phone: {
       type: String,
       default:"NULL",
       validate: {
@@ -21,7 +21,7 @@ var User = new Schema({
          message: '{VALUE} is not a valid phone number!'
       },
       required: [true, 'User phone number required']
-   },*/
+   },
    nid: {type: String, index: true},
   
    status: {type: Number, default:1}
