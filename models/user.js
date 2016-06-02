@@ -13,14 +13,14 @@ var User = new Schema({
    }],
    phone: {
       type: String,
-      default:"NULL",
-      validate: {
+      default:"NULL"
+      /*validate: {
          validator: function(v) {
             return /\d{3}-\d{3}-\d{4}/.test(v);
          },
          message: '{VALUE} is not a valid phone number!'
       },
-      required: [true, 'User phone number required']
+      required: [true, 'User phone number required']*/
    },
    nid: {type: String, index: true},
   

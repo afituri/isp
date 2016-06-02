@@ -122,6 +122,28 @@
     return self;
    }]);
 
+  app.service('UserServ',['$http',function($http){
+    var self = {
+      'getUserById': function(id){
+        return $http.get('/user/'+id);
+      },
+      'getUser': function(pageSize,currentPage){
+        return $http.get('/user/'+pageSize+'/'+currentPage);
+      },
+      'addUser': function(UserObj){
+        console.log(UserObj);
+        return $http.post('/user/add',UserObj);
+      },
+      'editUser': function(id,UserObj){
+        return $http.put('/user/edit/'+id,UserObj);
+      },
+      'deleteUser': function(id){
+        return $http.delete('/user/delete/'+id);
+      }
+    };
+    return self;
+  }]);
+
   app.service('ResllersServ',['$http',function($http){
     var self = {
       'getResellers': function(pageSize,currentPage){

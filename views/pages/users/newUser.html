@@ -6,7 +6,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <form novalidate ng-submit="newCustomer()">
+        <form novalidate ng-submit="newUser()">
           <div class="row">
           	  <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
               <div class="form-group">
@@ -31,7 +31,7 @@
           	 <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">رقم السري</label>
-                <input class="form-control input-sm" type="text" ng-model="newUserForm.password" ng-required-err-type="repName" placeholder="الرقم السري" required>
+                <input class="form-control input-sm" type="password" ng-model="newUserForm.password" ng-required-err-type="repName" placeholder="الرقم السري" required>
               </div>
             </div>
            
@@ -41,7 +41,7 @@
           	 <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">تأكيد رقم السري</label>
-                <input class="form-control input-sm" type="text" ng-model="newUserForm.confPassword" ng-required-err-type="repName" placeholder="تأكيد الرقم السري" required>
+                <input class="form-control input-sm" type="password" ng-model="newUserForm.confPassword" ng-required-err-type="repName" placeholder="تأكيد الرقم السري" required>
               </div>
             
            </div>
