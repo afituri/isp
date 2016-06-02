@@ -31,7 +31,6 @@
       InStockServ.getByWP($scope.stock._id,$scope.ItemId).then(function(response) {
         
         $scope.getData = response.data;
-        console.log($scope.getData);
       }, function(response) {
         console.log("Something went wrong");
       });
@@ -72,11 +71,11 @@
     $scope.init();
 
     $scope.newInvoice = function(){
-      console.log($scope.selectedProducts);
       if($scope.previousSubscription==1){
         $scope.newInvoiceForm.previousSubscription=1;
         // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
         $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
+        $scope.newInvoiceForm.inStockdata=$scope.inStockdata;
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
@@ -94,7 +93,9 @@
       } else if($scope.previousSubscription==2){
           $scope.newInvoiceForm.previousSubscription=2;
           $scope.newInvoiceForm.customId=$scope.customId;
-          $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
+          // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
+          $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
+          $scope.newInvoiceForm.inStockdata=$scope.inStockdata;
           InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
           },function(response){
