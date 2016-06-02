@@ -37,6 +37,8 @@
                 <ul class="nav side-menu">
                   <li><a ui-sref="home"><i class="fa fa-home"></i> الرئيسية</a>
                   </li>
+                  <li><a ui-sref="dollar"><i class="fa fa-usd"></i> تسجيل الدولار</a>
+                  </li>
                   <li><a><i class="fa fa-bars"></i> مزودي الخدمة <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li>
@@ -87,13 +89,13 @@
                       </li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bars"></i>المخزون (البضاعة المخزنة) <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-bars"></i>المخزون <small>(البضاعة المخزنة)</small> <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li>
-                        <a ui-sref="inStock">عرض المخازن</a>
+                        <a ui-sref="inStock">عرض مخزون</a>
                       </li>
                       <li>
-                        <a ui-sref="newInStock">إضافة مخزن جديد</a>
+                        <a ui-sref="newInStock">إضافة مخزون جديد</a>
                       </li>
                     </ul>
                   </li>
@@ -192,6 +194,10 @@
                     <span class=" fa fa-angle-down fa-fw"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a ui-sref="user"> عرض المدراء</a>
+                    </li>
+                    <li><a ui-sref="newUser"> اضافة مدير</a>
+                    </li>
                     <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> خروج</a>
                     </li>
                   </ul>
@@ -234,6 +240,7 @@
     <script src="/js/ui-bootstrap/ui-bootstrap-tpls-1.2.5.min.js"></script>
     <script src="/nprogress/nprogress.js"></script>
     <script src="/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="/angular-csv-import-tmp/dist/angular-csv-import.min.js"></script>
     <script src="/js/custom.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/services.js"></script>

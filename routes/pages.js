@@ -14,4 +14,9 @@ router.get('/:folder/:name',userHelpers.isLogin , function(req, res) {
   res.render('pages/' + folder + '/' + name);
 });
 
+router.get('/reseller/all/:name',userHelpers.isLogin , function(req, res) {
+  var name = req.params.name;
+  res.render('reseller/' + name);
+});
+
 module.exports = router;

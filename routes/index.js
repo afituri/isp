@@ -21,4 +21,8 @@ router.get('/home',userHelpers.isLogin ,function(req, res) {
   res.render('index', { title: 'الرئيسية' });
 });
 
+router.get('/reseller',userHelpers.isLogin ,function(req, res) {
+  res.render('reseller/index', { title: 'الرئيسية' });
+});
+
 module.exports = router;

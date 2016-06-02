@@ -47,7 +47,12 @@ module.exports = function (router) {
       
       req.logIn(user, function(err) {
         if (err) { return next(err); }
-        return res.send({login: true });
+        if (user.repName){
+          return res.send({login: true,admin:false });
+        }else{
+          return res.send({login: true,admin:true });  
+        }
+        
       });
     })(req, res, next);
   });
@@ -86,7 +91,7 @@ function findByUserName(username, fn) {
         if (user) {
           fn(null, user);
         } else {
-          fn(new Error('User ' + id + ' does not exist'));
+          return fn(null, null);
         }
       });
     }

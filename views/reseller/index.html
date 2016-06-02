@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="reseller">
+  <header>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>شركة الحلول المتقنة لتقينة المعلومات والإتصالات</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap-additions/dist/bootstrap-additions.min.css">
+    <link rel="stylesheet" href="/angular-motion/dist/angular-motion.min.css">
+    <link rel="stylesheet" href="/bootstrap-rtl/dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/angular-toastr/dist/angular-toastr.min.css">
+    <link rel="stylesheet" href="/nya-bootstrap-select/dist/css/nya-bs-select.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </header>
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border:0;">
+              <a href="/" class="site_title">
+                <span>شركة الحلول المتقنة لتقينة </span>
+                <br>
+                <span>المعلومات والإتصالات</span>
+              </a>
+            </div>
+            <div class="clearfix"></div>
+            <br/>
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> الرئيسية</a>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>الزبائن <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a ui-sref="customersPending">عرض الزبائن</a>
+                      </li>
+                      <li>
+                        <a ui-sref="newCutomersPending">إضافة زبون</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bars"></i>الفواتير <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li>
+                        <a >عرض الفواتير</a>
+                      </li>
+                      <li>
+                        <a >إضافة فاتورة جديدة</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+            <!-- /menu footer buttons -->
+            <!-- <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div> -->
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav class="" role="navigation">
+              <ul class="nav navbar-nav navbar-left">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="img/img.jpg" alt="">&nbsp;اسم المستخدم
+                    <span class=" fa fa-angle-down fa-fw"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> خروج</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div ui-view></div>
+        </div>
+        <!-- /page content -->
+        <!-- footer content -->
+        <footer class="footer">
+          <div class="pull-left">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-animate/angular-animate.min.js"></script>
+    <script src="/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="/js/angular-strap/angular-strap.tpl.min.js"></script>
+    <script src="/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+    <script src="/angular-toastr/dist/angular-toastr.min.js"></script>
+    <script src="/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script src="/nya-bootstrap-select/dist/js/nya-bs-select.min.js"></script>
+    <script src="/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="/js/ui-bootstrap/ui-bootstrap-tpls-1.2.5.min.js"></script>
+    <script src="/nprogress/nprogress.js"></script>
+    <script src="/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/resellerApp.js"></script>
+    <script src="/js/resellerServices.js"></script>
+    <script id="ng_load_reseller_controler_before"></script>
+  </body>
+</html>

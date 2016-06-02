@@ -2,6 +2,7 @@ var model = require("../models"),
     generatePassword = require('password-generator'),
     easyPbkdf2 = require("easy-pbkdf2")(),
     warehouse = null;
+    var autoIncrement = require('mongoose-auto-increment');
 
 
 module.exports = {
@@ -43,6 +44,7 @@ module.exports = {
   },
   /* here we add a new user to the system */
   addWarehouse: function (body, cb) {
+
     var obj = body;
     warehouse = new model.Warehouse(obj);
     warehouse.save(function(err,result){
@@ -50,7 +52,6 @@ module.exports = {
         cb(true);
 
       } else {
-        //TODO: return page with errors
         console.log(err);
         cb(false);
       }

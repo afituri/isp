@@ -92,6 +92,17 @@ module.exports = {
         }
       });
   },
+  getAllEtc :function(cb){
+    model.Product.find({type:"etc"})
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+  },
 
      
    getServiceById :function(id,cb){
@@ -165,6 +176,7 @@ module.exports = {
   },
   
   addProduct : function(body,cb){
+    
     var obj = body;
     product = new model.Product(obj);
     product.save(function(err,result){

@@ -1,12 +1,64 @@
-<div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2>X Title</h2>
-        <div class="clearfix"></div>
-      </div>
-      <div class="x_content">
-      </div>
+<div class="widget-box animated fadeIn">
+  <h5><i class="fa fa-plus"></i>&nbsp; تعديل منتج المعدة </h5>
+  <hr>
+   <div data-title="معدة - item" name="tap2" bs-pane>
+      <form novalidate ng-submit="editProductItems()">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">اسم المعدة</label>
+              <input class="form-control input-sm" type="text" ng-model="editProductItemForm.name" placeholder="اسم المعدة" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">سعر المعدة</label>
+              <input class="form-control input-sm" type="text" ng-model="editProductItemForm.initialPrice" placeholder="سعر المعدة" required >
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">المورد</label>
+              <select class="form-control input-sm" ng-model="editProductItemForm.item.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj track by supplier._id" required>
+                <option value="" disabled selected>الرجاء الاختيار</option>
+              </select>
+            </div>
+          </div>
+         <!--  <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label">بلد الصنع</label>
+              <select id="country" class="form-control input-sm" ng-model="cityObject.citiesObj[editProductItemForm.item.made -1].id" ng-options="made.id as made.nameAr for made in objects.citiesObj"  required >
+                <option value="" disabled >الرجاء الاختيار</option>
+              </select>
+            
+            </div>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label">اسم العلامة التجارية</label>
+              <input class="form-control input-sm" type="text" ng-model="editProductItemForm.item.brand" placeholder="اسم العلامة التجارية" required>
+
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="control-label">معلومات عن المعدة</label>
+              <textarea class="form-control input-sm" rows="5" ng-model="editProductItemForm.discriptoin" placeholder="معلومات عن المعدة" required></textarea>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-4">
+            <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;تعديل</button>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-success btn-sm btn-block" ui-sref="productItems"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+          </div>
+        </div>
+      </form>
     </div>
-  </div>
+
 </div>

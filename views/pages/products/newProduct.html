@@ -43,22 +43,60 @@
               </div>
             </form>
           </div>
+
+
+          <div data-title="معدات اخرى - service" name="tap4" bs-pane>
+            <form novalidate ng-submit="newEtcProduct()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label">اسم المعد</label>
+                    <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم المعد" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label">سعر المعد</label>
+                    <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر المعد" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="
+                col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">معلومات عن المعد</label>
+                    <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.discriptoin" placeholder="معلومات عن المعد" required></textarea>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-2 col-md-offset-4">
+                  <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
+                </div>
+                <div class="col-md-2">
+                  <a class="btn btn-success btn-sm btn-block" ui-sref="productServices"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+                </div>
+              </div>
+            </form>
+          </div>
           <div data-title="معدة - item" name="tap2" bs-pane>
             <form novalidate ng-submit="newItemProduct()">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">اسم المعدة</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.name" placeholder="اسم المعدة" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">سعر المعدة</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.initialPrice" placeholder="سعر المعدة" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">المورد</label>
                     <select class="form-control input-sm" ng-model="newProductForm.item.supplier" ng-options="supplier._id as supplier.name for supplier in objects.suppliersObj" required>
@@ -66,14 +104,14 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-3">
+               <!--  <div class="col-md-3">
                   <div class="form-group">
                     <label class="control-label">بلد الصنع</label>
                     <select class="form-control input-sm" ng-model="newProductForm.item.made" ng-options="city.id as city.nameAr for city in objects.citiesObj" required>
                       <option value="" disabled selected>الرجاء الاختيار</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="row">
                 <div class="col-md-4">
@@ -117,7 +155,7 @@
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label class="control-label">نوع الباقة</label>
+                    <label class="control-label">مزودي الخدمة</label>
                     <select class="form-control input-sm" ng-model="newProductForm.packages.type" ng-options="serviceProvider._id as serviceProvider.name for serviceProvider in objects.serviceProvidersObj"  ng-change="getServiceByID(newProductForm.packages.type)" required>
                       <option value="" disabled selected>الرجاء الاختيار</option>
                     </select>

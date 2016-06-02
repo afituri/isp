@@ -93,6 +93,10 @@ app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','
   $scope.objects=HelperServ;
   $scope.objects.getAllStock();
   $scope.newInStockForm={};
+  $scope.csv = {
+    result: null,
+    encoding: 'UTF-8',
+  };
   $scope.productType=function(){
     if($scope.newInStockForm.type==1){
       ProductsServ.getAllService().then(function(response) {
@@ -116,6 +120,16 @@ app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','
         });
     } else if($scope.newInStockForm.type==3){
         ProductsServ.getAllPackage().then(function(response) {
+        if(response.data){
+          $scope.Allproduct=response.data;
+        } else {
+          console.log(response.data);
+        }
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+    } else if($scope.newInStockForm.type==4){
+        ProductsServ.getAllEtc().then(function(response) {
         if(response.data){
           $scope.Allproduct=response.data;
         } else {

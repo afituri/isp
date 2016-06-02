@@ -92,9 +92,9 @@
     });
 
     $scope.editProductItems = function(){
-      var objCity=angular.element('#country').val();
-      console.log(objCity.slice(7,objCity.length));
-      $scope.editProductItemForm.city=objCity.slice(7,objCity.length);
+/*      var objCity=angular.element('#country').val();
+      console.log(objCity.slice(7,objCity.length));*/
+      /*$scope.editProductItemForm.city=objCity.slice(7,objCity.length);*/
       ProductsServ.editProductItem($stateParams.id,$scope.editProductItemForm).then(function(response) {
         if(response.data){
           $state.go('productItems');
@@ -236,6 +236,19 @@
     };
     $scope.newServiceProduct = function(){
       $scope.newProductForm.type = "service";
+      ProductsServ.addProduct($scope.newProductForm).then(function(response) {
+        if(response.data){
+          $state.go('productServices');
+          toastr.success('تمت إضافة منتج جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.newEtcProduct = function(){
+      $scope.newProductForm.type = "etc";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
           $state.go('productServices');

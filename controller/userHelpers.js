@@ -5,10 +5,10 @@ var path = require("path");
 module.exports = {
   /* here we check if the user have root access */
   isLogin : function (req,res,next) {
-    // if (req.isAuthenticated()) {
-    // return next();
-    // }
-    // res.redirect('/');
+   /* if (req.isAuthenticated()) {
+    return next();
+    }
+    res.redirect('/');*/
     return next();
   },
   printReport : function(HTMLprint,result,res){
@@ -17,11 +17,14 @@ module.exports = {
         engine: "jsrender",
         recipe: "phantom-pdf",
         content: fs.readFileSync(path.join(__dirname, "../views/reports/"+HTMLprint), "utf8"),
+        
       },data:{result:result}
     }).then(function(resp) {
       resp.stream.pipe(res);
     }).catch(function(e) {
       res.end(e.message);
     });
-  }
+  },
+
+  
 };

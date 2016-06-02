@@ -10,7 +10,8 @@
     'toastr',
     'ui.bootstrap',
     'nya.bootstrap.select',
-    'oc.lazyLoad'
+    'oc.lazyLoad',
+    'ngCsvImport'
   ]);
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider','$ocLazyLoadProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider,$ocLazyLoadProvider){
     $stateProvider.state('home',{
@@ -42,7 +43,24 @@
           }]);
         }] 
       }
-    }).state('newReseller',{
+    })
+    .state('dollar',{
+      url: '/dollar',
+      templateUrl: 'pages/dollar/dollar.html',
+      controller: 'DollarsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/dollarCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+      
+    })
+    .state('newReseller',{
       url: '/resellers/new',
       templateUrl: 'pages/resellers/newReseller.html',
       controller: 'NewResellerCtl',
@@ -85,6 +103,7 @@
         }] 
       }
     })
+  
     .state('serviceProviders',{
       url: '/serviceProviders',
       templateUrl: 'pages/serviceProviders/serviceProviders.html',
@@ -287,6 +306,7 @@
         }] 
       }
     })
+   
     .state('showInvoice',{
       url: '/showInvoice/:id',
       templateUrl: 'pages/invoices/showInvoice.html',
@@ -317,8 +337,36 @@
         }] 
       }
     })
-
-
+    .state('renewInvoice',{
+      url: '/invoiceCustomers/renew/:id',
+      templateUrl: 'pages/invoices/renewInvoice.html',
+      controller: 'RenewInvoiceCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('paidInvoice',{
+      url: '/invoiceCustomers/paid/:id',
+      templateUrl: 'pages/invoices/paidInvoice.html',
+      controller: 'PaidInvoiceCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
     .state('newCustomer',{
       url: '/customers/new',
       templateUrl: 'pages/customers/newCustomer.html',
@@ -693,7 +741,7 @@
     })
     .state('invoices',{
       url: '/invoices',
-      templateUrl: 'pages/invoices/invoices.html',
+      templateUrl: 'pages/invoices/invoice.html',
       controller: 'InvoicesCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -705,7 +753,40 @@
           }]);
         }] 
       }
-    }).state('newInvoice',{
+    })
+    .state('newUser',{
+      url: '/newUser',
+      templateUrl: 'pages/users/newUser.html',
+      controller: 'NewUserCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/usersCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+    .state('user',{
+      url: '/user',
+      templateUrl: 'pages/users/users.html',
+      controller: 'UserCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/usersCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+    .state('newInvoice',{
       url: '/invoices/new',
       templateUrl: 'pages/invoices/newInvoice.html',
       controller: 'NewInvoiceCtl',
@@ -764,11 +845,12 @@
       errorMessages['repName'] = "الرجاء إدخال اسم المخول";
       errorMessages['companyName'] = "الرجاء إدخال اسم الشىركة";
       errorMessages['city'] = "الرجاء إختيار المدينة";
-      errorMessages['address'] = "الرجاء إدخال المنطقة";
+      errorMessages['area'] = "الرجاء إدخال المنطقة";
       errorMessages['langtitude'] = "الرجاء إدخال خط الطول";
       errorMessages['longtitude'] = "الرجاء إدخال خط العرض";
       errorMessages['emailType'] = "الرجاء إدخال البريد الالكتروني";
       errorMessages['phone'] = "الرجاء إدخال رقم الهاتف";
+      errorMessages['repPhone'] = "الرجاء إدخال رقم هاتف المخول";
       errorMessages['password'] = "الرجاء إدخال كلمة المرور";
       errorMessages['confirmPassword'] = "الرجاء إعادة إدخال كلمة المرور";
       errorMessages['customerName'] = "الرجاء إدخال اسم العميل";
@@ -778,6 +860,8 @@
       errorMessages['servicesProvider'] = "الرجاء اختيار مزود الخدمة";
       errorMessages['nameService'] = "الرجاء إدخال اسم الخدمة";
       errorMessages['discriptoinService'] = "الرجاء إدخال معلومات عن الخدمة";
+      errorMessages['warehouseName'] = "الرجاء إدخال اسم المخزن";
+      errorMessages['customerName'] = 'الرجاء ادخال اسم العميل';
     });
   }]);
   app.filter('defaultLogo', function(){

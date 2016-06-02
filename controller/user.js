@@ -51,12 +51,15 @@ module.exports = {
   },
   /* here we add a new user to the system */
   register: function (body, cb) {
+    console.log(body);
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
     easyPbkdf2.secureHash( body.password, salt, function( err, passwordHash, originalSalt ) {
       var obj={
+        name: body.name,
         email : body.email,
         password : passwordHash,
         salt : originalSalt,
+        phone: body.phone
       };
       user = new model.User(obj);
       user.save(function(err,result){
@@ -66,7 +69,8 @@ module.exports = {
           cb(result);
         } else {
           //TODO: return page with errors
-          cb(true);
+          console.log(err);
+          cb(false);
         }
       });
     });
@@ -87,14 +91,31 @@ module.exports = {
     });
   },
 
+  deleteUser : function(id,cb){
+    model.User.remove({_id:id}, function(err,result) {
+      if (!err) {
+        cb(2);
+      } else {
+        console.log(err);
+        cb(3);
+      }
+    });
+
+  },
+
 
   updateUser : function(id,body,cb){
+    console.log(body.password);
+    var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
+    easyPbkdf2.secureHash(body.password, salt, function( err, passwordHash, originalSalt ) {
     var obj ={
       name : body.name,
       email : body.email,
       phone : body.phone,
-      nid : body.nid
+      password: passwordHash,
+      salt: originalSalt
   }
+  console.log(obj)
     model.User.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)
@@ -103,6 +124,7 @@ module.exports = {
         cb(false);
       }
     });
+  });
   },
 
   /* here we add a new user to the system */

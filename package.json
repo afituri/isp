@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.0.0",
+    "connect-mongodb-session": "^1.1.1",
     "connect-redis": "^3.0.2",
     "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
@@ -20,6 +21,7 @@
     "jsreport": "^0.13.4",
     "lodash": "^4.6.1",
     "mongoose": "^4.4.9",
+    "mongoose-auto-increment": "^5.0.1",
     "mongoose-model-loader": "0.0.6",
     "mongoose-text-search": "0.0.2",
     "mongoose-timestamp": "^0.5.0",

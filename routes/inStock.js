@@ -8,6 +8,13 @@ router.get('/search/:id', function(req, res) {
     res.send(InStock);
   });
 });
+//getByWP 
+router.get('/getByWP/:idStock/:idItem', function(req, res) {
+  instockMgr.getByWP(req.params.idStock,req.params.idItem,function(result){
+    res.send(result);
+  });
+});
+
 router.get('/:limit/:page', function(req, res) {
   instockMgr.getInStock(req.params.limit,req.params.page,function(InStock){
     res.send(InStock);
@@ -20,6 +27,7 @@ router.get('/all', function(req, res) {
 });
 /* Add new in stock  */
 router.post('/add', function(req, res) {
+  console.log(req.body);
   instockMgr.addInStock(req.body,function(InStock){
     res.send(InStock);
   });

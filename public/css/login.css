@@ -13,6 +13,12 @@ body {
   font-family: 'droidkufi', sans-serif;
 }
 .login_content h1{
-  font-family: 'droidkufi', sans-serif;
-  font-size: 20px;
+  font-size: 25px;
+  color: #000000;
+  margin: 0;
+  padding-top: 15px;
+}
+h5{
+  direction: ltr;
+  padding-bottom: 15px;
 }

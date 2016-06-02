@@ -21,7 +21,8 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
-      
+      'etcObj': [],
+      'resellersObj': [],
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
           self.stockObj = response.data.result;
@@ -64,21 +65,35 @@
         return $http.get('/product/allService').then(function(response) {
           self.servicesObj = response.data;
         }, function(response) {
-          console.log("Something went wrong in getAllItems");
+          console.log("Something went wrong in getAllServices");
         });
       },
       'getAllPackages': function(){
         return $http.get('/product/allPackage').then(function(response) {
           self.packagesObj = response.data;
         }, function(response) {
-          console.log("Something went wrong in getAllItems");
+          console.log("Something went wrong in getAllPackages");
+        });
+      },
+      'getAllEtcs': function(){
+        return $http.get('/product/allEtc').then(function(response) {
+          self.etcObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
         });
       },
       'getAllPolicies': function(){
         return $http.get('/policy/all').then(function(response) {
           self.policiesObj = response.data;
         }, function(response) {
-          console.log("Something went wrong in getAllItems");
+          console.log("Something went wrong in getAllPolicies");
+        });
+      },
+      'getAllResellers': function(){
+        return $http.get('/reseller/all').then(function(response) {
+          self.resellersObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllResellers");
         });
       }
     };
@@ -88,6 +103,47 @@
     self.getAllServiceProviders();
     return self;
   }]);
+
+  app.service('DollarServ',['$http',function($http){
+    var self = {
+      'addDollar': function(dollar){
+        return $http.post('/dollar/add',dollar);
+      },
+      'getDollar': function(pageSize,currentPage){
+        return $http.get('/dollar/'+pageSize+'/'+currentPage)
+      },
+      'getLastDollar': function(){
+        return $http.get('/dollar/lastDollar')
+      },
+      'deleteDollar': function(id){
+        return $http.delete('/dollar/delete/'+id);
+      }
+    };
+    return self;
+   }]);
+
+  app.service('UserServ',['$http',function($http){
+    var self = {
+      'getUserById': function(id){
+        return $http.get('/user/'+id);
+      },
+      'getUser': function(pageSize,currentPage){
+        return $http.get('/user/'+pageSize+'/'+currentPage);
+      },
+      'addUser': function(UserObj){
+        console.log(UserObj);
+        return $http.post('/user/add',UserObj);
+      },
+      'editUser': function(id,UserObj){
+        return $http.put('/user/edit/'+id,UserObj);
+      },
+      'deleteUser': function(id){
+        return $http.delete('/user/delete/'+id);
+      }
+    };
+    return self;
+  }]);
+
   app.service('ResllersServ',['$http',function($http){
     var self = {
       'getResellers': function(pageSize,currentPage){
@@ -186,6 +242,9 @@
       'addInStock': function(obj){
         return $http.post('/inStock/add',obj);
       },
+      'getByWP': function(idStock,idItem){
+        return $http.get('/inStock/getByWP/'+idStock+'/'+idItem);
+      },
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
       },
@@ -225,8 +284,8 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'getCustomers': function(pageSize,currentPage){
-        return $http.get('/customer/'+pageSize+'/'+currentPage);
+      'getCustomers': function(status,pageSize,currentPage){
+        return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getAllCustomers': function(){
         return $http.get('/customer/all');
@@ -294,6 +353,9 @@
       },
       'getAllService': function(){
         return $http.get('/product/allService');
+      },
+      'getAllEtc': function(){
+        return $http.get('/product/allEtc');
       },
       'getAllItem': function(type){
         return $http.get('/product/allItem');
@@ -403,6 +465,12 @@
       },
       'getItemInfoByID': function(id){
         return $http.get('/inStock/search/'+id);
+      },
+      'renewInvice': function(renewInviceObj){
+        return $http.post('/invoice/renewInvice',renewInviceObj);
+      },
+      'paidInvoice': function(paidInviceObj){
+        return $http.post('/invoice/paidInvoice',paidInviceObj);
       }
     };
     return self;

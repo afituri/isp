@@ -10,12 +10,12 @@ var Product = new Schema({
    //service 
    // name , type , description ,initialprice
    name: { type: String, required: true},
-   type: { type: String, enum: ['service', 'item', 'package'], required: true},
+   type: { type: String, enum: ['service', 'item', 'package','etc'], required: true},
    discriptoin: { type: String},
    initialPrice: { type: Number, required: true},
    item: {
       supplier: { type: Schema.Types.ObjectId , ref: 'Supplier'},
-      made: { type: Number},
+      /*made: { type: Number},*/
       brand: { type: String}
    },
    packages: {

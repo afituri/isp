@@ -68,6 +68,11 @@ module.exports = {
   },
   addInStock: function (body, cb) {
     var obj = body;
+    // if(body.type==4){
+    //   obj.macAddress=null;
+    //   obj.username=null;
+    //   obj.password=null;
+    // }
     inStock = new model.Instock(obj);
     inStock.save(function(err,result){
       if (!err) {
@@ -101,5 +106,14 @@ module.exports = {
       }
     });
   },
-
+getByWP :function(idW,idP,cb){
+  model.Instock.find({$and: [ {status:1},{product:idP},{warehouse:idW}]}, function(err,result) {
+    if (!err) {
+      cb(result)
+    } else {
+      console.log(err);
+      cb(false);
+    }
+  });
+},
 };
