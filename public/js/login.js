@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+
   var app = angular.module('isp',['jcs-autoValidate']);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
     defaultErrorMessageResolver.setI18nFileRootPath('/lang');
@@ -12,18 +13,21 @@
   app.controller('LoginCtl',['$scope','$http',function($scope,$http){
     $scope.loginForm = {};
     $scope.login = function(){
-      console.log("sdfsd");
       $http.post('/user/login',{
         'username': $scope.loginForm.email,
         'password': $scope.loginForm.password
       }).then(function(response) {
         //First function handles success
-        console.log(response.data);
+        if(response.data.admin == undefined){
+          alert('خطأ : اسم المستخدم او الرقم السري غير صحيح');
+         //toastr.success('خطأ : اسم المستخدم او الرقم السري غير صحيح');
+        } else {
         if(response.data.admin==true){
           window.location.replace('/home');  
         }else if(response.data.admin==false){
           window.location.replace('/reseller');
         }
+      }
         
       }, function(response) {
         //Second function handles error

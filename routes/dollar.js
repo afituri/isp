@@ -14,6 +14,16 @@ router.get('/all', function(req, res) {
     res.send(dollar);
   });
 });
+
+//lastDollar
+
+router.get('/lastDollar', function(req, res) {
+  dollarMgr.getLastDollar(function(dollar){
+    res.send(dollar);
+  });
+});
+
+
 /* GET last doolar */
 router.get('/last', function(req, res) {
   dollarMgr.getLastDollar(function(dollar){

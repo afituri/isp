@@ -5,7 +5,7 @@ var userMgr = require("../controller/user");
 
 /* GET all users */
 router.get('/:limit/:page', function(req, res) {
-  userMgr.getCustomer(req.params.limit,req.params.page,function(users){
+  userMgr.getAllUser(req.params.limit,req.params.page,function(users){
     res.send(users);
   });
 });
@@ -17,7 +17,6 @@ router.get('/all', function(req, res) {
 
 /* Add new user  */
 router.post('/add', function(req, res) {
-  // console.log(req.body);
   userMgr.register(req.body,function(user){
     res.send(user);
   });
@@ -35,7 +34,10 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete user by id  */
 router.delete('/delete/:id', function(req, res) {
-  
+  // don't forget break the session and logout
+  userMgr.deleteUser(req.params.id,function(result){
+    res.send({result:result});
+  });
 });
 
 /* GET user by ID  */

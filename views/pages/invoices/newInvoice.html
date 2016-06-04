@@ -173,6 +173,7 @@
                   <tr>
                     <th>نوع المنتج</th>
                     <th>اسم المنتج</th>
+                    <th>السعر</th>
                     <th>إلغاء</th>
                   </tr>
                 </thead>
@@ -182,6 +183,7 @@
                       {{selectedProduct.type}}
                     </td> 
                     <td>{{selectedProduct.name}}</td> 
+                     <td>{{selectedProduct.price}}</td> 
                     <td>
                       <button type="button" class="btn btn-danger btn-xs" ng-click="removeSelect($index)"><i class="fa fa-trash"></i></button>
                     </td> 
@@ -192,6 +194,22 @@
           </div>
           <hr>
           <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">المخــازن</label>
+                <select class="form-control input-sm" ng-model="stock"  ng-change="getStockId(stock._id)" ng-options="stock as stock.name for stock in objects.stockObj">
+                  <option value="" selected>الرجاء الاختيار</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">ماك ادرس</label>
+                <select class="form-control input-sm" ng-model="inStockdata" ng-change="showId(stock._id)"  ng-options="inStock as inStock.macAddress for inStock in getData">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+              </div>
+            </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">تاريخ البداية</label>

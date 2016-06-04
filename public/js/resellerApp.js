@@ -26,7 +26,24 @@
           }]);
         }] 
       }
-    }) .state('customersPending',{
+    }) 
+    .state('newCutomersPending',{
+      url: '/newCutomersPending',
+      templateUrl: 'pages/reseller/all/newCutomersPending.html',
+      controller: 'NewCustomerPendingCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+    .state('customersPending',{
       url: '/customersPending',
       templateUrl: 'pages/reseller/all/customersPending.html',
       controller: 'CustomersPendingCtl',

@@ -112,12 +112,37 @@
       'getDollar': function(pageSize,currentPage){
         return $http.get('/dollar/'+pageSize+'/'+currentPage)
       },
+      'getLastDollar': function(){
+        return $http.get('/dollar/lastDollar')
+      },
       'deleteDollar': function(id){
         return $http.delete('/dollar/delete/'+id);
       }
     };
     return self;
    }]);
+
+  app.service('UserServ',['$http',function($http){
+    var self = {
+      'getUserById': function(id){
+        return $http.get('/user/'+id);
+      },
+      'getUser': function(pageSize,currentPage){
+        return $http.get('/user/'+pageSize+'/'+currentPage);
+      },
+      'addUser': function(UserObj){
+        console.log(UserObj);
+        return $http.post('/user/add',UserObj);
+      },
+      'editUser': function(id,UserObj){
+        return $http.put('/user/edit/'+id,UserObj);
+      },
+      'deleteUser': function(id){
+        return $http.delete('/user/delete/'+id);
+      }
+    };
+    return self;
+  }]);
 
   app.service('ResllersServ',['$http',function($http){
     var self = {
@@ -217,6 +242,9 @@
       'addInStock': function(obj){
         return $http.post('/inStock/add',obj);
       },
+      'getByWP': function(idStock,idItem){
+        return $http.get('/inStock/getByWP/'+idStock+'/'+idItem);
+      },
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
       },
@@ -256,8 +284,8 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'getCustomers': function(pageSize,currentPage){
-        return $http.get('/customer/'+pageSize+'/'+currentPage);
+      'getCustomers': function(status,pageSize,currentPage){
+        return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getAllCustomers': function(){
         return $http.get('/customer/all');
@@ -440,6 +468,9 @@
       },
       'renewInvice': function(renewInviceObj){
         return $http.post('/invoice/renewInvice',renewInviceObj);
+      },
+      'paidInvoice': function(paidInviceObj){
+        return $http.post('/invoice/paidInvoice',paidInviceObj);
       }
     };
     return self;

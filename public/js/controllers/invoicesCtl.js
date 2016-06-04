@@ -17,7 +17,25 @@
     }
   }]);
 
-  app.controller('NewInvoiceCtl',['$scope','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+  app.controller('NewInvoiceCtl',['$scope','InStockServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+    
+
+    $scope.showId = function(id){
+      alert(id);
+    }
+
+    $scope.stock={};
+    $scope.stockId=0;
+    $scope.getStockId=function(id){
+      $scope.stockId=$scope.stock._id;
+      InStockServ.getByWP($scope.stock._id,$scope.ItemId).then(function(response) {
+        
+        $scope.getData = response.data;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+
+    };
     $scope.go =function(id,name){
       $scope.customId=id;
     }
@@ -40,6 +58,7 @@
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
     $scope.objects.getAllResellers();
+    $scope.objects.getAllStock();
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
     $scope.init = function () {
@@ -50,12 +69,13 @@
       });
     }
     $scope.init();
+
     $scope.newInvoice = function(){
-      console.log($scope.selectedProducts);
       if($scope.previousSubscription==1){
         $scope.newInvoiceForm.previousSubscription=1;
         // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
         $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
+        $scope.newInvoiceForm.inStockdata=$scope.inStockdata;
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
@@ -73,7 +93,9 @@
       } else if($scope.previousSubscription==2){
           $scope.newInvoiceForm.previousSubscription=2;
           $scope.newInvoiceForm.customId=$scope.customId;
-          $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
+          // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
+          $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
+          $scope.newInvoiceForm.inStockdata=$scope.inStockdata;
           InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
           },function(response){
@@ -100,12 +122,15 @@
         $scope.productsObj = $scope.objects.packagesObj;
       } else if (id == 'معدات'){
         $scope.productsObj = $scope.objects.etcObj;
+
       }
     };
 
     $scope.selectedProducts = [];
     $scope.productTypeRequired = false;
     $scope.productNameRequired = false;
+    $scope.newInvoiceForm.total = 0;
+    $scope.countItem=0;
     $scope.selectProduct = function(){
       if(!$scope.productType){
         $scope.productTypeRequired = true;
@@ -114,9 +139,41 @@
         $scope.productNameRequired = true;
       }
       if($scope.productType && $scope.productName){
-        $scope.selectedProducts.push({'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-        $scope.productType = '';
-        $scope.productName = '';
+
+        DollarServ.getLastDollar().then(function(response) {
+          //console.log(response.data[0].price);
+          
+          if($scope.productType=="معدة"){
+            if($scope.countItem==0){
+              $scope.countItem=1;
+              $scope.ItemId=$scope.productName._id;
+               InStockServ.getByWP($scope.stock._id,$scope.ItemId).then(function(response) {
+                $scope.getData = response.data;
+              }, function(response) {
+                console.log("Something went wrong");
+              });
+              $scope.dollarToday=response.data[0].price;
+              $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+              $scope.productType = '';
+              $scope.productName = '';
+             } else {
+            //000000
+            toastr["error"]("عفوا لا يمكن اختيار اكثر من معدة");
+          } 
+          } else {
+            $scope.dollarToday=response.data[0].price;
+            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+            $scope.productType = '';
+            $scope.productName = '';
+          }
+         
+         
+
+        }, function(response) {
+          console.log("Something went wrong");
+        });
       }
     };
     $scope.removeSelect = function(index){
@@ -142,6 +199,25 @@
       InvoicesServ.renewInvice($scope.renewInviceForm).then(function(response){
         if(response.data){
           toastr.success('تم التجديد بنجاح');
+          $state.go('invoiceCustomer')
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  app.controller('PaidInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+    $scope.paidInvoiceForm = {};
+    CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
+      $scope.customer = response.data;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.paidInvoice = function(){
+      $scope.paidInvoiceForm.idCu=$stateParams.id;
+      InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
+        if(response.data){
+          toastr.success('تم الدفع بنجاح');
           $state.go('invoiceCustomer')
         }
       }, function(response) {

@@ -95,8 +95,8 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'getCustomers': function(pageSize,currentPage){
-        return $http.get('/customer/'+pageSize+'/'+currentPage);
+      'getCustomers': function(status,pageSize,currentPage){
+        return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getAllCustomers': function(){
         return $http.get('/customer/all');

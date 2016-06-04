@@ -106,5 +106,14 @@ module.exports = {
       }
     });
   },
-
+getByWP :function(idW,idP,cb){
+  model.Instock.find({$and: [ {status:1},{product:idP},{warehouse:idW}]}, function(err,result) {
+    if (!err) {
+      cb(result)
+    } else {
+      console.log(err);
+      cb(false);
+    }
+  });
+},
 };

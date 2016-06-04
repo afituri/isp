@@ -7,7 +7,7 @@
     $scope.total = 0;
     
     $scope.init = function () {
-      CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
+      CustomersServ.getCustomers(2,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -43,6 +43,26 @@
       });
     };
   }]);
+
+  app.controller('NewCustomerPendingCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
+    $scope.newCustomerForm = {};
+    $scope.objects = HelperServ;
+    $scope.newCustomer = function(){
+      $scope.newCustomerForm.status = 2;
+      CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
+        if(response.data){
+          $state.go('customersPending');
+          toastr.success('تمت إضافة زبون جديد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  
+
   app.controller('NewCustomerCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
