@@ -73,19 +73,7 @@ module.exports = {
   },
 
 
-  hasNid: function (nid, cb) {
-    model.User.findOne({nid : nid, verified:3}, function(err, user){
-      if (!err) {
-        if(user){
-          cb(user);
-        } else {
-          cb(false);
-        }
-      } else {
-        cb(null);
-      }
-    });
-  },
+
 
 
   updateUser : function(id,body,cb){
