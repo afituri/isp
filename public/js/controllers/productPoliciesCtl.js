@@ -19,7 +19,7 @@
       $scope.newProductPolicyForm.type = "service";
       ProductPoliciesServ.addProductPolicy($scope.newProductPolicyForm).then(function(response){
         if(response.data){
-          $state.go('productPolicies');
+          $state.go('productPoliciesService');
           toastr.success('تمت إضافة سياسة جديدة بنجاح');
         } else {
           console.log(response.data);

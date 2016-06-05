@@ -33,6 +33,7 @@
                 <th>اسم المندوب </th>
                 <th>رقم الهاتف </th>
                 <th>المدير </th>
+                 <th>الموزع </th>
                 <th>السياسة </th>
                 <th><i class="fa fa-cog"></i></th>
               </tr>
@@ -51,6 +52,7 @@
                 </td>
                 <td>{{customer.phone}}</td>
                 <td>{{customer.user.name}}</td>
+                <td>{{customer.reseller.repName}}</td>
                 <td>{{customer.policy}}</td>
                 <td>
                   <a class="btn btn-success btn-xs" ui-sref="editCustomer({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>

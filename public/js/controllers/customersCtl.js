@@ -46,6 +46,81 @@
       });
     };
   }]);
+
+app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
+    MenuFac.active = 6;
+    $scope.activePanel = MenuFac;
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      CustomersServ.getCustomers(2,$scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.customers = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+
+    $scope.confirmCustomer = function(id){
+      //alert(id.id);
+      $scope.id = id.id;
+      $scope.deleteName = "هل حقا تريد تأكيد هذه البيانات ؟";
+      $scope.confirmModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/confirmModel.html',
+        show: true
+      });
+    }
+
+    $scope.confirmData = function(id){
+      CustomersServ.editCustomerById(id).then(function(response) {
+        if(response.data==1){
+          //$state.go('customers');
+          $scope.init();
+          $scope.confirmModel.hide();
+          toastr.info('تم التأكيد بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+
+
+    }
+
+
+
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذا الزبون";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      CustomersServ.deleteCustomer(id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+  }]);
   app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,MenuFac,CustomersServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;

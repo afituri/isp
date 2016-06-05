@@ -105,6 +105,7 @@
         return $http.get('/customer/'+id);
       },
       'addCustomer': function(customerObj){
+        console.log(customerObj);
         return $http.post('/customer/add',customerObj);
       },
       'editCustomer': function(id,customerObj){

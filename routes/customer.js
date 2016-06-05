@@ -72,6 +72,13 @@ router.put('/edit/:id', function(req, res) {
   });
 });
 
+//editById
+router.put('/editById/:id', function(req, res) {
+  customerMgr.updateCustomerById(req.params.id,req.session.passport.user,function(customer){
+    res.send(customer);
+  });
+});
+
 /* Delete customer  by id  */
 router.delete('/delete/:id', function(req, res) {
   customerMgr.deleteCustomer(req.params.id,function(customer){

@@ -70,6 +70,8 @@ module.exports = {
       user: body.user,
       reseller : body.reseller
   }
+
+  console.log(obj)
     customer = new model.Customer(obj);
     customer.save(function(err,result){
       if (!err) {
@@ -81,6 +83,23 @@ module.exports = {
       }
     });
   },
+
+  updateCustomerById : function(customerId,adminId,cb){
+    obj={
+      status:1,
+      user : adminId
+    }
+     model.Customer.findOneAndUpdate({_id:customerId},obj, function(err,result) {
+      if (!err) {
+        cb(true);
+      } else {
+        cb(false);
+      }
+    });
+
+  },
+
+
   updateCustomer : function(id,body,cb){
     var obj ={
       name : body.name,

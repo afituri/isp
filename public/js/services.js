@@ -299,6 +299,10 @@
       'editCustomer': function(id,customerObj){
         return $http.put('/customer/edit/'+id,customerObj);
       },
+      'editCustomerById': function(id){
+        
+        return $http.put('/customer/editById/'+id);
+      },
       'deleteCustomer': function(id){
         return $http.delete('/customer/delete/'+id);
       }
