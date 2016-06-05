@@ -306,6 +306,23 @@
         }] 
       }
     })
+  
+
+    .state('customerPendingC',{
+      url: '/customerPending',
+      templateUrl: 'pages/customers/customerPendingConfirm.html',
+      controller: 'CustomerPendingCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/customersCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
    
     .state('showInvoice',{
       url: '/showInvoice/:id',

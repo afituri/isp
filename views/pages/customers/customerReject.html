@@ -4,14 +4,14 @@
       <div class="x_title">
         <div class="row">
           <div class="col-xs-3">
-            <h2 class="pull-right">عرض الزبائن قيد الانتظار</h2>
+            <h2 class="pull-right">عرض الزبائن المرفوضين</h2>
           </div>
           <div class="col-xs-6">
             <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="بحث...">
           </div>
-          <div class="col-xs-3 text-left">
-            <a ui-sref="newCutomersPending" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة زبون جديد</a>
-          </div>
+         <!--  <div class="col-xs-3 text-left">
+            <a class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
+          </div> -->
         </div>
         <div class="clearfix"></div>
       </div>
@@ -32,13 +32,15 @@
                 <th>البريد الالكتروني </th>
                 <th>اسم المندوب </th>
                 <th>رقم الهاتف </th>
-                <th>الموزع / admin</th>
+                <th>المدير </th>
+                 <th>الموزع </th>
                 <th>السياسة </th>
-                <th><i class="fa fa-cog"></i></th>
+                 <th>سبب الرفض </th>
+               <!--  <th><i class="fa fa-cog"></i></th> -->
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="customer in customers">
+              <tr ng-repeat="customer in customers" style="background-color:#EEAAAA">
                 <td>{{customer.name}}</td>
                 <td>
                   <span ng-if="customer.type == 1">شخصي</span>
@@ -50,12 +52,21 @@
                   <span ng-if="customer.type == 2">{{customer.repName}}</span>
                 </td>
                 <td>{{customer.phone}}</td>
-                <td>{{customer.reseller.repName}}</td>
+                   <td ng-if="customer.user.name==null">لايوجد</td>
+                <td ng-if="customer.user.name!=null">{{customer.user.name}}</td>
+                 <td ng-if="customer.reseller.repName == null">لايوجد</td>
+                 <td ng-if="customer.reseller.repName != null">{{customer.reseller.repName}}</td>
                 <td>{{customer.policy}}</td>
-                <td>
+                <td class="text-center">
+                   <button type="button" class="btn btn-success btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="سبب الرفض :- {{customer.reject_message}}" bs-popover>
+                    <i class="fa fa-info fa-fw"></i>
+                    مزيد من المعلومات
+                  </button>
+              </td>
+                <!-- <td>
                   <a class="btn btn-success btn-xs" ui-sref="editCustomer({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
                   <a class="btn btn-success btn-xs" ng-click="showDeleteModel(customer._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>

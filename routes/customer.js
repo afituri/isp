@@ -13,6 +13,12 @@ router.get('/:limit/:page/:status', function(req, res) {
     res.send(customers);
   });
 });
+
+router.get('/reject/:limit/:page/:status', function(req, res) {
+  customerMgr.getCustomerReject(req.session.passport.user,req.params.status,req.params.limit,req.params.page,function(customers){
+    res.send(customers);
+  });
+});
 router.get('/all', function(req, res) {
   customerMgr.getAllCustomer(function(customers){
     res.send(customers);
@@ -68,6 +74,20 @@ router.post('/in/:name', function(req, res) {
 /* Edit customer  by id  */
 router.put('/edit/:id', function(req, res) {
   customerMgr.updateCustomer(req.params.id,req.body,function(customer){
+    res.send(customer);
+  });
+});
+
+//editById
+router.put('/editById/:id', function(req, res) {
+  customerMgr.updateCustomerById(req.params.id,req.session.passport.user,function(customer){
+    res.send(customer);
+  });
+});
+
+//editRejectById
+router.put('/editRejectById/:id', function(req, res) {
+  customerMgr.updateRejectCustomer(req.params.id,req.session.passport.user,req.body,function(customer){
     res.send(customer);
   });
 });
