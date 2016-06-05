@@ -50,7 +50,7 @@
                   <span ng-if="customer.type == 2">{{customer.repName}}</span>
                 </td>
                 <td>{{customer.phone}}</td>
-                <td>{{customer.reseller}}</td>
+                <td>{{customer.reseller.repName}}</td>
                 <td>{{customer.policy}}</td>
                 <td>
                   <a class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>

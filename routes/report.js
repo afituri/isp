@@ -6,6 +6,8 @@ var invoiceMgr = require("../controller/invoice");
 
 router.get('/printInvoice/:id', function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
+    console.log("um her");
+    console.log(result);
     var months;
     result['months']=months;
     var now = new Date();
