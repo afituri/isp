@@ -402,7 +402,19 @@
       },
       'deleteProduct': function(id){
         return $http.delete('/product/delete/'+id);
-      }
+      },
+      'getProductOtherEquipments': function(pageSize,currentPage){
+        return $http.get('/product/otherEquipment/'+pageSize+'/'+currentPage);
+      },
+      'getProductOtherEquipmentByID': function(id){
+        return $http.get('/product/getOtherEquipmentByID/'+id);
+      },
+      'editProductOtherEquipment':function(id,otherEquipmentObj){
+        return $http.put('/product/productOtherEquipment/edit/'+id,otherEquipmentObj);
+      },
+      'deleteProductOtherEquipment': function(id){
+        return $http.delete('/product/productOtherEquipment/delete/'+id);
+      },
     };
     return self;
   }]);
