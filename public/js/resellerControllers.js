@@ -6,8 +6,8 @@
     $scope.currentPage = 1;
     $scope.total = 0;
     
-    $scope.init = function () {
-      CustomersServ.getCustomers(2,$scope.pageSize,$scope.currentPage).then(function(response) {
+     $scope.init = function () {
+      CustomersServ.getCustomersReject(2,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
