@@ -24,7 +24,5 @@ module.exports = {
     }).catch(function(e) {
       res.end(e.message);
     });
-  },
-
-  
+  }, 
 };

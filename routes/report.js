@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 var userHelpers = require('../controller/userHelpers');
 var invoiceMgr = require("../controller/invoice");
+var jsreport = require("jsreport");
+var fs = require("fs");
+var path = require("path");
 
 
 router.get('/printInvoice/:id', function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
-    console.log("um her");
-    console.log(result);
     var months;
     result['months']=months;
     var now = new Date();
@@ -21,8 +22,8 @@ router.get('/printInvoice/:id', function(req, res) {
       result['startDate']=startDate;
       result['endDate']=endDate;    
     }
-    
     userHelpers.printReport("invoice.html",result,res);
+
   });
   
 });
