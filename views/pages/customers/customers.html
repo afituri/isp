@@ -51,8 +51,10 @@
                   <span ng-if="customer.type == 2">{{customer.repName}}</span>
                 </td>
                 <td>{{customer.phone}}</td>
-                <td>{{customer.user.name}}</td>
-                <td>{{customer.reseller.repName}}</td>
+                   <td ng-if="customer.user.name==null">لايوجد</td>
+                <td ng-if="customer.user.name!=null">{{customer.user.name}}</td>
+                 <td ng-if="customer.reseller.repName == null">لايوجد</td>
+                 <td ng-if="customer.reseller.repName != null">{{customer.reseller.repName}}</td>
                 <td>{{customer.policy}}</td>
                 <td>
                   <a class="btn btn-success btn-xs" ui-sref="editCustomer({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>

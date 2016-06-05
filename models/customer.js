@@ -12,6 +12,7 @@ var Customer = new Schema({
    phone: { type: String, required: true},
    type: { type: Number, required: [true, 'Why no type?']},
    notes: { type: String, required: true},
+   reject_message : {type: String,default:null},
    policy: { type: Schema.Types.ObjectId , ref: 'Policy'},
    status: { type: Number, default:1},
    reseller : {type: mongoose.Schema.Types.ObjectId, ref: 'Reseller'},

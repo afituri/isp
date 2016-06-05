@@ -18,6 +18,10 @@
       });
     }
     $scope.init();
+
+
+
+
     $scope.showDeleteModel = function(id){
       $scope.id = id;
       $scope.deleteName = "هذا الزبون";
@@ -47,6 +51,11 @@
     };
   }]);
 
+
+
+
+
+
 app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
@@ -62,6 +71,37 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
       });
     }
     $scope.init();
+    $scope.editCustomerMessage={};
+    $scope.editCustomerMessage.reject_message ="خطأ : البيانات غير صحيحة "; 
+
+    $scope.rejectData = function(id){
+      $scope.idreject = id;
+      $scope.deleteName = "هذا الزبون";
+      $scope.rejectDataModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/rejectModel.html',
+        show: true
+      });
+    };
+
+    $scope.rejectEdit = function(id){
+ /*     alert(id);
+      alert($scope.editCustomerMessage.reject_message);
+*/
+      CustomersServ.editCustomerReject(id,$scope.editCustomerMessage).then(function(response) {
+        if(response.data){
+          $scope.rejectDataModel.hide();
+          $scope.init();
+          //$state.go('customers');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+
+    }
 
     $scope.confirmCustomer = function(id){
       //alert(id.id);

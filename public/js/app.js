@@ -306,6 +306,7 @@
         }] 
       }
     })
+  
 
     .state('customerPendingC',{
       url: '/customerPending',

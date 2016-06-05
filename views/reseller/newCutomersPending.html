@@ -30,11 +30,12 @@
                 <input class="form-control input-sm" type="text" ng-model="newCustomerForm.repName" ng-required-err-type="repName" placeholder="اسم المندوب" required>
               </div>
             </div>
-            <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
+           <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
               <div class="form-group">
                 <label class="control-label">المدينة</label>
-                <select class="form-control input-sm" ng-model="newCustomerForm.city" ng-options="city.id as city.nameAr for city in objects.citiesObj" ng-required-err-type="city" required>
+                 <select class="form-control input-sm" ng-model="newCustomerForm.city" ng-required-err-type="city" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option ng-repeat="city in objects.citiesObj" value="{{city.nameAr}}">{{city.nameAr}}</option>
                 </select>
               </div>
             </div>

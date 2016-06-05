@@ -26,6 +26,28 @@ module.exports = {
     });
   },
 
+  getCustomerReject :function(user,status,limit,page,cb){
+    console.log(user);
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Customer.count({status:status,reseller:user},function(err,count){
+      model.Customer.find({status:status,reseller:user}).limit(limit).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
+        console.log(customers);
+        if(!err){
+          //console.log(customers);
+          cb({result:customers,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+
   getAllCustomer :function(cb){
     model.Customer.find({},function(err, customers){
       if(!err){
@@ -88,6 +110,22 @@ module.exports = {
     obj={
       status:1,
       user : adminId
+    }
+     model.Customer.findOneAndUpdate({_id:customerId},obj, function(err,result) {
+      if (!err) {
+        cb(true);
+      } else {
+        cb(false);
+      }
+    });
+
+  },
+
+  updateRejectCustomer : function(customerId,adminId,obj,cb){
+    obj={
+      status:3,
+      user : adminId,
+      reject_message : obj.reject_message
     }
      model.Customer.findOneAndUpdate({_id:customerId},obj, function(err,result) {
       if (!err) {

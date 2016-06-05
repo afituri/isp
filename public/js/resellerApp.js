@@ -42,6 +42,38 @@
         }] 
       }
     })
+    .state('editCustomer',{
+      url: '/customers/edit/:id',
+      templateUrl: 'pages/customers/editCustomer.html',
+      controller: 'EditCustomerCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+      //customerReject
+    .state('customerReject',{
+      url: '/customerReject',
+      templateUrl: 'pages/customers/customerReject.html',
+      controller: 'CustomersRejectCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
 
     .state('customersPending',{
       url: '/customersPending',

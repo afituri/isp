@@ -101,6 +101,10 @@
       'getAllCustomers': function(){
         return $http.get('/customer/all');
       },
+      // getCustomersReject
+      'getCustomersReject': function(status,pageSize,currentPage){
+        return $http.get('/customer/reject/'+pageSize+'/'+currentPage+'/'+status);
+      },
       'getCustomerByID': function(id){
         return $http.get('/customer/'+id);
       },
