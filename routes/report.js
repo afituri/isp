@@ -4,6 +4,7 @@ var userHelpers = require('../controller/userHelpers');
 var invoiceMgr = require("../controller/invoice");
 var reportMgr = require("../controller/report");
 
+
 router.get('/printInvoice/:id', function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
     var months;
@@ -19,8 +20,8 @@ router.get('/printInvoice/:id', function(req, res) {
       result['startDate']=startDate;
       result['endDate']=endDate;    
     }
-    
     userHelpers.printReport("invoice.html",result,res);
+
   });
   
 });

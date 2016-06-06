@@ -8,6 +8,15 @@ router.get('/:limit/:page', function(req, res) {
     res.send(product);
   });
 });
+// otherEquipment
+
+router.get('/otherEquipment/:limit/:page', function(req, res) {
+  productMgr.getProductETC(req.params.limit,req.params.page,function(product){
+    res.send(product);
+  });
+});
+
+
 router.get('/all', function(req, res) {
   productMgr.getAllProduct(function(product){
     res.send(product);
@@ -26,28 +35,39 @@ router.get('/allItem', function(req, res) {
     res.send(product);
   });
 });
+router.get('/allService', function(req, res) {
+  productMgr.getAllService(function(product){
+    console.log(product);
+    res.send(product);
+  });
+});
+
+router.get('/allPackage', function(req, res) {
+  productMgr.getAllPackage(function(product){
+    res.send(product);
+  });
+});
+router.get('/:id', function(req, res) {
+  console.log(req.params.id);
+  productMgr.getItemById(req.params.id,function(productService){
+    console.log(productService);
+    res.send(productService);
+  });
+});
 //get service
 router.get('/service/:limit/:page', function(req, res) {
   productMgr.getProductService(req.params.limit,req.params.page,function(product){
     res.send(product);
   });
 });
-router.get('/allService', function(req, res) {
-  productMgr.getAllService(function(product){
-    res.send(product);
-  });
-});
+
 //get package
 router.get('/package/:limit/:page', function(req, res) {
   productMgr.getProductPackage(req.params.limit,req.params.page,function(product){
     res.send(product);
   });
 });
-router.get('/allPackage', function(req, res) {
-  productMgr.getAllPackage(function(product){
-    res.send(product);
-  });
-});
+
 router.get('/allEtc', function(req, res) {
   console.log("sdfsdf");
   productMgr.getAllEtc(function(product){
@@ -72,11 +92,14 @@ router.get('/bytype/:id', function(req, res) {
 
 
 router.put('/productService/:id', function(req, res) {
+  console.log(req.params.id);
   productMgr.getItemById(req.params.id,function(productService){
-    
+    console.log(productService);
     res.send(productService);
   });
 });
+
+
 
 router.put('/productService/edit/:id', function(req, res) {
   productMgr.updateService(req.params.id,req.body,function(productService){
@@ -92,6 +115,12 @@ router.put('/productItems/edit/:id', function(req, res) {
 
 router.put('/productPackages/edit/:id', function(req, res) {
   productMgr.updatePackage(req.params.id,req.body,function(productService){
+    res.send(productService);
+  });
+});
+
+router.put('/productEtc/edit/:id', function(req, res) {
+  productMgr.updateEtc(req.params.id,req.body,function(productService){
     res.send(productService);
   });
 });

@@ -251,7 +251,7 @@
       $scope.newProductForm.type = "etc";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('productServices');
+          $state.go('productOtherEquipments');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
@@ -295,6 +295,7 @@
     HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
     ProductsServ.getProductByID($stateParams.id).then(function(response) {
+      console.log(response.data);
       $scope.editProductForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
@@ -303,6 +304,71 @@
       ProductsServ.editProduct($stateParams.id,$scope.editProductForm).then(function(response) {
         if(response.data){
           $state.go('products');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+  }]);
+  app.controller('ProductOtherEquipmentCtl',['$scope','$state','$stateParams','$modal','ProductsServ','toastr',function($scope,$state,$stateParams,$modal,ProductsServ,toastr){
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.init = function () {
+      ProductsServ.getProductOtherEquipments($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.productOtherEquipments = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+    $scope.showDeleteModel = function(id){
+      $scope.id = id;
+      $scope.deleteName = "معدات اخري";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+    $scope.confirmDelete = function(id){
+      ProductsServ.deleteProductService(id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          $scope.init();
+          toastr.success('تم الحذف بنجاح');
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+  app.controller('EditProductOtherEquipmentsCtl',['$scope','$state','$stateParams','$modal','ProductsServ','toastr',function($scope,$state,$stateParams,$modal,ProductsServ,toastr){
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.editProductOtherEquForm = {};
+    ProductsServ.getProductOtherEquipmentByID($stateParams.id).then(function(response) {
+      console.log(response.data);
+      $scope.editProductOtherEquForm = response.data[0];
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.editProductOtherEqu = function(){
+      ProductsServ.editProductOtherEquipment($stateParams.id,$scope.editProductOtherEquForm).then(function(response) {
+        if(response.data){
+          $state.go('productOtherEquipments');
           toastr.info('تم التعديل بنجاح');
         } else {
           console.log(response.data);
