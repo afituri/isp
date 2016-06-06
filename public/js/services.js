@@ -407,10 +407,12 @@
         return $http.get('/product/otherEquipment/'+pageSize+'/'+currentPage);
       },
       'getProductOtherEquipmentByID': function(id){
-        return $http.get('/product/getOtherEquipmentByID/'+id);
+        console.log("gg"+id);
+        return $http.get('/product/'+id);
       },
       'editProductOtherEquipment':function(id,otherEquipmentObj){
-        return $http.put('/product/productOtherEquipment/edit/'+id,otherEquipmentObj);
+        console.log(id);
+        return $http.put('/product/productEtc/edit/'+id,otherEquipmentObj);
       },
       'deleteProductOtherEquipment': function(id){
         return $http.delete('/product/productOtherEquipment/delete/'+id);

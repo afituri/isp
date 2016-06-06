@@ -251,7 +251,7 @@
       $scope.newProductForm.type = "etc";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $state.go('productServices');
+          $state.go('productOtherEquipments');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
           console.log(response.data);
@@ -295,6 +295,7 @@
     HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
     ProductsServ.getProductByID($stateParams.id).then(function(response) {
+      console.log(response.data);
       $scope.editProductForm = response.data;
     }, function(response) {
       console.log("Something went wrong");
@@ -327,7 +328,7 @@
     $scope.init();
     $scope.showDeleteModel = function(id){
       $scope.id = id;
-      $scope.deleteName = "منتج الخدمة";
+      $scope.deleteName = "معدات اخري";
       $scope.deleteModel = $modal({
         scope: $scope,
         templateUrl: 'pages/model.delete.tpl.html',
@@ -335,7 +336,7 @@
       });
     };
     $scope.confirmDelete = function(id){
-      ProductsServ.deleteProductOtherEquipment(id).then(function(response) {
+      ProductsServ.deleteProductService(id).then(function(response) {
         if(response.data.result == 1){
           $scope.deleteModel.hide();
           toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
