@@ -11,10 +11,12 @@ var Invoice = new Schema({
    notes: { type: String, required: true},
    piad: { type: Number, required: [true, 'Why no piad?']},
    reseller: { type: Schema.Types.ObjectId , ref: 'Reseller',default:null},
+   invoice: { type: Schema.Types.ObjectId , ref: 'Invoice',default:null},
    /*left: { type: Number},*/
    discount: { type: Number, required: [true, 'Why no piad?']},
    idinv:{ type: Number},
    typein: { type: Number, default:1},
+   instock: { type: mongoose.Schema.ObjectId, ref : 'Instock',default:null},
    status: { type: Number, default:1}
 });
 Invoice.plugin(autoIncrement.plugin, {
