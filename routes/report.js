@@ -35,7 +35,16 @@ router.get('/active',function(req , res){
 
 
       */
-      res.send(result);
+      var orderArray=[];
+      for(i in result.order){
+        orderArray[result.order[i].invoice] = result.order[i].product.name;
+        if(i==result.order.length-1){
+          console.log(orderArray);
+        //   delete result.order;
+        //   result.order=orderArray;
+          res.send(orderArray);
+        }
+      }
     });
   });
 });

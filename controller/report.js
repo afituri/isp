@@ -15,7 +15,6 @@ module.exports = {
   },
 
   getInvoices : function (ids,cb){
-    console.log(ids);
     model.Invoice.find({$and:[{_id:{$in:ids}},{typein:1}]}).populate('customer instock').exec(function(err, result){
       model.Invoice.find({$and:[{_id:{$in:ids}},{typein:3}]}).populate('customer invoice').exec(function(err, result2){  
         var options = {
@@ -33,10 +32,8 @@ module.exports = {
               // console.log(invoice[1].invoice);
               if(!err){
                 model.Product.find({type:'package'}).distinct('_id',function(err, result4){
-                  model.Order.find({$and:[{invoice:{$in:ids}},{product:{$in:result4}}]},function(err, order){
-                    console.log(order);
+                  model.Order.find({$and:[{invoice:{$in:ids}},{product:{$in:result4}}]}).populate('product').exec(function(err, order){
                     cb({order:order,invoice:invoice,result:result});
-
                   });
                 });
               }else{
