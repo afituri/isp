@@ -183,3 +183,6 @@ select, select.form-control {
     left: 12px;
     right: auto;
 }
+.bg-info,.bg-success,.bg-warning{
+  padding: 10px;
+}
