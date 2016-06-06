@@ -3,7 +3,6 @@ var router = express.Router();
 var userHelpers = require('../controller/userHelpers');
 var invoiceMgr = require("../controller/invoice");
 var reportMgr = require("../controller/report");
-
 router.get('/printInvoice/:id', function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
     var months;
@@ -19,8 +18,8 @@ router.get('/printInvoice/:id', function(req, res) {
       result['startDate']=startDate;
       result['endDate']=endDate;    
     }
-    
     userHelpers.printReport("invoice.html",result,res);
+
   });
   
 });
@@ -28,8 +27,14 @@ router.get('/printInvoice/:id', function(req, res) {
 router.get('/active',function(req , res){
   reportMgr.getActive(function(results){
     reportMgr.getInvoices(results,function(result){
-      console.log(result);
-      console.log(results);
+      /*
+        result المستخدمين الجدد فاتورة جديدة
+        invoise  تجديد الاشتراك
+        order اسم الخدمة
+
+
+
+      */
       res.send(result);
     });
   });

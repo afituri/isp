@@ -27,7 +27,7 @@
     
 
     $scope.showId = function(id){
-      alert(id);
+     
     }
 
     $scope.stock={};
@@ -98,6 +98,7 @@
         });
       } else if($scope.previousSubscription==2){
           $scope.newInvoiceForm.previousSubscription=2;
+          if($scope.customId != undefined){
           $scope.newInvoiceForm.customId=$scope.customId;
           // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
           $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
@@ -107,6 +108,9 @@
           },function(response){
             console.log("Something went wrong");
           });
+        } else {
+          toastr.error("الرجاء اختيار الاسم بطريقة صحيحة");
+        }
         }
     };
     $scope.getItemInfo = function(){
@@ -183,6 +187,9 @@
       }
     };
     $scope.removeSelect = function(index){
+      if($scope.selectedProducts[index].type == "معدة"){
+        $scope.countItem=0;
+      }
       $scope.selectedProducts.splice(index, 1);
     };
   }]);

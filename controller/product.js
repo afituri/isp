@@ -40,6 +40,24 @@ module.exports = {
     });
   },
 
+   getProductETC :function(limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Product.count({type:"etc"},function(err,count){
+      model.Product.find({type:"etc"}).limit(limit).skip(page*limit)
+      .populate('item.supplier')
+      .exec(function(err, products){
+        if(!err){
+          cb({result:products,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+
   getAllProductByType:function(type,cb){
     model.Product.find({type:type}).populate('supplier')
       .exec(function(err, products){
@@ -85,6 +103,8 @@ module.exports = {
     model.Product.find({type:"service"})
       .exec(function(err, products){
         if(!err){
+          console.log("products");
+          console.log(products);
           cb(products);
         }else{
           console.log(err);
@@ -271,6 +291,25 @@ module.exports = {
          brand:body.item.brand,
          supplier: body.item.supplier
         }
+      }
+    model.Product.update({_id:id}, obj, function(err,result) {
+      console.log(err);
+      if (!err) {
+        cb(true)
+      } else {
+        cb(false);
+      }
+    });
+  },
+
+  updateEtc: function(id,body,cb){
+    console.log("body");
+    console.log(body);
+    var obj ={
+      name : body.name,
+      discriptoin:body.discriptoin,
+      initialPrice:body.initialPrice,
+      discriptoin : body.discriptoin
       }
     model.Product.update({_id:id}, obj, function(err,result) {
       console.log(err);

@@ -32,7 +32,13 @@ module.exports = {
             model.Invoice.populate(result3, options, function (err, invoice) {
               // console.log(invoice[1].invoice);
               if(!err){
-                cb({invoice:invoice,result:result});
+                model.Product.find({type:'package'}).distinct('_id',function(err, result4){
+                  model.Order.find({$and:[{invoice:{$in:ids}},{product:{$in:result4}}]},function(err, order){
+                    console.log(order);
+                    cb({order:order,invoice:invoice,result:result});
+
+                  });
+                });
               }else{
                 console.log(err);
                 cb(null);

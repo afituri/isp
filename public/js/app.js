@@ -455,6 +455,20 @@
           }]);
         }] 
       }
+    }).state('productOtherEquipments',{
+      url: '/products/otherEquipments',
+      templateUrl: 'pages/products/productOtherEquipment.html',
+      controller: 'ProductOtherEquipmentCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productServicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     }).state('newProduct',{
       url: '/products/new',
       templateUrl: 'pages/products/newProduct.html',
@@ -501,6 +515,20 @@
       url: '/product/productItems/edit/:id',
       templateUrl: 'pages/products/editProductItem.html',
       controller: 'ProductItemsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productServicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    }).state('editProductOtherEquipment',{
+      url: '/product/productOtherEquipments/edit/:id',
+      templateUrl: 'pages/products/editProductOtherEquipment.html',
+      controller: 'EditProductOtherEquipmentsCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{

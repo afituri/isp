@@ -14,6 +14,7 @@
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
     $scope.objects.getAllPolicies();
+    console.log($scope.objects.servicesObj);
     $scope.newProductPolicyForm = {};
     $scope.newServiceProductPolicy = function(){
       $scope.newProductPolicyForm.type = "service";
