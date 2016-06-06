@@ -2,9 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userHelpers = require('../controller/userHelpers');
 var invoiceMgr = require("../controller/invoice");
-var jsreport = require("jsreport");
-var fs = require("fs");
-var path = require("path");
+var reportMgr = require("../controller/report");
 
 
 router.get('/printInvoice/:id', function(req, res) {
@@ -28,4 +26,13 @@ router.get('/printInvoice/:id', function(req, res) {
   
 });
 
+router.get('/active',function(req , res){
+  reportMgr.getActive(function(results){
+    reportMgr.getInvoices(results,function(result){
+      console.log(result);
+      console.log(results);
+      res.send(result);
+    });
+  });
+});
 module.exports = router;

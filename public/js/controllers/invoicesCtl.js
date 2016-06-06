@@ -3,6 +3,12 @@
   var app = angular.module('isp');
   //dddddddddddddddddddddd
   app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
+     alert($stateParams.id);
+
+     $scope.renewInvoice = function(id){
+      alert(id);
+     }
+
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
     //alert($stateParams.id);
@@ -193,6 +199,7 @@
     $scope.editInvoiceForm = {};
   }]);
   app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+   
     $scope.renewInviceForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllPackages();
