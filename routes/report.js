@@ -33,8 +33,32 @@ router.get('/active',function(req , res){
         invoise  تجديد الاشتراك
         order اسم الخدمة
       */
-         res.send(result);
+      res.send(result);
 
+    });
+  });
+});
+
+router.get('/unactive',function(req , res){
+  reportMgr.getunActive(function(results){
+    reportMgr.getInvoices(results,function(result){
+      res.send(result);
+    });
+  });
+});
+
+router.post('/Between',function(req , res){
+  reportMgr.getBetween(req.body.start,req.body.end,function(results){
+    reportMgr.getInvoices(results,function(result){
+      res.send(result);
+    });
+  });
+});
+
+router.post('/Reseller',function(req , res){
+  reportMgr.getReseller(req.body.reseller,function(results){
+    reportMgr.getInvoices(results,function(result){
+      res.send(result);
     });
   });
 });

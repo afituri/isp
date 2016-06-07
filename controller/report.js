@@ -14,6 +14,37 @@ module.exports = {
     });
   },
 
+  getunActive : function (cb) {
+    model.Order.find({endDate:{$lt:new Date()}}).distinct('invoice',function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getBetween : function (start,end,cb) {
+    model.Order.find({endDate:{$gte: new Date(start), $lt: new Date(end)}}).distinct('invoice',function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+  getReseller : function (id,cb) {
+    model.Invoice.find({reseller:id}).distinct('invoice',function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getInvoices : function (ids,cb){
     model.Invoice.find({$and:[{_id:{$in:ids}},{typein:1}]}).populate('customer instock').exec(function(err, result){
       model.Invoice.find({$and:[{_id:{$in:ids}},{typein:3}]}).populate('customer invoice').exec(function(err, result2){  
