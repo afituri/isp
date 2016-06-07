@@ -21,6 +21,24 @@ module.exports = {
       });
     });
   },
+  getServicesSearch :function(name,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Service.count({name:name},function(err,count){
+      model.Service.find({"name" : { '$regex' : name, $options: '-i' }}).limit(limit).skip(page*limit)
+      .populate('serviceprovider')
+      .exec(function(err, services){
+        if(!err){
+          console.log(services);
+          cb({result:services,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
   getAllServices :function(cb){
     model.Service.find({},function(err, services){
       if(!err){

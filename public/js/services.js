@@ -199,6 +199,10 @@
       'getServices': function(pageSize,currentPage){
         return $http.get('/service/'+pageSize+'/'+currentPage);
       },
+      'getServicesByName': function(name,pageSize,currentPage){
+        console.log(name);
+        return $http.post('/service/search/'+pageSize+'/'+currentPage,{name:name});
+      },
       'getAllServices': function(pageSize,currentPage){
         return $http.get('/service/all');
       },

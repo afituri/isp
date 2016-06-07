@@ -9,6 +9,12 @@ router.get('/:limit/:page', function(req, res) {
     res.send(services);
   });
 });
+
+router.post('/search/:limit/:page', function(req, res) {
+  servicesMgr.getServicesSearch (req.body.name,req.params.limit,req.params.page,function(services){
+    res.send(services);
+  });
+});
 router.get('/all', function(req, res) {
   // res.send(data.services);
   servicesMgr.getAllServices(function(services){
