@@ -3,7 +3,7 @@ var router = express.Router();
 var userHelpers = require('../controller/userHelpers');
 var invoiceMgr = require("../controller/invoice");
 var reportMgr = require("../controller/report");
-var orderArray=[];
+
 router.get('/printInvoice/:id', function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
     var months;
@@ -32,25 +32,8 @@ router.get('/active',function(req , res){
         result المستخدمين الجدد فاتورة جديدة
         invoise  تجديد الاشتراك
         order اسم الخدمة
-
-
-
       */
-      flage=false;
-      
-      for(i in result.order){
-        orderArray[result.order[i].invoice] = result.order[i].product.name;
-        if(i==result.order.length-1){
-          console.log(orderArray);
-          flage=true;
-         
-        }
-      }
-
-      if(flage){
-         res.send({a:orderArray});
-      }
-
+         res.send(result);
 
     });
   });
