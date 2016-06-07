@@ -144,4 +144,8 @@
       });
     }
   }]);
+  app.controller('InvoicesCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
+  }]);
+  app.controller('NewInvoiceCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
+  }]);
 }());

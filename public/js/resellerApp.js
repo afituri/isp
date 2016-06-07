@@ -89,6 +89,36 @@
           }]);
         }] 
       }
+    })
+    .state('invoices',{
+      url: '/invoices',
+      templateUrl: 'pages/reseller/all/invoices.html',
+      controller: 'InvoicesCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('newInvoice',{
+      url: '/invoices/new',
+      templateUrl: 'pages/reseller/all/newInvoice.html',
+      controller: 'NewInvoiceCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');
