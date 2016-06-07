@@ -69,16 +69,16 @@
             </div>
             <div class="col-xs-5">
               <div class="text-left">
-                <small>تاريخ الطباعة: {{:result.nowdate}}</small>
+                <small>تاريخ الطباعة<span>:{{:result.nowdate}}</span></small>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-9">
+            <div class="col-xs-8">
               <br><br>
               <div class="row">
                 <div class="col-xs-4">
-                  <h5>الاسم (Name)</h5>
+                  <h5>الاسم <span> (Name)</span></h5>
                 </div>
                 <div class="col-xs-8 text-center" style="background-color: #E4E4E4 !important;">
                   <h5>{{:result.invoices.customer.name}}</h5>
@@ -87,21 +87,21 @@
               <br>
               <div class="row">
                 <div class="col-xs-4">
-                  <h5>الاشتراك (Site ID)</h5>
+                  <h5>الاشتراك <span> (Site ID)</span></h5>
                 </div>
                 <div class="col-xs-8 text-center" style="background-color: #E4E4E4 !important;">
                   <h5>BWKA01031</h5>
                 </div>
               </div>
             </div>
-            <div class="col-xs-3 text-left">
+            <div class="col-xs-4 text-left">
               <h5><span class="label label-default">مدة الاشتراك Duration</span></h5>
               <h5 style="padding-top:7px;" class="btn-blok">
                 <span class="label label-default" style="padding-left:15px;padding-right:15px;">{{:result.months}}</span>
                 <span class="label label-default" style="padding-left:23px;padding-right:23px;">شهور</span>
               </h5>
               <h5 style="padding-top:7px;" class="btn-blok">
-                <span class="label label-default" style="padding-left:15px;padding-right:15px;">من</span>
+                <span class="label label-default" style="padding-left:14px;padding-right:14px;">من</span>
                 <span class="label label-default" style="padding-left:3px;padding-right:3px;">{{:result.startDate}}</span>
               </h5>
               <h5 style="padding-top:7px;" class="btn-blok">
@@ -143,9 +143,9 @@
                   </tr> 
                 </thead> 
                 <tbody> 
-                  {{for result.order}}
+                  {{for  result.order}}
                   <tr> 
-                    <td class="text-center"></td>
+                    <td class="text-center"> {{@index}}</td>
                     <td class="text-center">
                       <h5><!-- Hardware --> {{:product.name}}</h5>
                        {{:product.discriptoin}}
@@ -155,7 +155,7 @@
                       <br>
                       {{:price}}
                     </td>
-                    <td class="text-center">
+                    <!-- <td class="text-center"> -->
                     <!--   <br>
                         2500
                     </td> -->
@@ -208,7 +208,7 @@
             <div class="col-xs-7">
               <h6 style="color: red !important;padding:6px;">سوف يكون التثبيت في نفس اليوم عند الحصول على التأكيد</h6>
               <h6>التحميل مجاني من الساعة 1:00 حتي 06:00</h6>
-              <h6>سرعة الخدمة من %40 إلى %100</h6>
+              <h6>سرعة الخدمة من <span>%40 إلى %100</span></h6>
             </div>
             <div class="col-xs-5">
               <table class="pull-left">

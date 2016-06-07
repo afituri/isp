@@ -3,10 +3,13 @@
     <div class="x_panel">
       <div class="x_title">
         <div class="row">
-          <div class="col col-xs-6">
+          <div class="col col-xs-3">
             <h2>عرض الموزعين</h2>
           </div>
-          <div class="col col-xs-6 text-left">
+            <div class="col-xs-5">
+            <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="البحث / اسم المخول / اسم الشركة / الايميل / رقم الهاتف ..">
+        </div>
+          <div class="col col-xs-4 text-left">
             <a ui-sref="newReseller" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة موزع جديد</a>
           </div>
         </div>
