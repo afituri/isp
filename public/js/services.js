@@ -477,8 +477,6 @@
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
       'getInvoiceByID': function(id){
-        console.log("id");
-        console.log(id);
         return $http.get('/invoice/'+id);
       },
       'addInvoice': function(invoiceObj){
@@ -486,6 +484,9 @@
       },
       'report': function(invoiceObj){
         return $http.post('/report/printInvoice',invoiceObj);
+      },
+      'active': function(){
+        return $http.get('/report/active');
       },
       'editInvoice': function(id,invoiceObj){
         return $http.put('/invoice/edit/'+id,invoiceObj);
