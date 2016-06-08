@@ -136,20 +136,61 @@ function pars(result,cb){
   var flag2=0;
   var orderArray=[];
   var obj=[];
+  
   for(i in result.order){
     orderArray[result.order[i].invoice] = {name:result.order[i].product.name,end:result.order[i].endDate};
   }
-  for (j in result.result){
-    obj.push({name:result.result[i].customer.name,macAddress:result.result[i].instock.macAddress,product:orderArray[result.result[i]._id].name,phone:result.result[i].customer.phone,end:orderArray[result.result[i]._id].end})
-    if(j == result.result.length-1){
+  for (i in result.result){
+    var name = '';
+    var macAddress = '';
+    var product = '';
+    var phone = '';
+    var end = '';
+    if(result.result[i].customer){
+      name=result.result[i].customer.name;
+    }
+    if(result.result[i].instock){
+      macAddress=result.result[i].instock.macAddress;
+    }
+    if(orderArray[result.result[i]._id]){
+      product=orderArray[result.result[i]._id].name;
+    }
+    if(result.result[i].customer){
+      phone=result.result[i].customer.phone;
+    }
+    if(orderArray[result.result[i]._id]){
+      end=orderArray[result.result[i]._id].end;
+    }
+    obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end})
+    if(i == result.result.length-1){
       flag1=1;
     } 
   }
   for (i in result.invoice) {
+    var name = '';
+    var macAddress = '';
+    var product = '';
+    var phone = '';
+    var end = '';
+    if(result.invoice[i].customer){
+      name=result.invoice[i].customer.name;
+    }
+    if(result.invoice[i].invoice.instock){
+      macAddress=result.result[i].instock.macAddress;
+    }
+    if(orderArray[result.invoice[i]._id]){
+      product=orderArray[result.invoice[i]._id].name;
+    }
+    if(result.invoice[i].customer){
+      phone=result.invoice[i].customer.phone;
+    }
+    if(orderArray[result.invoice[i]._id]){
+      end=orderArray[result.invoice[i]._id].end;
+    }
     obj.push({name:result.invoice[i].customer.name,macAddress:result.invoice[i].invoice.instock.macAddress,product:orderArray[result.invoice[i]._id].name,phone:result.invoice[i].customer.phone,end:orderArray[result.invoice[i]._id].end})
-   if(i == result.invoice.length-1){
-    flag2=1;
-   } 
+    if(i == result.invoice.length-1){
+      flag2=1;
+    } 
   }
   if(flag1&&flag2){
     cb(obj);
