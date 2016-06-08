@@ -102,7 +102,9 @@ router.get('/printunActive',function(req , res){
         invoise  تجديد الاشتراك
         order اسم الخدمة
       */
-
+      pars(result,function(obj){
+        userHelpers.printReport("active.html",obj,res);
+      });
       
     });
   });
@@ -110,7 +112,9 @@ router.get('/printunActive',function(req , res){
 router.get('/unactive',function(req , res){
   reportMgr.getunActive(function(results){
     reportMgr.getInvoices(results,function(result){
-      res.send(result);
+      pars(result,function(obj){
+        res.send(obj);
+      });
     });
   });
 });
@@ -136,7 +140,12 @@ function pars(result,cb){
   var flag2=0;
   var orderArray=[];
   var obj=[];
-  
+  if(result.invoice.length==0){
+    flag2=1;
+  }
+  if(result.result.length==0){
+    flag1=1;
+  }
   for(i in result.order){
     orderArray[result.order[i].invoice] = {name:result.order[i].product.name,end:result.order[i].endDate};
   }
@@ -192,6 +201,7 @@ function pars(result,cb){
       flag2=1;
     } 
   }
+
   if(flag1&&flag2){
     cb(obj);
   }

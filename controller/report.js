@@ -15,13 +15,17 @@ module.exports = {
   },
 
   getunActive : function (cb) {
-    model.Order.find({endDate:{$lt:new Date()}}).distinct('invoice',function(err, result){
-      if(!err){
-        cb(result);
-      }else{
-        console.log(err);
-        cb(null);
-      }
+    model.Order.find({endDate:{$gte:new Date()}}).distinct('invoice',function(err, ido){
+      model.Invoice.find({_id:{$in:ido}}).distinct('invoice',function(err, idin){
+        model.Order.find({$and:[{endDate:{$lt:new Date()}},{invoice:{$nin:idin}}]}).distinct('invoice',function(err, result){
+          if(!err){
+            cb(result);
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      });
     });
   },
 
