@@ -26,18 +26,10 @@
                 <br>
                 <div class="row">
                   <div class="col-md-6">
-                    <select class="form-control input-sm" ng-model="status">
-                      <option value="" disabled selected>من التاريخ</option>
-                      <option value="1">مفعل</option>
-                      <option value="0">غير مفعل</option>
-                    </select>
+                    <input class="form-control input-sm" type="text" ng-model="startDate" placeholder="من التاريخ" required bs-datepicker>
                   </div>
                   <div class="col-md-6">
-                    <select class="form-control input-sm" ng-model="status">
-                      <option value="" disabled selected>الي التاريخ</option>
-                      <option value="1">مفعل</option>
-                      <option value="0">غير مفعل</option>
-                    </select>
+                    <input class="form-control input-sm" type="text" ng-model="endDate" placeholder="الي التاريخ" required bs-datepicker>
                   </div>
                 </div>
               </div>
