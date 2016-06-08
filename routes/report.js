@@ -15,7 +15,6 @@ router.get('/printInvoice/:id', function(req, res) {
       result['months']=months;
       var startDate =result.order[0].startDate.getDate()+' / '+parseInt(result.order[0].startDate.getMonth()+1)+' / '+result.order[0].startDate.getFullYear();
       var endDate =result.order[0].endDate.getDate()+' / '+parseInt(result.order[0].endDate.getMonth()+1)+' / '+result.order[0].endDate.getFullYear();
-      console.log(result.order);
       var startDate ='';
       var endDate='';
       if(parseInt(result.order[0].startDate.getDate())<9){
@@ -45,7 +44,6 @@ router.get('/printInvoice/:id', function(req, res) {
       result['nowdate']=nowdate;
       result['startDate']=startDate;
       result['endDate']=endDate; 
-      result.product={counter:[1,2,3]};    
     }
     userHelpers.printReport("invoice.html",result,res);
 
@@ -61,8 +59,9 @@ router.get('/active',function(req , res){
         invoise  تجديد الاشتراك
         order اسم الخدمة
       */
-      res.send(result);
-
+      pars(result,function(obj){
+        res.send(obj);
+      });
     });
   });
 });
@@ -74,8 +73,9 @@ router.get('/printActive',function(req , res){
         invoise  تجديد الاشتراك
         order اسم الخدمة
       */
-      userHelpers.printReportH("active.html",result,res);
-
+      pars(result,function(obj){
+        userHelpers.printReport("active.html",obj,res);
+      });
     });
   });
 });
@@ -87,8 +87,8 @@ router.get('/printunActive',function(req , res){
         invoise  تجديد الاشتراك
         order اسم الخدمة
       */
-      userHelpers.printReportH("active.html",result,res);
 
+      
     });
   });
 });
@@ -101,6 +101,7 @@ router.get('/unactive',function(req , res){
 });
 
 router.post('/Between',function(req , res){
+
   reportMgr.getBetween(req.body.start,req.body.end,function(results){
     reportMgr.getInvoices(results,function(result){
       res.send(result);
@@ -115,4 +116,28 @@ router.post('/Reseller',function(req , res){
     });
   });
 });
+function pars(result,cb){
+  var flag1=0;
+  var flag2=0;
+  var orderArray=[];
+  var obj=[];
+  for(i in result.order){
+    orderArray[result.order[i].invoice] = {name:result.order[i].product.name,end:result.order[i].endDate};
+  }
+  for (j in result.result){
+    obj.push({name:result.result[i].customer.name,macAddress:result.result[i].instock.macAddress,product:orderArray[result.result[i]._id].name,phone:result.result[i].customer.phone,end:orderArray[result.result[i]._id].end})
+    if(j == result.result.length-1){
+      flag1=1;
+    } 
+  }
+  for (i in result.invoice) {
+    obj.push({name:result.invoice[i].customer.name,macAddress:result.invoice[i].invoice.instock.macAddress,product:orderArray[result.invoice[i]._id].name,phone:result.invoice[i].customer.phone,end:orderArray[result.invoice[i]._id].end})
+   if(i == result.invoice.length-1){
+    flag2=1;
+   } 
+  }
+  if(flag1&&flag2){
+    cb(obj);
+  }
+}
 module.exports = router;

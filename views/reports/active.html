@@ -144,22 +144,26 @@
                   </tr> 
                 </thead> 
                 <tbody> 
-                  {{:~getSubTotal(result)}}
-                 <!--  <tr> 
+                  {{for  result}}
+                  <tr> 
                     <td class="text-left">
-                      <h5>Subscription</h5>
-                      Tooway Pro 30 1Mbps/2Mbps Up/Down 30GB
+                      {{:name}}
                     </td> 
                     <td class="text-center">
-                      <br>
-                      800
+                      {{:macAddress}}
+                    </td>
+                    <td class="text-left">
+                      {{:product}}
+                    </td> 
+                    <td class="text-center">
+                      {{:phone}}
                     </td>
                     <td class="text-center">
-                      <br>
-                      40800
+                      {{:end}}
                     </td> 
                   </tr>
-                  <tr> 
+                  {{/for}}
+                  <!-- <tr> 
                     <td class="text-left">
                       <h5>Router</h5>
                       Description of Router
