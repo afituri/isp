@@ -149,11 +149,16 @@
       'getResellers': function(pageSize,currentPage){
         return $http.get('/reseller/'+pageSize+'/'+currentPage);
       },
+
       'getResellersByID': function(id){
         return $http.get('/reseller/'+id);
       },
       'addResller': function(resllerObj){
         return $http.post('/reseller/add',resllerObj);
+      },
+      'getResellerByName': function(name,pageSize,currentPage){
+        console.log(name);
+        return $http.post('/reseller/search/'+pageSize+'/'+currentPage,{name:name});
       },
       'editResller': function(id,resllerObj){
         return $http.put('/reseller/edit/'+id,resllerObj);

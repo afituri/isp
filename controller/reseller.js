@@ -41,6 +41,34 @@ module.exports = {
       });
     });
   },
+
+  //getResellerByName
+  getResellerByName :function(searchString,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Reseller.count({'$or':[
+            {'repName':{'$regex':searchString, '$options':'i'}},
+            {'email':{'$regex':searchString, '$options':'i'}},
+            {'companyName':{'$regex':searchString, '$options':'i'}},
+            {'phone':{'$regex':searchString, '$options':'i'}}
+            ]},function(err,count){
+      model.Reseller.find({'$or':[
+            {'repName':{'$regex':searchString, '$options':'i'}},
+            {'email':{'$regex':searchString, '$options':'i'}},
+            {'companyName':{'$regex':searchString, '$options':'i'}},
+            {'phone':{'$regex':searchString, '$options':'i'}}
+            ]}).limit(limit).skip(page*limit).exec(function(err, result){
+        if(!err){
+          cb({result:result,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+
   getResellerId :function(id,cb){
     model.Reseller.findOne({_id : id}, function(err, result){
       if(!err){
