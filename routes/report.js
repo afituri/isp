@@ -62,7 +62,19 @@ router.get('/active',function(req , res){
     });
   });
 });
+router.get('/printActive',function(req , res){
+  reportMgr.getActive(function(results){
+    reportMgr.getInvoices(results,function(result){
+      /*
+        result المستخدمين الجدد فاتورة جديدة
+        invoise  تجديد الاشتراك
+        order اسم الخدمة
+      */
+      userHelpers.printReportH("active.html",result,res);
 
+    });
+  });
+});
 router.get('/unactive',function(req , res){
   reportMgr.getunActive(function(results){
     reportMgr.getInvoices(results,function(result){
