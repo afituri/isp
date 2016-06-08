@@ -13,8 +13,32 @@ router.get('/printInvoice/:id', function(req, res) {
     if(result.invoices.typein!=4){
       months = (result.order[0].endDate.getFullYear() - result.order[0].startDate.getFullYear()) * 12;
       months += result.order[0].endDate.getMonth()-result.order[0].startDate.getMonth() + 1;
-      var startDate =result.order[0].startDate.getDate()+' / '+parseInt(result.order[0].startDate.getMonth()+1)+' / '+result.order[0].startDate.getFullYear();
-      var endDate =result.order[0].endDate.getDate()+' / '+parseInt(result.order[0].endDate.getMonth()+1)+' / '+result.order[0].endDate.getFullYear();
+      var startDate ='';
+      var endDate='';
+      if(parseInt(result.order[0].startDate.getDate())<9){
+        startDate+='0'+result.order[0].startDate.getDate();
+      }else{
+        startDate+=result.order[0].startDate.getDate();
+      }
+
+      if(parseInt(result.order[0].startDate.getMonth()+1)<9){
+        startDate+=' / 0'+parseInt(result.order[0].startDate.getMonth()+1);
+      }else{
+        startDate+=' / '+parseInt(result.order[0].startDate.getMonth()+1);
+      }
+      if(parseInt(result.order[0].endDate.getDate())<9){
+        endDate+='0'+result.order[0].endDate.getDate();
+      }else{
+        endDate+=result.order[0].endDate.getDate();
+      }
+
+      if(parseInt(result.order[0].endDate.getMonth()+1)<9){
+        endDate+=' / 0'+parseInt(result.order[0].endDate.getMonth()+1);
+      }else{
+        endDate+=' / '+parseInt(result.order[0].endDate.getMonth()+1);
+      }
+      startDate +=' / '+result.order[0].startDate.getFullYear();
+      endDate +=' / '+result.order[0].endDate.getFullYear();
       result['nowdate']=nowdate;
       result['startDate']=startDate;
       result['endDate']=endDate;    
