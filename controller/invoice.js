@@ -50,18 +50,25 @@ module.exports = {
 
   deleteInvoice : function(id,cb){
 
-    model.Order.find({invoice:id}, function(err,resultOrder) {
-      if(resultOrder.length > 0){
-        cb(1)
-      } else{
+    model.remove.find({invoice:id}, function(err,resultOrder) {
+      if(!err){
         model.Invoice.remove({_id:id}, function(err,result) {
           if (!err) {
-            cb(2)
+            model.Instock.findOneAndUpdate({$and:[{status:2},{_id:id}]},{invoice:null,status:1} , function(err,result) {
+              if (!err) {
+                cb(true)
+              } else {
+                console.log(err);
+                cb(false);
+              }
+            });
           } else {
             console.log(err);
             cb(3);
           }
         });
+      } else{
+        cb(1);
       }
     });
   },
