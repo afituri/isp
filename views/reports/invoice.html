@@ -143,9 +143,10 @@
                   </tr> 
                 </thead> 
                 <tbody> 
+                <script type="text/javascript"> var i = 1; </script>
                   {{for result.order}}
                   <tr> 
-                    <td class="text-center"></td>
+                    <td class="text-center"><script type="text/javascript">document.write(i);i=i+1;</script></td>
                     <td class="text-center">
                       <h5><!-- Hardware --> {{:product.name}}</h5>
                        {{:product.discriptoin}}
