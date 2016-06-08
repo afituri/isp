@@ -7,12 +7,15 @@ var reportMgr = require("../controller/report");
 router.get('/printInvoice/:id', function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
     var months;
-    result['months']=months;
     var now = new Date();
     var nowdate =now.getDate()+' / '+parseInt(now.getMonth()+1)+' / '+now.getFullYear();
     if(result.invoices.typein!=4){
       months = (result.order[0].endDate.getFullYear() - result.order[0].startDate.getFullYear()) * 12;
       months += result.order[0].endDate.getMonth()-result.order[0].startDate.getMonth() + 1;
+      result['months']=months;
+      var startDate =result.order[0].startDate.getDate()+' / '+parseInt(result.order[0].startDate.getMonth()+1)+' / '+result.order[0].startDate.getFullYear();
+      var endDate =result.order[0].endDate.getDate()+' / '+parseInt(result.order[0].endDate.getMonth()+1)+' / '+result.order[0].endDate.getFullYear();
+      console.log(result.order);
       var startDate ='';
       var endDate='';
       if(parseInt(result.order[0].startDate.getDate())<9){
@@ -41,7 +44,8 @@ router.get('/printInvoice/:id', function(req, res) {
       endDate +=' / '+result.order[0].endDate.getFullYear();
       result['nowdate']=nowdate;
       result['startDate']=startDate;
-      result['endDate']=endDate;    
+      result['endDate']=endDate; 
+      result.product={counter:[1,2,3]};    
     }
     userHelpers.printReport("invoice.html",result,res);
 

@@ -3,10 +3,10 @@
   var app = angular.module('isp');
   //dddddddddddddddddddddd
   app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
-     alert($stateParams.id);
+    // alert($stateParams.id);
 
      $scope.renewInvoice = function(id){
-      alert(id);
+      //alert(id);
      }
 
     MenuFac.active = 10;
