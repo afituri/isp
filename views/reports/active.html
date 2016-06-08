@@ -61,111 +61,91 @@
             </div>
           </div>
           <hr>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-xs-7">
               <div class="text-left">
-                <h5>فاتورة رقم {{:result.invoices.idinv}}</h5>
+                <h5>فاتورة رقم </h5>
               </div>
             </div>
             <div class="col-xs-5">
               <div class="text-left">
-                <small>تاريخ الطباعة<span>:{{:result.nowdate}}</span></small>
+                <small>تاريخ الطباعة: </small>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-9">
               <br><br>
               <div class="row">
                 <div class="col-xs-4">
-                  <h5>الاسم <span> (Name)</span></h5>
+                  <h5>الاسم (Name)</h5>
                 </div>
                 <div class="col-xs-8 text-center" style="background-color: #E4E4E4 !important;">
-                  <h5>{{:result.invoices.customer.name}}</h5>
+                  <h5></h5>
                 </div>
               </div>
               <br>
               <div class="row">
                 <div class="col-xs-4">
-                  <h5>الاشتراك <span> (Site ID)</span></h5>
+                  <h5>الاشتراك (Site ID)</h5>
                 </div>
                 <div class="col-xs-8 text-center" style="background-color: #E4E4E4 !important;">
                   <h5>BWKA01031</h5>
                 </div>
               </div>
             </div>
-            <div class="col-xs-4 text-left">
+            <div class="col-xs-3 text-left">
               <h5><span class="label label-default">مدة الاشتراك Duration</span></h5>
               <h5 style="padding-top:7px;" class="btn-blok">
-                <span class="label label-default" style="padding-left:15px;padding-right:15px;">{{:result.months}}</span>
+                <span class="label label-default" style="padding-left:15px;padding-right:15px;"></span>
                 <span class="label label-default" style="padding-left:23px;padding-right:23px;">شهور</span>
               </h5>
               <h5 style="padding-top:7px;" class="btn-blok">
-                <span class="label label-default" style="padding-left:14px;padding-right:14px;">من</span>
-                <span class="label label-default" style="padding-left:3px;padding-right:3px;">{{:result.startDate}}</span>
+                <span class="label label-default" style="padding-left:15px;padding-right:15px;">من</span>
+                <span class="label label-default" style="padding-left:3px;padding-right:3px;"></span>
               </h5>
               <h5 style="padding-top:7px;" class="btn-blok">
                 <span class="label label-default" style="padding-left:14px;padding-right:14px;">الى</span>
-                <span class="label label-default" style="padding-left:3px;padding-right:3px;">{{:result.endDate}}</span>
+                <span class="label label-default" style="padding-left:3px;padding-right:3px;"></span>
               </h5>
             </div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-xs-12">
               <table class="table table-bordered table-condensed">
                 <thead> 
                   <tr>
-                    <th class="text-center" width="10%">
-                      رقم المنتج
-                      <br>
-                      Product Code
-                    </th>
+                    
                     <th class="text-center" width="45%">
                       الوصف
                       <br>
                       Description
                     </th> 
-                    <!-- <th class="text-center" width="6%">
+                    <th class="text-center" width="10%">
+                      رقم المنتج
+                      <br>
+                      Product Code
+                    </th>
+                    <th class="text-center" width="6%">
                       الكمية
                       <br>
                       Quantity
-                    </th> -->
+                    </th>
                     <th class="text-center" width="7%">
                       سعر الوحدة
                       <br>
                       Price
                     </th> 
-                    <!-- <th class="text-center" width="7%">
+                    <th class="text-center" width="7%">
                       الاجمالي
                       <br>
                       Amount
-                    </th>  -->
+                    </th> 
                   </tr> 
                 </thead> 
                 <tbody> 
-                  {{for  result.order}}
-                  <tr> 
-                    <!-- <td class="text-center"> {{@index}}</td> -->
-
-               <!--  <td><script type="text/javascript"> var i = 1; </script></td> -->
-                 
-                    <td class="text-center"><script type="text/javascript">document.write(i);i=i+1;</script></td>
-                    <td class="text-center">
-                      <h5><!-- Hardware --> {{:product.name}}</h5>
-                       {{:product.discriptoin}}
-                    </td> 
-                    <!-- <td class="text-center"></td> -->
-                    <td class="text-center">
-                      <br>
-                      {{:price}}
-                    </td>
-                    <!-- <td class="text-center"> -->
-                    <!--   <br>
-                        2500
-                    </td> -->
-                  </tr>
-                 {{/for}}
-                  <!-- <tr> 
+                  {{:~getSubTotal(result)}}
+                 <!--  <tr> 
                     <td class="text-left">
                       <h5>Subscription</h5>
                       Tooway Pro 30 1Mbps/2Mbps Up/Down 30GB
@@ -208,52 +188,34 @@
               </table>
             </div>
           </div>
-          <div class="row">
+          
+          <!-- <div class="row">
             <div class="col-xs-7">
               <h6 style="color: red !important;padding:6px;">سوف يكون التثبيت في نفس اليوم عند الحصول على التأكيد</h6>
               <h6>التحميل مجاني من الساعة 1:00 حتي 06:00</h6>
-              <h6>سرعة الخدمة من <span>%40 إلى %100</span></h6>
+              <h6>سرعة الخدمة من %40 إلى %100</h6>
             </div>
             <div class="col-xs-5">
               <table class="pull-left">
                 <tbody>
                   <tr>
                     <td class="text-center" style="padding-left:10px;"><h5>خصم </h5></td>
-                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">{{:result.invoices.discount}}
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">
 
                     </span></h5></td>
                   </tr>
                   <tr>
                     <td class="text-center" style="padding-left:10px;"><h5>صافي الفاتورة </h5></td>
-                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">{{:result.invoices.piad }}</span></h5></td>
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;"></span></h5></td>
                   </tr>
                 </tbody>
               </table>
-              <!-- <div class="row">
-                <div class="col-xs-6">
-                  <h5>اجمالى الفاتورة</h5>
-                </div>
-                <div class="col-xs-6" style="padding-right:0;margin-top:-5px;">
-                  <h5><span class="label label-default" style="display:block;padding:7px;">43300</span></h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-6 col-xs-offset-6" style="padding-right:0;margin-top:-5px;">
-                  <h5><span class="label label-default" style="display:block;padding:7px;">0</span></h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-6">
-                  <h5>صافي الفاتورة</h5>
-                </div>
-                <div class="col-xs-6" style="padding-right:0;margin-top:-5px;">
-                  <h5><span class="label label-default" style="display:block;padding:7px;">43300</span></h5>
-                </div>
-              </div> -->
+             
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
+
   </body>
 </html>
