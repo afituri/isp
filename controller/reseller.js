@@ -279,4 +279,83 @@ module.exports = {
 
       });
   },
+
+  renewInvice :function(body,cb){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        type:1,
+        invoice:body.idCu,
+        notes:body.invoceNotes,
+        piad:body.total,
+        reseller:invoices.reseller,
+        discount:body.discount,
+        typein:3
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          model.Product.findOne({_id:body.package},function(err,pro){
+            dollarMgr.getLastDollar(function(dollar){
+              Order={
+                invoice:invoiceResult._id,
+                product:pro._id,
+                price:pro.initialPrice*dollar[0].price,
+                startDate:body.startDate,
+                endDate:body.endDate
+              };
+              order=new model.Order(Order);
+              order.save(function(err,orderResult){
+                if (!err) {
+                  cb(invoiceResult);
+                }else{
+                  console.log(err);
+                  cb(null);
+                }
+              });
+            });
+          });
+
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
+
+addPaid :function(body,cb){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        invoice:body.idCu,
+        type:1,
+        notes:'null',
+        piad:body.paid,
+        reseller:invoices.reseller,
+        discount:0,
+        typein:4
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          cb(invoiceResult);
+          
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
 };

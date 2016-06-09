@@ -4,12 +4,7 @@ var data = require('../data/reseller');
 var resellerMgr = require("../controller/reseller");
 
 /* GET all resellers */
-router.get('/:limit/:page', function(req, res) {
-  // res.send(data.resellers);
-  resellerMgr.getReseller(req.params.limit,req.params.page,function(reseller){
-    res.send(reseller);
-  });
-});
+
 
 /* GET search resellers */
 router.post('/search/:limit/:page', function(req, res) {
@@ -65,4 +60,21 @@ router.post('/addInvoice', function(req, res) {
   });
 });
 
+router.post('/renewInvice', function(req, res) {
+  resellerMgr.renewInvice(req.body,function(result){
+    res.send(result);
+  });
+});
+
+router.post('/paidInvoice', function(req, res) {
+  resellerMgr.addPaid(req.body,function(result){
+    res.send(result);
+  });
+});
+router.get('/:limit/:page', function(req, res) {
+  // res.send(data.resellers);
+  resellerMgr.getReseller(req.params.limit,req.params.page,function(reseller){
+    res.send(reseller);
+  });
+});
 module.exports = router;
