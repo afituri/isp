@@ -24,6 +24,12 @@ router.get('/all', function(req, res) {
     res.send(customers);
   });
 });
+router.get('customerReseller/:limit/:page/', function(req, res) {
+  customerMgr.getCustomerReseller(req.user._id,req.params.limit,req.params.page,function(customers){
+    res.send(customers);
+  });
+});
+
 /* Add new customer   */
 router.post('/add', function(req, res) {
   /*user.register({email:'elamir@naga.ly',password:'12345'},function(customer){
@@ -31,13 +37,10 @@ router.post('/add', function(req, res) {
   });*/
   
 
-  console.log(req.session.passport.user);
   //res.send(true);
   req.body.user =null;
   req.body.reseller=null;
   if(req.body.status == 1){
-  console.log("here");
-  console.log(req.session.passport.user);
   req.body.user = req.session.passport.user;
   customerMgr.addCustomer(req.body,function(customer){
     res.send(customer);

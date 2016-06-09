@@ -81,7 +81,6 @@ module.exports = {
   },
   /* here we add a new user to the system */
   addReseller: function (body, cb) {
-    console.log(body);
     var obj = body;
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
     easyPbkdf2.secureHash( body.password, salt, function( err, passwordHash, originalSalt ) {
