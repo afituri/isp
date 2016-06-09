@@ -11,8 +11,8 @@
       if($scope.Active==1){
        // alert($scope.Active);
        InvoicesServ.active().then(function(response) {
-          console.log(response.data);
-          $scope.data= response;
+          console.log("response");
+          $scope.results= response.data;
        }, function(response) {
         console.log("Something went wrong");
     });

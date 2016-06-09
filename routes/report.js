@@ -5,6 +5,22 @@ var invoiceMgr = require("../controller/invoice");
 var reportMgr = require("../controller/report");
 
 
+
+router.get('/active',function(req , res){
+  console.log("fff");
+  reportMgr.getActive(function(results){
+    //console.log(results);
+    reportMgr.getInvoices(results,function(result){
+      console.log(result);
+      pars(result,function(obj){
+        console.log(obj);
+        res.send(obj);
+      });
+    });
+  });
+});
+
+
 router.get('/printInvoice/:id', function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
     var months;
@@ -52,21 +68,8 @@ router.get('/printInvoice/:id', function(req, res) {
   
 });
 
-router.get('/active',function(req , res){
-  reportMgr.getActive(function(results){
-    reportMgr.getInvoices(results,function(result){
-      /*
-        result المستخدمين الجدد فاتورة جديدة
-        invoise  تجديد الاشتراك
-        order اسم الخدمة
-      */
-      pars(result,function(obj){
-        console.log(obj);
-        res.send(obj);
-      });
-    });
-  });
-});
+
+
 router.get('/printActive',function(req , res){
   reportMgr.getActive(function(results){
     reportMgr.getInvoices(results,function(result){
@@ -123,9 +126,14 @@ function pars(result,cb){
   var flag2=0;
   var orderArray=[];
   var obj=[];
-  
+  if(result.result.length==0){
+    flag1=1;
+  }
   for(i in result.order){
     orderArray[result.order[i].invoice] = {name:result.order[i].product.name,end:result.order[i].endDate};
+  }
+  if(result.invoice.length==0){
+    flag2=1;
   }
   for (i in result.result){
     var name = '';
@@ -136,7 +144,8 @@ function pars(result,cb){
     if(result.result[i].customer){
       name=result.result[i].customer.name;
     }
-    if(result.result[i].instock){
+
+    if(result.result[i].instock!=undefined){
       macAddress=result.result[i].instock.macAddress;
     }
     if(orderArray[result.result[i]._id]){
@@ -162,7 +171,7 @@ function pars(result,cb){
     if(result.invoice[i].customer){
       name=result.invoice[i].customer.name;
     }
-    if(result.invoice[i].invoice.instock){
+    if(result.invoice[i].instock){
       macAddress=result.result[i].instock.macAddress;
     }
     if(orderArray[result.invoice[i]._id]){
@@ -174,7 +183,7 @@ function pars(result,cb){
     if(orderArray[result.invoice[i]._id]){
       end=orderArray[result.invoice[i]._id].end;
     }
-    obj.push({name:result.invoice[i].customer.name,macAddress:result.invoice[i].invoice.instock.macAddress,product:orderArray[result.invoice[i]._id].name,phone:result.invoice[i].customer.phone,end:orderArray[result.invoice[i]._id].end})
+    obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end})
     if(i == result.invoice.length-1){
       flag2=1;
     } 

@@ -486,6 +486,7 @@
         return $http.post('/report/printInvoice',invoiceObj);
       },
       'active': function(){
+        console.log("ggg");
         return $http.get('/report/active');
       },
       'editInvoice': function(id,invoiceObj){

@@ -81,10 +81,9 @@
             <tbody>
               <tr ng-repeat="result in results">
                 <td>{{result.name}}</td>
-                <td>Mac Address</td>
+                <td>{{result.macAddress}}</td>
                 <td>
-                  <span ng-if="result.type == 1">شخصي</span>
-                  <span ng-if="result.type == 2">شركة</span>
+                 {{result.product}}
                 </td>
                 <td>{{result.phone}}</td>
                 <td>تاريخ الاشتراك</td>
