@@ -120,10 +120,11 @@ router.get('/unactive',function(req , res){
 });
 
 router.post('/Between',function(req , res){
-
   reportMgr.getBetween(req.body.start,req.body.end,function(results){
     reportMgr.getInvoices(results,function(result){
-      res.send(result);
+      pars(result,function(obj){
+        res.send(obj);
+      });
     });
   });
 });
@@ -131,7 +132,9 @@ router.post('/Between',function(req , res){
 router.post('/Reseller',function(req , res){
   reportMgr.getReseller(req.body.reseller,function(results){
     reportMgr.getInvoices(results,function(result){
-      res.send(result);
+      pars(result,function(obj){
+        res.send(obj);
+      });
     });
   });
 });
