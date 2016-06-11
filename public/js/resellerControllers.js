@@ -393,9 +393,9 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
     $scope.currentPage = 1;
     $scope.total = 0;
     
-
+//000000000
     $scope.init = function () {
-      CustomersServ.getCustomers(1,$scope.pageSize,$scope.currentPage).then(function(response) {
+      CustomersServ.getCustomersForResseler($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {

@@ -86,7 +86,7 @@
                  {{result.product}}
                 </td>
                 <td>{{result.phone}}</td>
-                <td>تاريخ الاشتراك</td>
+                 <td ng-bind="result.end | date:'dd/MM/yyyy'"></td>
               </tr>
             </tbody>
           </table>

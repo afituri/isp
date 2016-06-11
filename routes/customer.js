@@ -8,11 +8,7 @@ var user = require("../controller/user");
 // var path = require("path");
 
 /* GET all customer */
-router.get('/:limit/:page/:status', function(req, res) {
-  customerMgr.getCustomer(req.params.status,req.params.limit,req.params.page,function(customers){
-    res.send(customers);
-  });
-});
+
 
 router.get('/reject/:limit/:page/:status', function(req, res) {
   customerMgr.getCustomerReject(req.session.passport.user,req.params.status,req.params.limit,req.params.page,function(customers){
@@ -24,6 +20,14 @@ router.get('/all', function(req, res) {
     res.send(customers);
   });
 });
+//0000000
+router.get('/customerReseller/:limit/:page', function(req, res) {
+  console.log("dd");
+  customerMgr.getCustomerReseller(req.user._id,req.params.limit,req.params.page,function(customers){
+    res.send(customers);
+  });
+});
+
 /* Add new customer   */
 router.post('/add', function(req, res) {
   /*user.register({email:'elamir@naga.ly',password:'12345'},function(customer){
@@ -31,13 +35,10 @@ router.post('/add', function(req, res) {
   });*/
   
 
-  console.log(req.session.passport.user);
   //res.send(true);
   req.body.user =null;
   req.body.reseller=null;
   if(req.body.status == 1){
-  console.log("here");
-  console.log(req.session.passport.user);
   req.body.user = req.session.passport.user;
   customerMgr.addCustomer(req.body,function(customer){
     res.send(customer);
@@ -106,7 +107,11 @@ router.get('/:id', function(req, res) {
     res.send(customer);
   });
 });
-
+router.get('/:limit/:page/:status', function(req, res) {
+  customerMgr.getCustomer(req.params.status,req.params.limit,req.params.page,function(customers){
+    res.send(customers);
+  });
+});
 
 
 

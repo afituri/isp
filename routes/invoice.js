@@ -53,6 +53,8 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete invoice  by id  */
 router.delete('/delete/:id', function(req, res) {
+  console.log(req.params.id);
+  res.send({x:1});
   invoiceMgr.deleteInvoice(req.params.id,function(result){
     res.send({result:result});  
   });

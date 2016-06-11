@@ -107,8 +107,12 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
+
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
+      },
+       'getCustomersForResseler': function(pageSize,currentPage){
+        return $http.get('/customer/customerReseller/'+pageSize+'/'+currentPage);
       },
       'getAllCustomers': function(){
         return $http.get('/customer/all');
@@ -256,7 +260,7 @@
         return $http.get('/invoice/'+id);
       },
       'addInvoice': function(invoiceObj){
-        return $http.post('/invoice/add',invoiceObj);
+        return $http.post('/reseller/addInvoice',invoiceObj);
       },
       'report': function(invoiceObj){
         return $http.post('/report/printInvoice',invoiceObj);

@@ -486,13 +486,22 @@
         return $http.post('/report/printInvoice',invoiceObj);
       },
       'active': function(){
-        console.log("ggg");
         return $http.get('/report/active');
+      },
+      'unActive': function(){
+        return $http.get('/report/unactive');
+      },
+      'contractBetweenDates': function(start,end){
+        return $http.post('/report/Between',{start:start,end:end});
+      },
+      'Byresseler': function(id){
+        return $http.post('/report/Reseller',{reseller:id});
       },
       'editInvoice': function(id,invoiceObj){
         return $http.put('/invoice/edit/'+id,invoiceObj);
       },
       'deleteInvoice': function(id){
+        console.log(id);
         return $http.delete('/invoice/delete/'+id);
       },
       'getItemInfoByID': function(id){

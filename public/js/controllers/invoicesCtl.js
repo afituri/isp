@@ -2,8 +2,41 @@
   'use strict';
   var app = angular.module('isp');
   //dddddddddddddddddddddd
-  app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
+  app.controller('InvoicesCtl',['$scope','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,$modal,$stateParams,MenuFac,InvoicesServ){
     // alert($stateParams.id);
+
+     $scope.DeleteInvoice = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذه الفاتورة";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+
+     }
+
+    $scope.confirmDelete = function(id){
+     // alert(id.id);
+      InvoicesServ.deleteInvoice(id.id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.init();
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+
+
 
      $scope.renewInvoice = function(id){
       //alert(id);

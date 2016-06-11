@@ -59,5 +59,10 @@ router.get('/:id', function(req, res) {
   });
 });
 
+router.post('/addInvoice', function(req, res) {
+  resellerMgr.addInvoice(req.body,req.user._id,function(result){
+    res.send(result);
+  });
+});
 
 module.exports = router;
