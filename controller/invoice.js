@@ -50,7 +50,7 @@ module.exports = {
 
   deleteInvoice : function(id,cb){
 
-    model.remove.find({invoice:id}, function(err,resultOrder) {
+    model.Order.remove.find({invoice:id}, function(err,resultOrder) {
       if(!err){
         model.Invoice.remove({_id:id}, function(err,result) {
           if (!err) {
