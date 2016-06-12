@@ -23,6 +23,17 @@
         });
       }
     };
+
+    $scope.printStatus = function(){
+      //alert($scope.Active);
+       if($scope.Active==1){
+        window.location.href ="/report/printActive";
+      } else {
+        window.location.href ="/report/printunActive";
+      }
+
+    };
+
      $scope.showDate = function(){
         InvoicesServ.contractBetweenDates($scope.startDate,$scope.endDate).then(function(response) {
           console.log("response");
@@ -43,9 +54,7 @@
     };
 
 
-    $scope.printStatus = function(){
-
-    };
+    
    
     $scope.printDate = function(){
 

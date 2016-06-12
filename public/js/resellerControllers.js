@@ -8,6 +8,7 @@
     
      $scope.init = function () {
       CustomersServ.getCustomersReject(2,$scope.pageSize,$scope.currentPage).then(function(response) {
+        console.log(response.data.result);
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -158,7 +159,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
     //alert($stateParams.id);
-    InvoicesServ.getInvoiceByID($stateParams.id).then(function(response) {
+    InvoicesServ.getInvoiceByID(2,$stateParams.id).then(function(response) {
       $scope.allInvoice=response.data;
     }, function(response) {
         console.log("Something went wrong");
@@ -356,10 +357,11 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
     });
     $scope.renewInvice = function(){
       $scope.renewInviceForm.idCu=$stateParams.id;
-      InvoicesServ.renewInvice($scope.renewInviceForm).then(function(response){
+      InvoicesServ.renewInvicePending($scope.renewInviceForm).then(function(response){
         if(response.data){
           toastr.success('تم التجديد بنجاح');
-          $state.go('invoiceCustomer')
+
+          $state.go('invoices');
         }
       }, function(response) {
         console.log("Something went wrong");
@@ -378,7 +380,9 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
       InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
         if(response.data){
           toastr.success('تم الدفع بنجاح');
-          $state.go('invoiceCustomer')
+          $scope.paidInvoiceForm.paid=" "
+          $state.go('paidInvoice');
+
         }
       }, function(response) {
         console.log("Something went wrong");

@@ -69,21 +69,19 @@ router.get('/printInvoice/:id', function(req, res) {
 });
 
 
-
 router.get('/printActive',function(req , res){
+  
   reportMgr.getActive(function(results){
+
     reportMgr.getInvoices(results,function(result){
-      /*
-        result المستخدمين الجدد فاتورة جديدة
-        invoise  تجديد الاشتراك
-        order اسم الخدمة
-      */
       pars(result,function(obj){
         userHelpers.printReport("active.html",obj,res);
       });
     });
   });
 });
+
+
 router.get('/printunActive',function(req , res){
   reportMgr.getunActive(function(results){
     reportMgr.getInvoices(results,function(result){

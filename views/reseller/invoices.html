@@ -32,8 +32,9 @@
                 <th>البريد الالكتروني </th>
                 <th>اسم المندوب </th>
                 <th>رقم الهاتف </th>
+    <!--             <th>المدير </th> -->
                 <th>الموزع </th>
-                <th>السياسة </th>
+                <th>الحالة </th>
                 <th><i class="fa fa-cog"></i></th>
               </tr>
             </thead>
@@ -50,8 +51,12 @@
                   <span ng-if="customer.type == 2">{{customer.repName}}</span>
                 </td>
                 <td>{{customer.phone}}</td>
-                <td>{{customer.reseller.repName}}</td>
-                <td>{{customer.policy}}</td>
+
+                <td ng-if="customer.reseller.repName!= null">{{customer.reseller.repName}}</td>
+                <td ng-if="customer.reseller.repName== null">لايوجد</td>
+                <td ng-if="customer.status==1">تم التأكيد</td>
+                <td ng-if="customer.status==2">قيد الأنتظار</td>
+                <td ng-if="customer.status==3">رفض</td>
                 <td>
                   <a class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                   

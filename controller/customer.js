@@ -30,13 +30,14 @@ module.exports = {
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.Customer.count({$and:[{status:2},{reseller:id}]},function(err,count){
-      model.Customer.find({$and:[{status:2},{reseller:id}]}).skip(page*limit)
+    model.Customer.count({status:{$ne:3}},function(err,count){
+      model.Customer.find({status:{$ne:3}}).skip(page*limit)
       .populate('user')
       .populate('reseller')
       .exec(function(err, customers){
         if(!err){
           //console.log(customers);
+          console.log(customers);
           cb({result:customers,count:count});
         }else{
           console.log(err);
@@ -67,6 +68,17 @@ module.exports = {
 
   getAllCustomer :function(cb){
     model.Customer.find({},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getAllCustomerStatus:function(status,cb){
+    model.Customer.find({status:status},function(err, customers){
       if(!err){
         cb(customers);
       }else{

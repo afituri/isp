@@ -90,10 +90,41 @@
         }] 
       }
     })
+     .state('paidInvoice',{
+      url: '/invoiceCustomers/paid/:id',
+      templateUrl: 'pages/invoices/paidInvoice.html',
+      controller: 'PaidInvoiceCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
     .state('invoices',{
       url: '/invoices',
       templateUrl: 'pages/reseller/all/invoices.html',
       controller: 'CustomersCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+     .state('renewInvoice',{
+      url: '/invoiceCustomers/renew/:id',
+      templateUrl: 'pages/invoices/renewInvoice.html',
+      controller: 'RenewInvoiceCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{

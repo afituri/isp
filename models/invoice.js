@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
 
 var Invoice = new Schema({
-   customer: { type: mongoose.Schema.ObjectId, ref : 'Customer'},
+   customer: { type: mongoose.Schema.ObjectId, ref :'Customer'},
    /*createDate: { type: Date, default: Date.now },*/
    type: { type: Number, required: [true, 'Why no type?']},
    notes: { type: String, required: true},

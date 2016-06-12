@@ -20,6 +20,13 @@ router.get('/all', function(req, res) {
     res.send(customers);
   });
 });
+//allStatus1
+
+router.get('/allStatus1', function(req, res) {
+  customerMgr.getAllCustomerStatus(1,function(customers){
+    res.send(customers);
+  });
+});
 //0000000
 router.get('/customerReseller/:limit/:page', function(req, res) {
   console.log("dd");

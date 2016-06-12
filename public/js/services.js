@@ -299,6 +299,9 @@
       'getAllCustomers': function(){
         return $http.get('/customer/all');
       },
+      'getAllCustomersStatus': function(){
+        return $http.get('/customer/allStatus1');
+      },
       'getCustomerByID': function(id){
         return $http.get('/customer/'+id);
       },
@@ -476,8 +479,11 @@
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
-      'getInvoiceByID': function(id){
-        return $http.get('/invoice/'+id);
+      'getInvoicePending': function(status,pageSize,currentPage){
+        return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
+      },
+      'getInvoiceByID': function(status,id){
+        return $http.get('/invoice/invoices/'+id+'/'+status);
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
@@ -487,6 +493,9 @@
       },
       'active': function(){
         return $http.get('/report/active');
+      },
+      'activeReport': function(){
+        return $http.get('/report/printActive');
       },
       'unActive': function(){
         return $http.get('/report/unactive');

@@ -256,8 +256,11 @@
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
-      'getInvoiceByID': function(id){
-        return $http.get('/invoice/'+id);
+      'getInvoiceByID': function(status,id){
+        return $http.get('/invoice/invoices/'+id+'/'+status);
+      },
+      'getInvoiceByIDD': function(id){
+        return $http.get('/invoice/invoicesByID/'+id);
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/reseller/addInvoice',invoiceObj);
@@ -280,8 +283,11 @@
       'renewInvice': function(renewInviceObj){
         return $http.post('/invoice/renewInvice',renewInviceObj);
       },
+      'renewInvicePending': function(renewInviceObj){
+        return $http.post('/invoice/renewInvicePending',renewInviceObj);
+      },
       'paidInvoice': function(paidInviceObj){
-        return $http.post('/invoice/paidInvoice',paidInviceObj);
+        return $http.post('/invoice/paidInvoicePending',paidInviceObj);
       }
     };
     return self;
