@@ -11,6 +11,7 @@ var Invoice = new Schema({
    notes: { type: String, required: true},
    piad: { type: Number, required: [true, 'Why no piad?']},
    reseller: { type: Schema.Types.ObjectId , ref: 'Reseller',default:null},
+   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User',default:null},
    invoice: { type: Schema.Types.ObjectId , ref: 'Invoice',default:null},
    /*left: { type: Number},*/
    discount: { type: Number, required: [true, 'Why no piad?']},

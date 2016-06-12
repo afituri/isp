@@ -1,6 +1,57 @@
 (function(){
   'use strict';
   var app = angular.module('reseller');
+ 
+    app.controller('invoicesStatus',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    
+    $scope.init = function(id){
+    InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
+      console.log(response.data);
+      $scope.allInvoice=response.data.result;
+      $scope.total = response.data.count;
+    }, function(response) {
+        console.log("Something went wrong");
+    }); 
+  }
+  $scope.init(2);
+   
+   $scope.getStatus = function(){
+    $scope.init($scope.pending);
+   }
+
+   $scope.accept = function(id){
+    $scope.id = id;
+      $scope.deleteName = "هل حقا تريد تأكيد هذه الفاتورة";
+      $scope.confirmModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/confirmModel.html',
+        show: true
+      });
+   }
+
+   $scope.confirmData = function(id){
+    InvoicesServ.editInvoice(id.id,{status:1}).then(function(response) {
+        if(response.data){
+          $scope.confirmModel.hide();
+          $scope.init(2);
+          //$state.go('customers');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+   }
+  
+  
+
+  }]);
+
+
   app.controller('CustomersPendingCtl',['$scope','$modal','CustomersServ','toastr',function($scope,$modal,CustomersServ,toastr){
     $scope.pageSize = 10;
     $scope.currentPage = 1;

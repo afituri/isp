@@ -68,6 +68,7 @@ router.post('/paidInvoicePending', function(req, res) {
 
 /* Edit invoice  by id  */
 router.put('/edit/:id', function(req, res) {
+  req.body.user=req.user._id;
   invoiceMgr.updateInvoice(req.params.id,req.body,function(result){
     res.send(result);
   });
