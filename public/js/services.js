@@ -506,6 +506,12 @@
       'Byresseler': function(id){
         return $http.post('/report/Reseller',{reseller:id});
       },
+      'printBetweenDates': function(start,end){
+        return $http.post('/report/printBetween',{start:start,end:end});
+      },
+      'printResseler': function(id){
+        return $http.post('/report/printReseller',{reseller:id});
+      },
       'editInvoice': function(id,invoiceObj){
         return $http.put('/invoice/edit/'+id,invoiceObj);
       },

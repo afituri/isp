@@ -12,6 +12,7 @@ module.exports = {
     return next();
   },
   printReport : function(HTMLprint,result,res){
+    console.log(result);
     jsreport.render({
       template: { 
         engine: "jsrender",
