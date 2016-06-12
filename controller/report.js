@@ -30,7 +30,8 @@ module.exports = {
   },
 
   getBetween : function (start,end,cb) {
-    model.Order.find({endDate:{$gte: new Date(start), $lt: new Date(end)}}).distinct('invoice',function(err, result){
+    console.log(new Date(end));
+    model.Order.find({$and:[{endDate:{$gte: new Date(start)}},{endDate:{$lt: new Date(end)}}]}).distinct('invoice',function(err, result){
       if(!err){
         cb(result);
       }else{
@@ -42,7 +43,7 @@ module.exports = {
   getReseller : function (id,cb) {
     console.log("her");
     console.log(id);
-    model.Invoice.find({reseller:id},{status:1},function(err, result){
+    model.Invoice.find({$and:[{reseller:id},{status:1}]},function(err, result){
       if(!err){
         cb(result);
       }else{

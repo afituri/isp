@@ -115,37 +115,31 @@
               <table class="table table-bordered table-condensed">
                 <thead> 
                   <tr>
-                    
+                    <th class="text-center" width="5%">
+                      الرقم  
+                    </th> 
                     <th class="text-center" width="45%">
-                      الوصف
-                      <br>
-                      Description
+                      اسم العميل   
                     </th> 
                     <th class="text-center" width="10%">
-                      رقم المنتج
-                      <br>
-                      Product Code
+                      ماك ادرس 
                     </th>
                     <th class="text-center" width="6%">
-                      الكمية
-                      <br>
-                      Quantity
+                      نوع الاشتراك  
                     </th>
                     <th class="text-center" width="7%">
-                      سعر الوحدة
-                      <br>
-                      Price
+                      الهاتف
                     </th> 
                     <th class="text-center" width="7%">
-                      الاجمالي
-                      <br>
-                      Amount
+                      تاريخ الانتهاء
                     </th> 
                   </tr> 
                 </thead> 
+                <script type="text/javascript"> var i = 1; </script>
                 <tbody> 
                   {{for  result}}
                   <tr> 
+                    <td class="text-center"><script type="text/javascript">document.write(i);i=i+1;</script></td>
                     <td class="text-left">
                       {{:name}}
                     </td> 
