@@ -14,7 +14,6 @@ module.exports = {
       .populate('user')
       .populate('reseller')
       .exec(function(err, customers){
-        console.log(customers);
         if(!err){
           //console.log(customers);
           cb({result:customers,count:count});
@@ -26,8 +25,28 @@ module.exports = {
     });
   },
 
+  getCustomerReseller :function(id,limit,page,cb){
+    console.log("ssss");
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Customer.count({status:{$ne:3}},function(err,count){
+      model.Customer.find({status:{$ne:3}}).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
+        if(!err){
+          //console.log(customers);
+          console.log(customers);
+          cb({result:customers,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
   getCustomerReject :function(user,status,limit,page,cb){
-    console.log(user);
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
@@ -36,7 +55,6 @@ module.exports = {
       .populate('user')
       .populate('reseller')
       .exec(function(err, customers){
-        console.log(customers);
         if(!err){
           //console.log(customers);
           cb({result:customers,count:count});
@@ -50,6 +68,28 @@ module.exports = {
 
   getAllCustomer :function(cb){
     model.Customer.find({},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getAllCustomerStatus:function(status,cb){
+    model.Customer.find({status:status},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getAllCustomerReseller :function(id,cb){
+    model.Customer.find({reseller:id},function(err, customers){
       if(!err){
         cb(customers);
       }else{
@@ -93,7 +133,6 @@ module.exports = {
       reseller : body.reseller
   }
 
-  console.log(obj)
     customer = new model.Customer(obj);
     customer.save(function(err,result){
       if (!err) {
@@ -137,27 +176,6 @@ module.exports = {
 
   },
 
-
-  updateCustomer : function(id,body,cb){
-    var obj ={
-      name : body.name,
-      repName : body.repName,
-      city : body.city,
-      address : body.address,
-      email : body.email,
-      phone : body.phone,
-      type : body.type,
-      notes : body.notes
-  }
-    model.Customer.findOneAndUpdate({_id:id}, obj, function(err,result) {
-      if (!err) {
-        cb(true)
-      } else {
-        console.log(err);
-        cb(false);
-      }
-    });
-  },
 
   updateCustomer : function(id,body,cb){
     var obj ={

@@ -7,7 +7,7 @@
             <form>
               <div class="form-group">
                 <label>الحالة - Status</label>
-                <select class="form-control input-sm" ng-model="status">
+                <select class="form-control input-sm" ng-model="Active">
                   <option value="" disabled selected>الرجاء الاختيار</option>
                   <option value="1">مفعل</option>
                   <option value="0">غير مفعل</option>
@@ -81,13 +81,12 @@
             <tbody>
               <tr ng-repeat="result in results">
                 <td>{{result.name}}</td>
-                <td>Mac Address</td>
+                <td>{{result.macAddress}}</td>
                 <td>
-                  <span ng-if="result.type == 1">شخصي</span>
-                  <span ng-if="result.type == 2">شركة</span>
+                 {{result.product}}
                 </td>
                 <td>{{result.phone}}</td>
-                <td>تاريخ الاشتراك</td>
+                 <td ng-bind="result.end | date:'dd/MM/yyyy'"></td>
               </tr>
             </tbody>
           </table>

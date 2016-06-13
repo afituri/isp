@@ -15,18 +15,23 @@ module.exports = {
   },
 
   getunActive : function (cb) {
-    model.Order.find({endDate:{$lt:new Date()}}).distinct('invoice',function(err, result){
-      if(!err){
-        cb(result);
-      }else{
-        console.log(err);
-        cb(null);
-      }
+    model.Order.find({endDate:{$gte:new Date()}}).distinct('invoice',function(err, ido){
+      model.Invoice.find({_id:{$in:ido}}).distinct('invoice',function(err, idin){
+        model.Order.find({$and:[{endDate:{$lt:new Date()}},{invoice:{$nin:idin}}]}).distinct('invoice',function(err, result){
+          if(!err){
+            cb(result);
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      });
     });
   },
 
   getBetween : function (start,end,cb) {
-    model.Order.find({endDate:{$gte: new Date(start), $lt: new Date(end)}}).distinct('invoice',function(err, result){
+    console.log(new Date(end));
+    model.Order.find({$and:[{endDate:{$gte: new Date(start)}},{endDate:{$lt: new Date(end)}}]}).distinct('invoice',function(err, result){
       if(!err){
         cb(result);
       }else{
@@ -36,7 +41,9 @@ module.exports = {
     });
   },
   getReseller : function (id,cb) {
-    model.Invoice.find({reseller:id}).distinct('invoice',function(err, result){
+    console.log("her");
+    console.log(id);
+    model.Invoice.find({$and:[{reseller:id},{status:1}]},function(err, result){
       if(!err){
         cb(result);
       }else{

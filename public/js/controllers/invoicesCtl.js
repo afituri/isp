@@ -1,22 +1,133 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  //dddddddddddddddddddddd
-  app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
-    // alert($stateParams.id);
+  app.controller('InvoicesCtlPending',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    
+    $scope.init = function(id){
+    InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
+      console.log(response.data);
+      $scope.allInvoice=response.data.result;
+      $scope.total = response.data.count;
+    }, function(response) {
+        console.log("Something went wrong");
+    }); 
+  }
+  $scope.init(2);
+   
+   $scope.getStatus = function(){
+    $scope.init($scope.pending);
+   }
+
+   $scope.accept = function(id){
+    $scope.id = id;
+      $scope.deleteName = "هل حقا تريد تأكيد هذه الفاتورة";
+      $scope.confirmModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/confirmModel.html',
+        show: true
+      });
+   }
+    $scope.editCustomerMessage ={};
+   $scope.RejectInvoice = function(id){
+    //alert(id.id);
+    $scope.idreject = id;
+    $scope.editCustomerMessage.reject_message = "خطأ بيانات الفاتورة غير صحيحة";
+      $scope.deleteName = "هل حقا تريد تأكيد هذه الفاتورة";
+      $scope.rejectDataModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/rejectModel.html',
+        show: true
+      });
+   }
+
+   $scope.rejectEdit = function(id){
+     InvoicesServ.editInvoice(id.id,{status:3,reject_message:$scope.editCustomerMessage.reject_message}).then(function(response) {
+    
+      if(response.data){
+          $scope.rejectDataModel.hide();
+          $scope.init(3);
+          //$state.go('customers');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+   }
+
+   $scope.confirmData = function(id){
+    InvoicesServ.editInvoice(id.id,{status:1}).then(function(response) {
+        if(response.data){
+          $scope.confirmModel.hide();
+          $scope.init(2);
+          //$state.go('customers');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+   }
+  
+  
+
+  }]);
+
+  app.controller('InvoicesCtl',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+    $scope.DeleteInvoice = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذه الفاتورة";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    }
+
+    $scope.confirmDelete = function(id){
+      InvoicesServ.deleteInvoice(id.id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.initInvoce();
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.initInvoce();
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+
+
 
      $scope.renewInvoice = function(id){
       //alert(id);
      }
 
+     
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
     //alert($stateParams.id);
-    InvoicesServ.getInvoiceByID($stateParams.id).then(function(response) {
+    $scope.initInvoce = function(){
+    InvoicesServ.getInvoiceByID(1,$stateParams.id).then(function(response) {
+    
       $scope.allInvoice=response.data;
     }, function(response) {
         console.log("Something went wrong");
     });
+  }
+  $scope.initInvoce();
 
     $scope.showInvoice = function(id){
       window.location.href='/report/printInvoice/'+id;
@@ -68,7 +179,7 @@
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
     $scope.init = function () {
-      CustomersServ.getAllCustomers().then(function(response) {
+      CustomersServ.getAllCustomersStatus().then(function(response) {
         $scope.customers = response.data;
       }, function(response) {
         console.log("Something went wrong");

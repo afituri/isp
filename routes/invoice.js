@@ -11,10 +11,19 @@ router.get('/:limit/:page', function(req, res) {
 	});
  });
 
-router.get('/:id', function(req, res) {
 
-  invoiceMgr.getInvoicesById(req.params.id,function(invoices){
 
+router.get('/InvoicePending/:limit/:page/:status', function(req, res) {
+/*  console.log("gggg");
+  res.send(true);*/
+  invoiceMgr.getInvoicePending(req.params.status,req.params.limit,req.params.page,function(invoices){
+    console.log(invoices);
+    res.send(invoices);
+  });
+ });
+
+router.get('/invoices/:id/:status', function(req, res) {
+  invoiceMgr.getInvoicesById(req.params.status,req.params.id,function(invoices){
     res.send(invoices);
   });
 });
@@ -38,14 +47,28 @@ router.post('/renewInvice', function(req, res) {
   });
 });
 
+//Pending
+router.post('/renewInvicePending', function(req, res) {
+  invoiceMgr.renewInvicePending(req.body,function(result){
+    res.send(result);
+  });
+});
+
 router.post('/paidInvoice', function(req, res) {
   invoiceMgr.addPaid(req.body,function(result){
     res.send(result);
   });
 });
 
+router.post('/paidInvoicePending', function(req, res) {
+  invoiceMgr.addPaidPending(req.body,function(result){
+    res.send(result);
+  });
+});
+
 /* Edit invoice  by id  */
 router.put('/edit/:id', function(req, res) {
+  req.body.user=req.user._id;
   invoiceMgr.updateInvoice(req.params.id,req.body,function(result){
     res.send(result);
   });
@@ -53,6 +76,7 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete invoice  by id  */
 router.delete('/delete/:id', function(req, res) {
+  console.log(req.params.id);
   invoiceMgr.deleteInvoice(req.params.id,function(result){
     res.send({result:result});  
   });

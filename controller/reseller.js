@@ -3,6 +3,7 @@ var model = require("../models"),
     easyPbkdf2 = require("easy-pbkdf2")(),
     reseller = null;
 var reseller = require('../models/reseller').Reseller;
+var dollarMgr = require("./dollar");
 
 
 module.exports = {
@@ -80,7 +81,6 @@ module.exports = {
   },
   /* here we add a new user to the system */
   addReseller: function (body, cb) {
-    console.log(body);
     var obj = body;
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
     easyPbkdf2.secureHash( body.password, salt, function( err, passwordHash, originalSalt ) {
@@ -128,5 +128,238 @@ module.exports = {
       }
     });
   },
+  addInvoice : function(body,idu,cb){
+    model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
+      },function(err,product){
+        body.reseller=idu;
+        body.status=2;
+        if(body.previousSubscription==1){
 
+          customer = new model.Customer(body);
+          customer.save(function(err,customerResult){
+            if (!err) {
+              invoice={
+                customer:customerResult._id,
+                type:body.type,
+                notes:body.invoceNotes,
+                piad:body.total,
+                reseller:body.reseller,
+                discount:body.discount,
+                typein:body.typein,
+                 startDate:body.startDate,
+                endDate:body.endDate,
+                status:2
+              };
+              if(body.typein!=2){
+                invoice.instock=body.inStockdata._id;
+              }
+              invoice=new model.Invoice(invoice);
+              invoice.save(function(err,invoiceResult){
+                if (!err) {
+                  
+                  var arrayOrd=[];
+                  for( i in body.selectedProducts ){
+
+                    model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
+                      dollarMgr.getLastDollar(function(dollar){
+                        Order={
+                          invoice:invoiceResult._id,
+                          product:pro._id,
+                          price:pro.initialPrice*dollar[0].price,
+                          startDate:body.startDate,
+                          endDate:body.endDate
+                        };
+
+                        order=new model.Order(Order);
+                        order.save(function(err,orderResult){
+                          arrayOrd.push(orderResult);
+                          arrayOfResult=[customerResult,invoiceResult,arrayOrd];
+                          if(!err){
+                            if(i==body.selectedProducts.length-1){
+                              if(body.typein!=2){
+                                model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
+                                  if (!err) {
+                                    cb(arrayOfResult,false);
+                                  } else {
+                                    console.log(err);
+                                    cb(false);
+                                  }
+                                });
+                              }else{
+                                cb(arrayOfResult,false);
+                              }
+                              
+                              
+                            }
+                          } else {
+                            cb(null,err)
+                          }
+                        });
+                      });
+                      });
+                      
+   
+                  }
+                } else {
+                  console.log(err);
+                  cb(null,err);
+                }
+              });
+            } else {
+              console.log(err);
+              cb(null,err);
+            }
+          });
+        }else{
+
+          invoice={
+            customer:body.customId,
+            type:1,
+            notes:body.invoceNotes,
+            piad:body.total,
+            reseller:body.reseller,
+            discount:body.discount,
+            typein:body.typein,
+            status:2
+          };
+          if(body.typein!=2){
+            invoice.instock=body.inStockdata._id;
+          }
+          invoice=new model.Invoice(invoice);
+          invoice.save(function(err,invoiceResult){
+            if (!err) {
+              
+              var arrayOrd=[];
+              for( i in body.selectedProducts ){
+
+                model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
+                  dollarMgr.getLastDollar(function(dollar){
+                    Order={
+                      invoice:invoiceResult._id,
+                      product:pro._id,
+                      price:pro.initialPrice*dollar[0].price,
+                      startDate:body.startDate,
+                      endDate:body.endDate
+                    };
+
+                    order=new model.Order(Order);
+                    order.save(function(err,orderResult){
+                      arrayOrd.push(orderResult);
+                      arrayOfResult=[null,invoiceResult,arrayOrd];
+                      if(!err){
+                        if(i==body.selectedProducts.length-1){
+                          if(body.typein!=2){
+                            model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
+                              if (!err) {
+                                cb(arrayOfResult,false);
+                              } else {
+                                console.log(err);
+                                cb(false);
+                              }
+                            });
+                          }else{
+                            cb(arrayOfResult,false);
+                          }
+                          
+                          
+                        }
+                      } else {
+                        cb(null,err)
+                      }
+                    });
+                  });
+                  });
+                  
+
+              }
+            } else {
+              console.log(err);
+              cb(null,err);
+            }
+          });
+        }
+
+
+
+      });
+  },
+
+  renewInvice :function(body,cb){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        type:1,
+        invoice:body.idCu,
+        notes:body.invoceNotes,
+        piad:body.total,
+        reseller:invoices.reseller,
+        discount:body.discount,
+        typein:3
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          model.Product.findOne({_id:body.package},function(err,pro){
+            dollarMgr.getLastDollar(function(dollar){
+              Order={
+                invoice:invoiceResult._id,
+                product:pro._id,
+                price:pro.initialPrice*dollar[0].price,
+                startDate:body.startDate,
+                endDate:body.endDate
+              };
+              order=new model.Order(Order);
+              order.save(function(err,orderResult){
+                if (!err) {
+                  cb(invoiceResult);
+                }else{
+                  console.log(err);
+                  cb(null);
+                }
+              });
+            });
+          });
+
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
+
+addPaid :function(body,cb){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        invoice:body.idCu,
+        type:1,
+        notes:'null',
+        piad:body.paid,
+        reseller:invoices.reseller,
+        discount:0,
+        typein:4
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          cb(invoiceResult);
+          
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
 };
