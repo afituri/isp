@@ -34,7 +34,7 @@
                 <th>رقم الهاتف </th>
                 <th>المدير</th>
                 <th>الموزع </th>
-                <th>السياسة </th>
+                <th>الحالة </th>
                 <th><i class="fa fa-cog"></i></th>
               </tr>
             </thead>
@@ -65,7 +65,9 @@
 
 
                 </td>
-                <td>{{customer.policy}}</td>
+                <td ng-if="customer.status==1">مأكد</td>
+                 <td ng-if="customer.status==2">قيد الانتظار</td>
+                  <td ng-if="customer.status==3">المرفوضين</td>
                 <td>
                   <a class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                   

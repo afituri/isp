@@ -75,6 +75,7 @@ router.get('/printActive',function(req , res){
 
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
+        obj.active = "المفعلة";
         userHelpers.printReport("active.html",obj,res);
       });
     });
@@ -91,6 +92,7 @@ router.get('/printunActive',function(req , res){
         order اسم الخدمة
       */
       pars(result,function(obj){
+        obj.active = "الغير المفعلة";
         userHelpers.printReport("active.html",obj,res);
       });
       

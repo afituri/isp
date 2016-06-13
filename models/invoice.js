@@ -17,8 +17,11 @@ var Invoice = new Schema({
    discount: { type: Number, required: [true, 'Why no piad?']},
    idinv:{ type: Number},
    typein: { type: Number, default:1},
+   startDate: { type:Date, required: [true, 'start date required']},
+   endDate:{ type: Date, required: [true, 'end date required']},
    instock: { type: mongoose.Schema.ObjectId, ref : 'Instock',default:null},
-   status: { type: Number, default:1}
+   status: { type: Number, default:1},
+   reject_message : {type: String,default:null}
 });
 Invoice.plugin(autoIncrement.plugin, {
     model: 'Invoice',

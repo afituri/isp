@@ -15,8 +15,9 @@
                 <select class="form-control input-sm" ng-model="pending" ng-change="getStatus()"  required>
                   <option value="" disabled selected>الصلاحية</option>
                   <option value="0" >الكل</option>
-                  <option value="2" >قيد الانتظار</option>
                   <option value="1" >المأكد</option>
+                  <option value="2" >قيد الانتظار</option>
+                  <option value="3" >مرفوض</option>
                 </select>
               </div>
             </div>
@@ -39,12 +40,14 @@
             <thead>
               <tr>
                 <th>اسم العميل </th>
-                <th>تاريخ الانشاء</th>
-                <th>وقت الانشاء </th>
+                <th>بداية الاشتراك</th>
+                <th>نهاية الاشتراك </th>
                 <th>المدفوع </th>
                 <th>التخفيض </th>
                 <th>نوع الفاتورة </th>
                 <th>الملاحظات </th>
+                 <th>المدير </th>
+                  <th>الموزع </th>
                 <th>الحالة </th>
                 <th><i class="fa fa-cog"></i></th>
               </tr>
@@ -52,8 +55,21 @@
             <tbody>
               <tr ng-repeat="customer in allInvoice">
                 <td>{{customer.customer.name}}</td>
-                <td ng-bind="customer.createdAt | date:'dd/MM/yyyy'"></td>
-                <td ng-bind="customer.createdAt | date:'HH:mm:ss'"></td>
+                <td ng-if="customer.typein==4" ng-bind="customer.createdAt | date:'dd/MM/yyyy'"></td>
+                 <td ng-if="customer.typein==4" >لا يوجد</td>
+<!--                 <td ng-if="customer.typein==4" ng-bind="customer.createdAt | date:'HH:mm:ss'"></td> -->
+
+                 <td ng-if="customer.typein==3" ng-bind="customer.startDate | date:'dd/MM/yyyy'"></td>
+                 <td ng-if="customer.typein==3" ng-bind="customer.endDate | date:'dd/MM/yyyy'"></td>
+               <!--  <td ng-if="customer.typein==3" ng-bind="customer.startDate | date:'HH:mm:ss'"></td> -->
+
+
+                 <td ng-if="customer.typein==1" ng-bind="customer.startDate | date:'dd/MM/yyyy'"></td>
+                 <td ng-if="customer.typein==1" ng-bind="customer.endDate | date:'dd/MM/yyyy'"></td>
+              <!--   <td ng-if="customer.typein==1" ng-bind="customer.startDate | date:'HH:mm:ss'"></td> -->
+
+               <!--   <td  ng-bind="customer.startDate | date:'dd/MM/yyyy'"></td>
+                <td  ng-bind="customer.startDate | date:'HH:mm:ss'"></td> -->
                 <td>{{customer.piad}}</td>
                
                 <td>{{customer.discount}}</td>
@@ -61,11 +77,16 @@
                   <span ng-if="customer.typein==4">دفعة </span>
                   <span ng-if="customer.typein==3"> تجديد</span></td>
                 <td>{{customer.notes}}</td>
+                <td ng-if="customer.user.name == null">لايوجد</td>
+                <td ng-if="customer.user.name != null"> {{customer.user.name}}</td>
+                <td ng-if="customer.reseller.repName == null"> الشركة الام</td>
+                <td ng-if="customer.reseller.repName != null"> {{customer.reseller.repName}}</td>
                 <td ng-if="customer.status==1">مأكد</td>
                 <td ng-if="customer.status==2">قيد الانتظار</td>
+                <td ng-if="customer.status==3">مرفوض</td>
                 <td >
                   <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="accept({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تأكيد</a>
-                  <a ng-show="customer.status==2" class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;رفض</a>
+                  <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="RejectInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;رفض</a>
                   
                 </td>
               </tr>
