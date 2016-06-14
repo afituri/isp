@@ -256,6 +256,9 @@
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
+      'getInvoicePending': function(status,pageSize,currentPage){
+        return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
+      },
       'getInvoiceByID': function(status,id){
         return $http.get('/invoice/invoices/'+id+'/'+status);
       },

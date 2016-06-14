@@ -13,7 +13,9 @@ module.exports = {
     limit = parseInt(limit);
     model.Invoice.count({},function(err,count){
       model.Invoice.find({}).limit(limit).skip(page*limit)
-      .populate('Customer')
+      .populate('customer')
+      .populate('reseller')
+      .populate('user')
       .exec(function(err, invoices){
         if(!err){
           cb({result:invoices,count:count});
@@ -30,9 +32,11 @@ module.exports = {
         page = parseInt(page);
         page-=1;
         limit = parseInt(limit);
-        model.Invoice.count({status:{$ne:3}},function(err,count){
-        model.Invoice.find({status:{$ne:3}}).limit(limit).skip(page*limit)
+        model.Invoice.count({},function(err,count){
+        model.Invoice.find({}).limit(limit).skip(page*limit)
         .populate('customer')
+        .populate('reseller')
+        .populate('user')
         .exec(function(err, invoices){
           if(!err){
             cb({result:invoices,count:count});
@@ -49,6 +53,8 @@ module.exports = {
         model.Invoice.count({status:1},function(err,count){
         model.Invoice.find({status:1}).limit(limit).skip(page*limit)
         .populate('customer')
+        .populate('reseller')
+        .populate('user')
         .exec(function(err, invoices){
           if(!err){
             cb({result:invoices,count:count});
@@ -66,6 +72,28 @@ module.exports = {
         model.Invoice.count({status:2},function(err,count){
         model.Invoice.find({status:2}).limit(limit).skip(page*limit)
         .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+
+      } else if(status==3) {
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:3},function(err,count){
+        model.Invoice.find({status:3}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
         .exec(function(err, invoices){
           if(!err){
             cb({result:invoices,count:count});
@@ -94,7 +122,11 @@ module.exports = {
   },
 
   getInvoicesById :function(status,id,cb){
-    model.Invoice.find({customer:id},function(err, invoices){
+    model.Invoice.find({customer:id})
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
       if(!err){
         cb(invoices);
       }else{
@@ -134,6 +166,7 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
+
     model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
       },function(err,product){
         if(body.reseller==1){
@@ -150,7 +183,9 @@ module.exports = {
                 piad:body.total,
                 reseller:body.reseller,
                 discount:body.discount,
-                typein:body.typein
+                typein:body.typein,
+                startDate:body.startDate,
+                endDate:body.endDate
               };
               if(body.typein!=2){
                 invoice.instock=body.inStockdata._id;
@@ -395,7 +430,9 @@ renewInvicePending :function(body,cb){
         reseller:null,
         discount:body.discount,
         typein:3,
-        status:2
+        status:2,
+        startDate:body.startDate,
+        endDate:body.endDate
       };
       invoice=new model.Invoice(invoice);
       invoice.save(function(err,invoiceResult){

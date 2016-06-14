@@ -106,6 +106,23 @@
       }
     })
 
+     //howInvoiceResellserPending.html
+     .state('invoicesStatus',{
+      url: '/invoicesStatus',
+      templateUrl: 'pages/reseller/all/showInvoiceResellserPending.html',
+      controller: 'invoicesStatus',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
     .state('invoices',{
       url: '/invoices',
       templateUrl: 'pages/reseller/all/invoices.html',

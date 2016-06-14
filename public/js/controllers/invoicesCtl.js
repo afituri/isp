@@ -30,6 +30,34 @@
         show: true
       });
    }
+    $scope.editCustomerMessage ={};
+   $scope.RejectInvoice = function(id){
+    //alert(id.id);
+    $scope.idreject = id;
+    $scope.editCustomerMessage.reject_message = "خطأ بيانات الفاتورة غير صحيحة";
+      $scope.deleteName = "هل حقا تريد تأكيد هذه الفاتورة";
+      $scope.rejectDataModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/rejectModel.html',
+        show: true
+      });
+   }
+
+   $scope.rejectEdit = function(id){
+     InvoicesServ.editInvoice(id.id,{status:3,reject_message:$scope.editCustomerMessage.reject_message}).then(function(response) {
+    
+      if(response.data){
+          $scope.rejectDataModel.hide();
+          $scope.init(3);
+          //$state.go('customers');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+   }
 
    $scope.confirmData = function(id){
     InvoicesServ.editInvoice(id.id,{status:1}).then(function(response) {

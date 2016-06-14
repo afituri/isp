@@ -146,6 +146,8 @@ module.exports = {
                 reseller:body.reseller,
                 discount:body.discount,
                 typein:body.typein,
+                 startDate:body.startDate,
+                endDate:body.endDate,
                 status:2
               };
               if(body.typein!=2){
