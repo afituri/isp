@@ -1,6 +1,10 @@
 (function(){
   'use strict';
   var app = angular.module('reseller');
+
+    app.controller('DashboardCtl',['$scope',function($scope){
+
+    }]);
  
     app.controller('invoicesStatus',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
     $scope.pageSize = 10;
