@@ -116,6 +116,14 @@ router.get('/money/:id',function(req , res){
     });
   });
 });
+
+router.get('/company',function(req , res){
+  reportMgr.getTotalCompany(function(result){
+    parsPiad(result,function(money){
+      console.log(money);
+    });
+  });
+});
 router.post('/Between',function(req , res){
   reportMgr.getBetween(req.body.start,req.body.end,function(results){
     reportMgr.getInvoices(results,function(result){

@@ -98,4 +98,15 @@ module.exports = {
       }
     });
   },
+
+  getTotalCompany : function (cb){
+    model.Invoice.find({$and:[{status:1},{typein:{$ne:2}}]},function(err, invoices){
+      if(!err){
+        cb(invoices);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
 };
