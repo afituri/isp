@@ -89,7 +89,7 @@ module.exports = {
     });
   },
   getTotalMoney : function (id,cb){
-    model.Invoice.find({$and:[{customer:id},{status:1}]},function(err, invoices){
+    model.Invoice.find({$and:[{customer:id},{status:1},{typein:{$ne:2}}]},function(err, invoices){
       if(!err){
         cb(invoices);
       }else{

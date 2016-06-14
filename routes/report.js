@@ -111,7 +111,9 @@ router.get('/unactive',function(req , res){
 
 router.get('/money/:id',function(req , res){
   reportMgr.getTotalMoney(req.params.id,function(result){
-    console.log(result);
+    parsPiad(result,function(money){
+      console.log(money);
+    });
   });
 });
 router.post('/Between',function(req , res){
@@ -153,6 +155,7 @@ router.post('/printReseller',function(req , res){
     });
   });
 });
+
 function pars(result,cb){
   var flag1=0;
   var flag2=0;
@@ -224,6 +227,31 @@ function pars(result,cb){
 
   if(flag1&&flag2){
     cb(obj);
+  }
+}
+
+function parsPiad(result,cb){
+  var flag=0;
+  var sum=0;
+  var piad=0;
+  if(result.length==0){
+    flag=1;
+  }
+
+
+  for (i in result){
+    if(result[i].typein==4){
+      piad+=result[i].piad;
+    }else{
+      sum+=result[i].piad; 
+    }
+    if(i==result.length-1){
+      flag=1;
+    }
+  }
+  
+  if(flag){
+    cb({sum:sum,piad:piad});
   }
 }
 module.exports = router;
