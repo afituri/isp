@@ -284,7 +284,7 @@ module.exports = {
       });
   },
 
-  renewInvice :function(body,cb){
+  renewInvice :function(body,idu,cb){
   model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
       var invoice={
@@ -293,8 +293,9 @@ module.exports = {
         invoice:body.idCu,
         notes:body.invoceNotes,
         piad:body.total,
-        reseller:invoices.reseller,
+        reseller:idu,
         discount:body.discount,
+        status:2,
         typein:3
       };
       invoice=new model.Invoice(invoice);
@@ -333,16 +334,17 @@ module.exports = {
   });
 },
 
-addPaid :function(body,cb){
+addPaid :function(body,idu,cb){
   model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
+      console.log(idu);
       var invoice={
         customer:invoices.customer,
         invoice:body.idCu,
         type:1,
         notes:'null',
         piad:body.paid,
-        reseller:invoices.reseller,
+        reseller:idu,
         discount:0,
         typein:4
       };

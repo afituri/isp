@@ -53,8 +53,8 @@ module.exports = {
     });
   },
   getInvoices : function (ids,cb){
-    model.Invoice.find({$and:[{_id:{$in:ids}},{typein:1}]}).populate('customer instock').exec(function(err, result){
-      model.Invoice.find({$and:[{_id:{$in:ids}},{typein:3}]}).populate('customer invoice').exec(function(err, result2){  
+    model.Invoice.find({$and:[{_id:{$in:ids}},{typein:1},{status:1}]}).populate('customer instock').exec(function(err, result){
+      model.Invoice.find({$and:[{_id:{$in:ids}},{typein:3},{status:1}]}).populate('customer invoice').exec(function(err, result2){  
         var options = {
           path: 'invoice.invoice',
           model: 'Invoice'
@@ -88,5 +88,14 @@ module.exports = {
       });
     });
   },
-
+  getTotalMoney : function (id,cb){
+    model.Invoice.find({$and:[{customer:id},{status:1}]},function(err, invoices){
+      if(!err){
+        cb(invoices);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
 };

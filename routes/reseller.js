@@ -61,13 +61,14 @@ router.post('/addInvoice', function(req, res) {
 });
 
 router.post('/renewInvice', function(req, res) {
-  resellerMgr.renewInvice(req.body,function(result){
+  resellerMgr.renewInvice(req.body,req.user._id,function(result){
     res.send(result);
   });
 });
 
 router.post('/paidInvoice', function(req, res) {
-  resellerMgr.addPaid(req.body,function(result){
+  console.log("ssss");
+  resellerMgr.addPaid(req.body,req.user._id,function(result){
     res.send(result);
   });
 });

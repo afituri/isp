@@ -109,6 +109,11 @@ router.get('/unactive',function(req , res){
   });
 });
 
+router.get('/money/:id',function(req , res){
+  reportMgr.getTotalMoney(req.params.id,function(result){
+    console.log(result);
+  });
+});
 router.post('/Between',function(req , res){
   reportMgr.getBetween(req.body.start,req.body.end,function(results){
     reportMgr.getInvoices(results,function(result){
