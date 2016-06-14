@@ -10,7 +10,7 @@
     
 
     $scope.init = function () {
-      CustomersServ.getCustomers(1,$scope.pageSize,$scope.currentPage).then(function(response) {
+      CustomersServ.getCustomers(-1,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {

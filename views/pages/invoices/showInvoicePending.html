@@ -42,8 +42,8 @@
                 <th>اسم العميل </th>
                 <th>بداية الاشتراك</th>
                 <th>نهاية الاشتراك </th>
-                <th>المدفوع </th>
-                <th>التخفيض </th>
+               <!--  <th>المدفوع </th> -->
+              <!--   <th>التخفيض </th> -->
                 <th>نوع الفاتورة </th>
                 <th>الملاحظات </th>
                  <th>المدير </th>
@@ -70,9 +70,9 @@
 
                <!--   <td  ng-bind="customer.startDate | date:'dd/MM/yyyy'"></td>
                 <td  ng-bind="customer.startDate | date:'HH:mm:ss'"></td> -->
-                <td>{{customer.piad}}</td>
+             <!--    <td>{{customer.piad}}</td> -->
                
-                <td>{{customer.discount}}</td>
+                <!-- <td>{{customer.discount}}</td> -->
                 <td><span ng-if="customer.typein==1"> فاتورة</span>
                   <span ng-if="customer.typein==4">دفعة </span>
                   <span ng-if="customer.typein==3"> تجديد</span></td>
@@ -85,6 +85,12 @@
                 <td ng-if="customer.status==2">قيد الانتظار</td>
                 <td ng-if="customer.status==3">مرفوض</td>
                 <td >
+                   <button type="button" class="btn btn-success btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{customer.piad}} <br> 
+                    التخفيض : {{customer.discount}}
+                    " bs-popover>
+                    <i class="fa fa-info fa-fw"></i>
+                    المعلومات
+                  </button>
                   <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="accept({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تأكيد</a>
                   <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="RejectInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;رفض</a>
                   

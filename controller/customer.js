@@ -6,7 +6,27 @@ var customer = null;
 module.exports = {
 
   getCustomer :function(status,limit,page,cb){
-    page = parseInt(page);
+    if(status==-1){
+      page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Customer.count({},function(err,count){
+      model.Customer.find({}).limit(limit).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
+        if(!err){
+          //console.log(customers);
+          cb({result:customers,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+
+    } else {
+      page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
     model.Customer.count({status:status},function(err,count){
@@ -23,6 +43,9 @@ module.exports = {
         }
       });
     });
+
+    }
+    
   },
 
   getCustomerReseller :function(id,limit,page,cb){
