@@ -295,7 +295,7 @@ module.exports = {
         piad:body.total,
         reseller:idu,
         discount:body.discount,
-        status:2
+        status:2,
         typein:3
       };
       invoice=new model.Invoice(invoice);
