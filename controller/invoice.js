@@ -321,6 +321,23 @@ module.exports = {
   },
 
   updateInvoice : function(id,body,cb){
+    if(body.status==-9){
+      var obj = {status:1}
+      model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {       
+        if (!err) {
+          model.Customer.findOneAndUpdate({_id:result.customer}, obj, function(err,result) {
+          if (!err) {
+             cb(true)
+          } else {
+            cb(false);
+          }
+          });
+        } else {
+          console.log(err);
+          cb(false);
+        }
+      });
+    } else {
     var obj = body;
     model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
@@ -330,6 +347,7 @@ module.exports = {
         cb(false);
       }
     });
+  }
   },
 
   

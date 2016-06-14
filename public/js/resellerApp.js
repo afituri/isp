@@ -185,5 +185,22 @@
     });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(false).hashPrefix('!');
+    angular.extend($popoverProvider.defaults, {
+      animation: 'am-flip-x',
+      html: true
+    });
+    angular.extend(toastrConfig, {
+      positionClass: 'toast-top-left',
+      progressBar: true,
+      tapToDismiss: true
+    });
+    angular.extend($modalProvider.defaults, {
+      animation: 'am-fade-and-scale',
+      placement: 'center'
+    });
+    angular.extend($datepickerProvider.defaults, {
+      dateFormat: 'd/M/yyyy',
+      autoclose: true
+    });
   }]);
 }());

@@ -60,7 +60,7 @@
    }
 
    $scope.confirmData = function(id){
-    InvoicesServ.editInvoice(id.id,{status:1}).then(function(response) {
+    InvoicesServ.editInvoice(id.id,{status:-9}).then(function(response) {
         if(response.data){
           $scope.confirmModel.hide();
           $scope.init(2);
