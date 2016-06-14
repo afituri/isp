@@ -142,7 +142,7 @@ module.exports = {
                 customer:customerResult._id,
                 type:body.type,
                 notes:body.invoceNotes,
-                piad:body.total,
+                piad:body.total-body.discount,
                 reseller:body.reseller,
                 discount:body.discount,
                 typein:body.typein,
@@ -216,7 +216,7 @@ module.exports = {
             customer:body.customId,
             type:1,
             notes:body.invoceNotes,
-            piad:body.total,
+            piad:body.total-body.discount,
             reseller:body.reseller,
             discount:body.discount,
             typein:body.typein,
@@ -346,6 +346,7 @@ addPaid :function(body,idu,cb){
         piad:body.paid,
         reseller:idu,
         discount:0,
+        status:2,
         typein:4
       };
       invoice=new model.Invoice(invoice);

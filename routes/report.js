@@ -111,7 +111,17 @@ router.get('/unactive',function(req , res){
 
 router.get('/money/:id',function(req , res){
   reportMgr.getTotalMoney(req.params.id,function(result){
-    console.log(result);
+    parsPiad(result,function(money){
+      console.log(money);
+    });
+  });
+});
+
+router.get('/company',function(req , res){
+  reportMgr.getTotalCompany(function(result){
+    parsPiad(result,function(money){
+      console.log(money);
+    });
   });
 });
 router.post('/Between',function(req , res){
@@ -153,11 +163,13 @@ router.post('/printReseller',function(req , res){
     });
   });
 });
+
 function pars(result,cb){
   var flag1=0;
   var flag2=0;
   var orderArray=[];
   var obj=[];
+  var typeA=['فاتورة','مبدئية','تجديد','دفعة'];
   if(result.invoice.length==0){
     flag2=1;
   }
@@ -174,6 +186,10 @@ function pars(result,cb){
     var product = '';
     var phone = '';
     var end = '';
+    var start='';
+    var type='';
+    
+
     if(result.result[i].customer){
       name=result.result[i].customer.name;
     }
@@ -187,10 +203,16 @@ function pars(result,cb){
     if(result.result[i].customer){
       phone=result.result[i].customer.phone;
     }
+    if(result.result[i].startDate){
+      start=result.result[i].startDate;
+    }
+    if(result.result[i].typein){
+      type=typeA[result.result[i].typein-1];
+    }
     if(orderArray[result.result[i]._id]){
       end=orderArray[result.result[i]._id].end;
     }
-    obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end})
+    obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end,start:start,type:type})
     if(i == result.result.length-1){
       flag1=1;
     } 
@@ -201,7 +223,9 @@ function pars(result,cb){
     var product = '';
     var phone = '';
     var end = '';
-    if(result.invoice[i].customer){
+    var start='';
+    var type='';
+    if(result.invoice[i].invoice.customer){
       name=result.invoice[i].customer.name;
     }
     if(result.invoice[i].instock){
@@ -213,10 +237,16 @@ function pars(result,cb){
     if(result.invoice[i].customer){
       phone=result.invoice[i].customer.phone;
     }
+    if(result.invoice[i].startDate){
+      start=result.invoice[i].startDate;
+    }
+    if(result.invoice[i].typein){
+      type=typeA[result.invoice[i].typein-1];
+    }
     if(orderArray[result.invoice[i]._id]){
       end=orderArray[result.invoice[i]._id].end;
     }
-    obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end})
+    obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end,start:start,type:type})
     if(i == result.invoice.length-1){
       flag2=1;
     } 
@@ -224,6 +254,31 @@ function pars(result,cb){
 
   if(flag1&&flag2){
     cb(obj);
+  }
+}
+
+function parsPiad(result,cb){
+  var flag=0;
+  var sum=0;
+  var piad=0;
+  if(result.length==0){
+    flag=1;
+  }
+
+
+  for (i in result){
+    if(result[i].typein==4){
+      piad+=result[i].piad;
+    }else{
+      sum+=result[i].piad; 
+    }
+    if(i==result.length-1){
+      flag=1;
+    }
+  }
+  
+  if(flag){
+    cb({sum:sum,piad:piad});
   }
 }
 module.exports = router;
