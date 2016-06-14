@@ -117,6 +117,9 @@
       'getAllCustomers': function(){
         return $http.get('/customer/all');
       },
+      'getResCustomers': function(){
+        return $http.get('/customer/res');
+      },
       // getCustomersReject
       'getCustomersReject': function(status,pageSize,currentPage){
         return $http.get('/customer/reject/'+pageSize+'/'+currentPage+'/'+status);
@@ -258,6 +261,12 @@
       },
       'getInvoicePending': function(status,pageSize,currentPage){
         return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
+      },
+      'getInvoicePendingRes': function(status,pageSize,currentPage){
+        return $http.get('/invoice/InvoicePendingRes/'+pageSize+'/'+currentPage+'/'+status);
+      },
+      'getTotal': function(id){
+        return $http.get('/invoice/all/Total/'+id);
       },
       'getInvoiceByID': function(status,id){
         return $http.get('/invoice/invoices/'+id+'/'+status);

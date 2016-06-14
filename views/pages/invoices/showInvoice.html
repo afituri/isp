@@ -44,41 +44,93 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="invoice in allInvoice">
+              <tr ng-repeat="invoice in allInvoice" ng-if="invoice.
+                status==1" style="background-color:#ccffcc">
                 <td ng-if="invoice.typein==4" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
-                 <td ng-if="invoice.typein==4" >لا يوجد</td>
-<!--                 <td ng-if="customer.typein==4" ng-bind="customer.createdAt | date:'HH:mm:ss'"></td> -->
-
-                 <td ng-if="invoice.typein==3" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
-                 <td ng-if="invoice.typein==3" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
-               <!--  <td ng-if="customer.typein==3" ng-bind="customer.startDate | date:'HH:mm:ss'"></td> -->
-
-
-                 <td ng-if="invoice.typein==1" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
-                 <td ng-if="invoice.typein==1" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
-               <!--  <td>{{invoice.piad}}</td> -->
-              <!--   <td>{{invoice.discount}}</td> -->
-                <!-- <td>{{invoice.notes}}</td> -->
+                <td ng-if="invoice.typein==4" >لا يوجد</td>
+                <td ng-if="invoice.typein==3" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==3" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==1" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==1" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
                 <td><span ng-if="invoice.typein==1"> فاتورة</span>
+                  <span ng-if="invoice.typein==2"> مبدئية</span>
                   <span ng-if="invoice.typein==4">دفعة </span>
                   <span ng-if="invoice.typein==3"> تجديد</span></td>
                   <td ng-if="customer.reseller.repName == null"> الشركة الام</td>
-                <td ng-if="customer.reseller.repName != null"> {{customer.reseller.repName}}</td>
+                <td ng-if="customer.reseller.repName != null">  {{customer.reseller.repName}}</td>
                 <td ng-if="invoice.status==1">مأكدة</td>
                 <td ng-if="invoice.status==2">قيد الانتظار</td>
                 <td ng-if="invoice.status==3">مرفوضة</td>
                 <td>
-                  <button type="button" class="btn btn-success btn-xs" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{invoice.piad}} , التخفيض :- {{invoice.discount}} , الملاحظات :- {{invoice.notes}}" bs-popover>
+                  <button type="button" class="btn btn-success btn-xs" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{invoice.piad}} <br> التخفيض :- {{invoice.discount}} <br> الملاحظات :- {{invoice.notes}}" bs-popover>
                     <i class="fa fa-info fa-fw"></i>
                     المعلومات
                   </button>
                   <a class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                   <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
                   <a class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
-                 <!--   <a  class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a> -->
                 </td>
-
               </tr>
+
+
+              <tr ng-repeat="invoice in allInvoice" ng-if="invoice.
+                status==2" style="background-color:#ffffb3">
+                <td ng-if="invoice.typein==4" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==4" >لا يوجد</td>
+                <td ng-if="invoice.typein==3" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==3" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==1" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==1" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td><span ng-if="invoice.typein==1"> فاتورة</span>
+                  <span ng-if="invoice.typein==2"> مبدئية</span>
+                  <span ng-if="invoice.typein==4">دفعة </span>
+                  <span ng-if="invoice.typein==3"> تجديد</span></td>
+                  <td ng-if="customer.reseller.repName == null"> الشركة الام</td>
+                <td ng-if="customer.reseller.repName != null">  {{customer.reseller.repName}}</td>
+                <td ng-if="invoice.status==1">مأكدة</td>
+                <td ng-if="invoice.status==2">قيد الانتظار</td>
+                <td ng-if="invoice.status==3">مرفوضة</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-xs" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{invoice.piad}} <br> التخفيض :- {{invoice.discount}} <br> الملاحظات :- {{invoice.notes}}" bs-popover>
+                    <i class="fa fa-info fa-fw"></i>
+                    المعلومات
+                  </button>
+                  <a class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
+                  <a class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
+                </td>
+              </tr>
+
+              <tr ng-repeat="invoice in allInvoice" ng-if="invoice.
+                status==3" style="background-color: #ffb3b3">
+                <td ng-if="invoice.typein==4" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==4" >لا يوجد</td>
+                <td ng-if="invoice.typein==3" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==3" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==1" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==1" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td><span ng-if="invoice.typein==1"> فاتورة</span>
+                  <span ng-if="invoice.typein==2"> مبدئية</span>
+                  <span ng-if="invoice.typein==4">دفعة </span>
+                  <span ng-if="invoice.typein==3"> تجديد</span></td>
+                  <td ng-if="customer.reseller.repName == null"> الشركة الام</td>
+                <td ng-if="customer.reseller.repName != null">  {{customer.reseller.repName}}</td>
+                <td ng-if="invoice.status==1">مأكدة</td>
+                <td ng-if="invoice.status==2">قيد الانتظار</td>
+                <td ng-if="invoice.status==3">مرفوضة</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-xs" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{invoice.piad}} <br> التخفيض :- {{invoice.discount}} <br> الملاحظات :- {{invoice.notes}}" bs-popover>
+                    <i class="fa fa-info fa-fw"></i>
+                    المعلومات
+                  </button>
+                  <a class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
+                  <a class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
+                </td>
+              </tr>
+
+
+
             </tbody>
           </table>
         </div>

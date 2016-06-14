@@ -12,7 +12,7 @@
     $scope.total = 0;
     
     $scope.init = function(id){
-    InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
+    InvoicesServ.getInvoicePendingRes(id,$scope.pageSize,$scope.currentPage).then(function(response) {
       console.log(response.data);
       $scope.allInvoice=response.data.result;
       $scope.total = response.data.count;
@@ -207,6 +207,16 @@
 app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
     // alert($stateParams.id);
 
+    
+    InvoicesServ.getTotal($stateParams.id).then(function(response) {
+      $scope.allTotals=response.data;
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+
+
+
+     
      $scope.renewInvoice = function(id){
       //alert(id);
      }
@@ -253,6 +263,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
       if(!name){ name=null;};
       $http({ method: 'POST', url: '/customer/in/'+name}).
         success(function(data, status, headers, config) {
+          
           $scope.customers=data;
         }).error(function(data, status, headers, config) {
           console.log('Oops and error', data);
@@ -270,7 +281,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
     $scope.init = function () {
-      CustomersServ.getAllCustomers().then(function(response) {
+      CustomersServ.getResCustomers().then(function(response) {
         $scope.customers = response.data;
       }, function(response) {
         console.log("Something went wrong");

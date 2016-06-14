@@ -22,6 +22,14 @@ router.get('/InvoicePending/:limit/:page/:status', function(req, res) {
   });
  });
 
+router.get('/InvoicePendingRes/:limit/:page/:status', function(req, res) {
+  console.log(req.user._id);
+  invoiceMgr.getInvoicePendingRes(req.params.status,req.user._id,req.params.limit,req.params.page,function(invoices){
+    console.log(invoices);
+    res.send(invoices);
+  });
+ });
+
 router.get('/invoices/:id/:status', function(req, res) {
   invoiceMgr.getInvoicesById(req.params.status,req.params.id,function(invoices){
     res.send(invoices);
@@ -32,6 +40,13 @@ router.get('/all', function(req, res) {
   invoiceMgr.getAllInvoices(function(result){
     res.send(result);
   });
+});
+
+  router.get('/all/Total/:id', function(req, res) {
+  console.log(req.params.id);
+  //invoiceMgr.getAllInvoices(function(result){
+    res.send(true);
+  //});
 });
 /* Add new invoice   */
 router.post('/add', function(req, res) {

@@ -20,6 +20,12 @@ router.get('/all', function(req, res) {
     res.send(customers);
   });
 });
+
+router.get('/res', function(req, res) {
+  customerMgr.getAllCustomerRes(req.user._id,function(customers){
+    res.send(customers);
+  });
+});
 //allStatus1
 
 router.get('/allStatus1', function(req, res) {

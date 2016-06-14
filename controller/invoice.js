@@ -110,6 +110,90 @@ module.exports = {
   },
 
 
+  getInvoicePendingRes :function(status,id,limit,page,cb){
+      if(status==0){
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({reseller:id},function(err,count){
+        model.Invoice.find({reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+      } else if(status==1){
+             page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:1,reseller:id},function(err,count){
+        model.Invoice.find({status:1,reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+      } else if(status==2) {
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:2,reseller:id},function(err,count){
+        model.Invoice.find({status:2,reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+
+      } else if(status==3) {
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:3,reseller:id},function(err,count){
+        model.Invoice.find({status:3,reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+
+      }
+    
+  },
+
+
+
    getAllInvoices :function(cb){
     model.Invoice.find({},function(err, invoices){
       if(!err){

@@ -49,12 +49,11 @@ module.exports = {
   },
 
   getCustomerReseller :function(id,limit,page,cb){
-    console.log("ssss");
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.Customer.count({status:{$ne:3}},function(err,count){
-      model.Customer.find({status:{$ne:3}}).skip(page*limit)
+    model.Customer.count({status:{$ne:3},reseller:id},function(err,count){
+      model.Customer.find({status:{$ne:3},reseller:id}).skip(page*limit)
       .populate('user')
       .populate('reseller')
       .exec(function(err, customers){
@@ -99,6 +98,18 @@ module.exports = {
       }
     });
   },
+
+  getAllCustomerRes :function(id,cb){
+    model.Customer.find({status:{$ne:3},reseller:id},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
 
   getAllCustomerStatus:function(status,cb){
     model.Customer.find({status:status},function(err, customers){
