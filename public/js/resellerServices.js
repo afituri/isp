@@ -287,10 +287,10 @@
         return $http.post('/invoice/renewInvice',renewInviceObj);
       },
       'renewInvicePending': function(renewInviceObj){
-        return $http.post('/invoice/renewInvicePending',renewInviceObj);
+        return $http.post('/reseller/renewInvice',renewInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
-        return $http.post('/invoice/paidInvoicePending',paidInviceObj);
+        return $http.post('/reseller/paidInvoice',paidInviceObj);
       }
     };
     return self;

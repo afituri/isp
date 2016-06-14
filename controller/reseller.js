@@ -346,6 +346,7 @@ addPaid :function(body,idu,cb){
         piad:body.paid,
         reseller:idu,
         discount:0,
+        status:2,
         typein:4
       };
       invoice=new model.Invoice(invoice);
