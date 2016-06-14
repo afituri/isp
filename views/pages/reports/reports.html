@@ -73,8 +73,10 @@
               <tr>
                 <th>اسم العميل</th>
                 <th>ماك ادرس</th>
+                <th>نوع الفاتورة</th>
                 <th>نوع الاشتراك</th>
                 <th>الهاتف</th>
+                <th>تاريخ البدء</th>
                 <th>تاريخ الانتهاء</th>
               </tr>
             </thead>
@@ -82,11 +84,13 @@
               <tr ng-repeat="result in results">
                 <td>{{result.name}}</td>
                 <td>{{result.macAddress}}</td>
+                <td>{{result.type}}</td>
                 <td>
                  {{result.product}}
                 </td>
                 <td>{{result.phone}}</td>
-                 <td ng-bind="result.end | date:'dd/MM/yyyy'"></td>
+                <td ng-bind="result.start | date:'dd/MM/yyyy'"></td>
+                <td ng-bind="result.end | date:'dd/MM/yyyy'"></td>
               </tr>
             </tbody>
           </table>
