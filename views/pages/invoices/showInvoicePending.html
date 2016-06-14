@@ -45,7 +45,7 @@
                <!--  <th>المدفوع </th> -->
               <!--   <th>التخفيض </th> -->
                 <th>نوع الفاتورة </th>
-                <th>الملاحظات </th>
+                <!-- <th>الملاحظات </th> -->
                  <th>المدير </th>
                   <th>الموزع </th>
                 <th>الحالة </th>
@@ -76,7 +76,7 @@
                 <td><span ng-if="customer.typein==1"> فاتورة</span>
                   <span ng-if="customer.typein==4">دفعة </span>
                   <span ng-if="customer.typein==3"> تجديد</span></td>
-                <td>{{customer.notes}}</td>
+               <!--  <td>{{customer.notes}}</td> -->
                 <td ng-if="customer.user.name == null">لايوجد</td>
                 <td ng-if="customer.user.name != null"> {{customer.user.name}}</td>
                 <td ng-if="customer.reseller.repName == null"> الشركة الام</td>
@@ -86,7 +86,8 @@
                 <td ng-if="customer.status==3">مرفوض</td>
                 <td >
                    <button type="button" class="btn btn-success btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{customer.piad}} <br> 
-                    التخفيض : {{customer.discount}}
+                    التخفيض : {{customer.discount}} <br>
+                    الملاجظات : {{customer.notes}}
                     " bs-popover>
                     <i class="fa fa-info fa-fw"></i>
                     المعلومات
