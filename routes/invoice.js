@@ -48,11 +48,11 @@ router.post('/renewInvice', function(req, res) {
 });
 
 //Pending
-router.post('/renewInvicePending', function(req, res) {
-  invoiceMgr.renewInvicePending(req.body,function(result){
-    res.send(result);
-  });
-});
+// router.post('/renewInvicePending', function(req, res) {
+//   invoiceMgr.renewInvicePending(req.body,function(result){
+//     res.send(result);
+//   });
+// });
 
 router.post('/paidInvoice', function(req, res) {
   invoiceMgr.addPaid(req.body,function(result){
@@ -60,11 +60,11 @@ router.post('/paidInvoice', function(req, res) {
   });
 });
 
-router.post('/paidInvoicePending', function(req, res) {
-  invoiceMgr.addPaidPending(req.body,function(result){
-    res.send(result);
-  });
-});
+// router.post('/paidInvoicePending', function(req, res) {
+//   invoiceMgr.addPaidPending(req.body,function(result){
+//     res.send(result);
+//   });
+// });
 
 /* Edit invoice  by id  */
 router.put('/edit/:id', function(req, res) {
