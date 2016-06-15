@@ -266,6 +266,9 @@
       'getSuppliers': function(pageSize,currentPage){
         return $http.get('/supplier/'+pageSize+'/'+currentPage);
       },
+      'getSuppliersCount': function(pageSize,currentPage){
+        return $http.get('/supplier/getSuppliersCount');
+      },
       'getSupplierByID': function(id){
         return $http.get('/supplier/'+id);
       },
@@ -328,8 +331,11 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'getCustomers': function(status,pageSize,currentPage){
+      'getCustomers': function(){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
+      },
+      'getAllMoney': function(){
+        return $http.get('/report/company');
       },
       'getCustomersCount': function(){
         return $http.get('/customer/customerCount');

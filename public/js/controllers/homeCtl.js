@@ -9,8 +9,17 @@
     $scope.currentPage = 1;
     $scope.total = 0;
      CustomersServ.getCustomersCount().then(function(response) {
-      console.log(response.data);
         $scope.customerNumber = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+
+     CustomersServ.getAllMoney().then(function(response) {
+      console.log(response.data);
+        $scope.totalMoney = (response.data.sum).toFixed(0);
+        $scope.totalPaid = (response.data.piad).toFixed(0);
+        $scope.reminder = ((response.data.sum).toFixed(0)-(response.data.piad).toFixed(2));
+
       }, function(response) {
         console.log("Something went wrong");
       });
@@ -20,6 +29,8 @@
       }, function(response) {
         console.log("Something went wrong");
       });
+
+      // all money 
 
 
   }]);

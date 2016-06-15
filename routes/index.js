@@ -18,11 +18,11 @@ router.get('/cities',userHelpers.isLogin , function(req, res) {
 });
 
 router.get('/home',userHelpers.isLogin ,function(req, res) {
-  res.render('index', { title: 'الرئيسية' });
+  res.render('index', { title: 'الرئيسية' ,name : req.user.name});
 });
 
 router.get('/reseller',userHelpers.isLogin ,function(req, res) {
-  res.render('reseller/index', { title: 'الرئيسية' });
+  res.render('reseller/index', { title: 'الرئيسية' ,name : req.user.repName});
 });
 
 module.exports = router;

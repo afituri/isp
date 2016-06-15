@@ -16,6 +16,13 @@ router.get('/all', function(req, res) {
     res.send(supplier);
   });
 });
+//getSuppliersCount
+router.get('/getSuppliersCount', function(req, res) {
+  // res.send(data.suppliers);
+  supplierMgr.getAllSupplierCount(function(supplier){
+    res.send(supplier);
+  });
+});
 /* Add new supplier  */
 router.post('/add', function(req, res) {
   // console.log(req.body);

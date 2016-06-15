@@ -32,6 +32,19 @@ module.exports = {
       }
     });
   },
+
+    getAllSupplierCount :function(cb){
+    model.Supplier.count({},function(err, result){
+      if(!err){
+        cb({count:result});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+
   getSupplierId :function(id,cb){
     model.Supplier.findOne({_id : id}, function(err, result){
       if(!err){

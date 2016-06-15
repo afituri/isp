@@ -148,7 +148,7 @@ router.get('/money/:id',function(req , res){
 router.get('/company',function(req , res){
   reportMgr.getTotalCompany(function(result){
     parsPiad(result,function(money){
-      console.log(money);
+      res.send(money);
     });
   });
 });
