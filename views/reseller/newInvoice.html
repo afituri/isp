@@ -242,6 +242,21 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">الدفعة</label>
+                <input  class="form-control input-sm" type="text" ng-model="newInvoiceForm.paid"  placeholder="الدفعة">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">ملاحظات</label>
+                <textarea class="form-control input-sm" rows="6" ng-model="newInvoiceForm.paidNotes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
             <div class="col-md-4" ng-show="itemInfo.length == 0">
               <div class="alert alert-info">
                 <p class="text-center">
