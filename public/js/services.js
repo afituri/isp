@@ -169,7 +169,7 @@
     };
     return self;
   }]);
-  app.service('ServiceProvidersServ',['$http',function($http){
+  app.service('ServiceProvidersServ',['$http','Upload',function($http,Upload){
     var self = {
       'serviceProvidersObj': [],
       'getServiceProviders': function(){
@@ -186,7 +186,12 @@
         return $http.get('/sProvider/'+id+'/services');
       },
       'addServiceProvider': function(serviceProviderObj){
-        return $http.post('/sProvider/add',serviceProviderObj);
+        // return $http.post('/sProvider/add',serviceProviderObj);
+        return Upload.upload({
+          url: '/sProvider/add',
+          method: 'POST',
+          data: {file: serviceProviderObj.logo, 'object': serviceProviderObj}
+        });
       },
       'editServiceProvider': function(id,serviceProviderObj){
         return $http.put('/sProvider/edit/'+id,serviceProviderObj);
@@ -197,6 +202,35 @@
     };
     self.getServiceProviders();
     return self;
+  }]);
+  app.service('uploadService',['$timeout','Upload',function($timeout,Upload){
+    this.uploadFile = function(file, fieldName, insertedID) {
+      var results = {errorFileType:false};
+      if (file && (file.type === 'application/pdf') && (file.size <= 2000000)) {
+        Upload.upload({
+          url: 'api/fileUpload',
+          method: 'POST',
+          data: {file: file, 'fieldName': fieldName, 'insertedID': insertedID}
+        }).then(function (response) {
+          $timeout(function () {
+            results.result = response.data;
+            // console.log(results.result);
+          });
+        }, function (response) {
+            if (response.status > 0){
+              results.errorMsg = response.status + ': ' + response.data;
+              // console.log(results.errorMsg);
+            }
+        }, function (evt) {
+            results.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            // console.log(results.progress);
+        });
+      } else {
+        results.errorFileType = true;
+        // console.log(results.errorFileType);
+      }
+      return results;
+    };
   }]);
 //0000 
   app.service('ServicesServ',['$http',function($http){
@@ -533,34 +567,5 @@
       }
     };
     return self;
-  }]);
-  app.service('uploadService',['$timeout','Upload',function($timeout,Upload){
-    this.uploadFile = function(file, fieldName, insertedID) {
-      var results = {errorFileType:false};
-      if (file && (file.type === 'application/pdf') && (file.size <= 2000000)) {
-        Upload.upload({
-          url: 'api/fileUpload',
-          method: 'POST',
-          data: {file: file, 'fieldName': fieldName, 'insertedID': insertedID}
-        }).then(function (response) {
-          $timeout(function () {
-            results.result = response.data;
-            // console.log(results.result);
-          });
-        }, function (response) {
-            if (response.status > 0){
-              results.errorMsg = response.status + ': ' + response.data;
-              // console.log(results.errorMsg);
-            }
-        }, function (evt) {
-            results.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-            // console.log(results.progress);
-        });
-      } else {
-        results.errorFileType = true;
-        // console.log(results.errorFileType);
-      }
-      return results;
-    };
   }]);
 }());
