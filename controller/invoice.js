@@ -277,7 +277,19 @@ module.exports = {
               invoice=new model.Invoice(invoice);
               invoice.save(function(err,invoiceResult){
                 if (!err) {
-                  
+                  if(body.paid!=0){
+                    var Paid={
+                      customer:customerResult._id,
+                      invoice:invoiceResult._id,
+                      type:1,
+                      notes:body.paidNotes,
+                      piad:body.paid,
+                      reseller:null,
+                      discount:0,
+                      typein:4
+                    };
+                    invoice=new model.Invoice(Paid);
+                    invoice.save();}
                   var arrayOrd=[];
                   for( i in body.selectedProducts ){
 
@@ -300,12 +312,13 @@ module.exports = {
                               if(body.typein!=2){
                                 model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
                                   if (!err) {
-                                    cb(arrayOfResult,false);
-                                  } else {
-                                    console.log(err);
-                                    cb(false);
-                                  }
-                                });
+                                    
+                                      cb(arrayOfResult,false);
+                                    } else {
+                                      console.log(err);
+                                      cb(false);
+                                    }
+                                  });
                               }else{
                                 cb(arrayOfResult,false);
                               }
@@ -348,7 +361,20 @@ module.exports = {
           invoice=new model.Invoice(invoice);
           invoice.save(function(err,invoiceResult){
             if (!err) {
-              
+              if(body.paid!=0){
+                var Paid={
+                  customer:body.customId,
+                  invoice:invoiceResult._id,
+                  type:1,
+                  notes:body.paidNotes,
+                  piad:body.paid,
+                  reseller:null,
+                  discount:0,
+                  typein:4
+                };
+                invoice=new model.Invoice(Paid);
+                invoice.save();
+                }
               var arrayOrd=[];
               for( i in body.selectedProducts ){
 
@@ -371,7 +397,7 @@ module.exports = {
                           if(body.typein!=2){
                             model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
                               if (!err) {
-                                cb(arrayOfResult,false);
+                                  cb(arrayOfResult,false);
                               } else {
                                 console.log(err);
                                 cb(false);
@@ -422,10 +448,19 @@ module.exports = {
         }
       });
     } else {
+
     var obj = body;
     model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
-        cb(true)
+        if(body.status == 3){
+          console.log('m hear');
+          model.Instock.findOneAndUpdate({invoice:id},{status:1},function(err,result) { 
+            cb(true);
+          }) ;
+        }else{
+          cb(true);
+        }
+        
       } else {
         console.log(err);
         cb(false);

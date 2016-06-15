@@ -3,6 +3,12 @@ var router = express.Router();
 var data = require('../data/sProvider');
 var serviceProviderMgr = require("../controller/Serviceprovider");
 var servicesMgr = require("../controller/service");
+multiparty = require('connect-multiparty'),
+multipartyMiddleware = multiparty();
+var formidable = require('formidable'),
+    http = require('http'),
+    util = require('util'),
+    fs   = require('fs-extra');
 
 /* GET all Service Providers */
 router.get('/', function(req, res) {
@@ -12,9 +18,19 @@ router.get('/', function(req, res) {
 });
 
 /* Add new Service Provider  */
-router.post('/add', function(req, res) {  
-  serviceProviderMgr.addSProvider(req.body,function(SProvider){
-    res.send(SProvider);
+router.post('/add', multipartyMiddleware, function(req, res) {
+  fs.readFile(req.files.file.path, function (err, data) {
+    var newPath = __dirname + "/../public/img/"+req.files.file.originalFilename;
+    fs.writeFile(newPath, data, function (err) {
+      if(!err){
+        console.log("back");
+        req.body.logo= "/../img/"+req.files.file.originalFilename;; 
+        serviceProviderMgr.addSProvider(req.body,function(SProvider){
+          res.send(SProvider);
+        });
+      }
+      
+    });
   });
 });
 

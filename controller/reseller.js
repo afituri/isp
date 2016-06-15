@@ -156,7 +156,20 @@ module.exports = {
               invoice=new model.Invoice(invoice);
               invoice.save(function(err,invoiceResult){
                 if (!err) {
-                  
+                  if(body.paid!=0){
+                    var Paid={
+                      customer:customerResult._id,
+                      invoice:invoiceResult._id,
+                      type:1,
+                      notes:body.paidNotes,
+                      piad:body.paid,
+                      reseller:body.reseller,
+                      discount:0,
+                      status:2,
+                      typein:4
+                    };
+                    invoice=new model.Invoice(Paid);
+                    invoice.save();}
                   var arrayOrd=[];
                   for( i in body.selectedProducts ){
 
@@ -228,7 +241,21 @@ module.exports = {
           invoice=new model.Invoice(invoice);
           invoice.save(function(err,invoiceResult){
             if (!err) {
-              
+              if(body.paid!=0){
+                var Paid={
+                  customer:body.customId,
+                  invoice:invoiceResult._id,
+                  type:1,
+                  notes:body.paidNotes,
+                  piad:body.paid,
+                  reseller:body.reseller,
+                  discount:0,
+                  status:2,
+                  typein:4
+                };
+                invoice=new model.Invoice(Paid);
+                invoice.save();
+                }
               var arrayOrd=[];
               for( i in body.selectedProducts ){
 
