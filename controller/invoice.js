@@ -422,10 +422,19 @@ module.exports = {
         }
       });
     } else {
+
     var obj = body;
     model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
-        cb(true)
+        if(body.status == 3){
+          console.log('m hear');
+          model.Instock.findOneAndUpdate({invoice:id},{status:1},function(err,result) { 
+            cb(true);
+          }) ;
+        }else{
+          cb(true);
+        }
+        
       } else {
         console.log(err);
         cb(false);
