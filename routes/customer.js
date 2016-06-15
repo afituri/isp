@@ -21,6 +21,14 @@ router.get('/all', function(req, res) {
   });
 });
 
+//customerCount
+router.get('/customerCount', function(req, res) {
+  console.log("fff");
+  customerMgr.getAllCustomerCount(function(customers){
+    res.send(customers);
+  });
+});
+
 router.get('/res', function(req, res) {
   customerMgr.getAllCustomerRes(req.user._id,function(customers){
     res.send(customers);

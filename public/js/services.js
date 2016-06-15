@@ -296,6 +296,9 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
+      'getCustomersCount': function(){
+        return $http.get('/customer/customerCount');
+      },
       'getAllCustomers': function(){
         return $http.get('/customer/all');
       },

@@ -583,7 +583,8 @@ addPaid :function(body,cb){
         piad:body.paid,
         reseller:null,
         discount:0,
-        typein:4
+        typein:4,
+        notes: body.notes
       };
       invoice=new model.Invoice(invoice);
       invoice.save(function(err,invoiceResult){

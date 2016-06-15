@@ -99,6 +99,18 @@ module.exports = {
     });
   },
 
+  //getAllCustomerCount
+    getAllCustomerCount :function(cb){
+    model.Customer.count({},function(err, customers){
+      if(!err){
+        cb({count:customers});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
   getAllCustomerRes :function(id,cb){
     model.Customer.find({status:{$ne:3},reseller:id},function(err, customers){
       if(!err){

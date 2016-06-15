@@ -8,12 +8,14 @@
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
-     CustomersServ.getCustomers($scope.pageSize,$scope.currentPage).then(function(response) {
+     CustomersServ.getCustomersCount().then(function(response) {
+      console.log(response.data);
         $scope.customerNumber = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
-      SuppliersServ.getSuppliers($scope.pageSize,$scope.currentPage).then(function(response) {
+      
+      SuppliersServ.getSuppliersCount().then(function(response) {
         $scope.suppliersCount = response.data.count;
       }, function(response) {
         console.log("Something went wrong");

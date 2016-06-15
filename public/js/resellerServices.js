@@ -299,6 +299,7 @@
         return $http.post('/reseller/renewInvice',renewInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
+        console.log(paidInviceObj);
         return $http.post('/reseller/paidInvoice',paidInviceObj);
       }
     };

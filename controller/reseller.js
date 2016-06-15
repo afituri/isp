@@ -347,7 +347,8 @@ addPaid :function(body,idu,cb){
         reseller:idu,
         discount:0,
         status:2,
-        typein:4
+        typein:4,
+        notes: body.notes
       };
       invoice=new model.Invoice(invoice);
       invoice.save(function(err,invoiceResult){

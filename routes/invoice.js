@@ -65,6 +65,7 @@ router.post('/renewInvice', function(req, res) {
 // });
 
 router.post('/paidInvoice', function(req, res) {
+  console.log(req.body);
   invoiceMgr.addPaid(req.body,function(result){
     res.send(result);
   });

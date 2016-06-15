@@ -10,8 +10,14 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label class="control-label">الدقعة</label>
+                <label class="control-label">الدفعة</label>
                 <input class="form-control input-sm" type="text" ng-model="paidInvoiceForm.paid" placeholder="الدفعة">
+              </div>
+            </div>
+             <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">معلومات عن الدفعة</label>
+                <textarea class="form-control input-sm" cols="30" rows="10" ng-model="paidInvoiceForm.notes" ng-required-err-type="discriptoinService" placeholder="معلومات عن الخدمة" required></textarea>
               </div>
             </div>
           </div>

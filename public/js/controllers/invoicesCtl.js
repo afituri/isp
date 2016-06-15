@@ -143,6 +143,10 @@
 
     $scope.showInvoice = function(id){
       window.location.href='/report/printInvoice/'+id;
+    },
+    $scope.showPaid = function(id){
+      alert(id);
+      window.location.href='/report/printInvoicePaid/'+id;
     }
   }]);
 

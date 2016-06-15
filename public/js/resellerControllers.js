@@ -205,9 +205,7 @@
   app.controller('NewInvoiceCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
   }]);*/
 app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
-    // alert($stateParams.id);
-
-    
+    $scope.resellerFlag=1;
     InvoicesServ.getTotal($stateParams.id).then(function(response) {
       console.log("response");
       console.log(response.data);
@@ -230,6 +228,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
     $scope.activePanel = MenuFac;
     //alert($stateParams.id);
     InvoicesServ.getInvoiceByID(2,$stateParams.id).then(function(response) {
+      console.log(response.data);
       $scope.allInvoice=response.data;
     }, function(response) {
         console.log("Something went wrong");
@@ -446,7 +445,9 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
     }, function(response) {
       console.log("Something went wrong");
     });
+
     $scope.paidInvoice = function(){
+
       $scope.paidInvoiceForm.idCu=$stateParams.id;
       InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
         if(response.data){

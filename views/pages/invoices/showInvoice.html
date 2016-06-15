@@ -66,10 +66,12 @@
                     <i class="fa fa-info fa-fw"></i>
                     المعلومات
                   </button>
-                  <a class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a  ng-if="invoice.typein!=4" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                   <a  ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
+                 
                   <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
                   <a class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
-                  <a class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
+                  <a ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
                 </td>
               </tr>
 
@@ -96,10 +98,11 @@
                     <i class="fa fa-info fa-fw"></i>
                     المعلومات
                   </button>
-                  <a class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a  ng-if="invoice.typein!=4" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                   <a  ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
                   <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
                   <a class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
-                  <a class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
+                  <a ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
                 </td>
               </tr>
 
@@ -125,10 +128,11 @@
                     <i class="fa fa-info fa-fw"></i>
                     المعلومات
                   </button>
-                  <a class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a  ng-if="invoice.typein!=4" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                   <a  ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
                   <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
                   <a class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
-                  <a class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
+                  <a ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
 
                 </td>
               </tr>

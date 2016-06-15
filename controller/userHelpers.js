@@ -11,6 +11,24 @@ module.exports = {
     res.redirect('/');*/
     return next();
   },
+  printReportPaid : function(HTMLprint,result,res){
+    console.log(result);
+    jsreport.render({
+      template: { 
+        engine: "jsrender",
+        recipe: "phantom-pdf",
+        content: fs.readFileSync(path.join(__dirname, "../views/reports/"+HTMLprint), "utf8"),
+        
+      },data:{
+        result:result
+      }
+    }).then(function(resp) {
+      resp.stream.pipe(res);
+    }).catch(function(e) {
+      res.end(e.message);
+    });
+
+  },
   printReport : function(HTMLprint,result,res){
     console.log(result);
     jsreport.render({

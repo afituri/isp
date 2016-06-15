@@ -3,6 +3,9 @@ var router = express.Router();
 var userHelpers = require('../controller/userHelpers');
 var invoiceMgr = require("../controller/invoice");
 var reportMgr = require("../controller/report");
+var jsreport = require("jsreport");
+var fs = require("fs");
+var path = require("path");
 
 
 
@@ -19,6 +22,31 @@ router.get('/active',function(req , res){
     });
   });
 });
+
+router.get('/printInvoicePaid/:id', function(req, res) {
+    invoiceMgr.getInvoicedata(req.params.id,function(result){
+      console.log(result.invoices);
+      console.log(result.invoices.piad);
+      console.log(result.invoices.discount);
+      console.log(result.invoices.notes);
+      
+      jsreport.render({
+        template: { 
+          engine: "jsrender",
+          recipe: "phantom-pdf",
+          content: fs.readFileSync(path.join(__dirname, "../views/reports/invoicePaid.html"), "utf8"),
+          
+        },data:{result:result
+        }
+      }).then(function(resp) {
+        resp.stream.pipe(res);
+      }).catch(function(e) {
+        res.end(e.message);
+      });
+
+  });
+
+  });
 
 
 router.get('/printInvoice/:id', function(req, res) {
