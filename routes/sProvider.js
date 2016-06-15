@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
 
 /* Add new Service Provider  */
 router.post('/add', function(req, res) {  
+  console.log(req.body);
   serviceProviderMgr.addSProvider(req.body,function(SProvider){
     res.send(SProvider);
   });
