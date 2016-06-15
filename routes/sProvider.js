@@ -3,6 +3,8 @@ var router = express.Router();
 var data = require('../data/sProvider');
 var serviceProviderMgr = require("../controller/Serviceprovider");
 var servicesMgr = require("../controller/service");
+multiparty = require('connect-multiparty'),
+multipartyMiddleware = multiparty();
 
 /* GET all Service Providers */
 router.get('/', function(req, res) {
@@ -12,11 +14,12 @@ router.get('/', function(req, res) {
 });
 
 /* Add new Service Provider  */
-router.post('/add', function(req, res) {  
+router.post('/add', multipartyMiddleware, function(req, res) {  
+  console.log(req.files.file);
   console.log(req.body);
-  serviceProviderMgr.addSProvider(req.body,function(SProvider){
-    res.send(SProvider);
-  });
+  // serviceProviderMgr.addSProvider(req.body,function(SProvider){
+  //   res.send(SProvider);
+  // });
 });
 
 /* Edit Service Provider by id  */
