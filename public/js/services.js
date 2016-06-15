@@ -534,6 +534,33 @@
     };
     return self;
   }]);
-
-
+  app.service('uploadService',['$timeout','Upload',function($timeout,Upload){
+    this.uploadFile = function(file, fieldName, insertedID) {
+      var results = {errorFileType:false};
+      if (file && (file.type === 'application/pdf') && (file.size <= 2000000)) {
+        Upload.upload({
+          url: 'api/fileUpload',
+          method: 'POST',
+          data: {file: file, 'fieldName': fieldName, 'insertedID': insertedID}
+        }).then(function (response) {
+          $timeout(function () {
+            results.result = response.data;
+            // console.log(results.result);
+          });
+        }, function (response) {
+            if (response.status > 0){
+              results.errorMsg = response.status + ': ' + response.data;
+              // console.log(results.errorMsg);
+            }
+        }, function (evt) {
+            results.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            // console.log(results.progress);
+        });
+      } else {
+        results.errorFileType = true;
+        // console.log(results.errorFileType);
+      }
+      return results;
+    };
+  }]);
 }());
