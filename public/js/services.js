@@ -479,6 +479,9 @@
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
+      'getTotal': function(id){
+        return $http.get('/report/money/'+id);
+      },
       'getInvoicePending': function(status,pageSize,currentPage){
         return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
       },
@@ -507,7 +510,7 @@
         return $http.post('/report/Reseller',{reseller:id});
       },
       'printBetweenDates': function(start,end){
-        return $http.post('/report/printBetween',{start:start,end:end});
+        console.log(start);
       },
       'printResseler': function(id){
         return $http.post('/report/printReseller',{reseller:id});

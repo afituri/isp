@@ -57,21 +57,16 @@
     
    
     $scope.printDate = function(){
-      console.log("dsfsdf");
-      InvoicesServ.printBetweenDates($scope.startDate,$scope.endDate).then(function(response) {
-        $scope.results= response.data;
-      }, function(response) {
-        console.log("Something went wrong");
-      });
+      window.location.href="/report/printBetween/"+$scope.startDate+"/"+$scope.endDate;
     };
    
     $scope.printReseller = function(){
-      console.log("sfd");
-      InvoicesServ.printResseler($scope.reseller).then(function(response) {
+      window.location.href="/report/printReseller/"+$scope.reseller;
+    /*  InvoicesServ.printResseler($scope.reseller).then(function(response) {
         $scope.results= response.data;
       }, function(response) {
         console.log("Something went wrong");
-      });
+      });*/
     };
   }]);
 }());

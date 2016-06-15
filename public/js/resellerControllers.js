@@ -209,7 +209,12 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
 
     
     InvoicesServ.getTotal($stateParams.id).then(function(response) {
-      $scope.allTotals=response.data;
+      console.log("response");
+      console.log(response.data);
+      $scope.allTotals=response.data.sum.toFixed(2);
+      $scope.piad =  response.data.piad.toFixed(2);
+
+      $scope.Therest =(response.data.sum-response.data.piad).toFixed(2);
     }, function(response) {
         console.log("Something went wrong");
     });

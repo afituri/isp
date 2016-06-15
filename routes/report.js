@@ -112,7 +112,7 @@ router.get('/unactive',function(req , res){
 router.get('/money/:id',function(req , res){
   reportMgr.getTotalMoney(req.params.id,function(result){
     parsPiad(result,function(money){
-      console.log(money);
+      res.send(money);
     });
   });
 });
@@ -133,9 +133,11 @@ router.post('/Between',function(req , res){
     });
   });
 });
-router.post('/printBetween',function(req , res){
-  console.log(req.body);
-  reportMgr.getBetween(req.body.start,req.body.end,function(results){
+router.get('/printBetween/:start/:end',function(req , res){
+  console.log(req.params.start);
+  console.log(req.params.end);
+
+  reportMgr.getBetween(req.params.start,req.params.end,function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
         userHelpers.printReport("active.html",obj,res);
@@ -154,8 +156,8 @@ router.post('/Reseller',function(req , res){
   });
 });
 
-router.post('/printReseller',function(req , res){
-  reportMgr.getReseller(req.body.reseller,function(results){
+router.get('/printReseller/:id',function(req , res){
+  reportMgr.getReseller(req.params.id,function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
         userHelpers.printReport("active.html",obj,res);

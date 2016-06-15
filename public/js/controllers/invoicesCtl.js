@@ -79,6 +79,18 @@
   }]);
 
   app.controller('InvoicesCtl',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+      InvoicesServ.getTotal($stateParams.id).then(function(response) {
+      console.log("response");
+      console.log(response.data);
+      $scope.allTotals=response.data.sum.toFixed(2);
+      $scope.piad =  response.data.piad.toFixed(2);
+
+      $scope.Therest =(response.data.sum-response.data.piad).toFixed(2);
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+
+
     $scope.DeleteInvoice = function(id){
       $scope.id = id;
       $scope.deleteName = "هذه الفاتورة";

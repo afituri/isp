@@ -42,12 +42,7 @@ router.get('/all', function(req, res) {
   });
 });
 
-  router.get('/all/Total/:id', function(req, res) {
-  console.log(req.params.id);
-  //invoiceMgr.getAllInvoices(function(result){
-    res.send(true);
-  //});
-});
+
 /* Add new invoice   */
 router.post('/add', function(req, res) {
   console.log("im in add");

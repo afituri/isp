@@ -266,7 +266,7 @@
         return $http.get('/invoice/InvoicePendingRes/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getTotal': function(id){
-        return $http.get('/invoice/all/Total/'+id);
+        return $http.get('/report/money/'+id);
       },
       'getInvoiceByID': function(status,id){
         return $http.get('/invoice/invoices/'+id+'/'+status);
