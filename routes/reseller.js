@@ -22,6 +22,14 @@ router.get('/all', function(req, res) {
   });
 });
 
+router.get('/getAllResellersCount', function(req, res) {
+  resellerMgr.getAllResellerCount(function(reseller){
+    console.log(reseller);
+    res.send(reseller);
+  });
+});
+
+
 /* Add new reseller  */
 router.post('/add', function(req, res) {
   // console.log(req.body);

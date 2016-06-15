@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','SuppliersServ',function($scope,MenuFac,CustomersServ,SuppliersServ){
+  app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','SuppliersServ','ResllersServ',function($scope,MenuFac,CustomersServ,SuppliersServ,ResllersServ){
     //alert("hii");
     MenuFac.active = -1;
     $scope.activePanel = MenuFac;
@@ -31,6 +31,11 @@
       });
 
       // all money 
+      ResllersServ.getResellersCount().then(function(response) {
+        $scope.ResellerCount = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
 
 
   }]);

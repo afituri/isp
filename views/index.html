@@ -200,16 +200,24 @@
           </div>
         </div>
         <!-- top navigation -->
+
         <div class="top_nav">
+
           <div class="nav_menu">
             <nav class="" role="navigation">
+             <ul class="nav navbar-nav navbar-rigth">
+              <h3> &nbsp; &nbsp;اخر سعر للدولار تم تسجيله <%= dollar %>$ </h3>
+            </ul>
               <ul class="nav navbar-nav navbar-left">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="img/img.jpg" alt="">&nbsp; <%= name %>
+                    
                     <span class=" fa fa-angle-down fa-fw"></span>
                   </a>
+                 
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+
                     <li><a ui-sref="user"> عرض المدراء</a>
                     </li>
                     <li><a ui-sref="newUser"> اضافة مدير</a>

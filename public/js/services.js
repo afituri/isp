@@ -149,6 +149,9 @@
       'getResellers': function(pageSize,currentPage){
         return $http.get('/reseller/'+pageSize+'/'+currentPage);
       },
+      'getResellersCount': function(pageSize,currentPage){
+        return $http.get('/reseller/getAllResellersCount');
+      },
 
       'getResellersByID': function(id){
         return $http.get('/reseller/'+id);

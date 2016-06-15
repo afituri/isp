@@ -27,6 +27,17 @@ module.exports = {
       }
     });
   },
+
+  getAllResellerCount :function(cb){
+    model.Reseller.count({},function(err, result){
+      if(!err){
+        cb({count:result});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getReseller :function(limit,page,cb){
     page = parseInt(page);
     page-=1;
