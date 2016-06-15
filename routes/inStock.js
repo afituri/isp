@@ -15,13 +15,32 @@ router.get('/getByWP/:idStock/:idItem', function(req, res) {
   });
 });
 
+
+router.get('/take/:limit/:page', function(req, res) {
+  instockMgr.getInStockTake(req.params.limit,req.params.page,function(InStock){
+    res.send(InStock);
+    
+  });
+});
+
+
 router.get('/:limit/:page', function(req, res) {
   instockMgr.getInStock(req.params.limit,req.params.page,function(InStock){
     res.send(InStock);
   });
 });
+
+
+
 router.get('/all', function(req, res) {
   instockMgr.getAllInStock(function(InStock){
+    res.send(InStock);
+  });
+});
+
+
+router.get('/allTake', function(req, res) {
+  instockMgr.getAllInStockTake(function(InStock){
     res.send(InStock);
   });
 });
