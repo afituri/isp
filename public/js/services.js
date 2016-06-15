@@ -190,7 +190,8 @@
         return Upload.upload({
           url: '/sProvider/add',
           method: 'POST',
-          data: {file: serviceProviderObj.logo, 'object': serviceProviderObj}
+          data: serviceProviderObj,
+          file: serviceProviderObj.logo
         });
       },
       'editServiceProvider': function(id,serviceProviderObj){
