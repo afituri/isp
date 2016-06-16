@@ -10,7 +10,7 @@ var fs   = require('fs-extra');
 
 
 /* GET search resellers */
-router.post('/search/:limit/:page', function(req, res) {
+router.post('/search/:limit/:page', userHelpers.isLogin ,function(req, res) {
   resellerMgr.getResellerByName(req.body.name,req.params.limit,req.params.page,function(reseller){
     res.send(reseller);
   });
@@ -18,14 +18,14 @@ router.post('/search/:limit/:page', function(req, res) {
 
 
 
-router.get('/all', function(req, res) {
+router.get('/all', userHelpers.isLogin ,function(req, res) {
   // res.send(data.resellers);
   resellerMgr.getAllReseller(function(reseller){
     res.send(reseller);
   });
 });
 
-router.get('/getAllResellersCount', function(req, res) {
+router.get('/getAllResellersCount', userHelpers.isLogin ,function(req, res) {
   resellerMgr.getAllResellerCount(function(reseller){
     res.send(reseller);
   });
@@ -33,47 +33,47 @@ router.get('/getAllResellersCount', function(req, res) {
 
 
 /* Add new reseller  */
-router.post('/add', function(req, res) {
+router.post('/add',userHelpers.isLogin , function(req, res) {
   resellerMgr.addReseller(req.body,function(reseller){
     res.send(reseller);
   });
 });
 
 /* Edit reseller by id  */
-router.put('/edit/:id', function(req, res) {
+router.put('/edit/:id',userHelpers.isLogin , function(req, res) {
   resellerMgr.updateReseller(req.params.id,req.body,function(reseller){
     res.send(reseller);
   });
 });
 
 /* Delete reseller by id  */
-router.delete('/delete/:id', function(req, res) {
+router.delete('/delete/:id',userHelpers.isLogin , function(req, res) {
   resellerMgr.deleteReseller(req.params.id,function(reseller){
     res.send({result:reseller});
   });
 });
 
 /* GET reseller by ID  */
-router.get('/:id', function(req, res) {
+router.get('/:id', userHelpers.isLogin ,function(req, res) {
   // res.send(data.reseller);
   resellerMgr.getResellerId(req.params.id,function(reseller){
     res.send(reseller);
   });
 });
 
-router.post('/addInvoice', function(req, res) {
+router.post('/addInvoice', userHelpers.isLogin ,function(req, res) {
   resellerMgr.addInvoice(req.body,req.user._id,function(result){
     res.send(result);
   });
 });
 
-router.post('/renewInvice', function(req, res) {
+router.post('/renewInvice', userHelpers.isLogin ,function(req, res) {
   resellerMgr.renewInvice(req.body,req.user._id,function(result){
     res.send(result);
   });
 });
 
-router.post('/paidInvoice', multipartyMiddleware,function(req, res) {
+router.post('/paidInvoice',userHelpers.isLogin , multipartyMiddleware,function(req, res) {
   if(req.body.monoyStatus==2){
     resellerMgr.addPaid(req.body,req.user._id,function(result){
       var dir = './Check/';
@@ -105,7 +105,7 @@ router.post('/paidInvoice', multipartyMiddleware,function(req, res) {
   //   res.send(result);
   // });
 });
-router.get('/:limit/:page', function(req, res) {
+router.get('/:limit/:page', userHelpers.isLogin ,function(req, res) {
   // res.send(data.resellers);
   resellerMgr.getReseller(req.params.limit,req.params.page,function(reseller){
     res.send(reseller);

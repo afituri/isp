@@ -10,53 +10,45 @@ var user = require("../controller/user");
 /* GET all customer */
 
 
-router.get('/reject/:limit/:page/:status', function(req, res) {
+router.get('/reject/:limit/:page/:status', userHelpers.isLogin ,function(req, res) {
   customerMgr.getCustomerReject(req.session.passport.user,req.params.status,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
-router.get('/all', function(req, res) {
+router.get('/all', userHelpers.isLogin ,function(req, res) {
   customerMgr.getAllCustomer(function(customers){
     res.send(customers);
   });
 });
 
 //customerCount
-router.get('/customerCount', function(req, res) {
-  console.log("fff");
+router.get('/customerCount',userHelpers.isLogin , function(req, res) {
   customerMgr.getAllCustomerCount(function(customers){
     res.send(customers);
   });
 });
 
-router.get('/res', function(req, res) {
+router.get('/res', userHelpers.isLogin ,function(req, res) {
   customerMgr.getAllCustomerRes(req.user._id,function(customers){
     res.send(customers);
   });
 });
 //allStatus1
 
-router.get('/allStatus1', function(req, res) {
+router.get('/allStatus1', userHelpers.isLogin ,function(req, res) {
   customerMgr.getAllCustomerStatus(1,function(customers){
     res.send(customers);
   });
 });
 //0000000
-router.get('/customerReseller/:limit/:page', function(req, res) {
-  console.log("dd");
+router.get('/customerReseller/:limit/:page',userHelpers.isLogin , function(req, res) {
   customerMgr.getCustomerReseller(req.user._id,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
 
 /* Add new customer   */
-router.post('/add', function(req, res) {
-  /*user.register({email:'elamir@naga.ly',password:'12345'},function(customer){
-    console.log(customer);
-  });*/
-  
-
-  //res.send(true);
+router.post('/add', userHelpers.isLogin ,function(req, res) {
   req.body.user =null;
   req.body.reseller=null;
   if(req.body.status == 1){
@@ -72,63 +64,48 @@ router.post('/add', function(req, res) {
 }
 });
 
-router.post('/in/:name', function(req, res) {
+router.post('/in/:name',userHelpers.isLogin , function(req, res) {
   customerMgr.getCustomerName(req.params.name,function(customer){
     res.send(customer);
   });
 });
 
-// router.get('/report', function(req, res) {
-//    jsr.render({
-//     template: {
-//       content: fs.readFileSync(path.join(__dirname, "../views/pages/invoices/invoice.html"), "utf8"),
-//       recipe: "phantom-pdf"
-//     },
-//     data: {
-//       name:"Mr.alla don't forget to design this page !!!"
-//     }
-//   })
-//   .then(function (response) {
-//     response.result.pipe(res);
-//   });
-// });
-
 /* Edit customer  by id  */
-router.put('/edit/:id', function(req, res) {
+router.put('/edit/:id',userHelpers.isLogin , function(req, res) {
   customerMgr.updateCustomer(req.params.id,req.body,function(customer){
     res.send(customer);
   });
 });
 
 //editById
-router.put('/editById/:id', function(req, res) {
+router.put('/editById/:id',userHelpers.isLogin , function(req, res) {
   customerMgr.updateCustomerById(req.params.id,req.session.passport.user,function(customer){
     res.send(customer);
   });
 });
 
 //editRejectById
-router.put('/editRejectById/:id', function(req, res) {
+router.put('/editRejectById/:id', userHelpers.isLogin ,function(req, res) {
   customerMgr.updateRejectCustomer(req.params.id,req.session.passport.user,req.body,function(customer){
     res.send(customer);
   });
 });
 
 /* Delete customer  by id  */
-router.delete('/delete/:id', function(req, res) {
+router.delete('/delete/:id',userHelpers.isLogin , function(req, res) {
   customerMgr.deleteCustomer(req.params.id,function(customer){
     res.send({result:customer});
   });
 });
 
 /* GET customer  by ID  */
-router.get('/:id', function(req, res) {
+router.get('/:id',userHelpers.isLogin , function(req, res) {
   // res.send(data.customer);
   customerMgr.getCustomerId(req.params.id,function(customer){
     res.send(customer);
   });
 });
-router.get('/:limit/:page/:status', function(req, res) {
+router.get('/:limit/:page/:status',userHelpers.isLogin , function(req, res) {
   customerMgr.getCustomer(req.params.status,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });

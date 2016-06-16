@@ -7,7 +7,7 @@ var fs   = require('fs-extra');
 
 
 /* GET all invoice */
-router.get('/:limit/:page', function(req, res) {
+router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getInvoice(req.params.limit,req.params.page,function(invoices){
     res.send(invoices);
 	});
@@ -15,25 +15,25 @@ router.get('/:limit/:page', function(req, res) {
 
 
 
-router.get('/InvoicePending/:limit/:page/:status', function(req, res) {
+router.get('/InvoicePending/:limit/:page/:status', userHelpers.isLogin ,function(req, res) {
   invoiceMgr.getInvoicePending(req.params.status,req.params.limit,req.params.page,function(invoices){
     res.send(invoices);
   });
  });
 
-router.get('/InvoicePendingRes/:limit/:page/:status', function(req, res) {
+router.get('/InvoicePendingRes/:limit/:page/:status',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getInvoicePendingRes(req.params.status,req.user._id,req.params.limit,req.params.page,function(invoices){
     res.send(invoices);
   });
  });
 
-router.get('/invoices/:id/:status', function(req, res) {
+router.get('/invoices/:id/:status', userHelpers.isLogin ,function(req, res) {
   invoiceMgr.getInvoicesById(req.params.status,req.params.id,function(invoices){
     res.send(invoices);
   });
 });
 
-router.get('/all', function(req, res) {
+router.get('/all', userHelpers.isLogin ,function(req, res) {
   invoiceMgr.getAllInvoices(function(result){
     res.send(result);
   });
@@ -41,26 +41,20 @@ router.get('/all', function(req, res) {
 
 
 /* Add new invoice   */
-router.post('/add', function(req, res) {
+router.post('/add',userHelpers.isLogin , function(req, res) {
   invoiceMgr.addInvoice(req.body,function(result){
     res.send(result);
   });
 });
 
-router.post('/renewInvice', function(req, res) {
+router.post('/renewInvice',userHelpers.isLogin , function(req, res) {
   invoiceMgr.renewInvice(req.body,function(result){
     res.send(result);
   });
 });
 
-//Pending
-// router.post('/renewInvicePending', function(req, res) {
-//   invoiceMgr.renewInvicePending(req.body,function(result){
-//     res.send(result);
-//   });
-// });
 
-router.post('/paidInvoice',multipartyMiddleware, function(req, res) {
+router.post('/paidInvoice',userHelpers.isLogin ,multipartyMiddleware, function(req, res) {
   if(req.body.monoyStatus==2){
     invoiceMgr.addPaid(req.body,function(result){
       var dir = './Check/';
@@ -91,14 +85,10 @@ router.post('/paidInvoice',multipartyMiddleware, function(req, res) {
 
 });
 
-// router.post('/paidInvoicePending', function(req, res) {
-//   invoiceMgr.addPaidPending(req.body,function(result){
-//     res.send(result);
-//   });
-// });
+
 
 /* Edit invoice  by id  */
-router.put('/edit/:id', function(req, res) {
+router.put('/edit/:id',userHelpers.isLogin , function(req, res) {
   req.body.user=req.user._id;
   invoiceMgr.updateInvoice(req.params.id,req.body,function(result){
     res.send(result);
@@ -106,7 +96,7 @@ router.put('/edit/:id', function(req, res) {
 });
 
 /* Delete invoice  by id  */
-router.delete('/delete/:id', function(req, res) {
+router.delete('/delete/:id',userHelpers.isLogin , function(req, res) {
   invoiceMgr.deleteInvoice(req.params.id,function(result){
     res.send({result:result});  
   });

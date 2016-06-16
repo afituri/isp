@@ -9,27 +9,18 @@ var path = require("path");
 
 
 
-router.get('/active',function(req , res){
-  console.log("fff");
+router.get('/active',userHelpers.isLogin ,function(req , res){
   reportMgr.getActive(function(results){
-    //console.log(results);
     reportMgr.getInvoices(results,function(result){
-      console.log(result);
       pars(result,function(obj){
-        console.log(obj);
         res.send(obj);
       });
     });
   });
 });
 
-router.get('/printInvoicePaid/:id', function(req, res) {
+router.get('/printInvoicePaid/:id',userHelpers.isLogin , function(req, res) {
     invoiceMgr.getInvoicedata(req.params.id,function(result){
-      console.log(result.invoices);
-      console.log(result.invoices.piad);
-      console.log(result.invoices.discount);
-      console.log(result.invoices.notes);
-      
       jsreport.render({
         template: { 
           engine: "jsrender",
@@ -49,7 +40,7 @@ router.get('/printInvoicePaid/:id', function(req, res) {
   });
 
 
-router.get('/printInvoice/:id', function(req, res) {
+router.get('/printInvoice/:id',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
     var months;
     var now = new Date();
@@ -97,7 +88,7 @@ router.get('/printInvoice/:id', function(req, res) {
 });
 
 
-router.get('/printActive',function(req , res){
+router.get('/printActive',userHelpers.isLogin ,function(req , res){
   
   reportMgr.getActive(function(results){
 
@@ -111,14 +102,9 @@ router.get('/printActive',function(req , res){
 });
 
 
-router.get('/printunActive',function(req , res){
+router.get('/printunActive',userHelpers.isLogin ,function(req , res){
   reportMgr.getunActive(function(results){
     reportMgr.getInvoices(results,function(result){
-      /*
-        result المستخدمين الجدد فاتورة جديدة
-        invoise  تجديد الاشتراك
-        order اسم الخدمة
-      */
       pars(result,function(obj){
         obj.active = "الغير المفعلة";
         userHelpers.printReport("active.html",obj,res);
@@ -127,7 +113,7 @@ router.get('/printunActive',function(req , res){
     });
   });
 });
-router.get('/unactive',function(req , res){
+router.get('/unactive',userHelpers.isLogin ,function(req , res){
   reportMgr.getunActive(function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
@@ -137,7 +123,7 @@ router.get('/unactive',function(req , res){
   });
 });
 
-router.get('/money/:id',function(req , res){
+router.get('/money/:id',userHelpers.isLogin ,function(req , res){
   reportMgr.getTotalMoney(req.params.id,function(result){
     parsPiad(result,function(money){
       res.send(money);
@@ -145,14 +131,14 @@ router.get('/money/:id',function(req , res){
   });
 });
 
-router.get('/company',function(req , res){
+router.get('/company',userHelpers.isLogin ,function(req , res){
   reportMgr.getTotalCompany(function(result){
     parsPiad(result,function(money){
       res.send(money);
     });
   });
 });
-router.post('/Between',function(req , res){
+router.post('/Between',userHelpers.isLogin ,function(req , res){
   reportMgr.getBetween(req.body.start,req.body.end,function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
@@ -161,9 +147,7 @@ router.post('/Between',function(req , res){
     });
   });
 });
-router.get('/printBetween/:start/:end',function(req , res){
-  console.log(req.params.start);
-  console.log(req.params.end);
+router.get('/printBetween/:start/:end',userHelpers.isLogin ,function(req , res){
 
   reportMgr.getBetween(req.params.start,req.params.end,function(results){
     reportMgr.getInvoices(results,function(result){
@@ -174,7 +158,7 @@ router.get('/printBetween/:start/:end',function(req , res){
   });
 });
 
-router.post('/Reseller',function(req , res){
+router.post('/Reseller',userHelpers.isLogin ,function(req , res){
   reportMgr.getReseller(req.body.reseller,function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
@@ -184,7 +168,7 @@ router.post('/Reseller',function(req , res){
   });
 });
 
-router.get('/printReseller/:id',function(req , res){
+router.get('/printReseller/:id',userHelpers.isLogin ,function(req , res){
   reportMgr.getReseller(req.params.id,function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
