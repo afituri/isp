@@ -18,7 +18,7 @@ router.get('/cities',userHelpers.isLogin , function(req, res) {
   res.send(city);
 });
 
-router.get('/home',userHelpers.isLogin ,function(req, res) {
+router.get('/dashboard',userHelpers.isLogin ,function(req, res) {
   dollarMgr.getLastDollar(function(result){ 
   res.render('index', { title: 'الرئيسية' ,name : req.user.name,dollar:result[0].price});
   })
