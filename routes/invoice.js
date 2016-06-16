@@ -16,10 +16,7 @@ router.get('/:limit/:page', function(req, res) {
 
 
 router.get('/InvoicePending/:limit/:page/:status', function(req, res) {
-/*  console.log("gggg");
-  res.send(true);*/
   invoiceMgr.getInvoicePending(req.params.status,req.params.limit,req.params.page,function(invoices){
-    console.log(invoices);
     res.send(invoices);
   });
  });
@@ -45,7 +42,6 @@ router.get('/all', function(req, res) {
 
 /* Add new invoice   */
 router.post('/add', function(req, res) {
-  console.log("im in add");
   invoiceMgr.addInvoice(req.body,function(result){
     res.send(result);
   });
@@ -65,10 +61,34 @@ router.post('/renewInvice', function(req, res) {
 // });
 
 router.post('/paidInvoice',multipartyMiddleware, function(req, res) {
-  console.log(req.files);
-  invoiceMgr.addPaid(req.body,function(result){
-    res.send(result);
-  });
+  if(req.body.monoyStatus==2){
+    invoiceMgr.addPaid(req.body,function(result){
+      var dir = './Check/';
+      if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+      }
+      var dir = './Check/'+result._id;
+      if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+      }
+      fs.readFile(req.files.file.path, function (err, data) {
+        var newPath = __dirname + "/."+dir+'/'+req.files.file.originalFilename;
+        fs.writeFile(newPath, data, function (err) {
+          if(!err){
+            invoiceMgr.updateInvoice(result._id,{path:dir+'/'+req.files.file.originalFilename},function(result1){
+              res.send(result);
+            });
+          }
+          
+        });
+      });
+    });
+  }else{
+    invoiceMgr.addPaid(req.body,function(result){
+      res.send(result);
+    });
+  }
+
 });
 
 // router.post('/paidInvoicePending', function(req, res) {
@@ -87,7 +107,6 @@ router.put('/edit/:id', function(req, res) {
 
 /* Delete invoice  by id  */
 router.delete('/delete/:id', function(req, res) {
-  console.log(req.params.id);
   invoiceMgr.deleteInvoice(req.params.id,function(result){
     res.send({result:result});  
   });

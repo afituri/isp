@@ -254,7 +254,7 @@
     };
     return self;
   }]);
-  app.service('InvoicesServ',['$http',function($http){
+  app.service('InvoicesServ',['$http','Upload',function($http,Upload){
     var self = {
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
@@ -299,8 +299,14 @@
         return $http.post('/reseller/renewInvice',renewInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
-        console.log(paidInviceObj);
-        return $http.post('/reseller/paidInvoice',paidInviceObj);
+        // console.log(paidInviceObj);
+        // return $http.post('/reseller/paidInvoice',paidInviceObj);
+        return Upload.upload({
+          url: '/reseller/paidInvoice',
+          method: 'POST',
+          data: paidInviceObj,
+          file: paidInviceObj.image
+        });
       }
     };
     return self;

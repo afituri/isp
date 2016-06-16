@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/reseller');
 var resellerMgr = require("../controller/reseller");
-
+var invoiceMgr = require("../controller/invoice");
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
+var fs   = require('fs-extra');
 /* GET all resellers */
 
 
@@ -24,7 +27,6 @@ router.get('/all', function(req, res) {
 
 router.get('/getAllResellersCount', function(req, res) {
   resellerMgr.getAllResellerCount(function(reseller){
-    console.log(reseller);
     res.send(reseller);
   });
 });
@@ -32,7 +34,6 @@ router.get('/getAllResellersCount', function(req, res) {
 
 /* Add new reseller  */
 router.post('/add', function(req, res) {
-  // console.log(req.body);
   resellerMgr.addReseller(req.body,function(reseller){
     res.send(reseller);
   });
@@ -40,8 +41,6 @@ router.post('/add', function(req, res) {
 
 /* Edit reseller by id  */
 router.put('/edit/:id', function(req, res) {
-  // console.log(req.body);
-  // console.log(req.params.id);
   resellerMgr.updateReseller(req.params.id,req.body,function(reseller){
     res.send(reseller);
   });
@@ -74,11 +73,37 @@ router.post('/renewInvice', function(req, res) {
   });
 });
 
-router.post('/paidInvoice', function(req, res) {
-  console.log("ssss");
-  resellerMgr.addPaid(req.body,req.user._id,function(result){
-    res.send(result);
-  });
+router.post('/paidInvoice', multipartyMiddleware,function(req, res) {
+  if(req.body.monoyStatus==2){
+    resellerMgr.addPaid(req.body,req.user._id,function(result){
+      var dir = './Check/';
+      if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+      }
+      var dir = './Check/'+result._id;
+      if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+      }
+      fs.readFile(req.files.file.path, function (err, data) {
+        var newPath = __dirname + "/."+dir+'/'+req.files.file.originalFilename;
+        fs.writeFile(newPath, data, function (err) {
+          if(!err){
+            invoiceMgr.updateInvoice(result._id,{path:dir+'/'+req.files.file.originalFilename},function(result1){
+              res.send(result);
+            });
+          }
+          
+        });
+      });
+    });
+  }else{
+    resellerMgr.addPaid(req.body,req.user._id,function(result){
+      res.send(result);
+    });
+  }
+  // resellerMgr.addPaid(req.body,req.user._id,function(result){
+  //   res.send(result);
+  // });
 });
 router.get('/:limit/:page', function(req, res) {
   // res.send(data.resellers);
