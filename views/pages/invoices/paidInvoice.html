@@ -10,7 +10,7 @@
             <div class="col-md-6">
               <div class="form-group pull-left" style="margin-bottom:0;">
                 <label class="control-label">هل الزبون سيدفع نقدا او شيك ؟</label>
-                <select class="form-control input-sm" ng-model="monoyStatus" required>
+                <select class="form-control input-sm" ng-model="paidInvoiceForm.monoyStatus" required>
                   <option value="1">نعم</option>
                   <option value="2">لا</option>
                 </select>
@@ -21,13 +21,13 @@
         </div>
         <div class="x_content">      
           <div class="row">
-            <div class="col-md-12" ng-class="{'col-md-8': monoyStatus==2}">
+            <div class="col-md-12" ng-class="{'col-md-8': paidInvoiceForm.monoyStatus==2}">
               <div class="form-group">
                 <label class="control-label">الدفعة</label>
                 <input class="form-control input-sm" type="text" ng-model="paidInvoiceForm.paid" placeholder="الدفعة">
               </div>
             </div>
-            <div class="col-md-4 text-center" ng-if="monoyStatus==2" style="padding-top:25px;">
+            <div class="col-md-4 text-center" ng-if="paidInvoiceForm.monoyStatus==2" style="padding-top:25px;">
               <button 
                 class="btn btn-default btn-sm" type="file" ngf-select ng-model="paidInvoiceForm.image" name="image"
                 accept="image/*" ngf-max-size="2MB" required="required"
