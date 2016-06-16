@@ -1,0 +1,276 @@
+<div class="page-sidebar navbar-collapse collapse">
+  <!-- BEGIN SIDEBAR MENU -->
+  <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+    <li class="start nav-item">
+      <a href="#/">
+        <i class="icon-home"></i>
+        <span class="title">لوحة التحكم</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#/dollar">
+        <i class="fa fa-usd"></i>
+        <span class="title">تسجيل الدولار</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-server"></i>
+        <span class="title">الخدمات</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li>
+          <a href="#/service">
+            <i class="fa fa-list"></i>&nbsp;عرض الخدمات</span>
+          </a>
+        </li>
+        <li>
+          <a href="#/services/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة خدمة جديدة</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-server"></i>
+        <span class="title">مزودي الخدمة</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li>
+          <a href="#/serviceProviders">
+            <i class="fa fa-list"></i>&nbsp;عرض مزودي الخدمة</span>
+          </a>
+        </li>
+        <li>
+          <a href="#/serviceProviders/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة مزود خدمة جديد</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-users"></i>
+        <span class="title">الموزعين</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li>
+          <a href="#/resellers">
+            <i class="fa fa-list"></i>&nbsp;عرض الموزعين</span>
+          </a>
+        </li>
+        <li>
+          <a href="#/resellers/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة موزع جديد</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-users"></i>
+        <span class="title">الموردين</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/suppliers">
+            <i class="fa fa-list"></i>&nbsp;عرض الموردين</span>
+          </a>
+        </li>
+        <li >
+          <a href="#/suppliers/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة مورد جديد</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-hdd-o"></i>
+        <span class="title">المخازن</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/warehouses">
+            <i class="fa fa-list"></i>&nbsp;عرض المخازن</span>
+          </a>
+        </li>
+        <li >
+          <a href="#/warehouses/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة مخزن جديد</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-archive"></i>
+        <span class="title">المخزون <small>(البضاعة المخزنة)</small></span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/instock">
+            <i class="fa fa-list"></i>&nbsp;عرض مخزون</span>
+          </a>
+        </li>
+        <li >
+          <a href="#/instock/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة مخزون جديد</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-users"></i>
+        <span class="title">الزبائن</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/customers">
+            <i class="fa fa-list"></i>&nbsp;عرض الزبائن
+          </a>
+        </li>
+        <li >
+          <a href="#/customerPending">
+            <i class="fa fa-pause" aria-hidden="true"></i>&nbsp;الزبائن قيد الانتظار
+          </a>
+        </li>
+        <li>
+          <a href="#/customers">
+            <i class="fa fa-plus"></i>&nbsp;إضافة زبون
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-product-hunt"></i>
+        <span class="title">المنتجات</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/products/services">
+            <i class="fa fa-list"></i>&nbsp;عرض الخدمات
+          </a>
+        </li>
+        <li >
+          <a href="#/products/items">
+            <i class="fa fa-list"></i>&nbsp;عرض المعدات
+          </a>
+        </li>
+        <li >
+          <a href="#/products/packages">
+            <i class="fa fa-list"></i>&nbsp;عرض الحزم
+          </a>
+        </li>
+        <li >
+          <a href="#/products/otherEquipments">
+            <i class="fa fa-list"></i>&nbsp;عرض المعدات الاخري
+          </a>
+        </li>
+        <li >
+          <a href="#/products/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة منتج جديد
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-bars"></i>
+        <span class="title">السياسات</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/policies">
+            <i class="fa fa-list"></i>&nbsp;عرض السياسات</span>
+          </a>
+        </li>
+        <li >
+          <a href="#/policies/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة سياسة جديدة</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-bars"></i>
+        <span class="title">سياسات المنتج</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/productPoliciesService">
+            <i class="fa fa-list"></i>&nbsp;<small>عرض سياسات منتج (الخدمة)</small></span>
+          </a>
+        </li>
+        <li >
+          <a href="#/productPoliciesItem">
+            <i class="fa fa-list"></i>&nbsp;<small>عرض سياسات منتج (المعدة)</small></span>
+          </a>
+        </li>
+        <li >
+          <a href="#productPoliciesPackage">
+            <i class="fa fa-list"></i>&nbsp;<small>عرض سياسات منتج (الحزمة)</small></span>
+          </a>
+        </li>
+        <li >
+          <a href="#/productPolicies/new">
+            <i class="fa fa-plus"></i>&nbsp;<small>إضافة سياسة منتج جديد</small></span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-bars"></i>
+        <span class="title">الفواتير</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/invoiceCustomers">
+            <i class="fa fa-list"></i>&nbsp;عرض الفواتير</span>
+          </a>
+        </li>
+        <li >
+          <a href="#/showInvoicePending">
+            <i class="fa fa-list"></i>&nbsp;عرض حالة الفاتورة</span>
+          </a>
+        </li>
+        <li >
+          <a href="#/invoices/new">
+            <i class="fa fa-plus"></i>&nbsp;إضافة فاتورة جديدة</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li  class="nav-item">
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-flag"></i>
+        <span class="title">التقارير</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/reports">
+            <i class="fa fa-list"></i>&nbsp;المفعلين والغير مفعلين</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <!-- END SIDEBAR MENU -->
+</div>
