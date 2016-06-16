@@ -71,6 +71,7 @@
     $stateProvider.state('dashboard',{
       url: '/',
       templateUrl: 'pages/reseller/all/dashboard.html',
+      data: {pageTitle: 'لوحة التحكم'},
       controller: 'DashboardCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -86,6 +87,7 @@
     .state('newCutomersPending',{
       url: '/newCutomersPending',
       templateUrl: 'pages/reseller/all/newCutomersPending.html',
+      data: {pageTitle: 'زبون جديد'},
       controller: 'NewCustomerPendingCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -101,6 +103,7 @@
     .state('editCustomer',{
       url: '/customers/edit/:id',
       templateUrl: 'pages/customers/editCustomer.html',
+      data: {pageTitle: 'تعديل زبون'},
       controller: 'EditCustomerCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -118,6 +121,7 @@
     .state('customerRejected',{
       url: '/customerRejected',
       templateUrl: 'pages/customers/customerReject.html',
+      data: {pageTitle: 'الزبائن المرفوضين'},
       controller: 'CustomersRejectCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -134,6 +138,7 @@
     .state('customersPending',{
       url: '/customersPending',
       templateUrl: 'pages/reseller/all/customersPending.html',
+      data: {pageTitle: 'الزبائن قيد الانتظار'},
       controller: 'CustomersPendingCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -166,6 +171,7 @@
      .state('invoicesStatus',{
       url: '/invoicesStatus',
       templateUrl: 'pages/reseller/all/showInvoiceResellserPending.html',
+      data: {pageTitle: 'حالة الفواتير'},
       controller: 'invoicesStatus',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -182,6 +188,7 @@
     .state('invoices',{
       url: '/invoices',
       templateUrl: 'pages/reseller/all/invoices.html',
+      data: {pageTitle: ' عرض الفواتير حسب الزبون'},
       controller: 'CustomersCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -227,6 +234,7 @@
     .state('newInvoice',{
       url: '/invoices/new',
       templateUrl: 'pages/reseller/all/newInvoice.html',
+      data: {pageTitle: 'إضافة فاتورة جديدة'},
       controller: 'NewInvoiceCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
