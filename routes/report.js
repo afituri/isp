@@ -255,8 +255,10 @@ function pars(result,cb){
     var end = '';
     var start='';
     var type='';
-    if(result.invoice[i].invoice.customer){
-      name=result.invoice[i].customer.name;
+    if(result.invoice[i].invoice){
+      if(result.invoice[i].invoice.customer){
+        name=result.invoice[i].customer.name;
+      }
     }
     if(result.invoice[i].instock){
       macAddress=result.result[i].instock.macAddress;
