@@ -334,7 +334,7 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'getCustomers': function(){
+      'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getAllMoney': function(){
