@@ -22,7 +22,7 @@
          toastr.error('خطأ : اسم المستخدم او كلمة المرور غير صحيح');
         } else {
         if(response.data.admin==true){
-          window.location.replace('/home');  
+          window.location.replace('/dashboard');  
         }else if(response.data.admin==false){
           window.location.replace('/reseller');
         }
