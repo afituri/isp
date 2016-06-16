@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var invoiceMgr = require("../controller/invoice");
-
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
+var fs   = require('fs-extra');
 
 
 /* GET all invoice */
@@ -23,9 +25,7 @@ router.get('/InvoicePending/:limit/:page/:status', function(req, res) {
  });
 
 router.get('/InvoicePendingRes/:limit/:page/:status', function(req, res) {
-  console.log(req.user._id);
   invoiceMgr.getInvoicePendingRes(req.params.status,req.user._id,req.params.limit,req.params.page,function(invoices){
-    console.log(invoices);
     res.send(invoices);
   });
  });
@@ -64,8 +64,8 @@ router.post('/renewInvice', function(req, res) {
 //   });
 // });
 
-router.post('/paidInvoice', function(req, res) {
-  console.log(req.body);
+router.post('/paidInvoice',multipartyMiddleware, function(req, res) {
+  console.log(req.files);
   invoiceMgr.addPaid(req.body,function(result){
     res.send(result);
   });

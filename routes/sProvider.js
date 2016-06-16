@@ -3,12 +3,9 @@ var router = express.Router();
 var data = require('../data/sProvider');
 var serviceProviderMgr = require("../controller/Serviceprovider");
 var servicesMgr = require("../controller/service");
-multiparty = require('connect-multiparty'),
-multipartyMiddleware = multiparty();
-var formidable = require('formidable'),
-    http = require('http'),
-    util = require('util'),
-    fs   = require('fs-extra');
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
+var fs   = require('fs-extra');
 
 /* GET all Service Providers */
 router.get('/', function(req, res) {
@@ -23,7 +20,6 @@ router.post('/add', multipartyMiddleware, function(req, res) {
     var newPath = __dirname + "/../public/img/"+req.files.file.originalFilename;
     fs.writeFile(newPath, data, function (err) {
       if(!err){
-        console.log("back");
         req.body.logo= "/../img/"+req.files.file.originalFilename;; 
         serviceProviderMgr.addSProvider(req.body,function(SProvider){
           res.send(SProvider);
