@@ -354,6 +354,7 @@
     }, function(response) {
       console.log("Something went wrong");
     });
+    $scope.monoyStatus = "1";
     $scope.paidInvoice = function(){
       $scope.paidInvoiceForm.idCu=$stateParams.id;
       InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
