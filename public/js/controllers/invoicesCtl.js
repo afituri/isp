@@ -99,7 +99,16 @@
         templateUrl: 'pages/model.delete.tpl.html',
         show: true
       });
-    }
+    };
+
+    $scope.moreInfo = function(obj){
+      $scope.obj = obj;
+      $scope.moreInfoModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.more.info.tpl.html',
+        show: true
+      });
+    };
 
     $scope.confirmDelete = function(id){
       InvoicesServ.deleteInvoice(id.id).then(function(response) {
