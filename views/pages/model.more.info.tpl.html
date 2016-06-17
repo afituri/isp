@@ -1,0 +1,34 @@
+<div id="deleteModal" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h5 class="modal-title">مزيد من المعلومات</h5>
+      </div>
+        <div class="modal-body">
+          <h5>
+            <div class="row">
+              <div class="col-md-4">
+                الاجمالي :- {{obj.piad}}
+              </div>
+              <div class="col-md-4">
+                التخفيض :- {{obj.discount}}
+              </div>
+              <div class="col-md-4">
+                الملاحظات :- {{obj.notes}}"
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <img src="{{obj.path}}" alt="">
+              </div>
+            </div>
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" ng-click="deleteModel.hide()">موافق</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
