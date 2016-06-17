@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/supplier');
 var supplierMgr = require("../controller/supplier");
+var userHelpers = require("../controller/userHelpers");
+
 
 /* GET all suppliers */
 router.get('/:limit/:page', userHelpers.isLogin ,function(req, res) {

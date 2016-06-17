@@ -5,6 +5,7 @@ var invoiceMgr = require("../controller/invoice");
 var reportMgr = require("../controller/report");
 var jsreport = require("jsreport");
 var fs = require("fs");
+var userHelpers = require("../controller/userHelpers");
 var path = require("path");
 
 

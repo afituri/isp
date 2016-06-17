@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/warehouse');
 var wareMgr = require("../controller/warehouse");
+var userHelpers = require("../controller/userHelpers");
+
 /* GET all warehouses */
 router.get('/:limit/:page', userHelpers.isLogin ,function(req, res) {
   // res.send(data.warehouses);

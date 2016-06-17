@@ -3,6 +3,8 @@ var router = express.Router();
 var data = require('../data/customer');
 var customerMgr = require("../controller/customer");
 var user = require("../controller/user");
+var userHelpers = require("../controller/userHelpers");
+
 // var jsr = require('jsreport');
 // var fs = require("fs");
 // var path = require("path");

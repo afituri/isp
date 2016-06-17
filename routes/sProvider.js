@@ -6,6 +6,8 @@ var servicesMgr = require("../controller/service");
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 var fs   = require('fs-extra');
+var userHelpers = require("../controller/userHelpers");
+
 
 /* GET all Service Providers */
 router.get('/',userHelpers.isLogin , function(req, res) {

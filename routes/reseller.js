@@ -5,6 +5,8 @@ var resellerMgr = require("../controller/reseller");
 var invoiceMgr = require("../controller/invoice");
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
+var userHelpers = require("../controller/userHelpers");
+
 var fs   = require('fs-extra');
 /* GET all resellers */
 

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/warehouse');
 var dollarMgr = require("../controller/dollar");
+var userHelpers = require("../controller/userHelpers");
+
 /* GET all doolars */
 router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   dollarMgr.getDollar(req.params.limit,req.params.page,function(dollars){

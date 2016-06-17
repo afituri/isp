@@ -4,6 +4,8 @@ var data = require('../data/policy');
 var policyMgr = require("../controller/policies");
 var productPMgr = require("../controller/policies");
 var productPolicyMgr = require("../controller/productPolicy");
+var userHelpers = require("../controller/userHelpers");
+
 
 
 /* GET all policy */

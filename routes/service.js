@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/service');
 var servicesMgr = require("../controller/service");
+var userHelpers = require("../controller/userHelpers");
+
 /* GET all Service */
 router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   // res.send(data.services);

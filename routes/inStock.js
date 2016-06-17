@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var instockMgr = require("../controller/inStock");
+var userHelpers = require("../controller/userHelpers");
+
 
 /* GET all in stock */
 router.get('/search/:id', userHelpers.isLogin ,function(req, res) {

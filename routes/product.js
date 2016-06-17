@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var productMgr = require("../controller/product");
+var userHelpers = require("../controller/userHelpers");
+
 
 /* GET all customer */
 router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {

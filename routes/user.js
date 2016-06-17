@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/user');
 var userMgr = require("../controller/user");
+var userHelpers = require("../controller/userHelpers");
 
 /* GET all users */
 router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
