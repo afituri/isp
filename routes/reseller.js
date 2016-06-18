@@ -78,19 +78,19 @@ router.post('/renewInvice', userHelpers.isLogin ,function(req, res) {
 router.post('/paidInvoice',userHelpers.isLogin , multipartyMiddleware,function(req, res) {
   if(req.body.monoyStatus==2){
     resellerMgr.addPaid(req.body,req.user._id,function(result){
-      var dir = './Check/';
+      var dir = './public/CheckR/';
       if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
       }
-      var dir = './Check/'+result._id;
+      var dir = './public/CheckR/'+result._id;
       if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
       }
       fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = __dirname + "/."+dir+'/'+req.files.file.originalFilename;
+        var newPath = dir+'/'+req.files.file.originalFilename;
         fs.writeFile(newPath, data, function (err) {
           if(!err){
-            invoiceMgr.updateInvoice(result._id,{path:dir+'/'+req.files.file.originalFilename},function(result1){
+            invoiceMgr.updateInvoice(result._id,{path:'CheckR/'+result._id+'/'+req.files.file.originalFilename},function(result1){
               res.send(result);
             });
           }
