@@ -1,4 +1,4 @@
-<div id="deleteModal" class="modal" role="dialog">
+<div id="readMoreModal" class="modal" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -18,15 +18,17 @@
                 الملاحظات :- {{obj.notes}}"
               </div>
             </div>
+            <br><br>
             <div class="row">
               <div class="col-md-12">
-                <img src="{{obj.path}}" alt="">
+                <label class="control-label">صورة الصك</label>
+                <img src="{{obj.path}}" alt="" style="width:100%;">
               </div>
             </div>
           </h5>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" ng-click="deleteModel.hide()">موافق</button>
+          <button type="button" class="btn btn-danger" ng-click="moreInfoModel.hide()">موافق</button>
         </div>
       </form>
     </div>
