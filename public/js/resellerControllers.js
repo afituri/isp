@@ -248,9 +248,15 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
 
 
      
-     $scope.renewInvoice = function(id){
+    /* $scope.renewInvoice = function(id){
       //alert(id);
-     }
+      alert(id);
+     }*/
+
+       $scope.showPaid = function(id){
+      //alert(id);
+      window.location.href='/report/printInvoicePaid/'+id;
+    }
 
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
