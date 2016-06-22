@@ -285,7 +285,7 @@
       tapToDismiss: true
     });
     angular.extend($modalProvider.defaults, {
-      animation: 'am-fade-and-scale',
+      animation: 'animated zoomIn',
       placement: 'center'
     });
     angular.extend($datepickerProvider.defaults, {

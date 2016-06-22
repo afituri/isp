@@ -62,7 +62,7 @@
         templateUrl: 'pages/confirmModel.html',
         show: true
       });
-   }
+   };
 
    $scope.confirmData = function(id){
     InvoicesServ.editInvoice(id.id,{status:1}).then(function(response) {
@@ -77,7 +77,16 @@
       }, function(response) {
         console.log("Something went wrong");
       });
-   }
+   };
+   
+   $scope.moreInfo = function(obj){
+      $scope.obj = obj;
+      $scope.moreInfoModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.more.info.tpl.html',
+        show: true
+      });
+    };
   
   
 
