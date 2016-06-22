@@ -157,7 +157,7 @@ module.exports = {
                 reseller:body.reseller,
                 discount:body.discount,
                 typein:body.typein,
-                 startDate:body.startDate,
+                startDate:body.startDate,
                 endDate:body.endDate,
                 status:2
               };
@@ -244,6 +244,8 @@ module.exports = {
             reseller:body.reseller,
             discount:body.discount,
             typein:body.typein,
+            startDate:body.startDate,
+            endDate:body.endDate,
             status:2
           };
           if(body.typein!=2){
@@ -334,6 +336,8 @@ module.exports = {
         reseller:idu,
         discount:body.discount,
         status:2,
+        startDate:body.startDate,
+        endDate:body.endDate,
         typein:3
       };
       invoice=new model.Invoice(invoice);

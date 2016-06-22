@@ -224,16 +224,12 @@ module.exports = {
 
 
   deleteInvoice : function(id,cb){
-      console.log("inside");
-      console.log(id);
     model.Order.remove({invoice:id}, function(err,resultOrder) {
-      console.log(err);
       if(!err){
         model.Invoice.remove({_id:id}, function(err,result) {
           if (!err) {
             model.Instock.findOneAndUpdate({$and:[{status:2},{_id:id}]},{invoice:null,status:1} , function(err,result) {
               if (!err) {
-                console.log(true);
                 cb(true)
               } else {
                 cb(false);
@@ -250,7 +246,6 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
-
     model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
       },function(err,product){
         if(body.reseller==1){
@@ -259,6 +254,7 @@ module.exports = {
         if(body.previousSubscription==1){
           customer = new model.Customer(body);
           customer.save(function(err,customerResult){
+
             if (!err) {
               invoice={
                 customer:customerResult._id,
@@ -353,6 +349,8 @@ module.exports = {
             piad:body.total-body.discount,
             reseller:body.reseller,
             discount:body.discount,
+            startDate:body.startDate,
+            endDate:body.endDate,
             typein:body.typein
           };
           if(body.typein!=2){
@@ -506,7 +504,6 @@ module.exports = {
 renewInvice :function(body,cb){
   model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
-      console.log(invoices);
       var invoice={
         customer:invoices.customer,
         type:1,
@@ -515,7 +512,9 @@ renewInvice :function(body,cb){
         piad:body.total,
         reseller:null,
         discount:body.discount,
-        typein:3
+        typein:3,
+        startDate:body.startDate,
+        endDate:body.endDate
       };
       invoice=new model.Invoice(invoice);
       invoice.save(function(err,invoiceResult){
@@ -556,7 +555,6 @@ renewInvice :function(body,cb){
 renewInvicePending :function(body,cb){
   model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
-      console.log(invoices);
       var invoice={
         customer:invoices.customer,
         type:1,
