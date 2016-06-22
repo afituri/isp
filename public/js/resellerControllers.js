@@ -1,15 +1,12 @@
 (function(){
   'use strict';
   var app = angular.module('reseller');
-
     app.controller('DashboardCtl',['$scope','CustomersServ','SuppliersServ','ResllersServ',function($scope,CustomersServ,SuppliersServ,ResllersServ){
-
        CustomersServ.getCustomersCount().then(function(response) {
         $scope.customerNumber = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
-
      CustomersServ.getAllMoney().then(function(response) {
         $scope.totalMoney = (response.data.sum).toFixed(2);
         $scope.totalPaid = (response.data.piad).toFixed(0);
@@ -24,7 +21,6 @@
       }, function(response) {
         console.log("Something went wrong");
       });
-
       // all money 
       CustomersServ.getResellersCount().then(function(response) {
         $scope.ResellerCount = response.data.count;
@@ -33,7 +29,6 @@
       });
 
     }]);
- 
     app.controller('invoicesStatus',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
     $scope.pageSize = 10;
     $scope.currentPage = 1;
@@ -41,7 +36,6 @@
     
     $scope.init = function(id){
     InvoicesServ.getInvoicePendingRes(id,$scope.pageSize,$scope.currentPage).then(function(response) {
-      console.log(response.data);
       $scope.allInvoice=response.data.result;
       $scope.total = response.data.count;
     }, function(response) {
@@ -78,15 +72,7 @@
         console.log("Something went wrong");
       });
    };
-   
-   $scope.moreInfo = function(obj){
-      $scope.obj = obj;
-      $scope.moreInfoModel = $modal({
-        scope: $scope,
-        templateUrl: 'pages/model.more.info.tpl.html',
-        show: true
-      });
-    };
+  
   
   
 
@@ -241,11 +227,9 @@
   }]);
   app.controller('NewInvoiceCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
   }]);*/
-app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
+app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','$modal',function($scope,$stateParams,MenuFac,InvoicesServ,$modal){
     $scope.resellerFlag=1;
     InvoicesServ.getTotal($stateParams.id).then(function(response) {
-      console.log("response");
-      console.log(response.data);
       $scope.allTotals=response.data.sum.toFixed(2);
       $scope.piad =  response.data.piad.toFixed(2);
 
@@ -261,7 +245,14 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
       //alert(id);
       alert(id);
      }*/
-
+      $scope.moreInfo = function(obj){
+      $scope.obj = obj;
+      $scope.moreInfoModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.more.info.tpl.html',
+        show: true
+      });
+    };
        $scope.showPaid = function(id){
       //alert(id);
       window.location.href='/report/printInvoicePaid/'+id;
@@ -707,11 +698,5 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
       });
     }
   }]);
-
-
-
-
-
-
 
 }());
