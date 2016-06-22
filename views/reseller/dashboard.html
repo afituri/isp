@@ -2,7 +2,7 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="#/dashboard.html">الرئيسية</a>
+            <a href="#/dashboard">الرئيسية</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
@@ -13,7 +13,7 @@
 <h3 class="page-title"> لوحة التحكم </h3>
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
-<div ng-controller="DashboardController">
+<div >
     <!-- BEGIN DASHBOARD STATS -->
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -22,10 +22,10 @@
                     <i class="fa fa-comments"></i>
                 </div>
                 <div class="details">
-                    <div class="number"> 1349 </div>
-                    <div class="desc"> New Feedbacks </div>
+                    <div class="number"> {{customerNumber}}</div>
+                    <div class="desc"> عدد الزبائن المسجلين</div>
                 </div>
-                <a class="more" href="#"> View more
+                <a class="more" href=""> عرض المزيد 
                     <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -36,10 +36,10 @@
                     <i class="fa fa-bar-chart-o"></i>
                 </div>
                 <div class="details">
-                    <div class="number"> 12,5M$ </div>
-                    <div class="desc"> Total Profit </div>
+                    <div class="number"> {{totalMoney}} </div>
+                    <div class="desc"> إجمالي المبيعات الكلي </div>
                 </div>
-                <a class="more" href="#"> View more
+                <a class="more" href="#"> عرض المزيد 
                     <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -50,10 +50,10 @@
                     <i class="fa fa-shopping-cart"></i>
                 </div>
                 <div class="details">
-                    <div class="number"> 549 </div>
-                    <div class="desc"> New Orders </div>
+                    <div class="number"> {{totalPaid}} </div>
+                    <div class="desc"> إجمالي المدفوع الكلي </div>
                 </div>
-                <a class="more" href="#"> View more
+                <a class="more" href="#"> عرض المزيد
                     <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
@@ -64,20 +64,79 @@
                     <i class="fa fa-globe"></i>
                 </div>
                 <div class="details">
-                    <div class="number"> +89% </div>
-                    <div class="desc"> Brand Popularity </div>
+                    <div class="number"> {{reminder}} </div>
+                    <div class="desc"> إجمالي الديون الكلي </div>
                 </div>
-                <a class="more" href="#"> View more
+                <a class="more" href="#"> عرض المزيد 
                     <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
         </div>
     </div>
-    <!-- END DASHBOARD STATS -->
+
+     <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{totalPaid}} </div>
+                    <div class="desc"> إجمالي المدفوع الكلي </div>
+                </div>
+                <a class="more" href="#"> عرض المزيد
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{reminder}} </div>
+                    <div class="desc"> إجمالي الديون الكلي </div>
+                </div>
+                <a class="more" href="#"> عرض المزيد 
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{suppliersCount}}</div>
+                    <div class="desc"> عدد الموردين الكلي </div>
+                </div>
+                <a class="more" href=""> عرض المزيد 
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{ResellerCount}} </div>
+                    <div class="desc"> عدد الموزعين الكلي  </div>
+                </div>
+                <a class="more" href="#"> عرض المزيد 
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+      
+    </div>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d419.1254614611043!2d13.198692613763932!3d32.870001692420466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xce5dde4e9ccc66c2!2sLibyan+Spider!5e0!3m2!1sen!2sly!4v1466091337582" width="1000" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
 </div>
 <!-- END MAIN CONTENT -->
 <!-- BEGIN MAIN JS & CSS -->
-<script>
-    Dashboard.init();
-</script>
 <!-- BEGIN MAIN JS & CSS -->

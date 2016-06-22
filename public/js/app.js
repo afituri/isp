@@ -69,7 +69,7 @@
       url: '/',
       templateUrl: "pages/dashboard.html",            
       data: {pageTitle: 'لوحة التحكم'},
-      controller: "DashboardController",
+      controller: "HomeCtl",
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load({
@@ -80,7 +80,7 @@
               'raphael/raphael.min.js',                            
               'assets/js/jquery.sparkline.min.js',
               'assets/js/dashboard.js',
-              'js/controllers/DashboardController.js',
+              'js/controllers/homeCtl.js',
             ] 
           });
         }]

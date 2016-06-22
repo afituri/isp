@@ -43,6 +43,14 @@
         console.log("Something went wrong");
       });
     };
+
+
+    $scope.searchSupplier = function(){
+      alert($scope.searchByAll);
+    }
+
+
+
   }]);
   app.controller('NewSupplierCtl',['$scope','$state','MenuFac','SuppliersServ','toastr',function($scope,$state,MenuFac,SuppliersServ,toastr){
     MenuFac.active = 3;

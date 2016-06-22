@@ -107,6 +107,15 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
+      'getResellersCount': function(pageSize,currentPage){
+        return $http.get('/reseller/getAllResellersCount');
+      },
+       'getCustomersCount': function(){
+        return $http.get('/customer/customerCount');
+      },
+      'getAllMoney': function(){
+        return $http.get('/report/company');
+      },
 
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
@@ -523,6 +532,9 @@
   }]);
   app.service('SuppliersServ',['$http',function($http){
     var self = {
+       'getSuppliersCount': function(pageSize,currentPage){
+        return $http.get('/supplier/getSuppliersCount');
+      },
       'getSuppliers': function(pageSize,currentPage){
         return $http.get('/supplier/'+pageSize+'/'+currentPage);
       },

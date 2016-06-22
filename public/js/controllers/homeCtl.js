@@ -2,7 +2,6 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','SuppliersServ','ResllersServ',function($scope,MenuFac,CustomersServ,SuppliersServ,ResllersServ){
-    //alert("hii");
     MenuFac.active = -1;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -15,8 +14,7 @@
       });
 
      CustomersServ.getAllMoney().then(function(response) {
-      console.log(response.data);
-        $scope.totalMoney = (response.data.sum).toFixed(0);
+        $scope.totalMoney = (response.data.sum).toFixed(2);
         $scope.totalPaid = (response.data.piad).toFixed(0);
         $scope.reminder = ((response.data.sum).toFixed(0)-(response.data.piad).toFixed(2));
 

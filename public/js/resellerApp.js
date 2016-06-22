@@ -70,7 +70,7 @@
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider','$ocLazyLoadProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider,$ocLazyLoadProvider){
     $stateProvider.state('dashboard',{
       url: '/',
-      templateUrl: 'pages/reseller/all/dashboard.html',
+      templateUrl: 'pages/reseller/all/dashboard',
       data: {pageTitle: 'لوحة التحكم'},
       controller: 'DashboardCtl',
       resolve: {
@@ -86,7 +86,7 @@
     }) 
     .state('newCutomersPending',{
       url: '/newCutomersPending',
-      templateUrl: 'pages/reseller/all/newCutomersPending.html',
+      templateUrl: 'pages/reseller/all/newCutomersPending',
       data: {pageTitle: 'زبون جديد'},
       controller: 'NewCustomerPendingCtl',
       resolve: {
@@ -102,7 +102,7 @@
     })
     .state('editCustomer',{
       url: '/customers/edit/:id',
-      templateUrl: 'pages/customers/editCustomer.html',
+      templateUrl: 'pages/customers/editCustomer',
       data: {pageTitle: 'تعديل زبون'},
       controller: 'EditCustomerCtl',
       resolve: {
@@ -120,7 +120,7 @@
       //customerReject
     .state('customerRejected',{
       url: '/customerRejected',
-      templateUrl: 'pages/customers/customerReject.html',
+      templateUrl: 'pages/customers/customerReject',
       data: {pageTitle: 'الزبائن المرفوضين'},
       controller: 'CustomersRejectCtl',
       resolve: {
@@ -137,7 +137,7 @@
 
     .state('customersPending',{
       url: '/customersPending',
-      templateUrl: 'pages/reseller/all/customersPending.html',
+      templateUrl: 'pages/reseller/all/customersPending',
       data: {pageTitle: 'الزبائن قيد الانتظار'},
       controller: 'CustomersPendingCtl',
       resolve: {
@@ -153,7 +153,7 @@
     })
      .state('paidInvoice',{
       url: '/invoiceCustomers/paid/:id',
-      templateUrl: 'pages/invoices/paidInvoice.html',
+      templateUrl: 'pages/invoices/paidInvoice',
       controller: 'PaidInvoiceCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -170,7 +170,7 @@
      //howInvoiceResellserPending.html
      .state('invoicesStatus',{
       url: '/invoicesStatus',
-      templateUrl: 'pages/reseller/all/showInvoiceResellserPending.html',
+      templateUrl: 'pages/reseller/all/showInvoiceResellserPending',
       data: {pageTitle: 'حالة الفواتير'},
       controller: 'invoicesStatus',
       resolve: {
@@ -187,7 +187,7 @@
 
     .state('invoices',{
       url: '/invoices',
-      templateUrl: 'pages/reseller/all/invoices.html',
+      templateUrl: 'pages/reseller/all/invoices',
       data: {pageTitle: ' عرض الفواتير حسب الزبون'},
       controller: 'CustomersCtl',
       resolve: {
@@ -203,7 +203,7 @@
     })
      .state('renewInvoice',{
       url: '/invoiceCustomers/renew/:id',
-      templateUrl: 'pages/invoices/renewInvoice.html',
+      templateUrl: 'pages/invoices/renewInvoice',
       controller: 'RenewInvoiceCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -218,7 +218,7 @@
     })
      .state('showInvoice',{
       url: '/showInvoice/:id',
-      templateUrl: 'pages/invoices/showInvoice.html',
+      templateUrl: 'pages/invoices/showInvoice',
       controller: 'InvoicesCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -233,7 +233,7 @@
     })
     .state('newInvoice',{
       url: '/invoices/new',
-      templateUrl: 'pages/reseller/all/newInvoice.html',
+      templateUrl: 'pages/reseller/all/newInvoice',
       data: {pageTitle: 'إضافة فاتورة جديدة'},
       controller: 'NewInvoiceCtl',
       resolve: {

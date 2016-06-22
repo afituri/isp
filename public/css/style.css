@@ -56,3 +56,6 @@ table.jambo_table thead {
 .bg-info{
   padding: 10px;
 }
+ p {
+     margin: 0; 
+}
