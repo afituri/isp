@@ -219,13 +219,15 @@ function pars(result,cb){
       phone=result.result[i].customer.phone;
     }
     if(result.result[i].startDate){
-      start=result.result[i].startDate;
+      // start=result.result[i].startDate;
+      start =result.result[i].startDate.getDate()+' / '+parseInt(result.result[i].startDate.getMonth()+1)+' / '+result.result[i].startDate.getFullYear();
     }
     if(result.result[i].typein){
       type=typeA[result.result[i].typein-1];
     }
-    if(orderArray[result.result[i]._id]){
-      end=orderArray[result.result[i]._id].end;
+    if(result.result[i].endDate){
+      // end=orderArray[result.result[i]._id].end;
+      end=result.result[i].endDate.getDate()+' / '+parseInt(result.result[i].endDate.getMonth()+1)+' / '+result.result[i].endDate.getFullYear();
     }
     obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end,start:start,type:type})
     if(i == result.result.length-1){
@@ -255,13 +257,15 @@ function pars(result,cb){
       phone=result.invoice[i].customer.phone;
     }
     if(result.invoice[i].startDate){
-      start=result.invoice[i].startDate;
+      // start=result.invoice[i].startDate;
+      start =result.invoice[i].startDate.getDate()+' / '+parseInt(result.invoice[i].startDate.getMonth()+1)+' / '+result.invoice[i].startDate.getFullYear();
     }
     if(result.invoice[i].typein){
       type=typeA[result.invoice[i].typein-1];
     }
-    if(orderArray[result.invoice[i]._id]){
-      end=orderArray[result.invoice[i]._id].end;
+    if(result.invoice[i].endDate){
+      // end=orderArray[result.invoice[i]._id].end;
+      end=result.invoice[i].endDate.getDate()+' / '+parseInt(result.invoice[i].endDate.getMonth()+1)+' / '+result.invoice[i].endDate.getFullYear();
     }
     obj.push({name:name,macAddress:macAddress,product:product,phone:phone,end:end,start:start,type:type})
     if(i == result.invoice.length-1){
