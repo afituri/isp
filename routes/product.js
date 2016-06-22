@@ -1,23 +1,25 @@
 var express = require('express');
 var router = express.Router();
 var productMgr = require("../controller/product");
+var userHelpers = require("../controller/userHelpers");
+
 
 /* GET all customer */
-router.get('/:limit/:page', function(req, res) {
+router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   productMgr.getProduct(req.params.limit,req.params.page,function(product){
     res.send(product);
   });
 });
 // otherEquipment
 
-router.get('/otherEquipment/:limit/:page', function(req, res) {
+router.get('/otherEquipment/:limit/:page',userHelpers.isLogin , function(req, res) {
   productMgr.getProductETC(req.params.limit,req.params.page,function(product){
     res.send(product);
   });
 });
 
 
-router.get('/all', function(req, res) {
+router.get('/all', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllProduct(function(product){
     res.send(product);
   });
@@ -25,65 +27,59 @@ router.get('/all', function(req, res) {
 
 
 // get item
-router.get('/item/:limit/:page', function(req, res) {
+router.get('/item/:limit/:page',userHelpers.isLogin , function(req, res) {
   productMgr.getProductItem(req.params.limit,req.params.page,function(product){
     res.send(product);
   });
 });
-router.get('/allItem', function(req, res) {
+router.get('/allItem', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllItem(function(product){
     res.send(product);
   });
 });
-router.get('/allService', function(req, res) {
+router.get('/allService',userHelpers.isLogin , function(req, res) {
   productMgr.getAllService(function(product){
-    console.log(product);
     res.send(product);
   });
 });
 
-router.get('/allPackage', function(req, res) {
+router.get('/allPackage', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllPackage(function(product){
     res.send(product);
   });
 });
-router.get('/:id', function(req, res) {
-  console.log(req.params.id);
+router.get('/:id', userHelpers.isLogin ,function(req, res) {
   productMgr.getItemById(req.params.id,function(productService){
-    console.log(productService);
     res.send(productService);
   });
 });
 //get service
-router.get('/service/:limit/:page', function(req, res) {
+router.get('/service/:limit/:page', userHelpers.isLogin ,function(req, res) {
   productMgr.getProductService(req.params.limit,req.params.page,function(product){
     res.send(product);
   });
 });
 
 //get package
-router.get('/package/:limit/:page', function(req, res) {
+router.get('/package/:limit/:page',userHelpers.isLogin , function(req, res) {
   productMgr.getProductPackage(req.params.limit,req.params.page,function(product){
     res.send(product);
   });
 });
 
-router.get('/allEtc', function(req, res) {
-  console.log("sdfsdf");
+router.get('/allEtc', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllEtc(function(product){
-    console.log(product);
     res.send(product);
   });
 });
 /* Add new customer   */
-router.post('/add', function(req, res) {
+router.post('/add', userHelpers.isLogin ,function(req, res) {
   productMgr.addProduct(req.body,function(product){
     res.send(product);
   });
 });
 
-router.get('/bytype/:id', function(req, res) {
-  //console.log(req.params.id);
+router.get('/bytype/:id',userHelpers.isLogin , function(req, res) {
    res.send(true);
  /* productMgr.getAllProductByType(req.body.type,function(product){
     res.send(product);
@@ -91,41 +87,39 @@ router.get('/bytype/:id', function(req, res) {
 });
 
 
-router.put('/productService/:id', function(req, res) {
-  console.log(req.params.id);
+router.put('/productService/:id',userHelpers.isLogin , function(req, res) {
   productMgr.getItemById(req.params.id,function(productService){
-    console.log(productService);
     res.send(productService);
   });
 });
 
 
 
-router.put('/productService/edit/:id', function(req, res) {
+router.put('/productService/edit/:id', userHelpers.isLogin ,function(req, res) {
   productMgr.updateService(req.params.id,req.body,function(productService){
     res.send(productService);
   });
 });
 //productItems
-router.put('/productItems/edit/:id', function(req, res) {
+router.put('/productItems/edit/:id', userHelpers.isLogin ,function(req, res) {
   productMgr.updateItem(req.params.id,req.body,function(productService){
     res.send(productService);
   });
 });
 
-router.put('/productPackages/edit/:id', function(req, res) {
+router.put('/productPackages/edit/:id',userHelpers.isLogin , function(req, res) {
   productMgr.updatePackage(req.params.id,req.body,function(productService){
     res.send(productService);
   });
 });
 
-router.put('/productEtc/edit/:id', function(req, res) {
+router.put('/productEtc/edit/:id', userHelpers.isLogin ,function(req, res) {
   productMgr.updateEtc(req.params.id,req.body,function(productService){
     res.send(productService);
   });
 });
 
-router.delete('/productService/delete/:id', function(req, res) {
+router.delete('/productService/delete/:id', userHelpers.isLogin ,function(req, res) {
   productMgr.deleteProductService(req.params.id,function(productService){
      res.send({result:productService});
    });

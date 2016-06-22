@@ -473,7 +473,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',f
     }, function(response) {
       console.log("Something went wrong");
     });
-
+      $scope.paidInvoiceForm.monoyStatus = "1";
     $scope.paidInvoice = function(){
 
       $scope.paidInvoiceForm.idCu=$stateParams.id;

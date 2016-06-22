@@ -62,10 +62,7 @@
                 <td ng-if="invoice.status==2">قيد الانتظار</td>
                 <td ng-if="invoice.status==3">مرفوضة</td>
                 <td>
-                  <button type="button" class="btn btn-success btn-xs" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="الاجمالي :- {{invoice.piad}} <br> التخفيض :- {{invoice.discount}} <br> الملاحظات :- {{invoice.notes}}" bs-popover>
-                    <i class="fa fa-info fa-fw"></i>
-                    المعلومات
-                  </button>
+                  <a class="btn btn-success btn-xs" ng-click="moreInfo(invoice)"><i class="fa fa-info fa-fw"></i>المعلومات</a>
                   <a  ng-if="invoice.typein!=4" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                    <a  ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
                  
@@ -124,10 +121,7 @@
                 <td ng-if="invoice.status==2">قيد الانتظار</td>
                 <td ng-if="invoice.status==3">مرفوضة</td>
                 <td>
-                  <button type="button" class="btn btn-success btn-xs" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{invoice.piad}} <br> التخفيض :- {{invoice.discount}} <br> الملاحظات :- {{invoice.notes}}" bs-popover>
-                    <i class="fa fa-info fa-fw"></i>
-                    المعلومات
-                  </button>
+                  <a class="btn btn-success btn-xs" ng-click="moreInfo(invoice)"><i class="fa fa-info fa-fw"></i>المعلومات</a>
                   <a  ng-if="invoice.typein!=4" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                    <a  ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
                   <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>

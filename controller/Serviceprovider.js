@@ -42,24 +42,17 @@ module.exports = {
     serviceProvider = new model.Serviceprovider(obj);
     serviceProvider.save(function(err,result){
       if (!err) {
-        cb(true);
+        cb(result);
 
       } else {
         console.log(err);
         //TODO: return page with errors
-        cb(false);
+        cb(null);
       }
     });
   },
   updateSProvider : function(id,body,cb){
-    var obj ={
-      name : body.name,
-      email : body.email,
-      phone : body.phone,
-      logo : body.logo,
-      websit : body.websit,
-      
-     }
+    var obj =body;
     model.Serviceprovider.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)

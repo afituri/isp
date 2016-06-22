@@ -6,6 +6,7 @@
     'ui.router',
     'jcs-autoValidate',
     'toastr',
+    'ngFileUpload',
     'ui.bootstrap',
     'nya.bootstrap.select',
     'oc.lazyLoad'
@@ -66,6 +67,32 @@
   app.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
     $rootScope.$settings = settings; // state to be accessed from view
+  }]);
+  app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
+    defaultErrorMessageResolver.setI18nFileRootPath('/lang');
+    defaultErrorMessageResolver.setCulture('ar-ly');
+    defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
+      errorMessages['repName'] = "الرجاء إدخال اسم المخول";
+      errorMessages['companyName'] = "الرجاء إدخال اسم الشىركة";
+      errorMessages['city'] = "الرجاء إختيار المدينة";
+      errorMessages['area'] = "الرجاء إدخال المنطقة";
+      errorMessages['langtitude'] = "الرجاء إدخال خط الطول";
+      errorMessages['longtitude'] = "الرجاء إدخال خط العرض";
+      errorMessages['emailType'] = "الرجاء إدخال البريد الالكتروني";
+      errorMessages['phone'] = "الرجاء إدخال رقم الهاتف";
+      errorMessages['repPhone'] = "الرجاء إدخال رقم هاتف المخول";
+      errorMessages['password'] = "الرجاء إدخال كلمة المرور";
+      errorMessages['confirmPassword'] = "الرجاء إعادة إدخال كلمة المرور";
+      errorMessages['customerName'] = "الرجاء إدخال اسم العميل";
+      errorMessages['customerRepName'] = "الرجاء إدخال اسم المندوب";
+      errorMessages['notes'] = "الرجاء إدخال الملاحضة";
+      errorMessages['type'] = "الرجاء اختيار نوع العميل";
+      errorMessages['servicesProvider'] = "الرجاء اختيار مزود الخدمة";
+      errorMessages['nameService'] = "الرجاء إدخال اسم الخدمة";
+      errorMessages['discriptoinService'] = "الرجاء إدخال معلومات عن الخدمة";
+      errorMessages['warehouseName'] = "الرجاء إدخال اسم المخزن";
+      errorMessages['customerName'] = 'الرجاء ادخال اسم العميل';
+    });
   }]);
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider','$ocLazyLoadProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider,$ocLazyLoadProvider){
     $stateProvider.state('dashboard',{
