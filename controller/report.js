@@ -30,7 +30,6 @@ module.exports = {
   },
 
   getBetween : function (start,end,cb) {
-    console.log(new Date(end));
     model.Order.find({$and:[{endDate:{$gte: new Date(start)}},{endDate:{$lt: new Date(end)}}]}).distinct('invoice',function(err, result){
       if(!err){
         cb(result);
@@ -41,8 +40,6 @@ module.exports = {
     });
   },
   getReseller : function (id,cb) {
-    console.log("her");
-    console.log(id);
     model.Invoice.find({$and:[{reseller:id},{status:1}]},function(err, result){
       if(!err){
         cb(result);
@@ -107,6 +104,15 @@ module.exports = {
         console.log(err);
         cb(null);
       }
+    });
+  },
+  getcompar : function (mac,cb) {
+    
+    model.Instock.find({macAddress:{$in:mac}}).distinct('invoice',function(err, ido){
+      model.Invoice.find({$and:[{status:1},{typein:{$ne:[2,4]}},{endDate:{$gte: new Date(start)}},{endDate:{$lt: new Date(end)}}],{$or:[{{_id:{$in:ido}}},{invoice:{$in:ido}}]}).populate('customer').exec(function(err, invoices){
+        
+
+      });
     });
   },
 };
