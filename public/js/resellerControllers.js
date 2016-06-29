@@ -486,7 +486,8 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
       InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
         if(response.data){
           toastr.success('تم الدفع بنجاح');
-          $scope.paidInvoiceForm.paid=" "
+          $scope.paidInvoiceForm.paid=" ";
+          $scope.paidInvoiceForm.notes=" ";
           $state.go('paidInvoice');
 
         }

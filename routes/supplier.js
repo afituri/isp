@@ -12,6 +12,13 @@ router.get('/:limit/:page', userHelpers.isLogin ,function(req, res) {
     res.send(supplier);
   });
 });
+
+router.get('/search/:limit/:page/:all', userHelpers.isLogin ,function(req, res) {
+  // res.send(data.suppliers);
+  supplierMgr.getSupplierAll(req.params.all,req.params.limit,req.params.page,function(supplier){
+    res.send(supplier);
+  });
+});
 router.get('/all', userHelpers.isLogin ,function(req, res) {
   // res.send(data.suppliers);
   supplierMgr.getAllSupplier(function(supplier){
