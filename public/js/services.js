@@ -524,6 +524,14 @@
     };
     return self;
   }]);
+  app.service('CSVServ',['$http',function($http){
+     var self = {
+      'addCSVFile': function(CSVObj){
+        return $http.post('',CSVObj);
+      }
+    };
+    return self;
+  }]);
   app.service('InvoicesServ',['$http','Upload',function($http,Upload){
     var self = {
       'getInvoces': function(pageSize,currentPage){

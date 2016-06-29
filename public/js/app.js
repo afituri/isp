@@ -90,6 +90,7 @@
       url: '/resellers',
       templateUrl: 'pages/resellers/resellers.html',
       controller: 'ResellersCtl',
+      data: {pageTitle: 'عرض الموزعين'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -105,6 +106,7 @@
       url: '/dollar',
       templateUrl: 'pages/dollar/dollar.html',
       controller: 'DollarsCtl',
+      data: {pageTitle: 'تسجيل الدولار'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -117,10 +119,28 @@
       }
       
     })
+    .state('restore',{
+      url: '/restore',
+      templateUrl: 'pages/restore/restore.html',
+      controller: 'RestoreCtl',
+      data: {pageTitle: 'استعادة'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/restoreCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+      
+    })
     .state('newReseller',{
       url: '/resellers/new',
       templateUrl: 'pages/resellers/newReseller.html',
       controller: 'NewResellerCtl',
+      data: {pageTitle: 'اضافة موزع جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -135,6 +155,7 @@
       url: '/resellers/edit/:id',
       templateUrl: 'pages/resellers/editReseller.html',
       controller: 'EditResellerCtl',
+      data: {pageTitle: 'تعديل الموزع'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
