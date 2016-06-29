@@ -44,7 +44,7 @@ app.set('view engine', 'html');
 
 app.use(favicon());
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
