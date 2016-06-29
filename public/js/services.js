@@ -269,6 +269,9 @@
       'getSuppliers': function(pageSize,currentPage){
         return $http.get('/supplier/'+pageSize+'/'+currentPage);
       },
+      'getSuppliersByAll': function(all,pageSize,currentPage){
+        return $http.get('/supplier/search/'+pageSize+'/'+currentPage+'/'+all);
+      },
       'getSuppliersCount': function(pageSize,currentPage){
         return $http.get('/supplier/getSuppliersCount');
       },
@@ -517,6 +520,14 @@
       },
       'deleteProductPolicy': function(id){
         return $http.delete('/policy/productPolicy/delete/'+id);
+      }
+    };
+    return self;
+  }]);
+  app.service('CSVServ',['$http',function($http){
+     var self = {
+      'addCSVFile': function(CSVObj){
+        return $http.post('',CSVObj);
       }
     };
     return self;
