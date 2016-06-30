@@ -106,12 +106,21 @@ module.exports = {
       }
     });
   },
-  getcompar : function (mac,cb) {
-    
-    model.Instock.find({macAddress:{$in:mac}}).distinct('invoice',function(err, ido){
-      model.Invoice.find({$and:[{status:1},{typein:{$ne:[2,4]}},{endDate:{$gte: new Date(start)}},{endDate:{$lt: new Date(end)}}],{$or:[{{_id:{$in:ido}}},{invoice:{$in:ido}}]}).populate('customer').exec(function(err, invoices){
-        
-
+  getcompar : function (body,cb) {
+    // var result=[];
+    // var flag=0;
+    // for (i in body){
+      var tbody = body[0].split(",");
+      var mac = tbody[0];
+      var start = tbody[1];
+      var end = tbody[2];
+      model.Instock.findOne({macAddress:mac}).distinct('invoice',function(err, ido){
+        model.Invoice.find({$or:[{_id:ido},{invoice:ido}]}).populate('customer').sort({startDate:-1}).limit(1).exec(function(err,invoice){
+        if(!err){
+          cb(invoice);
+        }else{
+          cb(null);
+        }
       });
     });
   },

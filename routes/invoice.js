@@ -5,7 +5,7 @@ var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 var fs   = require('fs-extra');
 var userHelpers = require("../controller/userHelpers");
-var parse = require('csv-parse');
+// var parse = require('csv-parse');
 // require('should');
 
 
@@ -72,25 +72,15 @@ router.post('/paidInvoice',userHelpers.isLogin ,multipartyMiddleware, function(r
         fs.mkdirSync(dir);
       }
       fs.readFile(req.files.file.path, function (err, data) {
-        // for (i in data){
-        //   console.log(data[i][0]);  
-        // }
-        // var input = '#Welcome\n"1","2","3","4"\n"a","b","c","d"';
-        parse(data, {delimiter: ','}, function(err, output){
-          for(i in output){
-            console.log(output[i][0]);  
-          }
-            
-        });
         var newPath = dir+'/'+req.files.file.originalFilename;
-      //   fs.writeFile(newPath, data, function (err) {
-      //     if(!err){
-      //       invoiceMgr.updateInvoice(result._id,{path:'CheckA/'+result._id+'/'+req.files.file.originalFilename},function(result1){
-      //         res.send(result);
-      //       });
-      //     }
+        fs.writeFile(newPath, data, function (err) {
+          if(!err){
+            invoiceMgr.updateInvoice(result._id,{path:'CheckA/'+result._id+'/'+req.files.file.originalFilename},function(result1){
+              res.send(result);
+            });
+          }
           
-      //   });
+        });
       });
     });
   }else{
@@ -98,7 +88,6 @@ router.post('/paidInvoice',userHelpers.isLogin ,multipartyMiddleware, function(r
       res.send(result);
     });
   }
-
 });
 
 

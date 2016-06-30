@@ -527,7 +527,7 @@
   app.service('CSVServ',['$http',function($http){
      var self = {
       'addCSVFile': function(CSVObj){
-        return $http.post('',CSVObj);
+        return $http.post('/report/restor',CSVObj);
       }
     };
     return self;

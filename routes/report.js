@@ -7,9 +7,23 @@ var jsreport = require("jsreport");
 var fs = require("fs");
 var userHelpers = require("../controller/userHelpers");
 var path = require("path");
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
 
 
+router.post('/restor',userHelpers.isLogin ,multipartyMiddleware,function(req , res){
+  var results=[];
+  req.body.forEach(function(i) {
+    reportMgr.getcompar(i,function(result){
+      results.push({invoice:result,tbody:i[0].split(",")});
+      if(results.length == req.body.length){
+        console.log("sssssssssssssssssssssssssssssssssssssss");
+        res.send(results);
+      }
 
+    });
+  });    
+});
 router.get('/active',userHelpers.isLogin ,function(req , res){
   reportMgr.getActive(function(results){
     reportMgr.getInvoices(results,function(result){
@@ -139,6 +153,7 @@ router.get('/company',userHelpers.isLogin ,function(req , res){
     });
   });
 });
+
 router.post('/Between',userHelpers.isLogin ,function(req , res){
   reportMgr.getBetween(req.body.start,req.body.end,function(results){
     reportMgr.getInvoices(results,function(result){
@@ -148,6 +163,7 @@ router.post('/Between',userHelpers.isLogin ,function(req , res){
     });
   });
 });
+
 router.get('/printBetween/:start/:end',userHelpers.isLogin ,function(req , res){
 
   reportMgr.getBetween(req.params.start,req.params.end,function(results){
