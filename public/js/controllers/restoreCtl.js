@@ -11,19 +11,15 @@
       if($scope.csv.result == null){
         $scope.CSVResult = true;
       } else {
-        if($scope.csv.result.length){
-          CSVServ.addCSVFile($scope.csv.result).then(function(response) {
-            if(response.data){
-              toastr.success('تمت استعادة ملف CSV بنجاح');
-            } else {
-              console.log(response.data);
-            }
-          }, function(response) {
-            console.log("Something went wrong");
-          });
-        } else {
-          console.log($scope.csv, ">");
-        }
+        CSVServ.addCSVFile($scope.csv.result).then(function(response) {
+          if(response.data){
+            toastr.success('تمت استعادة ملف CSV بنجاح');
+          } else {
+            console.log(response.data);
+          }
+        }, function(response) {
+          console.log("Something went wrong");
+        });
       }
     };
   }]);
