@@ -6,7 +6,27 @@ var customer = null;
 module.exports = {
 
   getCustomer :function(status,limit,page,cb){
-    page = parseInt(page);
+    if(status==-1){
+      page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Customer.count({},function(err,count){
+      model.Customer.find({}).limit(limit).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
+        if(!err){
+          //console.log(customers);
+          cb({result:customers,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+
+    } else {
+      page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
     model.Customer.count({status:status},function(err,count){
@@ -14,7 +34,49 @@ module.exports = {
       .populate('user')
       .populate('reseller')
       .exec(function(err, customers){
-        console.log(customers);
+        if(!err){
+          //console.log(customers);
+          cb({result:customers,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+
+    }
+    
+  },
+
+  getCustomerReseller :function(id,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Customer.count({status:{$ne:3},reseller:id},function(err,count){
+      model.Customer.find({status:{$ne:3},reseller:id}).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
+        if(!err){
+          //console.log(customers);
+          console.log(customers);
+          cb({result:customers,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+  getCustomerReject :function(user,status,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Customer.count({status:status,reseller:user},function(err,count){
+      model.Customer.find({status:status,reseller:user}).limit(limit).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
         if(!err){
           //console.log(customers);
           cb({result:customers,count:count});
@@ -28,6 +90,52 @@ module.exports = {
 
   getAllCustomer :function(cb){
     model.Customer.find({},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  //getAllCustomerCount
+    getAllCustomerCount :function(cb){
+    model.Customer.count({},function(err, customers){
+      if(!err){
+        cb({count:customers});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getAllCustomerRes :function(id,cb){
+    model.Customer.find({status:{$ne:3},reseller:id},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+
+  getAllCustomerStatus:function(status,cb){
+    model.Customer.find({status:status},function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+  getAllCustomerReseller :function(id,cb){
+    model.Customer.find({reseller:id},function(err, customers){
       if(!err){
         cb(customers);
       }else{
@@ -70,6 +178,7 @@ module.exports = {
       user: body.user,
       reseller : body.reseller
   }
+
     customer = new model.Customer(obj);
     customer.save(function(err,result){
       if (!err) {
@@ -81,26 +190,38 @@ module.exports = {
       }
     });
   },
-  updateCustomer : function(id,body,cb){
-    var obj ={
-      name : body.name,
-      repName : body.repName,
-      city : body.city,
-      address : body.address,
-      email : body.email,
-      phone : body.phone,
-      type : body.type,
-      notes : body.notes
-  }
-    model.Customer.findOneAndUpdate({_id:id}, obj, function(err,result) {
+
+  updateCustomerById : function(customerId,adminId,cb){
+    obj={
+      status:1,
+      user : adminId
+    }
+     model.Customer.findOneAndUpdate({_id:customerId},obj, function(err,result) {
       if (!err) {
-        cb(true)
+        cb(true);
       } else {
-        console.log(err);
         cb(false);
       }
     });
+
   },
+
+  updateRejectCustomer : function(customerId,adminId,obj,cb){
+    obj={
+      status:3,
+      user : adminId,
+      reject_message : obj.reject_message
+    }
+     model.Customer.findOneAndUpdate({_id:customerId},obj, function(err,result) {
+      if (!err) {
+        cb(true);
+      } else {
+        cb(false);
+      }
+    });
+
+  },
+
 
   updateCustomer : function(id,body,cb){
     var obj ={

@@ -7,7 +7,7 @@
             <h2 class="pull-right">عرض الزبائن</h2>
           </div>
           <div class="col-xs-7">
-            <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="بحث...">
+           <!--  <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="بحث..."> -->
           </div>
           <div class="col-xs-3 text-left">
             <a class="btn btn-sm btn-primary" ui-sref="newInvoice"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
@@ -32,13 +32,15 @@
                 <th>البريد الالكتروني </th>
                 <th>اسم المندوب </th>
                 <th>رقم الهاتف </th>
+                <th>المدير</th>
                 <th>الموزع </th>
-                <th>السياسة </th>
+                <th>الحالة </th>
                 <th><i class="fa fa-cog"></i></th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="customer in customers">
+              <tr ng-repeat="customer in customers" ng-if="customer.
+                status==1" style="background-color:#ccffcc">
                 <td>{{customer.name}}</td>
                 <td>
                   <span ng-if="customer.type == 1">شخصي</span>
@@ -50,12 +52,77 @@
                   <span ng-if="customer.type == 2">{{customer.repName}}</span>
                 </td>
                 <td>{{customer.phone}}</td>
-                <td>{{customer.reseller}}</td>
-                <td>{{customer.policy}}</td>
                 <td>
-                  <a class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
-                  <a class="btn btn-success btn-xs" ui-sref="renewInvoice({id:customer._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
-                  <a class="btn btn-success btn-xs" ui-sref="paidInvoice({id:customer._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
+                  <span ng-if="customer.user.name == null">لا يوجد</span>
+                  <span ng-if="customer.user.name != 2">{{customer.user.name}}</span>
+                </td>
+                <td>
+                  <span ng-if="customer.reseller.repName == null">لا يوجد</span>
+                  <span ng-if="customer.reseller.repName != 2">{{customer.reseller.repName}}</span>
+                </td>
+                <td ng-if="customer.status==1">مأكد</td>
+                 <td ng-if="customer.status==2">قيد الانتظار</td>
+                  <td ng-if="customer.status==3">المرفوضين</td>
+                <td >
+                  <a ng-if="customer.status!=3" class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a> 
+                </td>
+              </tr>
+
+              <tr ng-repeat="customer in customers" ng-if="customer.
+                status==2" style="background-color:#ffffb3">
+                <td>{{customer.name}}</td>
+                <td>
+                  <span ng-if="customer.type == 1">شخصي</span>
+                  <span ng-if="customer.type == 2">شركة</span>
+                </td>
+                <td>{{customer.email}}</td>
+                <td>
+                  <span ng-if="customer.type == 1">لا يوجد</span>
+                  <span ng-if="customer.type == 2">{{customer.repName}}</span>
+                </td>
+                <td>{{customer.phone}}</td>
+                <td>
+                  <span ng-if="customer.user.name == null">لا يوجد</span>
+                  <span ng-if="customer.user.name != 2">{{customer.user.name}}</span>
+                </td>
+                <td>
+                  <span ng-if="customer.reseller.repName == null">لا يوجد</span>
+                  <span ng-if="customer.reseller.repName != 2">{{customer.reseller.repName}}</span>
+                </td>
+                <td ng-if="customer.status==1">مأكد</td>
+                 <td ng-if="customer.status==2">قيد الانتظار</td>
+                  <td ng-if="customer.status==3">المرفوضين</td>
+                <td >
+                  <a ng-if="customer.status!=3" class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a> 
+                </td>
+              </tr>
+
+              <tr ng-repeat="customer in customers" ng-if="customer.
+                status==3" style="background-color:#ffb3b3">
+                <td>{{customer.name}}</td>
+                <td>
+                  <span ng-if="customer.type == 1">شخصي</span>
+                  <span ng-if="customer.type == 2">شركة</span>
+                </td>
+                <td>{{customer.email}}</td>
+                <td>
+                  <span ng-if="customer.type == 1">لا يوجد</span>
+                  <span ng-if="customer.type == 2">{{customer.repName}}</span>
+                </td>
+                <td>{{customer.phone}}</td>
+                <td>
+                  <span ng-if="customer.user.name == null">لا يوجد</span>
+                  <span ng-if="customer.user.name != 2">{{customer.user.name}}</span>
+                </td>
+                <td>
+                  <span ng-if="customer.reseller.repName == null">لا يوجد</span>
+                  <span ng-if="customer.reseller.repName != 2">{{customer.reseller.repName}}</span>
+                </td>
+                <td ng-if="customer.status==1">مأكد</td>
+                 <td ng-if="customer.status==2">قيد الانتظار</td>
+                  <td ng-if="customer.status==3">المرفوضين</td>
+                <td >
+                  <a  class="btn btn-success btn-xs" ui-sref="showInvoice({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a> 
                 </td>
               </tr>
             </tbody>

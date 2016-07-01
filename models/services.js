@@ -6,7 +6,6 @@ var Service = new Schema({
    name: { type: String, required : true},
    serviceprovider: { type: Schema.Types.ObjectId , ref: 'Serviceprovider'},
    description: { type: String, required : true},
-   
    status: { type: Number, default:1}
 });
 

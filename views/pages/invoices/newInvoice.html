@@ -2,7 +2,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <form novalidate ng-submit="newInvoice()">
       <div class="x_panel">
-        <div class="x_title">
+        <div class="x_title" style="padding-bottom:0px;">
           <div class="row">
             <div class="col-md-4" style="padding-top:15px;">
               <h2>إضافة فاتورة جديدة</h2>
@@ -225,7 +225,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">التخفيض</label>
-                <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.discount" placeholder="التخفيض">
+                <input  class="form-control input-sm" type="text" ng-model="newInvoiceForm.discount"  placeholder="التخفيض">
               </div>
             </div>
             <div class="col-md-3">
@@ -240,6 +240,21 @@
                 <textarea class="form-control input-sm" rows="6" ng-model="newInvoiceForm.invoceNotes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
               </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">الدفعة</label>
+                <input  class="form-control input-sm" type="text" ng-model="newInvoiceForm.paid"  placeholder="الدفعة">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">ملاحظات</label>
+                <textarea class="form-control input-sm" rows="6" ng-model="newInvoiceForm.paidNotes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
+              </div>
+            </div>
+
           </div>
           <div class="row">
             <div class="col-md-4" ng-show="itemInfo.length == 0">

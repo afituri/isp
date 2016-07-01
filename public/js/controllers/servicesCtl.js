@@ -2,11 +2,24 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('ServicesCtl',['$scope','$modal','MenuFac','ServicesServ','toastr',function($scope,$modal,MenuFac,ServicesServ,toastr){
+    
     MenuFac.active = 1;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+
+
+    
+    $scope.searchCustomer =function(){
+      ServicesServ.getServicesByName($scope.searchByName,$scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.services = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+
     $scope.init = function () {
       ServicesServ.getServices($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.services = response.data.result;

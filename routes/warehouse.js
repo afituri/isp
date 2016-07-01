@@ -2,45 +2,44 @@ var express = require('express');
 var router = express.Router();
 var data = require('../data/warehouse');
 var wareMgr = require("../controller/warehouse");
+var userHelpers = require("../controller/userHelpers");
+
 /* GET all warehouses */
-router.get('/:limit/:page', function(req, res) {
+router.get('/:limit/:page', userHelpers.isLogin ,function(req, res) {
   // res.send(data.warehouses);
   wareMgr.getWarehouses(req.params.limit,req.params.page,function(warehouse){
     res.send(warehouse);
   });
 });
-router.get('/all', function(req, res) {
+router.get('/all', userHelpers.isLogin ,function(req, res) {
   // res.send(data.warehouses);
   wareMgr.getAllWarehouses(function(warehouse){
     res.send(warehouse);
   });
 });
 /* Add new warehouse  */
-router.post('/add', function(req, res) {
-  // console.log(req.body);
+router.post('/add', userHelpers.isLogin ,function(req, res) {
   wareMgr.addWarehouse(req.body,function(warehouse){
     res.send(warehouse);
   });
 });
 
 /* Edit warehouse by id  */
-router.put('/edit/:id', function(req, res) {
-  // console.log(req.body);
-  // console.log(req.params.id);
+router.put('/edit/:id',userHelpers.isLogin , function(req, res) {
   wareMgr.updateWarehouse(req.params.id,req.body,function(warehouse){
     res.send(warehouse);
   });
 });
 
 /* Delete warehouse by id  */
-router.delete('/delete/:id', function(req, res) {
+router.delete('/delete/:id', userHelpers.isLogin ,function(req, res) {
   wareMgr.deleteWarehouse(req.params.id,function(warehouse){
     res.send({result:warehouse});
   });
 });
 
 /* GET warehouse by ID  */
-router.get('/:id', function(req, res) {
+router.get('/:id', userHelpers.isLogin ,function(req, res) {
   // res.send(data.warehouse);
   wareMgr.getWarehouseId(req.params.id,function(warehouse){
     res.send(warehouse);

@@ -149,11 +149,19 @@
       'getResellers': function(pageSize,currentPage){
         return $http.get('/reseller/'+pageSize+'/'+currentPage);
       },
+      'getResellersCount': function(pageSize,currentPage){
+        return $http.get('/reseller/getAllResellersCount');
+      },
+
       'getResellersByID': function(id){
         return $http.get('/reseller/'+id);
       },
       'addResller': function(resllerObj){
         return $http.post('/reseller/add',resllerObj);
+      },
+      'getResellerByName': function(name,pageSize,currentPage){
+        console.log(name);
+        return $http.post('/reseller/search/'+pageSize+'/'+currentPage,{name:name});
       },
       'editResller': function(id,resllerObj){
         return $http.put('/reseller/edit/'+id,resllerObj);
@@ -164,7 +172,7 @@
     };
     return self;
   }]);
-  app.service('ServiceProvidersServ',['$http',function($http){
+  app.service('ServiceProvidersServ',['$http','Upload',function($http,Upload){
     var self = {
       'serviceProvidersObj': [],
       'getServiceProviders': function(){
@@ -181,7 +189,13 @@
         return $http.get('/sProvider/'+id+'/services');
       },
       'addServiceProvider': function(serviceProviderObj){
-        return $http.post('/sProvider/add',serviceProviderObj);
+        // return $http.post('/sProvider/add',serviceProviderObj);
+        return Upload.upload({
+          url: '/sProvider/add',
+          method: 'POST',
+          data: serviceProviderObj,
+          file: serviceProviderObj.logo
+        });
       },
       'editServiceProvider': function(id,serviceProviderObj){
         return $http.put('/sProvider/edit/'+id,serviceProviderObj);
@@ -193,11 +207,44 @@
     self.getServiceProviders();
     return self;
   }]);
+  app.service('uploadService',['$timeout','Upload',function($timeout,Upload){
+    this.uploadFile = function(file, fieldName, insertedID) {
+      var results = {errorFileType:false};
+      if (file && (file.type === 'application/pdf') && (file.size <= 2000000)) {
+        Upload.upload({
+          url: 'api/fileUpload',
+          method: 'POST',
+          data: {file: file, 'fieldName': fieldName, 'insertedID': insertedID}
+        }).then(function (response) {
+          $timeout(function () {
+            results.result = response.data;
+            // console.log(results.result);
+          });
+        }, function (response) {
+            if (response.status > 0){
+              results.errorMsg = response.status + ': ' + response.data;
+              // console.log(results.errorMsg);
+            }
+        }, function (evt) {
+            results.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            // console.log(results.progress);
+        });
+      } else {
+        results.errorFileType = true;
+        // console.log(results.errorFileType);
+      }
+      return results;
+    };
+  }]);
 //0000 
   app.service('ServicesServ',['$http',function($http){
     var self = {
       'getServices': function(pageSize,currentPage){
         return $http.get('/service/'+pageSize+'/'+currentPage);
+      },
+      'getServicesByName': function(name,pageSize,currentPage){
+        console.log(name);
+        return $http.post('/service/search/'+pageSize+'/'+currentPage,{name:name});
       },
       'getAllServices': function(pageSize,currentPage){
         return $http.get('/service/all');
@@ -221,6 +268,12 @@
     var self = {
       'getSuppliers': function(pageSize,currentPage){
         return $http.get('/supplier/'+pageSize+'/'+currentPage);
+      },
+      'getSuppliersByAll': function(all,pageSize,currentPage){
+        return $http.get('/supplier/search/'+pageSize+'/'+currentPage+'/'+all);
+      },
+      'getSuppliersCount': function(pageSize,currentPage){
+        return $http.get('/supplier/getSuppliersCount');
       },
       'getSupplierByID': function(id){
         return $http.get('/supplier/'+id);
@@ -287,8 +340,17 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
+      'getAllMoney': function(){
+        return $http.get('/report/company');
+      },
+      'getCustomersCount': function(){
+        return $http.get('/customer/customerCount');
+      },
       'getAllCustomers': function(){
         return $http.get('/customer/all');
+      },
+      'getAllCustomersStatus': function(){
+        return $http.get('/customer/allStatus1');
       },
       'getCustomerByID': function(id){
         return $http.get('/customer/'+id);
@@ -298,6 +360,13 @@
       },
       'editCustomer': function(id,customerObj){
         return $http.put('/customer/edit/'+id,customerObj);
+      },
+      'editCustomerById': function(id){
+        
+        return $http.put('/customer/editById/'+id);
+      },
+      'editCustomerReject': function(id,customerObj){
+        return $http.put('/customer/editRejectById/'+id,customerObj);
       },
       'deleteCustomer': function(id){
         return $http.delete('/customer/delete/'+id);
@@ -395,7 +464,21 @@
       },
       'deleteProduct': function(id){
         return $http.delete('/product/delete/'+id);
-      }
+      },
+      'getProductOtherEquipments': function(pageSize,currentPage){
+        return $http.get('/product/otherEquipment/'+pageSize+'/'+currentPage);
+      },
+      'getProductOtherEquipmentByID': function(id){
+        console.log("gg"+id);
+        return $http.get('/product/'+id);
+      },
+      'editProductOtherEquipment':function(id,otherEquipmentObj){
+        console.log(id);
+        return $http.put('/product/productEtc/edit/'+id,otherEquipmentObj);
+      },
+      'deleteProductOtherEquipment': function(id){
+        return $http.delete('/product/productOtherEquipment/delete/'+id);
+      },
     };
     return self;
   }]);
@@ -441,15 +524,27 @@
     };
     return self;
   }]);
-  app.service('InvoicesServ',['$http',function($http){
+  app.service('CSVServ',['$http',function($http){
+     var self = {
+      'addCSVFile': function(CSVObj){
+        return $http.post('/report/restor',CSVObj);
+      }
+    };
+    return self;
+  }]);
+  app.service('InvoicesServ',['$http','Upload',function($http,Upload){
     var self = {
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
-      'getInvoiceByID': function(id){
-        console.log("id");
-        console.log(id);
-        return $http.get('/invoice/'+id);
+      'getTotal': function(id){
+        return $http.get('/report/money/'+id);
+      },
+      'getInvoicePending': function(status,pageSize,currentPage){
+        return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
+      },
+      'getInvoiceByID': function(status,id){
+        return $http.get('/invoice/invoices/'+id+'/'+status);
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
@@ -457,10 +552,32 @@
       'report': function(invoiceObj){
         return $http.post('/report/printInvoice',invoiceObj);
       },
+      'active': function(){
+        return $http.get('/report/active');
+      },
+      'activeReport': function(){
+        return $http.get('/report/printActive');
+      },
+      'unActive': function(){
+        return $http.get('/report/unactive');
+      },
+      'contractBetweenDates': function(start,end){
+        return $http.post('/report/Between',{start:start,end:end});
+      },
+      'Byresseler': function(id){
+        return $http.post('/report/Reseller',{reseller:id});
+      },
+      'printBetweenDates': function(start,end){
+        console.log(start);
+      },
+      'printResseler': function(id){
+        return $http.post('/report/printReseller',{reseller:id});
+      },
       'editInvoice': function(id,invoiceObj){
         return $http.put('/invoice/edit/'+id,invoiceObj);
       },
       'deleteInvoice': function(id){
+        console.log(id);
         return $http.delete('/invoice/delete/'+id);
       },
       'getItemInfoByID': function(id){
@@ -470,7 +587,13 @@
         return $http.post('/invoice/renewInvice',renewInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
-        return $http.post('/invoice/paidInvoice',paidInviceObj);
+        // return $http.post('/invoice/paidInvoice',paidInviceObj);
+        return Upload.upload({
+          url: '/invoice/paidInvoice',
+          method: 'POST',
+          data: paidInviceObj,
+          file: paidInviceObj.image
+        });
       }
     };
     return self;

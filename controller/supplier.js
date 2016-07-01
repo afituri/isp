@@ -22,6 +22,34 @@ module.exports = {
     });
   },
 
+  getSupplierAll :function(searchString,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Supplier.count({'$or':[
+            {'name':{'$regex':searchString, '$options':'i'}},
+            {'email':{'$regex':searchString, '$options':'i'}},
+            {'phone':{'$regex':searchString, '$options':'i'}},
+            {'repName':{'$regex':searchString, '$options':'i'}},
+            {'repPhone':{'$regex':searchString, '$options':'i'}}
+            ]},function(err,count){
+      model.Supplier.find({'$or':[
+            {'name':{'$regex':searchString, '$options':'i'}},
+            {'email':{'$regex':searchString, '$options':'i'}},
+            {'phone':{'$regex':searchString, '$options':'i'}},
+            {'repName':{'$regex':searchString, '$options':'i'}},
+            {'repPhone':{'$regex':searchString, '$options':'i'}}
+            ]}).limit(limit).skip(page*limit).exec(function(err, result){
+        if(!err){
+          cb({result:result,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+
   getAllSupplier :function(cb){
     model.Supplier.find({},function(err, result){
       if(!err){
@@ -32,6 +60,19 @@ module.exports = {
       }
     });
   },
+
+    getAllSupplierCount :function(cb){
+    model.Supplier.count({},function(err, result){
+      if(!err){
+        cb({count:result});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+
   getSupplierId :function(id,cb){
     model.Supplier.findOne({_id : id}, function(err, result){
       if(!err){

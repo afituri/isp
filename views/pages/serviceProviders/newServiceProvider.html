@@ -6,14 +6,24 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <form novalidate ng-submit="newServiceProvider()">
+        <form novalidate ng-submit="newServiceProvider()" name="myForm" enctype="multipart/form-data">
           <div class="row">
             <div class="col-md-3" align="center">
-              <img ng-src="{{newServiceProviderForm.logo | defaultLogo:'../img/internetProvider.png'}}" class="img-rounded img-responsive" alt="" style="width:75%;">
+              <img ngf-thumbnail="newServiceProviderForm.logo || '../img/internetProvider.png'" class="img-rounded img-responsive" style="width:75%;">
               <br>
-              <button type="file" class="btn btn-default btn-sm" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB">
+              <button 
+                class="btn btn-default btn-sm" type="file" ngf-select ng-model="newServiceProviderForm.logo" name="logo"
+                accept="image/*" ngf-max-size="2MB" required="required"
+                ngf-model-invalid="errorFiles" ng-class="(newServiceProviderForm.logo && newServiceProviderForm.logo.type == 'image/*') ? 'btn-success' : 'btn-warning'">
                 <i class="fa fa-upload"></i>&nbsp;تحمل الشعار
               </button>
+              <div class="text-center">
+                <br>
+                <p class="bg-danger" ng-show="myForm.logo.$error.maxSize">
+                  حجم الملف كبير جدا {{errorFiles[0].size / 1000000|number:1}}MB : 
+                  الحد اﻷقصي 2MB
+                </p>
+              </div>
             </div>
             <div class="col-md-9">
               <br>

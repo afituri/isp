@@ -8,13 +8,53 @@ module.exports = {
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.Instock.count({},function(err,count){
-      model.Instock.find({}).limit(limit).skip(page*limit)
+    model.Instock.count({status:1},function(err,count){
+      model.Instock.find({status:1}).limit(limit).skip(page*limit)
       .populate('product')
       .populate('warehouse')
       .exec(function(err, result){
         if(!err){
           cb({result:result,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
+  getInStockTake :function(limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Instock.count({status:2},function(err,count){
+      model.Instock.find({status:2}).limit(limit).skip(page*limit)
+      .populate('invoice')
+      .exec(function(err, result){
+        if(!err){
+          // console.log(result);
+          var options = {
+          path: 'invoice.customer',
+          model: 'Customer'
+        };
+        model.Instock.populate(result, options, function (err, result1) {
+          if(!err){
+             var options = {
+              path: 'invoice.reseller',
+              model: 'Reseller'
+            };
+            model.Instock.populate(result1, options, function (err, result2) {
+              if(!err){
+                cb({result:result2,count:count});    
+              }else{
+                console.log(err);
+                cb(null);
+              }
+            });
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
         }else{
           console.log(err);
           cb(null);
@@ -36,7 +76,7 @@ module.exports = {
   },
 
   getAllInStock :function(cb){
-    model.Instock.find({},function(err, result){
+    model.Instock.find({status:1},function(err, result){
       if(!err){
         cb(result);
       }else{
@@ -45,7 +85,40 @@ module.exports = {
       }
     });
   },
-  
+  getAllInStockTake :function(cb){
+    model.Instock.find({status:2}).populate('invoice')
+      .exec(function(err, result){
+        if(!err){
+          // console.log(result);
+          var options = {
+          path: 'invoice.customer',
+          model: 'Customer'
+        };
+        model.Instock.populate(result, options, function (err, result1) {
+          if(!err){
+             var options = {
+              path: 'invoice.reseller',
+              model: 'Reseller'
+            };
+            model.Instock.populate(result1, options, function (err, result2) {
+              if(!err){
+                cb({result:result2,count:count});    
+              }else{
+                console.log(err);
+                cb(null);
+              }
+            });
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+  },
   updateInStockInvoice : function(id,itemInfo,cb){
     model.Instock.findOneAndUpdate({$and:[{status:1},{_id:itemInfo}]},{invoice:id,status:2} , function(err,result) {
       if (!err) {

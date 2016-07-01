@@ -1,27 +1,169 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  //dddddddddddddddddddddd
-  app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ',function($scope,$stateParams,MenuFac,InvoicesServ){
-    MenuFac.active = 10;
-    $scope.activePanel = MenuFac;
-    //alert($stateParams.id);
-    InvoicesServ.getInvoiceByID($stateParams.id).then(function(response) {
-      $scope.allInvoice=response.data;
+  app.controller('InvoicesCtlPending',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    
+    $scope.init = function(id){
+    InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
+      console.log(response.data);
+      $scope.allInvoice=response.data.result;
+      $scope.total = response.data.count;
+    }, function(response) {
+        console.log("Something went wrong");
+    }); 
+  }
+  $scope.init(2);
+   
+   $scope.getStatus = function(){
+    $scope.init($scope.pending);
+   }
+
+   $scope.accept = function(id){
+    $scope.id = id;
+      $scope.deleteName = "هل حقا تريد تأكيد هذه الفاتورة";
+      $scope.confirmModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/confirmModel.html',
+        show: true
+      });
+   }
+    $scope.editCustomerMessage ={};
+   $scope.RejectInvoice = function(id){
+    //alert(id.id);
+    $scope.idreject = id;
+    $scope.editCustomerMessage.reject_message = "خطأ بيانات الفاتورة غير صحيحة";
+      $scope.deleteName = "هل حقا تريد تأكيد هذه الفاتورة";
+      $scope.rejectDataModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/rejectModel.html',
+        show: true
+      });
+   }
+
+   $scope.rejectEdit = function(id){
+     InvoicesServ.editInvoice(id.id,{status:3,reject_message:$scope.editCustomerMessage.reject_message}).then(function(response) {
+    
+      if(response.data){
+          $scope.rejectDataModel.hide();
+          $scope.init(3);
+          //$state.go('customers');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+   }
+
+   $scope.confirmData = function(id){
+    InvoicesServ.editInvoice(id.id,{status:-9}).then(function(response) {
+        if(response.data){
+          $scope.confirmModel.hide();
+          $scope.init(2);
+          //$state.go('customers');
+          toastr.info('تم التعديل بنجاح');
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+   }
+  
+  
+
+  }]);
+
+  app.controller('InvoicesCtl',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+      InvoicesServ.getTotal($stateParams.id).then(function(response) {
+      console.log("response");
+      console.log(response.data);
+      $scope.allTotals=response.data.sum.toFixed(2);
+      $scope.piad =  response.data.piad.toFixed(2);
+
+      $scope.Therest =(response.data.sum-response.data.piad).toFixed(2);
     }, function(response) {
         console.log("Something went wrong");
     });
 
+
+    $scope.DeleteInvoice = function(id){
+      $scope.id = id;
+      $scope.deleteName = "هذه الفاتورة";
+      $scope.deleteModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.delete.tpl.html',
+        show: true
+      });
+    };
+
+    $scope.moreInfo = function(obj){
+      $scope.obj = obj;
+      $scope.moreInfoModel = $modal({
+        scope: $scope,
+        templateUrl: 'pages/model.more.info.tpl.html',
+        show: true
+      });
+    };
+
+    $scope.confirmDelete = function(id){
+      InvoicesServ.deleteInvoice(id.id).then(function(response) {
+        if(response.data.result == 1){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.initInvoce();
+        } else if (response.data.result == 2){
+          $scope.deleteModel.hide();
+          toastr.success('تم الحذف بنجاح');
+          $scope.initInvoce();
+        } else if (response.data.result == 3){
+          $scope.deleteModel.hide();
+          toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+        }
+      }, function(response) {
+        $scope.deleteModel.hide();
+        console.log("Something went wrong");
+      });
+    };
+
+
+
+     $scope.renewInvoice = function(id){
+      //alert(id);
+     }
+
+     
+    MenuFac.active = 10;
+    $scope.activePanel = MenuFac;
+    //alert($stateParams.id);
+    $scope.initInvoce = function(){
+    InvoicesServ.getInvoiceByID(1,$stateParams.id).then(function(response) {
+    
+      $scope.allInvoice=response.data;
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+  }
+  $scope.initInvoce();
+
     $scope.showInvoice = function(id){
       window.location.href='/report/printInvoice/'+id;
+    },
+    $scope.showPaid = function(id){
+      //alert(id);
+      window.location.href='/report/printInvoicePaid/'+id;
     }
   }]);
 
   app.controller('NewInvoiceCtl',['$scope','InStockServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
-    
+
 
     $scope.showId = function(id){
-      alert(id);
+     
     }
 
     $scope.stock={};
@@ -62,7 +204,7 @@
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
     $scope.init = function () {
-      CustomersServ.getAllCustomers().then(function(response) {
+      CustomersServ.getAllCustomersStatus().then(function(response) {
         $scope.customers = response.data;
       }, function(response) {
         console.log("Something went wrong");
@@ -92,6 +234,7 @@
         });
       } else if($scope.previousSubscription==2){
           $scope.newInvoiceForm.previousSubscription=2;
+          if($scope.customId != undefined){
           $scope.newInvoiceForm.customId=$scope.customId;
           // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
           $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
@@ -101,6 +244,9 @@
           },function(response){
             console.log("Something went wrong");
           });
+        } else {
+          toastr.error("الرجاء اختيار الاسم بطريقة صحيحة");
+        }
         }
     };
     $scope.getItemInfo = function(){
@@ -177,6 +323,9 @@
       }
     };
     $scope.removeSelect = function(index){
+      if($scope.selectedProducts[index].type == "معدة"){
+        $scope.countItem=0;
+      }
       $scope.selectedProducts.splice(index, 1);
     };
   }]);
@@ -186,6 +335,7 @@
     $scope.editInvoiceForm = {};
   }]);
   app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+   
     $scope.renewInviceForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllPackages();
@@ -213,12 +363,17 @@
     }, function(response) {
       console.log("Something went wrong");
     });
+    $scope.paidInvoiceForm.monoyStatus = "1";
     $scope.paidInvoice = function(){
       $scope.paidInvoiceForm.idCu=$stateParams.id;
       InvoicesServ.paidInvoice($scope.paidInvoiceForm).then(function(response){
         if(response.data){
-          toastr.success('تم الدفع بنجاح');
-          $state.go('invoiceCustomer')
+          /*toastr.success('تم الدفع بنجاح');
+          $state.go('invoiceCustomer')*/
+           toastr.success('تم الدفع بنجاح');
+          $scope.paidInvoiceForm.paid=" ";
+          $scope.paidInvoiceForm.notes=" ";
+          $state.go('paidInvoice');
         }
       }, function(response) {
         console.log("Something went wrong");

@@ -2,7 +2,6 @@
   'use strict';
   var app = angular.module('isp',[
     'mgcrea.ngStrap',
-    'ngAnimate',
     'ngSanitize',
     'ui.router',
     'jcs-autoValidate',
@@ -13,26 +12,85 @@
     'oc.lazyLoad',
     'ngCsvImport'
   ]);
+  /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
+  app.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
+    $ocLazyLoadProvider.config({
+    // global configs go here
+    });
+  }]);
+  //AngularJS v1.3.x workaround for old style controller declarition in HTML
+  app.config(['$controllerProvider', function($controllerProvider) {
+    // this option might be handy for migrating old apps, but please don't use it
+    // in new ones!
+    $controllerProvider.allowGlobals();
+  }]);
+  /* Setup global settings */
+  app.factory('settings', ['$rootScope', function($rootScope) {
+    // supported languages
+    var settings = {
+      layout: {
+        pageSidebarClosed: false, // sidebar menu state
+        pageContentWhite: true, // set page content layout
+        pageBodySolid: false, // solid body color state
+        pageAutoScrollOnLoad: 1000 // auto scroll to top on page load
+      },
+      layoutPath: 'assets'
+    };
+    $rootScope.settings = settings;
+    return settings;
+  }]);
+  /* Setup App Main Controller */
+  app.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
+    $scope.$on('$viewContentLoaded', function() {
+      App.initComponents(); // init core components
+      //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
+    });
+  }]);
+  /* Setup Layout Part - Header */
+  app.controller('HeaderController', ['$scope', function($scope) {
+    $scope.$on('$includeContentLoaded', function() {
+      Layout.initHeader(); // init header
+    });
+  }]);
+  /* Setup Layout Part - Sidebar */
+  app.controller('SidebarController', ['$scope', function($scope) {
+    $scope.$on('$includeContentLoaded', function() {
+      Layout.initSidebar(); // init sidebar
+    });
+  }]);
+  /* Setup Layout Part - Footer */
+  app.controller('FooterController', ['$scope', function($scope) {
+    $scope.$on('$includeContentLoaded', function() {
+      Layout.initFooter(); // init footer
+    });
+  }]);
   app.config(['$stateProvider','$urlRouterProvider','$locationProvider','$popoverProvider','$modalProvider','toastrConfig','$datepickerProvider','$ocLazyLoadProvider',function($stateProvider,$urlRouterProvider,$locationProvider,$popoverProvider,$modalProvider,toastrConfig,$datepickerProvider,$ocLazyLoadProvider){
-    $stateProvider.state('home',{
+    $stateProvider.state('dashboard', {
       url: '/',
-      templateUrl: 'pages/home.html',
-      controller: 'HomeCtl',
+      templateUrl: "pages/dashboard.html",            
+      data: {pageTitle: 'لوحة التحكم'},
+      controller: "HomeCtl",
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-          return $ocLazyLoad.load([{
-            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+          return $ocLazyLoad.load({
+            insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
             files: [
-              '/js/controllers/homeCtl.js',
+              'morris.js/morris.css',                            
+              'morris.js/morris.min.js',
+              'raphael/raphael.min.js',                            
+              'assets/js/jquery.sparkline.min.js',
+              'assets/js/dashboard.js',
+              'js/controllers/homeCtl.js',
             ] 
-          }]);
-        }] 
+          });
+        }]
       }
     })
     .state('resellers',{
       url: '/resellers',
       templateUrl: 'pages/resellers/resellers.html',
       controller: 'ResellersCtl',
+      data: {pageTitle: 'عرض الموزعين'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -48,6 +106,7 @@
       url: '/dollar',
       templateUrl: 'pages/dollar/dollar.html',
       controller: 'DollarsCtl',
+      data: {pageTitle: 'تسجيل الدولار'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -60,10 +119,28 @@
       }
       
     })
+    .state('restore',{
+      url: '/restore',
+      templateUrl: 'pages/restore/restore.html',
+      controller: 'RestoreCtl',
+      data: {pageTitle: 'استعادة'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/restoreCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+      
+    })
     .state('newReseller',{
       url: '/resellers/new',
       templateUrl: 'pages/resellers/newReseller.html',
       controller: 'NewResellerCtl',
+      data: {pageTitle: 'اضافة موزع جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -78,6 +155,7 @@
       url: '/resellers/edit/:id',
       templateUrl: 'pages/resellers/editReseller.html',
       controller: 'EditResellerCtl',
+      data: {pageTitle: 'تعديل الموزع'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -306,6 +384,39 @@
         }] 
       }
     })
+  
+
+    .state('customerPending',{
+      url: '/customerPending',
+      templateUrl: 'pages/customers/customerPendingConfirm.html',
+      controller: 'CustomerPendingCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/customersCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    
+    .state('showInvoicePending',{
+      url: '/showInvoicePending',
+      templateUrl: 'pages/invoices/showInvoicePending.html',
+      controller: 'InvoicesCtlPending',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
    
     .state('showInvoice',{
       url: '/showInvoice/:id',
@@ -438,6 +549,20 @@
           }]);
         }] 
       }
+    }).state('productOtherEquipments',{
+      url: '/products/otherEquipments',
+      templateUrl: 'pages/products/productOtherEquipment.html',
+      controller: 'ProductOtherEquipmentCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productServicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     }).state('newProduct',{
       url: '/products/new',
       templateUrl: 'pages/products/newProduct.html',
@@ -484,6 +609,20 @@
       url: '/product/productItems/edit/:id',
       templateUrl: 'pages/products/editProductItem.html',
       controller: 'ProductItemsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/productServicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    }).state('editProductOtherEquipment',{
+      url: '/product/productOtherEquipments/edit/:id',
+      templateUrl: 'pages/products/editProductOtherEquipment.html',
+      controller: 'EditProductOtherEquipmentsCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -814,9 +953,22 @@
           }]);
         }] 
       }
+    }).state('reports',{
+      url: '/reports',
+      templateUrl: 'pages/reports/reports.html',
+      controller: 'ReportsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/reportsCtl.js',
+            ] 
+          }]);
+        }] 
+      }
     });
     $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(false).hashPrefix('!');
     angular.extend($popoverProvider.defaults, {
       animation: 'am-flip-x',
       html: true
@@ -827,7 +979,7 @@
       tapToDismiss: true
     });
     angular.extend($modalProvider.defaults, {
-      animation: 'am-fade-and-scale',
+      animation: 'animated zoomIn',
       placement: 'center'
     });
     angular.extend($datepickerProvider.defaults, {
@@ -837,6 +989,11 @@
     $ocLazyLoadProvider.config({
         // global configs go here
     });
+  }]);
+  /* Init global settings and run the app */
+  app.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
+    $rootScope.$state = $state; // state to be accessed from view
+    $rootScope.$settings = settings; // state to be accessed from view
   }]);
   app.run(['defaultErrorMessageResolver', function (defaultErrorMessageResolver){
     defaultErrorMessageResolver.setI18nFileRootPath('/lang');
@@ -876,8 +1033,3 @@
     $scope.activePanel = MenuFac;
   }]);
 }());
-
-
-
-
-

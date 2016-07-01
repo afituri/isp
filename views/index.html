@@ -1,249 +1,180 @@
 <!DOCTYPE html>
-<html ng-app="isp">
-  <header>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
+<!--[if IE 8]> <html lang="en" class="ie8 no-js" data-ng-app="isp"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js" data-ng-app="isp"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" data-ng-app="isp" dir="rtl">
+  <!--<![endif]-->
+  <!-- BEGIN HEAD -->
+  <head>
+    <title data-ng-bind="$state.current.data.pageTitle"></title>
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>شركة الحلول المتقنة لتقينة المعلومات والإتصالات</title>
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bootstrap-additions/dist/bootstrap-additions.min.css">
-    <link rel="stylesheet" href="/angular-motion/dist/angular-motion.min.css">
-    <link rel="stylesheet" href="/bootstrap-rtl/dist/css/bootstrap-rtl.min.css">
-    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/animate.css/animate.min.css">
-    <link rel="stylesheet" href="/angular-toastr/dist/angular-toastr.min.css">
-    <link rel="stylesheet" href="/nya-bootstrap-select/dist/css/nya-bs-select.min.css">
-    <link rel="stylesheet" href="/css/custom.css">
-    <link rel="stylesheet" href="/css/style.css">
-  </header>
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border:0;">
-              <a href="/" class="site_title">
-                <span>شركة الحلول المتقنة لتقينة </span>
-                <br>
-                <span>المعلومات والإتصالات</span>
-              </a>
-            </div>
-            <div class="clearfix"></div>
-            <br/>
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <ul class="nav side-menu">
-                  <li><a ui-sref="home"><i class="fa fa-home"></i> الرئيسية</a>
-                  </li>
-                  <li><a ui-sref="dollar"><i class="fa fa-usd"></i> تسجيل الدولار</a>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i> مزودي الخدمة <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="serviceProviders">عرض مزودي الخدمة</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newServiceProvider">إضافة مزود خدمة جديد</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i> الخدمات <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="services">عرض الخدمات</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newService">إضافة خدمة جديدة</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i> الموزعين <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="resellers">عرض الموزعين</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newReseller">إضافة موزع جديد</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i> الموردين <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="suppliers">عرض الموردين</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newSupplier">إضافة مورد جديد</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i>المخازن <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="warehouses">عرض المخازن</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newWarehouse">إضافة مخزن جديد</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i>المخزون <small>(البضاعة المخزنة)</small> <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="inStock">عرض مخزون</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newInStock">إضافة مخزون جديد</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i>الزبائن <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="customers">عرض الزبائن</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newCustomer">إضافة زبون</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i><span style="font-size:14px;">المنتجات <small style="font-size:9px;">(خدمات, معدات, حزم)</small> <span class="fa fa-chevron-down"></span></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="productServices">عرض الخدمات</a>
-                      </li>
-                      <li>
-                        <a ui-sref="productItems">عرض المعدات</a>
-                      </li>
-                      <li>
-                        <a ui-sref="productPackages">عرض الحزم</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newProduct">إضافة منتج جديد</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i>السياسات <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="policies">عرض السياسات</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newPolicy">إضافة سياسة جديدة</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i>سياسات المنتج <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="productPoliciesService">عرض سياسات منتج (الخدمة)</a>
-                      </li>
-                      <li>
-                        <a ui-sref="productPoliciesItem">عرض سياسات منتج (المعدة)</a>
-                      </li>
-                      <li>
-                        <a ui-sref="productPoliciesPackage">عرض سياسات منتج (الحزمة)</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newProductPolicy">إضافة سياسة منتج جديد</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bars"></i>الفواتير <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li>
-                        <a ui-sref="invoiceCustomer">عرض الفواتير</a>
-                      </li>
-                      <li>
-                        <a ui-sref="newInvoice">إضافة فاتورة جديدة</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- /sidebar menu -->
-            <!-- /menu footer buttons -->
-            <!-- <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div> -->
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav class="" role="navigation">
-              <ul class="nav navbar-nav navbar-left">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="img/img.jpg" alt="">&nbsp;اسم المستخدم
-                    <span class=" fa fa-angle-down fa-fw"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a ui-sref="user"> عرض المدراء</a>
-                    </li>
-                    <li><a ui-sref="newUser"> اضافة مدير</a>
-                    </li>
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> خروج</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div ui-view></div>
-        </div>
-        <!-- /page content -->
-        <!-- footer content -->
-        <footer class="footer">
-          <div class="pull-left">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      </div>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" /> -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/angular-motion/dist/angular-motion.min.css" />
+    <link rel="stylesheet" href="/animate.css/animate.min.css" />
+    <link rel="stylesheet" href="/angular-toastr/dist/angular-toastr.min.css"/>
+    <link rel="stylesheet" href="/nya-bootstrap-select/dist/css/nya-bs-select.min.css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
+    <link id="ng_load_plugins_before" />
+    <!-- END DYMANICLY LOADED CSS FILES -->
+    <!-- BEGIN THEME STYLES -->
+    <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="assets/css/components-rtl.min.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="assets/css/plugins-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/darkblue-rtl.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="assets/css/custom-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+  </head>
+  <!-- END HEAD -->
+  <!-- BEGIN BODY -->
+  <body ng-controller="AppController" class="page-header-fixed page-sidebar-closed-hide-logo page-on-load" ng-class="{'page-content-white': settings.layout.pageContentWhite,'page-container-bg-solid': settings.layout.pageBodySolid, 'page-sidebar-closed': settings.layout.pageSidebarClosed}">
+    <!-- BEGIN PAGE SPINNER -->
+    <div ng-spinner-bar class="page-spinner-bar">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
     </div>
-    <script src="/jquery/dist/jquery.min.js"></script>
-    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/angular/angular.min.js"></script>
-    <script src="/angular-animate/angular-animate.min.js"></script>
-    <script src="/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/angular-strap/dist/angular-strap.min.js"></script>
-    <script src="/js/angular-strap/angular-strap.tpl.min.js"></script>
-    <script src="/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
-    <script src="/ng-file-upload/ng-file-upload-shim.min.js"></script>
-    <script src="/ng-file-upload/ng-file-upload.min.js"></script>
-    <script src="/angular-toastr/dist/angular-toastr.min.js"></script>
-    <script src="/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
-    <script src="/nya-bootstrap-select/dist/js/nya-bs-select.min.js"></script>
-    <script src="/oclazyload/dist/ocLazyLoad.min.js"></script>
-    <script src="/js/ui-bootstrap/ui-bootstrap-tpls-1.2.5.min.js"></script>
-    <script src="/nprogress/nprogress.js"></script>
-    <script src="/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <script src="/angular-csv-import-tmp/dist/angular-csv-import.min.js"></script>
-    <script src="/js/custom.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/services.js"></script>
+    <!-- END PAGE SPINNER -->
+    <!-- BEGIN HEADER -->
+    <div data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top">
+       <!-- BEGIN HEADER INNER -->
+<div class="page-header-inner">
+    <!-- BEGIN LOGO -->
+    <div class="page-logo">
+        <a href="#/">
+            <img src="/assets/img/logo-vsat.old.png" alt="logo" class="logo-default"/> </a>
+        <div class="menu-toggler sidebar-toggler">
+            <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+        </div>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN HEADER SEARCH BOX -->
+    <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+    <form class="search-form hide" action="#" method="GET">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search..." name="query">
+            <span class="input-group-btn">
+                <a href="javascript:;" class="btn submit">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </span>
+        </div>
+    </form>
+    <!-- END HEADER SEARCH BOX -->
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+    <!-- END RESPONSIVE MENU TOGGLER -->
+    <!-- BEGIN TOP NAVIGATION MENU -->
+    <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <li class="dropdown dropdown-user">
+                <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                    <img alt="" class="img-circle" src="/img/avatar.png" />
+                    <span class="username username-hide-on-mobile"> <%= name %> </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-default">
+                    <li>
+                        <a ui-sref="user">
+                            <i class="fa fa-users"></i> عرض المدراء </a>
+                    </li>
+                    <li>
+                        <a ui-sref="newUser">
+                            <i class="fa fa-user-plus"></i> اضافة مدير </a>
+                    </li>
+                    <li class="divider"> </li>
+                    <li>
+                        <a href="/user/logout">
+                            <i class="fa fa-sign-out"></i> خروج </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- END USER LOGIN DROPDOWN -->
+        </ul>
+    </div>
+    <!-- END TOP NAVIGATION MENU -->
+</div>
+<!-- END HEADER INNER --> 
+    </div>
+    <!-- END HEADER -->
+    <div class="clearfix"> </div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+      <!-- BEGIN SIDEBAR -->
+      <div data-ng-include="'tpl/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"> </div>
+      <!-- END SIDEBAR -->
+      <!-- BEGIN CONTENT -->
+      <div class="page-content-wrapper">
+        <div class="page-content">
+          <!-- BEGIN ACTUAL CONTENT -->
+          <div ui-view class="fade-in-up"> </div>
+          <!-- END ACTUAL CONTENT -->
+        </div>
+      </div>
+        <!-- END CONTENT -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        <a href="javascript:;" class="page-quick-sidebar-toggler">
+            <i class="icon-login"></i>
+        </a>
+        <!-- END QUICK SIDEBAR -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div data-ng-include="'tpl/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE JQUERY PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script> 
+    <![endif]-->
+    <script src="jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- END CORE JQUERY PLUGINS -->
+    <!-- BEGIN CORE ANGULARJS PLUGINS -->
+    <script src="angular/angular.min.js" type="text/javascript"></script>
+    <script src="angular-sanitize/angular-sanitize.min.js" type="text/javascript"></script>
+    <script src="angular-touch/angular-touch.min.js" type="text/javascript"></script>
+    <script src="angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
+    <script src="assets/js/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+    <script src="angular-strap/dist/angular-strap.min.js" type="text/javascript"></script>
+    <script src="js/angular-strap/angular-strap.tpl.min.js" type="text/javascript"></script>
+    <script src="angular-auto-validate/dist/jcs-auto-validate.min.js" type="text/javascript"></script>
+    <script src="ng-file-upload/ng-file-upload-shim.min.js" type="text/javascript"></script>
+    <script src="ng-file-upload/ng-file-upload.min.js" type="text/javascript"></script>
+    <script src="angular-toastr/dist/angular-toastr.min.js" type="text/javascript"></script>
+    <script src="angular-toastr/dist/angular-toastr.tpls.min.js" type="text/javascript"></script>
+    <script src="nya-bootstrap-select/dist/js/nya-bs-select.min.js" type="text/javascript"></script>
+    <script src="oclazyload/dist/ocLazyLoad.min.js" type="text/javascript"></script>
+    <script src="nprogress/nprogress.js" type="text/javascript"></script>
+    <script src="bootstrap-progressbar/bootstrap-progressbar.min.js" type="text/javascript"></script>
+    <script src="angular-csv-import-tmp/dist/angular-csv-import.min.js" type="text/javascript"></script>
+    <!-- END CORE ANGULARJS PLUGINS -->
+    <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
+    <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/directives.js" type="text/javascript"></script>
+    <script src="js/services.js" type="text/javascript"></script>
     <script id="ng_load_controler_before"></script>
+    <!-- END APP LEVEL ANGULARJS SCRIPTS -->
+    <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
+    <script src="assets/js/app.min.js" type="text/javascript"></script>
+    <script src="assets/js/layout.min.js" type="text/javascript"></script>
+    <!-- END APP LEVEL JQUERY SCRIPTS -->
+    <!-- END JAVASCRIPTS -->
   </body>
+  <!-- END BODY -->
 </html>

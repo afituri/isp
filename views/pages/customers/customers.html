@@ -7,7 +7,7 @@
             <h2 class="pull-right">عرض الزبائن</h2>
           </div>
           <div class="col-xs-7">
-            <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="بحث...">
+            <!-- <input type="text" class="form-control input-sm" ng-model="searchByName" ng-click="searchCustomer()" placeholder="بحث..."> -->
           </div>
           <div class="col-xs-3 text-left">
             <a class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
@@ -33,7 +33,8 @@
                 <th>اسم المندوب </th>
                 <th>رقم الهاتف </th>
                 <th>المدير </th>
-                <th>السياسة </th>
+                 <th>الموزع </th>
+                <th>الحالة </th>
                 <th><i class="fa fa-cog"></i></th>
               </tr>
             </thead>
@@ -50,8 +51,13 @@
                   <span ng-if="customer.type == 2">{{customer.repName}}</span>
                 </td>
                 <td>{{customer.phone}}</td>
-                <td>{{customer.user.name}}</td>
-                <td>{{customer.policy}}</td>
+                   <td ng-if="customer.user.name==null">لايوجد</td>
+                <td ng-if="customer.user.name!=null">{{customer.user.name}}</td>
+                 <td ng-if="customer.reseller.repName == null">لايوجد</td>
+                 <td ng-if="customer.reseller.repName != null">{{customer.reseller.repName}}</td>
+                <td ng-if="customer.status==1">مأكد</td>
+                <td ng-if="customer.status==2">قيد الانتظار</td>
+                <td ng-if="customer.status==3">رفض</td>
                 <td>
                   <a class="btn btn-success btn-xs" ui-sref="editCustomer({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
                   <a class="btn btn-success btn-xs" ng-click="showDeleteModel(customer._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>

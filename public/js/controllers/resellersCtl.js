@@ -8,6 +8,19 @@
     $scope.total = 0;
     HelperServ.getAllCities();
     $scope.cityObject = HelperServ;
+
+
+    $scope.searchCustomer = function() {
+       ResllersServ.getResellerByName($scope.searchByName,$scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.resellers = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+
+
+
     $scope.init = function () {
       ResllersServ.getResellers($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.resellers = response.data.result;

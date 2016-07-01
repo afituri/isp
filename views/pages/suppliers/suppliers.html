@@ -3,10 +3,13 @@
     <div class="x_panel">
       <div class="x_title">
         <div class="row">
-          <div class="col col-xs-6">
+          <div class="col col-xs-3">
             <h2>عرض الموردين</h2>
           </div>
-          <div class="col col-xs-6 text-left">
+          <div class="col-xs-6">
+            <input type="text" class="form-control input-sm" ng-model="searchByAll" ng-change="searchSupplier()" placeholder="البحث / اسم المورد / اسم الشركة / الايميل / رقم هاتف الشركة و المخول ..">
+         </div>
+          <div class="col col-xs-3 text-left">
             <a ui-sref="newSupplier" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مورد جديد</a>
           </div>
         </div>

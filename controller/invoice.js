@@ -12,7 +12,11 @@ module.exports = {
     page-=1;
     limit = parseInt(limit);
     model.Invoice.count({},function(err,count){
-      model.Invoice.find({}).limit(limit).skip(page*limit).exec(function(err, invoices){
+      model.Invoice.find({}).limit(limit).skip(page*limit)
+      .populate('customer')
+      .populate('reseller')
+      .populate('user')
+      .exec(function(err, invoices){
         if(!err){
           cb({result:invoices,count:count});
         }else{
@@ -22,6 +26,173 @@ module.exports = {
       });
     });
   },
+
+    getInvoicePending :function(status,limit,page,cb){
+      if(status==0){
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({},function(err,count){
+        model.Invoice.find({}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+      } else if(status==1){
+             page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:1},function(err,count){
+        model.Invoice.find({status:1}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+      } else if(status==2) {
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:2},function(err,count){
+        model.Invoice.find({status:2}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+
+      } else if(status==3) {
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:3},function(err,count){
+        model.Invoice.find({status:3}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+
+      }
+    
+  },
+
+
+  getInvoicePendingRes :function(status,id,limit,page,cb){
+      if(status==0){
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({reseller:id},function(err,count){
+        model.Invoice.find({reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+      } else if(status==1){
+             page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:1,reseller:id},function(err,count){
+        model.Invoice.find({status:1,reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+      } else if(status==2) {
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:2,reseller:id},function(err,count){
+        model.Invoice.find({status:2,reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+
+      } else if(status==3) {
+        page = parseInt(page);
+        page-=1;
+        limit = parseInt(limit);
+        model.Invoice.count({status:3,reseller:id},function(err,count){
+        model.Invoice.find({status:3,reseller:id}).limit(limit).skip(page*limit)
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
+          if(!err){
+            cb({result:invoices,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+        }
+      });
+    });
+
+
+      }
+    
+  },
+
+
 
    getAllInvoices :function(cb){
     model.Invoice.find({},function(err, invoices){
@@ -34,8 +205,12 @@ module.exports = {
     });
   },
 
-  getInvoicesById :function(id,cb){
-    model.Invoice.find({customer:id},function(err, invoices){
+  getInvoicesById :function(status,id,cb){
+    model.Invoice.find({customer:id})
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoices){
       if(!err){
         cb(invoices);
       }else{
@@ -49,19 +224,23 @@ module.exports = {
 
 
   deleteInvoice : function(id,cb){
-
-    model.Order.find({invoice:id}, function(err,resultOrder) {
-      if(resultOrder.length > 0){
-        cb(1)
-      } else{
+    model.Order.remove({invoice:id}, function(err,resultOrder) {
+      if(!err){
         model.Invoice.remove({_id:id}, function(err,result) {
           if (!err) {
-            cb(2)
+            model.Instock.findOneAndUpdate({$and:[{status:2},{_id:id}]},{invoice:null,status:1} , function(err,result) {
+              if (!err) {
+                cb(true)
+              } else {
+                cb(false);
+              }
+            });
           } else {
-            console.log(err);
             cb(3);
           }
         });
+      } else{
+        cb(1);
       }
     });
   },
@@ -75,20 +254,38 @@ module.exports = {
         if(body.previousSubscription==1){
           customer = new model.Customer(body);
           customer.save(function(err,customerResult){
+
             if (!err) {
               invoice={
                 customer:customerResult._id,
                 type:body.type,
                 notes:body.invoceNotes,
-                piad:body.total,
+                piad:body.total-body.discount,
                 reseller:body.reseller,
                 discount:body.discount,
-                typein:body.typein
+                typein:body.typein,
+                startDate:body.startDate,
+                endDate:body.endDate
               };
+              if(body.typein!=2){
+                invoice.instock=body.inStockdata._id;
+              }
               invoice=new model.Invoice(invoice);
               invoice.save(function(err,invoiceResult){
                 if (!err) {
-                  
+                  if(body.paid!=0){
+                    var Paid={
+                      customer:customerResult._id,
+                      invoice:invoiceResult._id,
+                      type:1,
+                      notes:body.paidNotes,
+                      piad:body.paid,
+                      reseller:null,
+                      discount:0,
+                      typein:4
+                    };
+                    invoice=new model.Invoice(Paid);
+                    invoice.save();}
                   var arrayOrd=[];
                   for( i in body.selectedProducts ){
 
@@ -111,12 +308,13 @@ module.exports = {
                               if(body.typein!=2){
                                 model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
                                   if (!err) {
-                                    cb(arrayOfResult,false);
-                                  } else {
-                                    console.log(err);
-                                    cb(false);
-                                  }
-                                });
+                                    
+                                      cb(arrayOfResult,false);
+                                    } else {
+                                      console.log(err);
+                                      cb(false);
+                                    }
+                                  });
                               }else{
                                 cb(arrayOfResult,false);
                               }
@@ -148,15 +346,33 @@ module.exports = {
             customer:body.customId,
             type:1,
             notes:body.invoceNotes,
-            piad:body.total,
+            piad:body.total-body.discount,
             reseller:body.reseller,
             discount:body.discount,
+            startDate:body.startDate,
+            endDate:body.endDate,
             typein:body.typein
           };
+          if(body.typein!=2){
+            invoice.instock=body.inStockdata._id;
+          }
           invoice=new model.Invoice(invoice);
           invoice.save(function(err,invoiceResult){
             if (!err) {
-              
+              if(body.paid!=0){
+                var Paid={
+                  customer:body.customId,
+                  invoice:invoiceResult._id,
+                  type:1,
+                  notes:body.paidNotes,
+                  piad:body.paid,
+                  reseller:null,
+                  discount:0,
+                  typein:4
+                };
+                invoice=new model.Invoice(Paid);
+                invoice.save();
+                }
               var arrayOrd=[];
               for( i in body.selectedProducts ){
 
@@ -179,7 +395,7 @@ module.exports = {
                           if(body.typein!=2){
                             model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
                               if (!err) {
-                                cb(arrayOfResult,false);
+                                  cb(arrayOfResult,false);
                               } else {
                                 console.log(err);
                                 cb(false);
@@ -213,16 +429,44 @@ module.exports = {
   },
 
   updateInvoice : function(id,body,cb){
+    if(body.status==-9){
+      var obj = {status:1}
+      model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {       
+        if (!err) {
+          model.Customer.findOneAndUpdate({_id:result.customer}, obj, function(err,result) {
+          if (!err) {
+             cb(true)
+          } else {
+            cb(false);
+          }
+          });
+        } else {
+          console.log(err);
+          cb(false);
+        }
+      });
+    } else {
+
     var obj = body;
     model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
-        cb(true)
+        if(body.status == 3){
+          model.Instock.findOneAndUpdate({invoice:id},{status:1},function(err,result) { 
+            cb(true);
+          }) ;
+        }else{
+          cb(true);
+        }
+        
       } else {
         console.log(err);
         cb(false);
       }
     });
+  }
   },
+
+  
 
   getInvoicedata :function(id,cb){
     model.Instock.findOne({invoice : id}, function(err, result){
@@ -258,39 +502,101 @@ module.exports = {
   },
 
 renewInvice :function(body,cb){
-  var invoice={
-    customer:body.idCu,
-    type:1,
-    notes:body.invoceNotes,
-    piad:body.total,
-    reseller:null,
-    discount:body.discount,
-    typein:3
-  };
-  invoice=new model.Invoice(invoice);
-  invoice.save(function(err,invoiceResult){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
-      model.Product.findOne({_id:body.package},function(err,pro){
-        dollarMgr.getLastDollar(function(dollar){
-          Order={
-            invoice:invoiceResult._id,
-            product:pro._id,
-            price:pro.initialPrice*dollar[0].price,
-            startDate:body.startDate,
-            endDate:body.endDate
-          };
-          order=new model.Order(Order);
-          order.save(function(err,orderResult){
-            if (!err) {
-              cb(invoiceResult);
-            }else{
-              console.log(err);
-              cb(null);
-            }
+      var invoice={
+        customer:invoices.customer,
+        type:1,
+        invoice:body.idCu,
+        notes:body.invoceNotes,
+        piad:body.total,
+        reseller:null,
+        discount:body.discount,
+        typein:3,
+        startDate:body.startDate,
+        endDate:body.endDate
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          model.Product.findOne({_id:body.package},function(err,pro){
+            dollarMgr.getLastDollar(function(dollar){
+              Order={
+                invoice:invoiceResult._id,
+                product:pro._id,
+                price:pro.initialPrice*dollar[0].price,
+                startDate:body.startDate,
+                endDate:body.endDate
+              };
+              order=new model.Order(Order);
+              order.save(function(err,orderResult){
+                if (!err) {
+                  cb(invoiceResult);
+                }else{
+                  console.log(err);
+                  cb(null);
+                }
+              });
+            });
           });
-        });
-      });
 
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
+
+renewInvicePending :function(body,cb){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        type:1,
+        invoice:body.idCu,
+        notes:body.invoceNotes,
+        piad:body.total,
+        reseller:null,
+        discount:body.discount,
+        typein:3,
+        status:2,
+        startDate:body.startDate,
+        endDate:body.endDate
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          model.Product.findOne({_id:body.package},function(err,pro){
+            dollarMgr.getLastDollar(function(dollar){
+              Order={
+                invoice:invoiceResult._id,
+                product:pro._id,
+                price:pro.initialPrice*dollar[0].price,
+                startDate:body.startDate,
+                endDate:body.endDate
+              };
+              order=new model.Order(Order);
+              order.save(function(err,orderResult){
+                if (!err) {
+                  cb(invoiceResult);
+                }else{
+                  console.log(err);
+                  cb(null);
+                }
+              });
+            });
+          });
+
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
     }else{
       console.log(err);
       cb(null);
@@ -299,20 +605,29 @@ renewInvice :function(body,cb){
 },
 
 addPaid :function(body,cb){
-  var invoice={
-    customer:body.idCu,
-    type:1,
-    notes:'null',
-    piad:body.paid,
-    reseller:null,
-    discount:0,
-    typein:4
-  };
-  invoice=new model.Invoice(invoice);
-  invoice.save(function(err,invoiceResult){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
-      cb(invoiceResult);
-      
+      var invoice={
+        customer:invoices.customer,
+        invoice:body.idCu,
+        type:1,
+        notes:'null',
+        piad:body.paid,
+        reseller:null,
+        discount:0,
+        typein:4,
+        notes: body.notes
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          cb(invoiceResult);
+          
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
     }else{
       console.log(err);
       cb(null);
@@ -320,16 +635,36 @@ addPaid :function(body,cb){
   });
 },
 
-
-
-
-
-
-
-
-
-
-
+addPaidPending :function(body,cb){
+  model.Invoice.findOne({_id:body.idCu},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        invoice:body.idCu,
+        type:1,
+        notes:'null',
+        piad:body.paid,
+        reseller:null,
+        discount:0,
+        typein:4,
+        status:2
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          cb(invoiceResult);
+          
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
 
 
 };
