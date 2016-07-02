@@ -340,6 +340,9 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
+      'getCustomersRe': function(id,pageSize,currentPage){
+        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id);
+      },
       'getAllMoney': function(){
         return $http.get('/report/company');
       },

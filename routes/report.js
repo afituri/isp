@@ -17,7 +17,6 @@ router.post('/restor',userHelpers.isLogin ,multipartyMiddleware,function(req , r
     reportMgr.getcompar(i,function(result){
       results.push({invoice:result,tbody:i[0].split(",")});
       if(results.length == req.body.length){
-        console.log("sssssssssssssssssssssssssssssssssssssss");
         res.send(results);
       }
 

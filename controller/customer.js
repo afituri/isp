@@ -52,21 +52,38 @@ module.exports = {
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    model.Customer.count({status:{$ne:3},reseller:id},function(err,count){
-      model.Customer.find({status:{$ne:3},reseller:id}).skip(page*limit)
-      .populate('user')
-      .populate('reseller')
-      .exec(function(err, customers){
-        if(!err){
-          //console.log(customers);
-          console.log(customers);
-          cb({result:customers,count:count});
-        }else{
-          console.log(err);
-          cb(null);
-        }
-      });
-    });
+    if(id!=-1){
+      model.Customer.count({status:{$ne:3},reseller:id},function(err,count){
+        model.Customer.find({status:{$ne:3},reseller:id}).skip(page*limit)
+        .populate('user')
+        .populate('reseller')
+        .exec(function(err, customers){
+          if(!err){
+            //console.log(customers);
+            cb({result:customers,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      }); 
+    }else{
+      model.Customer.count({status:{$ne:3}},function(err,count){
+        model.Customer.find({status:{$ne:3}}).skip(page*limit)
+        .populate('user')
+        .populate('reseller')
+        .exec(function(err, customers){
+          if(!err){
+            //console.log(customers);
+            cb({result:customers,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      });  
+    }
+    
   },
   getCustomerReject :function(user,status,limit,page,cb){
     page = parseInt(page);
