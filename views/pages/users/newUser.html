@@ -6,45 +6,41 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <form novalidate ng-submit="newUser()">
+        <form novalidate ng-submit="newUser()" name="addUserForm">
           <div class="row">
-          	  <div class="col-md-4" ng-class="{'col-md-3': newCustomerForm.type==2}">
+          	  <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">اسم المدير</label>
-                <input class="form-control input-sm" type="text" ng-model="newUserForm.name" ng-required-err-type="customerName" placeholder="اسم المدير" required>
+                <input class="form-control input-sm" type="text" ng-model="newUserForm.name" placeholder="اسم المدير" required>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">البريد الالكتروني</label>
-                <input class="form-control input-sm" type="text" ng-model="newUserForm.email" ng-required-err-type="repName" placeholder="البريد الالكتروني" required>
+                <input class="form-control input-sm" type="text" ng-model="newUserForm.email" placeholder="البريد الالكتروني" required>
               </div>
             </div>
 
              <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">رقم الهاتف</label>
-                <input class="form-control input-sm" type="text" ng-model="newUserForm.phone" ng-required-err-type="repName" placeholder="رقم الهاتف" required>
+                <input class="form-control input-sm" type="text" ng-model="newUserForm.phone" placeholder="رقم الهاتف" required>
               </div>
             </div>
+          </div>
           <div class="row">
           	 <div class="col-md-6">
               <div class="form-group">
-                <label class="control-label">رقم السري</label>
-                <input class="form-control input-sm" type="password" ng-model="newUserForm.password" ng-required-err-type="repName" placeholder="الرقم السري" required>
+                <label class="control-label">كلمة المرور</label>
+                <input class="form-control input-sm" type="password" name="password" ng-model="newUserForm.password" placeholder="كلمة المرور" required>
               </div>
             </div>
-           
-          
-
-       
-          	 <div class="col-md-6">
+          	<div class="col-md-6">
               <div class="form-group">
-                <label class="control-label">تأكيد رقم السري</label>
-                <input class="form-control input-sm" type="password" ng-model="newUserForm.confPassword" ng-required-err-type="repName" placeholder="تأكيد الرقم السري" required>
+                <label class="control-label">تأكيد كلمة المرور</label>
+                <input class="form-control input-sm" type="password" name="confirmPassword" data-match-verify="newUserForm.password" ng-model="newUserForm.confPassword" placeholder="تأكيد كلمة المرور" required>
               </div>
-            
-           </div>
+            </div>
           </div>
           <hr>
           <div class="row">

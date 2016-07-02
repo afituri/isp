@@ -1019,6 +1019,7 @@
       errorMessages['discriptoinService'] = "الرجاء إدخال معلومات عن الخدمة";
       errorMessages['warehouseName'] = "الرجاء إدخال اسم المخزن";
       errorMessages['customerName'] = 'الرجاء ادخال اسم العميل';
+      errorMessages['matchVerify'] = 'كلمة المرور ليست متطابقة';
     });
   }]);
   app.filter('defaultLogo', function(){
