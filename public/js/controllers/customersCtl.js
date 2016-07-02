@@ -26,7 +26,6 @@
 
 
     $scope.getRe = function(){
-      console.log("im in "+$scope.reseller);
       $scope.init($scope.reseller);
     }
     $scope.showDeleteModel = function(id){
