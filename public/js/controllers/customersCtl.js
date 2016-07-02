@@ -8,6 +8,7 @@
     $scope.currentPage = 1;
     $scope.total = 0;
     HelperServ.getAllResellers();
+    HelperServ.getAllPackages();
     $scope.objects = HelperServ;
     // console.log($scope.objects.resellersObj);
     $scope.results = [];
