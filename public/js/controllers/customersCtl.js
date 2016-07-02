@@ -12,22 +12,22 @@
     $scope.objects = HelperServ;
     // console.log($scope.objects.resellersObj);
     $scope.results = [];
-    
-
-    $scope.init = function (id) {
-      CustomersServ.getCustomersRe(id,$scope.pageSize,$scope.currentPage).then(function(response) {
+    $scope.package = '-1';
+    $scope.reseller = '-1';
+    $scope.init = function (idR,idP) {
+      CustomersServ.getCustomersRe(idR,idP,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
     }
-    $scope.init(-1);
+    $scope.init(-1,-1);
 
 
 
     $scope.getRe = function(){
-      $scope.init($scope.reseller);
+      $scope.init($scope.reseller,$scope.package);
     }
     $scope.showDeleteModel = function(id){
       $scope.id = id;

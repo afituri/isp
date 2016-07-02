@@ -48,41 +48,46 @@ module.exports = {
     
   },
 
-  getCustomerReseller :function(id,limit,page,cb){
+  getCustomerReseller :function(id,idP,limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
-    if(id!=-1){
-      model.Customer.count({status:{$ne:3},reseller:id},function(err,count){
-        model.Customer.find({status:{$ne:3},reseller:id}).skip(page*limit)
-        .populate('user')
-        .populate('reseller')
-        .exec(function(err, customers){
-          if(!err){
-            //console.log(customers);
-            cb({result:customers,count:count});
-          }else{
-            console.log(err);
-            cb(null);
-          }
-        });
-      }); 
-    }else{
-      model.Customer.count({status:{$ne:3}},function(err,count){
-        model.Customer.find({status:{$ne:3}}).skip(page*limit)
-        .populate('user')
-        .populate('reseller')
-        .exec(function(err, customers){
-          if(!err){
-            //console.log(customers);
-            cb({result:customers,count:count});
-          }else{
-            console.log(err);
-            cb(null);
-          }
-        });
-      });  
+    var con={};
+    if (idP!=-1){
+      con={
+        product:idP
+      }
     }
+    model.Order.find(con).distinct('invoice',function(err, idin){
+      model.Invoice.find({_id:{$in:idin}}).distinct('customer',function(err, idC){
+        var options={
+          _id:{$in:idC},
+          status:{$ne:3}
+        }
+        if(id!=-1){
+          options={
+            _id:{$in:idC},
+            status:{$ne:3},
+            reseller:id
+          }
+        }
+        model.Customer.count(options,function(err,count){
+          model.Customer.find(options).skip(page*limit)
+          .populate('user')
+          .populate('reseller')
+          .exec(function(err, customers){
+            if(!err){
+              //console.log(customers);
+              cb({result:customers,count:count});
+            }else{
+              console.log(err);
+              cb(null);
+            }
+          });
+        });
+      });
+    });
+
     
   },
   getCustomerReject :function(user,status,limit,page,cb){

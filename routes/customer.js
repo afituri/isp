@@ -114,8 +114,8 @@ router.get('/:limit/:page/:status',userHelpers.isLogin , function(req, res) {
 });
 
 
-router.get('/getRe/:limit/:page/:id',userHelpers.isLogin , function(req, res) {
-  customerMgr.getCustomerReseller(req.params.id,req.params.limit,req.params.page,function(customers){
+router.get('/getRe/:limit/:page/:id/:idC',userHelpers.isLogin , function(req, res) {
+  customerMgr.getCustomerReseller(req.params.id,req.params.idC,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
