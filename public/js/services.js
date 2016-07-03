@@ -340,6 +340,9 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
+      'getCustomersRe': function(id,idC,pageSize,currentPage){
+        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC);
+      },
       'getAllMoney': function(){
         return $http.get('/report/company');
       },
@@ -527,7 +530,7 @@
   app.service('CSVServ',['$http',function($http){
      var self = {
       'addCSVFile': function(CSVObj){
-        return $http.post('',CSVObj);
+        return $http.post('/report/restor',CSVObj);
       }
     };
     return self;

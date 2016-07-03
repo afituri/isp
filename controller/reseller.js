@@ -186,6 +186,19 @@ module.exports = {
 
                     model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
                       dollarMgr.getLastDollar(function(dollar){
+                        if(pro.type=='package'){
+                          var months;
+                          
+                          var end = new Date(body.endDate);
+                          var start = new Date(body.startDate);
+                          months =(end.getFullYear() -start.getFullYear() )* 12;
+                          months += end.getMonth()-start.getMonth() + 1;
+                          var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
+                          money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
+                          money-=parseFloat(body.discount);
+                          model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                          });
+                        }
                         Order={
                           invoice:invoiceResult._id,
                           product:pro._id,
@@ -274,6 +287,19 @@ module.exports = {
 
                 model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
                   dollarMgr.getLastDollar(function(dollar){
+                    if(pro.type=='package'){
+                      var months;
+                      
+                      var end = new Date(body.endDate);
+                      var start = new Date(body.startDate);
+                      months =(end.getFullYear() -start.getFullYear() )* 12;
+                      months += end.getMonth()-start.getMonth() + 1;
+                      var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
+                      money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
+                      money-=parseFloat(body.discount);
+                      model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                      });
+                    }
                     Order={
                       invoice:invoiceResult._id,
                       product:pro._id,

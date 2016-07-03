@@ -1,27 +1,34 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
+  app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,$modal,MenuFac,CustomersServ,toastr,HelperServ){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
-    
-
-    $scope.init = function () {
-      CustomersServ.getCustomers(-1,$scope.pageSize,$scope.currentPage).then(function(response) {
+    HelperServ.getAllResellers();
+    HelperServ.getAllPackages();
+    $scope.objects = HelperServ;
+    // console.log($scope.objects.resellersObj);
+    $scope.results = [];
+    $scope.package = '-1';
+    $scope.reseller = '-1';
+    $scope.init = function (idR,idP) {
+      CustomersServ.getCustomersRe(idR,idP,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
     }
-    $scope.init();
+    $scope.init(-1,-1);
 
 
 
-
+    $scope.getRe = function(){
+      $scope.init($scope.reseller,$scope.package);
+    }
     $scope.showDeleteModel = function(id){
       $scope.id = id;
       $scope.deleteName = "هذا الزبون";
