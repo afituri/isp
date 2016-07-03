@@ -534,6 +534,12 @@
   }]);
   app.service('InvoicesServ',['$http','Upload',function($http,Upload){
     var self = {
+      'searchForMac': function(all,pageSize,currentPage){
+        return $http.get('/invoice/searchAll/'+pageSize+'/'+currentPage+'/'+all);
+      },
+      'searchForProduct': function(id){
+        return $http.get('/invoice/searchForProduct/all/'+id);
+      },
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },

@@ -5,9 +5,39 @@ var customer = null;
 
 module.exports = {
 
+  getCustomerSearch :function(searchString,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Customer.count({'$or':[
+            {'name':{'$regex':searchString, '$options':'i'}},
+            {'email':{'$regex':searchString, '$options':'i'}},
+            {'phone':{'$regex':searchString, '$options':'i'}}
+            ],status:1},function(err,count){
+      model.Customer.find({'$or':[
+            {'name':{'$regex':searchString, '$options':'i'}},
+            {'email':{'$regex':searchString, '$options':'i'}},
+            {'phone':{'$regex':searchString, '$options':'i'}}
+            ] ,status:1}).limit(limit).skip(page*limit)
+      .populate('user')
+      .populate('reseller')
+      .exec(function(err, customers){
+        if(!err){
+          console.log(customers);
+          cb({result:customers,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+
+
+  },
+
   getCustomer :function(status,limit,page,cb){
     if(status==-1){
-      page = parseInt(page);
+    page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
     model.Customer.count({},function(err,count){

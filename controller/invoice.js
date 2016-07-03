@@ -27,6 +27,61 @@ module.exports = {
     });
   },
 
+
+  getProductMack : function(id,cb){
+    idInvoiceArray=[];
+     instock =[];
+    model.Invoice.find({customer:id})
+      .exec(function(err, invoices){
+        if(!err){
+         for(i in invoices){
+          if(invoices[i].typein==1){
+            idInvoiceArray.push(invoices[i]._id);
+          }
+         }
+         
+          t=0;
+          for(var k=0;k<idInvoiceArray.length;k++){
+              /*console.log(idInvoiceArray.length);
+                  console.log(k);*/
+            model.Instock.find({status:2,invoice:idInvoiceArray[k]})
+              .populate('product')
+              .populate('warehouse')
+              .exec(function(err, result){
+                if(!err){
+                  console.log(result);
+                  instock.push(result);
+                  console.log(t);
+                  console.log(idInvoiceArray.length)
+                  if(t==idInvoiceArray.length-1){
+                    console.log("true true");
+                    cb({result:instock});
+                }
+                t++;
+                }else{
+                  console.log(err);
+                  cb(null);
+                }
+              });
+          }
+   
+
+
+
+
+
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+   
+
+
+  },
+
+
+
     getInvoicePending :function(status,limit,page,cb){
       if(status==0){
         page = parseInt(page);

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var invoiceMgr = require("../controller/invoice");
+var customerMgr = require("../controller/customer");
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 var fs   = require('fs-extra');
@@ -13,6 +14,22 @@ router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getInvoice(req.params.limit,req.params.page,function(invoices){
     res.send(invoices);
 	});
+ });
+
+
+router.get('/searchAll/:limit/:page/:all',userHelpers.isLogin , function(req, res) {
+  customerMgr.getCustomerSearch(req.params.all,req.params.limit,req.params.page,function(invoices){
+    res.send(invoices);
+  });
+ });
+
+//searchForProduct
+router.get('/searchForProduct/all/:id',userHelpers.isLogin , function(req, res) {
+  invoiceMgr.getProductMack(req.params.id,function(invoices){
+    console.log(invoices.result[0]);
+    console.log(invoices.result[1]);
+    res.send(invoices);
+  });
  });
 
 
