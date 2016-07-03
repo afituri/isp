@@ -40,6 +40,10 @@ module.exports = {
           }
          }
          
+         if(idInvoiceArray.length==0){
+          cb(false);
+
+         } else {
           t=0;
           for(var k=0;k<idInvoiceArray.length;k++){
               /*console.log(idInvoiceArray.length);
@@ -66,7 +70,7 @@ module.exports = {
           }
    
 
-
+}
 
 
 
@@ -76,7 +80,7 @@ module.exports = {
         }
       });
    
-
+  
 
   },
 

@@ -45,8 +45,6 @@ router.get('/searchAll/:limit/:page/:all',userHelpers.isLogin , function(req, re
 //searchForProduct
 router.get('/searchForProduct/all/:id',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getProductMack(req.params.id,function(invoices){
-    console.log(invoices.result[0]);
-    console.log(invoices.result[1]);
     res.send(invoices);
   });
  });

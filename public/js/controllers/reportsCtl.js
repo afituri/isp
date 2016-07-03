@@ -1,10 +1,13 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ReportsCtl',['$scope','$modal','InvoicesServ','HelperServ',function($scope,$modal,InvoicesServ,HelperServ){
+  app.controller('ReportsCtl',['$scope','toastr','$modal','InvoicesServ','HelperServ',function($scope,toastr,$modal,InvoicesServ,HelperServ){
    $scope.showMacAdress = function(id){
     InvoicesServ.searchForProduct(id.id).then(function(response) {
     
+    if(response.data==false){
+      toastr.error('هذا الزبون لم يشتري اي منتج بعد ');
+    } else {
     $scope.resul= response.data.result;
 /*      $scope.total = response.data.count;*/
    $scope.deleteName = "هذا الموزع";
@@ -13,7 +16,9 @@
         templateUrl: 'pages/showData.html',
         show: true
       });
+    }
     }, function(response) {
+      
       console.log("Something went wrong");
     });
 
@@ -25,10 +30,25 @@
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+
+    $scope.init= function(){
+
+       InvoicesServ.searchForMac(-9,$scope.pageSize,$scope.currentPage).then(function(response) {
+          console.log("response");
+          $scope.resultsAll= response.data.result;
+          $scope.total = response.data.count;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+     
+   }
+   $scope.init();
+
+
+
      $scope.searchMacAdress = function(){
-      $scope.init = function(){
       if($scope.searchByAll ==""){
-        $scope.resultsAll=null;
+         $scope.init();
       } else {
        InvoicesServ.searchForMac($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
           console.log("response");
@@ -38,8 +58,8 @@
           console.log("Something went wrong");
         });
      }
-   }
-   $scope.init();
+   
+   
   }
 
 
