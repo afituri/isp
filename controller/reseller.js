@@ -186,6 +186,13 @@ module.exports = {
 
                     model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
                       dollarMgr.getLastDollar(function(dollar){
+                        Order={
+                          invoice:invoiceResult._id,
+                          product:pro._id,
+                          price:pro.initialPrice*dollar[0].price,
+                          startDate:body.startDate,
+                          endDate:body.endDate
+                        };
                         if(pro.type=='package'){
                           var months;
                           
@@ -196,16 +203,11 @@ module.exports = {
                           var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
                           money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
                           money-=parseFloat(body.discount);
+                          Order.price=pro.initialPrice*dollar[0].price*months;
                           model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
                           });
                         }
-                        Order={
-                          invoice:invoiceResult._id,
-                          product:pro._id,
-                          price:pro.initialPrice*dollar[0].price,
-                          startDate:body.startDate,
-                          endDate:body.endDate
-                        };
+                        
 
                         order=new model.Order(Order);
                         order.save(function(err,orderResult){
@@ -287,6 +289,13 @@ module.exports = {
 
                 model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
                   dollarMgr.getLastDollar(function(dollar){
+                    Order={
+                      invoice:invoiceResult._id,
+                      product:pro._id,
+                      price:pro.initialPrice*dollar[0].price,
+                      startDate:body.startDate,
+                      endDate:body.endDate
+                    };
                     if(pro.type=='package'){
                       var months;
                       
@@ -297,16 +306,11 @@ module.exports = {
                       var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
                       money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
                       money-=parseFloat(body.discount);
+                      Order.price=pro.initialPrice*dollar[0].price*months;
                       model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
                       });
                     }
-                    Order={
-                      invoice:invoiceResult._id,
-                      product:pro._id,
-                      price:pro.initialPrice*dollar[0].price,
-                      startDate:body.startDate,
-                      endDate:body.endDate
-                    };
+                    
 
                     order=new model.Order(Order);
                     order.save(function(err,orderResult){
@@ -374,7 +378,7 @@ module.exports = {
               Order={
                 invoice:invoiceResult._id,
                 product:pro._id,
-                price:pro.initialPrice*dollar[0].price,
+                price:pro.initialPrice*dollar[0].price*months,
                 startDate:body.startDate,
                 endDate:body.endDate
               };

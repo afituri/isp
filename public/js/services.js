@@ -555,6 +555,9 @@
       'getInvoiceByID': function(status,id){
         return $http.get('/invoice/invoices/'+id+'/'+status);
       },
+      'getInvoicedata': function(id){
+        return $http.get('/invoice/invoicesdata/'+id);
+      },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
       },
@@ -586,7 +589,6 @@
         return $http.put('/invoice/edit/'+id,invoiceObj);
       },
       'deleteInvoice': function(id){
-        console.log(id);
         return $http.delete('/invoice/delete/'+id);
       },
       'getItemInfoByID': function(id){
@@ -594,6 +596,9 @@
       },
       'renewInvice': function(renewInviceObj){
         return $http.post('/invoice/renewInvice',renewInviceObj);
+      },
+      'upgreadInvice': function(renewInviceObj){
+        return $http.post('/invoice/upInvice',renewInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
         // return $http.post('/invoice/paidInvoice',paidInviceObj);

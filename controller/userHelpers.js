@@ -12,7 +12,6 @@ module.exports = {
     // return next();
   },
   printReportPaid : function(HTMLprint,result,res){
-    console.log(result);
     jsreport.render({
       template: { 
         engine: "jsrender",
