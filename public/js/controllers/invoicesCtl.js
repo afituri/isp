@@ -356,6 +356,33 @@
       });
     };
   }]);
+
+  app.controller('UpgreadeCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+   
+    $scope.upInviceForm = {};
+    $scope.objects = HelperServ;
+    $scope.objects.getAllPackages();
+    InvoicesServ.getInvoicedata($stateParams.id).then(function(response) {
+      $scope.days=response.data.days;
+      $scope.daysN=response.data.daysN;
+      $scope.price=response.data.price;
+      $scope.tot=response.data.price*(response.data.days-response.data.daysN);
+      $scope.upInviceForm.discount=$scope.tot;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.upInvice = function(){
+      $scope.upInviceForm.idCu=$stateParams.id;
+      InvoicesServ.upgreadInvice($scope.upInviceForm).then(function(response){
+        if(response.data){
+          toastr.success('تم التطوير بنجاح');
+          $state.go('invoiceCustomer')
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
   app.controller('PaidInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
     $scope.paidInvoiceForm = {};
     CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
