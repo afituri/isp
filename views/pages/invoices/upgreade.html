@@ -3,11 +3,10 @@
     <div class="x_panel">
       <div class="x_title">
         <h2>تطوير الفاتورة للعميل <span><strong>{{customer.name}}</strong></h2>
-
-        <div class="clearfix"></div>
         <div class="col-xs-7">
-          <h4 class="pull-right">الأجمالي الايام: {{days}} &nbsp;&nbsp;&nbsp;الباقي الايام: {{days-daysN}}&nbsp;&nbsp;&nbsp;&nbsp;سعر اليوم: {{price}} &nbsp;&nbsp;&nbsp;&nbsp;المبلغ المتبقي: {{tot}}</h4> 
+          <h6 class="pull-right">أجمالي الايام: {{days}} &nbsp;&nbsp;الأيام المتبقية: {{days-daysN}}&nbsp;&nbsp;&nbsp;سعر اليوم: {{price}} &nbsp;&nbsp;&nbsp;المبلغ المتبقي: {{tot}}</h6> 
         </div>
+        <div class="clearfix"></div>
       </div>
       <div class="x_content">
         <form novalidate ng-submit="upInvice()">
