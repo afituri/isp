@@ -125,25 +125,26 @@
                       <br>
                       Description
                     </th> 
-                    <!-- <th class="text-center" width="6%">
+                    <th class="text-center" width="6%">
                       الكمية
                       <br>
                       Quantity
-                    </th> -->
+                    </th>
                     <th class="text-center" width="7%">
                       سعر الوحدة
                       <br>
                       Price
                     </th> 
-                    <!-- <th class="text-center" width="7%">
+                    <th class="text-center" width="7%">
                       الاجمالي
                       <br>
                       Amount
-                    </th>  -->
+                    </th> 
                   </tr> 
                 </thead> 
                 <tbody> 
                   <script type="text/javascript"> var i = 1; </script>
+                  <script type="text/javascript"> var j = {{:result.months}}; </script>
                   {{for  result.order}}
                   <tr> 
                     <!-- <td class="text-center"> {{@index}}</td> -->
@@ -152,15 +153,27 @@
                      <span>  <h5><!-- Hardware -->{{:product.name}}</h5> </span>
                        {{:product.discriptoin}}
                     </td> 
-                    <!-- <td class="text-center"></td> -->
+                    <td class="text-center">
+                      {{if product.type=="package"}}
+                        <script type="text/javascript">document.write(j);;</script>
+                      {{else}}
+                      1
+
+                      {{/if}}
+                    </td>
                     <td class="text-center">
                       <br>
                       {{:price}}
                     </td>
-                    <!-- <td class="text-center"> -->
-                    <!--   <br>
-                        2500
-                    </td> -->
+                    <td class="text-center">
+                      <br>
+                       {{if product.type=="package"}}
+                          <script type="text/javascript">document.write(j*{{:price}});;</script>
+                        {{else}}
+                          {{:price}}
+
+                        {{/if}}
+                    </td>
                   </tr>
                  {{/for}}
                   <!-- <tr> 

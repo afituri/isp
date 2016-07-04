@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var invoiceMgr = require("../controller/invoice");
+var customerMgr = require("../controller/customer");
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 var fs   = require('fs-extra');
@@ -11,12 +12,41 @@ var userHelpers = require("../controller/userHelpers");
 
 
 
-
+router.get('/invoicesdata/:id', userHelpers.isLogin ,function(req, res) {
+  invoiceMgr.getInvoicedata(req.params.id,function(invoices){
+    days=(new Date(invoices.invoices.endDate)-new Date(invoices.invoices.startDate))/(1000*60*60*24);
+    invoices["days"]=Math.round(days);
+    daysN=(new Date(invoices.invoices.endDate)-new Date())/(1000*60*60*24);
+    invoices["daysN"]=Math.round(daysN);
+    for(i in invoices.order){
+      if(invoices.order[i].product.type=="package"){
+        var price = invoices.order[i].price/days;
+        invoices["price"]=price;
+      }
+      if(i == invoices.order.length-1){
+        res.send(invoices);  
+      }
+      
+    }
+    
+  });
+});
 /* GET all invoice */
-router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
-  invoiceMgr.getInvoice(req.params.limit,req.params.page,function(invoices){
+
+
+
+
+router.get('/searchAll/:limit/:page/:all',userHelpers.isLogin , function(req, res) {
+  customerMgr.getCustomerSearch(req.params.all,req.params.limit,req.params.page,function(invoices){
     res.send(invoices);
-	});
+  });
+ });
+
+//searchForProduct
+router.get('/searchForProduct/all/:id',userHelpers.isLogin , function(req, res) {
+  invoiceMgr.getProductMack(req.params.id,function(invoices){
+    res.send(invoices);
+  });
  });
 
 
@@ -59,7 +89,14 @@ router.post('/renewInvice',userHelpers.isLogin , function(req, res) {
   });
 });
 
-
+router.post('/upInvice',userHelpers.isLogin , function(req, res) {
+  
+  invoiceMgr.updateInvoice(req.body.idCu,{endDate:new Date(),status:1},function(result){
+    invoiceMgr.renewInvice(req.body,function(result){
+      res.send(result);
+    });
+  });
+});
 router.post('/paidInvoice',userHelpers.isLogin ,multipartyMiddleware, function(req, res) {
   if(req.body.monoyStatus==2){
     invoiceMgr.addPaid(req.body,function(result){
@@ -106,6 +143,10 @@ router.delete('/delete/:id',userHelpers.isLogin , function(req, res) {
     res.send({result:result});  
   });
 });
-
+router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
+  invoiceMgr.getInvoice(req.params.limit,req.params.page,function(invoices){
+    res.send(invoices);
+  });
+ });
 module.exports = router;
 

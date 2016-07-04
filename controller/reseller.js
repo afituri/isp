@@ -193,6 +193,21 @@ module.exports = {
                           startDate:body.startDate,
                           endDate:body.endDate
                         };
+                        if(pro.type=='package'){
+                          var months;
+                          
+                          var end = new Date(body.endDate);
+                          var start = new Date(body.startDate);
+                          months =(end.getFullYear() -start.getFullYear() )* 12;
+                          months += end.getMonth()-start.getMonth() + 1;
+                          var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
+                          money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
+                          money-=parseFloat(body.discount);
+                          Order.price=pro.initialPrice*dollar[0].price*months;
+                          model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                          });
+                        }
+                        
 
                         order=new model.Order(Order);
                         order.save(function(err,orderResult){
@@ -281,6 +296,21 @@ module.exports = {
                       startDate:body.startDate,
                       endDate:body.endDate
                     };
+                    if(pro.type=='package'){
+                      var months;
+                      
+                      var end = new Date(body.endDate);
+                      var start = new Date(body.startDate);
+                      months =(end.getFullYear() -start.getFullYear() )* 12;
+                      months += end.getMonth()-start.getMonth() + 1;
+                      var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
+                      money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
+                      money-=parseFloat(body.discount);
+                      Order.price=pro.initialPrice*dollar[0].price*months;
+                      model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                      });
+                    }
+                    
 
                     order=new model.Order(Order);
                     order.save(function(err,orderResult){
@@ -348,7 +378,7 @@ module.exports = {
               Order={
                 invoice:invoiceResult._id,
                 product:pro._id,
-                price:pro.initialPrice*dollar[0].price,
+                price:pro.initialPrice*dollar[0].price*months,
                 startDate:body.startDate,
                 endDate:body.endDate
               };

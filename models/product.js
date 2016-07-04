@@ -27,7 +27,7 @@ var Product = new Schema({
       renewPrice: { type: Number},
       GBPrice: { type: Number},
       cost: Number,
-      costCurrency: { type: Number},
+      costCurrency: { type: String},
       exchangeRate: { type: Number}
    },
    status: { type: Number, default:1}

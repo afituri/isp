@@ -27,6 +27,65 @@ module.exports = {
     });
   },
 
+
+  getProductMack : function(id,cb){
+    idInvoiceArray=[];
+     instock =[];
+    model.Invoice.find({customer:id})
+      .exec(function(err, invoices){
+        if(!err){
+         for(i in invoices){
+          if(invoices[i].typein==1){
+            idInvoiceArray.push(invoices[i]._id);
+          }
+         }
+         
+         if(idInvoiceArray.length==0){
+          cb(false);
+
+         } else {
+          t=0;
+          for(var k=0;k<idInvoiceArray.length;k++){
+              /*console.log(idInvoiceArray.length);
+                  console.log(k);*/
+            model.Instock.find({status:2,invoice:idInvoiceArray[k]})
+              .populate('product')
+              .populate('warehouse')
+              .exec(function(err, result){
+                if(!err){
+                  console.log(result);
+                  instock.push(result);
+                  console.log(t);
+                  console.log(idInvoiceArray.length)
+                  if(t==idInvoiceArray.length-1){
+                    console.log("true true");
+                    cb({result:instock});
+                }
+                t++;
+                }else{
+                  console.log(err);
+                  cb(null);
+                }
+              });
+          }
+   
+
+}
+
+
+
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+   
+  
+
+  },
+
+
+
     getInvoicePending :function(status,limit,page,cb){
       if(status==0){
         page = parseInt(page);
@@ -246,8 +305,6 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
-    model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
-      },function(err,product){
         if(body.reseller==1){
           body.reseller=null;
         }
@@ -299,6 +356,22 @@ module.exports = {
                           endDate:body.endDate
                         };
 
+                        if(pro.type=='package'){
+                          var months;
+                          
+                          var end = new Date(body.endDate);
+                          var start = new Date(body.startDate);
+                          months =(end.getFullYear() -start.getFullYear() )* 12;
+                          months += end.getMonth()-start.getMonth() + 1;
+                          var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
+                          money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
+                          money-=parseFloat(body.discount);
+                          Order.price=pro.initialPrice*dollar[0].price*months;
+                          model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                          });
+                        }
+                        
+
                         order=new model.Order(Order);
                         order.save(function(err,orderResult){
                           arrayOrd.push(orderResult);
@@ -346,7 +419,7 @@ module.exports = {
             customer:body.customId,
             type:1,
             notes:body.invoceNotes,
-            piad:body.total-body.discount,
+            piad:0,
             reseller:body.reseller,
             discount:body.discount,
             startDate:body.startDate,
@@ -385,6 +458,21 @@ module.exports = {
                       startDate:body.startDate,
                       endDate:body.endDate
                     };
+                    if(pro.type=='package'){
+                      var months;
+                      
+                      var end = new Date(body.endDate);
+                      var start = new Date(body.startDate);
+                      months =(end.getFullYear() -start.getFullYear() )* 12;
+                      months += end.getMonth()-start.getMonth() + 1;
+                      var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
+                      money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
+                      money-=parseFloat(body.discount);
+                      Order.price=pro.initialPrice*dollar[0].price*months;
+                      model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                      });
+                    }
+                    
 
                     order=new model.Order(Order);
                     order.save(function(err,orderResult){
@@ -422,10 +510,6 @@ module.exports = {
             }
           });
         }
-
-
-
-      });
   },
 
   updateInvoice : function(id,body,cb){
@@ -504,6 +588,7 @@ module.exports = {
 renewInvice :function(body,cb){
   model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
+
       var invoice={
         customer:invoices.customer,
         type:1,
@@ -528,6 +613,20 @@ renewInvice :function(body,cb){
                 startDate:body.startDate,
                 endDate:body.endDate
               };
+              if(pro.type=='package'){
+                var months;
+                
+                var end = new Date(body.endDate);
+                var start = new Date(body.startDate);
+                months =(end.getFullYear() -start.getFullYear() )* 12;
+                months += end.getMonth()-start.getMonth() + 1;
+                var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
+                money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
+                money-=parseFloat(body.discount);
+                Order.price=pro.initialPrice*dollar[0].price*months;
+                // model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                // });
+              }
               order=new model.Order(Order);
               order.save(function(err,orderResult){
                 if (!err) {

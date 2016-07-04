@@ -463,6 +463,21 @@
         }] 
       }
     })
+    .state('upgreade',{
+      url: '/invoiceCustomers/upgreade/:id',
+      templateUrl: 'pages/invoices/upgreade.html',
+      controller: 'UpgreadeCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
     .state('paidInvoice',{
       url: '/invoiceCustomers/paid/:id',
       templateUrl: 'pages/invoices/paidInvoice.html',
@@ -953,7 +968,25 @@
           }]);
         }] 
       }
-    }).state('reports',{
+    })
+    //searchMacAdress
+    .state('searchMacAdress',{
+      url: '/searchMacAdress',
+      templateUrl: 'pages/reports/searchMacAdress.html',
+      controller: 'ReportsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/reportsCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+    .state('reports',{
       url: '/reports',
       templateUrl: 'pages/reports/reports.html',
       controller: 'ReportsCtl',
@@ -1019,6 +1052,7 @@
       errorMessages['discriptoinService'] = "الرجاء إدخال معلومات عن الخدمة";
       errorMessages['warehouseName'] = "الرجاء إدخال اسم المخزن";
       errorMessages['customerName'] = 'الرجاء ادخال اسم العميل';
+      errorMessages['matchVerify'] = 'كلمة المرور ليست متطابقة';
     });
   }]);
   app.filter('defaultLogo', function(){

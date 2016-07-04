@@ -340,6 +340,9 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
+      'getCustomersRe': function(id,idC,pageSize,currentPage){
+        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC);
+      },
       'getAllMoney': function(){
         return $http.get('/report/company');
       },
@@ -534,6 +537,12 @@
   }]);
   app.service('InvoicesServ',['$http','Upload',function($http,Upload){
     var self = {
+      'searchForMac': function(all,pageSize,currentPage){
+        return $http.get('/invoice/searchAll/'+pageSize+'/'+currentPage+'/'+all);
+      },
+      'searchForProduct': function(id){
+        return $http.get('/invoice/searchForProduct/all/'+id);
+      },
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
@@ -545,6 +554,9 @@
       },
       'getInvoiceByID': function(status,id){
         return $http.get('/invoice/invoices/'+id+'/'+status);
+      },
+      'getInvoicedata': function(id){
+        return $http.get('/invoice/invoicesdata/'+id);
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
@@ -577,7 +589,6 @@
         return $http.put('/invoice/edit/'+id,invoiceObj);
       },
       'deleteInvoice': function(id){
-        console.log(id);
         return $http.delete('/invoice/delete/'+id);
       },
       'getItemInfoByID': function(id){
@@ -585,6 +596,9 @@
       },
       'renewInvice': function(renewInviceObj){
         return $http.post('/invoice/renewInvice',renewInviceObj);
+      },
+      'upgreadInvice': function(renewInviceObj){
+        return $http.post('/invoice/upInvice',renewInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
         // return $http.post('/invoice/paidInvoice',paidInviceObj);

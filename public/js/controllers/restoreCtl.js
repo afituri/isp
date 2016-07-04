@@ -6,6 +6,7 @@
       result: null,
       encoding: 'UTF-8',
     };
+    $scope.results=[];
     $scope.CSVResult = false;
     $scope.addCSV = function(){
       if($scope.csv.result == null){
@@ -14,6 +15,7 @@
         CSVServ.addCSVFile($scope.csv.result).then(function(response) {
           if(response.data){
             console.log(response.data);
+            $scope.results= response.data;
             toastr.success('تمت استعادة ملف CSV بنجاح');
           } else {
             console.log(response.data);
