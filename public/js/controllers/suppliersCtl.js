@@ -7,6 +7,22 @@
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+
+    // Search for Supplier by all (name , email ,phone ... )
+    $scope.searchSupplier = function(){
+      if($scope.searchByAll == ""){
+        $scope.init();
+      } else {
+        SuppliersServ.getSuppliersByAll($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
+          $scope.suppliers = response.data.result;
+          $scope.total = response.data.count;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      }
+    }
+
+
     $scope.init = function () {
       SuppliersServ.getSuppliers($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.suppliers = response.data.result;
@@ -43,23 +59,6 @@
         console.log("Something went wrong");
       });
     };
-
-
-    $scope.searchSupplier = function(){
-      //alert($scope.searchByAll);
-      if($scope.searchByAll == ""){
-        $scope.init();
-      } else {
-      SuppliersServ.getSuppliersByAll($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
-        $scope.suppliers = response.data.result;
-        $scope.total = response.data.count;
-      }, function(response) {
-        console.log("Something went wrong");
-      });
-    }
-    }
-
-
 
   }]);
   app.controller('NewSupplierCtl',['$scope','$state','MenuFac','SuppliersServ','toastr',function($scope,$state,MenuFac,SuppliersServ,toastr){

@@ -320,6 +320,9 @@
       'getWarehouses': function(pageSize,currentPage){
         return $http.get('/warehouse/'+pageSize+'/'+currentPage);
       },
+      'search': function(searchString,pageSize,currentPage){
+        return $http.get('/warehouse/search/'+pageSize+'/'+currentPage+'/'+searchString);
+      },
       'getWarehouseByID': function(id){
         return $http.get('/warehouse/'+id);
       },

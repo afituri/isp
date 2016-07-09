@@ -2,6 +2,20 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('WarehousesCtl',['$scope','$modal','HelperServ','MenuFac','WarehousesServ','toastr',function($scope,$modal,HelperServ,MenuFac,WarehousesServ,toastr){
+     
+    $scope.searchWarehouses = function(){
+       if($scope.searchByAll == ""){
+        $scope.init();
+      } else {
+        WarehousesServ.search($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
+          $scope.warehouses = response.data.result;
+          $scope.total = response.data.count;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      }
+    }
+
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;

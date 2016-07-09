@@ -3,10 +3,13 @@
     <div class="x_panel">
       <div class="x_title">
         <div class="row">
-          <div class="col col-xs-6">
+          <div class="col col-xs-3">
             <h2>عرض المخازن</h2>
           </div>
-          <div class="col col-xs-6 text-left">
+          <div class="col-xs-5">
+            <input type="text" class="form-control input-sm" ng-model="searchByAll" ng-change="searchWarehouses()" placeholder="البحث / اسم المخزن / البريد الالكتروني / الهاتف ...">
+          </div>
+          <div class="col col-xs-4 text-left">
             <a ui-sref="newWarehouse" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مخزن جديد</a>
           </div>
         </div>

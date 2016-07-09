@@ -11,6 +11,13 @@ router.get('/:limit/:page', userHelpers.isLogin ,function(req, res) {
     res.send(warehouse);
   });
 });
+
+/* Search warehouses */
+router.get('/search/:limit/:page/:searchString', userHelpers.isLogin ,function(req, res) {
+  wareMgr.searchWarehouses(req.params.searchString,req.params.limit,req.params.page,function(warehouse){
+    res.send(warehouse);
+  });
+});
 router.get('/all', userHelpers.isLogin ,function(req, res) {
   // res.send(data.warehouses);
   wareMgr.getAllWarehouses(function(warehouse){

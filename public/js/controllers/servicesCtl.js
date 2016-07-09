@@ -11,7 +11,7 @@
 
 
     
-    $scope.searchCustomer =function(){
+    $scope.searchServices =function(){
       ServicesServ.getServicesByName($scope.searchByName,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.services = response.data.result;
         $scope.total = response.data.count;
