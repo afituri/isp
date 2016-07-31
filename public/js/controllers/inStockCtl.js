@@ -87,7 +87,7 @@
     };
 }]);
 
-app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr',function($scope,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr){
+app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr','CSVServ',function($scope,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr,CSVServ){
   MenuFac.active = 5;
   $scope.activePanel = MenuFac;
   $scope.objects=HelperServ;

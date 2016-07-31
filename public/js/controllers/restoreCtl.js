@@ -14,7 +14,6 @@
       } else {
         CSVServ.addCSVFile($scope.csv.result).then(function(response) {
           if(response.data){
-            console.log(response.data);
             $scope.results= response.data;
             toastr.success('تمت استعادة ملف CSV بنجاح');
           } else {
