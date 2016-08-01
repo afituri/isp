@@ -145,7 +145,18 @@
                 <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
               </div>
             </div>
-            <div class="col-md-3">
+
+            <div class="col-md-2" ng-show="flag">
+              <div class="form-group">
+                <label class="control-label">إسم الخدمة</label>
+                <select class="form-control input-sm" ng-model="ServiceModel" ng-options="service.name for service in ServiceAll track by service._id" ng-change="serviceChange()">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+                <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
+              </div>
+            </div>
+
+            <div class="col-md-2">
               <div class="form-group">
                 <label class="control-label">اختيار المنتج</label>
                 <select class="form-control input-sm" ng-model="productName" ng-change="test()" ng-options="product.name for product in productsObj track by product._id">
@@ -154,10 +165,11 @@
                 <span style="color:red;" ng-show="productNameRequired">هذا الحقل مطلوب</span>
               </div>
             </div>
+
             <div class="col-md-1" style="padding-top:24px;">
               <button type="button" class="btn btn-primary btn-sm" ng-click="selectProduct()"><i class="fa fa-plus"></i>&nbsp;إضافة</button>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
               <div ng-show="selectedProducts.length == 0" style="padding-top:10px;">
                 <div class="alert alert-info">
                   <p class="text-center">

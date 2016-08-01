@@ -67,6 +67,13 @@ router.get('/package/:limit/:page',userHelpers.isLogin , function(req, res) {
   });
 });
 
+router.get('/getPackagesByService/service/:id',userHelpers.isLogin , function(req, res) {
+  productMgr.getProductPackageByService(req.params.id,function(product){
+    res.send(product);
+  });
+ 
+});
+
 router.get('/allEtc', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllEtc(function(product){
     res.send(product);

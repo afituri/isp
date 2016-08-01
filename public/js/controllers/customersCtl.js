@@ -16,13 +16,15 @@
     $scope.reseller = '-1';
     $scope.init = function (idR,idP) {
       CustomersServ.getCustomersRe(idR,idP,$scope.pageSize,$scope.currentPage).then(function(response) {
+        
         $scope.customers = response.data.result;
+        console.log($scope.customers);
         $scope.total = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
     }
-    $scope.init(-1,-1);
+    $scope.init($scope.package,$scope.reseller);
 
 
 

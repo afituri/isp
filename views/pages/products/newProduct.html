@@ -161,36 +161,52 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2" style="padding-left:0px;">
                   <div class="form-group">
                     <label class="control-label">سرعة التحميل</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.dSpeed" placeholder="سرعة التحميل" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-1" style="padding-right:0px;">
+                  <div class="form-group">
+                    <label class="control-label">نوع</label>
+                    <select class="form-control input-sm" ng-model="Speedtype" ng-change="speetType(Speedtype)" required>
+                      <option value="" disabled selected>اختار</option>
+                      <option value="Kbps">Kbps</option>
+                      <option value="Mbps">Mbps</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2" style="padding-left:0px;">
                   <div class="form-group">
                     <label class="control-label">سرعة الرفع</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.uSpeed" placeholder="سرعة الرفع" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                 <div class="col-md-1" style="padding-right:0px;">
+                  <div class="form-group">
+                    <label class="control-label">نوع</label>
+                    <select class="form-control input-sm" ng-model="Utype" ng-change="UType(Utype)" required>
+                      <option value="" disabled selected>اختار</option>
+                      <option value="Kbps">Kbps</option>
+                      <option value="Mbps">Mbps</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2" style="padding-left:0px;">
                   <div class="form-group">
                     <label class="control-label">الحصة الشهرية</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.monthlyQuota" placeholder="الحصة الشهرية" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                 <div class="col-md-1" style="padding-right:0px;">
                   <div class="form-group">
-                    <label class="control-label">سعر التجديد</label>
-                    <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.renewPrice" placeholder="سعر التجديد" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label class="control-label">سعر الجيجا</label>
-                    <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.GBPrice" placeholder="سعر الجيجا">
+                    <label class="control-label">نوع</label>
+                    <select class="form-control input-sm" ng-model="GBtype" ng-change="GBTypee(GBtype)"  required>
+                      <option value="" disabled selected>اختار</option>
+                      <option value="GB">GB</option>
+                      <option value="Unlimted">Unlimted</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-3">
@@ -199,21 +215,15 @@
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.cost" placeholder="التكلفة من المزود" required>
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
                     <label class="control-label">العملة</label>
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.costCurrency" placeholder="العملة" required>
                   </div>
                 </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label class="control-label">سعر الصرف</label>
-                    <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.exchangeRate" placeholder="سعر الصرف" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-9">
                   <div class="form-group">
                     <label class="control-label">معلومات عن الحزمة</label>
                     <textarea class="form-control input-sm" rows="5" ng-model="newProductForm.discriptoin" placeholder="معلومات عن الحزمة" required></textarea>

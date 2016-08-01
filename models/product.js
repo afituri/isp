@@ -21,11 +21,11 @@ var Product = new Schema({
    packages: {
       type:{ type: Schema.Types.ObjectId , ref: 'Serviceprovider'},
       service: { type: Schema.Types.ObjectId , ref: 'Service'},
-      dSpeed: { type: Number},
-      uSpeed: { type: Number},
-      monthlyQuota: { type: Number},
-      renewPrice: { type: Number},
-      GBPrice: { type: Number},
+      dSpeed: { type: String},
+      uSpeed: { type: String},
+      monthlyQuota: { type: String},
+      renewPrice: { type: String},
+      GBPrice: { type: String},
       cost: Number,
       costCurrency: { type: String},
       exchangeRate: { type: Number}

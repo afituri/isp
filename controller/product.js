@@ -40,6 +40,20 @@ module.exports = {
     });
   },
 
+  getProductPackageByService : function(id,cb){
+    console.log(id);
+     model.Product.find({'packages.service':id}).populate('supplier')
+      .exec(function(err, products){
+        if(!err){
+          cb(products);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+
+  },
+
    getProductETC :function(limit,page,cb){
     page = parseInt(page);
     page-=1;
