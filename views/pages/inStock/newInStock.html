@@ -7,6 +7,19 @@
       </div>
       <div class="x_content">
         <form  novalidate ng-submit="newInStock()">
+          <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">ss </label>
+                <select class="form-control input-sm" ng-model="csvc" ng-required-err-type="required"  required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                 <!--  <option value="1">الخدمة</option> -->
+                  <option value="1">يدوي </option>
+                 <!--  <option value="3">الحزمة</option> -->
+                  <option value="2">csv</option>
+
+                </select>
+              </div>
+            </div>
           <div class="row">
             <div class="col-md-4" ng-class="{'col-md-3': newInStockForm.type==4}">
               <div class="form-group">
@@ -37,14 +50,14 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-3" ng-if="newInStockForm.type==4">
+            <div class="col-md-3" ng-if="newInStockForm.type==4"  >
               <div class="form-group">
                 <label class="control-label">الكمية</label>
                 <input class="form-control input-sm" type="text" ng-model="newInStockForm.quantity" ng-required-err-type="required" placeholder="الكمية" required>
               </div>
             </div>
           </div>
-          <div class="row" ng-if="newInStockForm.type != 4">
+          <div class="row" ng-if="newInStockForm.type != 4 && csvc !=2" >
             <div class="col-md-4" >
               <div class="form-group">
                 <label class="control-label">ماك ادرس/سيريال نامبر</label>
@@ -65,11 +78,11 @@
             </div>
           </div>
           <div class="row">
-            <!-- <div class="col-md-3" style="padding-top:65px;">
+            <div class="col-md-3" style="padding-top:65px;" ng-if="newInStockForm.type != 4 && csvc ==2">
               <span class="file-input btn btn-block btn-info btn-file">استعراض ملف CSV
                 <ng-csv-import result="csv.result" encoding="csv.encoding" encoding-visible="csv.encodingVisible"></ng-csv-import>
               </span>
-            </div> -->
+            </div>
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">الوصف</label>

@@ -227,7 +227,22 @@
       });
     }
     $scope.init();
-
+    $scope.getDef= function(){
+      var a ;
+      a = new Date($scope.newInvoiceForm.startDate);
+      var b = $scope.newInvoiceForm.endDate;
+      a.setDate(a.getDate() - 1);
+      a.setMonth(a.getMonth()+1);
+      for(var i=0;a<=b;){
+        i++;
+        a.setMonth(a.getMonth()+1);
+      
+          
+      }
+      a.setMonth(a.getMonth()-1);
+      $scope.newInvoiceForm.day=(b-a)/ (1000 * 3600 * 24);
+      $scope.newInvoiceForm.month=i;
+    },
     $scope.newInvoice = function(){
       if($scope.previousSubscription==1){
         $scope.newInvoiceForm.previousSubscription=1;

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var instockMgr = require("../controller/inStock");
 var userHelpers = require("../controller/userHelpers");
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
 
 
 /* GET all in stock */
@@ -47,10 +49,11 @@ router.get('/allTake',userHelpers.isLogin , function(req, res) {
   });
 });
 /* Add new in stock  */
-router.post('/add', userHelpers.isLogin ,function(req, res) {
-  instockMgr.addInStock(req.body,function(InStock){
-    res.send(InStock);
-  });
+router.post('/add', userHelpers.isLogin ,multipartyMiddleware,function(req, res) {
+  // instockMgr.addInStock(req.body,function(InStock){
+  //   res.send(InStock);
+  // });
+console.log(req.body)
 });
 
 /* Edit in stock by id  */
