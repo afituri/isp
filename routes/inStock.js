@@ -50,9 +50,36 @@ router.get('/allTake',userHelpers.isLogin , function(req, res) {
 });
 /* Add new in stock  */
 router.post('/add', userHelpers.isLogin ,multipartyMiddleware,function(req, res) {
-  // instockMgr.addInStock(req.body,function(InStock){
-  //   res.send(InStock);
-  // });
+  if(req.body.csv==null){
+    instockMgr.addInStock(req.body,function(InStock){
+      res.send(InStock);
+    });
+  }else{
+    req.body.csv.forEach(function(i,j) {
+      var tbody = i[0].split(",");
+      var idmac = tbody[0];
+      var macAddress = tbody[1];
+      var username = tbody[2];
+      var password = tbody[2];
+      var obj ={
+        warehouse:req.body.warehouse,
+        product:req.body.product,
+        description: req.body.description,
+        macAddress:macAddress,
+        username:username,
+        password:password,
+        idmac:idmac
+      }
+      instockMgr.addInStock(obj,function(InStock){
+        if(j==req.body.csv.length-2){
+          res.send(InStock);  
+        }
+        
+      });
+    });
+    
+  }
+
 console.log(req.body)
 });
 

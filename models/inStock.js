@@ -11,6 +11,7 @@ var Instock = new Schema({
    macAddress: { type: String, required:true,default:'null'},
    username: { type: String, required:true,default:'null'},
    password: { type: String ,required:true,default:'null'},
+   idmac: { type: String, default:'null'},
    status: { type: Number, default:1}
 });
 

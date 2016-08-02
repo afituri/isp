@@ -140,7 +140,12 @@ app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','
         });
     }
   }
+  $scope.csv = {
+      result: null,
+      encoding: 'UTF-8',
+    };
   $scope.newInStock = function(){
+    $scope.newInStockForm.csv=$scope.csv.result;
     InStockServ.addInStock($scope.newInStockForm).then(function(response) {
       if(response.data){
         $state.go('inStock');
