@@ -20,12 +20,25 @@ router.get('/cities',userHelpers.isLogin , function(req, res) {
 
 router.get('/dashboard',userHelpers.isLogin ,function(req, res) {
   dollarMgr.getLastDollar(function(result){ 
-  res.render('index', { title: 'الرئيسية' ,name : req.user.name,dollar:result[0].price});
+  var doll;
+  if(result[0]==undefined){
+  	doll=" ";
+  } else {
+  	doll=result[0].price;
+  }
+  var name='';
+  console.log(req.user);
+  if(req.user==undefined){
+  	name=" ";  
+  } else {
+  	name = req.user.name;
+  }
+  res.render('index', { title: 'الرئيسية' ,name : name,dollar:doll});
   })
 });
 
 router.get('/reseller',userHelpers.isLogin ,function(req, res) {
-  res.render('reseller/index', { title: 'الرئيسية' ,name : req.user.repName});
+  res.render('reseller/index', { title: 'الرئيسية' ,name : 'req.user.repName'});
 });
 
 module.exports = router;

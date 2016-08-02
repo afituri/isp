@@ -159,12 +159,28 @@
     }
   }]);
 
-  app.controller('NewInvoiceCtl',['$scope','InStockServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+  app.controller('NewInvoiceCtl',['$scope','InStockServ','ProductsServ','ServicesServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,ProductsServ,ServicesServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
 
 
     $scope.showId = function(id){
      
     }
+
+    $scope.serviceChange = function(){
+      ProductsServ.getProductPackagesByService($scope.ServiceModel._id).then(function(response){
+        $scope.productsObj=response.data;
+      },function(response){
+        console.log("Something went wrong");
+      });
+    }
+
+    ServicesServ.getAllServices().then(function(response){ 
+      $scope.ServiceAll = response.data;
+    },function(response){
+      console.log("Somthing went wrong")
+    });
+
+
 
     $scope.stock={};
     $scope.stockId=0;
@@ -274,14 +290,19 @@
         console.log("Something went wrong");
       });
     };
+    $scope.flag=false;
     $scope.getProductInfo = function(id){
       if(id == 'خدمة'){
+        $scope.flag=false;
         $scope.productsObj = $scope.objects.servicesObj;
       } else if(id == 'معدة'){
+          $scope.flag=false;
         $scope.productsObj = $scope.objects.itemsObj;
       } else if (id == 'حزمة'){
+        $scope.flag=true;
         $scope.productsObj = $scope.objects.packagesObj;
       } else if (id == 'معدات'){
+          $scope.flag=false;
         $scope.productsObj = $scope.objects.etcObj;
 
       }

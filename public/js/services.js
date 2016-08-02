@@ -444,6 +444,11 @@
       'getProductPackages': function(pageSize,currentPage){
         return $http.get('/product/package/'+pageSize+'/'+currentPage);
       },
+      'getProductPackagesByService': function(service){
+        console.log("here");
+        console.log(service);
+        return $http.get('/product/getPackagesByService/service/'+service);
+      },
       'getProductByID': function(id){
         return $http.get('/product/'+id);
       },

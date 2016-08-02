@@ -9,7 +9,7 @@ module.exports = {
     return next();
     }
     res.redirect('/');
-    // return next();
+     /*return next();*/
   },
   printReportPaid : function(HTMLprint,result,res){
     jsreport.render({

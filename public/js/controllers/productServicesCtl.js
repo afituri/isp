@@ -234,8 +234,37 @@
         console.log("Something went wrong");
       })
     };
+
+    $scope.newProductForm.packages={};
+    $scope.speetType = function(id){
+      if($scope.newProductForm.packages.dSpeed!=undefined){
+      $scope.newProductForm.packages.dSpeed=$scope.newProductForm.packages.dSpeed+id;
+      } else {
+        $scope.newProductForm.packages.dSpeed=id;
+      }
+    }
+
+    $scope.UType  = function(id){
+      if($scope.newProductForm.packages.uSpeed != undefined){
+        $scope.newProductForm.packages.uSpeed=$scope.newProductForm.packages.uSpeed+id;
+      } else {
+        $scope.newProductForm.packages.uSpeed=id;
+      }
+    }
+
+    $scope.GBTypee = function(id){
+        if($scope.newProductForm.packages.monthlyQuota != undefined){
+        $scope.newProductForm.packages.monthlyQuota=$scope.newProductForm.packages.monthlyQuota+id;
+      } else {
+        $scope.newProductForm.packages.monthlyQuota=id;
+      }
+
+    }
+
+
     $scope.newServiceProduct = function(){
       $scope.newProductForm.type = "service";
+
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
           $state.go('productServices');
