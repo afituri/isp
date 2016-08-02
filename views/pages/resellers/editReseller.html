@@ -65,7 +65,20 @@
               </div>
             </div>
           </div>
+           <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">كلمة المرور</label>
+                <input class="form-control input-sm" type="password" ng-model="editResllerForm.passwordd" ng-required-err-type="password" placeholder="كلمة المرور" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">تأكيد كلمة المرور</label>
+                <input class="form-control input-sm" type="password" ng-model="editResllerForm.confirmPassword" ng-required-err-type="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+              </div>
+            </div>
           <hr>
+
           <div class="row">
             <div class="col-md-2 col-md-offset-4">
               <button type="submit" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil"></i>&nbsp;تعديل</button>

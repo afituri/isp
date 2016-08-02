@@ -74,13 +74,17 @@ router.get('/getPackagesByService/service/:id',userHelpers.isLogin , function(re
  
 });
 
-router.get('/allEtc', userHelpers.isLogin ,function(req, res) {
+router.get('/new/one/allEtc', userHelpers.isLogin ,function(req, res) {
+    console.log("here");
+    
   productMgr.getAllEtc(function(product){
     res.send(product);
   });
 });
+
 /* Add new customer   */
 router.post('/add', userHelpers.isLogin ,function(req, res) {
+
   productMgr.addProduct(req.body,function(product){
     res.send(product);
   });

@@ -1,7 +1,15 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ReportsCtl',['$scope','toastr','$modal','InvoicesServ','HelperServ',function($scope,toastr,$modal,InvoicesServ,HelperServ){
+  app.controller('ReportsCtl',['$scope','ServicesServ','toastr','$modal','InvoicesServ','HelperServ',function($scope,ServicesServ,toastr,$modal,InvoicesServ,HelperServ){
+   
+    ServicesServ.getAllServices().then(function(response){ 
+      $scope.ServiceAll = response.data;
+    },function(response){
+      console.log("Somthing went wrong")
+    });
+
+
    $scope.showMacAdress = function(id){
     InvoicesServ.searchForProduct(id.id).then(function(response) {
     
