@@ -76,7 +76,9 @@
         });
       },
       'getAllEtcs': function(){
-        return $http.get('/product/allEtc').then(function(response) {
+        return $http.get('/product/new/one/allEtc').then(function(response) {
+          console.log("hii");
+          console.log(response.data);
           self.etcObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllPackages");

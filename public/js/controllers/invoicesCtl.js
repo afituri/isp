@@ -292,6 +292,7 @@
     };
     $scope.flag=false;
     $scope.getProductInfo = function(id){
+
       if(id == 'خدمة'){
         $scope.flag=false;
         $scope.productsObj = $scope.objects.servicesObj;
@@ -303,6 +304,7 @@
         $scope.productsObj = $scope.objects.packagesObj;
       } else if (id == 'معدات'){
           $scope.flag=false;
+        console.log($scope.objects);
         $scope.productsObj = $scope.objects.etcObj;
 
       }

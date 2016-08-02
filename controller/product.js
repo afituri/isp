@@ -127,9 +127,12 @@ module.exports = {
       });
   },
   getAllEtc :function(cb){
+     console.log("heeee");
     model.Product.find({type:"etc"})
       .exec(function(err, products){
         if(!err){
+          console.log("heeee");
+          console.log(products);
           cb(products);
         }else{
           console.log(err);

@@ -111,15 +111,25 @@ module.exports = {
       });
     });
   },
+
   updateReseller: function(id,body,cb) {
-    var obj = body;
-    model.Reseller.findOneAndUpdate({_id:id}, obj, function(err,result) {
+    var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
+    easyPbkdf2.secureHash( body.passwordd, salt, function( err, passwordHash, originalSalt ) {
+    body.password=passwordHash;
+    body.salt =originalSalt;
+    console.log(body);
+    delete body.passwordd;
+    delete body.confirmPassword;
+    model.Reseller.findOneAndUpdate({_id:id}, body, function(err,result) {
+      console.log("after update");
+      console.log(result);
       if (!err) {
         cb(true)
       } else {
         console.log(err);
         cb(false);
       }
+    });
     });
   },
 

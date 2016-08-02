@@ -85,6 +85,7 @@
       console.log("Something went wrong");
     });
     $scope.editResller = function(){
+      if($scope.editResllerForm.passwordd == $scope.editResllerForm.confirmPassword){
       ResllersServ.editResller($stateParams.id,$scope.editResllerForm).then(function(response) {
         if(response.data){
           $state.go('resellers');
@@ -95,7 +96,10 @@
       }, function(response) {
         console.log("Something went wrong");
       });
+    } else  {
+      toastr.error("عفوا تأكيد الرقم السري غير متطابق");
     }
+  }
   }]);
   app.controller('ShowResellerCtl',['$scope','$stateParams','ResllersServ','MenuFac',function($scope,$stateParams,ResllersServ,MenuFac){
     MenuFac.active = 2;
