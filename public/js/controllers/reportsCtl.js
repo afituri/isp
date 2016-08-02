@@ -107,7 +107,6 @@
 
     $scope.showReseller = function(){
        InvoicesServ.Byresseler($scope.reseller).then(function(response) {
-          console.log("response");
           $scope.results= response.data;
         }, function(response) {
           console.log("Something went wrong");
