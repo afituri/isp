@@ -142,7 +142,7 @@
     //alert($stateParams.id);
     $scope.initInvoce = function(){
     InvoicesServ.getInvoiceByID(1,$stateParams.id).then(function(response) {
-    
+      $scope.invoiceID = response.data[0]._id;
       $scope.allInvoice=response.data;
     }, function(response) {
         console.log("Something went wrong");
