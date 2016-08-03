@@ -583,8 +583,8 @@
       'unActive': function(invoiceObj){
         return $http.post('/report/unactive',{service:invoiceObj});
       },
-      'contractBetweenDates': function(start,end){
-        return $http.post('/report/Between',{start:start,end:end});
+      'contractBetweenDates': function(start,end,service){
+        return $http.post('/report/Between',{start:start,end:end,service:service});
       },
       'Byresseler': function(id){
         return $http.post('/report/Reseller',{reseller:id});
