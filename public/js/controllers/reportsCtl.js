@@ -78,13 +78,13 @@
     $scope.showStatus = function(){
       if($scope.Active==1){
         // alert($scope.Active);
-        InvoicesServ.active().then(function(response) {
+        InvoicesServ.active($scope.ServiceModel).then(function(response) {
           $scope.results= response.data;
         }, function(response) {
           console.log("Something went wrong");
         });
       } else {
-          InvoicesServ.unActive().then(function(response) {
+          InvoicesServ.unActive($scope.ServiceModel).then(function(response) {
           console.log("response");
           $scope.results= response.data;
         }, function(response) {

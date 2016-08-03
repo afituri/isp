@@ -574,14 +574,14 @@
       'report': function(invoiceObj){
         return $http.post('/report/printInvoice',invoiceObj);
       },
-      'active': function(){
-        return $http.get('/report/active');
+      'active': function(invoiceObj){
+        return $http.post('/report/active',{service:invoiceObj});
       },
       'activeReport': function(){
         return $http.get('/report/printActive');
       },
-      'unActive': function(){
-        return $http.get('/report/unactive');
+      'unActive': function(invoiceObj){
+        return $http.post('/report/unactive',{service:invoiceObj});
       },
       'contractBetweenDates': function(start,end){
         return $http.post('/report/Between',{start:start,end:end});

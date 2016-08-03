@@ -23,7 +23,8 @@ router.post('/restor',userHelpers.isLogin ,multipartyMiddleware,function(req , r
     });
   });    
 });
-router.get('/active',userHelpers.isLogin ,function(req , res){
+router.post('/active',userHelpers.isLogin ,function(req , res){
+  console.log(req.body);
   reportMgr.getActive(function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
@@ -127,7 +128,7 @@ router.get('/printunActive',userHelpers.isLogin ,function(req , res){
     });
   });
 });
-router.get('/unactive',userHelpers.isLogin ,function(req , res){
+router.post('/unactive',userHelpers.isLogin ,function(req , res){
   reportMgr.getunActive(function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
