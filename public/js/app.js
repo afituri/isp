@@ -10,7 +10,8 @@
     'ui.bootstrap',
     'nya.bootstrap.select',
     'oc.lazyLoad',
-    'ngCsvImport'
+    'ngCsvImport',
+    'angular-ladda'
   ]);
   /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
   app.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {

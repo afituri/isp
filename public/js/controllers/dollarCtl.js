@@ -1,13 +1,8 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-
-  //newDollar
-  //DollarsCtl
-  
-  app.controller('DollarsCtl',['$scope','$modal','DollarServ','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$modal,DollarServ,$state,MenuFac,CustomersServ,HelperServ,toastr){
-    
-     $scope.showDeleteModel = function(id){
+  app.controller('DollarsCtl',['$scope','$modal','DollarServ','$state','$timeout','CustomersServ','HelperServ','toastr',function($scope,$modal,DollarServ,$state,$timeout,CustomersServ,HelperServ,toastr){
+    $scope.showDeleteModel = function(id){
       $scope.id = id;
       $scope.deleteName = "هذا الدولار";
       $scope.deleteModel = $modal({
@@ -34,13 +29,6 @@
         console.log("Something went wrong");
       });
     };
-
-
-
-
-
-    MenuFac.active = 6;
-    $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
@@ -53,16 +41,17 @@
       });
    };
    $scope.init();
-
-
     $scope.newDollarForm = {};
     $scope.newDollar = function(){
-     DollarServ.addDollar($scope.newDollarForm).then(function(response) {
+      $scope.loadingStatus = true;
+      DollarServ.addDollar($scope.newDollarForm).then(function(response) {
         if(response.data){
-          $state.go('dollar');
-          $scope.newDollarForm.price=" ";
-          toastr.success('تمت إضافة الدولار لهذا اليوم');
-          $scope.init();
+          $timeout(function () {
+            $scope.newDollarForm.price=" ";
+            toastr.success('تمت إضافة الدولار لهذا اليوم');
+            $scope.init();
+            $scope.loadingStatus = false;
+          },3000);
         } else {
           console.log(response.data);
         }
@@ -70,8 +59,5 @@
         console.log("Something went wrong");
       });      
     }
-
   }]);
-
-
-  }());
+}());
