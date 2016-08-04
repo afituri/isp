@@ -326,6 +326,11 @@
 
         DollarServ.getLastDollar().then(function(response) {
           //console.log(response.data[0].price);
+
+          var dollar = 1;
+          if($scope.productType=="حزمة"){
+           dollar = $scope.dollarToday;
+          } 
           
           if($scope.productType=="معدة"){
             if($scope.countItem==0){
@@ -338,7 +343,7 @@
               });
               $scope.dollarToday=response.data[0].price;
               $scope.selectedProducts.push({'price':($scope.productName.initialPrice),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
               $scope.productType = '';
               $scope.productName = '';
              } else {
@@ -347,8 +352,8 @@
           } 
           } else {
             $scope.dollarToday=response.data[0].price;
-            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * dollar),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
             $scope.productType = '';
             $scope.productName = '';
           }
@@ -361,6 +366,8 @@
       }
     };
     $scope.removeSelect = function(index){
+
+      $scope.newInvoiceForm.total=$scope.newInvoiceForm.total-$scope.selectedProducts[index].price;
       if($scope.selectedProducts[index].type == "معدة"){
         $scope.countItem=0;
       }
@@ -395,11 +402,16 @@
     };
   }]);
 
-  app.controller('UpgreadeCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+  app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
    
-    $scope.upInviceForm = {};
-    $scope.objects = HelperServ;
-    $scope.objects.getAllPackages();
+    //0000000000000
+
+
+    ProductsServ.getAllItem().then(function(response){
+      $scope.items=response.data;
+    },function(response){
+      console.log("Somthing went wrong");
+    });
     InvoicesServ.getInvoicedata($stateParams.id).then(function(response) {
       $scope.days=response.data.days;
       $scope.daysN=response.data.daysN;
