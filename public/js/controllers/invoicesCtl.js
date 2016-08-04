@@ -395,11 +395,16 @@
     };
   }]);
 
-  app.controller('UpgreadeCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+  app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
    
-    $scope.upInviceForm = {};
-    $scope.objects = HelperServ;
-    $scope.objects.getAllPackages();
+    //0000000000000
+
+
+    ProductsServ.getAllItem().then(function(response){
+      $scope.items=response.data;
+    },function(response){
+      console.log("Somthing went wrong");
+    });
     InvoicesServ.getInvoicedata($stateParams.id).then(function(response) {
       $scope.days=response.data.days;
       $scope.daysN=response.data.daysN;

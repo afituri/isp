@@ -93,3 +93,7 @@ table.jambo_table thead {
   cursor: inherit;
   display: block;
 }
+.ladda-button[data-style=zoom-out] .ladda-spinner {
+  left: 35%;
+  margin-left: -3px;
+}

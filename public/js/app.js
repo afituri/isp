@@ -10,7 +10,8 @@
     'ui.bootstrap',
     'nya.bootstrap.select',
     'oc.lazyLoad',
-    'ngCsvImport'
+    'ngCsvImport',
+    'angular-ladda'
   ]);
   /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
   app.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
@@ -466,6 +467,36 @@
     .state('upgreade',{
       url: '/invoiceCustomers/upgreade/:id',
       templateUrl: 'pages/invoices/upgreade.html',
+      controller: 'UpgreadeCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('addGiga',{
+      url: '/invoiceCustomers/addGiga/:id',
+      templateUrl: 'pages/invoices/addGiga.html',
+      controller: 'UpgreadeCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('Replacement',{
+      url: '/invoiceCustomers/Replacement/:id',
+      templateUrl: 'pages/invoices/Replacement.html',
       controller: 'UpgreadeCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
