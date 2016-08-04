@@ -9,6 +9,7 @@
                 <label class="control-label">إسم الخدمة</label>
                 <select class="form-control input-sm" ng-model="ServiceModel" ng-options="service.name for service in ServiceAll track by service._id" ng-change="serviceChange()">
                   <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="-1">عرض الزبائن جميعا</option>
                 </select>
                 <span style="color:red;" ng-show="productTypeRequired">هذا الحقل مطلوب</span>
               </div>

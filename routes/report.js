@@ -24,11 +24,18 @@ router.post('/restor',userHelpers.isLogin ,multipartyMiddleware,function(req , r
   });    
 });
 router.post('/active',userHelpers.isLogin ,function(req , res){
-  console.log(req.body);
-  reportMgr.getActive(function(results){
-    reportMgr.getInvoices(results,function(result){
-      pars(result,function(obj){
-        res.send(obj);
+  var service;
+  if(req.body.service){
+    service=req.body.service._id
+  }else{
+    service=-1;
+  }
+  reportMgr.getProductServes(service,function(product){
+    reportMgr.getActive(product,function(results){
+      reportMgr.getInvoices(results,function(result){
+        pars(result,function(obj){
+          res.send(obj);
+        });
       });
     });
   });
@@ -103,36 +110,58 @@ router.get('/printInvoice/:id',userHelpers.isLogin , function(req, res) {
 });
 
 
-router.get('/printActive',userHelpers.isLogin ,function(req , res){
-  
-  reportMgr.getActive(function(results){
-
-    reportMgr.getInvoices(results,function(result){
-      pars(result,function(obj){
-        obj.active = "المفعلة";
-        userHelpers.printReport("active.html",obj,res);
+router.get('/printActive/:id',userHelpers.isLogin ,function(req , res){
+  var service;
+  if(req.params.id!=-1){
+    service=req.params.id;
+  }else{
+    service=-1;
+  }
+  reportMgr.getProductServes(service,function(product){
+    reportMgr.getActive(product,function(results){
+      reportMgr.getInvoices(results,function(result){
+        pars(result,function(obj){
+          obj.active = "المفعلة";
+          userHelpers.printReport("active.html",obj,res);
+        });
       });
     });
   });
 });
 
 
-router.get('/printunActive',userHelpers.isLogin ,function(req , res){
-  reportMgr.getunActive(function(results){
-    reportMgr.getInvoices(results,function(result){
-      pars(result,function(obj){
-        obj.active = "الغير المفعلة";
-        userHelpers.printReport("active.html",obj,res);
+router.get('/printunActive/:id',userHelpers.isLogin ,function(req , res){
+  var service;
+  if(req.params.id!=-1){
+    service=req.params.id;
+  }else{
+    service=-1;
+  }
+  reportMgr.getProductServes(service,function(product){
+    reportMgr.getunActive(product,function(results){
+      reportMgr.getInvoices(results,function(result){
+        pars(result,function(obj){
+          obj.active = "الغير المفعلة";
+          userHelpers.printReport("active.html",obj,res);
+        });
+        
       });
-      
     });
   });
 });
 router.post('/unactive',userHelpers.isLogin ,function(req , res){
-  reportMgr.getunActive(function(results){
-    reportMgr.getInvoices(results,function(result){
-      pars(result,function(obj){
-        res.send(obj);
+  var service;
+  if(req.body.service){
+    service=req.body.service._id
+  }else{
+    service=-1;
+  }
+  reportMgr.getProductServes(service,function(product){
+    reportMgr.getunActive(product,function(results){
+      reportMgr.getInvoices(results,function(result){
+        pars(result,function(obj){
+          res.send(obj);
+        });
       });
     });
   });
@@ -155,21 +184,36 @@ router.get('/company',userHelpers.isLogin ,function(req , res){
 });
 
 router.post('/Between',userHelpers.isLogin ,function(req , res){
-  reportMgr.getBetween(req.body.start,req.body.end,function(results){
-    reportMgr.getInvoices(results,function(result){
-      pars(result,function(obj){
-        res.send(obj);
+  var service;
+  if(req.body.service){
+    service=req.body.service._id
+  }else{
+    service=-1;
+  }
+  reportMgr.getProductServes(service,function(product){
+    reportMgr.getBetween(req.body.start,req.body.end,product,function(results){
+      reportMgr.getInvoices(results,function(result){
+        pars(result,function(obj){
+          res.send(obj);
+        });
       });
     });
   });
 });
 
-router.get('/printBetween/:start/:end',userHelpers.isLogin ,function(req , res){
-
-  reportMgr.getBetween(req.params.start,req.params.end,function(results){
-    reportMgr.getInvoices(results,function(result){
-      pars(result,function(obj){
-        userHelpers.printReport("active.html",obj,res);
+router.get('/printBetween/:start/:end/:service',userHelpers.isLogin ,function(req , res){
+  var service;
+  if(req.body.service){
+    service=req.body.service._id
+  }else{
+    service=-1;
+  }
+  reportMgr.getProductServes(service,function(product){
+    reportMgr.getBetween(req.params.start,req.params.end,product,function(results){
+      reportMgr.getInvoices(results,function(result){
+        pars(result,function(obj){
+          userHelpers.printReport("active.html",obj,res);
+        });
       });
     });
   });

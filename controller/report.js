@@ -3,8 +3,8 @@ var model = require("../models");
 
 
 module.exports = {
-  getActive : function (cb) {
-    model.Order.find({endDate:{$gte:new Date()}}).distinct('invoice',function(err, result){
+  getActive : function (product,cb) {
+    model.Order.find({product:{$in:product},endDate:{$gte:new Date()}}).distinct('invoice',function(err, result){
       if(!err){
         cb(result);
       }else{
@@ -14,10 +14,10 @@ module.exports = {
     });
   },
 
-  getunActive : function (cb) {
+  getunActive : function (product,cb) {
     model.Order.find({endDate:{$gte:new Date()}}).distinct('invoice',function(err, ido){
       model.Invoice.find({_id:{$in:ido}}).distinct('invoice',function(err, idin){
-        model.Order.find({$and:[{endDate:{$lt:new Date()}},{invoice:{$nin:idin}}]}).distinct('invoice',function(err, result){
+        model.Order.find({$and:[{endDate:{$lt:new Date()}},{product:{$in:product}},{invoice:{$nin:idin}}]}).distinct('invoice',function(err, result){
           if(!err){
             cb(result);
           }else{
@@ -29,8 +29,8 @@ module.exports = {
     });
   },
 
-  getBetween : function (start,end,cb) {
-    model.Order.find({$and:[{endDate:{$gte: new Date(start)}},{endDate:{$lt: new Date(end)}}]}).distinct('invoice',function(err, result){
+  getBetween : function (start,end,product,cb) {
+    model.Order.find({$and:[{endDate:{$gte: new Date(start)}},{product:{$in:product}},{endDate:{$lt: new Date(end)}}]}).distinct('invoice',function(err, result){
       if(!err){
         cb(result);
       }else{
@@ -122,6 +122,21 @@ module.exports = {
           cb(null);
         }
       });
+    });
+  },
+  getProductServes : function (id,cb){
+    if(id!=-1){
+      var obj={'packages.service':id};
+    }else{
+      var obj={};
+    }
+    model.Product.find(obj).distinct('_id',function(err, products){
+      if(!err){
+        cb(products);
+      }else{
+        console.log(err);
+        cb(null);
+      }
     });
   },
 };

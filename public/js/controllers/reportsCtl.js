@@ -96,15 +96,15 @@
     $scope.printStatus = function(){
       //alert($scope.Active);
        if($scope.Active==1){
-        window.location.href ="/report/printActive";
+        window.location.href ="/report/printActive/"+$scope.ServiceModel._id;
       } else {
-        window.location.href ="/report/printunActive";
+        window.location.href ="/report/printunActive/"+$scope.ServiceModel._id;
       }
 
     };
 
      $scope.showDate = function(){
-        InvoicesServ.contractBetweenDates($scope.startDate,$scope.endDate).then(function(response) {
+        InvoicesServ.contractBetweenDates($scope.startDate,$scope.endDate,$scope.ServiceModel).then(function(response) {
           console.log("response");
           $scope.results= response.data;
         }, function(response) {
@@ -125,7 +125,7 @@
     
    
     $scope.printDate = function(){
-      window.location.href="/report/printBetween/"+$scope.startDate+"/"+$scope.endDate;
+      window.location.href="/report/printBetween/"+$scope.startDate+"/"+$scope.endDate+"/"+$scope.ServiceModel._id;
     };
    
     $scope.printReseller = function(){
