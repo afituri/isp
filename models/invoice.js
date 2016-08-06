@@ -21,6 +21,7 @@ var Invoice = new Schema({
    endDate:{ type: Date,default:null},
    instock: { type: mongoose.Schema.ObjectId, ref : 'Instock',default:null},
    status: { type: Number, default:1},
+   giga: { type: Number, default:0},
    path : {type: String,default:null},
    reject_message : {type: String,default:null}
 });

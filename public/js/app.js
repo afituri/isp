@@ -482,7 +482,7 @@
     .state('addGiga',{
       url: '/invoiceCustomers/addGiga/:id',
       templateUrl: 'pages/invoices/addGiga.html',
-      controller: 'UpgreadeCtl',
+      controller: 'Giga',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{

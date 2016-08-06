@@ -545,6 +545,16 @@
     };
     return self;
   }]);
+
+  app.service('gigaServ',['$http',function($http){
+     var self = {
+      'addgiga': function(form){
+        return $http.post('/invoice/addgiga',form);
+      }
+    };
+    return self;
+  }]);
+
   app.service('InvoicesServ',['$http','Upload',function($http,Upload){
     var self = {
       'searchForMac': function(all,pageSize,currentPage){
@@ -609,6 +619,10 @@
       },
       'upgreadInvice': function(renewInviceObj){
         return $http.post('/invoice/upInvice',renewInviceObj);
+      },
+      'replacInvice': function(replacInviceObj){
+        console.log(replacInviceObj);
+        return $http.post('/invoice/replacInvice',replacInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
         // return $http.post('/invoice/paidInvoice',paidInviceObj);
