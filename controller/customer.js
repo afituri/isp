@@ -99,7 +99,7 @@ module.exports = {
     
   },
 
-  getCustomerReseller :function(id,id,limit,page,cb){
+  getCustomerReseller :function(id,idP,limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
