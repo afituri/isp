@@ -189,4 +189,25 @@ getByWP :function(idW,idP,cb){
     }
   });
 },
+getByMac :function(txt,cb){
+  model.Instock.findOne({$or: [ {macAddress:{$regex:txt, $options:'i'}},{username:{$regex:txt, $options:'i'}}]}, function(err,result) {
+    if (!err) {
+      model.Invoice.find({_id:result.invoice})
+        .populate('customer')
+        .populate('reseller')
+        .populate('user')
+        .exec(function(err, invoice){
+          if(!err){
+            cb({invoice:invoice,mac:result});
+          }else{
+            console.log(err);
+            cb(null);
+          }
+      });
+    } else {
+      console.log(err);
+      cb(false);
+    }
+  });
+},
 };
