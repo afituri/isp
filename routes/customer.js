@@ -44,7 +44,7 @@ router.get('/allStatus1', userHelpers.isLogin ,function(req, res) {
 });
 //0000000
 router.get('/customerReseller/:limit/:page',userHelpers.isLogin , function(req, res) {
-  customerMgr.getCustomerReseller(req.user._id,req.params.limit,req.params.page,function(customers){
+  customerMgr.getCustomerReseller(req.user._id,-1,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
