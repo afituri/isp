@@ -5,6 +5,18 @@
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+
+    $scope.showInoice = function(id,typein){
+      if(typein == 1){
+        window.location.href='/report/printInvoice/'+id.id;
+      } 
+      if(typein ==4){
+        window.location.href='/report/printInvoicePaid/'+id.id;
+      }
+      if(typein == 3){
+        window.location.href='/report/printInvoice/'+id.id;
+      }
+    }
     
     $scope.init = function(id){
     InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {

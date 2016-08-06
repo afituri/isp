@@ -38,7 +38,15 @@ router.get('/dashboard',userHelpers.isLogin ,function(req, res) {
 });
 
 router.get('/reseller',userHelpers.isLogin ,function(req, res) {
-  res.render('reseller/index', { title: 'الرئيسية' ,name : 'req.user.repName'});
+    dollarMgr.getLastDollar(function(result){ 
+  var doll;
+  if(result[0]==undefined){
+    doll=" ";
+  } else {
+    doll=result[0].price;
+  }
+  res.render('reseller/index', { title: 'الرئيسية' ,name : req.user.repName,dollar:doll});
+   });
 });
 
 module.exports = router;
