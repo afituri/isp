@@ -228,6 +228,17 @@
   app.controller('NewInvoiceCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
   }]);*/
 app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','$modal',function($scope,$stateParams,MenuFac,InvoicesServ,$modal){
+    
+
+    $scope.initInvoce = function(){
+    InvoicesServ.getInvoiceByID(1,$stateParams.id).then(function(response) {
+      $scope.invoiceID = response.data[0]._id;
+      $scope.allInvoice=response.data;
+    }, function(response) {
+        console.log("Something went wrong");
+    });
+  }
+  $scope.initInvoce();
     $scope.resellerFlag=1;
     InvoicesServ.getTotal($stateParams.id).then(function(response) {
       $scope.allTotals=response.data.sum.toFixed(2);

@@ -18,8 +18,10 @@ router.get('/getByWP/:idStock/:idItem', userHelpers.isLogin ,function(req, res) 
     res.send(result);
   });
 });
+
 router.get('/searchMac/:id', userHelpers.isLogin ,function(req, res) {
   instockMgr.getByMac(req.params.id,function(InStock){
+    console.log(InStock);
     res.send(InStock);
   });
 });

@@ -311,7 +311,10 @@
       },
       'editInStock': function(id,obj){
         return $http.put('/inStock/edit/'+id,obj);
-      }
+      },
+      'getInfoByMackAdress': function(mac){
+        return $http.get('/inStock/searchMac/'+mac);
+      } 
     };
 
     return self;
@@ -343,6 +346,7 @@
   app.service('CustomersServ',['$http',function($http){
     var self = {
       'getCustomers': function(status,pageSize,currentPage){
+        console.log(status);
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getCustomersRe': function(id,idC,pageSize,currentPage){

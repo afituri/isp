@@ -74,7 +74,12 @@
                 <td ng-if="customer.status==2">قيد الانتظار</td>
                 <td ng-if="customer.status==3">مرفوض</td>
                 <td >
-                  <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="showInoice({id:customer._id},customer.typein)"><i class="fa fa-pencil fa-fw"></i>&nbsp; عرض الفاتورة</a>
+                  <a  class="btn btn-success btn-xs" ng-click="showInoice({id:customer._id},customer.typein)"><i class="fa fa-pencil fa-fw"></i>&nbsp; <span ng-if="customer.typein==1"> فاتورة</span>
+                  <span ng-if="customer.typein==4">دفعة </span>
+                  <span ng-if="customer.typein==3"> تجديد</span>
+
+
+                  </a>
                    <button type="button" class="btn btn-success btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{customer.piad}} <br> 
                     التخفيض : {{customer.discount}} <br>
                     الملاجظات : {{customer.notes}}
@@ -108,7 +113,12 @@
                 <td ng-if="customer.status==2">قيد الانتظار</td>
                 <td ng-if="customer.status==3">مرفوض</td>
                 <td >
-                  <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="showInoice({id:customer._id},customer.typein)"><i class="fa fa-pencil fa-fw"></i>&nbsp; عرض الفاتورة</a>
+                  <a  class="btn btn-success btn-xs" ng-click="showInoice({id:customer._id},customer.typein)"><i class="fa fa-pencil fa-fw"></i>&nbsp; 
+                    <span ng-if="customer.typein==1"> فاتورة</span>
+                  <span ng-if="customer.typein==4">دفعة </span>
+                  <span ng-if="customer.typein==3"> تجديد</span>
+
+                  </a>
                    <button type="button" class="btn btn-success btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{customer.piad}} <br> 
                     التخفيض : {{customer.discount}} <br>
                     الملاجظات : {{customer.notes}}
@@ -142,7 +152,14 @@
                 <td ng-if="customer.status==2">قيد الانتظار</td>
                 <td ng-if="customer.status==3">مرفوض</td>
                 <td >
-                  <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="showInoice({id:customer._id},customer.typein)"><i class="fa fa-pencil fa-fw"></i>&nbsp; عرض الفاتورة</a>
+                  <a ng-show="customer.status==2" class="btn btn-success btn-xs" ng-click="showInoice({id:customer._id},customer.typein)"><i class="fa fa-pencil fa-fw"></i>&nbsp; 
+
+                    <span ng-if="customer.typein==1"> فاتورة</span>
+                  <span ng-if="customer.typein==4">دفعة </span>
+                  <span ng-if="customer.typein==3"> تجديد</span>
+
+
+                  </a>
                    <button type="button" class="btn btn-success btn-sm" data-placement="right" data-trigger="focus" title="مزيد من المعلومات" data-content="المدفوع :- {{customer.piad}} <br> 
                     التخفيض : {{customer.discount}} <br>
                     الملاجظات : {{customer.notes}}
