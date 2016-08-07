@@ -196,12 +196,14 @@ getByMac :function(txt,cb){
       invoice = result.invoice;
     }
     if (!err) {
-      model.Invoice.find({_id:invoice})
+      model.Invoice.findOne({_id:invoice})
         .populate('customer')
         .populate('reseller')
         .populate('user')
         .exec(function(err, invoice){
           if(!err){
+            
+            // console.log(result);
             cb({invoice:invoice,mac:result});
           }else{
             console.log(err);
