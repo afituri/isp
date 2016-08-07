@@ -191,8 +191,12 @@ getByWP :function(idW,idP,cb){
 },
 getByMac :function(txt,cb){
   model.Instock.findOne({$or: [ {macAddress:{$regex:txt, $options:'i'}},{username:{$regex:txt, $options:'i'}}]}, function(err,result) {
+    var invoice;
+    if(result != null){
+      invoice = result.invoice;
+    }
     if (!err) {
-      model.Invoice.find({_id:result.invoice})
+      model.Invoice.find({_id:invoice})
         .populate('customer')
         .populate('reseller')
         .populate('user')
