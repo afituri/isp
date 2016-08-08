@@ -21,6 +21,7 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
+      'warehouseObjs': [],
       'etcObj': [],
       'resellersObj': [],
       'getAllStock': function(){
@@ -89,6 +90,13 @@
           self.policiesObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllPolicies");
+        });
+      },
+      'getAllWarehouses': function(){
+        return $http.get('/warehouse/allw').then(function(response) {
+          self.warehouseObjs = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
         });
       },
       'getAllResellers': function(){
