@@ -103,6 +103,26 @@
         }] 
       }
     })
+
+    .state('newPermissions',{
+      url: '/newPermissions',
+      templateUrl: 'pages/permissions/newPermissions.html',
+      controller: 'newPermissionCtl',
+      data: {pageTitle: 'عرض الصلاحيات'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/permissionCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+
+
     .state('dollar',{
       url: '/dollar',
       templateUrl: 'pages/dollar/dollar.html',

@@ -1,27 +1,39 @@
+
+
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>إضافة مدير (Admin)</h2>
+        <h2>إضافة موظفين</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
         <form novalidate ng-submit="newUser()" name="addUserForm">
           <div class="row">
-          	  <div class="col-md-4">
+             <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">نوع الموظف</label>
+                <select class="form-control input-sm" ng-model="newServiceForm.type"  ng-change="UserType()" ng-required-err-type="servicesProvider" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="1" >مدير</option>
+                  <option value="2" >موظف</option>
+                </select>
+              </div>
+            </div>
+          	  <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">اسم المدير</label>
                 <input class="form-control input-sm" type="text" ng-model="newUserForm.name" placeholder="اسم المدير" required>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">البريد الالكتروني</label>
                 <input class="form-control input-sm" type="text" ng-model="newUserForm.email" placeholder="البريد الالكتروني" required>
               </div>
             </div>
 
-             <div class="col-md-4">
+             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">رقم الهاتف</label>
                 <input class="form-control input-sm" type="text" ng-model="newUserForm.phone" placeholder="رقم الهاتف" required>
@@ -42,6 +54,60 @@
               </div>
             </div>
           </div>
+          <div class="row">
+          
+          
+          <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">لوحة المعلومات</div>
+            <div class="panel-body">
+          
+
+           <!--  <table class="table table-striped table-condensed jambo_table">
+            <thead>
+              <tr>
+                <th>اسم الصلاحية</th>
+                <th><i class="fa fa-cog"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr >
+                <td >عرض تسجيل الدولا</td>
+                <td>
+                  <input type="checkbox" checked data-toggle="toggle">
+                </td>
+              </tr>
+               <tr >
+                <td > عرض استعادة</td>
+                <td>
+                  <input type="checkbox" checked data-toggle="toggle">
+                </td>
+              </tr>
+            </tbody>
+          </table> -->
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+         <div class="col-md-6">
+          <div class="panel panel-success">
+            <div class="panel-heading">الصلاحيات الداخلية</div>
+            <div class="panel-body">Panel Content</div>
+          </div>
+        </div>
+      </div>
+
+
+
           <hr>
           <div class="row">
             <div class="col-md-2 col-md-offset-4">
@@ -51,8 +117,11 @@
               <a class="btn btn-success btn-sm btn-block" ui-sref="user"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
             </div>
           </div>
+
+  
         </form>
       </div>
     </div>
   </div>
 </div>
+
