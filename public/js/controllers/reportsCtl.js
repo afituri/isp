@@ -4,15 +4,19 @@
   app.controller('ReportsCtl',['$scope','ServicesServ','InStockServ','toastr','$modal','InvoicesServ','HelperServ',function($scope,ServicesServ,InStockServ,toastr,$modal,InvoicesServ,HelperServ){
    
     $scope.searchByMacAdress = function() {
-      
+      if($scope.searchByMac==""){
+        $scope.customers = null;
+      } else {
       InStockServ.getInfoByMackAdress($scope.searchByMac).then(function(response){
-        console.log(response.data)
+        console.log(response.data);
+        $scope.customers = response.data;
       },function(response){
         console.log("Somthing went wrong");
       });
-
-
     }
+    }
+
+
 
     ServicesServ.getAllServices().then(function(response){ 
       $scope.ServiceAll = response.data;
