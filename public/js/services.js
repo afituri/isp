@@ -353,6 +353,10 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
+      'getCustomerByAll' : function(all){
+        console.log(all);
+        return $http.get('/customer/searchAll/'+all);
+      },
       'getCustomers': function(status,pageSize,currentPage){
         console.log(status);
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
