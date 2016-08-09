@@ -326,7 +326,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.objects.getAllServices();
     $scope.objects.getAllPackages();
     $scope.objects.getAllResellers();
-    $scope.objects.getAllStock();
+    $scope.objects.getAllStockby();
     $scope.newInvoiceForm = {};
     $scope.previousSubscription = '1';
     $scope.init = function () {

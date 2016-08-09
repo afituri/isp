@@ -24,6 +24,13 @@ router.get('/all', userHelpers.isLogin ,function(req, res) {
     res.send(warehouse);
   });
 });
+router.get('/allw', userHelpers.isLogin ,function(req, res) {
+  // res.send(data.warehouses);
+  wareMgr.getAllWarehousesw(function(warehouse){
+    console.log(warehouse);
+    res.send(warehouse);
+  });
+});
 /* Add new warehouse  */
 router.post('/add', userHelpers.isLogin ,function(req, res) {
   wareMgr.addWarehouse(req.body,function(warehouse){
@@ -44,7 +51,12 @@ router.delete('/delete/:id', userHelpers.isLogin ,function(req, res) {
     res.send({result:warehouse});
   });
 });
-
+router.get('/:byid', userHelpers.isLogin ,function(req, res) {
+  // res.send(data.warehouse);
+  wareMgr.getWarehouseId(req.user.warehouse,function(warehouse){
+    res.send([warehouse]);
+  });
+});
 /* GET warehouse by ID  */
 router.get('/:id', userHelpers.isLogin ,function(req, res) {
   // res.send(data.warehouse);
