@@ -21,6 +21,7 @@
       'servicesObj': [],
       'packagesObj': [],
       'policiesObj': [],
+      'warehouseObjs': [],
       'etcObj': [],
       'resellersObj': [],
       'getAllStock': function(){
@@ -89,6 +90,13 @@
           self.policiesObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllPolicies");
+        });
+      },
+      'getAllWarehouses': function(){
+        return $http.get('/warehouse/allw').then(function(response) {
+          self.warehouseObjs = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
         });
       },
       'getAllResellers': function(){
@@ -311,7 +319,10 @@
       },
       'editInStock': function(id,obj){
         return $http.put('/inStock/edit/'+id,obj);
-      }
+      },
+      'getInfoByMackAdress': function(mac){
+        return $http.get('/inStock/searchMac/'+mac);
+      } 
     };
 
     return self;
@@ -343,6 +354,7 @@
   app.service('CustomersServ',['$http',function($http){
     var self = {
       'getCustomers': function(status,pageSize,currentPage){
+        console.log(status);
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getCustomersRe': function(id,idC,pageSize,currentPage){
@@ -545,6 +557,16 @@
     };
     return self;
   }]);
+
+  app.service('gigaServ',['$http',function($http){
+     var self = {
+      'addgiga': function(form){
+        return $http.post('/invoice/addgiga',form);
+      }
+    };
+    return self;
+  }]);
+
   app.service('InvoicesServ',['$http','Upload',function($http,Upload){
     var self = {
       'searchForMac': function(all,pageSize,currentPage){
@@ -609,6 +631,10 @@
       },
       'upgreadInvice': function(renewInviceObj){
         return $http.post('/invoice/upInvice',renewInviceObj);
+      },
+      'replacInvice': function(replacInviceObj){
+        console.log(replacInviceObj);
+        return $http.post('/invoice/replacInvice',replacInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
         // return $http.post('/invoice/paidInvoice',paidInviceObj);

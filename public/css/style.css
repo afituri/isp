@@ -94,6 +94,6 @@ table.jambo_table thead {
   display: block;
 }
 .ladda-button[data-style=zoom-out] .ladda-spinner {
-  left: 35%;
-  margin-left: -3px;
+  right: 47%;
+  left: auto;
 }

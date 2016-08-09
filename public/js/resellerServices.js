@@ -324,6 +324,7 @@
  app.service('HelperServ',['$http',function($http){
     var self = {
       'stockObj': [],
+      'stockObjs': [],
       'citiesObj': [],
       'suppliersObj': [],
       'serviceProvidersObj': [],
@@ -336,6 +337,13 @@
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
           self.stockObj = response.data.result;
+        }, function(response) {
+          console.log("Something went wrong in getAllCities");
+        });
+      },
+      'getAllStockby': function(){
+        $http.get('/warehouse/byid').then(function(response) {
+          self.stockObjs = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllCities");
         });

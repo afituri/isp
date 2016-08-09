@@ -11,6 +11,11 @@ var userHelpers = require("../controller/userHelpers");
 
 
 
+router.post('/replacInvice',userHelpers.isLogin , function(req, res) {
+  invoiceMgr.replacInvice(req.body,function(result){
+    res.send(result);
+  });
+});
 
 router.get('/invoicesdata/:id', userHelpers.isLogin ,function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(invoices){
@@ -82,6 +87,12 @@ router.post('/add',userHelpers.isLogin , function(req, res) {
     res.send(result);
   });
 });
+router.post('/addgiga',userHelpers.isLogin , function(req, res) {
+  invoiceMgr.addGiga(req.body,function(result){
+    res.send(result);
+  });
+});
+
 
 router.post('/renewInvice',userHelpers.isLogin , function(req, res) {
   invoiceMgr.renewInvice(req.body,function(result){

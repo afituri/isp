@@ -1,8 +1,23 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ReportsCtl',['$scope','ServicesServ','toastr','$modal','InvoicesServ','HelperServ',function($scope,ServicesServ,toastr,$modal,InvoicesServ,HelperServ){
+  app.controller('ReportsCtl',['$scope','ServicesServ','InStockServ','toastr','$modal','InvoicesServ','HelperServ',function($scope,ServicesServ,InStockServ,toastr,$modal,InvoicesServ,HelperServ){
    
+    $scope.searchByMacAdress = function() {
+      if($scope.searchByMac==""){
+        $scope.customers = null;
+      } else {
+      InStockServ.getInfoByMackAdress($scope.searchByMac).then(function(response){
+        console.log(response.data);
+        $scope.customers = response.data;
+      },function(response){
+        console.log("Somthing went wrong");
+      });
+    }
+    }
+
+
+
     ServicesServ.getAllServices().then(function(response){ 
       $scope.ServiceAll = response.data;
     },function(response){
@@ -42,7 +57,6 @@
     $scope.init= function(){
 
        InvoicesServ.searchForMac(-9,$scope.pageSize,$scope.currentPage).then(function(response) {
-          console.log("response");
           $scope.resultsAll= response.data.result;
           $scope.total = response.data.count;
         }, function(response) {

@@ -62,6 +62,8 @@
     MenuFac.active = 2;
     $scope.newResllerForm = {};
     $scope.objects = HelperServ;
+    $scope.objects.getAllWarehouses();
+    $scope.objects.getAllPolicies();
     $scope.newResller = function(){
       ResllersServ.addResller($scope.newResllerForm).then(function(response) {
         if(response.data){

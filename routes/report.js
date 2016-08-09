@@ -41,6 +41,41 @@ router.post('/active',userHelpers.isLogin ,function(req , res){
   });
 });
 
+router.get('/printInvoiceGiga/:id',userHelpers.isLogin , function(req, res) {
+  invoiceMgr.getInvoicedata(req.params.id,function(result){
+    jsreport.render({
+      template: { 
+        engine: "jsrender",
+        recipe: "phantom-pdf",
+        content: fs.readFileSync(path.join(__dirname, "../views/reports/invoiceGiga.html"), "utf8"),
+        
+      },data:{result:result
+      }
+    }).then(function(resp) {
+      resp.stream.pipe(res);
+    }).catch(function(e) {
+      res.end(e.message);
+    });
+  });
+});
+router.get('/printInvoiceshowrep/:id',userHelpers.isLogin , function(req, res) {
+  invoiceMgr.getInvoicedata(req.params.id,function(result){
+    jsreport.render({
+      template: { 
+        engine: "jsrender",
+        recipe: "phantom-pdf",
+        content: fs.readFileSync(path.join(__dirname, "../views/reports/invoicerep.html"), "utf8"),
+        
+      },data:{result:result
+      }
+    }).then(function(resp) {
+      resp.stream.pipe(res);
+    }).catch(function(e) {
+      res.end(e.message);
+    });
+  });
+});
+
 router.get('/printInvoicePaid/:id',userHelpers.isLogin , function(req, res) {
     invoiceMgr.getInvoicedata(req.params.id,function(result){
       jsreport.render({

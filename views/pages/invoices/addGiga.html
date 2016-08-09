@@ -2,27 +2,32 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>إضافة خدمة جديدة</h2>
+        <h2>إضافة قيقــا</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <form novalidate ng-submit="newService()">
+        <form novalidate ng-submit="addGiga()">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">إضافة قيقــا</label>
-                <input class="form-control input-sm" type="text" ng-model="newServiceForm.name" ng-required-err-type="nameService" placeholder="اسم الخدمة" required>
+                <input class="form-control input-sm" type="text" ng-model="newgiga.giga" ng-required-err-type="nameService" placeholder="إضافة قيقــا" required>
               </div>
             </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">السعر</label>
-                <input class="form-control input-sm" type="text" ng-model="newServiceForm.name" ng-required-err-type="nameService" placeholder="اسم الخدمة" required>
+                <input class="form-control input-sm" type="text" ng-model="newgiga.price" ng-required-err-type="nameService" placeholder="السعر" required>
               </div>
             </div>
         
-     
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">ملاحظات</label>
+                  <textarea class="form-control input-sm" rows="6" ng-model="newgiga.notes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
+                </div>
+              </div>
           <hr>
           <div class="row">
             <div class="col-md-2 col-md-offset-4">

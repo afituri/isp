@@ -482,7 +482,7 @@
     .state('addGiga',{
       url: '/invoiceCustomers/addGiga/:id',
       templateUrl: 'pages/invoices/addGiga.html',
-      controller: 'UpgreadeCtl',
+      controller: 'Giga',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -1004,6 +1004,22 @@
     .state('searchMacAdress',{
       url: '/searchMacAdress',
       templateUrl: 'pages/reports/searchMacAdress.html',
+      controller: 'ReportsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/reportsCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    //searchByMacAdress
+    .state('searchByMacAdress',{
+      url: '/searchByMacAdress',
+      templateUrl: 'pages/reports/searchByMacAdress.html',
       controller: 'ReportsCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {

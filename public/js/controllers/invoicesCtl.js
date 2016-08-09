@@ -5,6 +5,18 @@
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+
+    $scope.showInoice = function(id,typein){
+      if(typein == 1){
+        window.location.href='/report/printInvoice/'+id.id;
+      } 
+      if(typein ==4){
+        window.location.href='/report/printInvoicePaid/'+id.id;
+      }
+      if(typein == 3){
+        window.location.href='/report/printInvoice/'+id.id;
+      }
+    }
     
     $scope.init = function(id){
     InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
@@ -156,7 +168,16 @@
     $scope.showPaid = function(id){
       //alert(id);
       window.location.href='/report/printInvoicePaid/'+id;
+    },
+    $scope.showGiga = function(id){
+      //alert(id);
+      window.location.href='/report/printInvoiceGiga/'+id;
+    },
+    $scope.showrep = function(id){
+      //alert(id);
+      window.location.href='/report/printInvoiceshowrep/'+id;
     }
+
   }]);
 
   app.controller('NewInvoiceCtl',['$scope','InStockServ','ProductsServ','ServicesServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,ProductsServ,ServicesServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
@@ -326,6 +347,11 @@
 
         DollarServ.getLastDollar().then(function(response) {
           //console.log(response.data[0].price);
+
+          var dollar = 1;
+          if($scope.productType=="حزمة"){
+           dollar = $scope.dollarToday;
+          } 
           
           if($scope.productType=="معدة"){
             if($scope.countItem==0){
@@ -338,7 +364,7 @@
               });
               $scope.dollarToday=response.data[0].price;
               $scope.selectedProducts.push({'price':($scope.productName.initialPrice),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
               $scope.productType = '';
               $scope.productName = '';
              } else {
@@ -347,8 +373,8 @@
           } 
           } else {
             $scope.dollarToday=response.data[0].price;
-            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * dollar),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
             $scope.productType = '';
             $scope.productName = '';
           }
@@ -361,6 +387,8 @@
       }
     };
     $scope.removeSelect = function(index){
+
+      $scope.newInvoiceForm.total=$scope.newInvoiceForm.total-$scope.selectedProducts[index].price;
       if($scope.selectedProducts[index].type == "معدة"){
         $scope.countItem=0;
       }
@@ -398,7 +426,11 @@
   app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
    
     //0000000000000
-
+    
+    $scope.replace = {};
+    $scope.upInviceForm = {};
+    $scope.objects = HelperServ;
+    $scope.objects.getAllPackages();
 
     ProductsServ.getAllItem().then(function(response){
       $scope.items=response.data;
@@ -420,6 +452,18 @@
         if(response.data){
           toastr.success('تم التطوير بنجاح');
           $state.go('invoiceCustomer')
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.replac = function(){
+     
+      $scope.replace.idin=$stateParams.id;
+      InvoicesServ.replacInvice($scope.replace).then(function(response){
+        if(response.data){
+          toastr.success('تم التطوير بنجاح');
+          $state.go('invoiceCustomers/showInvoice/'+$stateParams.id)
         }
       }, function(response) {
         console.log("Something went wrong");
@@ -449,5 +493,22 @@
         console.log("Something went wrong");
       });
     };
+  }]);
+app.controller('Giga',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','gigaServ',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,gigaServ){
+    $scope.newgiga = {};
+    $scope.addGiga = function(){
+      $scope.newgiga.idin=$stateParams.id;
+      gigaServ.addgiga($scope.newgiga).then(function(response){
+        if(response.data){
+          /*toastr.success('تم الدفع بنجاح');
+          $state.go('invoiceCustomer')*/
+           toastr.success('تم إضافة قيقا بنجاح');
+          $state.go('invoiceCustomers');
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+
   }]);
 }());
