@@ -58,7 +58,8 @@ module.exports = {
 
   getCustomerSearchAll:function(all,cb){
 
-      model.Customer.find({"name" :{ '$regex' :all, $options: '-i' }}),function(err, services){
+      model.Customer.find({"name" : { '$regex' : name, $options: '-i' }})
+      .exec(function(err, services){
         if(!err){
           console.log(services);
           cb({result:services,count:count});
@@ -67,11 +68,8 @@ module.exports = {
           cb(null);
         }
       });
-    });
-
-
-
-  }
+    },
+  
 
   getCustomer :function(status,limit,page,cb){
     if(status==-1){
