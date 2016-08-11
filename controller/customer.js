@@ -58,7 +58,6 @@ module.exports = {
       model.Customer.find({"name" : { '$regex' : name, $options: '-i' }})
       .exec(function(err, services){
         if(!err){
-          console.log(services);
           cb({result:services,count:count});
         }else{
           console.log(err);

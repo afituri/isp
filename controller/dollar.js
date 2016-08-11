@@ -52,7 +52,6 @@ module.exports = {
   },
 
   deleteDollar: function(id,cb){
-    console.log(id);
     model.Dollar.remove({_id:id}, function(err,result) {
       if (!err) {
         cb(2)

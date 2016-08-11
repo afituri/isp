@@ -369,13 +369,10 @@ module.exports = {
   });
 },
 
-getAllItemR:function(id,cb){
+getAllItemR:function(cb){
   model.Product.find({type:"item"}).exec(function(err, products){
     if(!err){
-        productPolicyMgr.getProductPPolicy(products,id,function(result){
-          console.log(result);
-          cb(result);
-        });
+      cb(products);
     }else{
       console.log(err);
       cb(null);

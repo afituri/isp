@@ -40,8 +40,18 @@ router.get('/allItem', userHelpers.isLogin ,function(req, res) {
 });
 
 router.get('/allItemR', userHelpers.isLogin ,function(req, res) {
-  productMgr.getAllItemR(req.user.policy,function(product){
-    res.send(product); 
+  productMgr.getAllItem(function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
+
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
   });
   // var re=model_step(req.user.policy);
   // console.log(re);
@@ -54,7 +64,17 @@ router.get('/allService',userHelpers.isLogin , function(req, res) {
 
 router.get('/allServiceR',userHelpers.isLogin , function(req, res) {
   productMgr.getAllService(function(product){
-    res.send(product);
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
+
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
   });
 });
 
@@ -65,7 +85,17 @@ router.get('/allPackage', userHelpers.isLogin ,function(req, res) {
 });
 router.get('/allPackageR', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllPackage(function(product){
-    res.send(product);
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
+
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
   });
 });
 
@@ -91,7 +121,6 @@ router.get('/getPackagesByService/service/:id',userHelpers.isLogin , function(re
 });
 
 router.get('/new/one/allEtc', userHelpers.isLogin ,function(req, res) {
-    console.log("here");
     
   productMgr.getAllEtc(function(product){
     res.send(product);
@@ -104,7 +133,17 @@ router.get('/allEtc', userHelpers.isLogin ,function(req, res) {
 });
 router.get('/allEtcR', userHelpers.isLogin ,function(req, res) {    
   productMgr.getAllEtc(function(product){
-    res.send(product);
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
+
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
   });
 });
 /* Add new customer   */

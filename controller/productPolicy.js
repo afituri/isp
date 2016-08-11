@@ -53,24 +53,20 @@ module.exports = {
       }
     });
   },
-  getProductPPolicy :function(product,policy,cb){
-    product.forEach(function(i,j) {
-      model.Productpolicy.findOne({product : i._id,policy:policy}, function(err, pPolicies){
-        if(!err){
-          if(pPolicies){
-            i.initialPrice=pPolicies.initialPrice;
-            if(j==product.length-1){
-              console.log(product);
-              cb(product);
-            }
-          }
-        }else{
-          if(j==product.length-1){
-            console.log(product);
-            cb(product);
+  getProductPPolicy :function(policy,cb){
+    model.Productpolicy.find({policy:policy}, function(err, pPolicies){
+      if(!err){
+        var obj=[];
+        for(i in pPolicies){
+          obj[pPolicies[i].product]=pPolicies[i].initialPrice;
+          if(i==pPolicies.length-1){
+            cb(obj);    
           }
         }
-      });
+        
+      }else{
+        cb(null);
+      }
     });
   },
   getByPolicy :function(idpr,cb){

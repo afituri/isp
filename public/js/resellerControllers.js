@@ -273,7 +273,6 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.activePanel = MenuFac;
     //alert($stateParams.id);
     InvoicesServ.getInvoiceByID(2,$stateParams.id).then(function(response) {
-      console.log(response.data);
       $scope.allInvoice=response.data;
     }, function(response) {
         console.log("Something went wrong");
@@ -439,7 +438,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
           } 
           } else {
             $scope.dollarToday=response.data[0].price;
-            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * dollar),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
             $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
             $scope.productType = '';
             $scope.productName = '';
