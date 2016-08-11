@@ -370,27 +370,26 @@ module.exports = {
 },
 
 getAllItemR:function(id,cb){
-  model.Product.find({type:"item"}).populate('supplier')
-  .exec(function(err, products){
+  model.Product.find({type:"item"}).exec(function(err, products){
     if(!err){
-      products.forEach(function(i,j) {
-        productPolicyMgr.getProductPPolicy(i._id,id,function(result){
+        productPolicyMgr.getProductPPolicy(products,id,function(result){
           console.log(result);
-          if(result){
-            i.initialPrice=result.initialPrice;
-          }
-          if(j==products.length-1){
-            console.log(products);
-            cb(products);  
-          }
-          
+          cb(result);
         });
-      });
     }else{
       console.log(err);
       cb(null);
     }
   });
+   // model.Product.find({type:"item"}).populate('supplier')
+   //    .exec(function(err, products){
+   //      if(!err){
+   //        cb(null,products);
+   //      }else{
+   //        console.log(err);
+   //        cb(null,null);
+   //      }
+   //    });
 },
 
 

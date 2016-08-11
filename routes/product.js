@@ -3,6 +3,7 @@ var router = express.Router();
 var productMgr = require("../controller/product");
 var productPolicyMgr = require("../controller/productPolicy");
 var userHelpers = require("../controller/userHelpers");
+var Step = require('step');
 
 
 /* GET all customer */
@@ -43,6 +44,8 @@ router.get('/allItemR', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllItemR(req.user.policy,function(product){
     res.send(product); 
   });
+  // var re=model_step(req.user.policy);
+  // console.log(re);
 });
 router.get('/allService',userHelpers.isLogin , function(req, res) {
   productMgr.getAllService(function(product){
@@ -164,4 +167,32 @@ router.get('/:id', userHelpers.isLogin ,function(req, res) {
     res.send(productService);
   });
 });
+// function model_step(id){
+//   var flag;
+//   Step(
+//     /* SELECT OLD VALUE FROM DB */
+//     function SelectAllItem() {
+//       productMgr.getAllItemR(this);
+//     },
+//     /* UPDATE VALUE */
+//     function Updatephone(err,results) {
+//       console.log(results);
+//       results.forEach(function(i,j) {
+//         productPolicyMgr.getProductPPolicy(i._id,id,function(result){
+//           console.log(result);
+//           if(result){
+//             i.initialPrice=result.initialPrice;
+//           }
+//           if(j==results.length-1){
+//             console.log(results);
+//             console.log(results);
+//             flag=results;  
+//           }
+          
+//         });
+//       });
+//     }
+//   );
+//   return flag;
+// }
 module.exports = router;
