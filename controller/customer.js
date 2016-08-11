@@ -53,6 +53,21 @@ module.exports = {
 
   },
 
+  getCustomerSearchAll:function(all,cb){
+
+      model.Customer.find({"name" : { '$regex' : name, $options: '-i' }})
+      .exec(function(err, services){
+        if(!err){
+          console.log(services);
+          cb({result:services,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    },
+  
+
   getCustomer :function(status,limit,page,cb){
     if(status==-1){
     page = parseInt(page);

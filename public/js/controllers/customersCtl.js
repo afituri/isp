@@ -2,6 +2,23 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,$modal,MenuFac,CustomersServ,toastr,HelperServ){
+    
+
+    $scope.searchCustomer = function(){
+      if($scope.searchByName == ""){
+        $scope.init($scope.package,$scope.reseller);
+      } else {
+      alert($scope.searchByName);
+      CustomersServ.getCustomerByAll($scope.searchByName).then(function(response){
+        $scope.customerss = response.data;
+
+      },function(response){
+        console.log("Something went wrong");
+      });
+    }
+      // function to server 
+    }
+
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;

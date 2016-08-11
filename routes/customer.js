@@ -23,6 +23,8 @@ router.get('/all', userHelpers.isLogin ,function(req, res) {
   });
 });
 
+
+
 //customerCount
 router.get('/customerCount',userHelpers.isLogin , function(req, res) {
   customerMgr.getAllCustomerCount(function(customers){
@@ -116,6 +118,12 @@ router.get('/:limit/:page/:status',userHelpers.isLogin , function(req, res) {
 
 router.get('/getRe/:limit/:page/:id/:idC',userHelpers.isLogin , function(req, res) {
   customerMgr.getCustomerReseller(req.params.id,req.params.idC,req.params.limit,req.params.page,function(customers){
+    res.send(customers);
+  });
+});
+
+router.get('/searchAll/:all', userHelpers.isLogin ,function(req, res) {
+  customerMgr.getCustomerSearchAll(req.params.all,function(customers){
     res.send(customers);
   });
 });
