@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var productMgr = require("../controller/product");
+var productPolicyMgr = require("../controller/productPolicy");
 var userHelpers = require("../controller/userHelpers");
 
 
@@ -37,7 +38,19 @@ router.get('/allItem', userHelpers.isLogin ,function(req, res) {
     res.send(product);
   });
 });
+
+router.get('/allItemR', userHelpers.isLogin ,function(req, res) {
+  productMgr.getAllItemR(req.user.policy,function(product){
+    res.send(product); 
+  });
+});
 router.get('/allService',userHelpers.isLogin , function(req, res) {
+  productMgr.getAllService(function(product){
+    res.send(product);
+  });
+});
+
+router.get('/allServiceR',userHelpers.isLogin , function(req, res) {
   productMgr.getAllService(function(product){
     res.send(product);
   });
@@ -48,11 +61,12 @@ router.get('/allPackage', userHelpers.isLogin ,function(req, res) {
     res.send(product);
   });
 });
-router.get('/:id', userHelpers.isLogin ,function(req, res) {
-  productMgr.getItemById(req.params.id,function(productService){
-    res.send(productService);
+router.get('/allPackageR', userHelpers.isLogin ,function(req, res) {
+  productMgr.getAllPackage(function(product){
+    res.send(product);
   });
 });
+
 //get service
 router.get('/service/:limit/:page', userHelpers.isLogin ,function(req, res) {
   productMgr.getProductService(req.params.limit,req.params.page,function(product){
@@ -81,7 +95,16 @@ router.get('/new/one/allEtc', userHelpers.isLogin ,function(req, res) {
     res.send(product);
   });
 });
-
+router.get('/allEtc', userHelpers.isLogin ,function(req, res) {    
+  productMgr.getAllEtc(function(product){
+    res.send(product);
+  });
+});
+router.get('/allEtcR', userHelpers.isLogin ,function(req, res) {    
+  productMgr.getAllEtc(function(product){
+    res.send(product);
+  });
+});
 /* Add new customer   */
 router.post('/add', userHelpers.isLogin ,function(req, res) {
 
@@ -136,5 +159,9 @@ router.delete('/productService/delete/:id', userHelpers.isLogin ,function(req, r
    });
 });
 
-
+router.get('/:id', userHelpers.isLogin ,function(req, res) {
+  productMgr.getItemById(req.params.id,function(productService){
+    res.send(productService);
+  });
+});
 module.exports = router;

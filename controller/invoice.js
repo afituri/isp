@@ -53,12 +53,9 @@ module.exports = {
               .populate('warehouse')
               .exec(function(err, result){
                 if(!err){
-                  console.log(result);
                   instock.push(result);
-                  console.log(t);
-                  console.log(idInvoiceArray.length)
+
                   if(t==idInvoiceArray.length-1){
-                    console.log("true true");
                     cb({result:instock});
                 }
                 t++;

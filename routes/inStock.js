@@ -85,7 +85,6 @@ router.post('/add', userHelpers.isLogin ,multipartyMiddleware,function(req, res)
     
   }
 
-console.log(req.body)
 });
 
 /* Edit in stock by id  */

@@ -53,8 +53,8 @@ module.exports = {
       }
     });
   },
-  getProductPPolicy :function(idpo,idpr,cb){
-    model.Productpolicy.findOne({product : idpr,policy:idpro}, function(err, pPolicies){
+  getProductPPolicy :function(product,policy,cb){
+    model.Productpolicy.findOne({product : product,policy:policy}, function(err, pPolicies){
       if(!err){
         cb(pPolicies);
       }else{

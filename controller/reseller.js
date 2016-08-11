@@ -117,12 +117,9 @@ module.exports = {
     easyPbkdf2.secureHash( body.passwordd, salt, function( err, passwordHash, originalSalt ) {
     body.password=passwordHash;
     body.salt =originalSalt;
-    console.log(body);
     delete body.passwordd;
     delete body.confirmPassword;
     model.Reseller.findOneAndUpdate({_id:id}, body, function(err,result) {
-      console.log("after update");
-      console.log(result);
       if (!err) {
         cb(true)
       } else {
@@ -419,7 +416,6 @@ module.exports = {
 addPaid :function(body,idu,cb){
   model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
-      console.log(idu);
       var invoice={
         customer:invoices.customer,
         invoice:body.idCu,
