@@ -3,7 +3,6 @@ var router = express.Router();
 var productMgr = require("../controller/product");
 var productPolicyMgr = require("../controller/productPolicy");
 var userHelpers = require("../controller/userHelpers");
-var Step = require('step');
 
 
 /* GET all customer */
