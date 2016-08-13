@@ -64,7 +64,7 @@ router.get('/:id', userHelpers.isLogin ,function(req, res) {
 });
 
 router.post('/addInvoice', userHelpers.isLogin ,function(req, res) {
-  resellerMgr.addInvoice(req.body,req.user._id,function(result){
+  resellerMgr.addInvoice(req.body,req.user._id,req.user.policy,function(result){
     res.send(result);
   });
 });

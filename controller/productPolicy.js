@@ -57,9 +57,9 @@ module.exports = {
     model.Productpolicy.find({policy:policy}, function(err, pPolicies){
       if(!err){
         var obj=[];
-        for(i in pPolicies){
-          obj[pPolicies[i].product]=pPolicies[i].initialPrice;
-          if(i==pPolicies.length-1){
+        for(k in pPolicies){
+          obj[pPolicies[k].product]=pPolicies[k].initialPrice;
+          if(k==pPolicies.length-1){
             cb(obj);    
           }
         }

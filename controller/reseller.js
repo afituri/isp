@@ -4,6 +4,7 @@ var model = require("../models"),
     reseller = null;
 var reseller = require('../models/reseller').Reseller;
 var dollarMgr = require("./dollar");
+var productPolicyMgr = require("./productPolicy");
 
 
 module.exports = {
@@ -146,7 +147,7 @@ module.exports = {
       }
     });
   },
-  addInvoice : function(body,idu,cb){
+  addInvoice : function(body,idu,policy,cb){
     model.Product.find({ $or: [ { _id:body.product}, {_id:body.productItem} ,{_id:body.productPackage} ]
       },function(err,product){
         body.reseller=idu;
@@ -190,60 +191,75 @@ module.exports = {
                     invoice.save();}
                   var arrayOrd=[];
                   for( i in body.selectedProducts ){
-
                     model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
-                      dollarMgr.getLastDollar(function(dollar){
-                        Order={
-                          invoice:invoiceResult._id,
-                          product:pro._id,
-                          price:pro.initialPrice*dollar[0].price,
-                          startDate:body.startDate,
-                          endDate:body.endDate
-                        };
-                        if(pro.type=='package'){
-                          var months;
-                          
-                          var end = new Date(body.endDate);
-                          var start = new Date(body.startDate);
-                          months =(end.getFullYear() -start.getFullYear() )* 12;
-                          months += end.getMonth()-start.getMonth() + 1;
-                          var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
-                          money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
-                          money-=parseFloat(body.discount);
-                          Order.price=pro.initialPrice*dollar[0].price*months;
-                          model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
-                          });
-                        }
-                        
-
-                        order=new model.Order(Order);
-                        order.save(function(err,orderResult){
-                          arrayOrd.push(orderResult);
-                          arrayOfResult=[customerResult,invoiceResult,arrayOrd];
-                          if(!err){
-                            if(i==body.selectedProducts.length-1){
-                              if(body.typein!=2){
-                                model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
-                                  if (!err) {
-                                    cb(arrayOfResult,false);
-                                  } else {
-                                    console.log(err);
-                                    cb(false);
-                                  }
-                                });
-                              }else{
-                                cb(arrayOfResult,false);
-                              }
-                              
-                              
-                            }
-                          } else {
-                            cb(null,err)
+                      productPolicyMgr.getProductPPolicy(policy,function(result){
+                        dollarMgr.getLastDollar(function(dollar){
+                          Order={
+                            invoice:invoiceResult._id,
+                            product:pro._id,
+                            price:pro.initialPrice,
+                            startDate:body.startDate,
+                            endDate:body.endDate
+                          };
+                          if(result[pro._id]){
+                            // console.log(result[pro._id]);
+                            Order.price=result[pro._id];
                           }
+                          if(pro.type=='package'){
+                            
+                            if(result[pro._id]){
+                              var priceP=result[pro._id];
+                            }else{
+                              var priceP=pro.initialPrice;
+                            }
+                            
+                           
+                            var months;
+                            
+                            var end = new Date(body.endDate);
+                            var start = new Date(body.startDate);
+                            months =(end.getFullYear() -start.getFullYear() )* 12;
+                            months += end.getMonth()-start.getMonth() + 1;
+                            var money=parseFloat(body.total)-parseFloat(priceP)*parseFloat(dollar[0].price);
+                            money=money+parseFloat(priceP)*parseFloat(dollar[0].price)*parseFloat(body.month)+(priceP/31*body.day);
+                            money-=parseFloat(body.discount);
+                            Order.price=priceP*dollar[0].price;
+                            model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                            });
+                          }
+                          
+                          order=new model.Order(Order);
+                          order.save(function(err,orderResult){
+                            arrayOrd.push(orderResult);
+                            arrayOfResult=[customerResult,invoiceResult,arrayOrd];
+                            if(!err){
+                              
+                              if(i==body.selectedProducts.length-1){
+                                if(body.typein!=2){
+                                  model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
+                                    if (!err) {
+
+                                      cb(arrayOfResult,false);
+                                    } else {
+                                      console.log(err);
+                                      cb(false);
+                                    }
+                                  });
+                                }else{
+                                  cb(arrayOfResult,false);
+                                }
+                                
+                                
+                              }
+                            } else {
+                              console.log(err);
+                              cb(null,err)
+                            }
+                          });
                         });
                       });
-                      });
-                      
+                    });
+                        
    
                   }
                 } else {
@@ -293,59 +309,69 @@ module.exports = {
                 }
               var arrayOrd=[];
               for( i in body.selectedProducts ){
-
                 model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
-                  dollarMgr.getLastDollar(function(dollar){
-                    Order={
-                      invoice:invoiceResult._id,
-                      product:pro._id,
-                      price:pro.initialPrice*dollar[0].price,
-                      startDate:body.startDate,
-                      endDate:body.endDate
-                    };
-                    if(pro.type=='package'){
-                      var months;
-                      
-                      var end = new Date(body.endDate);
-                      var start = new Date(body.startDate);
-                      months =(end.getFullYear() -start.getFullYear() )* 12;
-                      months += end.getMonth()-start.getMonth() + 1;
-                      var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
-                      money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(months);
-                      money-=parseFloat(body.discount);
-                      Order.price=pro.initialPrice*dollar[0].price*months;
-                      model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
-                      });
-                    }
-                    
-
-                    order=new model.Order(Order);
-                    order.save(function(err,orderResult){
-                      arrayOrd.push(orderResult);
-                      arrayOfResult=[null,invoiceResult,arrayOrd];
-                      if(!err){
-                        if(i==body.selectedProducts.length-1){
-                          if(body.typein!=2){
-                            model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
-                              if (!err) {
-                                cb(arrayOfResult,false);
-                              } else {
-                                console.log(err);
-                                cb(false);
-                              }
-                            });
-                          }else{
-                            cb(arrayOfResult,false);
-                          }
-                          
-                          
-                        }
-                      } else {
-                        cb(null,err)
+                  productPolicyMgr.getProductPPolicy(policy,function(result){
+                    dollarMgr.getLastDollar(function(dollar){
+                      Order={
+                        invoice:invoiceResult._id,
+                        product:pro._id,
+                        price:pro.initialPrice,
+                        startDate:body.startDate,
+                        endDate:body.endDate
+                      };
+                      if(result[pro._id]){
+                        // console.log(result[pro._id]);
+                        Order.price=result[pro._id];
                       }
+                      if(pro.type=='package'){
+                        if(result[pro._id]){
+                          var priceP=result[pro._id];
+                        }else{
+                          var priceP=pro.initialPrice;
+                        }
+                        var months;
+                        
+                        var end = new Date(body.endDate);
+                        var start = new Date(body.startDate);
+                        months =(end.getFullYear() -start.getFullYear() )* 12;
+                        months += end.getMonth()-start.getMonth() + 1;
+                        var money=parseFloat(body.total)-parseFloat(priceP)*parseFloat(dollar[0].price);
+                        money=money+parseFloat(priceP)*parseFloat(dollar[0].price)*parseFloat(body.month)+(priceP/31*body.day);
+                        money-=parseFloat(body.discount);
+                        Order.price=priceP*dollar[0].price;
+                        model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
+                        });
+                      }
+                      
+
+                      order=new model.Order(Order);
+                      order.save(function(err,orderResult){
+                        arrayOrd.push(orderResult);
+                        arrayOfResult=[null,invoiceResult,arrayOrd];
+                        if(!err){
+                          if(i==body.selectedProducts.length-1){
+                            if(body.typein!=2){
+                              model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
+                                if (!err) {
+                                  cb(arrayOfResult,false);
+                                } else {
+                                  console.log(err);
+                                  cb(false);
+                                }
+                              });
+                            }else{
+                              cb(arrayOfResult,false);
+                            }
+                            
+                            
+                          }
+                        } else {
+                          cb(null,err)
+                        }
+                      });
                     });
                   });
-                  });
+                });
                   
 
               }
