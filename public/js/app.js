@@ -914,6 +914,21 @@
         }] 
       }
     })
+    .state('Transfer',{
+      url: '/instock/Transfer',
+      templateUrl: 'pages/inStock/Transfer.html',
+      controller: 'TransferCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/inStockCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
     .state('editInStock',{
       url: '/inStock/edit/:id',
       templateUrl: 'pages/inStock/editInStock.html',

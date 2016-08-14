@@ -305,8 +305,14 @@
       'addInStock': function(obj){
         return $http.post('/inStock/add',obj);
       },
+      'transfer': function(obj,to){
+        return $http.post('/inStock/transfer',{obj:obj,to:to});
+      },
       'getByWP': function(idStock,idItem){
         return $http.get('/inStock/getByWP/'+idStock+'/'+idItem);
+      },
+      'getByWare': function(idStock,pageSize,currentPage){
+        return $http.get('/inStock/getByWare/'+idStock+'/'+pageSize+'/'+currentPage);
       },
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);

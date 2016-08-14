@@ -18,7 +18,17 @@ router.get('/getByWP/:idStock/:idItem', userHelpers.isLogin ,function(req, res) 
     res.send(result);
   });
 });
-
+router.get('/getByWare/:idStock/:limit/:page', userHelpers.isLogin ,function(req, res) {
+  // console.log(req.params.idStock+' '+req.params.limit+' '+req.params.page);
+  instockMgr.getByWare(req.params.idStock,req.params.limit,req.params.page,function(result){
+    res.send(result);
+  });
+});
+router.post('/transfer', userHelpers.isLogin ,function(req, res) {
+  instockMgr.transfer(req.body,function(result){
+    res.send(result);
+  });
+});
 router.get('/searchMac/:id', userHelpers.isLogin ,function(req, res) {
   instockMgr.getByMac(req.params.id,function(InStock){
     res.send(InStock);
