@@ -208,16 +208,18 @@ app.controller('TransferCtl',['$scope','ProductsServ','InStockServ','$state','Me
       }
     }
     $scope.transfer = function(){
-      InStockServ.transfer($scope.waerck,$scope.warehouseTo).then(function(response) {
-        $scope.waerck=[];
-        if($scope.warehouse){
-          $scope.init($scope.warehouse);
-        }else{
-          $scope.init(-1);
-        }
-      }, function(response) {
-        console.log("Something went wrong");
-      });
+      if($scope.warehouseTo){
+        InStockServ.transfer($scope.waerck,$scope.warehouseTo).then(function(response) {
+          $scope.waerck=[];
+          if($scope.warehouse){
+            $scope.init($scope.warehouse);
+          }else{
+            $scope.init(-1);
+          }
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+      }
     }
     $scope.check = function(id){
       var idx = $scope.waerck.indexOf(id);
