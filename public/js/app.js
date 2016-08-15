@@ -103,6 +103,26 @@
         }] 
       }
     })
+
+    .state('newPermissions',{
+      url: '/newPermissions',
+      templateUrl: 'pages/permissions/newPermissions.html',
+      controller: 'newPermissionCtl',
+      data: {pageTitle: 'عرض الصلاحيات'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/permissionCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+
+
+
     .state('dollar',{
       url: '/dollar',
       templateUrl: 'pages/dollar/dollar.html',
@@ -482,7 +502,7 @@
     .state('addGiga',{
       url: '/invoiceCustomers/addGiga/:id',
       templateUrl: 'pages/invoices/addGiga.html',
-      controller: 'UpgreadeCtl',
+      controller: 'Giga',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -894,6 +914,21 @@
         }] 
       }
     })
+    .state('Transfer',{
+      url: '/instock/Transfer',
+      templateUrl: 'pages/inStock/Transfer.html',
+      controller: 'TransferCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/inStockCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
     .state('editInStock',{
       url: '/inStock/edit/:id',
       templateUrl: 'pages/inStock/editInStock.html',
@@ -1004,6 +1039,22 @@
     .state('searchMacAdress',{
       url: '/searchMacAdress',
       templateUrl: 'pages/reports/searchMacAdress.html',
+      controller: 'ReportsCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/reportsCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    //searchByMacAdress
+    .state('searchByMacAdress',{
+      url: '/searchByMacAdress',
+      templateUrl: 'pages/reports/searchByMacAdress.html',
       controller: 'ReportsCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {

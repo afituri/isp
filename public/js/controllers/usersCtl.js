@@ -2,8 +2,15 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('NewUserCtl',['$scope','$state','UserServ','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,UserServ,MenuFac,CustomersServ,HelperServ,toastr){
-    $scope.newUserForm={}; 
+    $scope.newUserForm={};
+
+    $scope.UserType = function() {
+      alert($scope.newServiceForm.type);
+    }
+
+
     $scope.newUser = function(){
+
       if($scope.newUserForm.password != $scope.newUserForm.confPassword){
         toastr.error("خطأ: الرجاء تأكيد الرقم السري");
       } else {

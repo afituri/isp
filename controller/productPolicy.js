@@ -34,16 +34,7 @@ module.exports = {
     });
   },
 
-  getAllProductP :function(cb){
-    model.Productpolicy.find({},function(err, pPolicies){
-      if(!err){
-        cb(pPolicies);
-      }else{
-        console.log(err);
-        cb(null);
-      }
-    });
-  },
+
 /*  getProductP :function(id,cb){
     model.ProductPolicy.find({policy:id},function(err, pPolicies){
       if(!err){
@@ -62,7 +53,31 @@ module.exports = {
       }
     });
   },
-  
+  getProductPPolicy :function(policy,cb){
+    model.Productpolicy.find({policy:policy}, function(err, pPolicies){
+      if(!err){
+        var obj=[];
+        for(k in pPolicies){
+          obj[pPolicies[k].product]=pPolicies[k].initialPrice;
+          if(k==pPolicies.length-1){
+            cb(obj);    
+          }
+        }
+        
+      }else{
+        cb(null);
+      }
+    });
+  },
+  getByPolicy :function(idpr,cb){
+    model.Productpolicy.find({policy:idpr}, function(err, pPolicies){
+      if(!err){
+        cb(pPolicies);
+      }else{
+        cb(null);
+      }
+    });
+  },
   addProductP : function(body,cb){
   //   var obj ={
   //   product: body.product,

@@ -2,27 +2,32 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>إضافة خدمة جديدة</h2>
+        <h2>بدل فاقد</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <form novalidate ng-submit="newService()">
+        <form novalidate ng-submit="replac()">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">ألمعدة</label>
-                    <select class="form-control input-sm" ng-model="newProductForm.item.supplier" ng-options="item._id as item.name for item in items" required>
+                    <select class="form-control input-sm" ng-model="replace.product" ng-options="item._id as item.name for item in items" required>
                       <option value="" disabled selected>الرجاء الاختيار</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">السعر</label>
-                <input class="form-control input-sm" type="text" ng-model="newServiceForm.name" ng-required-err-type="nameService" placeholder="اسم الخدمة" required>
+                <input class="form-control input-sm" type="text" ng-model="replace.price" ng-required-err-type="nameService" placeholder="اسم الخدمة" required>
               </div>
             </div>
-        
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">ملاحظات</label>
+                  <textarea class="form-control input-sm" rows="6" ng-model="replace.notes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
+                </div>
+              </div>
      
           <hr>
           <div class="row">

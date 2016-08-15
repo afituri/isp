@@ -197,7 +197,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">المخــازن</label>
-                <select class="form-control input-sm" ng-model="stock"  ng-change="getStockId(stock._id)" ng-options="stock as stock.name for stock in objects.stockObj">
+                <select class="form-control input-sm" ng-model="stock"  ng-change="getStockId(stock._id)" ng-options="stock as stock.name for stock in objects.stockObjs">
                   <option value="" selected>الرجاء الاختيار</option>
                 </select>
               </div>
@@ -219,7 +219,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">تاريخ النهاية</label>
-                <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.endDate" placeholder="تاريخ النهاية" required bs-datepicker>
+                <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.endDate" placeholder="تاريخ النهاية" ng-change="getDef()" required bs-datepicker>
               </div>
             </div>
             <div class="col-md-3">
@@ -238,6 +238,18 @@
               <div class="form-group">
                 <label class="control-label">ملاحظات</label>
                 <textarea class="form-control input-sm" rows="6" ng-model="newInvoiceForm.invoceNotes" ng-required-err-type="notes" placeholder="ملاحظات"></textarea>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <label class="control-label">شهر</label>
+                <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.month" placeholder="شهر" >
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <label class="control-label">يوم</label>
+                <input class="form-control input-sm" type="text" ng-model="newInvoiceForm.day" placeholder="يوم" >
               </div>
             </div>
           </div>

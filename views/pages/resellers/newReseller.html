@@ -37,7 +37,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+         <!--  <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">خط الطول</label>
@@ -50,7 +50,7 @@
                 <input class="form-control input-sm" type="text" ng-model="newResllerForm.longtitude" ng-required-err-type="longtitude" placeholder="خط العرض">
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -64,7 +64,7 @@
                 <input class="form-control input-sm" type="email" ng-model="newResllerForm.email" ng-required-err-type="emailType" placeholder="البريد الالكتروني" required>
               </div>
             </div>
-          </div>
+          </div> 
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -76,6 +76,24 @@
               <div class="form-group">
                 <label class="control-label">تأكيد كلمة المرور</label>
                 <input class="form-control input-sm" type="password" ng-model="newResllerForm.confirmPassword" ng-required-err-type="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"> المخزن</label>
+                <select class="form-control input-sm" ng-model="newResllerForm.warehouse" ng-options="warehouse._id as warehouse.name for warehouse in objects.warehouseObjs" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">السياسة</label>
+                <select class="form-control input-sm" ng-model="newResllerForm.policy" ng-options="policy._id as policy.name for policy in objects.policiesObj" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
               </div>
             </div>
           </div>

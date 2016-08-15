@@ -2,6 +2,23 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,$modal,MenuFac,CustomersServ,toastr,HelperServ){
+    
+
+    $scope.searchCustomer = function(){
+      if($scope.searchByName == ""){
+        $scope.init($scope.package,$scope.reseller);
+      } else {
+      alert($scope.searchByName);
+      CustomersServ.getCustomerByAll($scope.searchByName).then(function(response){
+        $scope.customerss = response.data;
+
+      },function(response){
+        console.log("Something went wrong");
+      });
+    }
+      // function to server 
+    }
+
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -16,7 +33,6 @@
     $scope.reseller = '-1';
     $scope.init = function (idR,idP) {
       CustomersServ.getCustomersRe(idR,idP,$scope.pageSize,$scope.currentPage).then(function(response) {
-        
         $scope.customers = response.data.result;
         console.log($scope.customers);
         $scope.total = response.data.count;
@@ -25,6 +41,19 @@
       });
     }
     $scope.init($scope.package,$scope.reseller);
+
+    //.getCustomers(1,
+
+       $scope.initi = function () {
+      CustomersServ.getCustomers(1,$scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.customerss = response.data.result;
+        console.log($scope.customers);
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.initi();
 
 
 
