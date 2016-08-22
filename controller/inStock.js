@@ -216,4 +216,49 @@ getByMac :function(txt,cb){
     }
   });
 },
+getByWare:function(idW,limit,page,cb){
+  page = parseInt(page);
+  page-=1;
+  limit = parseInt(limit);
+  
+  if(idW==-1){
+    var obj={$and: [ {status:1}]};
+  }else{
+    var obj={$and: [ {status:1},{warehouse:idW}]};
+  }
+  model.Instock.count(obj,function(err,count){
+    model.Instock.find(obj).limit(limit).skip(page*limit)
+    .populate('product')
+    .populate('warehouse')
+    .exec(function(err, result){
+      if(!err){
+        cb({result:result,count:count});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  });
+},
+transfer : function(body,cb){
+  var up ={
+    warehouse : body.to,
+  }
+  for(w in body.obj){
+    model.Instock.update({_id:body.obj[w]}, up, function(err,result) {
+      if(w == body.obj.length-1){
+        if (!err) {
+        
+          cb(true)
+        } else {
+          console.log(err);
+          cb(false);
+        }
+  
+      }
+    });  
+  }
+  
+  },
+
 };

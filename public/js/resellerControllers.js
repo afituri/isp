@@ -273,7 +273,6 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.activePanel = MenuFac;
     //alert($stateParams.id);
     InvoicesServ.getInvoiceByID(2,$stateParams.id).then(function(response) {
-      console.log(response.data);
       $scope.allInvoice=response.data;
     }, function(response) {
         console.log("Something went wrong");
@@ -290,7 +289,22 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.showId = function(id){
      
     }
-
+    $scope.getDef= function(){
+      var a ;
+      a = new Date($scope.newInvoiceForm.startDate);
+      var b = $scope.newInvoiceForm.endDate;
+      a.setDate(a.getDate() - 1);
+      a.setMonth(a.getMonth()+1);
+      for(var i=0;a<=b;){
+        i++;
+        a.setMonth(a.getMonth()+1);
+      
+          
+      }
+      a.setMonth(a.getMonth()-1);
+      $scope.newInvoiceForm.day=(b-a)/ (1000 * 3600 * 24);
+      $scope.newInvoiceForm.month=i;
+    },
     $scope.stock={};
     $scope.stockId=0;
     $scope.getStockId=function(id){
@@ -321,10 +335,10 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
     $scope.objects = HelperServ;
-    $scope.objects.getAllItems();
-    $scope.objects.getAllEtcs();
-    $scope.objects.getAllServices();
-    $scope.objects.getAllPackages();
+    $scope.objects.getAllItemsR();
+    $scope.objects.getAllEtcsR();
+    $scope.objects.getAllServicesR();
+    $scope.objects.getAllPackagesR();
     $scope.objects.getAllResellers();
     $scope.objects.getAllStockby();
     $scope.newInvoiceForm = {};
@@ -387,13 +401,14 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     };
     $scope.getProductInfo = function(id){
       if(id == 'خدمة'){
-        $scope.productsObj = $scope.objects.servicesObj;
+        $scope.productsObj = $scope.objects.servicesRObj;
       } else if(id == 'معدة'){
-        $scope.productsObj = $scope.objects.itemsObj;
+        console.log($scope.objects.itemsRObj);
+        $scope.productsObj = $scope.objects.itemsRObj;
       } else if (id == 'حزمة'){
-        $scope.productsObj = $scope.objects.packagesObj;
+        $scope.productsObj = $scope.objects.packagesRObj;
       } else if (id == 'معدات'){
-        $scope.productsObj = $scope.objects.etcObj;
+        $scope.productsObj = $scope.objects.etcRObj;
 
       }
     };
@@ -413,8 +428,11 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
       if($scope.productType && $scope.productName){
 
         DollarServ.getLastDollar().then(function(response) {
-          //console.log(response.data[0].price);
-          
+          $scope.dollarToday=response.data[0].price;
+          var dollar = 1;
+          if($scope.productType=="حزمة"){
+           dollar = $scope.dollarToday;
+          }           
           if($scope.productType=="معدة"){
             if($scope.countItem==0){
               $scope.countItem=1;
@@ -424,9 +442,9 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
               }, function(response) {
                 console.log("Something went wrong");
               });
-              $scope.dollarToday=response.data[0].price;
+              
               $scope.selectedProducts.push({'price':($scope.productName.initialPrice),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+              $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
               $scope.productType = '';
               $scope.productName = '';
              } else {
@@ -435,8 +453,8 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
           } 
           } else {
             $scope.dollarToday=response.data[0].price;
-            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * $scope.dollarToday),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
-            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * $scope.dollarToday);
+            $scope.selectedProducts.push({'price':($scope.productName.initialPrice * dollar),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
+            $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
             $scope.productType = '';
             $scope.productName = '';
           }

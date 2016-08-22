@@ -51,7 +51,6 @@ module.exports = {
   },
   /* here we add a new user to the system */
   register: function (body, cb) {
-    console.log(body);
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
     easyPbkdf2.secureHash( body.password, salt, function( err, passwordHash, originalSalt ) {
       var obj={
@@ -93,7 +92,6 @@ module.exports = {
 
 
   updateUser : function(id,body,cb){
-    console.log(body.password);
     var salt = easyPbkdf2.generateSalt(); //we generate a new salt for every new user
     easyPbkdf2.secureHash(body.password, salt, function( err, passwordHash, originalSalt ) {
     var obj ={
@@ -103,7 +101,6 @@ module.exports = {
       password: passwordHash,
       salt: originalSalt
   }
-  console.log(obj)
     model.User.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         cb(true)

@@ -1,6 +1,8 @@
 var generatePassword = require('password-generator'),
     easyPbkdf2 = require("easy-pbkdf2")();
 var model = require("../models");
+var productPolicyMgr = require("./productPolicy");
+
 var product = null;
 
 module.exports = {
@@ -41,7 +43,6 @@ module.exports = {
   },
 
   getProductPackageByService : function(id,cb){
-    console.log(id);
      model.Product.find({'packages.service':id}).populate('supplier')
       .exec(function(err, products){
         if(!err){
@@ -117,8 +118,6 @@ module.exports = {
     model.Product.find({type:"service"})
       .exec(function(err, products){
         if(!err){
-          console.log("products");
-          console.log(products);
           cb(products);
         }else{
           console.log(err);
@@ -127,12 +126,9 @@ module.exports = {
       });
   },
   getAllEtc :function(cb){
-     console.log("heeee");
     model.Product.find({type:"etc"})
       .exec(function(err, products){
         if(!err){
-          console.log("heeee");
-          console.log(products);
           cb(products);
         }else{
           console.log(err);
@@ -297,8 +293,6 @@ module.exports = {
   },
 
   updateItem: function(id,body,cb){
-    console.log("body");
-    console.log(body);
     var obj ={
       name : body.name,
       discriptoin:body.discriptoin,
@@ -320,8 +314,6 @@ module.exports = {
   },
 
   updateEtc: function(id,body,cb){
-    console.log("body");
-    console.log(body);
     var obj ={
       name : body.name,
       discriptoin:body.discriptoin,
@@ -375,11 +367,27 @@ module.exports = {
         cb(3);
       }
   });
-}
+},
 
-
-
-
+getAllItemR:function(cb){
+  model.Product.find({type:"item"}).exec(function(err, products){
+    if(!err){
+      cb(products);
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+   // model.Product.find({type:"item"}).populate('supplier')
+   //    .exec(function(err, products){
+   //      if(!err){
+   //        cb(null,products);
+   //      }else{
+   //        console.log(err);
+   //        cb(null,null);
+   //      }
+   //    });
+},
 
 
 };

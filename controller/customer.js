@@ -7,7 +7,6 @@ module.exports = {
 
   getCustomerSearch :function(searchString,limit,page,cb){
     if(searchString==-9){
-      console.log(searchString);
        page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
@@ -17,7 +16,6 @@ module.exports = {
       .populate('reseller')
       .exec(function(err, customers){
         if(!err){
-          console.log(customers);
           cb({result:customers,count:count});
         }else{
           console.log(err);
@@ -44,7 +42,6 @@ module.exports = {
       .populate('reseller')
       .exec(function(err, customers){
         if(!err){
-          console.log(customers);
           cb({result:customers,count:count});
         }else{
           console.log(err);
@@ -61,7 +58,6 @@ module.exports = {
       model.Customer.find({"name" : { '$regex' : name, $options: '-i' }})
       .exec(function(err, services){
         if(!err){
-          console.log(services);
           cb({result:services,count:count});
         }else{
           console.log(err);

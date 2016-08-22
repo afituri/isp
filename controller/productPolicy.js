@@ -53,10 +53,17 @@ module.exports = {
       }
     });
   },
-  getProductPPolicy :function(idpo,idpr,cb){
-    model.Productpolicy.findOne({product : idpr,policy:idpro}, function(err, pPolicies){
+  getProductPPolicy :function(policy,cb){
+    model.Productpolicy.find({policy:policy}, function(err, pPolicies){
       if(!err){
-        cb(pPolicies);
+        var obj=[];
+        for(k in pPolicies){
+          obj[pPolicies[k].product]=pPolicies[k].initialPrice;
+          if(k==pPolicies.length-1){
+            cb(obj);    
+          }
+        }
+        
       }else{
         cb(null);
       }

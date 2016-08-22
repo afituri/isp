@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var productMgr = require("../controller/product");
+var productPolicyMgr = require("../controller/productPolicy");
 var userHelpers = require("../controller/userHelpers");
 
 
@@ -37,9 +38,43 @@ router.get('/allItem', userHelpers.isLogin ,function(req, res) {
     res.send(product);
   });
 });
+
+router.get('/allItemR', userHelpers.isLogin ,function(req, res) {
+  productMgr.getAllItem(function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
+
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
+  });
+  // var re=model_step(req.user.policy);
+  // console.log(re);
+});
 router.get('/allService',userHelpers.isLogin , function(req, res) {
   productMgr.getAllService(function(product){
     res.send(product);
+  });
+});
+
+router.get('/allServiceR',userHelpers.isLogin , function(req, res) {
+  productMgr.getAllService(function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
+
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
   });
 });
 
@@ -48,11 +83,22 @@ router.get('/allPackage', userHelpers.isLogin ,function(req, res) {
     res.send(product);
   });
 });
-router.get('/:id', userHelpers.isLogin ,function(req, res) {
-  productMgr.getItemById(req.params.id,function(productService){
-    res.send(productService);
+router.get('/allPackageR', userHelpers.isLogin ,function(req, res) {
+  productMgr.getAllPackage(function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
+
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
   });
 });
+
 //get service
 router.get('/service/:limit/:page', userHelpers.isLogin ,function(req, res) {
   productMgr.getProductService(req.params.limit,req.params.page,function(product){
@@ -75,13 +121,31 @@ router.get('/getPackagesByService/service/:id',userHelpers.isLogin , function(re
 });
 
 router.get('/new/one/allEtc', userHelpers.isLogin ,function(req, res) {
-    console.log("here");
     
   productMgr.getAllEtc(function(product){
     res.send(product);
   });
 });
+router.get('/allEtc', userHelpers.isLogin ,function(req, res) {    
+  productMgr.getAllEtc(function(product){
+    res.send(product);
+  });
+});
+router.get('/allEtcR', userHelpers.isLogin ,function(req, res) {    
+  productMgr.getAllEtc(function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
 
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
+  });
+});
 /* Add new customer   */
 router.post('/add', userHelpers.isLogin ,function(req, res) {
 
@@ -136,5 +200,37 @@ router.delete('/productService/delete/:id', userHelpers.isLogin ,function(req, r
    });
 });
 
-
+router.get('/:id', userHelpers.isLogin ,function(req, res) {
+  productMgr.getItemById(req.params.id,function(productService){
+    res.send(productService);
+  });
+});
+// function model_step(id){
+//   var flag;
+//   Step(
+//     /* SELECT OLD VALUE FROM DB */
+//     function SelectAllItem() {
+//       productMgr.getAllItemR(this);
+//     },
+//     /* UPDATE VALUE */
+//     function Updatephone(err,results) {
+//       console.log(results);
+//       results.forEach(function(i,j) {
+//         productPolicyMgr.getProductPPolicy(i._id,id,function(result){
+//           console.log(result);
+//           if(result){
+//             i.initialPrice=result.initialPrice;
+//           }
+//           if(j==results.length-1){
+//             console.log(results);
+//             console.log(results);
+//             flag=results;  
+//           }
+          
+//         });
+//       });
+//     }
+//   );
+//   return flag;
+// }
 module.exports = router;
