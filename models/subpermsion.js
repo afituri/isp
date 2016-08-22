@@ -4,10 +4,11 @@ var textSearch = require('mongoose-text-search');
 var Schema = mongoose.Schema;
 
 var Subpermsion = new Schema({
-   pageName: { type: String},
-   add: { type: Number, default:1},
-   delete: { type: Number, default:1},
-   update: { type: Number, default:1}, 
+   pageName: { type: String,required:true},
+   add: { type: Boolean, default:1},
+   delete: { type: Boolean, default:1},
+   edit: { type: Boolean, default:1}, 
+   all: {type: Boolean, default:1},
    permission: { type : mongoose.Schema.ObjectId, ref : 'Permission'},
 });
 

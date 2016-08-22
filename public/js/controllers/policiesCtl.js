@@ -2,6 +2,19 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('PoliciesCtl',['$scope','$modal','MenuFac','PoliciesServ','toastr',function($scope,$modal,MenuFac,PoliciesServ,toastr){
+/*    $scope.searchP = function(search){
+      PoliciesServ.searchPolicy(search).then(function(response){
+        // result
+        if(search==""){
+          $scope.init();
+        } else {
+        $scope.policies= response;
+      },function(response){
+        console.log("Something went wrong")
+      })
+    }
+    }*/
+
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -44,6 +57,7 @@
       });
     };
   }]);
+ 
   app.controller('NewPolicyCtl',['$scope','$state','MenuFac','PoliciesServ','toastr',function($scope,$state,MenuFac,PoliciesServ,toastr){
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
@@ -61,6 +75,7 @@
       });
     };
   }]);
+ 
   app.controller('EditPolicyCtl',['$scope','$state','$stateParams','MenuFac','PoliciesServ','toastr',function($scope,$state,$stateParams,MenuFac,PoliciesServ,toastr){
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;

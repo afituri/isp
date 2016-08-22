@@ -108,7 +108,7 @@
       url: '/newPermissions',
       templateUrl: 'pages/permissions/newPermissions.html',
       controller: 'newPermissionCtl',
-      data: {pageTitle: 'عرض الصلاحيات'},
+      data: {pageTitle: 'إضافة الصلاحيات'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -121,6 +121,39 @@
       }
     })
 
+    .state('editPermissions',{
+      url: '/editPermissions/edit/:id',
+      templateUrl: 'pages/permissions/editPermissions.html',
+      controller: 'editPermissionCtl',
+      data: {pageTitle: 'إضافة الصلاحيات'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/permissionCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    //permissions
+    .state('permissions',{
+      url: '/permissions',
+      templateUrl: 'pages/permissions/permissions.html',
+      controller: 'permissionCtl',
+      data: {pageTitle: 'عرض الصلاحيات'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/permissionCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
 
 
     .state('dollar',{

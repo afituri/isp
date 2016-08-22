@@ -132,6 +132,27 @@
     return self;
    }]);
 
+  app.service('PermissionServ',['$http',function($http){
+    var self = {
+      'addPermssion': function(permission){
+        return $http.post('/permission',permission);
+      },
+      'getPermission': function(pageSize,currentPage){
+        return $http.get('/permission/'+pageSize+'/'+currentPage);
+      },
+      'deletePermission': function(id){
+        return $http.delete('/permission/'+id);
+      },
+      'getPermissionByID': function(id){
+        return $http.get('/permission/'+id);
+      },
+      'editPermission': function(id,obj){
+        return $http.put('/permission/'+id,obj);
+      }
+    };
+    return self;
+  }]);
+
   app.service('UserServ',['$http',function($http){
     var self = {
       'getUserById': function(id){
@@ -141,7 +162,6 @@
         return $http.get('/user/'+pageSize+'/'+currentPage);
       },
       'addUser': function(UserObj){
-        console.log(UserObj);
         return $http.post('/user/add',UserObj);
       },
       'editUser': function(id,UserObj){
@@ -529,6 +549,11 @@
       },
       'deletePolicy': function(id){
         return $http.delete('/policy/delete/'+id);
+      },
+      'searchPolicy': function(name){
+        console.log(name);
+        //return $http.get('//');
+
       }
     };
     return self;
