@@ -384,6 +384,7 @@
       url: '/warehouses',
       templateUrl: 'pages/warehouses/warehouses.html',
       controller: 'WarehousesCtl',
+      data: {pageTitle: 'عرض المخازن'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -398,6 +399,7 @@
       url: '/warehouses/new',
       templateUrl: 'pages/warehouses/newWarehouse.html',
       controller: 'NewWarehouseCtl',
+      data: {pageTitle: 'إضافة مخزن جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -751,6 +753,7 @@
       url: '/policies',
       templateUrl: 'pages/policies/policies.html',
       controller: 'PoliciesCtl',
+      data: {pageTitle: 'عرض السياسات'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -765,6 +768,7 @@
       url: '/policies/new',
       templateUrl: 'pages/policies/newPolicy.html',
       controller: 'NewPolicyCtl',
+      data: {pageTitle: 'إضافة سياسة جديدة'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -1011,6 +1015,7 @@
       url: '/newUser',
       templateUrl: 'pages/users/newUser.html',
       controller: 'NewUserCtl',
+      data: {pageTitle: 'إضافة موظف'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -1180,5 +1185,27 @@
   });
   app.controller('MenuCtl',['$scope','MenuFac',function($scope,MenuFac){
     $scope.activePanel = MenuFac;
+  }]);
+  app.controller('NotifcationCtr',['$scope','HelperServ',function($scope,HelperServ){
+    $scope.getAllNotification = HelperServ;
+    $scope.getAllNotification.getNotification();
+    // for(;;){
+    //   window.setTimeout(function(){
+    //     // $scope.getAllNotification.getNotification();
+    //     console.log('Hi');
+    //   },10000);
+    // }
+    // $scope.notificationCount = $scope.getAllNotification.notificationObj.count;
+    // $scope.$watch('notificationCount', function() {
+    //     alert('hey, myVar has changed!');
+    // });
+    // HelperServ.getNotification().then(function(response) {
+    //   $scope.notificationCount = response.data.count;
+    //   $scope.notification = response.data.result;
+    //   console.log($scope.notification);
+    //   console.log($scope.notificationCount);
+    // }, function(response) {
+    //   console.log("Something went wrong");
+    // });
   }]);
 }());
