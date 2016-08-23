@@ -4,13 +4,13 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>إضافة موظفين</h2>
+        <h2>إضافة موظف</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
         <form novalidate ng-submit="newUser()" name="addUserForm">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4" ng-class="{'col-md-3':permissinFlag==true}">
               <div class="form-group">
                 <label class="control-label">نوع الموظف</label>
                 <select class="form-control input-sm" ng-model="newUserForm.type"  ng-change="UserType()" ng-required-err-type="servicesProvider" required>
@@ -20,43 +20,41 @@
                 </select>
               </div>
             </div>
-
-            <div class="col-md-3" ng-show="permissinFlag">
+            <div class="col-md-4" ng-show="permissinFlag" ng-class="{'col-md-3':permissinFlag==true}">
               <div class="form-group">
                 <label class="control-label">اسم الصلاحية</label>
-                <select class="form-control input-sm" ng-model="newUserForm.permission"  ng-options="perm._id as perm.name for perm in allPermissions" required ng-required-err-type="servicesProvider" required>
+                <select class="form-control input-sm" ng-model="newUserForm.permission"  ng-options="perm._id as perm.name for perm in allPermissions" ng-required-err-type="servicesProvider" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
                 </select>
               </div>
             </div>
-          	  <div class="col-md-3">
+          	<div class="col-md-4" ng-class="{'col-md-3':permissinFlag==true}">
               <div class="form-group">
                 <label class="control-label">اسم المدير</label>
                 <input class="form-control input-sm" type="text" ng-model="newUserForm.name" placeholder="اسم المدير" required>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4" ng-class="{'col-md-3':permissinFlag==true}">
               <div class="form-group">
                 <label class="control-label">البريد الالكتروني</label>
                 <input class="form-control input-sm" type="text" ng-model="newUserForm.email" placeholder="البريد الالكتروني" required>
               </div>
             </div>
-
-             <div class="col-md-12">
+          </div>
+          <div class="row">
+            <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">رقم الهاتف</label>
                 <input class="form-control input-sm" type="text" ng-model="newUserForm.phone" placeholder="رقم الهاتف" required>
               </div>
             </div>
-          </div>
-          <div class="row">
-          	 <div class="col-md-6">
+          	 <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">كلمة المرور</label>
                 <input class="form-control input-sm" type="password" name="password" ng-model="newUserForm.password" placeholder="كلمة المرور" required>
               </div>
             </div>
-          	<div class="col-md-6">
+          	<div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">تأكيد كلمة المرور</label>
                 <input class="form-control input-sm" type="password" name="confirmPassword" data-match-verify="newUserForm.password" ng-model="newUserForm.confPassword" placeholder="تأكيد كلمة المرور" required>

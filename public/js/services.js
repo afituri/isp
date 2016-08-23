@@ -11,7 +11,7 @@
       'invoiceObj': []
     }
   });
-  app.service('HelperServ',['$http',function($http){
+  app.service('HelperServ',['$http','$rootScope',function($http,$rootScope){
     var self = {
       'stockObj': [],
       'citiesObj': [],
@@ -24,6 +24,7 @@
       'warehouseObjs': [],
       'etcObj': [],
       'resellersObj': [],
+      'notifications': {},
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
           self.stockObj = response.data.result;
@@ -105,12 +106,20 @@
         }, function(response) {
           console.log("Something went wrong in getAllResellers");
         });
+      },
+      'getNotification': function(){
+        return $http.get('/invoice/Notification/').then(function(response) {
+          self.notifications = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllResellers");
+        });
       }
     };
     self.getAllStock();
     self.getAllCities();
     self.getAllSuppliers();
     self.getAllServiceProviders();
+    // self.watchNotification();
     return self;
   }]);
 
@@ -630,6 +639,9 @@
       },
       'getInvoicedata': function(id){
         return $http.get('/invoice/invoicesdata/'+id);
+      },
+      'getNotification': function(){
+        return $http.get('/invoice/Notification/');
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);

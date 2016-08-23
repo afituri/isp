@@ -1,9 +1,10 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','PermissionServ','SuppliersServ','ResllersServ',function($scope,MenuFac,CustomersServ,PermissionServ,SuppliersServ,ResllersServ){
-    $scope.Pages ={}
+  app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','PermissionServ','SuppliersServ','ResllersServ','InvoicesServ',function($scope,MenuFac,CustomersServ,PermissionServ,SuppliersServ,ResllersServ,InvoicesServ){
+    $scope.Pages ={};
     $scope.dollarPage = "sss";
+    $scope.notif=['إضافة فاتورة','إضافة فاتورة مبدئية','تجديد','دفعة']
      PermissionServ.getSubpermission().then(function(response){
         
         $scope.permission =true;
@@ -99,7 +100,7 @@
       }, function(response) {
         console.log("Something went wrong");
       });
-
+     
      CustomersServ.getAllMoney().then(function(response) {
         $scope.totalMoney = (response.data.sum).toFixed(2);
         $scope.totalPaid = (response.data.piad).toFixed(0);

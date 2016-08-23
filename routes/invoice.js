@@ -80,6 +80,12 @@ router.get('/all', userHelpers.isLogin ,function(req, res) {
   });
 });
 
+router.get('/Notification', userHelpers.isLogin ,function(req, res) {
+  invoiceMgr.getNotification(function(result){
+    res.send(result);
+  });
+});
+
 
 /* Add new invoice   */
 router.post('/add',userHelpers.isLogin , function(req, res) {
