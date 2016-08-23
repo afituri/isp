@@ -4,7 +4,7 @@
   app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','PermissionServ','SuppliersServ','ResllersServ','InvoicesServ',function($scope,MenuFac,CustomersServ,PermissionServ,SuppliersServ,ResllersServ,InvoicesServ){
     $scope.Pages ={};
     $scope.dollarPage = "sss";
-    $scope.notif=['إضافة فاتورة','إضافة فاتورة مبدئية','تجديد','دفعة']
+    
      PermissionServ.getSubpermission().then(function(response){
       //dollar
       $scope.dollarPage = response.data[0].all;
