@@ -58,8 +58,12 @@ module.exports = {
         email : body.email,
         password : passwordHash,
         salt : originalSalt,
-        phone: body.phone
+        phone: body.phone,
+        permission: body.permission,
+        type: body.type
+
       };
+      console.log(obj);
       user = new model.User(obj);
       user.save(function(err,result){
         if (!err) {

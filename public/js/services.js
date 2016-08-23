@@ -148,6 +148,12 @@
       },
       'editPermission': function(id,obj){
         return $http.put('/permission/'+id,obj);
+      },
+      'getAllPermission': function(){
+        return $http.get('/permission');
+      },
+      'getSubpermission': function(){
+        return $http.get('/permission/getSubPermission');
       }
     };
     return self;

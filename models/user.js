@@ -23,7 +23,8 @@ var User = new Schema({
       required: [true, 'User phone number required']*/
    },
    nid: {type: String, index: true},
-  
+   permission: { type : mongoose.Schema.ObjectId, ref : 'Permission'},
+   type: { type: Number},
    status: {type: Number, default:1}
 });
 

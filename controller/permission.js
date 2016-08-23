@@ -21,6 +21,18 @@ module.exports = {
     });
   },
 
+  getAllPermission: function(cb){
+     model.Permission.find({}, function(err,result) {
+      if (!err) {
+        cb(result)
+      } else {
+        console.log(err);
+        cb(false);
+      }
+    });
+
+  },
+
   addPermission: function(body,cb){
     var objects ={
       name : body.name,
@@ -67,8 +79,6 @@ module.exports = {
   getPermissionById: function(id,cb){
       model.Permission.find({_id:id}, function(err,resultPer) {
       if (!err) {
-        console.log(resultPer[0].id);
-        console.log(resultPer.id);
         model.Subpermsion.find({permission:resultPer[0].id}, function(err,resultSub) {
           if (!err) {
             cb({resultPer:resultPer,resultSub:resultSub})
@@ -84,6 +94,18 @@ module.exports = {
     });
 
   },
+
+   getSubPermissionById: function(id,cb){
+        model.Subpermsion.find({permission:id}, function(err,resultSub) {
+          if (!err) {
+            cb(resultSub)
+          } else {
+            console.log(err);
+            cb(false);
+          }
+        });
+
+      },
 
   editPermission: function(id,body,cb){
     var objects ={

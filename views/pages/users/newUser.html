@@ -10,13 +10,22 @@
       <div class="x_content">
         <form novalidate ng-submit="newUser()" name="addUserForm">
           <div class="row">
-             <div class="col-md-3">
+            <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">نوع الموظف</label>
-                <select class="form-control input-sm" ng-model="newServiceForm.type"  ng-change="UserType()" ng-required-err-type="servicesProvider" required>
+                <select class="form-control input-sm" ng-model="newUserForm.type"  ng-change="UserType()" ng-required-err-type="servicesProvider" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
                   <option value="1" >مدير</option>
                   <option value="2" >موظف</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-3" ng-show="permissinFlag">
+              <div class="form-group">
+                <label class="control-label">اسم الصلاحية</label>
+                <select class="form-control input-sm" ng-model="newUserForm.permission"  ng-options="perm._id as perm.name for perm in allPermissions" required ng-required-err-type="servicesProvider" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
                 </select>
               </div>
             </div>
@@ -33,7 +42,7 @@
               </div>
             </div>
 
-             <div class="col-md-3">
+             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">رقم الهاتف</label>
                 <input class="form-control input-sm" type="text" ng-model="newUserForm.phone" placeholder="رقم الهاتف" required>
