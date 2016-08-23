@@ -625,6 +625,9 @@
       'getInvoicedata': function(id){
         return $http.get('/invoice/invoicesdata/'+id);
       },
+      'getNotification': function(){
+        return $http.get('/invoice/Notification/');
+      },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);
       },

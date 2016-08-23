@@ -836,4 +836,20 @@ replacInvice:function(body,cb){
     }
   });
 },
+getNotification:function(cb){
+  model.Invoice.count({status:2},function(err,count){
+    model.Invoice.find({status:2})
+    .populate('customer')
+    .populate('reseller')
+    .populate('user')
+    .exec(function(err, invoices){
+      if(!err){
+        cb({result:invoices,count:count});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  });
+},
 };

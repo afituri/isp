@@ -82,21 +82,30 @@
           <ul class="nav navbar-nav pull-right">
             <!-- BEGIN NOTIFICATION DROPDOWN -->
             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar" ng-controller="HomeCtl">
               <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                 <i class="fa fa-bell-o" aria-hidden="true"></i>
-                <span class="badge badge-default"> 10 </span>
+                <span class="badge badge-default"> {{notificationCount}}a </span>
               </a>
               <ul class="dropdown-menu">
                 <li class="external">
                   <h3>
-                    <span class="bold">12 pending</span> notifications
+                    <span class="bold">{{notificationCount}}</span> notifications
                   </h3>
-                  <a href="#/profile/dashboard">view all</a>
+                  <!-- <a href="#/profile/dashboard">view all</a> -->
                 </li>
                 <li>
                   <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                    <li>
+                  <li ng-repeat="not in notification">
+                      <a href="javascript:;">
+                        <span class="time">{{not.reseller.repName}}</span>
+                        <span class="details">
+                        <span class="label label-sm label-icon label-success">
+                          <i class="fa fa-plus"></i>
+                        </span> إضافة فاتورة. </span>
+                      </a>
+                    </li>
+                    <!-- <li>
                       <a href="javascript:;">
                         <span class="time">just now</span>
                         <span class="details">
@@ -181,7 +190,7 @@
                             </span> Storage server failed. 
                           </span>
                         </a>
-                      </li>
+                      </li> -->
                     </ul>
                   </li>
                 </ul>
