@@ -13,7 +13,7 @@
         <span class="title">تسجيل الدولار </span>
       </a>
     </li>
-     <li class="nav-item">
+     <li class="nav-item" ng-show="permission">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-server" aria-hidden="true"></i>
         <span class="title">الصلاحيات</span>
@@ -32,13 +32,13 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" ng-show="permission">
       <a href="#/restore">
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
         <span class="title">استعادة</span>
       </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" ng-show="servicePage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-server" aria-hidden="true"></i>
         <span class="title">الخدمات</span>
@@ -57,7 +57,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" ng-show="serviceProvidersPage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-server" aria-hidden="true"></i>
         <span class="title">مزودي الخدمة</span>
@@ -95,7 +95,7 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="suppliersPage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-users" aria-hidden="true"></i>
         <span class="title">الموردين</span>
@@ -114,7 +114,7 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="warehousesPage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-hdd-o" aria-hidden="true"></i>
         <span class="title">المخازن</span>
@@ -133,7 +133,7 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="instockPage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-archive" aria-hidden="true"></i>
         <span class="title">المخزون <small>(البضاعة المخزنة)</small></span>
@@ -157,7 +157,7 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="customersPage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-users" aria-hidden="true"></i>
         <span class="title">الزبائن</span>
@@ -181,29 +181,29 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="allProductService">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-product-hunt" aria-hidden="true"></i>
         <span class="title">المنتجات</span>
         <span class="arrow"></span>
       </a>
       <ul class="sub-menu">
-        <li >
+        <li ng-show="productServicesPage">
           <a href="#/products/services">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض الخدمات
           </a>
         </li>
-        <li >
+        <li ng-show="productItemsPage">
           <a href="#/products/items">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض المعدات
           </a>
         </li>
-        <li >
+        <li ng-show="productPackagesPage">
           <a href="#/products/packages">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض الحزم
           </a>
         </li>
-        <li >
+        <li ng-show="productItemsPage">
           <a href="#/products/otherEquipments">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض المعدات الاخري
           </a>
@@ -215,13 +215,13 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="policiesPage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-bars" aria-hidden="true"></i>
         <span class="title">السياسات</span>
         <span class="arrow"></span>
       </a>
-      <ul class="sub-menu">
+      <ul class="sub-menu" >
         <li >
           <a href="#/policies">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض السياسات</span>
@@ -234,7 +234,7 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="productPoliciesPage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-bars" aria-hidden="true"></i>
         <span class="title">سياسات المنتج</span>
@@ -263,7 +263,7 @@
         </li>
       </ul>
     </li>
-    <li  class="nav-item">
+    <li  class="nav-item" ng-show="invoicePage">
       <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-bars" aria-hidden="true"></i>
         <span class="title">الفواتير</span>

@@ -110,19 +110,19 @@
               </li>
             <!-- END NOTIFICATION DROPDOWN -->
             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-            <li class="dropdown dropdown-user">
+            <li class="dropdown dropdown-user" ng-controller="HomeCtl">
               <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                 <img alt="" class="img-circle" src="/img/avatar.png" />
                 <span class="username username-hide-on-mobile"> <%= name %> </span>
                 <i class="fa fa-angle-down"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-default">
-                <li>
-                  <a ui-sref="user">
+                <li ng-show="permission">
+                  <a ui-sref="user" >
                     <i class="fa fa-users"></i> عرض الموظفين </a>
                 </li>
-                <li>
-                  <a ui-sref="newUser">
+                <li ng-show="permission">
+                  <a ui-sref="newUser" >
                     <i class="fa fa-user-plus"></i> اضافة موظفين
                   </a>
                 </li>
