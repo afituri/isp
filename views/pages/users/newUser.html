@@ -13,17 +13,17 @@
             <div class="col-md-4" ng-class="{'col-md-3':permissinFlag==true}">
               <div class="form-group">
                 <label class="control-label">نوع الموظف</label>
-                <select class="form-control input-sm" ng-model="newUserForm.type"  ng-change="UserType()" ng-required-err-type="servicesProvider" required>
+                <select class="form-control input-sm" ng-model="newUserForm.type"  ng-change="UserType()" required>
                   <option value="" disabled selected>الرجاء الاختيار</option>
                   <option value="1" >مدير</option>
                   <option value="2" >موظف</option>
                 </select>
               </div>
             </div>
-            <div class="col-md-4" ng-show="permissinFlag" ng-class="{'col-md-3':permissinFlag==true}">
+            <div class="col-md-4" ng-if="permissinFlag" ng-class="{'col-md-3':permissinFlag==true}">
               <div class="form-group">
                 <label class="control-label">اسم الصلاحية</label>
-                <select class="form-control input-sm" ng-model="newUserForm.permission"  ng-options="perm._id as perm.name for perm in allPermissions" ng-required-err-type="servicesProvider" required>
+                <select class="form-control input-sm" ng-model="newUserForm.permission" ng-options="perm._id as perm.name for perm in allPermissions">
                   <option value="" disabled selected>الرجاء الاختيار</option>
                 </select>
               </div>
