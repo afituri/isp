@@ -4,6 +4,7 @@ var userHelpers = require("../controller/userHelpers");
 var permissionMgr = require("../controller/permission");
 
 
+
 // permission CRUD
 router.route('/')
   .post(function(req, res) {
@@ -11,6 +12,18 @@ router.route('/')
       res.send(result);
     });  
   })
+  .get(function(req, res) {
+    permissionMgr.getAllPermission(function(result){
+      console.log(result);
+      res.send(result);
+    });  
+  })
+router.route('/getSubPermission')
+  .get(function(req,res){
+    permissionMgr.getSubPermissionById(req.user.permission,function(result){
+      res.send(result);
+    });
+  });
 
 router.route('/:id')
   .get(function(req, res) {
