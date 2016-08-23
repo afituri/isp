@@ -1,5 +1,5 @@
 <!-- BEGIN HEADER INNER -->
-<div class="page-header-inner">
+<div class="page-header-inner" ng-controller="HomeCtl">
     <!-- BEGIN LOGO -->
     <div class="page-logo">
         <a href="#/">
@@ -26,7 +26,7 @@
     <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
     <!-- END RESPONSIVE MENU TOGGLER -->
     <!-- BEGIN TOP NAVIGATION MENU -->
-    <div class="top-menu">
+    <div class="top-menu" >
         <ul class="nav navbar-nav pull-right">
             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
             <li class="dropdown dropdown-user">
@@ -36,8 +36,8 @@
                     <i class="fa fa-angle-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-default">
-                    <li>
-                        <a ui-sref="user">
+                    <li >
+                        <a ui-sref="user" >
                             <i class="fa fa-users"></i> عرض الموظفين </a>
                     </li>
                     <li>
