@@ -1,7 +1,25 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('DollarsCtl',['$scope','$modal','DollarServ','$state','$timeout','CustomersServ','HelperServ','toastr',function($scope,$modal,DollarServ,$state,$timeout,CustomersServ,HelperServ,toastr){
+  app.controller('DollarsCtl',['$scope','PermissionServ','$modal','DollarServ','$state','$timeout','CustomersServ','HelperServ','toastr',function($scope,PermissionServ,$modal,DollarServ,$state,$timeout,CustomersServ,HelperServ,toastr){
+    PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+        if(response.data[0] != undefined){
+          //employee
+          $scope.permission =false;
+          $scope.addDollar =  response.data[0].add;
+          $scope.deleteDollar = response.data[0].delete; 
+        } else {
+          //admin
+          $scope.addDollar =  true;
+          $scope.deleteDollar = true; 
+        }
+
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+
+
     $scope.showDeleteModel = function(id){
       $scope.id = id;
       $scope.deleteName = "هذا الدولار";

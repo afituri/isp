@@ -1,7 +1,31 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('PoliciesCtl',['$scope','$modal','MenuFac','PoliciesServ','toastr',function($scope,$modal,MenuFac,PoliciesServ,toastr){
+  app.controller('PoliciesCtl',['$scope','PermissionServ','$modal','MenuFac','PoliciesServ','toastr',function($scope,PermissionServ,$modal,MenuFac,PoliciesServ,toastr){
+     PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[13]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addPolicy=  response.data[13].add;
+        $scope.deletePolicy = response.data[13].delete; 
+        $scope.editPolicy = response.data[13].edit; 
+      } else {
+        //admin
+        $scope.addPolicy =  true;
+        $scope.deletePolicy = true; 
+        $scope.editPolicy = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
+
+
+
 /*    $scope.searchP = function(search){
       PoliciesServ.searchPolicy(search).then(function(response){
         // result

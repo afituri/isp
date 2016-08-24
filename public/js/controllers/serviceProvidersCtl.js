@@ -1,7 +1,33 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ServiceProvidersCtl',['$scope','$modal','MenuFac','ServiceProvidersServ','toastr',function($scope,$modal,MenuFac,ServiceProvidersServ,toastr){
+  app.controller('ServiceProvidersCtl',['$scope','PermissionServ','$modal','MenuFac','ServiceProvidersServ','toastr',function($scope,PermissionServ,$modal,MenuFac,ServiceProvidersServ,toastr){
+    PermissionServ.getSubpermission().then(function(response){
+        
+        $scope.permission =true;
+        if(response.data[0] != undefined){
+          console.log(response.data[5]);
+          //employee
+          $scope.permission =false;
+ 
+          $scope.addServiceProvider =  response.data[5].add;
+          $scope.deleteServiceProvider = response.data[5].delete; 
+          $scope.editServiceProvider = response.data[5].edit; 
+        } else {
+          //admin
+          $scope.addServiceProvider =  true;
+          $scope.deleteServiceProvider = true; 
+          $scope.editServiceProvider = true;
+        }
+
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
+
+
+
     MenuFac.active = 0;
     $scope.activePanel = MenuFac;
     ServiceProvidersServ.getServiceProviders();
@@ -76,7 +102,32 @@
       });
     }
   }]);
-  app.controller('DetailServiceProviderCtl',['$scope','$stateParams','MenuFac','ServiceProvidersServ',function($scope,$stateParams,MenuFac,ServiceProvidersServ){
+  app.controller('DetailServiceProviderCtl',['$scope','PermissionServ','$stateParams','MenuFac','ServiceProvidersServ',function($scope,PermissionServ,$stateParams,MenuFac,ServiceProvidersServ){
+    PermissionServ.getSubpermission().then(function(response){
+        
+        $scope.permission =true;
+        if(response.data[0] != undefined){
+          console.log(response.data[5]);
+          //employee
+          $scope.permission =false;
+ 
+          $scope.addServiceProvider =  response.data[5].add;
+          $scope.deleteServiceProvider = response.data[5].delete; 
+          $scope.editServiceProvider = response.data[5].edit; 
+        } else {
+          //admin
+          $scope.addServiceProvider =  true;
+          $scope.deleteServiceProvider = true; 
+          $scope.editServiceProvider = true;
+        }
+
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
+
+
     MenuFac.active = 0;
     $scope.activePanel = MenuFac;
     $scope.services = {};

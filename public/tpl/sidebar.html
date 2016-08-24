@@ -50,7 +50,7 @@
             <i class="fa fa-list"></i>&nbsp;عرض الخدمات</span>
           </a>
         </li>
-        <li>
+        <li ng-show="serviceAddPage">
           <a href="#/services/new">
             <i class="fa fa-plus"></i>&nbsp;إضافة خدمة جديدة</span>
           </a>
@@ -70,7 +70,7 @@
           </a>
         </li>
         <li>
-          <a href="#/serviceProviders/new">
+          <a href="#/serviceProviders/new" ng-show="serviceProvidersAddPage">
             <i class="fa fa-plus"></i>&nbsp;إضافة مزود خدمة جديد</span>
           </a>
         </li>
@@ -88,7 +88,7 @@
             <i class="fa fa-list"></i>&nbsp;عرض الموزعين</span>
           </a>
         </li>
-        <li>
+        <li ng-show="resselersAddPage">
           <a href="#/resellers/new">
             <i class="fa fa-plus"></i>&nbsp;إضافة موزع جديد</span>
           </a>
@@ -107,7 +107,7 @@
             <i class="fa fa-list"></i>&nbsp;عرض الموردين</span>
           </a>
         </li>
-        <li >
+        <li ng-show="suppliersAddPage">
           <a href="#/suppliers/new">
             <i class="fa fa-plus"></i>&nbsp;إضافة مورد جديد</span>
           </a>
@@ -126,7 +126,7 @@
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض المخازن</span>
           </a>
         </li>
-        <li >
+        <li ng-show="warehousesAddPage">
           <a href="#/warehouses/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة مخزن جديد</span>
           </a>
@@ -145,12 +145,12 @@
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض مخزون</span>
           </a>
         </li>
-        <li >
+        <li ng-show="instockAddPage">
           <a href="#/instock/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة مخزون جديد</span>
           </a>
         </li>
-        <li >
+        <li  ng-show="instockAddPage">
           <a href="#/instock/Transfer">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;نقل مخزون </span>
           </a>
@@ -169,12 +169,12 @@
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض الزبائن
           </a>
         </li>
-        <li >
+        <li ng-show="permission">
           <a href="#/customerPending">
             <i class="fa fa-pause" aria-hidden="true"></i>&nbsp;الزبائن قيد الانتظار
           </a>
         </li>
-        <li>
+        <li ng-show="customersAddPage">
           <a href="#/customers/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة زبون
           </a>
@@ -208,7 +208,7 @@
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض المعدات الاخري
           </a>
         </li>
-        <li >
+        <li ng-show="productServicesAddPage+productItemAddPage+productPackAddPage">
           <a href="#/products/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة منتج جديد
           </a>
@@ -227,7 +227,7 @@
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض السياسات</span>
           </a>
         </li>
-        <li >
+        <li ng-show="policiesAddPage">
           <a href="#/policies/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة سياسة جديدة</span>
           </a>
@@ -256,7 +256,7 @@
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<small>عرض سياسات منتج (الحزمة)</small></span>
           </a>
         </li>
-        <li >
+        <li ng-show="productPoliciesAddPage">
           <a href="#/productPolicies/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<small>إضافة سياسة منتج جديد</small></span>
           </a>
@@ -280,7 +280,7 @@
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;تأكيد / رفض الفاتورة</span>
           </a>
         </li>
-        <li >
+        <li ng-show="invoiceAddPage">
           <a href="#/invoices/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة فاتورة جديدة</span>
           </a>

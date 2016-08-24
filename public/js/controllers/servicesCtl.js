@@ -1,8 +1,29 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ServicesCtl',['$scope','$modal','MenuFac','ServicesServ','toastr',function($scope,$modal,MenuFac,ServicesServ,toastr){
+  app.controller('ServicesCtl',['$scope','PermissionServ','$modal','MenuFac','ServicesServ','toastr',function($scope,PermissionServ,$modal,MenuFac,ServicesServ,toastr){
     
+    PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+        if(response.data[0] != undefined){
+          console.log(response.data[3]);
+          //employee
+          $scope.permission =false;
+          console.log(response.data[3].add);
+          $scope.addService =  response.data[3].add;
+          $scope.deleteService = response.data[3].delete; 
+          $scope.editService = response.data[3].edit; 
+        } else {
+          //admin
+          $scope.addService =  true;
+          $scope.deleteService = true; 
+          $scope.editService = true;
+        }
+
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+
     MenuFac.active = 1;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;

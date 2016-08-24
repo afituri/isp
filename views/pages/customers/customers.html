@@ -10,7 +10,7 @@
             <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="بحث...">
           </div>
           <div class="col-xs-3 text-left">
-            <a ui-sref="newCustomer" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة زبون جديد</a>
+            <a ng-show="addCustomer" ui-sref="newCustomer" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة زبون جديد</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -59,8 +59,8 @@
                 <td ng-if="customer.status==2">قيد الانتظار</td>
                 <td ng-if="customer.status==3">رفض</td>
                 <td>
-                  <a class="btn btn-success btn-xs" ui-sref="editCustomer({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-xs" ng-click="showDeleteModel(customer._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editCustomer" class="btn btn-success btn-xs" ui-sref="editCustomer({id:customer._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteCustomer" class="btn btn-success btn-xs" ng-click="showDeleteModel(customer._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

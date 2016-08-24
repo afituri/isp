@@ -1,7 +1,31 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('inStockCtl',['$scope','$modal','$stateParams','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr',function($scope,$modal,$stateParams,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr){
+  app.controller('inStockCtl',['$scope','PermissionServ','$modal','$stateParams','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr',function($scope,PermissionServ,$modal,$stateParams,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr){
+     
+
+     PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[7]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addInStock =  response.data[7].add;
+        $scope.deleteInStock = response.data[7].delete; 
+        $scope.editInStock = response.data[7].edit; 
+      } else {
+        //admin
+        $scope.addInStock =  true;
+        $scope.deleteInStock = true; 
+        $scope.editInStock = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
+
     MenuFac.active =5;
     $scope.activePanel = MenuFac;
     $scope.objects=HelperServ;

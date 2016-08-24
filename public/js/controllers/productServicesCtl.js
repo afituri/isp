@@ -1,7 +1,29 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ProductServicesCtl',['$scope','$state','$stateParams','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,$stateParams,$modal,MenuFac,ProductsServ,toastr){
+  app.controller('ProductServicesCtl',['$scope','PermissionServ','$state','$stateParams','$modal','MenuFac','ProductsServ','toastr',function($scope,PermissionServ,$state,$stateParams,$modal,MenuFac,ProductsServ,toastr){
+      PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[8]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addProductService =  response.data[8].add;
+        $scope.deleteProductService = response.data[8].delete; 
+        $scope.editProductService = response.data[8].edit; 
+      } else {
+        //admin
+        $scope.addProductService =  true;
+        $scope.deleteProductService = true; 
+        $scope.editProductService = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+
+
+
     MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -63,7 +85,31 @@
       });
     };
   }]);
-  app.controller('ProductItemsCtl',['$scope','$state','$stateParams','HelperServ','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,$stateParams,HelperServ,$modal,MenuFac,ProductsServ,toastr){
+  app.controller('ProductItemsCtl',['$scope','PermissionServ','$state','$stateParams','HelperServ','$modal','MenuFac','ProductsServ','toastr',function($scope,PermissionServ,$state,$stateParams,HelperServ,$modal,MenuFac,ProductsServ,toastr){
+    
+
+      PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[9]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addProductItems =  response.data[9].add;
+        $scope.deleteProductItems = response.data[9].delete; 
+        $scope.editProductItems = response.data[9].edit; 
+      } else {
+        //admin
+        $scope.addProductItems =  true;
+        $scope.deleteProductItems = true; 
+        $scope.editProductItems = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+
+
+
     MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -135,7 +181,28 @@
       });
     };
   }]);
-  app.controller('ProductPackagesCtl',['$scope','$state','ServicesServ','HelperServ','$stateParams','$modal','MenuFac','ProductsServ','toastr',function($scope,$state,ServicesServ,HelperServ,$stateParams,$modal,MenuFac,ProductsServ,toastr){
+  app.controller('ProductPackagesCtl',['$scope','PermissionServ','$state','ServicesServ','HelperServ','$stateParams','$modal','MenuFac','ProductsServ','toastr',function($scope,PermissionServ,$state,ServicesServ,HelperServ,$stateParams,$modal,MenuFac,ProductsServ,toastr){
+     PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[10]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addProductPackage =  response.data[10].add;
+        $scope.deleteProductPackage = response.data[10].delete; 
+        $scope.editProductPackage = response.data[10].edit; 
+      } else {
+        //admin
+        $scope.addProductPackage =  true;
+        $scope.deleteProductPackage = true; 
+        $scope.editProductPackage = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+
+
     MenuFac.active = 7;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;

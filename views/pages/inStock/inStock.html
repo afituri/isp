@@ -10,7 +10,7 @@
            <!--  <input type="text" class="form-control input-sm" ng-model="searchByName" placeholder="بحث..."> -->
           </div>
           <div class="col-xs-3 text-left">
-            <a ui-sref="newInStock" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مخزون جديد</a>
+            <a ng-show="addInStock" ui-sref="newInStock" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مخزون جديد</a>
             <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus"  ng-click="showPassword()" >
               <em ng-if="hidePass" class="glyphicon glyphicon-eye-open"></em>
               <em ng-if="showPass" class="glyphicon glyphicon-eye-close"></em>
@@ -47,8 +47,8 @@
                 <td>{{inStocks.username}}</td>
                 <td> <p ng-if="showPass">{{inStocks.password}}</p> <p ng-if="hidePass"> ******** </p></td>
                 <td>
-                  <a class="btn btn-success btn-xs" ui-sref="editInStock({id:inStocks._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-xs" ng-click="showDeleteModel(inStocks._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editInStock" class="btn btn-success btn-xs" ui-sref="editInStock({id:inStocks._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteInStock" class="btn btn-success btn-xs" ng-click="showDeleteModel(inStocks._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

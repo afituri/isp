@@ -1,8 +1,31 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('WarehousesCtl',['$scope','$modal','HelperServ','MenuFac','WarehousesServ','toastr',function($scope,$modal,HelperServ,MenuFac,WarehousesServ,toastr){
+  app.controller('WarehousesCtl',['$scope','PermissionServ','$modal','HelperServ','MenuFac','WarehousesServ','toastr',function($scope,PermissionServ,$modal,HelperServ,MenuFac,WarehousesServ,toastr){
      
+    PermissionServ.getSubpermission().then(function(response){  
+        $scope.permission =true;
+        if(response.data[0] != undefined){
+          console.log(response.data[6]);
+          //employee
+          $scope.permission =false;
+ 
+          $scope.addWarehouse =  response.data[6].add;
+          $scope.deleteWarehouse = response.data[6].delete; 
+          $scope.editWarehouse = response.data[6].edit; 
+        } else {
+          //admin
+          $scope.addWarehouse =  true;
+          $scope.deleteWarehouse = true; 
+          $scope.editWarehouse = true;
+        }
+
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
+
     $scope.searchWarehouses = function(){
        if($scope.searchByAll == ""){
         $scope.init();

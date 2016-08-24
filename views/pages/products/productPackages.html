@@ -9,7 +9,7 @@
           <div class="col-md-9 text-left">
             <a ui-sref="productServices" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض الخدمات</a> 
             <a ui-sref="productItems" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض المعدات</a>
-            <a ui-sref="newProduct" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة منتج جديد</a>
+            <a ng-show="addProductPackage" ui-sref="newProduct" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة منتج جديد</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -48,8 +48,8 @@
                     <i class="fa fa-info fa-fw"></i>
                     مزيد من المعلومات
                   </button>
-                  <a class="btn btn-success btn-sm" ui-sref="editProductPackages({id:packages._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(packages._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editProductPackage" class="btn btn-success btn-sm" ui-sref="editProductPackages({id:packages._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteProductPackage" class="btn btn-success btn-sm" ng-click="showDeleteModel(packages._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>
