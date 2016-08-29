@@ -77,7 +77,6 @@ module.exports = {
   },
 
   deletePolicy : function(id,cb){
-    console.log("id in "+id);
     model.Customer.find({policy:id}, function(err,resultCustomer) {
       if(resultCustomer.length > 0){
         cb(1)

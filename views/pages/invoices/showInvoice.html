@@ -8,7 +8,7 @@
           </div>
           <td ng-bind="dataa | date:'dd/MM/yyyy'"></td>
           <div class="col-xs-3 text-left">
-            <a class="btn btn-sm btn-primary" ui-sref="newInvoice"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
+            <a ng-show="addInvoice" class="btn btn-sm btn-primary" ui-sref="newInvoice"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
           </div> 
         </div>
 
@@ -83,7 +83,7 @@
                 <!--   <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a> -->
                  <!--  <a  class="btn btn-success btn-xs" ui-sref="upgreade({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تطوير</a> -->
                 <!--   <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a> -->
-                  <a ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
+                  <a ng-show="deleteInvoice" ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
                 </td>
               </tr>
               <tr ng-repeat="invoice in allInvoice" ng-if="invoice.

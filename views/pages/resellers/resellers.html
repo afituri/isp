@@ -9,8 +9,8 @@
             <div class="col-xs-5">
             <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="البحث / اسم المخول / اسم الشركة / الايميل / رقم الهاتف ..">
         </div>
-          <div class="col col-xs-4 text-left">
-            <a ui-sref="newReseller" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة موزع جديد</a>
+          <div class="col col-xs-4 text-left" >
+            <a ng-show="addResseler" ui-sref="newReseller" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة موزع جديد</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -46,8 +46,8 @@
                 <td>{{reseller.phone}}</td>
                 <td>
                   <a class="btn btn-success btn-sm" ui-sref="showReseller({id:reseller._id})"><i class="fa fa-eye fa-fw"></i>&nbsp;عرض</a>
-                  <a class="btn btn-success btn-sm" ui-sref="editReseller({id:reseller._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(reseller._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editResseler" class="btn btn-success btn-sm" ui-sref="editReseller({id:reseller._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteResseler" class="btn btn-success btn-sm" ng-click="showDeleteModel(reseller._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

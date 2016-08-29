@@ -26,6 +26,7 @@ var invoice = require('./routes/invoice');
 var inStock = require('./routes/inStock');
 var report = require('./routes/report');
 var dollar = require('./routes/dollar');
+var permission = require('./routes/permission');
 var app = express();
 var store = new MongoDBStore({
   uri: 'mongodb://localhost:27017/isp',
@@ -84,6 +85,8 @@ app.use('/invoice', invoice);
 app.use('/instock', inStock);
 app.use('/report', report);
 app.use('/dollar', dollar);
+app.use('/permission', permission);
+
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

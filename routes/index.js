@@ -11,6 +11,7 @@ var city = require('../data/lycities');
 
 /* GET home page. */
 router.get('/', function(req, res) {
+  
   res.render('login', { title: 'شاشة الدخول' });
 });
 
@@ -27,7 +28,6 @@ router.get('/dashboard',userHelpers.isLogin ,function(req, res) {
   	doll=result[0].price;
   }
   var name='';
-  console.log(req.user);
   if(req.user==undefined){
   	name=" ";  
   } else {

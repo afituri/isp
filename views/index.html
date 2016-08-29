@@ -49,65 +49,97 @@
     <!-- END PAGE SPINNER -->
     <!-- BEGIN HEADER -->
     <div data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top">
-       <!-- BEGIN HEADER INNER -->
-<div class="page-header-inner">
-    <!-- BEGIN LOGO -->
-    <div class="page-logo">
-        <a href="#/">
-            <img src="/assets/img/logo-vsat.old.png" alt="logo" class="logo-default"/> </a>
-        <div class="menu-toggler sidebar-toggler">
+      <!-- BEGIN HEADER INNER -->
+      <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+          <a href="#/">
+            <img src="/assets/img/logo-vsat.old.png" alt="logo" class="logo-default"/>
+          </a>
+          <div class="menu-toggler sidebar-toggler">
             <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+          </div>
         </div>
-    </div>
-    <!-- END LOGO -->
-    <!-- BEGIN HEADER SEARCH BOX -->
-    <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-    <form class="search-form hide" action="#" method="GET">
-        <div class="input-group">
+        <!-- END LOGO -->
+        <!-- BEGIN HEADER SEARCH BOX -->
+        <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+        <form class="search-form hide" action="#" method="GET">
+          <div class="input-group">
             <input type="text" class="form-control" placeholder="Search..." name="query">
             <span class="input-group-btn">
-                <a href="javascript:;" class="btn submit">
-                    <i class="icon-magnifier"></i>
-                </a>
+              <a href="javascript:;" class="btn submit">
+                <i class="icon-magnifier"></i>
+              </a>
             </span>
-        </div>
-    </form>
-    <!-- END HEADER SEARCH BOX -->
-    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
-    <!-- END RESPONSIVE MENU TOGGLER -->
-    <!-- BEGIN TOP NAVIGATION MENU -->
-    <div class="top-menu">
-        <ul class="nav navbar-nav pull-right">
+          </div>
+        </form>
+        <!-- END HEADER SEARCH BOX -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        <div class="top-menu">
+          <ul class="nav navbar-nav pull-right">
+            <!-- BEGIN NOTIFICATION DROPDOWN -->
             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-            <li class="dropdown dropdown-user">
-                <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
-                    <img alt="" class="img-circle" src="/img/avatar.png" />
-                    <span class="username username-hide-on-mobile"> <%= name %> </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-default">
-                    <li>
-                        <a ui-sref="user">
-                            <i class="fa fa-users"></i> عرض الموظفين </a>
+            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar" ng-controller="NotifcationCtr">
+              <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+                <span class="badge badge-default"> {{getAllNotification.notifications.count}} </span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="external">
+                  <h3>
+                    <span class="bold" ng-show="getAllNotification.notifications.count==0">لا توجد إشعارات</span>
+                  </h3>
+                </li>
+                <li>
+                  <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                    <li ng-repeat="not in getAllNotification.notifications.result">
+                      <a href="javascript:;">
+                        <span class="time">{{not.reseller.repName}}</span>
+                        <span class="details">
+                        <span class="label label-sm label-icon label-success">
+                          <i class="fa fa-plus"></i>
+                        </span> {{notif[not.typein-1]}} </span>
+                      </a>
                     </li>
-                    <li>
-                        <a ui-sref="newUser">
-                            <i class="fa fa-user-plus"></i> اضافة موظفين</a>
-                    </li>
-                    <li class="divider"> </li>
-                    <li>
-                        <a href="/user/logout">
-                            <i class="fa fa-sign-out"></i> خروج </a>
-                    </li>
+                    </ul>
+                  </li>
                 </ul>
+              </li>
+            <!-- END NOTIFICATION DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <li class="dropdown dropdown-user" ng-controller="HomeCtl">
+              <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                <img alt="" class="img-circle" src="/img/avatar.png" />
+                <span class="username username-hide-on-mobile"> <%= name %> </span>
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-default">
+                <li ng-show="permission">
+                  <a ui-sref="user" >
+                    <i class="fa fa-users"></i> عرض الموظفين </a>
+                </li>
+                <li ng-show="permission">
+                  <a ui-sref="newUser" >
+                    <i class="fa fa-user-plus"></i> اضافة موظفين
+                  </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                  <a href="/user/logout">
+                    <i class="fa fa-sign-out"></i> خروج
+                  </a>
+                </li>
+              </ul>
             </li>
             <!-- END USER LOGIN DROPDOWN -->
-        </ul>
-    </div>
-    <!-- END TOP NAVIGATION MENU -->
-</div>
-<!-- END HEADER INNER --> 
+          </ul>
+        </div>
+        <!-- END TOP NAVIGATION MENU -->
+      </div>
+      <!-- END HEADER INNER --> 
     </div>
     <!-- END HEADER -->
     <div class="clearfix"> </div>
@@ -170,6 +202,7 @@
     <!-- END CORE ANGULARJS PLUGINS -->
     <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
     <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/controllers/homeCtl.js"></script>
     <script src="js/directives.js" type="text/javascript"></script>
     <script src="js/services.js" type="text/javascript"></script>
     <script id="ng_load_controler_before"></script>

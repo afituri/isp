@@ -12,7 +12,7 @@
           <div class="col-md-5 text-left">
             <a ui-sref="productItems" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض المعدات</a> 
             <a ui-sref="productPackages" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض الحزم</a>
-            <a ui-sref="newProduct" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة منتج جديد</a>
+            <a ng-show="addProductService" ui-sref="newProduct" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة منتج جديد</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -41,8 +41,8 @@
                 <td>{{service.initialPrice}}</td>
                 <td>{{service.discriptoin}}</td>
                  <td>
-                  <a class="btn btn-success btn-sm" ui-sref="editProductService({id:service._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(service._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editProductService" class="btn btn-success btn-sm" ui-sref="editProductService({id:service._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteProductService" class="btn btn-success btn-sm" ng-click="showDeleteModel(service._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

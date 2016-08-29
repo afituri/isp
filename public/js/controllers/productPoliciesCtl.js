@@ -1,7 +1,28 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ProductPoliciesCtl',['$scope','MenuFac','ProductPoliciesServ',function($scope,MenuFac,ProductPoliciesServ){
+  app.controller('ProductPoliciesCtl',['$scope','PermissionServ','MenuFac','ProductPoliciesServ',function($scope,PermissionServ,MenuFac,ProductPoliciesServ){
+     PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[12]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addProductPolicy =  response.data[12].add;
+        $scope.deleteProductPolicy = response.data[12].delete; 
+        $scope.editProductPolicy = response.data[12].edit; 
+      } else {
+        //admin
+        $scope.addProductPolicy =  true;
+        $scope.deleteProductPolicy = true; 
+        $scope.editProductPolicy = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
@@ -61,7 +82,28 @@
     $scope.activePanel = MenuFac;
   }]);
 
-  app.controller('ProductPoliciesServiceCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+  app.controller('ProductPoliciesServiceCtl',['$scope','PermissionServ','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,PermissionServ,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+     PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[12]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addProductPolicy =  response.data[12].add;
+        $scope.deleteProductPolicy = response.data[12].delete; 
+        $scope.editProductPolicy = response.data[12].edit; 
+      } else {
+        //admin
+        $scope.addProductPolicy =  true;
+        $scope.deleteProductPolicy = true; 
+        $scope.editProductPolicy = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -133,8 +175,28 @@
     };
   }]);
 
-  app.controller('ProductPoliciesItemCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+  app.controller('ProductPoliciesItemCtl',['$scope','PermissionServ','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,PermissionServ,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
     // edit form data 
+     PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[12]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addProductPolicy =  response.data[12].add;
+        $scope.deleteProductPolicy = response.data[12].delete; 
+        $scope.editProductPolicy = response.data[12].edit; 
+      } else {
+        //admin
+        $scope.addProductPolicy =  true;
+        $scope.deleteProductPolicy = true; 
+        $scope.editProductPolicy = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
@@ -208,8 +270,29 @@
     };
   }]);
 
-  app.controller('ProductPoliciesPackageCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+  app.controller('ProductPoliciesPackageCtl',['$scope','PermissionServ','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,PermissionServ,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
     // edit form data 
+      PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[12]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addProductPolicy =  response.data[12].add;
+        $scope.deleteProductPolicy = response.data[12].delete; 
+        $scope.editProductPolicy = response.data[12].edit; 
+      } else {
+        //admin
+        $scope.addProductPolicy =  true;
+        $scope.deleteProductPolicy = true; 
+        $scope.editProductPolicy = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+
+
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;

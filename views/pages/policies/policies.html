@@ -6,8 +6,11 @@
           <div class="col col-xs-6">
             <h2>عرض السياسات</h2>
           </div>
+        <!--   <div class="col col-xs-3">
+            <input type="text" ng-change="searchP(search)" ng-model="search">
+          </div> -->
           <div class="col col-xs-6 text-left">
-            <a ui-sref="newPolicy" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة سياسة جديدة</a>
+            <a ng-show="addPolicy" ui-sref="newPolicy" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة سياسة جديدة</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -27,8 +30,8 @@
                 <td>{{policy.name}}</td>
                 <td>{{policy.description}}</td>
                 <td class="text-center">
-                  <a class="btn btn-success btn-sm" ui-sref="editPolicy({id:policy._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(policy._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editPolicy" class="btn btn-success btn-sm" ui-sref="editPolicy({id:policy._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deletePolicy" class="btn btn-success btn-sm" ng-click="showDeleteModel(policy._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

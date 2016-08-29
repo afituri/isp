@@ -1,11 +1,20 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('NewUserCtl',['$scope','$state','UserServ','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,UserServ,MenuFac,CustomersServ,HelperServ,toastr){
+  app.controller('NewUserCtl',['$scope','$state','PermissionServ','UserServ','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,PermissionServ,UserServ,MenuFac,CustomersServ,HelperServ,toastr){
     $scope.newUserForm={};
 
     $scope.UserType = function() {
-      alert($scope.newServiceForm.type);
+      /*alert($scope.newServiceForm.type);*/
+      $scope.permissinFlag=false;
+      if($scope.newUserForm.type ==2){
+        $scope.permissinFlag=true;
+        PermissionServ.getAllPermission().then(function(result){
+          $scope.allPermissions = result.data;
+        },function(result){
+          console.log("Somthing went wrong");
+        })
+      }
     }
 
 

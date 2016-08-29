@@ -10,7 +10,7 @@
             <input type="text" class="form-control input-sm" ng-model="searchByAll" ng-change="searchSupplier()" placeholder="البحث / اسم المورد / اسم الشركة / الايميل / رقم هاتف الشركة و المخول ..">
          </div>
           <div class="col col-xs-3 text-left">
-            <a ui-sref="newSupplier" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مورد جديد</a>
+            <a ng-show="addSupplier" ui-sref="newSupplier" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مورد جديد</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -43,8 +43,8 @@
                 <td>{{supplier.phone}}</td>
                 <td>{{supplier.repPhone}}</td>
                 <td>
-                  <a class="btn btn-success btn-sm" ui-sref="editSupplier({id:supplier._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(supplier._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editSupplier" class="btn btn-success btn-sm" ui-sref="editSupplier({id:supplier._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteSupplier" class="btn btn-success btn-sm" ng-click="showDeleteModel(supplier._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

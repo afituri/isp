@@ -1,0 +1,645 @@
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<div class="widget-box animated fadeIn">
+  <h5><i class="fa fa-plus"></i>&nbsp;إضافة الصلاحيات </h5>
+  <hr>
+  <form novalidate ng-submit="editPerm()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="control-label">اسم الصلاحية</label>
+          <input class="form-control input-sm" type="text" ng-model="editPermission.name"  placeholder="اسم الصلاحية" required>
+        </div>
+      </div>
+    </div>
+
+     <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="control-label">الوصف</label>
+          <textarea class="form-control input-sm" type="text" ng-model="editPermission.description"  placeholder="وصف الصلاحية" required></textarea>
+        </div>
+      </div>
+    </div>
+        
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-primary" >
+            <div class="panel-heading">لوحة المعلومات</div>
+              <div class="panel-body">
+                <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل الدولار</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                          <!-- <input type="checkbox"  ng-click="allDollar(allDol)" checked ng-model="allDol" data-toggle="toggle" > -->
+                          <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.dollar.all]" ng-click="editPermission.dollar.all = !editPermission.dollar.all">{{!editPermission.dollar.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة الدولار</td>
+                        <td class="text-center">
+                         <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.dollar.add]" ng-click="editPermission.dollar.add = !editPermission.dollar.add">{{!editPermission.dollar.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح الدولار</td>
+                        <td class="text-center">
+                         <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.dollar.delete]" ng-click="editPermission.dollar.delete = !editPermission.dollar.delete">{{!editPermission.dollar.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل الموزعين</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                          <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.resselers.all]" ng-click="editPermission.resselers.all = !editPermission.resselers.all">{{!editPermission.resselers.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة الموزع</td>
+                        <td class="text-center">
+                          <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.resselers.add]" ng-click="editPermission.resselers.add = !editPermission.resselers.add">{{!editPermission.resselers.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح الموزع</td>
+                        <td class="text-center">
+                          <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.resselers.delete]" ng-click="editPermission.resselers.delete = !editPermission.resselers.delete">{{!editPermission.resselers.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td > تعديل الموزع</td>
+                        <td class="text-center">
+                          <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.resselers.edit]" ng-click="editPermission.resselers.edit = !editPermission.resselers.edit">{{!editPermission.resselers.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل الخدمة </th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.service.all]" ng-click="editPermission.service.all = !editPermission.service.all">{{!editPermission.service.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة الخدمة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.service.add]" ng-click="editPermission.service.add = !editPermission.service.add">{{!editPermission.service.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح الخدمة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.service.delete]" ng-click="editPermission.service.delete = !editPermission.service.delete">{{!editPermission.service.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                         <tr >
+                        <td > تعديل الخدمة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.service.edit]" ng-click="editPermission.service.edit = !editPermission.service.edit">{{!editPermission.service.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل المزود</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                            <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.serviceProviders.all]" ng-click="editPermission.serviceProviders.all = !editPermission.serviceProviders.all">{{!editPermission.serviceProviders.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة المزود</td>
+                        <td class="text-center">
+                            <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.serviceProviders.add]" ng-click="editPermission.serviceProviders.add = !editPermission.serviceProviders.add">{{!editPermission.serviceProviders.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح المزود</td>
+                        <td class="text-center">
+                            <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.serviceProviders.delete]" ng-click="editPermission.serviceProviders.delete = !editPermission.serviceProviders.delete">{{!editPermission.serviceProviders.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > تعديل المزود</td>
+                        <td class="text-center">
+                            <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.serviceProviders.edit]" ng-click="editPermission.serviceProviders.edit = !editPermission.serviceProviders.edit">{{!editPermission.serviceProviders.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل الموردين </th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.suppliers.all]" ng-click="editPermission.suppliers.all = !editPermission.suppliers.all">{{!editPermission.suppliers.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة موردين</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.suppliers.add]" ng-click="editPermission.suppliers.add = !editPermission.suppliers.add">{{!editPermission.suppliers.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح الموردين</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.suppliers.delete]" ng-click="editPermission.suppliers.delete = !editPermission.suppliers.delete">{{!editPermission.suppliers.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                         <tr >
+                        <td > تعديل الموردين</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.suppliers.edit]" ng-click="editPermission.suppliers.edit = !editPermission.suppliers.edit">{{!editPermission.suppliers.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل المخازن</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.warehouses.all]" ng-click="editPermission.warehouses.all = !editPermission.warehouses.all">{{!editPermission.warehouses.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة المخازن</td>
+                        <td class="text-center">
+                             <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.warehouses.add]" ng-click="editPermission.warehouses.add = !editPermission.warehouses.add">{{!editPermission.warehouses.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح المخازن</td>
+                        <td class="text-center">
+                            <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.warehouses.delete]" ng-click="editPermission.warehouses.delete = !editPermission.warehouses.delete">{{!editPermission.warehouses.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > تعديل المخازن</td>
+                        <td class="text-center">
+                             <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.warehouses.edit]" ng-click="editPermission.warehouses.edit = !editPermission.warehouses.edit">{{!editPermission.warehouses.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل المخزون </th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                          
+                          <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.instock.all]" ng-click="editPermission.instock.all = !editPermission.instock.all">{{!editPermission.instock.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة المخزون</td>
+                        <td class="text-center">
+                            <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.instock.add]" ng-click="editPermission.instock.add = !editPermission.instock.add">{{!editPermission.instock.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح المخزون</td>
+                        <td class="text-center">
+                            <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.instock.delete]" ng-click="editPermission.instock.delete = !editPermission.instock.delete">{{!editPermission.instock.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                         <tr >
+                        <td > تعديل المخزون</td>
+                        <td class="text-center">
+                          <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.instock.edit]" ng-click="editPermission.instock.edit = !editPermission.instock.edit">{{!editPermission.instock.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل منتج الخدمة</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productServices.all]" ng-click="editPermission.productServices.all = !editPermission.productServices.all">{{!editPermission.productServices.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة منتج الخدمة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productServices.add]" ng-click="editPermission.productServices.add = !editPermission.productServices.add">{{!editPermission.productServices.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح منتج الخدمة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productServices.delete]" ng-click="editPermission.productServices.delete = !editPermission.productServices.delete">{{!editPermission.productServices.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > تعديل منتج الخدمة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productServices.edit]" ng-click="editPermission.productServices.edit = !editPermission.productServices.edit">{{!editPermission.productServices.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <div class="row">
+               <div class="col-md-6">
+                    <table class="table table-striped table-condensed jambo_table" >
+                      <thead>
+                        <tr>
+                          <th>تسجيل سياسات المنتج </th>
+                          <th class="text-center">الحالة</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         <tr >
+                          <td >الكــل</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.all]" ng-click="editPermission.productPolicies.all = !editPermission.productPolicies.all">{{!editPermission.productPolicies.all && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                        <tr >
+                          <td >إضافة سياسات المنتج</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.add]" ng-click="editPermission.productPolicies.add = !editPermission.productPolicies.add">{{!editPermission.productPolicies.add && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                         <tr >
+                          <td > مسح سياسات المنتج</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.delete]" ng-click="editPermission.productPolicies.delete = !editPermission.productPolicies.delete">{{!editPermission.productPolicies.delete && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                           <tr >
+                          <td > تعديل سياسات المنتج</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.edit]" ng-click="editPermission.productPolicies.edit = !editPermission.productPolicies.edit">{{!editPermission.productPolicies.edit && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                 <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل منتج ألمعدة</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productItems.all]" ng-click="editPermission.productItems.all = !editPermission.productItems.all">{{!editPermission.productItems.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة سياسات المنتج</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productItems.add]" ng-click="editPermission.productItems.add = !editPermission.productItems.add">{{!editPermission.productItems.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح سياسات المنتج</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productItems.delete]" ng-click="editPermission.productItems.delete = !editPermission.productItems.delete">{{!editPermission.productItems.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                         <tr >
+                        <td > تعديل سياسات المنتج</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productItems.edit]" ng-click="editPermission.productItems.edit = !editPermission.productItems.edit">{{!editPermission.productItems.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل  الفاتورة</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.invoice.all]" ng-click="editPermission.invoice.all = !editPermission.invoice.all">{{!editPermission.invoice.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >طباعة الفاتورة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.invoice.add]" ng-click="editPermission.invoice.add = !editPermission.invoice.add">{{!editPermission.invoice.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح الفاتورة </td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.invoice.delete]" ng-click="editPermission.invoice.delete = !editPermission.invoice.delete">{{!editPermission.invoice.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+          
+
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل منتج الحزمة</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPackages.all]" ng-click="editPermission.productPackages.all = !editPermission.productPackages.all">{{!editPermission.productPackages.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة سياسات المنتج</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPackages.add]" ng-click="editPermission.productPackages.add = !editPermission.productPackages.add">{{!editPermission.productPackages.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح سياسات المنتج</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPackages.delete]" ng-click="editPermission.productPackages.delete = !editPermission.productPackages.delete">{{!editPermission.productPackages.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                         <tr >
+                        <td > تعديل سياسات المنتج</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPackages.edit]" ng-click="editPermission.productPackages.edit = !editPermission.productPackages.edit">{{!editPermission.productPackages.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل الزبون </th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.customers.all]" ng-click="editPermission.customers.all = !editPermission.customers.all">{{!editPermission.customers.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >إضافة الزبون</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.customers.add]" ng-click="editPermission.customers.add = !editPermission.customers.add">{{!editPermission.customers.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح الزبون</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.customers.delete]" ng-click="editPermission.customers.delete = !editPermission.customers.delete">{{!editPermission.customers.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                         <tr >
+                        <td > تعديل الزبون</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.customers.edit]" ng-click="editPermission.customers.edit = !editPermission.customers.edit">{{!editPermission.customers.edit && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="col-md-6">
+                    <table class="table table-striped table-condensed jambo_table" >
+                      <thead>
+                        <tr>
+                          <th>تسجيل  السياسات</th>
+                          <th class="text-center">الحالة</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         <tr >
+                          <td >الكــل</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.policies.all]" ng-click="editPermission.policies.all = !editPermission.policies.all">{{!editPermission.policies.all && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                        <tr >
+                          <td >إضافة السياسة</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.policies.add]" ng-click="editPermission.policies.add = !editPermission.policies.add">{{!editPermission.policies.add && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                         <tr >
+                          <td > مسح السياسة </td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.policies.delete]" ng-click="editPermission.policies.delete = !editPermission.policies.delete">{{!editPermission.policies.delete && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                         <tr >
+                          <td > تعديل السياسة</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.policies.edit]" ng-click="editPermission.policies.edit = !editPermission.policies.edit">{{!editPermission.policies.edit && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+
+
+              <div class="row">
+                <!-- <div class="col-md-6">
+                    <table class="table table-striped table-condensed jambo_table" >
+                      <thead>
+                        <tr>
+                          <th>تسجيل سياسات المنتج </th>
+                          <th class="text-center">الحالة</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         <tr >
+                          <td >الكــل</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.all]" ng-click="editPermission.productPolicies.all = !editPermission.productPolicies.all">{{!editPermission.productPolicies.all && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                        <tr >
+                          <td >إضافة سياسات المنتج</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.add]" ng-click="editPermission.productPolicies.add = !editPermission.productPolicies.add">{{!editPermission.productPolicies.add && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                         <tr >
+                          <td > مسح سياسات المنتج</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.delete]" ng-click="editPermission.productPolicies.delete = !editPermission.productPolicies.delete">{{!editPermission.productPolicies.delete && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                           <tr >
+                          <td > تعديل سياسات المنتج</td>
+                          <td class="text-center">
+                              <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.productPolicies.edit]" ng-click="editPermission.productPolicies.edit = !editPermission.productPolicies.edit">{{!editPermission.productPolicies.edit && 'غير مفعل' || 'مفعل'}}</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div> -->
+
+                <!-- <div class="col-md-6">
+                  <table class="table table-striped table-condensed jambo_table" >
+                    <thead>
+                      <tr>
+                        <th>تسجيل  الفاتورة</th>
+                        <th class="text-center">الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr >
+                        <td >الكــل</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.invoice.all]" ng-click="editPermission.invoice.all = !editPermission.invoice.all">{{!editPermission.invoice.all && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td >طباعة الفاتورة</td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.invoice.add]" ng-click="editPermission.invoice.add = !editPermission.invoice.add">{{!editPermission.invoice.add && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                       <tr >
+                        <td > مسح الفاتورة </td>
+                        <td class="text-center">
+                           <a class="btn" ng-class="{true: 'btn-danger', false: 'btn-primary'}[!editPermission.invoice.delete]" ng-click="editPermission.invoice.delete = !editPermission.invoice.delete">{{!editPermission.invoice.delete && 'غير مفعل' || 'مفعل'}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> -->
+              </div>
+
+            
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-4">
+        <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; تعديــل</button>
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-success btn-sm btn-block" ui-sref="permissions"><i class="fa fa-ban"></i>&nbsp;إلغاء</a>
+      </div>
+    </div>
+  </form>
+</div>

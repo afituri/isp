@@ -1,8 +1,26 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,$modal,MenuFac,CustomersServ,toastr,HelperServ){
+  app.controller('CustomersCtl',['$scope','PermissionServ','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,PermissionServ,$modal,MenuFac,CustomersServ,toastr,HelperServ){
     
+     PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[11]);
+        //employee
+        $scope.permission =false;
+        $scope.addCustomer =  response.data[11].add;
+        $scope.deleteCustomer = response.data[11].delete; 
+        $scope.editCustomer = response.data[11].edit; 
+      } else {
+        //admin
+        $scope.addCustomer =  true;
+        $scope.deleteCustomer = true; 
+        $scope.editCustomer = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
 
     
     

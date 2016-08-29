@@ -10,7 +10,7 @@
             <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchServices()" placeholder="البحث / اسم الخدمة ..">
         </div>
         <div class="col col-xs-5 text-left">
-            <a ui-sref="newService" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة جديدة جديدة</a>
+            <a ui-sref="newService" class="btn btn-sm btn-primary" ng-show="addService"><i class="fa fa-plus fa-fw" ></i>&nbsp;إضافة خدمة جديدة</a>
           </div>
         <div class="clearfix"></div>
       </div>
@@ -36,8 +36,8 @@
                 <td>{{service.name}}</td>
                 <td>{{service.serviceprovider.name}}</td>
                 <td>
-                  <a class="btn btn-success btn-sm" ui-sref="editService({id:service._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(service._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editService" class="btn btn-success btn-sm" ui-sref="editService({id:service._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteService" class="btn btn-success btn-sm" ng-click="showDeleteModel(service._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

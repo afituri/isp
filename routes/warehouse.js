@@ -27,7 +27,6 @@ router.get('/all', userHelpers.isLogin ,function(req, res) {
 router.get('/allw', userHelpers.isLogin ,function(req, res) {
   // res.send(data.warehouses);
   wareMgr.getAllWarehousesw(function(warehouse){
-    console.log(warehouse);
     res.send(warehouse);
   });
 });

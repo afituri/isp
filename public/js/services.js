@@ -11,7 +11,7 @@
       'invoiceObj': []
     }
   });
-  app.service('HelperServ',['$http',function($http){
+  app.service('HelperServ',['$http','$rootScope',function($http,$rootScope){
     var self = {
       'stockObj': [],
       'citiesObj': [],
@@ -24,6 +24,7 @@
       'warehouseObjs': [],
       'etcObj': [],
       'resellersObj': [],
+      'notifications': {},
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
           self.stockObj = response.data.result;
@@ -105,12 +106,20 @@
         }, function(response) {
           console.log("Something went wrong in getAllResellers");
         });
+      },
+      'getNotification': function(){
+        return $http.get('/invoice/Notification/').then(function(response) {
+          self.notifications = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllResellers");
+        });
       }
     };
     self.getAllStock();
     self.getAllCities();
     self.getAllSuppliers();
     self.getAllServiceProviders();
+    // self.watchNotification();
     return self;
   }]);
 
@@ -132,6 +141,33 @@
     return self;
    }]);
 
+  app.service('PermissionServ',['$http',function($http){
+    var self = {
+      'addPermssion': function(permission){
+        return $http.post('/permission',permission);
+      },
+      'getPermission': function(pageSize,currentPage){
+        return $http.get('/permission/'+pageSize+'/'+currentPage);
+      },
+      'deletePermission': function(id){
+        return $http.delete('/permission/'+id);
+      },
+      'getPermissionByID': function(id){
+        return $http.get('/permission/'+id);
+      },
+      'editPermission': function(id,obj){
+        return $http.put('/permission/'+id,obj);
+      },
+      'getAllPermission': function(){
+        return $http.get('/permission');
+      },
+      'getSubpermission': function(){
+        return $http.get('/permission/getSubPermission');
+      }
+    };
+    return self;
+  }]);
+
   app.service('UserServ',['$http',function($http){
     var self = {
       'getUserById': function(id){
@@ -141,7 +177,6 @@
         return $http.get('/user/'+pageSize+'/'+currentPage);
       },
       'addUser': function(UserObj){
-        console.log(UserObj);
         return $http.post('/user/add',UserObj);
       },
       'editUser': function(id,UserObj){
@@ -305,8 +340,14 @@
       'addInStock': function(obj){
         return $http.post('/inStock/add',obj);
       },
+      'transfer': function(obj,to){
+        return $http.post('/inStock/transfer',{obj:obj,to:to});
+      },
       'getByWP': function(idStock,idItem){
         return $http.get('/inStock/getByWP/'+idStock+'/'+idItem);
+      },
+      'getByWare': function(idStock,pageSize,currentPage){
+        return $http.get('/inStock/getByWare/'+idStock+'/'+pageSize+'/'+currentPage);
       },
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
@@ -537,6 +578,11 @@
       },
       'deletePolicy': function(id){
         return $http.delete('/policy/delete/'+id);
+      },
+      'searchPolicy': function(name){
+        console.log(name);
+        //return $http.get('//');
+
       }
     };
     return self;
@@ -601,6 +647,9 @@
       },
       'getInvoicedata': function(id){
         return $http.get('/invoice/invoicesdata/'+id);
+      },
+      'getNotification': function(){
+        return $http.get('/invoice/Notification/');
       },
       'addInvoice': function(invoiceObj){
         return $http.post('/invoice/add',invoiceObj);

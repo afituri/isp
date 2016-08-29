@@ -1,7 +1,30 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('SuppliersCtl',['$scope','$modal','MenuFac','SuppliersServ','toastr',function($scope,$modal,MenuFac,SuppliersServ,toastr){
+  app.controller('SuppliersCtl',['$scope','PermissionServ','$modal','MenuFac','SuppliersServ','toastr',function($scope,PermissionServ,$modal,MenuFac,SuppliersServ,toastr){
+    
+    PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[4]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addSupplier =  response.data[4].add;
+        $scope.deleteSupplier = response.data[4].delete; 
+        $scope.editSupplier = response.data[4].edit; 
+      } else {
+        //admin
+        $scope.addSupplier =  true;
+        $scope.deleteSupplier = true; 
+        $scope.editSupplier = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    }); 
+
+
+
     MenuFac.active = 3;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;

@@ -90,7 +90,28 @@
 
   }]);
 
-  app.controller('InvoicesCtl',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+  app.controller('InvoicesCtl',['$scope','PermissionServ','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,PermissionServ,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+       PermissionServ.getSubpermission().then(function(response){
+      $scope.permission =true;
+      if(response.data[0] != undefined){
+        console.log(response.data[2]);
+        //employee
+        $scope.permission =false;
+
+        $scope.addInvoice =  response.data[2].add;
+        $scope.deleteInvoice = response.data[2].delete; 
+        $scope.editInvoice = response.data[2].edit; 
+      } else {
+        //admin
+        $scope.addInvoice =  true;
+        $scope.deleteInvoice = true; 
+        $scope.editInvoice = true;
+      }
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+
+
       InvoicesServ.getTotal($stateParams.id).then(function(response) {
       console.log("response");
       console.log(response.data);

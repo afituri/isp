@@ -4,13 +4,13 @@
       <div class="x_title">
         <div class="row">
           <div class="col-xs-2">
-            <h2 class="pull-right">عرض المخزون</h2>
+            <h2 class="pull-right">نقل مخزون</h2>
           </div>
           <div class="col-xs-7">
            <!--  <input type="text" class="form-control input-sm" ng-model="searchByName" placeholder="بحث..."> -->
           </div>
           <div class="col-xs-3 text-left">
-            <a ng-show="addInStock" ui-sref="newInStock" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مخزون جديد</a>
+            
             <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus"  ng-click="showPassword()" >
               <em ng-if="hidePass" class="glyphicon glyphicon-eye-open"></em>
               <em ng-if="showPass" class="glyphicon glyphicon-eye-close"></em>
@@ -19,7 +19,32 @@
         </div>
         <div class="clearfix"></div>
       </div>
+      <div class="col-xs-3 col-md-3">
+            <div class="form-group">
+              <label>عرض المنتجات حسب المخزن</label>
+              <select class="form-control input-sm" ng-model="warehouse" ng-change="getIn()">
+                <option value=""selected>عرض الكل</option>
+                <option ng-repeat="warehouse in objects.warehouseObjs" value="{{warehouse._id}}">{{warehouse.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-3 col-md-3 col-md-offset-3">
+            <div class="form-group">
+              <label>نقل الى</label>
+              <select class="form-control input-sm" ng-model="warehouseTo" >
+                <option value="" disabled selected>الرجاء الاختيار</option>
+                <option ng-repeat="warehouse in objects.warehouseObjs" value="{{warehouse._id}}">{{warehouse.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-3 col-md-1 ">
+            <div class="form-group">
+              <label>نقل </label>
+              <button type="button" ng-click= "transfer()" class="btn btn-primary btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp;نقل</button>
+            </div> 
+          </div>
       <div class="x_content">
+
         <div class="table-responsive">
           <div ng-show="getInStocks.length == 0">
             <div class="alert alert-info">
@@ -47,8 +72,7 @@
                 <td>{{inStocks.username}}</td>
                 <td> <p ng-if="showPass">{{inStocks.password}}</p> <p ng-if="hidePass"> ******** </p></td>
                 <td>
-                  <a ng-show="editInStock" class="btn btn-success btn-xs" ui-sref="editInStock({id:inStocks._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a ng-show="deleteInStock" class="btn btn-success btn-xs" ng-click="showDeleteModel(inStocks._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <input type="checkbox" ng-click="check(inStocks._id)"/>
                 </td>
               </tr>
             </tbody>

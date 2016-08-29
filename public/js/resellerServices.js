@@ -22,8 +22,12 @@
       'itemsObj': [],
       'servicesObj': [],
       'packagesObj': [],
+      'itemsRObj': [],
+      'servicesRObj': [],
+      'packagesRObj': [],
       'policiesObj': [],
       'etcObj': [],
+      'etcRObj': [],
       'resellersObj': [],
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
@@ -80,6 +84,34 @@
       'getAllEtcs': function(){
         return $http.get('/product/allEtc').then(function(response) {
           self.etcObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
+        });
+      },
+      'getAllItemsR': function(){
+        return $http.get('/product/allItemR').then(function(response) {
+          self.itemsRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllServicesR': function(){
+        return $http.get('/product/allServiceR').then(function(response) {
+          self.servicesRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllServices");
+        });
+      },
+      'getAllPackagesR': function(){
+        return $http.get('/product/allPackageR').then(function(response) {
+          self.packagesRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
+        });
+      },
+      'getAllEtcsR': function(){
+        return $http.get('/product/allEtcR').then(function(response) {
+          self.etcRObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllPackages");
         });
@@ -331,8 +363,12 @@
       'itemsObj': [],
       'servicesObj': [],
       'packagesObj': [],
+      'itemsRObj': [],
+      'servicesRObj': [],
+      'packagesRObj': [],
       'policiesObj': [],
       'etcObj': [],
+      'etcRObj': [],
       'resellersObj': [],
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
@@ -396,6 +432,35 @@
       'getAllEtcs': function(){
         return $http.get('/product/allEtc').then(function(response) {
           self.etcObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
+        });
+      },
+      'getAllItemsR': function(){
+        return $http.get('/product/allItemR').then(function(response) {
+          console.log(response.data);
+          self.itemsRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllServicesR': function(){
+        return $http.get('/product/allServiceR').then(function(response) {
+          self.servicesRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllServices");
+        });
+      },
+      'getAllPackagesR': function(){
+        return $http.get('/product/allPackageR').then(function(response) {
+          self.packagesRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
+        });
+      },
+      'getAllEtcsR': function(){
+        return $http.get('/product/allEtcR').then(function(response) {
+          self.etcRObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllPackages");
         });

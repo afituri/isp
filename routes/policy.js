@@ -83,10 +83,8 @@ router.post('/productPolicyService/:id',userHelpers.isLogin , function(req, res)
 });
 
 router.get('/productPolicyReseller',userHelpers.isLogin , function(req, res) {
-  console.log("ddddd");
   productPolicyMgr.getByPolicy(req.user.policy,function(result){
-    console.log(req.user.policy);
-    console.log(result);
+
     res.send(result);
   });
 });

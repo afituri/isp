@@ -7,7 +7,7 @@
             <h2>عرض سياسات منتج (الحزمة)</h2>
           </div>
           <div class="col col-xs-6 text-left">
-            <a ui-sref="newProductPolicy" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة سياسة منتج جديد</a>
+            <a ng-show="addProductPolicy" ui-sref="newProductPolicy" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة سياسة منتج جديد</a>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -40,8 +40,8 @@
                 <td>{{policy.packages.renewPrice}}</td>
                 <td>{{policy.packages.GBPrice}}</td>
                 <td>
-                  <a class="btn btn-success btn-sm" ui-sref="editProductPoliciesPackage({id:policy._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
-                  <a class="btn btn-success btn-sm" ng-click="showDeleteModel(policy._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                  <a ng-show="editProductPolicy" class="btn btn-success btn-sm" ui-sref="editProductPoliciesPackage({id:policy._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteProductPolicy" class="btn btn-success btn-sm" ng-click="showDeleteModel(policy._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
                 </td>
               </tr>
             </tbody>

@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var Permission = new Schema({
    name: { type: String},
+   description: { type: String},
    status: { type: Number, default:1}
 });
 
