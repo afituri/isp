@@ -82,6 +82,9 @@ module.exports = {
             cb(null);
           }
         });
+      });
+    },
+
 
 /*  getCustomerSearchAll:function(all,cb){
 
