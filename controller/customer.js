@@ -56,21 +56,37 @@ module.exports = {
 
   },
 
-  getCustomerSearchAll:function(all,cb){
-
-      model.Customer.find({"name" : { '$regex' : name, $options: '-i' }})
-      .exec(function(err, services){
-        if(!err){
-          console.log(services);
-          cb({result:services,count:count});
-        }else{
-          console.log(err);
-          cb(null);
-        }
+  getCustomerSearchAll:function(all,limit,page,cb){
+      console.log("ss");
+      page = parseInt(page);
+      page-=1;
+      limit = parseInt(limit);
+      model.Customer.count({'$or':[
+          {"name" : { '$regex' : all, $options: '-i' }},
+          {"repName" : { '$regex' : all, $options: '-i' }},
+          {"phone" : { '$regex' : all, $options: '-i' }},
+          {"city" : { '$regex' : all, $options: '-i' }},
+          ]},function(err,count){
+        model.Customer.find({'$or':[
+          {"name" : { '$regex' : all, $options: '-i' }},
+          {"repName" : { '$regex' : all, $options: '-i' }},
+          {"phone" : { '$regex' : all, $options: '-i' }},
+          {"city" : { '$regex' : all, $options: '-i' }},
+          {"name" : { '$regex' : all, $options: '-i' }}]
+          }).limit(limit).skip(page*limit)
+        .populate('user')
+        .exec(function(err, customers){
+          console.log(customers);
+          if(!err){
+            console.log(customers);
+            cb({result:customers,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
       });
     },
-  
-
   getCustomer :function(status,limit,page,cb){
     if(status==-1){
     page = parseInt(page);

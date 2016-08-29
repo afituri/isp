@@ -40,6 +40,57 @@ module.exports = {
     });
   },
 
+
+  getProductServiceByName:function(name,limit,page,cb){
+      page = parseInt(page);
+      page-=1;
+      limit = parseInt(limit);
+    model.Product.count({type:"service","name" : { '$regex' : name, $options: '-i' }},function(err,count){
+      model.Product.find({type:"service","name" : { '$regex' : name, $options: '-i' }}).limit(limit).skip(page*limit)
+        .exec(function(err, products){
+          if(!err){
+            cb({result:products,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      });
+    },
+  getProductPackagesByName:function(name,limit,page,cb){
+    console.log("blabla");
+      page = parseInt(page);
+      page-=1;
+      limit = parseInt(limit);
+    model.Product.count({type:"package","name" : { '$regex' : name, $options: '-i' }},function(err,count){
+      model.Product.find({type:"package","name" : { '$regex' : name, $options: '-i' }}).limit(limit).skip(page*limit)
+        .exec(function(err, products){
+          if(!err){
+            cb({result:products,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      });
+    },
+  getProductItemsByName:function(name,limit,page,cb){
+    console.log("blabla");
+      page = parseInt(page);
+      page-=1;
+      limit = parseInt(limit);
+    model.Product.count({type:"item","name" : { '$regex' : name, $options: '-i' }},function(err,count){
+      model.Product.find({type:"item","name" : { '$regex' : name, $options: '-i' }}).limit(limit).skip(page*limit)
+        .exec(function(err, products){
+          if(!err){
+            cb({result:products,count:count});
+          }else{
+            console.log(err);
+            cb(null);
+          }
+        });
+      });
+    },
   getProductPackageByService : function(id,cb){
     console.log(id);
      model.Product.find({'packages.service':id}).populate('supplier')

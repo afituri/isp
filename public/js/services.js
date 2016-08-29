@@ -353,9 +353,8 @@
   }]);
   app.service('CustomersServ',['$http',function($http){
     var self = {
-      'getCustomerByAll' : function(all){
-        console.log(all);
-        return $http.get('/customer/searchAll/'+all);
+      'getCustomerByAll' : function(all,pageSize,currentPage){
+        return $http.get('/customer/searchAll/'+all+'/'+pageSize+'/'+currentPage);
       },
       'getCustomers': function(status,pageSize,currentPage){
         console.log(status);
@@ -438,6 +437,9 @@
 
   app.service('ProductsServ',['$http',function($http){
     var self = {
+      'getProductsByName': function(name,pageSize,currentPage){
+        return $http.get('/product/searchService/'+name+'/'+pageSize+'/'+currentPage);
+      },
       'getProductServices': function(pageSize,currentPage){
         return $http.get('/product/service/'+pageSize+'/'+currentPage);
       },
@@ -453,11 +455,17 @@
       'getAllItem': function(type){
         return $http.get('/product/allItem');
       },
+      'getProductsPackagesByName': function(name,pageSize,currentPage){
+        return $http.get('/product/searchPackages/'+name+'/'+pageSize+'/'+currentPage);
+      },
       'getAllPackage': function(type){
         return $http.get('/product/allPackage');
       },
       'getProductItems': function(pageSize,currentPage){
         return $http.get('/product/item/'+pageSize+'/'+currentPage);
+      },
+      'getProductsItemsByName': function(name,pageSize,currentPage){
+        return $http.get('/product/searchItems/'+name+'/'+pageSize+'/'+currentPage);
       },
       'getProductPackages': function(pageSize,currentPage){
         return $http.get('/product/package/'+pageSize+'/'+currentPage);

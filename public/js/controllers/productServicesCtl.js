@@ -14,6 +14,20 @@
     }, function(response) {
       console.log("Something went wrong");
     });
+    $scope.searchProductService = function(){
+      $scope.package = '-1';
+      $scope.results = [];
+      if($scope.searchByName == ""){
+        $scope.init();
+      } else {
+      ProductsServ.getProductsByName($scope.searchByName,$scope.pageSize,$scope.currentPage).then(function(response){
+        $scope.productServices = response.data.result;
+        $scope.total = response.data.count;
+      },function(response){
+        console.log("Something went wrong");
+      });
+    }
+    }
     $scope.editProductService = function(){
       ProductsServ.editProductService($stateParams.id,$scope.editProductServiceForm).then(function(response) {
         if(response.data){
@@ -74,6 +88,20 @@
     HelperServ.getAllCities();
     $scope.cityObject = HelperServ;
 
+    $scope.searchProductItems = function(){
+      $scope.package = '-1';
+      $scope.results = [];
+      if($scope.searchByName == ""){
+        $scope.init();
+      } else {
+      ProductsServ.getProductsItemsByName($scope.searchByName,$scope.pageSize,$scope.currentPage).then(function(response){
+        $scope.productItems = response.data.result;
+        $scope.total = response.data.count;
+        console.log($scope.products);
+      },function(response){
+      });
+    }
+    }
     $scope.init = function () {
       ProductsServ.getProductItems($scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.productItems = response.data.result;
@@ -90,7 +118,6 @@
     }, function(response) {
       console.log("Something went wrong");
     });
-
     $scope.editProductItems = function(){
 /*      var objCity=angular.element('#country').val();
       console.log(objCity.slice(7,objCity.length));*/
@@ -168,6 +195,21 @@
       console.log("Something went wrong");
     });
 
+    $scope.searchProductPackages = function(){
+      $scope.package = '-1';
+      $scope.results = [];
+      if($scope.searchByName == ""){
+        $scope.init();
+      } else {
+      ProductsServ.getProductsPackagesByName($scope.searchByName,$scope.pageSize,$scope.currentPage).then(function(response){
+        $scope.products = response.data.result;
+        $scope.total = response.data.count;
+        console.log($scope.products);
+      },function(response){
+        console.log("Something went wrong");
+      });
+    }
+    }
     $scope.editProductPackages = function(){
       /*var objCity=angular.element('#country').val();
       console.log(objCity.slice(7,objCity.length));
