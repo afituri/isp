@@ -22,14 +22,17 @@
       console.log("Somthing went wrong");
     }); 
 
+    
+    
     $scope.searchCustomer = function(){
+      $scope.package = '-1';
+      $scope.results = [];
       if($scope.searchByName == ""){
-        $scope.init($scope.package,$scope.reseller);
+        $scope.init($scope.package,$scope.result);
       } else {
-      alert($scope.searchByName);
-      CustomersServ.getCustomerByAll($scope.searchByName).then(function(response){
-        $scope.customerss = response.data;
-
+      CustomersServ.getCustomerByAll($scope.searchByName,$scope.pageSize,$scope.currentPage).then(function(response){
+        $scope.customerss = response.data.result;
+        $scope.total = response.data.count;
       },function(response){
         console.log("Something went wrong");
       });

@@ -19,7 +19,6 @@ router.post('/restor',userHelpers.isLogin ,multipartyMiddleware,function(req , r
       if(results.length == req.body.length){
         res.send(results);
       }
-
     });
   });    
 });

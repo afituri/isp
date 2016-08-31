@@ -5,6 +5,23 @@ var productPolicyMgr = require("../controller/productPolicy");
 var userHelpers = require("../controller/userHelpers");
 
 
+router.get('/searchService/:name/:limit/:page',userHelpers.isLogin , function(req, res) {
+  productMgr.getProductServiceByName(req.params.name,req.params.limit,req.params.page,function(product){
+    res.send(product);
+  });
+});
+
+router.get('/searchPackages/:name/:limit/:page',userHelpers.isLogin , function(req, res) {
+  productMgr.getProductPackagesByName(req.params.name,req.params.limit,req.params.page,function(product){
+    res.send(product);
+  });
+});
+
+router.get('/searchItems/:name/:limit/:page',userHelpers.isLogin , function(req, res) {
+  productMgr.getProductItemsByName(req.params.name,req.params.limit,req.params.page,function(product){
+    res.send(product);
+  });
+});
 /* GET all customer */
 router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   productMgr.getProduct(req.params.limit,req.params.page,function(product){
@@ -18,6 +35,7 @@ router.get('/otherEquipment/:limit/:page',userHelpers.isLogin , function(req, re
     res.send(product);
   });
 });
+
 
 
 router.get('/all', userHelpers.isLogin ,function(req, res) {
