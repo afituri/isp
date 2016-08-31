@@ -330,10 +330,12 @@ module.exports = {
   
   deleteCustomer : function(id,cb){
     model.Invoice.find({customer:id}, function(err,resul) {
+      console.log(resul);
       if(resul.length > 0){
         cb(1)
       } else{
         model.Customer.remove({_id:id}, function(err,result) {
+          console.log(result);
           if (!err) {
             cb(2)
           } else {
