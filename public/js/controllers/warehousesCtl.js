@@ -91,6 +91,7 @@
     $scope.newWarehouse = function(){
       WarehousesServ.addWarehouse($scope.newWarehouseForm).then(function(response) {
         if(response.data){
+          $scope.newWarehouseForm = {};
           $state.go('warehouses');
           toastr.success('تمت إضافة مخزن جديد بنجاح');
         } else {
