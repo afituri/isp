@@ -86,6 +86,7 @@
     $scope.newService = function(){
       ServicesServ.addService($scope.newServiceForm).then(function(response) {
         if(response.data){
+          $scope.newServiceForm = {};
           $state.go('services');
           toastr.success('تمت إضافة خدمة جديدة بنجاح');
         } else {

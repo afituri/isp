@@ -172,6 +172,7 @@ app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','
     $scope.newInStockForm.csv=$scope.csv.result;
     InStockServ.addInStock($scope.newInStockForm).then(function(response) {
       if(response.data){
+        $scope.newInStockForm={};
         $state.go('inStock');
         toastr.success('تمت إضافة المخزون بنجاح');
       } else {

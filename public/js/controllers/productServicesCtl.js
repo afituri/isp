@@ -376,6 +376,7 @@
 
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
+          $scope.newProductForm = {};
           $state.go('productServices');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
@@ -389,6 +390,7 @@
       $scope.newProductForm.type = "etc";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
+          $scope.newProductForm = {};
           $state.go('productOtherEquipments');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
@@ -402,6 +404,7 @@
       $scope.newProductForm.type = "item";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
+          $scope.newProductForm = {};
           $state.go('productItems');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {
@@ -415,6 +418,7 @@
       $scope.newProductForm.type = "package";
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
+          $scope.newProductForm = {};
           $state.go('productPackages');
           toastr.success('تمت إضافة منتج جديد بنجاح');
         } else {

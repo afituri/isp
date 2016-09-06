@@ -92,6 +92,7 @@
     $scope.newResller = function(){
       ResllersServ.addResller($scope.newResllerForm).then(function(response) {
         if(response.data){
+          $scope.newResllerForm = {};
           $state.go('resellers');
           toastr.success('تمت إضافة موزع جديد بنجاح');
         } else {

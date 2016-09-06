@@ -89,6 +89,7 @@
     $scope.newPolicy = function(){
       PoliciesServ.addPolicy($scope.newPolicyForm).then(function(response) {
         if(response.data){
+          $scope.newPolicyForm = {};
           $state.go('policies');
           toastr.success('تمت إضافة سياسة جديدة بنجاح');
         } else {

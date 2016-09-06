@@ -91,6 +91,7 @@
     $scope.newSupplier = function(){
       SuppliersServ.addSupplier($scope.newSupplierForm).then(function(response) {
         if(response.data){
+          $scope.newSupplierForm = {};
           $state.go('suppliers');
           toastr.success('تمت إضافة مورد جديد بنجاح');
         } else {

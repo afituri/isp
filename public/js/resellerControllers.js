@@ -173,6 +173,7 @@
       $scope.newCustomerForm.status = 2;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
+          $scope.newCustomerForm = {};
           $state.go('customersPending');
           toastr.success('تمت إضافة زبون جديد بنجاح');
         } else {
@@ -191,6 +192,7 @@
     $scope.newCustomer = function(){
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
+          $scope.newCustomerForm = {};
           $state.go('customers');
           toastr.success('تمت إضافة زبون جديد بنجاح');
         } else {
@@ -695,6 +697,7 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
       $scope.newCustomerForm.status=1;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
+          $scope.newCustomerForm = {};
           $state.go('customers');
           toastr.success('تمت إضافة زبون جديد بنجاح');
         } else {

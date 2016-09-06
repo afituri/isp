@@ -230,6 +230,7 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
       $scope.newCustomerForm.status=1;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
+          $scope.newCustomerForm = {};
           $state.go('customers');
           toastr.success('تمت إضافة زبون جديد بنجاح');
         } else {

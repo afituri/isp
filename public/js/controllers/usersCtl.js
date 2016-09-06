@@ -26,6 +26,7 @@
         // insert data
         UserServ.addUser($scope.newUserForm).then(function(response) {
         if(response.data){
+          $scope.newUserForm={};
           $state.go('user');
           toastr.success('تمت إضافة admin جديد بنجاح');
         } else {

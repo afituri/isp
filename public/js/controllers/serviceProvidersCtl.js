@@ -70,6 +70,7 @@
     $scope.newServiceProvider = function(){
       ServiceProvidersServ.addServiceProvider($scope.newServiceProviderForm).then(function(response) {
         if(response.data){
+          $scope.newServiceProviderForm = {};
           $state.go('serviceProviders');
           toastr.success('تمت إضافة مزود خدمة جديد بنجاح');
         } else {
