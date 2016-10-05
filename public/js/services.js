@@ -363,7 +363,10 @@
       },
       'getInfoByMackAdress': function(mac){
         return $http.get('/inStock/searchMac/'+mac);
-      } 
+      },
+      'getUserPassByWare': function(id){
+        return $http.get('/inStock/getUserPassByWare/'+id);
+      }
     };
 
     return self;

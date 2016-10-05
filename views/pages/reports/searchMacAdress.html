@@ -3,12 +3,29 @@
     <div class="x_panel">
       <div class="x_title">
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-xs-3">
             <h2 class="pull-right">عرض (الماك أدرس) للزبائن </h2>
           </div>
-          <div class="col-xs-5">
-            <input type="text" class="form-control input-sm" ng-model="searchByAll" ng-change="searchMacAdress()" placeholder="البحث/ الإسم / البريد الإلكتروني / الهاتف">
+           <div class="col-xs-1">
+            <label class="control-label">العدد</label>
+            <input type="text" class="form-control input-sm" ng-model="searchByAll" placeholder="عدد الزبائن">
           </div>
+          <div class="col-xs-5">
+            <label class="control-label">بحث عام</label>
+            <input type="text" class="form-control input-sm" ng-model="searchByAll" ng-change="searchMacAdress()" placeholder="{{message}}">
+          </div>
+          <div class="col-xs-1">
+          <label class="control-label">سيريال</label>
+          <input type="checkbox" name="serial" ng-model="idSwitch" ng-click="switch(idSwitch)"> 
+          </div>
+          <div class="col-xs-2">
+           <label class="control-label">الخدمة</label>
+                <select class="form-control input-sm" ng-model="Service" ng-required-err-type="required" ng-options="service._id as service.name for service in allService" ng-change="ServiceFunc(Service)" required>
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                </select>
+          </div>
+
+
           <div class="col-xs-3 text-left">
             <!-- <a class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a> -->
           </div>

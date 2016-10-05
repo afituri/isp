@@ -12,6 +12,30 @@ router.get('/search/:id', userHelpers.isLogin ,function(req, res) {
     res.send(InStock);
   });
 });
+
+router.get('/macAddress/:hasMacAdress', userHelpers.isLogin, function (req, res, next){
+  console.log("here");
+  instockMgr.hasMacAdress(req.params.hasMacAdress,function (result){
+    console.log(result);
+    if(result!=0){
+      //send true if we find a match
+      res.send({isValid: true});
+    } else {
+      //send false if we didn't find a match
+      res.send({isValid: false});
+    }
+  });
+});
+
+
+
+//getUserPassByWare
+router.get('/getUserPassByWare/:id', userHelpers.isLogin ,function(req, res) {
+  instockMgr.getUserPassByWare(req.params.id,function(InStock){
+    console.log(InStock);
+    res.send(InStock);
+  });
+});
 //getByWP 
 router.get('/getByWP/:idStock/:idItem', userHelpers.isLogin ,function(req, res) {
   instockMgr.getByWP(req.params.idStock,req.params.idItem,function(result){

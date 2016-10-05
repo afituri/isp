@@ -30,10 +30,8 @@ router.get('/invoicesdata/:id', userHelpers.isLogin ,function(req, res) {
       }
       if(i == invoices.order.length-1){
         res.send(invoices);  
-      }
-      
+      }   
     }
-    
   });
 });
 /* GET all invoice */
