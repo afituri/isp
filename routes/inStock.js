@@ -13,7 +13,7 @@ router.get('/search/:id', userHelpers.isLogin ,function(req, res) {
   });
 });
 
-router.get('/macAddress/:hasMacAdress', userHelpers.isLogin, function (req, res, next){
+router.get('/hasMacAdress', userHelpers.isLogin, function (req, res, next){
   console.log("here");
   instockMgr.hasMacAdress(req.params.hasMacAdress,function (result){
     console.log(result);

@@ -6,7 +6,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <form novalidate name="newInStockForm" ng-submit="newInStock()">
+        <form novalidate name="stockForm" ng-submit="newInStock()">
           <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">نوعية الادخال</label>
@@ -61,8 +61,9 @@
             <div class="col-md-4" >
               <div class="form-group">
                 <label class="control-label">ماك ادرس/سيريال نامبر</label>
-                <input class="form-control input-sm" type="text" name="newInStock" ng-model="newInStockForm.macAddress" ng-required-err-type="required" placeholder="ماك ادرس/سيريال نامبر" required>
-                <i style="position:absolute; margin:-32px;" class="fa fa-spinner fa-pulse fa-2x" ng-show="newInStockForm.newInStock.$pending"></i>
+                <input class="form-control input-sm" type="text" name="newInStock" ng-model="newInStockForm.macAddress" ng-remote-validate="/inStock/hasMacAdress/" ng-remote-throttle="800" ng-remote-method="GET" ng-required-err-type="required" placeholder="ماك ادرس/سيريال نامبر" required>
+                <i style="position:absolute;margin:-22px;font-size:22px;" class="fa fa-spinner fa-pulse" ng-show="stockForm.newInStock.$pending"></i>
+                <span ng-show="stockForm.newInStock.$error.ngRemoteValidate" style="position:absolute;color:red;">ماك ادرس/سيريال نامبر موجود مسبقا!</span>
               </div>
             </div>
             <div class="col-md-4" >
