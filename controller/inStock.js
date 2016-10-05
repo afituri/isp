@@ -85,6 +85,20 @@ module.exports = {
       }
     });
   },
+
+  getUserPassByWare: function(id,cb){
+    model.Instock.find({warehouse:id},function(err, result){
+      if(!err){
+        cb(result);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+
+  },
+
+
   getAllInStockTake :function(cb){
     model.Instock.find({status:2}).populate('invoice')
       .exec(function(err, result){
@@ -181,6 +195,17 @@ module.exports = {
   },
 getByWP :function(idW,idP,cb){
   model.Instock.find({$and: [ {status:1},{product:idP},{warehouse:idW}]}, function(err,result) {
+    if (!err) {
+      cb(result)
+    } else {
+      console.log(err);
+      cb(false);
+    }
+  });
+},
+
+hasMacAdress:function(mac,cb){
+   model.Instock.find({macAddress:{$regex:mac, $options:'i'}}, function(err,result) {
     if (!err) {
       cb(result)
     } else {

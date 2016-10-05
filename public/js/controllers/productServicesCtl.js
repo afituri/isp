@@ -343,17 +343,19 @@
         console.log("Something went wrong");
       })
     };
-
+    var flag1=true;
     $scope.newProductForm.packages={};
     $scope.speetType = function(id){
+      $scope.newProductForm.packages.dSpeed="";
       if($scope.newProductForm.packages.dSpeed!=undefined){
       $scope.newProductForm.packages.dSpeed=$scope.newProductForm.packages.dSpeed+id;
       } else {
         $scope.newProductForm.packages.dSpeed=id;
       }
-    }
+  }
 
     $scope.UType  = function(id){
+      $scope.newProductForm.packages.uSpeed="";
       if($scope.newProductForm.packages.uSpeed != undefined){
         $scope.newProductForm.packages.uSpeed=$scope.newProductForm.packages.uSpeed+id;
       } else {
@@ -362,6 +364,7 @@
     }
 
     $scope.GBTypee = function(id){
+      $scope.newProductForm.packages.monthlyQuota="";
         if($scope.newProductForm.packages.monthlyQuota != undefined){
         $scope.newProductForm.packages.monthlyQuota=$scope.newProductForm.packages.monthlyQuota+id;
       } else {

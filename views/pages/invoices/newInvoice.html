@@ -204,6 +204,8 @@
               </table>
             </div>
           </div>
+          اسم المستخدم : <span ng-if="!username" style="color:red">لايوجد</span><span ng-if="username" style="color:red">{{username}} </span><br>
+          الرقم السري  : <span ng-if="!password" style="color:red">لايوجد</span><span ng-if="password" style="color:red">{{password}} </span>
           <hr>
           <div class="row">
             <div class="col-md-3">

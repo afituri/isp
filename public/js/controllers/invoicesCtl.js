@@ -205,6 +205,12 @@
 
 
     $scope.showId = function(id){
+      InStockServ.getUserPassByWare(id).then(function(result){
+        $scope.username = result.data[0].username;
+        $scope.password = result.data[0].password;
+      },function(response){
+        console.log("Somthing went wrong");
+      })
      
     }
 

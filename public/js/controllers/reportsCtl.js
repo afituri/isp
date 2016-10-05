@@ -3,6 +3,10 @@
   var app = angular.module('isp');
   app.controller('ReportsCtl',['$scope','ServicesServ','InStockServ','toastr','$modal','InvoicesServ','HelperServ',function($scope,ServicesServ,InStockServ,toastr,$modal,InvoicesServ,HelperServ){
    
+
+
+
+
     $scope.searchByMacAdress = function() {
       if($scope.searchByMac==""){
         $scope.customers = null;
@@ -65,24 +69,84 @@
      
    }
    $scope.init();
+    $scope.message = "البحث/ الإسم / البريد الإلكتروني / الهاتف ";
+    $scope.funcionSwich = 1;
+    $scope.switch = function(){
+      $scope.message={};
+      /*alert($scope.idSwitch);*/
+      if($scope.idSwitch){
+        $scope.funcionSwich =0;
+        $scope.message = "سيريال نمبر";
+      } else {
+        $scope.funcionSwich =1;
+        $scope.message = "البحث/ الإسم / البريد الإلكتروني / الهاتف ";
+      }
+    }
 
+    // get service data 
+    ServicesServ.getAllServices().then(function(response){
+      $scope.allService = response.data;
+    },function(response){
+      console.log("Somthing went wrong");
+    })
+    $scope.ServiceSwich=false;
+    $scope.ServiceFunc = function(id){
+      $scope.ServiceSwich=true;
+      
+    }
 
 
      $scope.searchMacAdress = function(){
-      if($scope.searchByAll ==""){
-         $scope.init();
+
+      if(!$scope.ServiceSwich){
+
+      if($scope.funcionSwich==1){
+        if($scope.searchByAll ==""){
+           $scope.init();
+        } else {
+          /*alert("search for all number  without service");*/
+         InvoicesServ.searchForMac($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
+            console.log("response");
+            $scope.resultsAll= response.data.result;
+            console.log($scope.resultsAll);
+            $scope.total = response.data.count;
+          }, function(response) {
+            console.log("Something went wrong");
+          });
+       }
+      } else if($scope.funcionSwich==0){
+        if($scope.searchByAll ==""){
+           $scope.init();
+        } else {
+          // search for serial number 
+          /*alert("search for serial number  without service");*/
+           if($scope.searchByMac==""){
+        $scope.customers = null;
       } else {
-       InvoicesServ.searchForMac($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
-          console.log("response");
-          $scope.resultsAll= response.data.result;
-          $scope.total = response.data.count;
-        }, function(response) {
-          console.log("Something went wrong");
-        });
-     }
-   
+      InStockServ.getInfoByMackAdress($scope.searchByAll).then(function(response){
+        console.log(response.data.invoice.customer);
+        $scope.resultsAll = [response.data.invoice.customer];
+
+      },function(response){
+        console.log("Somthing went wrong");
+      });
+    }
+
+
+        }
+      }
+    } else {
+      // search with service 
+     /* alert("search for all number  with service");*/
+
+     /* alert("search for serial number  with service");*/
+
+
+
+    }
    
   }
+
 
 
     HelperServ.getAllResellers();
