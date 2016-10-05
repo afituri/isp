@@ -11,7 +11,8 @@
     'nya.bootstrap.select',
     'oc.lazyLoad',
     'ngCsvImport',
-    'angular-ladda'
+    'angular-ladda',
+    'remoteValidation'
   ]);
   /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
   app.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
