@@ -11,7 +11,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">اسم الحزمة</label>
-                <select class="form-control input-sm" ng-model="renewInviceForm.package" ng-options="package._id as package.name for package in objects.packagesObj" required>
+                <select class="form-control input-sm" ng-model="renewInviceForm.package" ng-options="package._id as package.name for package in objects.packagesObj" required ng-change="getMony()">
                   <option value="" disabled selected>الرجاء الاختيار</option>
                 </select>
               </div>
@@ -25,9 +25,11 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">تاريخ النهاية</label>
-                <input class="form-control input-sm" type="text" ng-model="renewInviceForm.endDate" placeholder="تاريخ النهاية" required bs-datepicker>
+                <input class="form-control input-sm" type="text" ng-model="renewInviceForm.endDate" placeholder="تاريخ النهاية" ng-change="getDef()" required bs-datepicker>
               </div>
             </div>
+          </div>
+          <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">التخفيض</label>
@@ -40,6 +42,20 @@
                 <input class="form-control input-sm" type="text" ng-model="renewInviceForm.total" placeholder="الاجمالي" required>
               </div>
             </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <label class="control-label">شهر</label>
+                <input class="form-control input-sm" type="text" ng-model="renewInviceForm.month" placeholder="شهر" ng-change="getMony()">
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <label class="control-label">يوم</label>
+                <input class="form-control input-sm" type="text" ng-model="renewInviceForm.day" placeholder="يوم" ng-change="getMony()">
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">ملاحظات</label>
