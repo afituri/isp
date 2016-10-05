@@ -3,10 +3,10 @@
     <div class="x_panel">
       <div class="x_title">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3 col-xs-3">
             <h2>عرض المنتجات (حزم)</h2>
           </div>
-          <div class="col-xs-3">
+          <div class="col-md-3 col-xs-3">
             <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchProductPackages()" placeholder="بحث">
           </div>
           <div class="col-xs-2 col-md-2">
@@ -18,7 +18,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-5 text-left">
+          <div class="col-md-4 text-left">
             <a ui-sref="productServices" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض الخدمات</a> 
             <a ui-sref="productItems" class="btn btn-sm btn-primary"><i class="fa fa-list fa-fw"></i>&nbsp;عرض المعدات</a>
             <a ng-show="addProductPackage" ui-sref="newProduct" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة منتج جديد</a>
