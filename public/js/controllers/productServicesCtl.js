@@ -235,9 +235,9 @@
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+    $scope.service;
      HelperServ.getAllSuppliers();
     $scope.objects = HelperServ;
-    console.log($scope.objects);
     $scope.activeTab = "tap1";
     ServicesServ.getAllServices().then(function(response){
         $scope.ObjService=response.data;
@@ -245,7 +245,13 @@
         console.log("Something went wrong");
       });
     $scope.init = function () {
-      ProductsServ.getProductPackages($scope.pageSize,$scope.currentPage).then(function(response) {
+      if(!$scope.service){
+        var ser = -1;
+      }else{
+        var ser = $scope.service;
+      }
+
+      ProductsServ.getProductPackagesSearch($scope.pageSize,$scope.currentPage,ser).then(function(response) {
         $scope.products = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -253,7 +259,9 @@
       });
     }
     $scope.init();
-
+    $scope.refresh = function(){
+      $scope.init();
+    }
     $scope.editProductPackageForm = {};
     ProductsServ.getProductServiceByID($stateParams.id,$scope.editProductItemForm).then(function(response) {
 

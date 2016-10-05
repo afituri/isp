@@ -130,7 +130,11 @@ router.get('/package/:limit/:page',userHelpers.isLogin , function(req, res) {
     res.send(product);
   });
 });
-
+router.get('/packageSearch/:limit/:page/:service',userHelpers.isLogin , function(req, res) {
+  productMgr.getProductPackageSearch(req.params.limit,req.params.page,req.params.service,function(product){
+    res.send(product);
+  });
+});
 router.get('/getPackagesByService/service/:id',userHelpers.isLogin , function(req, res) {
   productMgr.getProductPackageByService(req.params.id,function(product){
     res.send(product);

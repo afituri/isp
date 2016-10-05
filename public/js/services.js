@@ -511,9 +511,11 @@
       'getProductPackages': function(pageSize,currentPage){
         return $http.get('/product/package/'+pageSize+'/'+currentPage);
       },
+      'getProductPackagesSearch': function(pageSize,currentPage,service){
+        return $http.get('/product/packageSearch/'+pageSize+'/'+currentPage+'/'+service);
+      },
       'getProductPackagesByService': function(service){
-        console.log("here");
-        console.log(service);
+
         return $http.get('/product/getPackagesByService/service/'+service);
       },
       'getProductByID': function(id){
