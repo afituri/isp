@@ -62,6 +62,7 @@
 
        InvoicesServ.searchForMac(-9,$scope.pageSize,$scope.currentPage).then(function(response) {
           $scope.resultsAll= response.data.result;
+          $scope.counter = response.data.count;
           $scope.total = response.data.count;
         }, function(response) {
           console.log("Something went wrong");
@@ -89,16 +90,32 @@
     },function(response){
       console.log("Somthing went wrong");
     })
-    $scope.ServiceSwich=false;
+    $
+
+
     $scope.ServiceFunc = function(id){
-      $scope.ServiceSwich=true;
+      
+      ServicesServ.getCustomerByService(id).then(function(response){
+        console.log(response.data);
+        var customers=[];
+        for(var i in response.data){
+          console.log(response.data[i].customer);
+          customers.push(response.data[i].customer);
+        }
+        console.log(customers);
+        $scope.counter = customers.length;
+        $scope.resultsAll = customers;
+     },function(response){
+      console.log("Something went wrong");
+     });
+
       
     }
 
 
      $scope.searchMacAdress = function(){
 
-      if(!$scope.ServiceSwich){
+      
 
       if($scope.funcionSwich==1){
         if($scope.searchByAll ==""){
@@ -108,6 +125,7 @@
          InvoicesServ.searchForMac($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
             console.log("response");
             $scope.resultsAll= response.data.result;
+            $scope.counter = response.data.result.length; 
             console.log($scope.resultsAll);
             $scope.total = response.data.count;
           }, function(response) {
@@ -126,7 +144,7 @@
       InStockServ.getInfoByMackAdress($scope.searchByAll).then(function(response){
         console.log(response.data.invoice.customer);
         $scope.resultsAll = [response.data.invoice.customer];
-
+        $scope.counter = [response.data.invoice.customer].length; 
       },function(response){
         console.log("Somthing went wrong");
       });
@@ -135,17 +153,7 @@
 
         }
       }
-    } else {
-      // search with service 
-     /* alert("search for all number  with service");*/
-
-     
-
-     /* alert("search for serial number  with service");*/
-
-
-
-    }
+    
    
   }
 

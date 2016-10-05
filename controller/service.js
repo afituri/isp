@@ -39,6 +39,65 @@ module.exports = {
       });
     });
   },
+
+
+
+  getCustomerByService : function(id,cb){    
+    model.Product.find({'packages.service':id}).distinct('_id',function(err, products){
+      if(!err){
+       /* console.log(products);
+        cb(products);*/
+        // another collections
+      console.log(products);
+      model.Order.find({product:{$in:products}}).distinct('invoice',function(err, order){
+        if(!err){
+          /*console.log(order);
+          cb(products);*/
+      console.log(order);
+      model.Invoice.find({_id:{$in:order}})
+      .populate('customer')
+      .exec(function(err, invoice){
+      
+        if(!err){
+          console.log(invoice);
+          cb(invoice);
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+
+
+
+
+
+
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+
+
+
+
+
+
+
+
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+
+
+
+
+  },
+
+
+
   getAllServices :function(cb){
     model.Service.find({},function(err, services){
       if(!err){
