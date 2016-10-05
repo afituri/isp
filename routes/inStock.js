@@ -14,15 +14,16 @@ router.get('/search/:id', userHelpers.isLogin ,function(req, res) {
 });
 
 router.get('/hasMacAdress', userHelpers.isLogin, function (req, res, next){
-  console.log("here");
-  instockMgr.hasMacAdress(req.params.hasMacAdress,function (result){
-    console.log(result);
+  instockMgr.hasMacAdress(req.query.value,function (result){
+    
     if(result!=0){
+      console.log(true);
       //send true if we find a match
-      res.send({isValid: true});
+      res.send({isValid: false});
     } else {
       //send false if we didn't find a match
-      res.send({isValid: false});
+      console.log(false);
+      res.send({isValid: true});
     }
   });
 });

@@ -205,7 +205,7 @@ getByWP :function(idW,idP,cb){
 },
 
 hasMacAdress:function(mac,cb){
-   model.Instock.find({macAddress:{$regex:mac, $options:'i'}}, function(err,result) {
+   model.Instock.find({macAddress:mac}, function(err,result) {
     if (!err) {
       cb(result)
     } else {
