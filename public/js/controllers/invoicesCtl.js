@@ -20,7 +20,6 @@
     
     $scope.init = function(id){
     InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
-      console.log(response.data);
       $scope.allInvoice=response.data.result;
       $scope.total = response.data.count;
     }, function(response) {
@@ -64,7 +63,6 @@
           //$state.go('customers');
           toastr.info('تم التعديل بنجاح');
         } else {
-          console.log(response.data);
         }
     }, function(response) {
         console.log("Something went wrong");
@@ -79,7 +77,6 @@
           //$state.go('customers');
           toastr.info('تم التعديل بنجاح');
         } else {
-          console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");
@@ -94,7 +91,6 @@
        PermissionServ.getSubpermission().then(function(response){
       $scope.permission =true;
       if(response.data[0] != undefined){
-        console.log(response.data[2]);
         //employee
         $scope.permission =false;
 
@@ -113,8 +109,6 @@
 
 
       InvoicesServ.getTotal($stateParams.id).then(function(response) {
-      console.log("response");
-      console.log(response.data);
       $scope.allTotals=response.data.sum.toFixed(2);
       $scope.piad =  response.data.piad.toFixed(2);
 
@@ -352,7 +346,6 @@
         $scope.productsObj = $scope.objects.packagesObj;
       } else if (id == 'معدات'){
           $scope.flag=false;
-        console.log($scope.objects);
         $scope.productsObj = $scope.objects.etcObj;
 
       }
@@ -428,10 +421,47 @@
     $scope.editInvoiceForm = {};
   }]);
   app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
-   
     $scope.renewInviceForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllPackages();
+    var rePrice;
+    $scope.getMony= function(){
+      angular.forEach($scope.objects.packagesObj, function(value, key) {
+        if(value._id==$scope.renewInviceForm.package){
+         rePrice= value.initialPrice;
+        }
+      }, rePrice);
+      var dPrice=rePrice/30;
+      if($scope.renewInviceForm.month){
+        var month = $scope.renewInviceForm.month;
+      }else{
+        var month = 0;
+      }
+      if($scope.renewInviceForm.day){
+        var day = $scope.renewInviceForm.day;
+      }else{
+        var day = 0;
+      }
+      $scope.renewInviceForm.total=rePrice*month+day*dPrice;
+    },
+    $scope.getDef= function(){
+      var a ;
+      a = new Date($scope.renewInviceForm.startDate);
+      var b = $scope.renewInviceForm.endDate;
+      a.setDate(a.getDate() - 1);
+      a.setMonth(a.getMonth()+1);
+      for(var i=0;a<=b;){
+        i++;
+        a.setMonth(a.getMonth()+1);
+      
+          
+      }
+      a.setMonth(a.getMonth()-1);
+      $scope.renewInviceForm.day=(b-a)/ (1000 * 3600 * 24);
+      $scope.renewInviceForm.month=i;
+      $scope.getMony();
+    },
+    
     CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
       $scope.customer = response.data;
     }, function(response) {
