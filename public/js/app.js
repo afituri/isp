@@ -241,6 +241,7 @@
       url: '/serviceProviders',
       templateUrl: 'pages/serviceProviders/serviceProviders.html',
       controller: 'ServiceProvidersCtl',
+      data: {pageTitle: 'عرض مزودي الخدمة'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -256,6 +257,7 @@
       url: '/serviceProviders/new',
       templateUrl: 'pages/serviceProviders/newServiceProvider.html',
       controller: 'NewServiceProviderCtl',
+      data: {pageTitle: 'إضافة مزود خدمة جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -299,6 +301,7 @@
       url: '/service',
       templateUrl: 'pages/services/services.html',
       controller: 'ServicesCtl',
+      data: {pageTitle: 'عرض الخدمات'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -313,6 +316,7 @@
       url: '/services/new',
       templateUrl: 'pages/services/newService.html',
       controller: 'NewServiceCtl',
+      data: {pageTitle: 'إضافة خدمة جديدة'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -342,6 +346,7 @@
       url: '/suppliers',
       templateUrl: 'pages/suppliers/suppliers.html',
       controller: 'SuppliersCtl',
+      data: {pageTitle: 'عرض الموردين'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -356,6 +361,7 @@
       url: '/suppliers/new',
       templateUrl: 'pages/suppliers/newSupplier.html',
       controller: 'NewSupplierCtl',
+      data: {pageTitle: 'إضافة مورد جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -430,6 +436,7 @@
       url: '/customers',
       templateUrl: 'pages/customers/customers.html',
       controller: 'CustomersCtl',
+      data: {pageTitle: 'عرض الزبائن'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -463,6 +470,7 @@
       url: '/showInvoicePending',
       templateUrl: 'pages/invoices/showInvoicePending.html',
       controller: 'InvoicesCtlPending',
+      data: {pageTitle: 'عرض الفواتير قيد الانتظار'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -494,6 +502,7 @@
       url: '/invoiceCustomers',
       templateUrl: 'pages/invoices/customers.html',
       controller: 'CustomersCtl',
+      data: {pageTitle: 'عرض الزبائن'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -584,6 +593,7 @@
       url: '/customers/new',
       templateUrl: 'pages/customers/newCustomer.html',
       controller: 'NewCustomerCtl',
+      data: {pageTitle: 'إضافة عميل جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -613,6 +623,7 @@
       url: '/products/services',
       templateUrl: 'pages/products/productServices.html',
       controller: 'ProductServicesCtl',
+      data: {pageTitle: 'عرض المنتجات (خدمات)'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -627,6 +638,7 @@
       url: '/products/items',
       templateUrl: 'pages/products/productItems.html',
       controller: 'ProductItemsCtl',
+      data: {pageTitle: 'عرض المنتجات (معدات)'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -641,6 +653,7 @@
       url: '/products/packages',
       templateUrl: 'pages/products/productPackages.html',
       controller: 'ProductPackagesCtl',
+      data: {pageTitle: 'عرض المنتجات (حزم)'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -655,6 +668,7 @@
       url: '/products/otherEquipments',
       templateUrl: 'pages/products/productOtherEquipment.html',
       controller: 'ProductOtherEquipmentCtl',
+      data: {pageTitle: 'عرض المنتجات (معدات اخري)'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -669,6 +683,7 @@
       url: '/products/new',
       templateUrl: 'pages/products/newProduct.html',
       controller: 'NewProductCtl',
+      data: {pageTitle: 'إضافة منتج جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -815,6 +830,7 @@
       url: '/productPoliciesService',
       templateUrl: 'pages/productPolicies/productPoliciesService.html',
       controller: 'ProductPoliciesServiceCtl',
+      data: {pageTitle: 'عرض سياسات منتج (الخدمة)'},
      resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -831,6 +847,7 @@
       url: '/productPoliciesItem',
       templateUrl: 'pages/productPolicies/productPoliciesItem.html',
       controller: 'ProductPoliciesItemCtl',
+      data: {pageTitle: 'عرض سياسات منتج (المعدة)'},
      resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -896,6 +913,7 @@
       url: '/productPoliciesPackage',
       templateUrl: 'pages/productPolicies/productPoliciesPackage.html',
       controller: 'ProductPoliciesPackageCtl',
+      data: {pageTitle: 'عرض سياسات منتج (الحزمة)'},
      resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -911,6 +929,7 @@
       url: '/productPolicies/new',
       templateUrl: 'pages/productPolicies/newProductPolicy.html',
       controller: 'NewProductPolicyCtl',
+      data: {pageTitle: 'إضافة منتج جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -926,6 +945,7 @@
       url: '/instock/new',
       templateUrl: 'pages/inStock/newInStock.html',
       controller: 'NewInStockCtl',
+      data: {pageTitle: 'إضافة مخزون جديد'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -941,6 +961,7 @@
       url: '/instock',
       templateUrl: 'pages/inStock/inStock.html',
       controller: 'inStockCtl',
+      data: {pageTitle: 'عرض المخزون'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -956,6 +977,7 @@
       url: '/instock/Transfer',
       templateUrl: 'pages/inStock/Transfer.html',
       controller: 'TransferCtl',
+      data: {pageTitle: 'نقل مخزون'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -1049,6 +1071,7 @@
       url: '/invoices/new',
       templateUrl: 'pages/invoices/newInvoice.html',
       controller: 'NewInvoiceCtl',
+      data: {pageTitle: 'إضافة فاتورة جديدة'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -1079,6 +1102,7 @@
       url: '/searchMacAdress',
       templateUrl: 'pages/reports/searchMacAdress.html',
       controller: 'ReportsCtl',
+      data: {pageTitle: 'البحث عن الماك ادرس'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -1095,6 +1119,7 @@
       url: '/searchByMacAdress',
       templateUrl: 'pages/reports/searchByMacAdress.html',
       controller: 'ReportsCtl',
+      data: {pageTitle: 'البحث بالماك ادرس / سيريال'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
@@ -1111,6 +1136,7 @@
       url: '/reports',
       templateUrl: 'pages/reports/reports.html',
       controller: 'ReportsCtl',
+      data: {pageTitle: 'المفعلين والغير مفعلين'},
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
