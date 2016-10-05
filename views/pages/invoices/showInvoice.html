@@ -56,8 +56,8 @@
                 <td ng-if="invoice.typein==3" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==1" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==1" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
-                <td ng-if="invoice.typein==5" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
-                <td ng-if="invoice.typein==5" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==5" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==5" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==6" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==6" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
                 <td>

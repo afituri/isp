@@ -439,6 +439,35 @@ getAllItemR:function(cb){
    //      }
    //    });
 },
+getProductPackageSearch :function(limit,page,service,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    if(service!= -1){
+      var q= {
+        type:"package",
+        "packages.service":service
+      }
+    }else{
+      console.log("c");
+      var q= {
+        type:"package"
+      }
+    }
+    model.Product.count(q,function(err,count){
+      model.Product.find(q).limit(limit).skip(page*limit)
+      .populate('packages.type')
+      .populate('packages.service')
+      .exec(function(err, products){
+        if(!err){
+          cb({result:products,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
 
 
 };
