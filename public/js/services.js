@@ -25,6 +25,10 @@
       'etcObj': [],
       'resellersObj': [],
       'notifications': {},
+      'itemsRObj': [],
+      'servicesRObj': [],
+      'packagesRObj': [],
+      'etcRObj': [],
       'getAllStock': function(){
         $http.get('/warehouse/all').then(function(response) {
           self.stockObj = response.data.result;
@@ -79,8 +83,6 @@
       },
       'getAllEtcs': function(){
         return $http.get('/product/new/one/allEtc').then(function(response) {
-          console.log("hii");
-          console.log(response.data);
           self.etcObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllPackages");
@@ -105,6 +107,34 @@
           self.resellersObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllResellers");
+        });
+      },
+      'getAllItemsR': function(id){
+        return $http.get('/product/allItemRA/'+id).then(function(response) {
+          self.itemsRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllItems");
+        });
+      },
+      'getAllServicesR': function(id){
+        return $http.get('/product/allServiceRA/'+id).then(function(response) {
+          self.servicesRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllServices");
+        });
+      },
+      'getAllPackagesR': function(id){
+        return $http.get('/product/allPackageRA/'+id).then(function(response) {
+          self.packagesRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
+        });
+      },
+      'getAllEtcsR': function(id){
+        return $http.get('/product/allEtcRA/'+id).then(function(response) {
+          self.etcRObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllPackages");
         });
       },
       'getNotification': function(){
@@ -401,7 +431,6 @@
         return $http.get('/customer/searchAll/'+all+'/'+pageSize+'/'+currentPage);
       },
       'getCustomers': function(status,pageSize,currentPage){
-        console.log(status);
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
       'getCustomersRe': function(id,idC,pageSize,currentPage){
@@ -521,6 +550,9 @@
 
         return $http.get('/product/getPackagesByService/service/'+service);
       },
+      'getProductPackagesByServiceR': function(reseller,service){
+        return $http.get('/product/getPackagesByService/serviceR/'+service+'/'+reseller);
+      },
       'getProductByID': function(id){
         return $http.get('/product/'+id);
       },
@@ -552,11 +584,9 @@
         return $http.get('/product/otherEquipment/'+pageSize+'/'+currentPage);
       },
       'getProductOtherEquipmentByID': function(id){
-        console.log("gg"+id);
         return $http.get('/product/'+id);
       },
       'editProductOtherEquipment':function(id,otherEquipmentObj){
-        console.log(id);
         return $http.put('/product/productEtc/edit/'+id,otherEquipmentObj);
       },
       'deleteProductOtherEquipment': function(id){
@@ -678,7 +708,6 @@
         return $http.post('/report/Reseller',{reseller:id});
       },
       'printBetweenDates': function(start,end){
-        console.log(start);
       },
       'printResseler': function(id){
         return $http.post('/report/printReseller',{reseller:id});
@@ -699,7 +728,6 @@
         return $http.post('/invoice/upInvice',renewInviceObj);
       },
       'replacInvice': function(replacInviceObj){
-        console.log(replacInviceObj);
         return $http.post('/invoice/replacInvice',replacInviceObj);
       },
       'paidInvoice': function(paidInviceObj){

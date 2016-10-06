@@ -29,8 +29,8 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label class="control-label">اسم الموزع</label>
-                <select class="form-control input-sm" ng-model="newInvoiceForm.reseller" required>
-                  <option value="" disabled selected>الرجاء الاختيار</option>
+                <select class="form-control input-sm" ng-model="newInvoiceForm.reseller" required ng-change="getprodectR()">
+                  <option value="" disabled selected >الرجاء الاختيار</option>
                   <option value="1">الشركة الام</option>
                   <option ng-repeat="reseller in objects.resellersObj" value="{{reseller._id}}">{{reseller.companyName}}</option>
                 </select>

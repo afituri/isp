@@ -197,7 +197,7 @@
 
   app.controller('NewInvoiceCtl',['$scope','InStockServ','ProductsServ','ServicesServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,ProductsServ,ServicesServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
 
-
+    $scope.productsObj;
     $scope.showId = function(id){
       InStockServ.getUserPassByWare(id).then(function(result){
         $scope.username = result.data[0].username;
@@ -209,11 +209,20 @@
     }
 
     $scope.serviceChange = function(){
-      ProductsServ.getProductPackagesByService($scope.ServiceModel._id).then(function(response){
-        $scope.productsObj=response.data;
-      },function(response){
-        console.log("Something went wrong");
-      });
+      if($scope.newInvoiceForm.reseller==1){
+        ProductsServ.getProductPackagesByService($scope.ServiceModel._id).then(function(response){
+          $scope.productsObj=response.data;
+        },function(response){
+          console.log("Something went wrong");
+        });
+      }else{
+        ProductsServ.getProductPackagesByServiceR($scope.newInvoiceForm.reseller,$scope.ServiceModel._id).then(function(response){
+          $scope.productsObj=response.data;
+        },function(response){
+          console.log("Something went wrong");
+        });
+      }
+      
     }
 
     ServicesServ.getAllServices().then(function(response){ 
@@ -253,6 +262,7 @@
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
     $scope.objects = HelperServ;
+    
     $scope.objects.getAllItems();
     $scope.objects.getAllEtcs();
     $scope.objects.getAllServices();
@@ -322,6 +332,12 @@
         }
         }
     };
+    $scope.getprodectR =function(){
+      $scope.objects.getAllItemsR($scope.newInvoiceForm.reseller);
+      $scope.objects.getAllEtcsR($scope.newInvoiceForm.reseller);
+      $scope.objects.getAllServicesR($scope.newInvoiceForm.reseller);
+      $scope.objects.getAllPackagesR($scope.newInvoiceForm.reseller);
+    }
     $scope.getItemInfo = function(){
       InvoicesServ.getItemInfoByID($scope.newInvoiceForm.productItem).then(function(response){
         $scope.itemInfo={};
@@ -334,21 +350,39 @@
     };
     $scope.flag=false;
     $scope.getProductInfo = function(id){
-
-      if(id == 'خدمة'){
-        $scope.flag=false;
-        $scope.productsObj = $scope.objects.servicesObj;
-      } else if(id == 'معدة'){
+      if($scope.newInvoiceForm.reseller==1){
+        if(id == 'خدمة'){
           $scope.flag=false;
-        $scope.productsObj = $scope.objects.itemsObj;
-      } else if (id == 'حزمة'){
-        $scope.flag=true;
-        $scope.productsObj = $scope.objects.packagesObj;
-      } else if (id == 'معدات'){
-          $scope.flag=false;
-        $scope.productsObj = $scope.objects.etcObj;
+          $scope.productsObj = $scope.objects.servicesObj;
+        } else if(id == 'معدة'){
+            $scope.flag=false;
+          $scope.productsObj = $scope.objects.itemsObj;
+        } else if (id == 'حزمة'){
+          $scope.flag=true;
+          $scope.productsObj = $scope.objects.packagesObj;
+        } else if (id == 'معدات'){
+            $scope.flag=false;
+          $scope.productsObj = $scope.objects.etcObj;
 
+        }  
+      }else{
+
+        if(id == 'خدمة'){
+          $scope.flag=false;
+          $scope.productsObj = $scope.objects.servicesRObj;
+        } else if(id == 'معدة'){
+            $scope.flag=false;
+          $scope.productsObj = $scope.objects.itemsRObj;
+        } else if (id == 'حزمة'){
+          $scope.flag=true;
+          $scope.productsObj = $scope.objects.packagesRObj;
+        } else if (id == 'معدات'){
+            $scope.flag=false;
+          $scope.productsObj = $scope.objects.etcRObj;
+
+        }  
       }
+      
     };
 
     $scope.selectedProducts = [];

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var productMgr = require("../controller/product");
 var productPolicyMgr = require("../controller/productPolicy");
+var resellerMgr = require("../controller/reseller");
 var userHelpers = require("../controller/userHelpers");
 
 
@@ -22,12 +23,7 @@ router.get('/searchItems/:name/:limit/:page',userHelpers.isLogin , function(req,
     res.send(product);
   });
 });
-/* GET all customer */
-router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
-  productMgr.getProduct(req.params.limit,req.params.page,function(product){
-    res.send(product);
-  });
-});
+
 // otherEquipment
 
 router.get('/otherEquipment/:limit/:page',userHelpers.isLogin , function(req, res) {
@@ -71,8 +67,23 @@ router.get('/allItemR', userHelpers.isLogin ,function(req, res) {
       }
     });
   });
-  // var re=model_step(req.user.policy);
-  // console.log(re);
+});
+router.get('/allItemRA/:id', userHelpers.isLogin ,function(req, res) {
+  productMgr.getAllItemR(function(product){
+    resellerMgr.getResellerId(req.params.id,function(reseller){
+      productPolicyMgr.getProductPPolicy(reseller.policy,function(result){
+        for(i in product){
+          if(result[product[i]._id]){
+            product[i].initialPrice=result[product[i]._id];
+          }
+
+          if(i==product.length-1){
+            res.send(product);    
+          }
+        }
+      });
+    });
+  }); 
 });
 router.get('/allService',userHelpers.isLogin , function(req, res) {
   productMgr.getAllService(function(product){
@@ -95,7 +106,25 @@ router.get('/allServiceR',userHelpers.isLogin , function(req, res) {
     });
   });
 });
+router.get('/allServiceRA/:id',userHelpers.isLogin , function(req, res) {
+  productMgr.getAllService(function(product){
+    resellerMgr.getResellerId(req.params.id,function(reseller){
+      productPolicyMgr.getProductPPolicy(reseller.policy,function(result){
+        for(i in product){
+          if(result[product[i]._id]){
+            product[i].initialPrice=result[product[i]._id];
+          }
 
+          if(i==product.length-1){
+            console.log("//////////////////////////////");
+            console.log(product);
+            res.send(product);    
+          }
+        }
+      });
+    });
+  });
+});
 router.get('/allPackage', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllPackage(function(product){
     res.send(product);
@@ -113,6 +142,24 @@ router.get('/allPackageR', userHelpers.isLogin ,function(req, res) {
           res.send(product);    
         }
       }
+    });
+  });
+});
+
+router.get('/allPackageRA/:id', userHelpers.isLogin ,function(req, res) {
+  productMgr.getAllPackage(function(product){
+    resellerMgr.getResellerId(req.params.id,function(reseller){
+      productPolicyMgr.getProductPPolicy(reseller.policy,function(result){
+        for(i in product){
+          if(result[product[i]._id]){
+            product[i].initialPrice=result[product[i]._id];
+          }
+
+          if(i==product.length-1){
+            res.send(product);    
+          }
+        }
+      });
     });
   });
 });
@@ -141,7 +188,28 @@ router.get('/getPackagesByService/service/:id',userHelpers.isLogin , function(re
   });
  
 });
+router.get('/getPackagesByService/serviceR/:service/:reseller',userHelpers.isLogin , function(req, res) {
+  productMgr.getProductPackageByService(req.params.service,function(product){
+    console.log("*******************************");
+    console.log(product);
+    resellerMgr.getResellerId(req.params.reseller,function(reseller){
+      productPolicyMgr.getProductPPolicy(reseller.policy,function(result){
+        for(i in product){
+          if(result[product[i]._id]){
+            product[i].initialPrice=result[product[i]._id];
+          }
 
+          if(i==product.length-1){
+            console.log("*******************************");
+    console.log(product);
+            res.send(product);    
+          }
+        }
+      });
+    });
+  });
+ 
+});
 router.get('/new/one/allEtc', userHelpers.isLogin ,function(req, res) {
     
   productMgr.getAllEtc(function(product){
@@ -165,6 +233,24 @@ router.get('/allEtcR', userHelpers.isLogin ,function(req, res) {
           res.send(product);    
         }
       }
+    });
+  });
+});
+
+router.get('/allEtcRA/:id', userHelpers.isLogin ,function(req, res) {    
+  productMgr.getAllEtc(function(product){
+    resellerMgr.getResellerId(req.params.id,function(reseller){
+      productPolicyMgr.getProductPPolicy(reseller.policy,function(result){
+        for(i in product){
+          if(result[product[i]._id]){
+            product[i].initialPrice=result[product[i]._id];
+          }
+
+          if(i==product.length-1){
+            res.send(product);    
+          }
+        }
+      });
     });
   });
 });
@@ -221,7 +307,12 @@ router.delete('/productService/delete/:id', userHelpers.isLogin ,function(req, r
      res.send({result:productService});
    });
 });
-
+/* GET all customer */
+router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
+  productMgr.getProduct(req.params.limit,req.params.page,function(product){
+    res.send(product);
+  });
+});
 router.get('/:id', userHelpers.isLogin ,function(req, res) {
   productMgr.getItemById(req.params.id,function(productService){
     res.send(productService);
