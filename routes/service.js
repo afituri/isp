@@ -4,6 +4,15 @@ var data = require('../data/service');
 var servicesMgr = require("../controller/service");
 var userHelpers = require("../controller/userHelpers");
 
+
+
+router.get('/getCustomerByService/:id', userHelpers.isLogin ,function(req, res) {
+  servicesMgr.getCustomerByService(req.params.id,function(services){
+    res.send(services);
+  });
+});
+
+
 /* GET all Service */
 router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   // res.send(data.services);
@@ -51,6 +60,10 @@ router.get('/:id', userHelpers.isLogin ,function(req, res) {
     res.send(services);
   });
 });
+
+
+
+
 
 
 module.exports = router;

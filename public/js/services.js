@@ -335,6 +335,9 @@
       },
       'deleteService': function(id){
         return $http.delete('/service/delete/'+id);
+      },
+      'getCustomerByService': function(id){
+        return $http.get('/service/getCustomerByService/'+id);
       }
     };
     return self;
