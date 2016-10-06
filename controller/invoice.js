@@ -852,4 +852,31 @@ getNotification:function(cb){
     });
   });
 },
+getInvoicePendingReseller :function(status,reseller,limit,page,cb){
+  page = parseInt(page);
+  page-=1;
+  limit = parseInt(limit);
+  var q={};
+  if(parseInt(status)){
+    q.status=status;
+  }
+  if(parseInt(reseller)){
+    q.reseller=reseller;
+  }
+  model.Invoice.count(q,function(err,count){
+    model.Invoice.find(q).limit(limit).skip(page*limit)
+    .populate('customer')
+    .populate('reseller')
+    .populate('user')
+    .exec(function(err, invoices){
+      if(!err){
+        cb({result:invoices,count:count});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  });
+    
+  },
 };

@@ -1,10 +1,12 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('InvoicesCtlPending',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+  app.controller('InvoicesCtlPending',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ','HelperServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ,HelperServ){
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+    $scope.objects = HelperServ;
+    $scope.objects.getAllResellers();
 
     $scope.showInoice = function(id,typein){
       if(typein == 1){
@@ -18,18 +20,31 @@
       }
     }
     
-    $scope.init = function(id){
-    InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
+    $scope.init = function(pend,resel){
+    InvoicesServ.getInvoicePendingReseller(pend,resel,$scope.pageSize,$scope.currentPage).then(function(response) {
       $scope.allInvoice=response.data.result;
       $scope.total = response.data.count;
     }, function(response) {
         console.log("Something went wrong");
     }); 
   }
-  $scope.init(2);
+  $scope.init(2,0);
    
    $scope.getStatus = function(){
-    $scope.init($scope.pending);
+    var pend;
+    var resel;
+    if($scope.pending){
+      pend=$scope.pending;
+    }else{
+      pend=0;
+    }
+    console.lo
+    if($scope.reseller){
+      resel=$scope.reseller;
+    }else{
+      resel=0;
+    }
+    $scope.init(pend,resel);
    }
 
    $scope.accept = function(id){

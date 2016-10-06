@@ -680,6 +680,9 @@
       'getInvoicePending': function(status,pageSize,currentPage){
         return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
       },
+      'getInvoicePendingReseller': function(status,reseller,pageSize,currentPage){
+        return $http.get('/invoice/InvoicePendingReseller/'+pageSize+'/'+currentPage+'/'+status+'/'+reseller);
+      },
       'getInvoiceByID': function(status,id){
         return $http.get('/invoice/invoices/'+id+'/'+status);
       },
