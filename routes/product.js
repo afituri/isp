@@ -116,8 +116,6 @@ router.get('/allServiceRA/:id',userHelpers.isLogin , function(req, res) {
           }
 
           if(i==product.length-1){
-            console.log("//////////////////////////////");
-            console.log(product);
             res.send(product);    
           }
         }
@@ -190,8 +188,6 @@ router.get('/getPackagesByService/service/:id',userHelpers.isLogin , function(re
 });
 router.get('/getPackagesByService/serviceR/:service/:reseller',userHelpers.isLogin , function(req, res) {
   productMgr.getProductPackageByService(req.params.service,function(product){
-    console.log("*******************************");
-    console.log(product);
     resellerMgr.getResellerId(req.params.reseller,function(reseller){
       productPolicyMgr.getProductPPolicy(reseller.policy,function(result){
         for(i in product){
@@ -200,8 +196,6 @@ router.get('/getPackagesByService/serviceR/:service/:reseller',userHelpers.isLog
           }
 
           if(i==product.length-1){
-            console.log("*******************************");
-    console.log(product);
             res.send(product);    
           }
         }
@@ -318,32 +312,4 @@ router.get('/:id', userHelpers.isLogin ,function(req, res) {
     res.send(productService);
   });
 });
-// function model_step(id){
-//   var flag;
-//   Step(
-//     /* SELECT OLD VALUE FROM DB */
-//     function SelectAllItem() {
-//       productMgr.getAllItemR(this);
-//     },
-//     /* UPDATE VALUE */
-//     function Updatephone(err,results) {
-//       console.log(results);
-//       results.forEach(function(i,j) {
-//         productPolicyMgr.getProductPPolicy(i._id,id,function(result){
-//           console.log(result);
-//           if(result){
-//             i.initialPrice=result.initialPrice;
-//           }
-//           if(j==results.length-1){
-//             console.log(results);
-//             console.log(results);
-//             flag=results;  
-//           }
-          
-//         });
-//       });
-//     }
-//   );
-//   return flag;
-// }
 module.exports = router;

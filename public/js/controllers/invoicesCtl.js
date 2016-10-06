@@ -333,10 +333,13 @@
         }
     };
     $scope.getprodectR =function(){
-      $scope.objects.getAllItemsR($scope.newInvoiceForm.reseller);
-      $scope.objects.getAllEtcsR($scope.newInvoiceForm.reseller);
-      $scope.objects.getAllServicesR($scope.newInvoiceForm.reseller);
-      $scope.objects.getAllPackagesR($scope.newInvoiceForm.reseller);
+      if($scope.newInvoiceForm.reseller!= 1){
+        $scope.objects.getAllItemsR($scope.newInvoiceForm.reseller);    
+        $scope.objects.getAllEtcsR($scope.newInvoiceForm.reseller);
+        $scope.objects.getAllServicesR($scope.newInvoiceForm.reseller);
+        $scope.objects.getAllPackagesR($scope.newInvoiceForm.reseller);
+      }
+      
     }
     $scope.getItemInfo = function(){
       InvoicesServ.getItemInfoByID($scope.newInvoiceForm.productItem).then(function(response){
@@ -400,7 +403,7 @@
       if($scope.productType && $scope.productName){
 
         DollarServ.getLastDollar().then(function(response) {
-          //console.log(response.data[0].price);
+          $scope.dollarToday=response.data[0].price;
 
           var dollar = 1;
           if($scope.productType=="حزمة"){
@@ -416,7 +419,8 @@
               }, function(response) {
                 console.log("Something went wrong");
               });
-              $scope.dollarToday=response.data[0].price;
+               
+              // $scope.dollarToday=response.data[0].price;
               $scope.selectedProducts.push({'price':($scope.productName.initialPrice),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
               $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
               $scope.productType = '';
@@ -426,7 +430,7 @@
             toastr["error"]("عفوا لا يمكن اختيار اكثر من معدة");
           } 
           } else {
-            $scope.dollarToday=response.data[0].price;
+            // $scope.dollarToday=response.data[0].price;
             $scope.selectedProducts.push({'price':($scope.productName.initialPrice * dollar),'type':$scope.productType,'name':$scope.productName.name,'id':$scope.productName._id});
             $scope.newInvoiceForm.total = $scope.newInvoiceForm.total + ($scope.productName.initialPrice * dollar);
             $scope.productType = '';
