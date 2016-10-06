@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('NewUserCtl',['$scope','$state','PermissionServ','UserServ','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,PermissionServ,UserServ,MenuFac,CustomersServ,HelperServ,toastr){
+  app.controller('NewUserCtl',['$scope','$timeout','$state','PermissionServ','UserServ','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$timeout,$state,PermissionServ,UserServ,MenuFac,CustomersServ,HelperServ,toastr){
     $scope.newUserForm={};
 
     $scope.UserType = function() {
@@ -19,16 +19,19 @@
 
 
     $scope.newUser = function(){
-
+      $scope.loadingStatus = true;
       if($scope.newUserForm.password != $scope.newUserForm.confPassword){
         toastr.error("خطأ: الرجاء تأكيد الرقم السري");
       } else {
         // insert data
         UserServ.addUser($scope.newUserForm).then(function(response) {
         if(response.data){
-          $scope.newUserForm={};
-          $state.go('user');
-          toastr.success('تمت إضافة admin جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newUserForm={};
+            $state.go('user');
+            toastr.success('تمت إضافة admin جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }

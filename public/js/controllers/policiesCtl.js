@@ -82,16 +82,20 @@
     };
   }]);
  
-  app.controller('NewPolicyCtl',['$scope','$state','MenuFac','PoliciesServ','toastr',function($scope,$state,MenuFac,PoliciesServ,toastr){
+  app.controller('NewPolicyCtl',['$scope','$timeout','$state','MenuFac','PoliciesServ','toastr',function($scope,$timeout,$state,MenuFac,PoliciesServ,toastr){
     MenuFac.active = 8;
     $scope.activePanel = MenuFac;
     $scope.newPolicyForm = {};
     $scope.newPolicy = function(){
+      $scope.loadingStatus = true;
       PoliciesServ.addPolicy($scope.newPolicyForm).then(function(response) {
         if(response.data){
-          $scope.newPolicyForm = {};
-          $state.go('policies');
-          toastr.success('تمت إضافة سياسة جديدة بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newPolicyForm = {};
+            $state.go('policies');
+            toastr.success('تمت إضافة سياسة جديدة بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }

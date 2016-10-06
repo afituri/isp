@@ -9,7 +9,8 @@
     'ngFileUpload',
     'ui.bootstrap',
     'nya.bootstrap.select',
-    'oc.lazyLoad'
+    'oc.lazyLoad',
+    'angular-ladda'
   ]);
   /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
   app.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {

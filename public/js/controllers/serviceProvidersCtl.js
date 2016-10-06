@@ -63,16 +63,20 @@
       });
     };
   }]);
-  app.controller('NewServiceProviderCtl',['$scope','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$state,MenuFac,ServiceProvidersServ,toastr){
+  app.controller('NewServiceProviderCtl',['$scope','$timeout','$state','MenuFac','ServiceProvidersServ','toastr',function($scope,$timeout,$state,MenuFac,ServiceProvidersServ,toastr){
     MenuFac.active = 0;
     $scope.activePanel = MenuFac;
     $scope.newServiceProviderForm = {};
     $scope.newServiceProvider = function(){
+      $scope.loadingStatus = true;
       ServiceProvidersServ.addServiceProvider($scope.newServiceProviderForm).then(function(response) {
         if(response.data){
-          $scope.newServiceProviderForm = {};
-          $state.go('serviceProviders');
-          toastr.success('تمت إضافة مزود خدمة جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newServiceProviderForm = {};
+            $state.go('serviceProviders');
+            toastr.success('تمت إضافة مزود خدمة جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }

@@ -26,7 +26,7 @@
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
   }]);
-  app.controller('NewProductPolicyCtl',['$scope','$state','MenuFac','ProductPoliciesServ','HelperServ','toastr',function($scope,$state,MenuFac,ProductPoliciesServ,HelperServ,toastr){
+  app.controller('NewProductPolicyCtl',['$scope','$timeout','$state','MenuFac','ProductPoliciesServ','HelperServ','toastr',function($scope,$timeout,$state,MenuFac,ProductPoliciesServ,HelperServ,toastr){
     MenuFac.active = 9;
     $scope.activePanel = MenuFac;
     $scope.activeTab = "tap1";
@@ -39,11 +39,15 @@
     $scope.newProductPolicyForm = {};
     $scope.newServiceProductPolicy = function(){
       $scope.newProductPolicyForm.type = "service";
+      $scope.loadingStatus = true;
       ProductPoliciesServ.addProductPolicy($scope.newProductPolicyForm).then(function(response){
         if(response.data){
-          $scope.newProductPolicyForm = {};
-          $state.go('productPoliciesService');
-          toastr.success('تمت إضافة سياسة جديدة بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newProductPolicyForm = {};
+            $state.go('productPoliciesService');
+            toastr.success('تمت إضافة سياسة جديدة بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }
