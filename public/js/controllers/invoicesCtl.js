@@ -526,7 +526,43 @@
     $scope.upInviceForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllPackages();
-
+    var rePrice;
+    $scope.getMony= function(){
+      angular.forEach($scope.objects.packagesObj, function(value, key) {
+        if(value._id==$scope.upInviceForm.package){
+         rePrice= value.initialPrice;
+        }
+      }, rePrice);
+      var dPrice=rePrice/30;
+      if($scope.upInviceForm.month){
+        var month = $scope.upInviceForm.month;
+      }else{
+        var month = 0;
+      }
+      if($scope.upInviceForm.day){
+        var day = $scope.upInviceForm.day;
+      }else{
+        var day = 0;
+      }
+      $scope.upInviceForm.total=rePrice*month+day*dPrice;
+    },
+    $scope.getDef= function(){
+      var a ;
+      a = new Date($scope.upInviceForm.startDate);
+      var b = $scope.upInviceForm.endDate;
+      a.setDate(a.getDate() - 1);
+      a.setMonth(a.getMonth()+1);
+      for(var i=0;a<=b;){
+        i++;
+        a.setMonth(a.getMonth()+1);
+      
+          
+      }
+      a.setMonth(a.getMonth()-1);
+      $scope.upInviceForm.day=(b-a)/ (1000 * 3600 * 24);
+      $scope.upInviceForm.month=i;
+      $scope.getMony();
+    },
     ProductsServ.getAllItem().then(function(response){
       $scope.items=response.data;
     },function(response){
