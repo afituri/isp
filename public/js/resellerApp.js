@@ -274,6 +274,22 @@
           }]);
         }] 
       }
+    })
+    .state('inStock',{
+      url: '/inStock',
+      templateUrl: 'pages/reseller/all/inStock',
+      data: {pageTitle: 'المخزن'},
+      controller: 'inStockCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
     });
     $urlRouterProvider.otherwise('/');
     angular.extend($popoverProvider.defaults, {

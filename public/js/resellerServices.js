@@ -643,6 +643,9 @@
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
       },
+      'getInStocksReseler': function(pageSize,currentPage){
+        return $http.get('/inStock/Reseler/'+pageSize+'/'+currentPage);
+      },
       'deleteStocks': function(id){
         return $http.delete('/inStock/delete/'+id);
       },
