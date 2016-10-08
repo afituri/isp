@@ -145,8 +145,14 @@
        'getCustomersCount': function(){
         return $http.get('/customer/customerCount');
       },
+      'getCustomersCountReseller': function(){
+        return $http.get('/customer/customerCountReseller');
+      },
       'getAllMoney': function(){
         return $http.get('/report/company');
+      },
+      'getAllMoneyReseller': function(){
+        return $http.get('/report/companyReseller');
       },
 
       'getCustomers': function(status,pageSize,currentPage){

@@ -2,15 +2,15 @@
   'use strict';
   var app = angular.module('reseller');
     app.controller('DashboardCtl',['$scope','CustomersServ','SuppliersServ','ResllersServ',function($scope,CustomersServ,SuppliersServ,ResllersServ){
-       CustomersServ.getCustomersCount().then(function(response) {
+       CustomersServ.getCustomersCountReseller().then(function(response) {
         $scope.customerNumber = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
-     CustomersServ.getAllMoney().then(function(response) {
+     CustomersServ.getAllMoneyReseller().then(function(response) {
         $scope.totalMoney = (response.data.sum).toFixed(2);
-        $scope.totalPaid = (response.data.piad).toFixed(0);
-        $scope.reminder = ((response.data.sum).toFixed(0)-(response.data.piad).toFixed(2));
+        $scope.totalPaid = (response.data.piad).toFixed(2);
+        $scope.reminder = ((response.data.sum).toFixed(2)-(response.data.piad).toFixed(2));
 
       }, function(response) {
         console.log("Something went wrong");

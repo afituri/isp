@@ -26,12 +26,17 @@ router.get('/all', userHelpers.isLogin ,function(req, res) {
 
 
 //customerCount
+
 router.get('/customerCount',userHelpers.isLogin , function(req, res) {
   customerMgr.getAllCustomerCount(function(customers){
     res.send(customers);
   });
 });
-
+router.get('/customerCountReseller',userHelpers.isLogin , function(req, res) {
+  customerMgr.getAllCustomerCountReseller(req.user.id,function(customers){
+    res.send(customers);
+  });
+});
 router.get('/res', userHelpers.isLogin ,function(req, res) {
   customerMgr.getAllCustomerRes(req.user._id,function(customers){
     res.send(customers);

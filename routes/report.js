@@ -216,7 +216,13 @@ router.get('/company',userHelpers.isLogin ,function(req , res){
     });
   });
 });
-
+router.get('/companyReseller',userHelpers.isLogin ,function(req , res){
+  reportMgr.getTotalCompanyReseller(req.user.id,function(result){
+    parsPiad(result,function(money){
+      res.send(money);
+    });
+  });
+});
 router.post('/Between',userHelpers.isLogin ,function(req , res){
   var service;
   if(req.body.service){

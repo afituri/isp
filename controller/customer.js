@@ -227,6 +227,18 @@ module.exports = {
     });
   },
 
+    //getAllCustomerCount
+  getAllCustomerCountReseller :function(id,cb){
+    model.Customer.count({reseller:id},function(err, customers){
+      if(!err){
+        cb({count:customers});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
   getAllCustomerRes :function(id,cb){
     model.Customer.find({status:{$ne:3},reseller:id},function(err, customers){
       if(!err){

@@ -106,6 +106,17 @@ module.exports = {
       }
     });
   },
+  getTotalCompanyReseller : function (id,cb){
+    model.Invoice.find({$and:[{status:1},{reseller:id},{typein:{$ne:2}}]},function(err, invoices){
+      if(!err){
+        console.log(invoices);
+        cb(invoices);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getcompar : function (body,cb) {
     // var result=[];
     // var flag=0;
