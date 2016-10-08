@@ -208,7 +208,8 @@ module.exports = {
   },
 
   getAllCustomer :function(cb){
-    model.Customer.find({},function(err, customers){
+    model.Customer.find({}).populate('user').populate('reseller')
+      .exec(function(err, customers){
       if(!err){
         cb(customers);
       }else{
@@ -377,7 +378,6 @@ module.exports = {
   
   deleteCustomer : function(id,cb){
     model.Invoice.find({customer:id}, function(err,resul) {
-      console.log(resul);
       if(resul.length > 0){
         cb(1)
       } else{
@@ -390,6 +390,21 @@ module.exports = {
             cb(3);
           }
         });
+      }
+    });
+  },
+  getAllCustomerByReseler :function(id,cb){
+    var q={};
+    if(parseInt(id)!=-1){
+      q.reseller=id;
+    }
+    model.Customer.find(q).populate('user').populate('reseller').sort({reseller:1})
+      .exec(function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
       }
     });
   },

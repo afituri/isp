@@ -33,7 +33,7 @@
               </div>
             </form>
           </div>
-          <div class="bg-info col-md-4" style="margin-left:10px;">
+          <div class="bg-info col-md-3" style="margin-left:10px;">
             <form>
               <div class="form-group">
                 <label>التاريخ - Date</label>
@@ -53,7 +53,7 @@
               </div>
             </form>
           </div>
-          <div class="bg-info col-md-4" style="padding-right:20px;padding-left:20px;">
+          <div class="bg-info col-md-2" style="padding-right:20px;padding-left:20px;margin-left:10px;">
             <form>
               <div class="form-group">
                 <label>الموزع - Reseller</label>
@@ -67,6 +67,24 @@
               <div class="text-center">
                 <button type="button" ng-click="showReseller()" class="btn btn-info btn-sm"><i class="fa fa-bars"></i>&nbsp;عرض</button>
                 <button type="button" ng-click="printReseller()" class="btn btn-primary btn-sm"><i class="fa fa-print"></i>&nbsp;طباعة</button>
+              </div>
+            </form>
+          </div>
+          <div class="bg-info col-md-2" style="padding-right:20px;padding-left:20px;">
+            <form>
+              <div class="form-group">
+                <label>حسابات الموزع - Reseller</label>
+                <br>
+                <div class="row">
+                  <select class="form-control input-sm" ng-model="resellerAcc" >
+                <option value="" disabled selected>الرجاء الاختيار</option>
+                <option value="-1">عرض الزبائن جميعا</option>
+                <option ng-repeat="reseller in objects.resellersObj" value="{{reseller._id}}">{{reseller.companyName}}</option>
+              </select>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="button" ng-click="printResellerAcc()" class="btn btn-primary btn-sm"><i class="fa fa-print"></i>&nbsp;طباعة</button>
               </div>
             </form>
           </div>

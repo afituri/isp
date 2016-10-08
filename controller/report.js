@@ -117,6 +117,23 @@ module.exports = {
       }
     });
   },
+  getTotalCompanyForAll : function (id,cb){
+    var q = {
+      status:1,
+      typein:{$ne:2}
+    };
+    if(parseInt(id)!=-1){
+      q.reseller=id;
+    }
+    model.Invoice.find(q,function(err, invoices){
+      if(!err){
+        cb(invoices);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
   getcompar : function (body,cb) {
     // var result=[];
     // var flag=0;

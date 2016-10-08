@@ -1,0 +1,223 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>القاتورة النعائية</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/bootstrap-rtl/dist/css/bootstrap-rtl.min.css">
+    <style>
+      @font-face{
+        font-family: 'Droid Arabic Kufi Regular';
+        src : url("//localhost:3000/fonts/DroidKufi-Regular.ttf") format("truetype");
+      }
+      @font-face{
+        font-family: 'Droid Arabic Kufi bold';
+        src : url("//localhost:3000/fonts/DroidKufi-bold.ttf") format("truetype");
+      }
+      body{
+        font-family: 'Droid Arabic Kufi Regular', sans-serif;
+        font-size: 12px;
+      }
+      h6{
+        margin-top: 6px;
+        margin-bottom: 0px;
+      }
+      hr{
+        border-top:4px solid #000000;
+        margin-top:5px;
+        margin-bottom:5px;
+      }
+      .logo{
+        padding-top: 30px;
+        padding-right: 25px;
+        width: 50%;
+      }
+      .label-default {
+        background-color: #E4E4E4 !important;
+      }
+      .table-bordered>thead>tr>th{
+        background-color: #E4E4E4 !important;
+      }
+      .table-bordered,.table-bordered>thead>tr>th,.table-bordered>tbody>tr>td{
+        font-size: 12px;
+        border: 1px solid #000 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-8 text-right">
+               <img class="logo" src="//localhost:3000/img/logo-vsat.png" alt="logo">
+            </div>
+            <div class="col-xs-4 text-center">
+              <h6>13 amooen st , Hay alandlus</h6>
+              <h6>.Tripoli, Libya</h6>
+              <h6>Tel: 00218925977876</h6>
+              <h6>Tel: 00218923047879</h6>
+              <h6>Tel: 00218913826821</h6>
+              <h6>Email: info@libya-vsat.com.ly</h6>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="text-center">
+                <h3>عرض  {{:active}}</h3>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <table class="table table-bordered table-condensed">
+                <thead> 
+                  <tr>
+                    <th class="text-center" width="5%">
+                      الرقم  
+                    </th> 
+                    <th class="text-center" width="30%">
+                      اسم العميل   
+                    </th> 
+                    <th class="text-center" width="10%">
+                      الموزع 
+                    </th>
+                    <th class="text-center" width="5%">
+                      الأجمالي  
+                    </th>
+                    <th class="text-center" width="7%">
+                      المدفوع
+                    </th> 
+                    <th class="text-center" width="10%">
+                      الباقي
+                    </th> 
+                  </tr> 
+                </thead> 
+                <script type="text/javascript"> var i = 1; </script>
+                <tbody> 
+                  {{for  result}}
+                  <tr> 
+                    <td class="text-center"><script type="text/javascript">document.write(i);i=i+1;</script></td>
+                    <td class="text-center">
+                      {{:name}}
+                    </td> 
+                    <td class="text-center">
+                      {{:reseller}}
+                    </td>
+                    <td class="text-left">
+                      <script type="text/javascript">document.write(({{:sum}}).toFixed(2));</script>
+                      
+                    </td> 
+                    <td class="text-center">
+                      <script type="text/javascript">document.write(({{:piad}}).toFixed(2));</script>
+                      
+                    </td>
+                    <td class="text-center">
+                      <script type="text/javascript">document.write(({{:sum-piad}}).toFixed(2));</script>
+
+                      
+                    </td> 
+                  </tr>
+                  {{/for}}
+                  <!-- <tr> 
+                    <td class="text-left">
+                      <h5>Router</h5>
+                      Description of Router
+                    </td> 
+                    <td class="text-center">
+                      <br>
+                      0
+                    </td>
+                    <td class="text-center">
+                      <br>
+                      0
+                    </td> 
+                  </tr>
+                  <tr> 
+                    <td class="text-center">
+                      <h5>اعمال التركيب والنقل المصاحبة</h5>
+                    </td> 
+                    <td class="text-center">
+                      <h6>0</h6>
+                    </td>
+                    <td class="text-center">
+                      <h6>0</h6>
+                    </td> 
+                  </tr> -->
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-xs-12">
+                  <table class="table table-bordered table-condensed">
+                    <thead> 
+                      <tr>
+                        <th class="text-center" width="5%">
+                          الأجمالي
+                        </th> 
+                        <th class="text-center" width="30%">
+                          المدفوع   
+                        </th> 
+                        <th class="text-center" width="10%">
+                         الباقي  
+                        </th>
+                      </tr> 
+                    </thead> 
+                    <tbody> 
+                      <tr> 
+                        <td class="text-left">
+                          <script type="text/javascript">
+                            document.write(({{:sum}}).toFixed(2));
+                          </script>
+                        </td> 
+                        <td class="text-center">
+                          <script type="text/javascript">
+                            document.write(({{:piad}}).toFixed(2));
+                          </script>
+                        </td>
+                        <td class="text-center">
+                          <script type="text/javascript">
+                            document.write(({{:sum-piad}}).toFixed(2));
+                          </script>
+                        </td> 
+                    </tr>
+
+
+                    </tbody>
+                  </table>
+
+            </div>
+          </div>
+          
+          <!-- <div class="row">
+            <div class="col-xs-7">
+              <h6 style="color: red !important;padding:6px;">سوف يكون التثبيت في نفس اليوم عند الحصول على التأكيد</h6>
+              <h6>التحميل مجاني من الساعة 1:00 حتي 06:00</h6>
+              <h6>سرعة الخدمة من %40 إلى %100</h6>
+            </div>
+            <div class="col-xs-5">
+              <table class="pull-left">
+                <tbody>
+                  <tr>
+                    <td class="text-center" style="padding-left:10px;"><h5>خصم </h5></td>
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">
+
+                    </span></h5></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center" style="padding-left:10px;"><h5>صافي الفاتورة </h5></td>
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;"></span></h5></td>
+                  </tr>
+                </tbody>
+              </table>
+             
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

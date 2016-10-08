@@ -3,6 +3,7 @@ var router = express.Router();
 var userHelpers = require('../controller/userHelpers');
 var invoiceMgr = require("../controller/invoice");
 var reportMgr = require("../controller/report");
+var customerMgr = require("../controller/customer");
 var jsreport = require("jsreport");
 var fs = require("fs");
 var userHelpers = require("../controller/userHelpers");
@@ -279,6 +280,70 @@ router.get('/printReseller/:id',userHelpers.isLogin ,function(req , res){
   });
 });
 
+router.get('/getAllMoney/:id',userHelpers.isLogin ,function(req , res){
+  var result=[];
+  customerMgr.getAllCustomerByReseler(req.params.id, function(customers){
+    // console.log(customers);
+    customers.forEach(function(value, key) {
+      reportMgr.getTotalMoney(value._id,function(results){
+        parsPiad(results,function(money){
+          var obj={
+            name:value.name,
+            sum:money.sum,
+            piad:money.piad
+          }
+          if(value.reseller){
+            obj.reseller=value.reseller.repName;
+          }else{
+            obj.reseller='الشركة الام';
+          }
+          result.push(obj);
+          if(key == customers.length-1){
+            MonyForAll(req.params.id,function(Mony){
+              var finalR={
+                result:result,
+                active:"الحسابات",
+                sum:Mony.sum,
+                piad:Mony.piad
+              }
+              userHelpers.printReportMoney("Accounts.html",finalR,res); 
+            });
+             
+          }
+          
+        });
+      });
+    });
+    
+    // for(var i in customers){
+    //   reportMgr.getTotalMoney(customers[i]._id,function(results){
+    //     parsPiad(results,function(money){
+    //       var obj={
+    //         name:customers[i].name,
+    //         sum:money.sum,
+    //         piad:money.piad
+    //       }
+    //       if(customers[i].reseller){
+    //         obj.reseller=customers[i].reseller.repName;
+    //       }else{
+    //         obj.reseller='الشركة الام';
+    //       }
+    //       result.push(obj);
+    //       console.log(result);
+          
+          
+    //     });
+    //   });
+      
+
+    //   if(i == customers.length-1){
+    //         res.send(result);  
+    //       }
+    // }
+  });
+  
+});
+
 function pars(result,cb){
   var flag1=0;
   var flag2=0;
@@ -401,5 +466,12 @@ function parsPiad(result,cb){
   if(flag){
     cb({sum:sum,piad:piad});
   }
+}
+function MonyForAll(id,cb){
+  reportMgr.getTotalCompanyForAll(id,function(result){
+    parsPiad(result,function(money){
+      cb(money);
+    });
+  });
 }
 module.exports = router;
