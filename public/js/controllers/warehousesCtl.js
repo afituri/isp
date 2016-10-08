@@ -83,17 +83,21 @@
       });
     };
   }]);
-  app.controller('NewWarehouseCtl',['$scope','$state','MenuFac','WarehousesServ','HelperServ','toastr',function($scope,$state,MenuFac,WarehousesServ,HelperServ,toastr){
+  app.controller('NewWarehouseCtl',['$scope','$timeout','$state','MenuFac','WarehousesServ','HelperServ','toastr',function($scope,$timeout,$state,MenuFac,WarehousesServ,HelperServ,toastr){
     MenuFac.active = 4;
     $scope.activePanel = MenuFac;
     $scope.objects = HelperServ;
     $scope.newWarehouseForm = {};
     $scope.newWarehouse = function(){
+      $scope.loadingStatus = true;
       WarehousesServ.addWarehouse($scope.newWarehouseForm).then(function(response) {
         if(response.data){
-          $scope.newWarehouseForm = {};
-          $state.go('warehouses');
-          toastr.success('تمت إضافة مخزن جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newWarehouseForm = {};
+            $state.go('warehouses');
+            toastr.success('تمت إضافة مخزن جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }

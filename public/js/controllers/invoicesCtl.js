@@ -210,7 +210,7 @@
 
   }]);
 
-  app.controller('NewInvoiceCtl',['$scope','InStockServ','ProductsServ','ServicesServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,ProductsServ,ServicesServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+  app.controller('NewInvoiceCtl',['$scope','$timeout','InStockServ','ProductsServ','ServicesServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$timeout,InStockServ,ProductsServ,ServicesServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
 
     $scope.productsObj;
     $scope.showId = function(id){
@@ -316,9 +316,13 @@
         // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
         $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
         $scope.newInvoiceForm.inStockdata=$scope.inStockdata;
+        $scope.loadingStatus = true;
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            window.location.href='/report/printInvoice/'+response.data[1]._id;
+            $timeout(function () {
+              $scope.loadingStatus = false;
+              window.location.href='/report/printInvoice/'+response.data[1]._id;
+            },3000);
             // InvoicesServ.report(response.data).then(function(response,err){
             //   if(!err){
 
@@ -658,16 +662,20 @@
       });
     };
   }]);
-app.controller('Giga',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','gigaServ',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,gigaServ){
+app.controller('Giga',['$scope','$timeout','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','gigaServ',function($scope,$timeout,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,gigaServ){
     $scope.newgiga = {};
     $scope.addGiga = function(){
+      $scope.loadingStatus = true;
       $scope.newgiga.idin=$stateParams.id;
       gigaServ.addgiga($scope.newgiga).then(function(response){
         if(response.data){
-          /*toastr.success('تم الدفع بنجاح');
-          $state.go('invoiceCustomer')*/
-           toastr.success('تم إضافة قيقا بنجاح');
-          $state.go('invoiceCustomers');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            toastr.success('تم إضافة قيقا بنجاح');
+            $state.go('invoiceCustomers');
+          },3000);
+        } else {
+          console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");

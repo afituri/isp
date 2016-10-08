@@ -221,18 +221,22 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
       });
     };
   }]);
-  app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,MenuFac,CustomersServ,HelperServ,toastr){
+  app.controller('NewCustomerCtl',['$scope','$timeout','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$timeout,$state,MenuFac,CustomersServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
     $scope.newCustomer = function(){
+      $scope.loadingStatus = true;
       $scope.newCustomerForm.status=1;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
-          $scope.newCustomerForm = {};
-          $state.go('customers');
-          toastr.success('تمت إضافة زبون جديد بنجاح');
+          $timeout(function () {
+            $scope.newCustomerForm = {};
+            $state.go('customers');
+            toastr.success('تمت إضافة زبون جديد بنجاح');
+            $scope.loadingStatus = false;
+          },3000);
         } else {
           console.log(response.data);
         }

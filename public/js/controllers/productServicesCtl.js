@@ -330,7 +330,7 @@
       });
     };
   }]);
-  app.controller('NewProductCtl',['$scope','ServicesServ','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,ServicesServ,$state,MenuFac,ProductsServ,HelperServ,toastr){
+  app.controller('NewProductCtl',['$scope','$timeout','ServicesServ','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$timeout,ServicesServ,$state,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 7;
     
     $scope.activePanel = MenuFac;
@@ -384,12 +384,15 @@
 
     $scope.newServiceProduct = function(){
       $scope.newProductForm.type = "service";
-
+      $scope.loadingStatus = true;
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $scope.newProductForm = {};
-          $state.go('productServices');
-          toastr.success('تمت إضافة منتج جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newProductForm = {};
+            $state.go('productServices');
+            toastr.success('تمت إضافة منتج جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }
@@ -399,11 +402,15 @@
     };
     $scope.newEtcProduct = function(){
       $scope.newProductForm.type = "etc";
+      $scope.loadingStatus = true;
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $scope.newProductForm = {};
-          $state.go('productOtherEquipments');
-          toastr.success('تمت إضافة منتج جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newProductForm = {};
+            $state.go('productOtherEquipments');
+            toastr.success('تمت إضافة منتج جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }
@@ -413,11 +420,15 @@
     };
     $scope.newItemProduct = function(){
       $scope.newProductForm.type = "item";
+      $scope.loadingStatus = true;
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $scope.newProductForm = {};
-          $state.go('productItems');
-          toastr.success('تمت إضافة منتج جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newProductForm = {};
+            $state.go('productItems');
+            toastr.success('تمت إضافة منتج جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }
@@ -427,11 +438,15 @@
     };
     $scope.newPackageProduct = function(){
       $scope.newProductForm.type = "package";
+      $scope.loadingStatus = true;
       ProductsServ.addProduct($scope.newProductForm).then(function(response) {
         if(response.data){
-          $scope.newProductForm = {};
-          $state.go('productPackages');
-          toastr.success('تمت إضافة منتج جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newProductForm = {};
+            $state.go('productPackages');
+            toastr.success('تمت إضافة منتج جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }

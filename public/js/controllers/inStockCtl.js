@@ -111,7 +111,7 @@
     };
 }]);
 
-app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr','CSVServ',function($scope,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr,CSVServ){
+app.controller('NewInStockCtl',['$scope','$timeout','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr','CSVServ',function($scope,$timeout,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr,CSVServ){
   MenuFac.active = 5;
   $scope.activePanel = MenuFac;
   $scope.objects=HelperServ;
@@ -169,12 +169,16 @@ app.controller('NewInStockCtl',['$scope','ProductsServ','InStockServ','$state','
       encoding: 'UTF-8',
     };
   $scope.newInStock = function(){
+    $scope.loadingStatus = true;
     $scope.newInStockForm.csv=$scope.csv.result;
     InStockServ.addInStock($scope.newInStockForm).then(function(response) {
       if(response.data){
-        $scope.newInStockForm={};
-        $state.go('inStock');
-        toastr.success('تمت إضافة المخزون بنجاح');
+        $timeout(function () {
+          $scope.loadingStatus = false;
+          $scope.newInStockForm={};
+          $state.go('inStock');
+          toastr.success('تمت إضافة المخزون بنجاح');
+        },3000);
       } else {
         console.log(response.data);
       }
