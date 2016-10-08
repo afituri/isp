@@ -52,34 +52,36 @@
     $scope.results = [];
     $scope.package = '-1';
     $scope.reseller = '-1';
-    $scope.init = function (idR,idP) {
-      CustomersServ.getCustomersRe(idR,idP,$scope.pageSize,$scope.currentPage).then(function(response) {
+    $scope.init = function (idR,idP,name) {
+      if(name== undefined|| name.length==0){
+        name=-1;
+      }
+      CustomersServ.getCustomersRe(idR,idP,name,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
-        console.log($scope.customers);
         $scope.total = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
     }
-    $scope.init($scope.package,$scope.reseller);
+    $scope.init($scope.package,$scope.reseller,'');
 
     //.getCustomers(1,
 
-       $scope.initi = function () {
-      CustomersServ.getCustomers(1,$scope.pageSize,$scope.currentPage).then(function(response) {
-        $scope.customerss = response.data.result;
-        console.log($scope.customers);
-        $scope.total = response.data.count;
-      }, function(response) {
-        console.log("Something went wrong");
-      });
-    }
-    $scope.initi();
+    //    $scope.initi = function () {
+    //   CustomersServ.getCustomers(1,$scope.pageSize,$scope.currentPage).then(function(response) {
+    //     $scope.customerss = response.data.result;
+    //     console.log($scope.customers);
+    //     $scope.total = response.data.count;
+    //   }, function(response) {
+    //     console.log("Something went wrong");
+    //   });
+    // }
+    // $scope.initi();
 
 
 
     $scope.getRe = function(){
-      $scope.init($scope.reseller,$scope.package);
+      $scope.init($scope.reseller,$scope.package,$scope.searchByName);
     }
     $scope.showDeleteModel = function(id){
       $scope.id = id;

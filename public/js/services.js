@@ -436,8 +436,8 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
-      'getCustomersRe': function(id,idC,pageSize,currentPage){
-        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC);
+      'getCustomersRe': function(id,idC,name,pageSize,currentPage){
+        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC+'/'+name);
       },
       'getAllMoney': function(){
         return $http.get('/report/company');

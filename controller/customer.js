@@ -142,7 +142,7 @@ module.exports = {
     
   },
 
-  getCustomerReseller :function(id,idP,limit,page,cb){
+  getCustomerReseller :function(id,idP,name,limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
@@ -158,12 +158,15 @@ module.exports = {
           _id:{$in:idC},
           status:{$ne:3}
         }
-        if(id!=-1){
-          options={
+        options={
             _id:{$in:idC},
-            status:{$ne:3},
-            reseller:id
+            status:{$ne:3}
           }
+        if(id!=-1){
+          options.reseller=id;
+        }
+        if(parseInt(name)!=-1){
+          options.name= { $regex: name, $options: '-i' };
         }
         model.Customer.count(options,function(err,count){
           model.Customer.find(options).skip(page*limit)
