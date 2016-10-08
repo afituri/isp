@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('CustomersCtl',['$scope','PermissionServ','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,PermissionServ,$modal,MenuFac,CustomersServ,toastr,HelperServ){
+  app.controller('CustomersCtl',['$scope','PermissionServ','$modal','MenuFac','CustomersServ','toastr','HelperServ','$location',function($scope,PermissionServ,$modal,MenuFac,CustomersServ,toastr,HelperServ,$location){
     
      PermissionServ.getSubpermission().then(function(response){
       $scope.permission =true;
@@ -63,7 +63,13 @@
         console.log("Something went wrong");
       });
     }
-    $scope.init($scope.package,$scope.reseller,'');
+    if($location.search().q != undefined){
+      $scope.searchByName=$location.search().q;
+        $scope.init($scope.package,$scope.reseller,$scope.searchByName);
+      }else{
+        $scope.init($scope.package,$scope.reseller,'');
+      }
+    
 
     //.getCustomers(1,
 
