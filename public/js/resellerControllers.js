@@ -536,16 +536,23 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     };
   }]);
 
-   app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
+   app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,$modal,MenuFac,CustomersServ,toastr,HelperServ){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
-    
+    $scope.objects = HelperServ;
+    $scope.objects.getAllPackages();
 //000000000
-    $scope.init = function () {
-      CustomersServ.getCustomersForResseler($scope.pageSize,$scope.currentPage).then(function(response) {
+    $scope.init = function (idP,name) {
+      if(name== undefined|| name.length==0){
+        name=-1;
+      }
+      if(idP== undefined){
+        idP=-1;
+      }
+      CustomersServ.getCustomersForResseler(idP,name,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -555,7 +562,9 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.init();
 
 
-
+    $scope.getRe = function(){
+      $scope.init($scope.package,$scope.searchByName);
+    }
 
     $scope.showDeleteModel = function(id){
       $scope.id = id;

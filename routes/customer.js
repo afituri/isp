@@ -50,8 +50,8 @@ router.get('/allStatus1', userHelpers.isLogin ,function(req, res) {
   });
 });
 //0000000
-router.get('/customerReseller/:limit/:page',userHelpers.isLogin , function(req, res) {
-  customerMgr.getCustomerReseller(req.user._id,-1,req.params.limit,req.params.page,function(customers){
+router.get('/customerReseller/:idP/:name/:limit/:page',userHelpers.isLogin , function(req, res) {
+  customerMgr.getCustomerReseller(req.user._id,req.params.idP,req.params.name,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });

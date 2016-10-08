@@ -158,8 +158,8 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
-       'getCustomersForResseler': function(pageSize,currentPage){
-        return $http.get('/customer/customerReseller/'+pageSize+'/'+currentPage);
+       'getCustomersForResseler': function(idP,name,pageSize,currentPage){
+        return $http.get('/customer/customerReseller/'+idP+'/'+name+'/'+pageSize+'/'+currentPage);
       },
       'getAllCustomers': function(){
         return $http.get('/customer/all');
