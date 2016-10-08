@@ -817,8 +817,30 @@ replacInvice:function(body,cb){
             order=new model.Order(Order);
             order.save(function(err,orderResult){
               if(!err){
-                console.log(orderResult);
-                cb(invoiceResult);
+                model.Instock.findOne({invoice:body.idin,status:2},function(err,instockOld){
+                  if(!err){
+                    model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.mac}]},{invoice:body.idin,status:2,username:instockOld.username,password:instockOld.password} , function(err,result) {
+                      if (!err) {
+                        model.Instock.findOneAndUpdate({_id:instockOld._id},{status:5} , function(err,result) {
+                          if(!err){
+                            cb(invoiceResult);
+                          }else{
+                            console.log(err);
+                            cb(false);
+                          }
+                        });
+                      } else {
+                        console.log(err);
+                        cb(false);
+                      }
+                    }); 
+                  } else {
+                    console.log(err);
+                    cb(false);
+                  }
+                  
+                });
+                
               } else {
                 console.log(err);
                 cb(null,err)

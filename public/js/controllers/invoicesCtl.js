@@ -533,7 +533,7 @@
     };
   }]);
 
-  app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+  app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','InStockServ',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,InStockServ){
    
     //0000000000000
     
@@ -541,7 +541,25 @@
     $scope.upInviceForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllPackages();
+    $scope.objects.getAllStock();
     var rePrice;
+    $scope.getMac = function(item,stock){
+      if(!item){
+        item=0;
+      }
+      if(!stock){
+        stock=0;
+      } 
+      InStockServ.getByWP(stock,item).then(function(response) {
+        $scope.macObj=response.data;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.setStock=function(){
+      $scope.getMac($scope.replace.product,$scope.replace.warehouse);
+    }
+    $scope.getMac(0,0);
     $scope.getMony= function(){
       angular.forEach($scope.objects.packagesObj, function(value, key) {
         if(value._id==$scope.upInviceForm.package){

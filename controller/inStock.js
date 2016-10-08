@@ -194,7 +194,16 @@ module.exports = {
     });
   },
 getByWP :function(idW,idP,cb){
-  model.Instock.find({$and: [ {status:1},{product:idP},{warehouse:idW}]}, function(err,result) {
+  var q = {
+    status:1
+  }
+  if(parseInt(idW)){
+    q.warehouse=idW;
+  }
+  if(parseInt(idP)){
+    q.product=idP;
+  }
+  model.Instock.find(q, function(err,result) {
     if (!err) {
       cb(result)
     } else {

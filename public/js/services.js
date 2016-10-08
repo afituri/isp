@@ -736,6 +736,9 @@
       'replacInvice': function(replacInviceObj){
         return $http.post('/invoice/replacInvice',replacInviceObj);
       },
+      'getMac': function(replacInviceObj){
+        return $http.post('/invoice/replacInvice',replacInviceObj);
+      },
       'paidInvoice': function(paidInviceObj){
         // return $http.post('/invoice/paidInvoice',paidInviceObj);
         return Upload.upload({
