@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('ReportsCtl',['$scope','ServicesServ','InStockServ','toastr','$modal','InvoicesServ','HelperServ',function($scope,ServicesServ,InStockServ,toastr,$modal,InvoicesServ,HelperServ){
+  app.controller('ReportsCtl',['$scope','ServicesServ','InStockServ','toastr','$modal','InvoicesServ','HelperServ','$state',function($scope,ServicesServ,InStockServ,toastr,$modal,InvoicesServ,HelperServ,$state){
    
 
 
@@ -12,7 +12,6 @@
         $scope.customers = null;
       } else {
       InStockServ.getInfoByMackAdress($scope.searchByMac).then(function(response){
-        console.log(response.data);
         $scope.customers = response.data;
       },function(response){
         console.log("Somthing went wrong");
@@ -20,7 +19,9 @@
     }
     }
 
-
+    $scope.printResellerAcc=function(){
+       window.location.href="/report/getAllMoney/"+$scope.resellerAcc;
+    }
 
     ServicesServ.getAllServices().then(function(response){ 
       $scope.ServiceAll = response.data;

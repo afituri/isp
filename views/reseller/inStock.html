@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <div class="row">
+          <div class="col-xs-2">
+            <h2 class="pull-right">عرض المخزون</h2>
+          </div>
+          <div class="col-xs-7">
+           <!--  <input type="text" class="form-control input-sm" ng-model="searchByName" placeholder="بحث..."> -->
+          </div>
+          <div class="col-xs-3 text-left">
+            <button type="button" class="btn btn-info btn-sm" data-placement="right" data-trigger="focus"  ng-click="showPassword()" >
+              <em ng-if="hidePass" class="glyphicon glyphicon-eye-open"></em>
+              <em ng-if="showPass" class="glyphicon glyphicon-eye-close"></em>
+            </button>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="table-responsive">
+          <div ng-show="getInStocks.length == 0">
+            <div class="alert alert-info">
+              <p class="text-center">
+                عفوا لاتوجد بيانات
+              </p>
+            </div>
+          </div>
+          <table ng-show="getInStocks.length" class="table table-striped table-condensed jambo_table">
+            <thead>
+              <tr>
+                <th class="column-title" style="display: table-cell;">المخزن</th>
+                <th class="column-title" style="display: table-cell;">المنتج</th>
+                <th class="column-title" style="display: table-cell;">ماك ادرس</th>
+                <th class="column-title" style="display: table-cell;">اسم المستخدم</th>
+                <th class="column-title" style="display: table-cell;">الباسورد</th>
+                <th class="column-title text-center" style="display: table-cell;"><i class="fa fa-cog"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="inStocks in getInStocks">
+                <td>{{inStocks.warehouse.name}}</td>
+                <td>{{inStocks.product.name}}</td>
+                <td>{{inStocks.macAddress}}</td>
+                <td>{{inStocks.username}}</td>
+                <td> <p ng-if="showPass">{{inStocks.password}}</p> <p ng-if="hidePass"> ******** </p></td>
+                <!-- <td>
+                  <a ng-show="editInStock" class="btn btn-success btn-xs" ui-sref="editInStock({id:inStocks._id})"><i class="fa fa-pencil fa-fw"></i>&nbsp;تعديل</a>
+                  <a ng-show="deleteInStock" class="btn btn-success btn-xs" ng-click="showDeleteModel(inStocks._id)"><i class="fa fa-trash fa-fw"></i>&nbsp;حذف</a>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row" ng-show="getInStocks.length">
+          <div class="col-xs-12 col-md-12 text-center">
+            <uib-pagination class="hidden-xs btn-sm" boundary-links="true" rotate="false" max-size="5" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="السابق" next-text="التالي" first-text="الاول" last-text="الاخير"></uib-pagination>
+            <uib-pagination class="visible-xs" boundary-links="true" rotate="false" max-size="3" total-items="total" ng-model="currentPage" items-per-page="pageSize" ng-click="init()" previous-text="‹" next-text="›" first-text="«" last-text="»"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

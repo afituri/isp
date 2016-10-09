@@ -145,15 +145,21 @@
        'getCustomersCount': function(){
         return $http.get('/customer/customerCount');
       },
+      'getCustomersCountReseller': function(){
+        return $http.get('/customer/customerCountReseller');
+      },
       'getAllMoney': function(){
         return $http.get('/report/company');
+      },
+      'getAllMoneyReseller': function(){
+        return $http.get('/report/companyReseller');
       },
 
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
-       'getCustomersForResseler': function(pageSize,currentPage){
-        return $http.get('/customer/customerReseller/'+pageSize+'/'+currentPage);
+       'getCustomersForResseler': function(idP,name,pageSize,currentPage){
+        return $http.get('/customer/customerReseller/'+idP+'/'+name+'/'+pageSize+'/'+currentPage);
       },
       'getAllCustomers': function(){
         return $http.get('/customer/all');
@@ -642,6 +648,9 @@
       },
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
+      },
+      'getInStocksReseler': function(pageSize,currentPage){
+        return $http.get('/inStock/Reseler/'+pageSize+'/'+currentPage);
       },
       'deleteStocks': function(id){
         return $http.delete('/inStock/delete/'+id);

@@ -83,18 +83,22 @@
       });
     };
   }]);
-  app.controller('NewResellerCtl',['$scope','$state','MenuFac','ResllersServ','HelperServ','toastr', function($scope,$state,MenuFac,ResllersServ,HelperServ,toastr){
+  app.controller('NewResellerCtl',['$scope','$timeout','$state','MenuFac','ResllersServ','HelperServ','toastr', function($scope,$timeout,$state,MenuFac,ResllersServ,HelperServ,toastr){
     MenuFac.active = 2;
     $scope.newResllerForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllWarehouses();
     $scope.objects.getAllPolicies();
     $scope.newResller = function(){
+      $scope.loadingStatus = true;
       ResllersServ.addResller($scope.newResllerForm).then(function(response) {
         if(response.data){
-          $scope.newResllerForm = {};
-          $state.go('resellers');
-          toastr.success('تمت إضافة موزع جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newResllerForm = {};
+            $state.go('resellers');
+            toastr.success('تمت إضافة موزع جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }

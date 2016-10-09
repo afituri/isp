@@ -84,16 +84,20 @@
     };
 
   }]);
-  app.controller('NewSupplierCtl',['$scope','$state','MenuFac','SuppliersServ','toastr',function($scope,$state,MenuFac,SuppliersServ,toastr){
+  app.controller('NewSupplierCtl',['$scope','$timeout','$state','MenuFac','SuppliersServ','toastr',function($scope,$timeout,$state,MenuFac,SuppliersServ,toastr){
     MenuFac.active = 3;
     $scope.activePanel = MenuFac;
     $scope.newSupplierForm = {};
     $scope.newSupplier = function(){
+      $scope.loadingStatus = true;
       SuppliersServ.addSupplier($scope.newSupplierForm).then(function(response) {
         if(response.data){
-          $scope.newSupplierForm = {};
-          $state.go('suppliers');
-          toastr.success('تمت إضافة مورد جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newSupplierForm = {};
+            $state.go('suppliers');
+            toastr.success('تمت إضافة مورد جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }

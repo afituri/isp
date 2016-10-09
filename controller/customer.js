@@ -142,7 +142,7 @@ module.exports = {
     
   },
 
-  getCustomerReseller :function(id,idP,limit,page,cb){
+  getCustomerReseller :function(id,idP,name,limit,page,cb){
     page = parseInt(page);
     page-=1;
     limit = parseInt(limit);
@@ -158,12 +158,15 @@ module.exports = {
           _id:{$in:idC},
           status:{$ne:3}
         }
-        if(id!=-1){
-          options={
+        options={
             _id:{$in:idC},
-            status:{$ne:3},
-            reseller:id
+            status:{$ne:3}
           }
+        if(id!=-1){
+          options.reseller=id;
+        }
+        if(parseInt(name)!=-1){
+          options.name= { $regex: name, $options: '-i' };
         }
         model.Customer.count(options,function(err,count){
           model.Customer.find(options).skip(page*limit)
@@ -205,7 +208,8 @@ module.exports = {
   },
 
   getAllCustomer :function(cb){
-    model.Customer.find({},function(err, customers){
+    model.Customer.find({}).populate('user').populate('reseller')
+      .exec(function(err, customers){
       if(!err){
         cb(customers);
       }else{
@@ -218,6 +222,18 @@ module.exports = {
   //getAllCustomerCount
     getAllCustomerCount :function(cb){
     model.Customer.count({},function(err, customers){
+      if(!err){
+        cb({count:customers});
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
+
+    //getAllCustomerCount
+  getAllCustomerCountReseller :function(id,cb){
+    model.Customer.count({reseller:id},function(err, customers){
       if(!err){
         cb({count:customers});
       }else{
@@ -362,7 +378,6 @@ module.exports = {
   
   deleteCustomer : function(id,cb){
     model.Invoice.find({customer:id}, function(err,resul) {
-      console.log(resul);
       if(resul.length > 0){
         cb(1)
       } else{
@@ -375,6 +390,21 @@ module.exports = {
             cb(3);
           }
         });
+      }
+    });
+  },
+  getAllCustomerByReseler :function(id,cb){
+    var q={};
+    if(parseInt(id)!=-1){
+      q.reseller=id;
+    }
+    model.Customer.find(q).populate('user').populate('reseller').sort({reseller:1})
+      .exec(function(err, customers){
+      if(!err){
+        cb(customers);
+      }else{
+        console.log(err);
+        cb(null);
       }
     });
   },

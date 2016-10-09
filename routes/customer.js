@@ -26,12 +26,17 @@ router.get('/all', userHelpers.isLogin ,function(req, res) {
 
 
 //customerCount
+
 router.get('/customerCount',userHelpers.isLogin , function(req, res) {
   customerMgr.getAllCustomerCount(function(customers){
     res.send(customers);
   });
 });
-
+router.get('/customerCountReseller',userHelpers.isLogin , function(req, res) {
+  customerMgr.getAllCustomerCountReseller(req.user.id,function(customers){
+    res.send(customers);
+  });
+});
 router.get('/res', userHelpers.isLogin ,function(req, res) {
   customerMgr.getAllCustomerRes(req.user._id,function(customers){
     res.send(customers);
@@ -45,17 +50,15 @@ router.get('/allStatus1', userHelpers.isLogin ,function(req, res) {
   });
 });
 //0000000
-router.get('/customerReseller/:limit/:page',userHelpers.isLogin , function(req, res) {
-  customerMgr.getCustomerReseller(req.user._id,-1,req.params.limit,req.params.page,function(customers){
+router.get('/customerReseller/:idP/:name/:limit/:page',userHelpers.isLogin , function(req, res) {
+  customerMgr.getCustomerReseller(req.user._id,req.params.idP,req.params.name,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
 
 
 router.get('/searchAll/:all/:limit/:page', userHelpers.isLogin ,function(req, res) {
-  console.log("you are in");
   customerMgr.getCustomerSearchAll(req.params.all,req.params.limit,req.params.page,function(customers){
-    console.log(customers);
     res.send(customers);
   });
 });
@@ -119,18 +122,18 @@ router.get('/:id',userHelpers.isLogin , function(req, res) {
     res.send(customer);
   });
 });
+
+
+
+router.get('/getRe/:limit/:page/:id/:idC/:name',userHelpers.isLogin , function(req, res) {
+  customerMgr.getCustomerReseller(req.params.id,req.params.idC,req.params.name,req.params.limit,req.params.page,function(customers){
+    res.send(customers);
+  });
+});
+
 router.get('/:limit/:page/:status',userHelpers.isLogin , function(req, res) {
   customerMgr.getCustomer(req.params.status,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });
-
-
-router.get('/getRe/:limit/:page/:id/:idC',userHelpers.isLogin , function(req, res) {
-  customerMgr.getCustomerReseller(req.params.id,req.params.idC,req.params.limit,req.params.page,function(customers){
-    res.send(customers);
-  });
-});
-
-
 module.exports = router;

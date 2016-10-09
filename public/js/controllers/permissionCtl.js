@@ -8,7 +8,6 @@
     $scope.total = 0;
     $scope.init = function () {
      PermissionServ.getPermission($scope.pageSize,$scope.currentPage).then(function(response) {
-        console.log(response.data);
         $scope.permissions = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -46,7 +45,7 @@
     } 
   }]);
 
-  app.controller('newPermissionCtl',['$scope','toastr','$state','CustomersServ','PermissionServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,$state,CustomersServ,PermissionServ,$modal,$stateParams,MenuFac,InvoicesServ){
+  app.controller('newPermissionCtl',['$scope','$timeout','toastr','$state','CustomersServ','PermissionServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,$timeout,toastr,$state,CustomersServ,PermissionServ,$modal,$stateParams,MenuFac,InvoicesServ){
       $scope.newPermission={}
       $scope.allDoller=true;
 
@@ -87,15 +86,22 @@
           $scope.newPermission[pages[i]].edit=true;
           $scope.newPermission[pages[i]].all=true;
          }
-         console.log($scope.newPermission);
       
 
 
       $scope.newPerm = function(){
-        console.log($scope.newPermission);
+        $scope.loadingStatus = true;
          PermissionServ.addPermssion($scope.newPermission).then(function(respones){
-          $state.go('permissions');
-          toastr.success('تمت إضافة الصلاحية بنجاح');
+          if(response.data){
+            $timeout(function () {
+              $scope.loadingStatus = false;
+              $state.go('permissions');
+              toastr.success('تمت إضافة الصلاحية بنجاح');
+            },3000);
+          } else {
+            console.log(response.data);
+            $state.go('permissions');
+          }
          },function(respones){
           console.log("Somthing went wrong");
          })

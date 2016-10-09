@@ -165,12 +165,12 @@
                     </td>
                     <td class="text-center">
                       <br>
-                      {{:price}}
+                      <script type="text/javascript">document.write({{:price}}.toFixed(2));</script>
                     </td>
                     <td class="text-center">
                       <br>
                        {{if product.type=="package"}}
-                          <script type="text/javascript">document.write(j*{{:price}});;</script>
+                          <script type="text/javascript">document.write((j*{{:price}}).toFixed(2));</script>
                         {{else}}
                           {{:price}}
 
@@ -232,19 +232,31 @@
                 <tbody>
                   <tr>
                     <td class="text-center" style="padding-left:10px;"><h5>اجمالي </h5></td>
-                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">{{:result.invoices.discount +result.invoices.piad }}
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">
+                      <script type="text/javascript">
+                        document.write(({{:result.invoices.discount +result.invoices.piad }}).toFixed(2))
+                      </script>
+                      
 
                     </span></h5></td>
                   </tr>
                   <tr>
                     <td class="text-center" style="padding-left:10px;"><h5>خصم </h5></td>
-                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">{{:result.invoices.discount}}
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">
 
+                      <script type="text/javascript">
+                        document.write(({{:result.invoices.discount}}).toFixed(2))
+                      </script>
                     </span></h5></td>
                   </tr>
                   <tr>
                     <td class="text-center" style="padding-left:10px;"><h5>صافي الفاتورة </h5></td>
-                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">{{:result.invoices.piad }}</span></h5></td>
+                    <td class="text-center" width="50%"><h5><span class="label label-default" style="display:block;">
+                      
+                      <script type="text/javascript">
+                        document.write(({{:result.invoices.piad }}).toFixed(2))
+                      </script>
+                    </span></h5></td>
                   </tr>
                 </tbody>
               </table>

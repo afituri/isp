@@ -1,10 +1,12 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('InvoicesCtlPending',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+  app.controller('InvoicesCtlPending',['$scope','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ','HelperServ',function($scope,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ,HelperServ){
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
+    $scope.objects = HelperServ;
+    $scope.objects.getAllResellers();
 
     $scope.showInoice = function(id,typein){
       if(typein == 1){
@@ -18,18 +20,31 @@
       }
     }
     
-    $scope.init = function(id){
-    InvoicesServ.getInvoicePending(id,$scope.pageSize,$scope.currentPage).then(function(response) {
+    $scope.init = function(pend,resel){
+    InvoicesServ.getInvoicePendingReseller(pend,resel,$scope.pageSize,$scope.currentPage).then(function(response) {
       $scope.allInvoice=response.data.result;
       $scope.total = response.data.count;
     }, function(response) {
         console.log("Something went wrong");
     }); 
   }
-  $scope.init(2);
+  $scope.init(2,0);
    
    $scope.getStatus = function(){
-    $scope.init($scope.pending);
+    var pend;
+    var resel;
+    if($scope.pending){
+      pend=$scope.pending;
+    }else{
+      pend=0;
+    }
+    console.lo
+    if($scope.reseller){
+      resel=$scope.reseller;
+    }else{
+      resel=0;
+    }
+    $scope.init(pend,resel);
    }
 
    $scope.accept = function(id){
@@ -195,7 +210,7 @@
 
   }]);
 
-  app.controller('NewInvoiceCtl',['$scope','InStockServ','ProductsServ','ServicesServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,InStockServ,ProductsServ,ServicesServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
+  app.controller('NewInvoiceCtl',['$scope','$timeout','InStockServ','ProductsServ','ServicesServ','DollarServ','$state','MenuFac','InvoicesServ','HelperServ','CustomersServ','toastr','$http','ReportServ',function($scope,$timeout,InStockServ,ProductsServ,ServicesServ,DollarServ,$state,MenuFac,InvoicesServ,HelperServ,CustomersServ,toastr,$http,ReportServ){    
 
     $scope.productsObj;
     $scope.showId = function(id){
@@ -301,9 +316,13 @@
         // $scope.newInvoiceForm.itemInfo=$scope.itemInfo.inst;
         $scope.newInvoiceForm.selectedProducts=$scope.selectedProducts;
         $scope.newInvoiceForm.inStockdata=$scope.inStockdata;
+        $scope.loadingStatus = true;
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
-            window.location.href='/report/printInvoice/'+response.data[1]._id;
+            $timeout(function () {
+              $scope.loadingStatus = false;
+              window.location.href='/report/printInvoice/'+response.data[1]._id;
+            },3000);
             // InvoicesServ.report(response.data).then(function(response,err){
             //   if(!err){
 
@@ -518,7 +537,7 @@
     };
   }]);
 
-  app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+  app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','InStockServ',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,InStockServ){
    
     //0000000000000
     
@@ -526,7 +545,61 @@
     $scope.upInviceForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllPackages();
-
+    $scope.objects.getAllStock();
+    var rePrice;
+    $scope.getMac = function(item,stock){
+      if(!item){
+        item=0;
+      }
+      if(!stock){
+        stock=0;
+      } 
+      InStockServ.getByWP(stock,item).then(function(response) {
+        $scope.macObj=response.data;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.setStock=function(){
+      $scope.getMac($scope.replace.product,$scope.replace.warehouse);
+    }
+    $scope.getMac(0,0);
+    $scope.getMony= function(){
+      angular.forEach($scope.objects.packagesObj, function(value, key) {
+        if(value._id==$scope.upInviceForm.package){
+         rePrice= value.initialPrice;
+        }
+      }, rePrice);
+      var dPrice=rePrice/30;
+      if($scope.upInviceForm.month){
+        var month = $scope.upInviceForm.month;
+      }else{
+        var month = 0;
+      }
+      if($scope.upInviceForm.day){
+        var day = $scope.upInviceForm.day;
+      }else{
+        var day = 0;
+      }
+      $scope.upInviceForm.total=rePrice*month+day*dPrice;
+    },
+    $scope.getDef= function(){
+      var a ;
+      a = new Date($scope.upInviceForm.startDate);
+      var b = $scope.upInviceForm.endDate;
+      a.setDate(a.getDate() - 1);
+      a.setMonth(a.getMonth()+1);
+      for(var i=0;a<=b;){
+        i++;
+        a.setMonth(a.getMonth()+1);
+      
+          
+      }
+      a.setMonth(a.getMonth()-1);
+      $scope.upInviceForm.day=(b-a)/ (1000 * 3600 * 24);
+      $scope.upInviceForm.month=i;
+      $scope.getMony();
+    },
     ProductsServ.getAllItem().then(function(response){
       $scope.items=response.data;
     },function(response){
@@ -589,16 +662,20 @@
       });
     };
   }]);
-app.controller('Giga',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','gigaServ',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,gigaServ){
+app.controller('Giga',['$scope','$timeout','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','gigaServ',function($scope,$timeout,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,gigaServ){
     $scope.newgiga = {};
     $scope.addGiga = function(){
+      $scope.loadingStatus = true;
       $scope.newgiga.idin=$stateParams.id;
       gigaServ.addgiga($scope.newgiga).then(function(response){
         if(response.data){
-          /*toastr.success('تم الدفع بنجاح');
-          $state.go('invoiceCustomer')*/
-           toastr.success('تم إضافة قيقا بنجاح');
-          $state.go('invoiceCustomers');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            toastr.success('تم إضافة قيقا بنجاح');
+            $state.go('invoiceCustomers');
+          },3000);
+        } else {
+          console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");

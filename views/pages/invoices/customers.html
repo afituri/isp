@@ -7,7 +7,10 @@
             <h2 class="pull-right">عرض الزبائن</h2>
           </div>
           <div class="col-xs-2 col-md-2">
-           <!--  <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="searchCustomer()" placeholder="بحث..."> -->
+            <div class="form-group">
+              <label>بحث بالاسم</label>
+              <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="getRe()" placeholder="بحث...">
+            </div>
           </div>
           <div class="col-xs-3 col-md-3">
             <div class="form-group">
@@ -31,6 +34,12 @@
           </div>
           <div class="col-xs-2 col-md-2" style="padding-top:25px;">
             <a class="btn btn-sm btn-primary" ui-sref="newInvoice"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
+          </div>
+        </div>
+        <div class= "row">
+          <div class="col-xs-2" style="padding-top:20px;">
+            <h2><label> عدد الزبائن :  {{total}}</label></h2>
+           
           </div>
         </div>
         <div class="clearfix"></div>

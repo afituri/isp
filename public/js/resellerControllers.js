@@ -2,15 +2,15 @@
   'use strict';
   var app = angular.module('reseller');
     app.controller('DashboardCtl',['$scope','CustomersServ','SuppliersServ','ResllersServ',function($scope,CustomersServ,SuppliersServ,ResllersServ){
-       CustomersServ.getCustomersCount().then(function(response) {
+       CustomersServ.getCustomersCountReseller().then(function(response) {
         $scope.customerNumber = response.data.count;
       }, function(response) {
         console.log("Something went wrong");
       });
-     CustomersServ.getAllMoney().then(function(response) {
+     CustomersServ.getAllMoneyReseller().then(function(response) {
         $scope.totalMoney = (response.data.sum).toFixed(2);
-        $scope.totalPaid = (response.data.piad).toFixed(0);
-        $scope.reminder = ((response.data.sum).toFixed(0)-(response.data.piad).toFixed(2));
+        $scope.totalPaid = (response.data.piad).toFixed(2);
+        $scope.reminder = ((response.data.sum).toFixed(2)-(response.data.piad).toFixed(2));
 
       }, function(response) {
         console.log("Something went wrong");
@@ -166,16 +166,20 @@
     };
   }]);
 
-  app.controller('NewCustomerPendingCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
+  app.controller('NewCustomerPendingCtl',['$scope','$timeout','$state','CustomersServ','HelperServ','toastr',function($scope,$timeout,$state,CustomersServ,HelperServ,toastr){
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
     $scope.newCustomer = function(){
+      $scope.loadingStatus = true;
       $scope.newCustomerForm.status = 2;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
-          $scope.newCustomerForm = {};
-          $state.go('customersPending');
-          toastr.success('تمت إضافة زبون جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newCustomerForm = {};
+            $state.go('customersPending');
+            toastr.success('تمت إضافة زبون جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }
@@ -186,15 +190,19 @@
   }]);
   
 
-  app.controller('NewCustomerCtl',['$scope','$state','CustomersServ','HelperServ','toastr',function($scope,$state,CustomersServ,HelperServ,toastr){
+  app.controller('NewCustomerCtl',['$scope','$timeout','$state','CustomersServ','HelperServ','toastr',function($scope,$timeout,$state,CustomersServ,HelperServ,toastr){
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
     $scope.newCustomer = function(){
+      $scope.loadingStatus = true;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
-          $scope.newCustomerForm = {};
-          $state.go('customers');
-          toastr.success('تمت إضافة زبون جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newCustomerForm = {};
+            $state.go('customers');
+            toastr.success('تمت إضافة زبون جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }
@@ -528,16 +536,23 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     };
   }]);
 
-   app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr',function($scope,$modal,MenuFac,CustomersServ,toastr){
+   app.controller('CustomersCtl',['$scope','$modal','MenuFac','CustomersServ','toastr','HelperServ',function($scope,$modal,MenuFac,CustomersServ,toastr,HelperServ){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
     $scope.total = 0;
-    
+    $scope.objects = HelperServ;
+    $scope.objects.getAllPackages();
 //000000000
-    $scope.init = function () {
-      CustomersServ.getCustomersForResseler($scope.pageSize,$scope.currentPage).then(function(response) {
+    $scope.init = function (idP,name) {
+      if(name== undefined|| name.length==0){
+        name=-1;
+      }
+      if(idP== undefined){
+        idP=-1;
+      }
+      CustomersServ.getCustomersForResseler(idP,name,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -547,7 +562,9 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.init();
 
 
-
+    $scope.getRe = function(){
+      $scope.init($scope.package,$scope.searchByName);
+    }
 
     $scope.showDeleteModel = function(id){
       $scope.id = id;
@@ -688,18 +705,22 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
       });
     };
   }]);
-  app.controller('NewCustomerCtl',['$scope','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$state,MenuFac,CustomersServ,HelperServ,toastr){
+  app.controller('NewCustomerCtl',['$scope','$timeout','$state','MenuFac','CustomersServ','HelperServ','toastr',function($scope,$timeout,$state,MenuFac,CustomersServ,HelperServ,toastr){
     MenuFac.active = 6;
     $scope.activePanel = MenuFac;
     $scope.newCustomerForm = {};
     $scope.objects = HelperServ;
     $scope.newCustomer = function(){
+      $scope.loadingStatus = true;
       $scope.newCustomerForm.status=1;
       CustomersServ.addCustomer($scope.newCustomerForm).then(function(response) {
         if(response.data){
-          $scope.newCustomerForm = {};
-          $state.go('customers');
-          toastr.success('تمت إضافة زبون جديد بنجاح');
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            $scope.newCustomerForm = {};
+            $state.go('customers');
+            toastr.success('تمت إضافة زبون جديد بنجاح');
+          },3000);
         } else {
           console.log(response.data);
         }
@@ -731,5 +752,93 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
       });
     }
   }]);
+   app.controller('inStockCtl',['$scope','$modal','$stateParams','ProductsServ','$state','MenuFac','HelperServ','toastr','InStockServ',function($scope,$modal,$stateParams,ProductsServ,$state,MenuFac,HelperServ,toastr,InStockServ){
+      
+
+
+
+    MenuFac.active =5;
+    $scope.activePanel = MenuFac;
+    $scope.objects=HelperServ;
+    $scope.newInStockForm={};
+    $scope.pageSize = 10;
+    $scope.currentPage = 1;
+    $scope.total = 0;
+    $scope.editInStockForm={};
+     // InStockServ.getInStockById($stateParams.id).then(function(response) {
+     //   $scope.editInStockForm = response.data;
+     //  }, function(response) {
+     //    console.log("Something went wrong");
+     //  });
+    ProductsServ.getProductAll().then(function(response) {
+      if(response.data){
+        $scope.Allproduct=response.data;
+      } else {
+        console.log(response.data);
+      }
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    // $scope.editInStock = function(){
+    //   InStockServ.editInStock($stateParams.id,$scope.editInStockForm).then(function(response) {
+    //     if(response.data){
+    //       $state.go('inStock');
+    //       toastr.info('تم التعديل بنجاح');
+    //     } else {
+    //       console.log(response.data);
+    //     }
+    //   }, function(response) {
+    //     console.log("Something went wrong");
+    //   });
+    // }
+
+    $scope.init = function () {
+      InStockServ.getInStocksReseler($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.getInStocks = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.init();
+    $scope.showPass=false;
+    $scope.hidePass=true;
+    $scope.showPassword = function(){
+      if(!$scope.showPass){
+        $scope.showPass=true;
+        $scope.hidePass=false;
+      } else {
+        $scope.showPass=false;
+        $scope.hidePass=true;
+      }
+    }
+    // $scope.showDeleteModel = function(id){
+    //   $scope.id = id;
+    //   $scope.deleteName = "هذا المخزون";
+    //   $scope.deleteModel = $modal({
+    //     scope: $scope,
+    //     templateUrl: 'pages/model.delete.tpl.html',
+    //     show: true
+    //   });
+    // };
+    // $scope.confirmDelete = function(id){
+    //   InStockServ.deleteStocks(id).then(function(response) {
+    //     if(response.data.result == 1){
+    //       $scope.deleteModel.hide();
+    //       toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
+    //     } else if (response.data.result == 2){
+    //       $scope.deleteModel.hide();
+    //       toastr.success('تم الحذف بنجاح');
+    //       $scope.init();
+    //     } else if (response.data.result == 3){
+    //       $scope.deleteModel.hide();
+    //       toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
+    //     }
+    //   }, function(response) {
+    //     $scope.deleteModel.hide();
+    //     console.log("Something went wrong");
+    //   });
+    // };
+}]);
 
 }());

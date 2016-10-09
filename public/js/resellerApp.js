@@ -9,7 +9,8 @@
     'ngFileUpload',
     'ui.bootstrap',
     'nya.bootstrap.select',
-    'oc.lazyLoad'
+    'oc.lazyLoad',
+    'angular-ladda'
   ]);
   /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
   app.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
@@ -263,6 +264,22 @@
       templateUrl: 'pages/reseller/all/newInvoice',
       data: {pageTitle: 'إضافة فاتورة جديدة'},
       controller: 'NewInvoiceCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('inStock',{
+      url: '/inStock',
+      templateUrl: 'pages/reseller/all/inStock',
+      data: {pageTitle: 'المخزن'},
+      controller: 'inStockCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{

@@ -439,8 +439,8 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
-      'getCustomersRe': function(id,idC,pageSize,currentPage){
-        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC);
+      'getCustomersRe': function(id,idC,name,pageSize,currentPage){
+        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC+'/'+name);
       },
       'getAllMoney': function(){
         return $http.get('/report/company');
@@ -683,6 +683,9 @@
       'getInvoicePending': function(status,pageSize,currentPage){
         return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
       },
+      'getInvoicePendingReseller': function(status,reseller,pageSize,currentPage){
+        return $http.get('/invoice/InvoicePendingReseller/'+pageSize+'/'+currentPage+'/'+status+'/'+reseller);
+      },
       'getInvoiceByID': function(status,id){
         return $http.get('/invoice/invoices/'+id+'/'+status);
       },
@@ -734,6 +737,9 @@
         return $http.post('/invoice/upInvice',renewInviceObj);
       },
       'replacInvice': function(replacInviceObj){
+        return $http.post('/invoice/replacInvice',replacInviceObj);
+      },
+      'getMac': function(replacInviceObj){
         return $http.post('/invoice/replacInvice',replacInviceObj);
       },
       'paidInvoice': function(paidInviceObj){

@@ -22,6 +22,24 @@ module.exports = {
       });
     });
   },
+  getInStockReseler :function(id,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    model.Instock.count({status:1,warehouse:id},function(err,count){
+      model.Instock.find({status:1,warehouse:id}).limit(limit).skip(page*limit)
+      .populate('product')
+      .populate('warehouse')
+      .exec(function(err, result){
+        if(!err){
+          cb({result:result,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
   getInStockTake :function(limit,page,cb){
     page = parseInt(page);
     page-=1;
@@ -194,7 +212,16 @@ module.exports = {
     });
   },
 getByWP :function(idW,idP,cb){
-  model.Instock.find({$and: [ {status:1},{product:idP},{warehouse:idW}]}, function(err,result) {
+  var q = {
+    status:1
+  }
+  if(parseInt(idW)){
+    q.warehouse=idW;
+  }
+  if(parseInt(idP)){
+    q.product=idP;
+  }
+  model.Instock.find(q, function(err,result) {
     if (!err) {
       cb(result)
     } else {

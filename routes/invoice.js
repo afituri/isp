@@ -59,7 +59,11 @@ router.get('/InvoicePending/:limit/:page/:status', userHelpers.isLogin ,function
     res.send(invoices);
   });
  });
-
+router.get('/InvoicePendingReseller/:limit/:page/:status/:reseller', userHelpers.isLogin ,function(req, res) {
+  invoiceMgr.getInvoicePendingReseller(req.params.status,req.params.reseller,req.params.limit,req.params.page,function(invoices){
+    res.send(invoices);
+  });
+ });
 router.get('/InvoicePendingRes/:limit/:page/:status',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getInvoicePendingRes(req.params.status,req.user._id,req.params.limit,req.params.page,function(invoices){
     res.send(invoices);
