@@ -2,7 +2,11 @@
   'use strict';
   var app = angular.module('isp');
   app.controller('inStockCtl',['$scope','PermissionServ','$modal','$stateParams','ProductsServ','InStockServ','$state','MenuFac','HelperServ','toastr',function($scope,PermissionServ,$modal,$stateParams,ProductsServ,InStockServ,$state,MenuFac,HelperServ,toastr){
-     
+    $scope.objects = HelperServ;
+    $scope.objects.getAllItems();
+    $scope.objects.getAllEtcs();
+    $scope.objects.getAllStock();
+
 
      PermissionServ.getSubpermission().then(function(response){
       $scope.permission =true;
@@ -64,6 +68,29 @@
 
     $scope.init = function () {
       InStockServ.getInStocks($scope.pageSize,$scope.currentPage).then(function(response) {
+        $scope.getInStocks = response.data.result;
+        $scope.total = response.data.count;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.search =function(){
+      if($scope.searchStock){
+        var Stock = $scope.searchStock;
+      }else{
+        var Stock=-1;
+      }
+      if($scope.searchProduct){
+        var Product = $scope.searchProduct;
+      }else{
+        var Product=-1;
+      }
+      if($scope.searchByName){
+        var value = $scope.searchByName;
+      }else{
+        var value = -1;
+      }
+      InStockServ.getInStocksSearch(Stock,Product,value,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.getInStocks = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {

@@ -74,6 +74,11 @@ router.get('/:limit/:page', userHelpers.isLogin ,function(req, res) {
   });
 });
 
+router.get('/searchinstock/:warehouse/:product/:value/:limit/:page', userHelpers.isLogin ,function(req, res) {
+  instockMgr.getInStockSearch(req.params.warehouse,req.params.product,req.params.value,req.params.limit,req.params.page,function(InStock){
+    res.send(InStock);
+  });
+});
 
 
 router.get('/all',userHelpers.isLogin , function(req, res) {
