@@ -405,6 +405,9 @@
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
       },
+      'getInStocksSearch': function(stock,product,search,pageSize,currentPage){
+        return $http.get('/inStock/searchinstock/'+stock+'/'+product+'/'+search+'/'+pageSize+'/'+currentPage);
+      },
       'deleteStocks': function(id){
         return $http.delete('/inStock/delete/'+id);
       },
