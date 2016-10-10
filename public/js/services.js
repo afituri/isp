@@ -153,6 +153,26 @@
     return self;
   }]);
 
+//NoticeServ
+ app.service('NoticeServ',['$http',function($http){
+    var self = {
+      'addNotice': function(notice){
+        console.log(notice);
+        return $http.post('/notice/add',notice);
+      },
+      'getDollar': function(pageSize,currentPage){
+        return $http.get('/dollar/'+pageSize+'/'+currentPage)
+      },
+      'getLastDollar': function(){
+        return $http.get('/dollar/lastDollar')
+      },
+      'deleteDollar': function(id){
+        return $http.delete('/dollar/delete/'+id);
+      }
+    };
+    return self;
+   }]);
+
   app.service('DollarServ',['$http',function($http){
     var self = {
       'addDollar': function(dollar){

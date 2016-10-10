@@ -88,6 +88,48 @@
         }]
       }
     })
+
+    .state('notice',{
+      url: '/notice',
+      templateUrl: 'pages/notices/notices.html',
+      controller: 'noticeCtl',
+      data: {pageTitle: 'تنبيه عام'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/noticeCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+      
+    })
+
+    .state('newNotice',{
+      url: '/newNotice',
+      templateUrl: 'pages/notices/newNotice.html',
+      controller: 'newNoticeCtl',
+      data: {pageTitle: 'تنبيه عام'},
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/noticeCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+      
+    })
+
+
+
+
+
+
     .state('resellers',{
       url: '/resellers',
       templateUrl: 'pages/resellers/resellers.html',
