@@ -160,14 +160,15 @@
         console.log(notice);
         return $http.post('/notice/add',notice);
       },
-      'getDollar': function(pageSize,currentPage){
-        return $http.get('/dollar/'+pageSize+'/'+currentPage)
+      'getAllNotice': function(pageSize,currentPage){
+        return $http.get('/notice/'+pageSize+'/'+currentPage)
       },
-      'getLastDollar': function(){
-        return $http.get('/dollar/lastDollar')
+      'deleteNotice': function(id){
+        return $http.delete('/notice/delete/'+id);
       },
-      'deleteDollar': function(id){
-        return $http.delete('/dollar/delete/'+id);
+      'getNoticeLimit': function(){
+        console.log("fff");
+        return $http.get('/notice/getNoticeLimit');
       }
     };
     return self;

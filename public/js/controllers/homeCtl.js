@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   var app = angular.module('isp');
-  app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','PermissionServ','SuppliersServ','ResllersServ','InvoicesServ',function($scope,MenuFac,CustomersServ,PermissionServ,SuppliersServ,ResllersServ,InvoicesServ){
+  app.controller('HomeCtl',['$scope','MenuFac','CustomersServ','NoticeServ','PermissionServ','SuppliersServ','ResllersServ','InvoicesServ',function($scope,MenuFac,CustomersServ,NoticeServ,PermissionServ,SuppliersServ,ResllersServ,InvoicesServ){
     $scope.Pages ={};
     $scope.dollarPage = "sss";
     
@@ -150,6 +150,12 @@
       }, function(response) {
         console.log("Something went wrong");
       });
+
+      NoticeServ.getNoticeLimit().then(function(response){
+        $scope.noticeAll=response.data;
+      },function(response){
+        console.log("Somthing went wrong ");
+      })
 
 
   }]);
