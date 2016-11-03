@@ -1,7 +1,13 @@
 (function(){
   'use strict';
   var app = angular.module('reseller');
-    app.controller('DashboardCtl',['$scope','CustomersServ','SuppliersServ','ResllersServ',function($scope,CustomersServ,SuppliersServ,ResllersServ){
+    app.controller('DashboardCtl',['$scope','NoticeServ','CustomersServ','SuppliersServ','ResllersServ',function($scope,NoticeServ,CustomersServ,SuppliersServ,ResllersServ){
+        NoticeServ.getNoticeLimit().then(function(response){
+        $scope.noticeAll=response.data;
+      },function(response){
+        console.log("Somthing went wrong ");
+      })
+
        CustomersServ.getCustomersCountReseller().then(function(response) {
         $scope.customerNumber = response.data.count;
       }, function(response) {

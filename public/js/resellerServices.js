@@ -188,6 +188,26 @@
     return self;
   }]);
 
+ app.service('NoticeServ',['$http',function($http){
+    var self = {
+      'addNotice': function(notice){
+        console.log(notice);
+        return $http.post('/notice/add',notice);
+      },
+      'getAllNotice': function(pageSize,currentPage){
+        return $http.get('/notice/'+pageSize+'/'+currentPage)
+      },
+      'deleteNotice': function(id){
+        return $http.delete('/notice/delete/'+id);
+      },
+      'getNoticeLimit': function(){
+        console.log("fff");
+        return $http.get('/notice/getNoticeLimit');
+      }
+    };
+    return self;
+   }]);
+
 
     app.service('ProductsServ',['$http',function($http){
     var self = {

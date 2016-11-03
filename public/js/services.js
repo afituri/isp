@@ -153,6 +153,27 @@
     return self;
   }]);
 
+//NoticeServ
+ app.service('NoticeServ',['$http',function($http){
+    var self = {
+      'addNotice': function(notice){
+        console.log(notice);
+        return $http.post('/notice/add',notice);
+      },
+      'getAllNotice': function(pageSize,currentPage){
+        return $http.get('/notice/'+pageSize+'/'+currentPage)
+      },
+      'deleteNotice': function(id){
+        return $http.delete('/notice/delete/'+id);
+      },
+      'getNoticeLimit': function(){
+        console.log("fff");
+        return $http.get('/notice/getNoticeLimit');
+      }
+    };
+    return self;
+   }]);
+
   app.service('DollarServ',['$http',function($http){
     var self = {
       'addDollar': function(dollar){
@@ -384,6 +405,9 @@
       },
       'getInStocks': function(pageSize,currentPage){
         return $http.get('/inStock/'+pageSize+'/'+currentPage);
+      },
+      'getInStocksSearch': function(stock,product,search,pageSize,currentPage){
+        return $http.get('/inStock/searchinstock/'+stock+'/'+product+'/'+search+'/'+pageSize+'/'+currentPage);
       },
       'deleteStocks': function(id){
         return $http.delete('/inStock/delete/'+id);

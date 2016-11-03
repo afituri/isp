@@ -312,5 +312,39 @@ transfer : function(body,cb){
   }
   
   },
+  getInStockSearch :function(warehouse,product,value,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    if(value == -1){
+      value = '';
+    }
+    var q ={
+      $or:[
+            {macAddress:{$regex:value, $options:'i'}},
+            {username:{$regex:value, $options:'i'}},
+            ],
+      status:1,
+    }
+    if(warehouse!= -1){
+      q.warehouse=warehouse;
+    }
+    if(product!= -1){
+      q.product=product;
+    }
+    model.Instock.count(q,function(err,count){
+      model.Instock.find(q).limit(limit).skip(page*limit)
+      .populate('product')
+      .populate('warehouse')
+      .exec(function(err, result){
+        if(!err){
+          cb({result:result,count:count});
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    });
+  },
 
 };

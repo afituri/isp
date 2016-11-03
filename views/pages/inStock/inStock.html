@@ -7,7 +7,33 @@
             <h2 class="pull-right">عرض المخزون</h2>
           </div>
           <div class="col-xs-7">
-           <!--  <input type="text" class="form-control input-sm" ng-model="searchByName" placeholder="بحث..."> -->
+            <div class="col-xs-3 col-md-3">
+              <div class="form-group">
+                <label>عرض  حسب المخزن</label>
+                <select class="form-control input-sm" ng-model="searchStock" ng-change="search()">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="-1">عرض الزبائن جميعا</option>
+                  <option ng-repeat="wear in objects.stockObj" value="{{wear._id}}">{{wear.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-3 col-md-3">
+              <div class="form-group">
+                <label>عرض  حسب المنتج</label>
+                <select class="form-control input-sm" ng-model="searchProduct" ng-change="search()">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="-1">عرض الزبائن جميعا</option>
+                  <option ng-repeat="prod in objects.itemsObj" value="{{prod._id}}">{{prod.name}}</option>
+                  <option ng-repeat="prod in objects.etcObj" value="{{prod._id}}">{{prod.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-5 col-md-5">
+              <div class="form-group">
+                <label>بحث</label>
+                <input type="text" class=" input-sm" ng-model="searchByName" placeholder="بحث..." ng-change="search()">
+              </div>
+            </div>
           </div>
           <div class="col-xs-3 text-left">
             <a ng-show="addInStock" ui-sref="newInStock" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة مخزون جديد</a>
