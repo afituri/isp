@@ -542,9 +542,6 @@
   }]);
 
   app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','InStockServ',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,InStockServ){
-   
-    //0000000000000
-    
     $scope.replace = {};
     $scope.upInviceForm = {};
     $scope.objects = HelperServ;
@@ -610,6 +607,28 @@
       console.log("Somthing went wrong");
     });
     InvoicesServ.getInvoicedata($stateParams.id).then(function(response) {
+      var date =new Date(response.data.invoices.endDate);
+      $scope.upInviceForm.endDate = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()
+
+
+      var order = response.data.order
+    /*  console.log(order);*/
+    var flag = 0;
+    var packages = " "
+      for(var i in order){
+        console.log(order[i].product);
+        if(order[i].product.type== "package"){
+          flag =1;
+          packages = order[i].product.name
+        } else {
+          if(flag==0){
+          packages = "لا يوجد حزمة";
+        }
+        }
+      }
+      
+      $scope.getCurrentPackeges = packages;
+
       $scope.days=response.data.days;
       $scope.daysN=response.data.daysN;
       $scope.price=response.data.price;
