@@ -372,9 +372,11 @@
     };
     $scope.flag=false;
     $scope.getProductInfo = function(id){
+  
       if($scope.newInvoiceForm.reseller==1){
         if(id == 'خدمة'){
           $scope.flag=false;
+          console.log(productsObj);
           $scope.productsObj = $scope.objects.servicesObj;
         } else if(id == 'معدة'){
             $scope.flag=false;
@@ -388,19 +390,21 @@
 
         }  
       }else{
-
         if(id == 'خدمة'){
+
           $scope.flag=false;
-          $scope.productsObj = $scope.objects.servicesRObj;
+          console.log($scope.objects);
+          $scope.productsObj = $scope.objects.servicesObj;
+
         } else if(id == 'معدة'){
             $scope.flag=false;
-          $scope.productsObj = $scope.objects.itemsRObj;
+          $scope.productsObj = $scope.objects.itemsObj;
         } else if (id == 'حزمة'){
           $scope.flag=true;
-          $scope.productsObj = $scope.objects.packagesRObj;
+          $scope.productsObj = $scope.objects.packagesObj;
         } else if (id == 'معدات'){
             $scope.flag=false;
-          $scope.productsObj = $scope.objects.etcRObj;
+          $scope.productsObj = $scope.objects.etcObj;
 
         }  
       }
