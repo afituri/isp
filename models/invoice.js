@@ -9,7 +9,7 @@ var Invoice = new Schema({
    /*createDate: { type: Date, default: Date.now },*/
    type: { type: Number, required: [true, 'Why no type?']},
    notes: { type: String},
-   piad: { type: Number, required: [true, 'Why no piad?']},
+   piad: { type: Number},
    reseller: { type: Schema.Types.ObjectId , ref: 'Reseller',default:null},
    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User',default:null},
    invoice: { type: Schema.Types.ObjectId , ref: 'Invoice',default:null},

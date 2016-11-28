@@ -99,6 +99,7 @@ router.get('/printInvoicePaid/:id',userHelpers.isLogin , function(req, res) {
 
 router.get('/printInvoice/:id',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
+    console.log(result);
     var months;
     var now = new Date();
     var nowdate =now.getDate()+' / '+parseInt(now.getMonth()+1)+' / '+now.getFullYear();
