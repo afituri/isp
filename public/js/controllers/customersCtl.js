@@ -6,7 +6,6 @@
      PermissionServ.getSubpermission().then(function(response){
       $scope.permission =true;
       if(response.data[0] != undefined){
-        console.log(response.data[11]);
         //employee
         $scope.permission =false;
         $scope.addCustomer =  response.data[11].add;
@@ -47,16 +46,22 @@
     $scope.total = 0;
     HelperServ.getAllResellers();
     HelperServ.getAllPackages();
+    HelperServ.getServices();
     $scope.objects = HelperServ;
     // console.log($scope.objects.resellersObj);
     $scope.results = [];
     $scope.package = '-1';
     $scope.reseller = '-1';
-    $scope.init = function (idR,idP,name) {
+    $scope.servis = '-1';
+    $scope.init = function (idR,idP,name,mac,idS) {
       if(name== undefined|| name.length==0){
         name=-1;
       }
-      CustomersServ.getCustomersRe(idR,idP,name,$scope.pageSize,$scope.currentPage).then(function(response) {
+      if(mac== undefined|| mac.length==0){
+        mac=-1;
+      }
+      console.log(idS);
+      CustomersServ.getCustomersRe(idR,idP,name,mac,idS,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -65,9 +70,9 @@
     }
     if($location.search().q != undefined){
       $scope.searchByName=$location.search().q;
-        $scope.init($scope.package,$scope.reseller,$scope.searchByName);
+        $scope.init($scope.package,$scope.reseller,$scope.searchByName,$scope.searchByMac,$scope.servis);
       }else{
-        $scope.init($scope.package,$scope.reseller,'');
+        $scope.init($scope.package,$scope.reseller,'','',-1);
       }
     
 
@@ -86,7 +91,7 @@
 
 
     $scope.getRe = function(){
-      $scope.init($scope.reseller,$scope.package,$scope.searchByName);
+      $scope.init($scope.reseller,$scope.package,$scope.searchByName,$scope.searchByMac,$scope.servis);
     }
     $scope.showDeleteModel = function(id){
       $scope.id = id;

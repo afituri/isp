@@ -187,6 +187,66 @@ module.exports = {
 
     
   },
+  getCustomerResMAc :function(id,idP,name,mac,idS,limit,page,cb){
+    page = parseInt(page);
+    page-=1;
+    limit = parseInt(limit);
+    var con={};
+    if (idP!=-1){
+      con={
+        product:idP
+      }
+    }
+    if (idS!=-1){
+      con['packages.service']=idS;
+    }
+    if(parseInt(mac)==-1){
+      var macOp={_id:null}
+    }else{
+      var macOp={macAddress:{$regex:mac, $options:'i'},status:2}
+    }
+    model.Instock.find(macOp).distinct('invoice', function(err,macs) {
+      if(macs.length>0){
+        con.invoice={
+          $in:macs
+        }
+      }  
+      model.Order.find(con).distinct('invoice',function(err, idin){
+        model.Invoice.find({_id:{$in:idin}}).distinct('customer',function(err, idC){
+          var options={
+            _id:{$in:idC},
+            status:{$ne:3}
+          }
+          options={
+              _id:{$in:idC},
+              status:{$ne:3}
+            }
+          if(id!=-1){
+            options.reseller=id;
+          }
+          if(parseInt(name)!=-1){
+            options.name= { $regex: name, $options: '-i' };
+          }
+          model.Customer.count(options,function(err,count){
+            model.Customer.find(options).skip(page*limit)
+            .populate('user')
+            .populate('reseller')
+            .exec(function(err, customers){
+              if(!err){
+                //console.log(customers);
+                cb({result:customers,count:count});
+              }else{
+                console.log(err);
+                cb(null);
+              }
+            });
+          });
+        });
+      });
+    });
+
+    
+  },
   getCustomerReject :function(user,status,limit,page,cb){
     page = parseInt(page);
     page-=1;

@@ -19,6 +19,7 @@
       'serviceProvidersObj': [],
       'itemsObj': [],
       'servicesObj': [],
+      'servicesObjAll': [],
       'packagesObj': [],
       'policiesObj': [],
       'warehouseObjs': [],
@@ -70,6 +71,13 @@
       'getAllServices': function(){
         return $http.get('/product/allService').then(function(response) {
           self.servicesObj = response.data;
+        }, function(response) {
+          console.log("Something went wrong in getAllServices");
+        });
+      },
+      'getServices': function(){
+        return $http.get('/service/all').then(function(response) {
+          self.servicesObjAll = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllServices");
         });
@@ -460,8 +468,8 @@
       'getCustomers': function(status,pageSize,currentPage){
         return $http.get('/customer/'+pageSize+'/'+currentPage+'/'+status);
       },
-      'getCustomersRe': function(id,idC,name,pageSize,currentPage){
-        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC+'/'+name);
+      'getCustomersRe': function(id,idC,name,mac,idS,pageSize,currentPage){
+        return $http.get('/customer/getRe/'+pageSize+'/'+currentPage+'/'+id+'/'+idC+'/'+name+'/'+mac+'/'+idS);
       },
       'getAllMoney': function(){
         return $http.get('/report/company');

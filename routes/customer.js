@@ -125,8 +125,8 @@ router.get('/:id',userHelpers.isLogin , function(req, res) {
 
 
 
-router.get('/getRe/:limit/:page/:id/:idC/:name',userHelpers.isLogin , function(req, res) {
-  customerMgr.getCustomerReseller(req.params.id,req.params.idC,req.params.name,req.params.limit,req.params.page,function(customers){
+router.get('/getRe/:limit/:page/:id/:idC/:name/:mac/:idS',userHelpers.isLogin , function(req, res) {
+  customerMgr.getCustomerResMAc(req.params.id,req.params.idC,req.params.name,req.params.mac,req.params.idS,req.params.limit,req.params.page,function(customers){
     res.send(customers);
   });
 });

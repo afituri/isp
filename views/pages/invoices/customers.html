@@ -6,34 +6,55 @@
           <div class="col-xs-2" style="padding-top:20px;">
             <h2 class="pull-right">عرض الزبائن</h2>
           </div>
-          <div class="col-xs-2 col-md-2">
-            <div class="form-group">
-              <label>بحث بالاسم</label>
-              <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="getRe()" placeholder="بحث...">
+          <div class="row">
+            <div class="col-xs-2 col-md-2">
+              <div class="form-group">
+                <label>عرض الزبائن حسب الخدمة</label>
+                <select class="form-control input-sm" ng-model="servis" ng-change="getRe()">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="-1">عرض الزبائن جميعا</option>
+                  <option ng-repeat="services in objects.servicesObjAll" value="{{services._id}}">{{services.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-2 col-md-2">
+              <div class="form-group">
+                <label>عرض الزبائن حسب الباقة</label>
+                <select class="form-control input-sm" ng-model="package" ng-change="getRe()">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="-1">عرض الزبائن جميعا</option>
+                  <option ng-repeat="package in objects.packagesObj" value="{{package._id}}">{{package.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-2 col-md-2">
+              <div class="form-group">
+                <label>عرض الزبائن حسب الموزع</label>
+                <select class="form-control input-sm" ng-model="reseller" ng-change="getRe()">
+                  <option value="" disabled selected>الرجاء الاختيار</option>
+                  <option value="-1">عرض الزبائن جميعا</option>
+                  <option ng-repeat="reseller in objects.resellersObj" value="{{reseller._id}}">{{reseller.companyName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-2 col-md-2" style="padding-top:25px;">
+              <a class="btn btn-sm btn-primary" ui-sref="newInvoice"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
             </div>
           </div>
-          <div class="col-xs-3 col-md-3">
-            <div class="form-group">
-              <label>عرض الزبائن حسب الباقة</label>
-              <select class="form-control input-sm" ng-model="package" ng-change="getRe()">
-                <option value="" disabled selected>الرجاء الاختيار</option>
-                <option value="-1">عرض الزبائن جميعا</option>
-                <option ng-repeat="package in objects.packagesObj" value="{{package._id}}">{{package.name}}</option>
-              </select>
+          <div class="row">
+           <div class="col-xs-2 col-md-2"></div>
+            <div class="col-xs-3 col-md-3">
+              <div class="form-group">
+                <label>بحث بالاسم</label>
+                <input type="text" class="form-control input-sm" ng-model="searchByName" ng-change="getRe()" placeholder="بحث...">
+              </div>
             </div>
-          </div>
-          <div class="col-xs-3 col-md-3">
-            <div class="form-group">
-              <label>عرض الزبائن حسب الموزع</label>
-              <select class="form-control input-sm" ng-model="reseller" ng-change="getRe()">
-                <option value="" disabled selected>الرجاء الاختيار</option>
-                <option value="-1">عرض الزبائن جميعا</option>
-                <option ng-repeat="reseller in objects.resellersObj" value="{{reseller._id}}">{{reseller.companyName}}</option>
-              </select>
+            <div class="col-xs-3 col-md-3">
+              <div class="form-group">
+                <label>بحث ماك</label>
+                <input type="text" class="form-control input-sm" ng-model="searchByMac" ng-change="getRe()" placeholder="بحث...">
+              </div>
             </div>
-          </div>
-          <div class="col-xs-2 col-md-2" style="padding-top:25px;">
-            <a class="btn btn-sm btn-primary" ui-sref="newInvoice"><i class="fa fa-plus fa-fw"></i>&nbsp;إضافة فاتورة جديدة</a>
           </div>
         </div>
         <div class= "row">
