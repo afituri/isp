@@ -25,6 +25,7 @@ var User = new Schema({
    nid: {type: String, index: true},
    permission: { type : mongoose.Schema.ObjectId, ref : 'Permission'},
    type: { type: Number},
+   level: { type: Number, default:1},
    status: {type: Number, default:1}
 });
 

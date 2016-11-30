@@ -246,7 +246,7 @@
     })
      .state('showInvoice',{
       url: '/showInvoice/:id',
-      templateUrl: 'pages/invoices/showInvoice',
+      templateUrl: 'pages/reseller/all/showInvoice',
       controller: 'InvoicesCtl',
       resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -265,6 +265,66 @@
       data: {pageTitle: 'إضافة فاتورة جديدة'},
       controller: 'NewInvoiceCtl',
       resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('upgreade',{
+      url: '/invoiceCustomers/upgreade/:id',
+      templateUrl: 'pages/invoices/upgreade.html',
+      controller: 'UpgreadeCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('addGiga',{
+      url: '/invoiceCustomers/addGiga/:id',
+      templateUrl: 'pages/invoices/addGiga.html',
+      controller: 'Giga',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/controllers/invoicesCtl.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('Replacement',{
+      url: '/invoiceCustomers/Replacement/:id',
+      templateUrl: 'pages/invoices/Replacement.html',
+      controller: 'UpgreadeCtl',
+      resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('productPolicies',{
+      url: '/productPolicies',
+      templateUrl: 'pages/reseller/all/productPolicies',
+      controller: 'ProductPoliciesCtl',
+     resolve: {
         deps: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{
             insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'

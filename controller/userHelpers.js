@@ -11,6 +11,21 @@ module.exports = {
     res.redirect('/');
      /*return next();*/
   },
+  isResller : function (req,res,next) {
+    if (req.isAuthenticated()&&req.user.level<=2) {
+    return next();
+    }
+    res.redirect('/');
+     /*return next();*/
+  },
+ isAdmin : function (req,res,next) {
+    if (req.isAuthenticated()&&req.user.level==1) {
+    return next();
+    }
+    res.redirect('/');
+     /*return next();*/
+  },
+
   printReportPaid : function(HTMLprint,result,res){
     jsreport.render({
       template: { 

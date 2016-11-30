@@ -302,6 +302,8 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
+    console.log('req.body')
+    console.log(body);
         if(body.reseller==1){
           body.reseller=null;
         }
@@ -344,6 +346,7 @@ module.exports = {
                   for( i in body.selectedProducts ){
 
                     model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
+                      pro.initialPrice=body.selectedProducts[i].price;
                       dollarMgr.getLastDollar(function(dollar){
                         Order={
                           invoice:invoiceResult._id,

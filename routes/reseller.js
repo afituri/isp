@@ -19,7 +19,16 @@ router.post('/search/:limit/:page', userHelpers.isLogin ,function(req, res) {
 });
 
 
-
+router.post('/replacInviceResseler',userHelpers.isLogin , function(req, res) {
+  resellerMgr.replacInvice(req.body,function(result){
+    res.send(result);
+  });
+});
+router.post('/addgiga',userHelpers.isLogin , function(req, res) {
+  resellerMgr.addGiga(req.user._id,req.body,function(result){
+    res.send(result);
+  });
+});
 router.get('/all', userHelpers.isLogin ,function(req, res) {
   // res.send(data.resellers);
   resellerMgr.getAllReseller(function(reseller){
@@ -70,8 +79,16 @@ router.post('/addInvoice', userHelpers.isLogin ,function(req, res) {
 });
 
 router.post('/renewInvice', userHelpers.isLogin ,function(req, res) {
-  resellerMgr.renewInvice(req.body,req.user._id,function(result){
+  resellerMgr.renewInvice(req.body,req.user._id,req.user.policy,function(result){
     res.send(result);
+  });
+});
+router.post('/upInvice',userHelpers.isLogin , function(req, res) {
+  
+  invoiceMgr.updateInvoice(req.body.idCu,{endDate:new Date(),status:1},function(result){
+    resellerMgr.renewInvice(req.body,req.user._id,req.user.policy,function(result){
+      res.send(result);
+    });
   });
 });
 

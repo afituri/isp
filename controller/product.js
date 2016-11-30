@@ -469,5 +469,15 @@ getProductPackageSearch :function(limit,page,service,cb){
     });
   },
 
-
+  getAll : function(cb){
+    model.Product.find({}).populate('supplier')
+    .exec(function(err, products){
+      if(!err){
+        cb(products);
+      }else{
+        console.log(err);
+        cb(null);
+      }
+    });
+  },
 };

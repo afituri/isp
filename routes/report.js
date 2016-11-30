@@ -104,42 +104,45 @@ router.get('/printInvoice/:id',userHelpers.isLogin , function(req, res) {
     var now = new Date();
     var nowdate =now.getDate()+' / '+parseInt(now.getMonth()+1)+' / '+now.getFullYear();
     if(result.invoices.typein!=4){
-      months = (result.order[0].endDate.getFullYear() - result.order[0].startDate.getFullYear()) * 12;
-      months += result.order[0].endDate.getMonth()-result.order[0].startDate.getMonth() + 1;
+      months = (result.invoices.endDate.getFullYear() - result.invoices.startDate.getFullYear()) * 12;
+      months += result.invoices.endDate.getMonth()-result.invoices.startDate.getMonth() + 1;
       result['months']=months;
-      var startDate =result.order[0].startDate.getDate()+' / '+parseInt(result.order[0].startDate.getMonth()+1)+' / '+result.order[0].startDate.getFullYear();
-      var endDate =result.order[0].endDate.getDate()+' / '+parseInt(result.order[0].endDate.getMonth()+1)+' / '+result.order[0].endDate.getFullYear();
+      var startDate =result.invoices.startDate.getDate()+' / '+parseInt(result.invoices.startDate.getMonth()+1)+' / '+result.invoices.startDate.getFullYear();
+      var endDate =result.invoices.endDate.getDate()+' / '+parseInt(result.invoices.endDate.getMonth()+1)+' / '+result.invoices.endDate.getFullYear();
       var startDate ='';
       var endDate='';
-      if(parseInt(result.order[0].startDate.getDate())<9){
-        startDate+='0'+result.order[0].startDate.getDate();
+      if(parseInt(result.invoices.startDate.getDate())<9){
+        startDate+='0'+result.invoices.startDate.getDate();
       }else{
-        startDate+=result.order[0].startDate.getDate();
+        startDate+=result.invoices.startDate.getDate();
       }
 
-      if(parseInt(result.order[0].startDate.getMonth()+1)<9){
-        startDate+=' / 0'+parseInt(result.order[0].startDate.getMonth()+1);
+      if(parseInt(result.invoices.startDate.getMonth()+1)<9){
+        startDate+=' / 0'+parseInt(result.invoices.startDate.getMonth()+1);
       }else{
-        startDate+=' / '+parseInt(result.order[0].startDate.getMonth()+1);
+        startDate+=' / '+parseInt(result.invoices.startDate.getMonth()+1);
       }
-      if(parseInt(result.order[0].endDate.getDate())<9){
-        endDate+='0'+result.order[0].endDate.getDate();
+      if(parseInt(result.invoices.endDate.getDate())<9){
+        endDate+='0'+result.invoices.endDate.getDate();
       }else{
-        endDate+=result.order[0].endDate.getDate();
+        endDate+=result.invoices.endDate.getDate();
       }
 
-      if(parseInt(result.order[0].endDate.getMonth()+1)<9){
-        endDate+=' / 0'+parseInt(result.order[0].endDate.getMonth()+1);
+      if(parseInt(result.invoices.endDate.getMonth()+1)<9){
+        endDate+=' / 0'+parseInt(result.invoices.endDate.getMonth()+1);
       }else{
-        endDate+=' / '+parseInt(result.order[0].endDate.getMonth()+1);
+        endDate+=' / '+parseInt(result.invoices.endDate.getMonth()+1);
       }
-      startDate +=' / '+result.order[0].startDate.getFullYear();
-      endDate +=' / '+result.order[0].endDate.getFullYear();
+      startDate +=' / '+result.invoices.startDate.getFullYear();
+      endDate +=' / '+result.invoices.endDate.getFullYear();
+      if(!result.instock){
+        result.instock={macAddress:""};
+      }
       result['nowdate']=nowdate;
       result['startDate']=startDate;
       result['endDate']=endDate; 
     }
-    userHelpers.printReport("invoice.html",result,res);
+    userHelpers.printReport("invoice.html",{result:result,active:"فاتورة"},res);
 
   });
   
@@ -157,8 +160,7 @@ router.get('/printActive/:id',userHelpers.isLogin ,function(req , res){
     reportMgr.getActive(product,function(results){
       reportMgr.getInvoices(results,function(result){
         pars(result,function(obj){
-          obj.active = "المفعلة";
-          userHelpers.printReport("active.html",obj,res);
+          userHelpers.printReport("active.html",{result:obj,active:"المفعلة"},res);
         });
       });
     });
@@ -177,8 +179,7 @@ router.get('/printunActive/:id',userHelpers.isLogin ,function(req , res){
     reportMgr.getunActive(product,function(results){
       reportMgr.getInvoices(results,function(result){
         pars(result,function(obj){
-          obj.active = "الغير المفعلة";
-          userHelpers.printReport("active.html",obj,res);
+          userHelpers.printReport("active.html",{result:obj,active:"الغير المفعلة"},res);
         });
         
       });
@@ -245,8 +246,8 @@ router.post('/Between',userHelpers.isLogin ,function(req , res){
 
 router.get('/printBetween/:start/:end/:service',userHelpers.isLogin ,function(req , res){
   var service;
-  if(req.body.service){
-    service=req.body.service._id
+  if(req.params.service!=-1){
+    service=req.params.service;
   }else{
     service=-1;
   }
@@ -254,7 +255,7 @@ router.get('/printBetween/:start/:end/:service',userHelpers.isLogin ,function(re
     reportMgr.getBetween(req.params.start,req.params.end,product,function(results){
       reportMgr.getInvoices(results,function(result){
         pars(result,function(obj){
-          userHelpers.printReport("active.html",obj,res);
+          userHelpers.printReport("active.html",{result:obj,active:""},res);
         });
       });
     });
@@ -275,7 +276,7 @@ router.get('/printReseller/:id',userHelpers.isLogin ,function(req , res){
   reportMgr.getReseller(req.params.id,function(results){
     reportMgr.getInvoices(results,function(result){
       pars(result,function(obj){
-        userHelpers.printReport("active.html",obj,res);
+        userHelpers.printReport("active.html",{result:obj,active:""},res);
       });
     });
   });

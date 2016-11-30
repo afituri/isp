@@ -28,7 +28,7 @@
         console.log("Something went wrong");
     }); 
   }
-  $scope.init(2,0);
+  $scope.init(0,0);
    
    $scope.getStatus = function(){
     var pend;
@@ -38,7 +38,6 @@
     }else{
       pend=0;
     }
-    console.lo
     if($scope.reseller){
       resel=$scope.reseller;
     }else{
@@ -356,6 +355,8 @@
         }
     };
     $scope.getprodectR =function(){
+      console.log('$scope.newInvoiceForm.reseller');
+      console.log($scope.newInvoiceForm.reseller);
       if($scope.newInvoiceForm.reseller!= 1){
         $scope.objects.getAllItemsR($scope.newInvoiceForm.reseller);    
         $scope.objects.getAllEtcsR($scope.newInvoiceForm.reseller);
@@ -380,7 +381,6 @@
       if($scope.newInvoiceForm.reseller==1){
         if(id == 'خدمة'){
           $scope.flag=false;
-          console.log(productsObj);
           $scope.productsObj = $scope.objects.servicesObj;
         } else if(id == 'معدة'){
             $scope.flag=false;
@@ -397,18 +397,17 @@
         if(id == 'خدمة'){
 
           $scope.flag=false;
-          console.log($scope.objects);
-          $scope.productsObj = $scope.objects.servicesObj;
+          $scope.productsObj = $scope.objects.servicesRObj;
 
         } else if(id == 'معدة'){
             $scope.flag=false;
-          $scope.productsObj = $scope.objects.itemsObj;
+          $scope.productsObj = $scope.objects.itemsRObj;
         } else if (id == 'حزمة'){
           $scope.flag=true;
-          $scope.productsObj = $scope.objects.packagesObj;
+          $scope.productsObj = $scope.objects.packagesRObj;
         } else if (id == 'معدات'){
             $scope.flag=false;
-          $scope.productsObj = $scope.objects.etcObj;
+          $scope.productsObj = $scope.objects.etcRObj;
 
         }  
       }

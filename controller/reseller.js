@@ -387,7 +387,7 @@ module.exports = {
       });
   },
 
-  renewInvice :function(body,idu,cb){
+  renewInvice :function(body,idu,policy,cb){
   model.Invoice.findOne({_id:body.idCu},function(err, invoices){
     if (!err) {
       var invoice={
@@ -407,22 +407,30 @@ module.exports = {
       invoice.save(function(err,invoiceResult){
         if (!err) {
           model.Product.findOne({_id:body.package},function(err,pro){
-            dollarMgr.getLastDollar(function(dollar){
-              Order={
-                invoice:invoiceResult._id,
-                product:pro._id,
-                price:pro.initialPrice*dollar[0].price*months,
-                startDate:body.startDate,
-                endDate:body.endDate
-              };
-              order=new model.Order(Order);
-              order.save(function(err,orderResult){
-                if (!err) {
-                  cb(invoiceResult);
+            productPolicyMgr.getProductPPolicy(policy,function(result){
+              console.log(result);
+              dollarMgr.getLastDollar(function(dollar){
+                Order={
+                  invoice:invoiceResult._id,
+                  product:pro._id,
+                  startDate:body.startDate,
+                  endDate:body.endDate
+                };
+                if(result[pro._id]){
+                  var priceP=result[pro._id];
                 }else{
-                  console.log(err);
-                  cb(null);
+                  var priceP=pro.initialPrice;
                 }
+                Order.price=priceP*dollar[0].price*parseFloat(body.month)+(priceP/30*parseFloat(body.day));
+                order=new model.Order(Order);
+                order.save(function(err,orderResult){
+                  if (!err) {
+                    cb(invoiceResult);
+                  }else{
+                    console.log(err);
+                    cb(null);
+                  }
+                });
               });
             });
           });
@@ -452,6 +460,105 @@ addPaid :function(body,idu,cb){
         discount:0,
         status:2,
         typein:4,
+        notes: body.notes
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          cb(invoiceResult);
+          
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
+replacInvice:function(body,cb){
+  model.Invoice.findOne({_id:body.idin},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        invoice:body.idin,
+        type:1,
+        piad:body.price,
+        reseller:null,
+        discount:0,
+        typein:6,
+        status:2,
+        notes: body.notes
+      };
+      invoice=new model.Invoice(invoice);
+      invoice.save(function(err,invoiceResult){
+        if (!err) {
+          model.Product.findOne({_id:body.product},function(err,pro){
+            Order={
+              invoice:invoiceResult._id,
+              product:pro._id,
+              price:body.price,
+              startDate:new Date(),
+              endDate:new Date()
+            };
+            order=new model.Order(Order);
+            order.save(function(err,orderResult){
+              if(!err){
+                model.Instock.findOne({invoice:body.idin,status:2},function(err,instockOld){
+                  if(!err){
+                    model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.mac}]},{invoice:body.idin,status:2,username:instockOld.username,password:instockOld.password} , function(err,result) {
+                      if (!err) {
+                        model.Instock.findOneAndUpdate({_id:instockOld._id},{status:5} , function(err,result) {
+                          if(!err){
+                            cb(invoiceResult);
+                          }else{
+                            console.log(err);
+                            cb(false);
+                          }
+                        });
+                      } else {
+                        console.log(err);
+                        cb(false);
+                      }
+                    }); 
+                  } else {
+                    console.log(err);
+                    cb(false);
+                  }
+                  
+                });
+                
+              } else {
+                console.log(err);
+                cb(null,err)
+              }
+            });
+          });
+        }else{
+          console.log(err);
+          cb(null);
+        }
+      });
+    }else{
+      console.log(err);
+      cb(null);
+    }
+  });
+},
+addGiga:function(id,body,cb){
+  model.Invoice.findOne({_id:body.idin},function(err, invoices){
+    if (!err) {
+      var invoice={
+        customer:invoices.customer,
+        invoice:body.idin,
+        type:1,
+        piad:body.price,
+        reseller:id,
+        discount:0,
+        typein:5,
+        status:2,
         notes: body.notes
       };
       invoice=new model.Invoice(invoice);

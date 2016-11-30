@@ -48,7 +48,7 @@
         console.log("Something went wrong");
     }); 
   }
-  $scope.init(2);
+  $scope.init(0);
    
    $scope.getStatus = function(){
     $scope.init($scope.pending);
@@ -494,11 +494,71 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.activePanel = MenuFac;
     $scope.editInvoiceForm = {};
   }]);
-  app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
+  // app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
    
+  //   $scope.renewInviceForm = {};
+  //   $scope.objects = HelperServ;
+  //   $scope.objects.getAllPackages();
+  //   CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
+  //     $scope.customer = response.data;
+  //   }, function(response) {
+  //     console.log("Something went wrong");
+  //   });
+  //   $scope.renewInvice = function(){
+  //     $scope.renewInviceForm.idCu=$stateParams.id;
+  //     InvoicesServ.renewInvicePending($scope.renewInviceForm).then(function(response){
+  //       if(response.data){
+  //         toastr.success('تم التجديد بنجاح');
+
+  //         $state.go('invoices');
+  //       }
+  //     }, function(response) {
+  //       console.log("Something went wrong");
+  //     });
+  //   };
+  // }]);
+  app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
     $scope.renewInviceForm = {};
     $scope.objects = HelperServ;
     $scope.objects.getAllPackages();
+    var rePrice;
+    $scope.getMony= function(){
+      angular.forEach($scope.objects.packagesObj, function(value, key) {
+        if(value._id==$scope.renewInviceForm.package){
+         rePrice= value.initialPrice;
+        }
+      }, rePrice);
+      var dPrice=rePrice/30;
+      if($scope.renewInviceForm.month){
+        var month = $scope.renewInviceForm.month;
+      }else{
+        var month = 0;
+      }
+      if($scope.renewInviceForm.day){
+        var day = $scope.renewInviceForm.day;
+      }else{
+        var day = 0;
+      }
+      $scope.renewInviceForm.total=rePrice*month+day*dPrice;
+    },
+    $scope.getDef= function(){
+      var a ;
+      a = new Date($scope.renewInviceForm.startDate);
+      var b = $scope.renewInviceForm.endDate;
+      a.setDate(a.getDate() - 1);
+      a.setMonth(a.getMonth()+1);
+      for(var i=0;a<=b;){
+        i++;
+        a.setMonth(a.getMonth()+1);
+      
+          
+      }
+      a.setMonth(a.getMonth()-1);
+      $scope.renewInviceForm.day=(b-a)/ (1000 * 3600 * 24);
+      $scope.renewInviceForm.month=i;
+      $scope.getMony();
+    },
+    
     CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
       $scope.customer = response.data;
     }, function(response) {
@@ -509,8 +569,7 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
       InvoicesServ.renewInvicePending($scope.renewInviceForm).then(function(response){
         if(response.data){
           toastr.success('تم التجديد بنجاح');
-
-          $state.go('invoices');
+          $state.go('invoiceCustomer')
         }
       }, function(response) {
         console.log("Something went wrong");
@@ -846,5 +905,154 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
     //   });
     // };
 }]);
+app.controller('ProductPoliciesCtl',['$scope','ProductPoliciesServ',function($scope,ProductPoliciesServ){
+   ProductPoliciesServ.getAllProductPolicies().then(function(response) {
+      $scope.policies = response.data;
+      console.log(response.data);
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  }]);
 
+app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','InStockServ',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,InStockServ){
+    $scope.replace = {};
+    $scope.upInviceForm = {};
+    $scope.objects = HelperServ;
+    $scope.objects.getAllPackages();
+    $scope.objects.getAllStockby();
+    var rePrice;
+    $scope.getMac = function(item,stock){
+      if(!item){
+        item=0;
+      }
+      if(!stock){
+        stock=0;
+      } 
+      InStockServ.getByWP(stock,item).then(function(response) {
+        $scope.macObj=response.data;
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    }
+    $scope.setStock=function(){
+      $scope.getMac($scope.replace.product,$scope.replace.warehouse);
+    }
+    $scope.getMac(0,0);
+    $scope.getMony= function(){
+      angular.forEach($scope.objects.packagesObj, function(value, key) {
+        if(value._id==$scope.upInviceForm.package){
+         rePrice= value.initialPrice;
+        }
+      }, rePrice);
+      var dPrice=rePrice/30;
+      if($scope.upInviceForm.month){
+        var month = $scope.upInviceForm.month;
+      }else{
+        var month = 0;
+      }
+      if($scope.upInviceForm.day){
+        var day = $scope.upInviceForm.day;
+      }else{
+        var day = 0;
+      }
+      $scope.upInviceForm.total=rePrice*month+day*dPrice;
+    },
+    $scope.getDef= function(){
+      var a ;
+      a = new Date($scope.upInviceForm.startDate);
+      var b = $scope.upInviceForm.endDate;
+      a.setDate(a.getDate() - 1);
+      a.setMonth(a.getMonth()+1);
+      for(var i=0;a<=b;){
+        i++;
+        a.setMonth(a.getMonth()+1);
+      
+          
+      }
+      a.setMonth(a.getMonth()-1);
+      $scope.upInviceForm.day=(b-a)/ (1000 * 3600 * 24);
+      $scope.upInviceForm.month=i;
+      $scope.getMony();
+    },
+    ProductsServ.getAllItem().then(function(response){
+      $scope.items=response.data;
+    },function(response){
+      console.log("Somthing went wrong");
+    });
+    InvoicesServ.getInvoicedata($stateParams.id).then(function(response) {
+      var date =new Date(response.data.invoices.endDate);
+      $scope.upInviceForm.endDate = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()
+
+
+      var order = response.data.order
+    /*  console.log(order);*/
+    var flag = 0;
+    var packages = " "
+      for(var i in order){
+        console.log(order[i].product);
+        if(order[i].product.type== "package"){
+          flag =1;
+          packages = order[i].product.name
+        } else {
+          if(flag==0){
+          packages = "لا يوجد حزمة";
+        }
+        }
+      }
+      
+      $scope.getCurrentPackeges = packages;
+
+      $scope.days=response.data.days;
+      $scope.daysN=response.data.daysN;
+      $scope.price=response.data.price.toFixed(2);
+      $scope.tot=(response.data.price*(response.data.days-response.data.daysN)).toFixed(2);
+      $scope.upInviceForm.discount=$scope.tot;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+    $scope.upInvice = function(){
+      $scope.upInviceForm.idCu=$stateParams.id;
+      InvoicesServ.upgreadInvice($scope.upInviceForm).then(function(response){
+        if(response.data){
+          toastr.success('تم التطوير بنجاح');
+          $state.go('invoiceCustomer')
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+    $scope.replac = function(){
+     
+      $scope.replace.idin=$stateParams.id;
+      InvoicesServ.replacInvice($scope.replace).then(function(response){
+        if(response.data){
+          toastr.success('تم التطوير بنجاح');
+          $state.go('invoiceCustomers/showInvoice/'+$stateParams.id)
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+  }]);
+app.controller('Giga',['$scope','$timeout','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','gigaServ',function($scope,$timeout,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,gigaServ){
+    $scope.newgiga = {};
+    $scope.addGiga = function(){
+      $scope.loadingStatus = true;
+      $scope.newgiga.idin=$stateParams.id;
+      gigaServ.addgiga($scope.newgiga).then(function(response){
+        if(response.data){
+          $timeout(function () {
+            $scope.loadingStatus = false;
+            toastr.success('تم إضافة قيقا بنجاح');
+            $state.go('invoiceCustomers');
+          },3000);
+        } else {
+          console.log(response.data);
+        }
+      }, function(response) {
+        console.log("Something went wrong");
+      });
+    };
+
+  }]);
 }());

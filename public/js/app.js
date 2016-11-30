@@ -1275,7 +1275,7 @@
     $scope.activePanel = MenuFac;
   }]);
   app.controller('NotifcationCtr',['$scope','HelperServ',function($scope,HelperServ){
-    $scope.notif=['إضافة فاتورة','إضافة فاتورة مبدئية','تجديد','دفعة'];
+    $scope.notif=['إضافة فاتورة','إضافة فاتورة مبدئية','تجديد','دفعة','إضافة قيقا'];
     $scope.getAllNotification = HelperServ;
     $scope.getAllNotification.getNotification();
     // for(;;){

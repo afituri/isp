@@ -306,6 +306,9 @@
       'getProductPolicies': function(pageSize,currentPage,type){
         return $http.post('/policy/productPolicy/'+pageSize+'/'+currentPage,type);
       },
+      'getAllProductPolicies': function(){
+        return $http.get('/product/allItemPolisy/');
+      },
       'getProductPolicyByID': function(id){
         return $http.post('/policy/productPolicyService/'+id);
       },
@@ -326,8 +329,14 @@
       'getInvoces': function(pageSize,currentPage){
         return $http.get('/invoice/'+pageSize+'/'+currentPage);
       },
+      'getInvoicedata': function(id){
+        return $http.get('/invoice/invoicesdata/'+id);
+      },
       'getInvoicePending': function(status,pageSize,currentPage){
         return $http.get('/invoice/InvoicePending/'+pageSize+'/'+currentPage+'/'+status);
+      },
+      'replacInvice': function(replacInviceObj){
+        return $http.post('/reseller/replacInviceResseler',replacInviceObj);
       },
       'getInvoicePendingRes': function(status,pageSize,currentPage){
         return $http.get('/invoice/InvoicePendingRes/'+pageSize+'/'+currentPage+'/'+status);
@@ -365,6 +374,9 @@
       'renewInvicePending': function(renewInviceObj){
         return $http.post('/reseller/renewInvice',renewInviceObj);
       },
+      'upgreadInvice': function(renewInviceObj){
+        return $http.post('/reseller/upInvice',renewInviceObj);
+      },
       'paidInvoice': function(paidInviceObj){
         // console.log(paidInviceObj);
         // return $http.post('/reseller/paidInvoice',paidInviceObj);
@@ -374,6 +386,14 @@
           data: paidInviceObj,
           file: paidInviceObj.image
         });
+      }
+    };
+    return self;
+  }]);
+  app.service('gigaServ',['$http',function($http){
+     var self = {
+      'addgiga': function(form){
+        return $http.post('/reseller/addgiga',form);
       }
     };
     return self;

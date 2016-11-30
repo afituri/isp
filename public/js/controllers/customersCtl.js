@@ -76,7 +76,6 @@
        $scope.initi = function () {
       CustomersServ.getCustomers(1,$scope.pageSize,$scope.currentPage).then(function(response) {
         $scope.customerss = response.data.result;
-        console.log($scope.customers);
         $scope.total = response.data.count;
       }, function(response) {
         console.log("Something went wrong");

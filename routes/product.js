@@ -52,7 +52,21 @@ router.get('/allItem', userHelpers.isLogin ,function(req, res) {
     res.send(product);
   });
 });
+router.get('/allItemPolisy', userHelpers.isLogin ,function(req, res) {
+  productMgr.getAll(function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product){
+        if(result[product[i]._id]){
+          product[i].initialPrice=result[product[i]._id];
+        }
 
+        if(i==product.length-1){
+          res.send(product);    
+        }
+      }
+    });
+  });
+});
 router.get('/allItemR', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllItem(function(product){
     productPolicyMgr.getProductPPolicy(req.user.policy,function(result){

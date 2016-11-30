@@ -17,7 +17,7 @@ var Reseller = new Schema({
    // policy: { type: mongoose.Schema.Types.ObjectId, ref: 'Policy'},
    warehouse: { type: Schema.Types.ObjectId , ref: 'Warehouse',default:null},
    policy: { type: Schema.Types.ObjectId , ref: 'Policy',default:null},
-   
+   level: { type: Number, default:2},
    status: { type: Number, default:1}
 });
 

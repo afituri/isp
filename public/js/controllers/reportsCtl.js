@@ -184,10 +184,15 @@
 
     $scope.printStatus = function(){
       //alert($scope.Active);
+      if($scope.ServiceModel){
+        var service=$scope.ServiceModel;
+      }else{
+        var service=-1;
+      }
        if($scope.Active==1){
-        window.location.href ="/report/printActive/"+$scope.ServiceModel._id;
+        window.location.href ="/report/printActive/"+service;
       } else {
-        window.location.href ="/report/printunActive/"+$scope.ServiceModel._id;
+        window.location.href ="/report/printunActive/"+service;
       }
 
     };
@@ -214,7 +219,12 @@
     
    
     $scope.printDate = function(){
-      window.location.href="/report/printBetween/"+$scope.startDate+"/"+$scope.endDate+"/"+$scope.ServiceModel._id;
+      if($scope.ServiceModel){
+        var service=$scope.ServiceModel;
+      }else{
+        var service=-1;
+      }
+      window.location.href="/report/printBetween/"+$scope.startDate+"/"+$scope.endDate+"/"+service;
     };
    
     $scope.printReseller = function(){
