@@ -175,7 +175,6 @@
         return $http.get('/customer/'+id);
       },
       'addCustomer': function(customerObj){
-        console.log(customerObj);
         return $http.post('/customer/add',customerObj);
       },
       'editCustomer': function(id,customerObj){
@@ -191,7 +190,6 @@
  app.service('NoticeServ',['$http',function($http){
     var self = {
       'addNotice': function(notice){
-        console.log(notice);
         return $http.post('/notice/add',notice);
       },
       'getAllNotice': function(pageSize,currentPage){
@@ -201,7 +199,6 @@
         return $http.delete('/notice/delete/'+id);
       },
       'getNoticeLimit': function(){
-        console.log("fff");
         return $http.get('/notice/getNoticeLimit');
       }
     };
@@ -266,11 +263,9 @@
         return $http.get('/product/otherEquipment/'+pageSize+'/'+currentPage);
       },
       'getProductOtherEquipmentByID': function(id){
-        console.log("gg"+id);
         return $http.get('/product/'+id);
       },
       'editProductOtherEquipment':function(id,otherEquipmentObj){
-        console.log(id);
         return $http.put('/product/productEtc/edit/'+id,otherEquipmentObj);
       },
       'deleteProductOtherEquipment': function(id){
@@ -378,8 +373,6 @@
         return $http.post('/reseller/upInvice',renewInviceObj);
       },
       'paidInvoice': function(paidInviceObj){
-        // console.log(paidInviceObj);
-        // return $http.post('/reseller/paidInvoice',paidInviceObj);
         return Upload.upload({
           url: '/reseller/paidInvoice',
           method: 'POST',
@@ -484,7 +477,6 @@
       },
       'getAllItemsR': function(){
         return $http.get('/product/allItemR').then(function(response) {
-          console.log(response.data);
           self.itemsRObj = response.data;
         }, function(response) {
           console.log("Something went wrong in getAllItems");
@@ -560,7 +552,6 @@
         return $http.get('/user/'+pageSize+'/'+currentPage);
       },
       'addUser': function(UserObj){
-        console.log(UserObj);
         return $http.post('/user/add',UserObj);
       },
       'editUser': function(id,UserObj){
@@ -586,7 +577,6 @@
         return $http.post('/reseller/add',resllerObj);
       },
       'getResellerByName': function(name,pageSize,currentPage){
-        console.log(name);
         return $http.post('/reseller/search/'+pageSize+'/'+currentPage,{name:name});
       },
       'editResller': function(id,resllerObj){
@@ -634,7 +624,6 @@
         return $http.get('/service/'+pageSize+'/'+currentPage);
       },
       'getServicesByName': function(name,pageSize,currentPage){
-        console.log(name);
         return $http.post('/service/search/'+pageSize+'/'+currentPage,{name:name});
       },
       'getAllServices': function(pageSize,currentPage){

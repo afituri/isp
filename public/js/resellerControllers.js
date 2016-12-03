@@ -92,7 +92,6 @@
     
      $scope.init = function () {
       CustomersServ.getCustomersReject(2,$scope.pageSize,$scope.currentPage).then(function(response) {
-        console.log(response.data.result);
         $scope.customers = response.data.result;
         $scope.total = response.data.count;
       }, function(response) {
@@ -284,6 +283,10 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
       //alert(id);
       window.location.href='/report/printInvoicePaid/'+id;
     }
+    $scope.showGiga = function(id){
+      //alert(id);
+      window.location.href='/report/printInvoiceGiga/'+id;
+    }
 
     MenuFac.active = 10;
     $scope.activePanel = MenuFac;
@@ -377,13 +380,6 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
         InvoicesServ.addInvoice($scope.newInvoiceForm).then(function(response,err){
           if(!err){
             window.location.href='/report/printInvoice/'+response.data[1]._id;
-            // InvoicesServ.report(response.data).then(function(response,err){
-            //   if(!err){
-
-            //   }
-            // },function(response){
-            //   console.log("Something went wrong");
-            // });
           }
         },function(response){
           console.log("Something went wrong");
@@ -419,7 +415,6 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
       if(id == 'خدمة'){
         $scope.productsObj = $scope.objects.servicesRObj;
       } else if(id == 'معدة'){
-        console.log($scope.objects.itemsRObj);
         $scope.productsObj = $scope.objects.itemsRObj;
       } else if (id == 'حزمة'){
         $scope.productsObj = $scope.objects.packagesRObj;
@@ -494,29 +489,6 @@ app.controller('InvoicesCtl',['$scope','$stateParams','MenuFac','InvoicesServ','
     $scope.activePanel = MenuFac;
     $scope.editInvoiceForm = {};
   }]);
-  // app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
-   
-  //   $scope.renewInviceForm = {};
-  //   $scope.objects = HelperServ;
-  //   $scope.objects.getAllPackages();
-  //   CustomersServ.getCustomerByID($stateParams.id).then(function(response) {
-  //     $scope.customer = response.data;
-  //   }, function(response) {
-  //     console.log("Something went wrong");
-  //   });
-  //   $scope.renewInvice = function(){
-  //     $scope.renewInviceForm.idCu=$stateParams.id;
-  //     InvoicesServ.renewInvicePending($scope.renewInviceForm).then(function(response){
-  //       if(response.data){
-  //         toastr.success('تم التجديد بنجاح');
-
-  //         $state.go('invoices');
-  //       }
-  //     }, function(response) {
-  //       console.log("Something went wrong");
-  //     });
-  //   };
-  // }]);
   app.controller('RenewInvoiceCtl',['$scope','$state','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr',function($scope,$state,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr){
     $scope.renewInviceForm = {};
     $scope.objects = HelperServ;
@@ -694,14 +666,10 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
     };
 
     $scope.rejectEdit = function(id){
- /*     alert(id);
-      alert($scope.editCustomerMessage.reject_message);
-*/
       CustomersServ.editCustomerReject(id,$scope.editCustomerMessage).then(function(response) {
         if(response.data){
           $scope.rejectDataModel.hide();
           $scope.init();
-          //$state.go('customers');
           toastr.info('تم التعديل بنجاح');
         } else {
           console.log(response.data);
@@ -713,7 +681,6 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
     }
 
     $scope.confirmCustomer = function(id){
-      //alert(id.id);
       $scope.id = id.id;
       $scope.deleteName = "هل حقا تريد تأكيد هذه البيانات ؟";
       $scope.confirmModel = $modal({
@@ -731,7 +698,6 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
           $scope.confirmModel.hide();
           toastr.info('تم التأكيد بنجاح');
         } else {
-          console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");
@@ -787,7 +753,6 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
             toastr.success('تمت إضافة زبون جديد بنجاح');
           },3000);
         } else {
-          console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");
@@ -810,7 +775,6 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
           $state.go('customers');
           toastr.info('تم التعديل بنجاح');
         } else {
-          console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");
@@ -830,32 +794,14 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
     $scope.currentPage = 1;
     $scope.total = 0;
     $scope.editInStockForm={};
-     // InStockServ.getInStockById($stateParams.id).then(function(response) {
-     //   $scope.editInStockForm = response.data;
-     //  }, function(response) {
-     //    console.log("Something went wrong");
-     //  });
     ProductsServ.getProductAll().then(function(response) {
       if(response.data){
         $scope.Allproduct=response.data;
       } else {
-        console.log(response.data);
       }
     }, function(response) {
       console.log("Something went wrong");
     });
-    // $scope.editInStock = function(){
-    //   InStockServ.editInStock($stateParams.id,$scope.editInStockForm).then(function(response) {
-    //     if(response.data){
-    //       $state.go('inStock');
-    //       toastr.info('تم التعديل بنجاح');
-    //     } else {
-    //       console.log(response.data);
-    //     }
-    //   }, function(response) {
-    //     console.log("Something went wrong");
-    //   });
-    // }
 
     $scope.init = function () {
       InStockServ.getInStocksReseler($scope.pageSize,$scope.currentPage).then(function(response) {
@@ -877,38 +823,11 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
         $scope.hidePass=true;
       }
     }
-    // $scope.showDeleteModel = function(id){
-    //   $scope.id = id;
-    //   $scope.deleteName = "هذا المخزون";
-    //   $scope.deleteModel = $modal({
-    //     scope: $scope,
-    //     templateUrl: 'pages/model.delete.tpl.html',
-    //     show: true
-    //   });
-    // };
-    // $scope.confirmDelete = function(id){
-    //   InStockServ.deleteStocks(id).then(function(response) {
-    //     if(response.data.result == 1){
-    //       $scope.deleteModel.hide();
-    //       toastr.error('لايمكن الحذف لوجود كيانات تعتمد عليها');
-    //     } else if (response.data.result == 2){
-    //       $scope.deleteModel.hide();
-    //       toastr.success('تم الحذف بنجاح');
-    //       $scope.init();
-    //     } else if (response.data.result == 3){
-    //       $scope.deleteModel.hide();
-    //       toastr.error('عفوا يوجد خطأ الرجاء المحاولة لاحقا');
-    //     }
-    //   }, function(response) {
-    //     $scope.deleteModel.hide();
-    //     console.log("Something went wrong");
-    //   });
-    // };
+
 }]);
 app.controller('ProductPoliciesCtl',['$scope','ProductPoliciesServ',function($scope,ProductPoliciesServ){
    ProductPoliciesServ.getAllProductPolicies().then(function(response) {
       $scope.policies = response.data;
-      console.log(response.data);
     }, function(response) {
       console.log("Something went wrong");
     });
@@ -985,11 +904,9 @@ app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','I
 
 
       var order = response.data.order
-    /*  console.log(order);*/
     var flag = 0;
     var packages = " "
       for(var i in order){
-        console.log(order[i].product);
         if(order[i].product.type== "package"){
           flag =1;
           packages = order[i].product.name
@@ -1044,10 +961,8 @@ app.controller('Giga',['$scope','$timeout','$state','$stateParams','InvoicesServ
           $timeout(function () {
             $scope.loadingStatus = false;
             toastr.success('تم إضافة قيقا بنجاح');
-            $state.go('invoiceCustomers');
           },3000);
         } else {
-          console.log(response.data);
         }
       }, function(response) {
         console.log("Something went wrong");

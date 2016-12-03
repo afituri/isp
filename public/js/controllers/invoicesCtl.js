@@ -274,7 +274,6 @@
         success(function(data, status, headers, config) {
           $scope.customers=data;
         }).error(function(data, status, headers, config) {
-          console.log('Oops and error', data);
         });
     };
     MenuFac.active = 10;
@@ -326,13 +325,6 @@
               $scope.loadingStatus = false;
               window.location.href='/report/printInvoice/'+response.data[1]._id;
             },3000);
-            // InvoicesServ.report(response.data).then(function(response,err){
-            //   if(!err){
-
-            //   }
-            // },function(response){
-            //   console.log("Something went wrong");
-            // });
           }
         },function(response){
           console.log("Something went wrong");
@@ -355,8 +347,6 @@
         }
     };
     $scope.getprodectR =function(){
-      console.log('$scope.newInvoiceForm.reseller');
-      console.log($scope.newInvoiceForm.reseller);
       if($scope.newInvoiceForm.reseller!= 1){
         $scope.objects.getAllItemsR($scope.newInvoiceForm.reseller);    
         $scope.objects.getAllEtcsR($scope.newInvoiceForm.reseller);
@@ -615,11 +605,9 @@
 
 
       var order = response.data.order
-    /*  console.log(order);*/
     var flag = 0;
     var packages = " "
       for(var i in order){
-        console.log(order[i].product);
         if(order[i].product.type== "package"){
           flag =1;
           packages = order[i].product.name

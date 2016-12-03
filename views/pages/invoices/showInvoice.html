@@ -80,9 +80,6 @@
                   <a ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
                   <a ng-if="invoice.typein==5" class="btn btn-success btn-xs" ng-click="showGiga(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض قيقا</a>
                   <a ng-if="invoice.typein==6" class="btn btn-success btn-xs" ng-click="showrep(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
-                <!--   <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a> -->
-                 <!--  <a  class="btn btn-success btn-xs" ui-sref="upgreade({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تطوير</a> -->
-                <!--   <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a> -->
                   <a ng-show="deleteInvoice" ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
                 </td>
               </tr>
@@ -94,12 +91,18 @@
                 <td ng-if="invoice.typein==3" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==1" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==1" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==5" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==5" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==6" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==6" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
                 <td>
                   <span ng-if="invoice.typein==1"> فاتورة</span>
                   <span ng-if="invoice.typein==2"> مبدئية</span>
                   <span ng-if="invoice.typein==4">دفعة </span>
                   <span ng-if="invoice.typein==3"> تجديد</span>
-                  <span ng-if="invoice.typein==1 && invoice.type==3"> تطوير</span>
+                  <span ng-if="invoice.typein==1 && invoice.type==3"> تطوير فاتورة</span>
+                  <span ng-if="invoice.typein==5"> إضافة قيقا</span>
+                  <span ng-if="invoice.typein==6"> تغير معدة</span>
                 </td>
                 <td ng-if="invoice.reseller.repName == null"> الشركة الام</td>
                 <td ng-if="invoice.reseller.repName != null">  {{invoice.reseller.repName}}</td>
@@ -108,11 +111,11 @@
                 <td ng-if="invoice.status==3">مرفوضة</td>
                 <td>
                   <a class="btn btn-success btn-xs" ng-click="moreInfo(invoice)"><i class="fa fa-info fa-fw"></i>المعلومات</a>
-                  <a ng-if="invoice.typein!=4" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a ng-if="invoice.typein!=4 && invoice.typein!=5 && invoice.typein!=6" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                   <a ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
-                  <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
-                  <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a>
-                  <a ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
+                  <a ng-if="invoice.typein==5" class="btn btn-success btn-xs" ng-click="showGiga(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض قيقا</a>
+                  <a ng-if="invoice.typein==6" class="btn btn-success btn-xs" ng-click="showrep(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a ng-show="deleteInvoice" ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
                 </td>
               </tr>
               <tr ng-repeat="invoice in allInvoice" ng-if="invoice.
@@ -123,11 +126,18 @@
                 <td ng-if="invoice.typein==3" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==1" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
                 <td ng-if="invoice.typein==1" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==5" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==5" ng-bind="invoice.createdAt | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==6" ng-bind="invoice.startDate | date:'dd/MM/yyyy'"></td>
+                <td ng-if="invoice.typein==6" ng-bind="invoice.endDate | date:'dd/MM/yyyy'"></td>
                 <td>
                   <span ng-if="invoice.typein==1"> فاتورة</span>
                   <span ng-if="invoice.typein==2"> مبدئية</span>
                   <span ng-if="invoice.typein==4">دفعة </span>
                   <span ng-if="invoice.typein==3"> تجديد</span>
+                  <span ng-if="invoice.typein==1 && invoice.type==3"> تطوير فاتورة</span>
+                  <span ng-if="invoice.typein==5"> إضافة قيقا</span>
+                  <span ng-if="invoice.typein==6"> تغير معدة</span>
                 </td>
                 <td ng-if="invoice.reseller.repName == null"> الشركة الام</td>
                 <td ng-if="invoice.reseller.repName != null">  {{invoice.reseller.repName}}</td>
@@ -136,11 +146,11 @@
                 <td ng-if="invoice.status==3">مرفوضة</td>
                 <td>
                   <a class="btn btn-success btn-xs" ng-click="moreInfo(invoice)"><i class="fa fa-info fa-fw"></i>المعلومات</a>
-                  <a ng-if="invoice.typein!=4" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a ng-if="invoice.typein!=4 && invoice.typein!=5 && invoice.typein!=6" class="btn btn-success btn-xs" ng-click="showInvoice(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
                   <a ng-if="invoice.typein==4" class="btn btn-success btn-xs" ng-click="showPaid(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض دفعة</a>
-               <!--    <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="renewInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;تجديد الفاتورة</a>
-                  <a ng-if="invoice.typein==1" class="btn btn-success btn-xs" ui-sref="paidInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;الدفعات</a> -->
-                  <a ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
+                  <a ng-if="invoice.typein==5" class="btn btn-success btn-xs" ng-click="showGiga(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض قيقا</a>
+                  <a ng-if="invoice.typein==6" class="btn btn-success btn-xs" ng-click="showrep(invoice._id)"><i class="fa fa-pencil fa-fw"></i>&nbsp;عرض الفاتورة</a>
+                  <a ng-show="deleteInvoice" ng-if="resellerFlag!=1" class="btn btn-success btn-xs" ng-click="DeleteInvoice({id:invoice._id})"><i class="fa fa-plus fa-fw"></i>&nbsp;مسح</a>
                 </td>
               </tr>
             </tbody>
