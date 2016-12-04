@@ -99,14 +99,18 @@ router.get('/printInvoicePaid/:id',userHelpers.isLogin , function(req, res) {
 
 router.get('/printInvoice/:id',userHelpers.isLogin , function(req, res) {
   invoiceMgr.getInvoicedata(req.params.id,function(result){
-    console.log(result);
     var months;
     var now = new Date();
     var nowdate =now.getDate()+' / '+parseInt(now.getMonth()+1)+' / '+now.getFullYear();
     if(result.invoices.typein!=4){
-      months = (result.invoices.endDate.getFullYear() - result.invoices.startDate.getFullYear()) * 12;
-      months += result.invoices.endDate.getMonth()-result.invoices.startDate.getMonth() + 1;
-      result['months']=months;
+      if(!result.invoices.month){
+        months = (result.invoices.endDate.getFullYear() - result.invoices.startDate.getFullYear()) * 12;
+        months += result.invoices.endDate.getMonth()-result.invoices.startDate.getMonth() + 1;
+        result['months']=months;  
+      }else{
+        result['months']=result.invoices.month;
+      }
+      
       var startDate =result.invoices.startDate.getDate()+' / '+parseInt(result.invoices.startDate.getMonth()+1)+' / '+result.invoices.startDate.getFullYear();
       var endDate =result.invoices.endDate.getDate()+' / '+parseInt(result.invoices.endDate.getMonth()+1)+' / '+result.invoices.endDate.getFullYear();
       var startDate ='';
@@ -285,7 +289,6 @@ router.get('/printReseller/:id',userHelpers.isLogin ,function(req , res){
 router.get('/getAllMoney/:id',userHelpers.isLogin ,function(req , res){
   var result=[];
   customerMgr.getAllCustomerByReseler(req.params.id, function(customers){
-    // console.log(customers);
     customers.forEach(function(value, key) {
       reportMgr.getTotalMoney(value._id,function(results){
         parsPiad(results,function(money){
@@ -316,32 +319,6 @@ router.get('/getAllMoney/:id',userHelpers.isLogin ,function(req , res){
         });
       });
     });
-    
-    // for(var i in customers){
-    //   reportMgr.getTotalMoney(customers[i]._id,function(results){
-    //     parsPiad(results,function(money){
-    //       var obj={
-    //         name:customers[i].name,
-    //         sum:money.sum,
-    //         piad:money.piad
-    //       }
-    //       if(customers[i].reseller){
-    //         obj.reseller=customers[i].reseller.repName;
-    //       }else{
-    //         obj.reseller='الشركة الام';
-    //       }
-    //       result.push(obj);
-    //       console.log(result);
-          
-          
-    //     });
-    //   });
-      
-
-    //   if(i == customers.length-1){
-    //         res.send(result);  
-    //       }
-    // }
   });
   
 });

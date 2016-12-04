@@ -161,6 +161,8 @@ module.exports = {
                 customer:customerResult._id,
                 type:body.type,
                 notes:body.invoceNotes,
+                month:body.month,
+                day:body.day,
                 piad:body.total-body.discount,
                 reseller:body.reseller,
                 discount:body.discount,
@@ -202,7 +204,6 @@ module.exports = {
                             endDate:body.endDate
                           };
                           if(result[pro._id]){
-                            // console.log(result[pro._id]);
                             Order.price=result[pro._id];
                           }
                           if(pro.type=='package'){
@@ -280,6 +281,8 @@ module.exports = {
             notes:body.invoceNotes,
             piad:body.total-body.discount,
             reseller:body.reseller,
+            month:body.month,
+            day:body.day,
             discount:body.discount,
             typein:body.typein,
             startDate:body.startDate,
@@ -320,7 +323,6 @@ module.exports = {
                         endDate:body.endDate
                       };
                       if(result[pro._id]){
-                        // console.log(result[pro._id]);
                         Order.price=result[pro._id];
                       }
                       if(pro.type=='package'){
@@ -397,6 +399,8 @@ module.exports = {
         notes:body.invoceNotes,
         piad:body.total,
         reseller:idu,
+        month:body.month,
+        day:body.day,
         discount:body.discount,
         status:2,
         startDate:body.startDate,
@@ -408,7 +412,6 @@ module.exports = {
         if (!err) {
           model.Product.findOne({_id:body.package},function(err,pro){
             productPolicyMgr.getProductPPolicy(policy,function(result){
-              console.log(result);
               dollarMgr.getLastDollar(function(dollar){
                 Order={
                   invoice:invoiceResult._id,
