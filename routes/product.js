@@ -52,6 +52,7 @@ router.get('/allItem', userHelpers.isLogin ,function(req, res) {
     res.send(product);
   });
 });
+
 router.get('/allItemPolisy', userHelpers.isLogin ,function(req, res) {
   productMgr.getAll(function(product){
     productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
@@ -67,6 +68,8 @@ router.get('/allItemPolisy', userHelpers.isLogin ,function(req, res) {
     });
   });
 });
+
+
 router.get('/allItemR', userHelpers.isLogin ,function(req, res) {
   productMgr.getAllItem(function(product){
     productPolicyMgr.getProductPPolicy(req.user.policy,function(result){

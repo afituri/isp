@@ -206,6 +206,12 @@ $.getScript('http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js
 
 
   app.controller('InvoicesCtl',['$scope','PermissionServ','toastr','CustomersServ','$modal','$stateParams','MenuFac','InvoicesServ',function($scope,PermissionServ,toastr,CustomersServ,$modal,$stateParams,MenuFac,InvoicesServ){
+          
+
+
+
+
+
        PermissionServ.getSubpermission().then(function(response){
       $scope.permission =true;
       if(response.data[0] != undefined){
@@ -287,6 +293,51 @@ $.getScript('http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js
     //alert($stateParams.id);
     $scope.initInvoce = function(){
     InvoicesServ.getInvoiceByID(1,$stateParams.id).then(function(response) {
+ 
+
+
+      InvoicesServ.getInvoicedata(response.data[1].invoice).then(function(response) {
+/*      var date =new Date(response.data.invoices.endDate);
+      $scope.upInviceForm.endDate = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()
+*/
+   
+    var order = response.data.order
+    var flag = 0;
+    var packages = " "
+      for(var i in order){
+        if(order[i].product.type== "package"){
+          flag =1;
+          packages = order[i].product.name
+        } else {
+          if(flag==0){
+          packages = "لا يوجد حزمة";
+        }
+        }
+      }
+      
+      $scope.getCurrentPackeges = packages;
+      $scope.getMackAdress = response.data.instock.macAddress;
+
+      /*$scope.days=response.data.days;
+      $scope.daysN=response.data.daysN;
+      $scope.price=response.data.price.toFixed(2);
+      $scope.tot=(response.data.price*(response.data.days-response.data.daysN)).toFixed(2);
+      $scope.upInviceForm.discount=$scope.tot;*/
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+
+
+
+
+
+
+
+
+
+
+
+
       $scope.invoiceID = response.data[0]._id;
       $scope.allInvoice=response.data;
     }, function(response) {
@@ -699,6 +750,7 @@ $.getScript('http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js
     },function(response){
       console.log("Somthing went wrong");
     });
+
     InvoicesServ.getInvoicedata($stateParams.id).then(function(response) {
       var date =new Date(response.data.invoices.endDate);
       $scope.upInviceForm.endDate = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()

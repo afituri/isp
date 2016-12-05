@@ -69,6 +69,28 @@ module.exports = {
       }
     });
   },
+
+   getProductPPolicyByType :function(policy,type,cb){
+    console.log("44444");
+    console.log(type);
+    model.Productpolicy.find({type:type}, function(err, pPolicies){
+      console.log(pPolicies)
+      if(!err){
+        var obj=[];
+        for(k in pPolicies){
+          obj[pPolicies[k].product]=pPolicies[k].initialPrice;
+          if(k==pPolicies.length-1){
+            console.log(obj);
+            cb(obj);    
+          }
+        }
+        
+      }else{
+        cb(null);
+      }
+    });
+  },
+
   getByPolicy :function(idpr,cb){
     model.Productpolicy.find({policy:idpr}, function(err, pPolicies){
       if(!err){
@@ -129,6 +151,7 @@ module.exports = {
   //   }
   // }
     var obj=body;
+    console.log(obj);
 
     model.Productpolicy.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {

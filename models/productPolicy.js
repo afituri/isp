@@ -13,8 +13,8 @@ var Productpolicy = new Schema({
       brand: { type: String}
    },
    packages: {
-      renewPrice: { type: Number},
-      GBPrice: { type: Number},
+      renewPrice: { type: Number}
+  
    },
    status: { type: Number, default:1}
 });

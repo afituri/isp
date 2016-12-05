@@ -126,7 +126,9 @@
     }, function(response) {
       console.log("Something went wrong");
     });
+
     $scope.editProductPolicy = function(){
+      alert("dd");
       ProductPoliciesServ.editProductPolicy($stateParams.id,$scope.editPolicyServiceForm).then(function(response) {
         if(response.data){
           $state.go('productPoliciesService');
@@ -354,8 +356,8 @@
     }, function(response) {
       console.log("Something went wrong");
     });
-      //edit function 
-    $scope.editProductPolicy = function(){
+    
+    $scope.editProductPolicyy = function(){
       ProductPoliciesServ.editProductPolicy($stateParams.id,$scope.editPolicyPackageForm).then(function(response) {
         if(response.data){
           $state.go('productPoliciesPackage');

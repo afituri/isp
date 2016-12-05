@@ -826,11 +826,38 @@ app.controller('CustomerPendingCtl',['$scope','$modal','MenuFac','CustomersServ'
 
 }]);
 app.controller('ProductPoliciesCtl',['$scope','ProductPoliciesServ',function($scope,ProductPoliciesServ){
+   
+  
+   
+   $scope.getPolicy = function(){
+    if($scope.searchForPolicy == 0){  
+       ProductPoliciesServ.getAllProductPolicies().then(function(response) {
+          $scope.policies = response.data;
+        }, function(response) {
+          console.log("Something went wrong");
+        });
+    } else {
+    $scope.policies = []
+     ProductPoliciesServ.getAllProductPolicies().then(function(response) {
+      for(var i in response.data){
+        if(response.data[i].type == $scope.searchForPolicy){
+          $scope.policies.push(response.data[i]);
+        }
+      }
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+   }
+ }
+
+
+
    ProductPoliciesServ.getAllProductPolicies().then(function(response) {
       $scope.policies = response.data;
     }, function(response) {
       console.log("Something went wrong");
     });
+
   }]);
 
 app.controller('UpgreadeCtl',['$scope','$state','ProductsServ','$stateParams','InvoicesServ','CustomersServ','HelperServ','toastr','InStockServ',function($scope,$state,ProductsServ,$stateParams,InvoicesServ,CustomersServ,HelperServ,toastr,InStockServ){

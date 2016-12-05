@@ -28,7 +28,8 @@ var Product = new Schema({
       GBPrice: { type: String},
       cost: Number,
       costCurrency: { type: String},
-      exchangeRate: { type: Number}
+      exchangeRate: { type: Number},
+      shear: {type: String}
    },
    status: { type: Number, default:1}
 });
