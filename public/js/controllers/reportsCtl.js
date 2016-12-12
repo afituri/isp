@@ -3,10 +3,6 @@
   var app = angular.module('isp');
   app.controller('ReportsCtl',['$scope','ServicesServ','InStockServ','toastr','$modal','InvoicesServ','HelperServ','$state',function($scope,ServicesServ,InStockServ,toastr,$modal,InvoicesServ,HelperServ,$state){
    
-
-
-
-
     $scope.searchByMacAdress = function() {
       if($scope.searchByMac==""){
         $scope.customers = null;
@@ -38,6 +34,7 @@
     } else {
     $scope.resul= response.data.result;
 /*      $scope.total = response.data.count;*/
+    $scope.resul[0].endDate=response.data.invoice[0].endDate;
    $scope.deleteName = "هذا الموزع";
       $scope.deleteModel = $modal({
         scope: $scope,
@@ -97,13 +94,10 @@
     $scope.ServiceFunc = function(id){
       
       ServicesServ.getCustomerByService(id).then(function(response){
-        console.log(response.data);
         var customers=[];
         for(var i in response.data){
-          console.log(response.data[i].customer);
           customers.push(response.data[i].customer);
         }
-        console.log(customers);
         $scope.counter = customers.length;
         $scope.resultsAll = customers;
      },function(response){
@@ -124,10 +118,8 @@
         } else {
           /*alert("search for all number  without service");*/
          InvoicesServ.searchForMac($scope.searchByAll,$scope.pageSize,$scope.currentPage).then(function(response) {
-            console.log("response");
             $scope.resultsAll= response.data.result;
             $scope.counter = response.data.result.length; 
-            console.log($scope.resultsAll);
             $scope.total = response.data.count;
           }, function(response) {
             console.log("Something went wrong");
@@ -143,9 +135,13 @@
         $scope.customers = null;
       } else {
       InStockServ.getInfoByMackAdress($scope.searchByAll).then(function(response){
-        console.log(response.data.invoice.customer);
-        $scope.resultsAll = [response.data.invoice.customer];
-        $scope.counter = [response.data.invoice.customer].length; 
+        if(response.data.invoice){
+          $scope.resultsAll = [response.data.invoice.customer];
+          $scope.counter = [response.data.invoice.customer].length; 
+        }else{
+          $scope.resultsAll = []; 
+          $scope.counter = 0;
+        }
       },function(response){
         console.log("Somthing went wrong");
       });
@@ -174,7 +170,6 @@
         });
       } else {
           InvoicesServ.unActive($scope.ServiceModel).then(function(response) {
-          console.log("response");
           $scope.results= response.data;
         }, function(response) {
           console.log("Something went wrong");
@@ -199,7 +194,6 @@
 
      $scope.showDate = function(){
         InvoicesServ.contractBetweenDates($scope.startDate,$scope.endDate,$scope.ServiceModel).then(function(response) {
-          console.log("response");
           $scope.results= response.data;
         }, function(response) {
           console.log("Something went wrong");

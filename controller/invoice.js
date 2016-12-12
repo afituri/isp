@@ -31,7 +31,7 @@ module.exports = {
   getProductMack : function(id,cb){
     idInvoiceArray=[];
      instock =[];
-    model.Invoice.find({customer:id})
+    model.Invoice.find({customer:id}).sort({endDate:-1})
       .exec(function(err, invoices){
         if(!err){
          for(i in invoices){
@@ -56,7 +56,7 @@ module.exports = {
                   instock.push(result);
 
                   if(t==idInvoiceArray.length-1){
-                    cb({result:instock});
+                    cb({result:instock,invoice:invoices});
                 }
                 t++;
                 }else{

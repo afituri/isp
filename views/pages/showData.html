@@ -13,6 +13,7 @@
                 <th>اسم المستخدم </th>
                 <th>الرقم السري </th>
                 <th> السعر </th>
+                <th> تاريخ النهاية </th>
              
               </tr>
             </thead>
@@ -23,6 +24,8 @@
                 <td>{{customer[0].username}}</td>
                 <td>{{customer[0].password}}</td>
                 <td>{{customer[0].product.initialPrice}}</td>
+                <td>{{customer.endDate | date:'yyyy-MM-dd'}}</td>
+
           
               </tr>
             </tbody>
