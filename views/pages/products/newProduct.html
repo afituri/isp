@@ -223,10 +223,10 @@
                     <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.costCurrency" placeholder="العملة" required>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" ng-if="ifGB">
                   <div class="form-group">
                     <label class="control-label">نسبة المشاركة</label>
-                    <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.shear" placeholder="المشاركة" required>
+                    <input class="form-control input-sm" type="text" ng-model="newProductForm.packages.shear" placeholder="المشاركة">
                   </div>
                 </div>
                 <div class="col-md-6">

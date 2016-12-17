@@ -332,7 +332,6 @@
   }]);
   app.controller('NewProductCtl',['$scope','$timeout','ServicesServ','$state','MenuFac','ProductsServ','HelperServ','toastr',function($scope,$timeout,ServicesServ,$state,MenuFac,ProductsServ,HelperServ,toastr){
     MenuFac.active = 7;
-    
     $scope.activePanel = MenuFac;
     $scope.newProductForm = {};
     HelperServ.getAllSuppliers();
@@ -370,8 +369,14 @@
         $scope.newProductForm.packages.uSpeed=id;
       }
     }
-
+    $scope.ifGB =true;
     $scope.GBTypee = function(id){
+      if(id == "GB"){
+        $scope.ifGB = false;
+      } else {
+        $scope.ifGB = true;
+      }
+
       $scope.newProductForm.packages.monthlyQuota="";
         if($scope.newProductForm.packages.monthlyQuota != undefined){
         $scope.newProductForm.packages.monthlyQuota=$scope.newProductForm.packages.monthlyQuota+id;
