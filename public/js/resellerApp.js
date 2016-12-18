@@ -290,6 +290,54 @@
         }] 
       }
     })
+    .state('productPoliciesService',{
+      url: '/productPoliciesService',
+      templateUrl: 'pages/reseller/all/productPoliciesService',
+      controller: 'ProductPoliciesServiceCtl',
+      data: {pageTitle: 'عرض سياسات منتج (الخدمة)'},
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('productPoliciesItem',{
+      url: '/productPoliciesItem',
+      templateUrl: 'pages/reseller/all/productPoliciesItem',
+      controller: 'ProductPoliciesItemCtl',
+      data: {pageTitle: 'عرض سياسات منتج (المعدة)'},
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
+    .state('productPoliciesPackage',{
+      url: '/productPoliciesPackage',
+      templateUrl: 'pages/reseller/all/productPoliciesPackage',
+      controller: 'ProductPoliciesPackageCtl',
+      data: {pageTitle: 'عرض سياسات منتج (الحزمة)'},
+     resolve: {
+        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            insertBefore: '#ng_load_controler_before', // load the above js files before '#ng_load_plugins_before'
+            files: [
+              '/js/resellerControllers.js',
+            ] 
+          }]);
+        }] 
+      }
+    })
     .state('addGiga',{
       url: '/invoiceCustomers/addGiga/:id',
       templateUrl: 'pages/invoices/addGiga.html',

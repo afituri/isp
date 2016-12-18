@@ -60,10 +60,39 @@
         <i class="fa fa-plus"></i>&nbsp;المخزن</span>
       </a>
     </li>
-    <li>
+   <!--  <li>
       <a href="#/productPolicies">
         <i class="fa fa-plus"></i>&nbsp;السياسات</span>
       </a>
+    </li> -->
+    <li  class="nav-item" >
+      <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+        <span class="title">سياسات المنتج</span>
+        <span class="arrow"></span>
+      </a>
+      <ul class="sub-menu">
+        <li >
+          <a href="#/productPoliciesService">
+            <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<small>عرض سياسات منتج (الخدمة)</small></span>
+          </a>
+        </li>
+        <li >
+          <a href="#/productPoliciesItem">
+            <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<small>عرض سياسات منتج (المعدة)</small></span>
+          </a>
+        </li>
+        <li >
+          <a href="#productPoliciesPackage">
+            <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<small>عرض سياسات منتج (الحزمة)</small></span>
+          </a>
+        </li>
+        <li ng-show="productPoliciesAddPage">
+          <a href="#/productPolicies/new">
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<small>إضافة سياسة منتج جديد</small></span>
+          </a>
+        </li>
+      </ul>
     </li>
   </ul>
   <!-- END SIDEBAR MENU -->

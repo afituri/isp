@@ -304,6 +304,15 @@
       'getAllProductPolicies': function(){
         return $http.get('/product/allItemPolisy/');
       },
+      'getAllProductPoliciesS': function(pageSize,currentPage){
+        return $http.get('/product/allItemPolisySer/'+pageSize+'/'+currentPage);
+      },
+      'getAllProductPoliciesP': function(pageSize,currentPage,service){
+        return $http.get('/product/allItemPolisyPac/'+pageSize+'/'+currentPage+'/'+service);
+      },
+      'getAllProductPoliciesI': function(pageSize,currentPage){
+        return $http.get('/product/allItemPolisyIte/'+pageSize+'/'+currentPage);
+      },
       'getProductPolicyByID': function(id){
         return $http.post('/policy/productPolicyService/'+id);
       },

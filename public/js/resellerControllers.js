@@ -997,4 +997,82 @@ app.controller('Giga',['$scope','$timeout','$state','$stateParams','InvoicesServ
     };
 
   }]);
+app.controller('ProductPoliciesServiceCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+  MenuFac.active = 9;
+  $scope.activePanel = MenuFac;
+  $scope.pageSize = 10;
+  $scope.currentPage = 1;
+  $scope.total = 0;
+  $scope.objects = HelperServ;
+  $scope.objects.getAllItems();
+  $scope.objects.getAllServices();
+  $scope.objects.getAllPackages();
+  $scope.objects.getAllPolicies();
+  $scope.policies=[];
+  $scope.init = function () {
+    ProductPoliciesServ.getAllProductPoliciesS($scope.pageSize,$scope.currentPage).then(function(response) {
+      $scope.policies = response.data.result;
+      $scope.total = response.data.count;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  };
+  $scope.init();
+      
+}]);
+app.controller('ProductPoliciesItemCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ){
+  MenuFac.active = 9;
+  $scope.activePanel = MenuFac;
+  $scope.pageSize = 10;
+  $scope.currentPage = 1;
+  $scope.total = 0;
+  $scope.objects = HelperServ;
+  $scope.objects.getAllItems();
+  $scope.objects.getAllServices();
+  $scope.objects.getAllPackages();
+  $scope.objects.getAllPolicies();
+  $scope.policies=[];
+  $scope.init = function () {
+    ProductPoliciesServ.getAllProductPoliciesI($scope.pageSize,$scope.currentPage).then(function(response) {
+      $scope.policies = response.data.result;
+      $scope.total = response.data.count;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  };
+  $scope.init();
+      
+}]);
+app.controller('ProductPoliciesPackageCtl',['$scope','$state','PoliciesServ','HelperServ','$stateParams','toastr','$modal','MenuFac','ProductPoliciesServ','ServicesServ',function($scope,$state,PoliciesServ,HelperServ,$stateParams,toastr,$modal,MenuFac,ProductPoliciesServ,ServicesServ){
+  MenuFac.active = 9;
+  $scope.activePanel = MenuFac;
+  $scope.pageSize = 10;
+  $scope.currentPage = 1;
+  $scope.total = 0;
+  $scope.objects = HelperServ;
+  $scope.objects.getAllItems();
+  $scope.objects.getAllServices();
+  $scope.objects.getAllPackages();
+  $scope.objects.getAllPolicies();
+  $scope.policies=[];
+  $scope.ServiceModel;
+  ServicesServ.getAllServices($scope.pageSize,$scope.currentPage).then(function(response) {
+    $scope.servicesObj = response.data;
+  }, function(response) {
+    console.log("Something went wrong");
+  });
+  $scope.serviceChange = function(){
+    $scope.init($scope.ServiceModel._id);
+  };
+  $scope.init = function (serv) {
+    ProductPoliciesServ.getAllProductPoliciesP($scope.pageSize,$scope.currentPage,serv).then(function(response) {
+      $scope.policies = response.data.result;
+      $scope.total = response.data.count;
+    }, function(response) {
+      console.log("Something went wrong");
+    });
+  };
+  $scope.init(-1);
+      
+}]);
 }());

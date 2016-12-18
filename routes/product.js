@@ -68,6 +68,53 @@ router.get('/allItemPolisy', userHelpers.isLogin ,function(req, res) {
     });
   });
 });
+router.get('/allItemPolisyPac/:limit/:page/:service', userHelpers.isLogin ,function(req, res) {
+  productMgr.getProductPackageSearch(req.params.limit,req.params.page,req.params.service,function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product.result){
+        if(result[product.result[i]._id]){
+          product.result[i].initialPrice=result[product.result[i]._id];
+        }
+
+        if(i==product.result.length-1){
+          res.send(product);    
+        }
+      }
+    });
+  });
+});
+router.get('/allItemPolisySer/:limit/:page', userHelpers.isLogin ,function(req, res) {
+  productMgr.getProductService(req.params.limit,req.params.page,function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product.result){
+        if(result[product.result[i]._id]){
+          product.result[i].initialPrice=result[product.result[i]._id];
+        }
+
+        if(i==product.result.length-1){
+          res.send(product);    
+        }
+      }
+    });
+  });
+});
+router.get('/allItemPolisyIte/:limit/:page', userHelpers.isLogin ,function(req, res) {
+  productMgr.getProductItem(req.params.limit,req.params.page,function(product){
+    productPolicyMgr.getProductPPolicy(req.user.policy,function(result){
+      for(i in product.result){
+        if(result[product.result[i]._id]){
+          product.result[i].initialPrice=result[product.result[i]._id];
+        }
+
+        if(i==product.result.length-1){
+          res.send(product);    
+        }
+      }
+    });
+  });
+});
+
+
 
 
 router.get('/allItemR', userHelpers.isLogin ,function(req, res) {

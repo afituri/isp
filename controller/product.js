@@ -449,7 +449,6 @@ getProductPackageSearch :function(limit,page,service,cb){
         "packages.service":service
       }
     }else{
-      console.log("c");
       var q= {
         type:"package"
       }
