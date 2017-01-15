@@ -2,13 +2,13 @@
   <!-- BEGIN SIDEBAR MENU -->
   <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="false" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
     <li class="start nav-item">
-      <a href="#/">
+      <a href="#!/">
         <i class="icon-home"></i>
         <span class="title">لوحة التحكم</span>
       </a>
     </li>
     <li class="nav-item" ng-show="dollarPage">
-      <a href="#/dollar">
+      <a href="#!/dollar">
         <i class="fa fa-usd" aria-hidden="true"></i>
         <span class="title">تسجيل الدولار </span>
       </a>
@@ -21,12 +21,12 @@
       </a>
       <ul class="sub-menu">
         <li>
-          <a href="#/notice">
+          <a href="#!/notice">
             <i class="fa fa-list"></i>&nbsp;عرض التنبيهات</span>
           </a>
         </li>
         <li>
-          <a href="#/newNotice">
+          <a href="#!/newNotice">
             <i class="fa fa-plus"></i>&nbsp;إضافة التنبيهات</span>
           </a>
         </li>
@@ -40,19 +40,19 @@
       </a>
       <ul class="sub-menu">
         <li>
-          <a href="#/permissions">
+          <a href="#!/permissions">
             <i class="fa fa-list"></i>&nbsp;عرض الصلاحيات</span>
           </a>
         </li>
         <li>
-          <a href="#/newPermissions">
+          <a href="#!/newPermissions">
             <i class="fa fa-plus"></i>&nbsp;إضافة الصلاحيات</span>
           </a>
         </li>
       </ul>
     </li>
     <li class="nav-item" ng-show="permission">
-      <a href="#/restore">
+      <a href="#!/restore">
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
         <span class="title">استعادة</span>
       </a>
@@ -65,12 +65,12 @@
       </a>
       <ul class="sub-menu">
         <li>
-          <a href="#/service">
+          <a href="#!/service">
             <i class="fa fa-list"></i>&nbsp;عرض الخدمات</span>
           </a>
         </li>
         <li ng-show="serviceAddPage">
-          <a href="#/services/new">
+          <a href="#!/services/new">
             <i class="fa fa-plus"></i>&nbsp;إضافة خدمة جديدة</span>
           </a>
         </li>
@@ -84,12 +84,12 @@
       </a>
       <ul class="sub-menu">
         <li>
-          <a href="#/serviceProviders">
+          <a href="#!/serviceProviders">
             <i class="fa fa-list"></i>&nbsp;عرض مزودي الخدمة</span>
           </a>
         </li>
         <li>
-          <a href="#/serviceProviders/new" ng-show="serviceProvidersAddPage">
+          <a href="#!/serviceProviders/new" ng-show="serviceProvidersAddPage">
             <i class="fa fa-plus"></i>&nbsp;إضافة مزود خدمة جديد</span>
           </a>
         </li>
@@ -103,12 +103,12 @@
       </a>
       <ul class="sub-menu">
         <li>
-          <a href="#/resellers">
+          <a href="#!/resellers">
             <i class="fa fa-list"></i>&nbsp;عرض الموزعين</span>
           </a>
         </li>
         <li ng-show="resselersAddPage">
-          <a href="#/resellers/new">
+          <a href="#!/resellers/new">
             <i class="fa fa-plus"></i>&nbsp;إضافة موزع جديد</span>
           </a>
         </li>
@@ -122,12 +122,12 @@
       </a>
       <ul class="sub-menu">
         <li >
-          <a href="#/suppliers">
+          <a href="#!/suppliers">
             <i class="fa fa-list"></i>&nbsp;عرض الموردين</span>
           </a>
         </li>
         <li ng-show="suppliersAddPage">
-          <a href="#/suppliers/new">
+          <a href="#!/suppliers/new">
             <i class="fa fa-plus"></i>&nbsp;إضافة مورد جديد</span>
           </a>
         </li>
@@ -141,12 +141,12 @@
       </a>
       <ul class="sub-menu">
         <li >
-          <a href="#/warehouses">
+          <a href="#!/warehouses">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض المخازن</span>
           </a>
         </li>
         <li ng-show="warehousesAddPage">
-          <a href="#/warehouses/new">
+          <a href="#!/warehouses/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة مخزن جديد</span>
           </a>
         </li>
@@ -160,17 +160,17 @@
       </a>
       <ul class="sub-menu">
         <li >
-          <a href="#/instock">
+          <a href="#!/instock">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض مخزون</span>
           </a>
         </li>
         <li ng-show="instockAddPage">
-          <a href="#/instock/new">
+          <a href="#!/instock/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة مخزون جديد</span>
           </a>
         </li>
         <li  ng-show="instockAddPage">
-          <a href="#/instock/Transfer">
+          <a href="#!/instock/Transfer">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;نقل مخزون </span>
           </a>
         </li>
@@ -184,17 +184,17 @@
       </a>
       <ul class="sub-menu">
         <li >
-          <a href="#/customers">
+          <a href="#!/customers">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض الزبائن
           </a>
         </li>
         <li ng-show="permission">
-          <a href="#/customerPending">
+          <a href="#!/customerPending">
             <i class="fa fa-pause" aria-hidden="true"></i>&nbsp;الزبائن قيد الانتظار
           </a>
         </li>
         <li ng-show="customersAddPage">
-          <a href="#/customers/new">
+          <a href="#!/customers/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة زبون
           </a>
         </li>
@@ -208,27 +208,27 @@
       </a>
       <ul class="sub-menu">
         <li ng-show="productServicesPage">
-          <a href="#/products/services">
+          <a href="#!/products/services">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض الخدمات
           </a>
         </li>
         <li ng-show="productItemsPage">
-          <a href="#/products/items">
+          <a href="#!/products/items">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض المعدات
           </a>
         </li>
         <li ng-show="productPackagesPage">
-          <a href="#/products/packages">
+          <a href="#!/products/packages">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض الحزم
           </a>
         </li>
         <li ng-show="productItemsPage">
-          <a href="#/products/otherEquipments">
+          <a href="#!/products/otherEquipments">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض المعدات الاخري
           </a>
         </li>
         <li ng-show="productServicesAddPage+productItemAddPage+productPackAddPage">
-          <a href="#/products/new">
+          <a href="#!/products/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة منتج جديد
           </a>
         </li>
@@ -242,12 +242,12 @@
       </a>
       <ul class="sub-menu" >
         <li >
-          <a href="#/policies">
+          <a href="#!/policies">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض السياسات</span>
           </a>
         </li>
         <li ng-show="policiesAddPage">
-          <a href="#/policies/new">
+          <a href="#!/policies/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة سياسة جديدة</span>
           </a>
         </li>
@@ -261,22 +261,22 @@
       </a>
       <ul class="sub-menu">
         <li >
-          <a href="#/productPoliciesService">
+          <a href="#!/productPoliciesService">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<small>عرض سياسات منتج (الخدمة)</small></span>
           </a>
         </li>
         <li >
-          <a href="#/productPoliciesItem">
+          <a href="#!/productPoliciesItem">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<small>عرض سياسات منتج (المعدة)</small></span>
           </a>
         </li>
         <li >
-          <a href="#productPoliciesPackage">
+          <a href="#!productPoliciesPackage">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<small>عرض سياسات منتج (الحزمة)</small></span>
           </a>
         </li>
         <li ng-show="productPoliciesAddPage">
-          <a href="#/productPolicies/new">
+          <a href="#!/productPolicies/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<small>إضافة سياسة منتج جديد</small></span>
           </a>
         </li>
@@ -290,17 +290,17 @@
       </a>
       <ul class="sub-menu">
         <li >
-          <a href="#/invoiceCustomers">
+          <a href="#!/invoiceCustomers">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;عرض الفواتير</span>
           </a>
         </li>
         <li >
-          <a href="#/showInvoicePending">
+          <a href="#!/showInvoicePending">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;تأكيد / رفض الفاتورة</span>
           </a>
         </li>
         <li ng-show="invoiceAddPage">
-          <a href="#/invoices/new">
+          <a href="#!/invoices/new">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;إضافة فاتورة جديدة</span>
           </a>
         </li>
@@ -316,26 +316,26 @@
 
 
          <li >
-          <a href="#/statistics">
+          <a href="#!/statistics">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp; الاحصائيات </span>
           </a>
         </li>
 
 
         <li >
-          <a href="#/reports">
+          <a href="#!/reports">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;المفعلين والغير مفعلين</span>
           </a>
         </li>
 
          <li >
-          <a href="#/searchMacAdress">
+          <a href="#!/searchMacAdress">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;البحث عن الماك ادرس</span>
           </a>
         </li>
 
           <li >
-          <a href="#/searchByMacAdress">
+          <a href="#!/searchByMacAdress">
             <i class="fa fa-list" aria-hidden="true"></i>&nbsp;البحث عن الزبون ب الماك أدرس / سيريال نمبر</span>
           </a>
         </li>
