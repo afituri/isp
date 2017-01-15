@@ -88,7 +88,6 @@
         }]
       }
     })
-
     .state('notice',{
       url: '/notice',
       templateUrl: 'pages/notices/notices.html',
@@ -104,9 +103,7 @@
           }]);
         }] 
       }
-      
     })
-
     .state('newNotice',{
       url: '/newNotice',
       templateUrl: 'pages/notices/newNotice.html',
