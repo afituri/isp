@@ -1,8 +1,10 @@
 var user = require('./user');
+var config = require('../config'); // get our config file
+
 var obj = {
   name : 'admin',
-  email : 'admin@isp.com',
-  password : 'admin102030'
+  email : config.admin_user,
+  password : config.admin_pass
 };
 
 user.register(obj, function(res){
