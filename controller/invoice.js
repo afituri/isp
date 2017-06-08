@@ -39,7 +39,7 @@ module.exports = {
             idInvoiceArray.push(invoices[i]._id);
           }
          }
-         
+
          if(idInvoiceArray.length==0){
           cb(false);
 
@@ -65,7 +65,7 @@ module.exports = {
                 }
               });
           }
-   
+
 
 }
 
@@ -76,8 +76,8 @@ module.exports = {
           cb(null);
         }
       });
-   
-  
+
+
 
   },
 
@@ -162,7 +162,7 @@ module.exports = {
 
 
       }
-    
+
   },
 
 
@@ -245,7 +245,7 @@ module.exports = {
 
 
       }
-    
+
   },
 
 
@@ -302,8 +302,6 @@ module.exports = {
   },
 
   addInvoice : function(body,cb){
-    console.log('req.body')
-    console.log(body);
         if(body.reseller==1){
           body.reseller=null;
         }
@@ -321,7 +319,9 @@ module.exports = {
                 discount:body.discount,
                 typein:body.typein,
                 startDate:body.startDate,
-                endDate:body.endDate
+                endDate:body.endDate,
+                month:body.month,
+                day:body.day
               };
               if(body.typein!=2){
                 invoice.instock=body.inStockdata._id;
@@ -343,10 +343,10 @@ module.exports = {
                     invoice=new model.Invoice(Paid);
                     invoice.save();}
                   var arrayOrd=[];
-                  for( i in body.selectedProducts ){
-
-                    model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
-                      pro.initialPrice=body.selectedProducts[i].price;
+                  // for( i in body.selectedProducts ){
+                  body.selectedProducts.forEach(function(element,i) {
+                    model.Product.findOne({_id:element.id},function(err,pro){
+                      pro.initialPrice=element.price;
                       dollarMgr.getLastDollar(function(dollar){
                         Order={
                           invoice:invoiceResult._id,
@@ -358,7 +358,7 @@ module.exports = {
 
                         if(pro.type=='package'){
                           var months;
-                          
+
                           var end = new Date(body.endDate);
                           var start = new Date(body.startDate);
                           months =(end.getFullYear() -start.getFullYear() )* 12;
@@ -366,11 +366,11 @@ module.exports = {
                           var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
                           money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(body.month)+(pro.initialPrice/31*body.day);
                           money-=parseFloat(body.discount);
-                          Order.price=pro.initialPrice*dollar[0].price*parseFloat(body.month)+(pro.initialPrice/31*body.day);
+                          // Order.price=pro.initialPrice*dollar[0].price*parseFloat(body.month)+(pro.initialPrice/31*body.day);
                           model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
                           });
                         }
-                        
+
 
                         order=new model.Order(Order);
                         order.save(function(err,orderResult){
@@ -381,7 +381,7 @@ module.exports = {
                               if(body.typein!=2){
                                 model.Instock.findOneAndUpdate({$and:[{status:1},{_id:body.inStockdata._id}]},{invoice:invoiceResult._id,status:2} , function(err,result) {
                                   if (!err) {
-                                    
+
                                       cb(arrayOfResult,false);
                                     } else {
                                       console.log(err);
@@ -391,8 +391,8 @@ module.exports = {
                               }else{
                                 cb(arrayOfResult,false);
                               }
-                              
-                              
+
+
                             }
                           } else {
                             cb(null,err)
@@ -400,9 +400,9 @@ module.exports = {
                         });
                       });
                       });
-                      
-   
-                  }
+
+                    });
+                  // }
                 } else {
                   console.log(err);
                   cb(null,err);
@@ -424,7 +424,9 @@ module.exports = {
             discount:body.discount,
             startDate:body.startDate,
             endDate:body.endDate,
-            typein:body.typein
+            typein:body.typein,
+            month:body.month,
+            day:body.day
           };
           if(body.typein!=2){
             invoice.instock=body.inStockdata._id;
@@ -447,9 +449,11 @@ module.exports = {
                 invoice.save();
                 }
               var arrayOrd=[];
-              for( i in body.selectedProducts ){
+              // for( i in body.selectedProducts ){
+              body.selectedProducts.forEach(function(element,i) {
 
-                model.Product.findOne({_id:body.selectedProducts[i].id},function(err,pro){
+                model.Product.findOne({_id:element.id},function(err,pro){
+                  pro.initialPrice=element.price;
                   dollarMgr.getLastDollar(function(dollar){
                     Order={
                       invoice:invoiceResult._id,
@@ -460,7 +464,7 @@ module.exports = {
                     };
                     if(pro.type=='package'){
                           var months;
-                          
+
                           var end = new Date(body.endDate);
                           var start = new Date(body.startDate);
                           months =(end.getFullYear() -start.getFullYear() )* 12;
@@ -468,11 +472,11 @@ module.exports = {
                           var money=parseFloat(body.total)-parseFloat(pro.initialPrice)*parseFloat(dollar[0].price);
                           money=money+parseFloat(pro.initialPrice)*parseFloat(dollar[0].price)*parseFloat(body.month)+(pro.initialPrice/31*body.day);
                           money-=parseFloat(body.discount);
-                          Order.price=pro.initialPrice*dollar[0].price*parseFloat(body.month)+(pro.initialPrice/31*body.day);
+                          // Order.price=pro.initialPrice*dollar[0].price*parseFloat(body.month)+(pro.initialPrice/31*body.day);
                           model.Invoice.findOneAndUpdate({_id:invoiceResult._id}, {piad:money},function(err,re){
                           });
                         }
-                    
+
 
                     order=new model.Order(Order);
                     order.save(function(err,orderResult){
@@ -492,8 +496,8 @@ module.exports = {
                           }else{
                             cb(arrayOfResult,false);
                           }
-                          
-                          
+
+
                         }
                       } else {
                         cb(null,err)
@@ -501,9 +505,9 @@ module.exports = {
                     });
                   });
                   });
-                  
 
-              }
+
+              });
             } else {
               console.log(err);
               cb(null,err);
@@ -515,7 +519,7 @@ module.exports = {
   updateInvoice : function(id,body,cb){
     if(body.status==-9){
       var obj = {status:1}
-      model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {       
+      model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
         if (!err) {
           model.Customer.findOneAndUpdate({_id:result.customer}, obj, function(err,result) {
           if (!err) {
@@ -535,13 +539,13 @@ module.exports = {
     model.Invoice.findOneAndUpdate({_id:id}, obj, function(err,result) {
       if (!err) {
         if(body.status == 3){
-          model.Instock.findOneAndUpdate({invoice:id},{status:1},function(err,result) { 
+          model.Instock.findOneAndUpdate({invoice:id},{status:1},function(err,result) {
             cb(true);
           }) ;
         }else{
           cb(true);
         }
-        
+
       } else {
         console.log(err);
         cb(false);
@@ -550,7 +554,7 @@ module.exports = {
   }
   },
 
-  
+
 
   getInvoicedata :function(id,cb){
     model.Instock.findOne({invoice : id}, function(err, result){
@@ -615,7 +619,7 @@ renewInvice :function(body,cb){
               };
               if(pro.type=='package'){
                 var months;
-                
+
                 var end = new Date(body.endDate);
                 var start = new Date(body.startDate);
                 months =(end.getFullYear() -start.getFullYear() )* 12;
@@ -721,7 +725,7 @@ addPaid :function(body,cb){
       invoice.save(function(err,invoiceResult){
         if (!err) {
           cb(invoiceResult);
-          
+
         }else{
           console.log(err);
           cb(null);
@@ -752,7 +756,7 @@ addPaidPending :function(body,cb){
       invoice.save(function(err,invoiceResult){
         if (!err) {
           cb(invoiceResult);
-          
+
         }else{
           console.log(err);
           cb(null);
@@ -781,7 +785,7 @@ addGiga:function(body,cb){
       invoice.save(function(err,invoiceResult){
         if (!err) {
           cb(invoiceResult);
-          
+
         }else{
           console.log(err);
           cb(null);
@@ -836,14 +840,14 @@ replacInvice:function(body,cb){
                         console.log(err);
                         cb(false);
                       }
-                    }); 
+                    });
                   } else {
                     console.log(err);
                     cb(false);
                   }
-                  
+
                 });
-                
+
               } else {
                 console.log(err);
                 cb(null,err)
@@ -902,6 +906,6 @@ getInvoicePendingReseller :function(status,reseller,limit,page,cb){
       }
     });
   });
-    
+
   },
 };

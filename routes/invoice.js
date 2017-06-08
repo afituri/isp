@@ -29,8 +29,8 @@ router.get('/invoicesdata/:id', userHelpers.isLogin ,function(req, res) {
         invoices["price"]=price;
       }
       if(i == invoices.order.length-1){
-        res.send(invoices);  
-      }   
+        res.send(invoices);
+      }
     }
   });
 });
@@ -109,7 +109,7 @@ router.post('/renewInvice',userHelpers.isLogin , function(req, res) {
 });
 
 router.post('/upInvice',userHelpers.isLogin , function(req, res) {
-  
+
   invoiceMgr.updateInvoice(req.body.idCu,{endDate:new Date(),status:1},function(result){
     invoiceMgr.renewInvice(req.body,function(result){
       res.send(result);
@@ -135,7 +135,7 @@ router.post('/paidInvoice',userHelpers.isLogin ,multipartyMiddleware, function(r
               res.send(result);
             });
           }
-          
+
         });
       });
     });
@@ -159,7 +159,7 @@ router.put('/edit/:id',userHelpers.isLogin , function(req, res) {
 /* Delete invoice  by id  */
 router.delete('/delete/:id',userHelpers.isLogin , function(req, res) {
   invoiceMgr.deleteInvoice(req.params.id,function(result){
-    res.send({result:result});  
+    res.send({result:result});
   });
 });
 router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
@@ -168,4 +168,3 @@ router.get('/:limit/:page',userHelpers.isLogin , function(req, res) {
   });
  });
 module.exports = router;
-
